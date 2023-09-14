@@ -1,9 +1,79 @@
-version: "3"
+version: "0.0.1"
 # Example API for images
 services:
-  client:
+  zookeeper:
+    image: ${ZOOKEEPER_IMAGE}
+    container_name: ${ZOOKEEPER_HOST}
+    restart: ${GENERIC_RESTART}
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+    ports:
+      - ${ZOOKEEPER_PORT}:2181
+    networks:
+      - shared_network
+  
+  kafka:
+    image: ${KAFKA_IMAGE}
+    container_name: ${KAFKA_HOST}
+    restart: ${GENERIC_RESTART}
+    depends_on:
+      - zookeeper
+    ports:
+      - ${KAFKA_PORT}:29092
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092,PLAINTEXT_HOST://${KAFKA_BROKER_HOST}:29092
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+    networks:
+      - shared_network
+
+  opensearch-service:
+    image: ${OPENSEARCH_IMAGE}
+    container_name: ${OPENSEARCH_HOST}
+    restart: ${GENERIC_RESTART}
+    environment:
+      - node.name=opensearch-service
+      - discovery.type=single-node
+      - "DISABLE_INSTALL_DEMO_CONFIG=true" # Prevents execution of bundled demo script which installs demo certificates and security configurations to OpenSearch
+      - "DISABLE_SECURITY_PLUGIN=true" # Disables Security plugin
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+      nofile:
+        soft: 65536 # maximum number of open files for the OpenSearch user, set to at least 65536 on modern systems
+        hard: 65536
+    volumes:
+      - volume_opensearch:/usr/share/opensearch/data
+    ports:
+      - ${OPENSEARCH_PORT}:9200
+      - ${OPENSEARCH_PERFORMANCE_PORT}:9600 # required for Performance Analyzer
+    networks:
+      - shared_network
+  
+  opensearch.gateway.rs:
+    image: ${OPENSEARCH_GATEWAY_RS_IMAGE}
+    container_name: ${OPENSEARCH_GATEWAY_RS_HOST}
+    restart: ${GENERIC_RESTART}
+    depends_on:
+      - kafka
+      - opensearch-service
+    environment:
+      KAFKA_HOST: "kafka:9092"
+      OPENSEARCH_URL: "http://opensearch-service:9200"
+    ports:
+      - ${OPENSEARCH_GATEWAY_RS_PORT}:7878
+    networks:
+      - shared_network
+  adempiere.ui.gateway:
       image: nginx
       container_name: ${NGINX_NAME}
+      depends_on:
+      - opensearch.gateway.rs
       ports:
           - 80:80
       volumes:
@@ -13,3 +83,13 @@ services:
           - ./gateway/api_gateway.conf:/etc/nginx/api_gateway.conf
           - ./api_json_errors.conf:/etc/nginx/api_json_errors.conf
           - ./keys/api_keys.conf:/etc/nginx/api_keys.conf
+      networks:
+      - shared_network
+
+networks:
+  shared_network:
+    name: ${DEFAULT_NETWORK}
+     
+volumes:
+  volume_opensearch:
+    name: ${OPENSEARCH_VOLUME}
