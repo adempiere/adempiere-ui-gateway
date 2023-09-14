@@ -1,0 +1,15 @@
+version: "3"
+# Example API for images
+services:
+  client:
+      image: nginx
+      container_name: ${NGINX_NAME}
+      ports:
+          - 80:80
+      volumes:
+          - ./nginx.conf:/etc/nginx/nginx.conf
+          - ./backend/:/etc/nginx/api_backend_conf.d
+          - ./api/:/etc/nginx/api_conf.d
+          - ./gateway/api_gateway.conf:/etc/nginx/api_gateway.conf
+          - ./api_json_errors.conf:/etc/nginx/api_json_errors.conf
+          - ./keys/api_keys.conf:/etc/nginx/api_keys.conf
