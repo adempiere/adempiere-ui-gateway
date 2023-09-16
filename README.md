@@ -47,6 +47,12 @@ GNU nano 4.8                                                                    
 
 ```
 
+### Request using transcoding
+
+This request use the `nginx` + `envoy` + `adempiere-grpc-server` using [transcoding](https://cloud.google.com/endpoints/docs/grpc/transcoding).
+
+The base URL is `/v1/`
+
 **Example Request**
 
 ```Shell
@@ -57,5 +63,25 @@ curl --location 'http://api.adempiere.io/v1/open-id/services'
 ```
 {
     "services": []
+}
+```
+
+### Request using legacy node server
+
+This request use the `nginx` + `proxy-adempierer-api` using default `http`
+
+The base URL is `/api/`
+
+**Example Request**
+
+```Shell    
+curl --location 'http://api.adempiere.io/api/user/open-id/services'
+```
+
+**Response**
+```
+{
+    "code": 200,
+    "result": []
 }
 ```
