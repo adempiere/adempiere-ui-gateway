@@ -7,6 +7,13 @@ The main scope for this project is use the gRPC [transcoding](https://cloud.goog
 
 See [this](https://www.nginx.com/blog/deploying-nginx-plus-as-an-api-gateway-part-1/) article for more info
 
+## Some Advantages
+
+- [API Key Authentication](https://docs.nginx.com/nginx/deployment-guides/single-sign-on/keycloak/)
+- [Transformation using Lua](https://clouddocs.f5.com/training/community/nginx/html/class3/module1/module16.html)
+- [Transformation using Javascript](https://clouddocs.f5.com/training/community/nginx/html/class3/module1/module16.html)
+- [Content Caching](https://docs.nginx.com/nginx/admin-guide/content-cache/content-caching/#:~:text=Overview,the%20same%20content%20every%20time.)
+
 ## Run Docker Compose
 
 You can also run it with `docker compose` for develop enviroment. Note that this is a easy way for start the service with PostgreSQL and middleware.
