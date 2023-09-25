@@ -40,34 +40,6 @@ services:
         condition: service_healthy
     networks:
       - shared_network
-
-  adempiere.api:
-    image: ${VUE_API_IMAGE}
-    container_name: ${VUE_API_HOST}
-    restart: ${GENERIC_RESTART}
-    healthcheck:
-      test: "bash -c 'printf \"GET / HTTP/1.1\n\n\" > /dev/tcp/$(hostname)/8085; exit $?;'"
-      interval: 10s
-      retries: 60
-      start_period: 20s
-      timeout: 10s
-    environment:
-      ES_HOST: ${ES_HOST}
-      ES_PORT: ${ES_PORT}
-      AD_ACCESSHOST: ${VUE_BACKEND_HOST}
-      AD_STORE_ACCESS_HOST: ${VUE_BACKEND_HOST}
-      AD_BUSINESSHOST: ${VUE_BACKEND_HOST}
-      AD_DICTIONARYHOST: ${VUE_BACKEND_HOST}
-      AD_ACCESSAPIHOST: ${VUE_BACKEND_HOST}
-      AD_STORE_HOST: ${VUE_BACKEND_HOST}
-      AD_DEFAULT_HOST: ${VUE_BACKEND_HOST}
-      VS_ENV: ${VS_ENV}
-      INDEX: ${INDEX}
-    depends_on:
-      adempiere.grpc:
-        condition: service_healthy
-    networks:
-      - shared_network
   grpc.proxy:
       image:  ${ENVOY_IMAGE_NAME}
       container_name: ${ENVOY_NAME}
@@ -83,8 +55,8 @@ services:
   ui.gateway:
       image: ${NGINX_IMAGE_NAME}
       container_name: ${NGINX_NAME}
-      depends_on:
-        - grpc.proxy
+      # depends_on:
+      #   - grpc.proxy
       ports:
           - 80:80
       volumes:
@@ -94,8 +66,6 @@ services:
           - ./gateway/api_gateway.conf:/etc/nginx/api_gateway.conf
           - ./api_json_errors.conf:/etc/nginx/api_json_errors.conf
           #- ./keys/api_keys.conf:/etc/nginx/api_keys.conf
-      depends_on:
-        - adempiere.api
       networks:
         - shared_network
 
