@@ -37,7 +37,7 @@ cd adempiere-ui-gateway
 ```
 
 ```Shell
-docker compose up
+docker compose -f docker-compose/docker-compose.yml up
 ```
 
 ## Some Info
@@ -67,7 +67,7 @@ curl --location 'http://api.adempiere.io/v1/open-id/services'
 ```
 
 **Response**
-```
+```json
 {
     "services": []
 }
@@ -81,14 +81,23 @@ The base URL is `/api/`
 
 **Example Request**
 
-```Shell    
+```Shell
 curl --location 'http://api.adempiere.io/api/user/open-id/services'
 ```
 
 **Response**
-```
+```json
 {
     "code": 200,
     "result": []
+}
+```
+
+Error response format
+```json
+{
+    "code": 1,
+    "message": "",
+    "deatils": []
 }
 ```
