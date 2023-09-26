@@ -55,8 +55,8 @@ services:
   ui.gateway:
       image: ${NGINX_IMAGE_NAME}
       container_name: ${NGINX_NAME}
-      # depends_on:
-      #   - grpc.proxy
+      depends_on:
+        - grpc.proxy
       ports:
           - 80:80
       volumes:

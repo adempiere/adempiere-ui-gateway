@@ -75,6 +75,7 @@ static_resources:
                 always_print_primitive_fields: true
                 always_print_enums_as_ints: false
                 preserve_proto_field_names: true
+              convert_grpc_status: true
           - name: envoy.filters.http.router
             typed_config:
               "@type": type.googleapis.com/envoy.extensions.filters.http.router.v3.Router
@@ -99,5 +100,5 @@ static_resources:
                 # WARNING: "docker.for.mac.localhost" has been deprecated from Docker v18.03.0.
                 # If you're running an older version of Docker, please use "docker.for.mac.localhost" instead.
                 # Reference: https://docs.docker.com/docker-for-mac/release-notes/#docker-community-edition-18030-ce-mac59-2018-03-26
-                address: adempiere.grpc.server # for local testing change for your ip
+                address: adempiere.grpc # for local testing change for your ip
                 port_value: 50059
