@@ -21,9 +21,9 @@ services:
     networks:
       - shared_network
 
-  adempiere.grpc:
+  adempiere.grpc.server:
     image: ${ADEMPIERE_GRPC_SERVER_IMAGE}
-    container_name: ${VUE_BACKEND_HOST}
+    container_name: ${ADEMPIERE_GRPC_HOST}
     restart: ${GENERIC_RESTART}
     healthcheck:
       test: "bash -c 'printf \"GET / HTTP/1.1\n\n\" > /dev/tcp/127.0.0.1/50059; exit $?;'"
@@ -41,15 +41,35 @@ services:
     networks:
       - shared_network
 
+  adempiere.middleware:
+    image: ${ADEMPIERE_MIDDLEWARE_IMAGE}
+    container_name: ${ADEMPIERE_MIDDLEWARE_HOST}
+    restart: ${GENERIC_RESTART}
+    healthcheck:
+      test: "bash -c 'printf \"GET / HTTP/1.1\n\n\" > /dev/tcp/127.0.0.1/50059; exit $?;'"
+      interval: 10s
+      retries: 60
+      start_period: 20s
+      timeout: 10s
+    environment:
+      DB_HOST: ${POSTGRES_NAME}
+      SERVER_PORT: ${ADEMPIERE_MIDDLEWARE_PORT}
+    depends_on:
+      adempiere.database:
+        condition: service_healthy
+    networks:
+      - shared_network
+
   grpc.proxy:
       image: ${ENVOY_IMAGE_NAME}
       container_name: ${ENVOY_NAME}
       volumes:
           - ./envoy/envoy.yaml:/etc/envoy/envoy.yaml:ro
-          - ./envoy/adempiere-grpc-server.pb:/data/service_definition.pb:ro
+          - ./envoy/definitions/adempiere-grpc-server.pb:/data/adempiere-grpc-server.pb:ro
+          - ./envoy/definitions/adempiere-middleware.pb:/data/adempiere-middleware.pb:ro
       depends_on:
-        adempiere.grpc:
-          condition: service_healthy
+        - adempiere.grpc.server
+        - adempiere.middleware
       networks:
         - shared_network
 
