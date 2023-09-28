@@ -147,6 +147,7 @@ static_resources:
                 # Reference: https://docs.docker.com/docker-for-mac/release-notes/#docker-community-edition-18030-ce-mac59-2018-03-26
                 address: adempiere.grpc.server # for local testing change for your ip
                 port_value: 50059
+
   - name: adempiere-middleware
     type: LOGICAL_DNS
     lb_policy: ROUND_ROBIN
@@ -168,4 +169,3 @@ static_resources:
                 # Reference: https://docs.docker.com/docker-for-mac/release-notes/#docker-community-edition-18030-ce-mac59-2018-03-26
                 address: adempiere.middleware # for local testing change for your ip
                 port_value: 50060
-  
