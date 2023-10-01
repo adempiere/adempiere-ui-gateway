@@ -39,6 +39,7 @@ static_resources:
                 - business_partner.BusinessPartner
                 - data.BusinessData
                 - data.CoreFunctionality
+                - data.UserInterface
                 - dashboarding.Dashboarding
                 - dictionary.Dictionary
                 - enrollment.Register
@@ -76,6 +77,7 @@ static_resources:
                 always_print_enums_as_ints: false
                 preserve_proto_field_names: true
               convert_grpc_status: true
+              ignore_unknown_query_parameters: true
           - name: envoy.filters.http.router
             typed_config:
               "@type": type.googleapis.com/envoy.extensions.filters.http.router.v3.Router
@@ -121,6 +123,7 @@ static_resources:
                 always_print_enums_as_ints: false
                 preserve_proto_field_names: true
               convert_grpc_status: true
+              ignore_unknown_query_parameters: true
           - name: envoy.filters.http.router
             typed_config:
               "@type": type.googleapis.com/envoy.extensions.filters.http.router.v3.Router
