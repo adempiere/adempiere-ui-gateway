@@ -23,7 +23,8 @@ static_resources:
               # Reference: https://envoyproxy.io/docs/envoy/latest/configuration/http/http_filters/grpc_json_transcoder_filter#route-configs-for-transcoded-requests
               # https://www.envoyproxy.io/docs/envoy/latest/configuration/http/http_filters/grpc_json_transcoder_filter#sample-envoy-configuration
               - match: {
-                  prefix: "/"
+                  prefix: "/",
+                  grpc: {}
                 }
                 route: {
                   cluster: adempiere-grpc-server,
@@ -81,6 +82,7 @@ static_resources:
           - name: envoy.filters.http.router
             typed_config:
               "@type": type.googleapis.com/envoy.extensions.filters.http.router.v3.Router
+
   - name: adempiere_middleware
     address:
       socket_address: {
