@@ -36,6 +36,7 @@ static_resources:
               "@type": type.googleapis.com/envoy.extensions.filters.http.grpc_json_transcoder.v3.GrpcJsonTranscoder
               proto_descriptor: "/data/adempiere-grpc-server.pb"
               services:
+                # package.service
                 - bank_statement_match.BankStatementMatch
                 - business_partner.BusinessPartner
                 - data.BusinessData
