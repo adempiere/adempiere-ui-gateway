@@ -33,7 +33,7 @@ services:
       timeout: 10s
     environment:
       DB_HOST: ${POSTGRES_NAME}
-      SECRET_KEY: ${SECRET_KEY}
+      JWT_SECRET_KEY: ${JWT_SECRET_KEY}
       SERVICES_ENABLED: ${SERVICES_ENABLED}
     depends_on:
       adempiere.database:
