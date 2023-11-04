@@ -79,7 +79,7 @@ services:
       depends_on:
         - grpc.proxy
       ports:
-          - 80:80
+          - ${NGINX_PORT}:80
       volumes:
           - ./nginx.conf:/etc/nginx/nginx.conf
           - ./backend/:/etc/nginx/api_backend_conf.d
