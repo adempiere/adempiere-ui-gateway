@@ -55,6 +55,7 @@ static_resources:
                 - in_out.InOut
                 - invoice.Invoice
                 - issue_management.IssueManagement
+                - location_address.LocationAddress
                 - logs.Logs
                 - match_po_receipt_invoice.MatchPORReceiptInvoice
                 - material_management.MaterialManagement
