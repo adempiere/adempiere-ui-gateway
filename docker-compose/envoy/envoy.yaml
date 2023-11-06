@@ -42,7 +42,6 @@ static_resources:
                 - business_partner.BusinessPartner
                 - data.BusinessData
                 - data.CoreFunctionality
-                - data.UserInterface
                 - dashboarding.Dashboarding
                 - dictionary.Dictionary
                 - enrollment.Register
@@ -67,11 +66,13 @@ static_resources:
                 - data.Store
                 - product.Product
                 - record_management.RecordManagement
+                - report_management.ReportManagement
                 - security.Security
                 - time_control.TimeControl
                 - time_record.TimeRecord
                 - updates.UpdateCenter
                 - user_customization.UserCustomization
+                - user_interface.UserInterface
                 - wms.WarehouseManagement
                 - store.WebStore
                 - workflow.Workflow
