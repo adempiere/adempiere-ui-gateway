@@ -1,4 +1,7 @@
-version: "0.0.1"
+version: "3.9"
+
+name: adempiere-ui-gateway
+
 # Example API for images
 services:
   adempiere.database:
@@ -22,8 +25,8 @@ services:
       - shared_network
 
   adempiere.grpc.server:
-    image: ${ADEMPIERE_GRPC_SERVER_IMAGE}
-    container_name: ${ADEMPIERE_GRPC_HOST}
+    image: ${GRPC_SERVER_IMAGE}
+    container_name: ${GRPC_SERVER_NAME}
     restart: ${GENERIC_RESTART}
     healthcheck:
       test: "bash -c 'printf \"GET / HTTP/1.1\n\n\" > /dev/tcp/127.0.0.1/50059; exit $?;'"
@@ -31,64 +34,55 @@ services:
       retries: 60
       start_period: 20s
       timeout: 10s
-    environment:
-      DB_HOST: ${POSTGRES_NAME}
-      JWT_SECRET_KEY: ${JWT_SECRET_KEY}
-      SERVICES_ENABLED: ${SERVICES_ENABLED}
     depends_on:
       adempiere.database:
         condition: service_healthy
-    networks:
-      - shared_network
-
-  adempiere.middleware:
-    image: ${ADEMPIERE_MIDDLEWARE_IMAGE}
-    container_name: ${ADEMPIERE_MIDDLEWARE_HOST}
-    restart: ${GENERIC_RESTART}
-    healthcheck:
-      test: "bash -c 'printf \"GET / HTTP/1.1\n\n\" > /dev/tcp/127.0.0.1/50059; exit $?;'"
-      interval: 10s
-      retries: 60
-      start_period: 20s
-      timeout: 10s
     environment:
       DB_HOST: ${POSTGRES_NAME}
-      SERVER_PORT: ${ADEMPIERE_MIDDLEWARE_PORT}
-    depends_on:
-      adempiere.database:
-        condition: service_healthy
+      JWT_SECRET_KEY: ${GRPC_SERVER_JWT_SECRET_KEY}
+      SERVICES_ENABLED: ${GRPC_SERVER_SERVICES_ENABLED}
     networks:
       - shared_network
 
   grpc.proxy:
-      image: ${ENVOY_IMAGE_NAME}
-      container_name: ${ENVOY_NAME}
-      volumes:
-          - ./envoy/envoy.yaml:/etc/envoy/envoy.yaml:ro
-          - ./envoy/definitions/adempiere-grpc-server.pb:/data/adempiere-grpc-server.pb:ro
-          - ./envoy/definitions/adempiere-middleware.pb:/data/adempiere-middleware.pb:ro
-      depends_on:
-        - adempiere.grpc.server
-        - adempiere.middleware
-      networks:
-        - shared_network
+    image: ${GRPC_PROXY_IMAGE}
+    container_name: ${GRPC_PROXY_NAME}
+    depends_on:
+      - adempiere.grpc.server
+    ports:
+      - ${GRPC_PROXY_PORT}:5555
+    environment:
+      BACKEND_HOST: ${GRPC_SERVER_NAME}
+      BACKEND_PORT: 50059
+    networks:
+      - shared_network
 
   ui.gateway:
-      image: ${NGINX_IMAGE_NAME}
-      container_name: ${NGINX_NAME}
-      depends_on:
-        - grpc.proxy
-      ports:
-          - ${NGINX_PORT}:80
-      volumes:
-          - ./nginx.conf:/etc/nginx/nginx.conf
-          - ./backend/:/etc/nginx/api_backend_conf.d
-          - ./api/:/etc/nginx/api_conf.d
-          - ./gateway/api_gateway.conf:/etc/nginx/api_gateway.conf
-          - ./api_json_errors.conf:/etc/nginx/api_json_errors.conf
-          #- ./keys/api_keys.conf:/etc/nginx/api_keys.conf
-      networks:
-        - shared_network
+    image: ${GATEWAY_IMAGE}
+    container_name: ${GATEWAY_NAME}
+    depends_on:
+      - grpc.proxy
+    ports:
+        - ${GATEWAY_PORT}:80
+    volumes:
+        - ./nginx.conf:/etc/nginx/nginx.conf
+        - ./backend/:/etc/nginx/api_backend_conf.d
+        - ./api/:/etc/nginx/api_conf.d
+        - ./gateway/api_gateway.conf:/etc/nginx/api_gateway.conf
+        - ./api_json_errors.conf:/etc/nginx/api_json_errors.conf
+        #- ./keys/api_keys.conf:/etc/nginx/api_keys.conf
+    networks:
+      - shared_network
+
+  vue.ui:
+    image: ${VUE_UI_IMAGE}
+    container_name: ${VUE_UI_HOST}
+    restart: ${GENERIC_RESTART}
+    ports:
+      - ${VUE_UI_PORT}:80
+    environment:
+      API_URL: ${VUE_UI_API_URL}
+
 
 networks:
   shared_network:
@@ -96,8 +90,6 @@ networks:
 
 volumes:
   volume_nginx:
-    name: ${NGINX_VOLUME}
-  volume_envoy:
-    name: ${ENVOY_VOLUME}
+    name: ${GATEWAY_VOLUME}
   volume_postgres:
     name: ${POSTGRES_VOLUME}
