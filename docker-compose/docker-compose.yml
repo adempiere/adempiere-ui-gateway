@@ -52,7 +52,7 @@ services:
     ports:
       - ${GRPC_PROXY_PORT}:5555
     environment:
-      BACKEND_HOST: ${GRPC_SERVER_NAME}
+      BACKEND_HOST: ${GRPC_PROXY_SERVER_HOST}
       BACKEND_PORT: 50059
     networks:
       - shared_network
@@ -63,14 +63,14 @@ services:
     depends_on:
       - grpc.proxy
     ports:
-        - ${GATEWAY_PORT}:80
+      - ${GATEWAY_PORT}:80
     volumes:
-        - ./nginx.conf:/etc/nginx/nginx.conf
-        - ./backend/:/etc/nginx/api_backend_conf.d
-        - ./api/:/etc/nginx/api_conf.d
-        - ./gateway/api_gateway.conf:/etc/nginx/api_gateway.conf
-        - ./api_json_errors.conf:/etc/nginx/api_json_errors.conf
-        #- ./keys/api_keys.conf:/etc/nginx/api_keys.conf
+      - ./nginx.conf:/etc/nginx/nginx.conf
+      - ./backend/:/etc/nginx/api_backend_conf.d
+      - ./api/:/etc/nginx/api_conf.d
+      - ./gateway/api_gateway.conf:/etc/nginx/api_gateway.conf
+      - ./api_json_errors.conf:/etc/nginx/api_json_errors.conf
+      #- ./keys/api_keys.conf:/etc/nginx/api_keys.conf
     networks:
       - shared_network
 
