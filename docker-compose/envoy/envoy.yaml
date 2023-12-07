@@ -1,0 +1,182 @@
+static_resources:
+  listeners:
+  - name: adempiere_grpc_server
+    address:
+      socket_address: {
+        address: 0.0.0.0,
+        port_value: 5555
+      }
+    per_connection_buffer_limit_bytes: 94371840 # 90 MiB
+    filter_chains:
+    - filters:
+      - name: envoy.filters.network.http_connection_manager
+        typed_config:
+          "@type": type.googleapis.com/envoy.extensions.filters.network.http_connection_manager.v3.HttpConnectionManager
+          stat_prefix: grpc_json
+          codec_type: AUTO
+          route_config:
+            name: local_route
+            virtual_hosts:
+            - name: local_service
+              domains: ["*"]
+              routes:
+              # NOTE: by default, matching happens based on the gRPC route, and not on the incoming request path.
+              # Reference: https://envoyproxy.io/docs/envoy/latest/configuration/http/http_filters/grpc_json_transcoder_filter#route-configs-for-transcoded-requests
+              # https://www.envoyproxy.io/docs/envoy/latest/configuration/http/http_filters/grpc_json_transcoder_filter#sample-envoy-configuration
+              - match: {
+                  prefix: "/",
+                  grpc: {}
+                }
+                route: {
+                  cluster: adempiere-grpc-server,
+                  timeout: 60s
+                }
+          http_filters:
+          - name: envoy.filters.http.grpc_json_transcoder
+            typed_config:
+              "@type": type.googleapis.com/envoy.extensions.filters.http.grpc_json_transcoder.v3.GrpcJsonTranscoder
+              proto_descriptor: "/data/adempiere-grpc-server.pb"
+              services:
+                # package.service
+                - bank_statement_match.BankStatementMatch
+                - business_partner.BusinessPartner
+                - data.BusinessData
+                - data.CoreFunctionality
+                - dashboarding.Dashboarding
+                - dictionary.Dictionary
+                - enrollment.Register
+                - express_movement.ExpressMovement
+                - express_receipt.ExpressReceipt
+                - express_shipment.ExpressShipment
+                - file_management.FileManagement
+                - general_ledger.GeneralLedger
+                - import_file_loader.ImportFileLoader
+                - in_out.InOut
+                - invoice.Invoice
+                - issue_management.IssueManagement
+                - location_address.LocationAddress
+                - logs.Logs
+                - match_po_receipt_invoice.MatchPORReceiptInvoice
+                - material_management.MaterialManagement
+                - notice_management.NoticeManagement
+                - order.Order
+                - payment_allocation.PaymentAllocation
+                - payment_print_export.PaymentPrintExport
+                - payment.Payment
+                - payroll_action_notice.PayrollActionNotice
+                - data.Store
+                - product.Product
+                - record_management.RecordManagement
+                - report_management.ReportManagement
+                - security.Security
+                - time_control.TimeControl
+                - time_record.TimeRecord
+                - updates.UpdateCenter
+                - user_customization.UserCustomization
+                - user_interface.UserInterface
+                - wms.WarehouseManagement
+                - store.WebStore
+                - workflow.Workflow
+              print_options:
+                add_whitespace: true
+                always_print_primitive_fields: true
+                always_print_enums_as_ints: false
+                preserve_proto_field_names: true
+              convert_grpc_status: true
+              ignore_unknown_query_parameters: true
+          - name: envoy.filters.http.router
+            typed_config:
+              "@type": type.googleapis.com/envoy.extensions.filters.http.router.v3.Router
+
+  - name: adempiere_processor
+    address:
+      socket_address: {
+        address: 0.0.0.0,
+        port_value: 5556
+      }
+    filter_chains:
+    - filters:
+      - name: envoy.filters.network.http_connection_manager
+        typed_config:
+          "@type": type.googleapis.com/envoy.extensions.filters.network.http_connection_manager.v3.HttpConnectionManager
+          stat_prefix: grpc_json
+          codec_type: AUTO
+          route_config:
+            name: local_route
+            virtual_hosts:
+            - name: local_service
+              domains: ["*"]
+              routes:
+              # NOTE: by default, matching happens based on the gRPC route, and not on the incoming request path.
+              # Reference: https://envoyproxy.io/docs/envoy/latest/configuration/http/http_filters/grpc_json_transcoder_filter#route-configs-for-transcoded-requests
+              # https://www.envoyproxy.io/docs/envoy/latest/configuration/http/http_filters/grpc_json_transcoder_filter#sample-envoy-configuration
+              - match: {
+                  prefix: "/"
+                }
+                route: {
+                  cluster: adempiere-processor,
+                  timeout: 60s
+                }
+          http_filters:
+          - name: envoy.filters.http.grpc_json_transcoder
+            typed_config:
+              "@type": type.googleapis.com/envoy.extensions.filters.http.grpc_json_transcoder.v3.GrpcJsonTranscoder
+              proto_descriptor: "/data/adempiere-processors-service-service.pb"
+              services:
+                - processor.Processors
+              print_options:
+                add_whitespace: true
+                always_print_primitive_fields: true
+                always_print_enums_as_ints: false
+                preserve_proto_field_names: true
+              convert_grpc_status: true
+              ignore_unknown_query_parameters: true
+          - name: envoy.filters.http.router
+            typed_config:
+              "@type": type.googleapis.com/envoy.extensions.filters.http.router.v3.Router
+
+
+  clusters:
+  - name: adempiere-grpc-server
+    type: LOGICAL_DNS
+    lb_policy: ROUND_ROBIN
+    dns_lookup_family: V4_ONLY
+    typed_extension_protocol_options:
+      envoy.extensions.upstreams.http.v3.HttpProtocolOptions:
+        "@type": type.googleapis.com/envoy.extensions.upstreams.http.v3.HttpProtocolOptions
+        explicit_http_config:
+          http2_protocol_options: {}
+    load_assignment:
+      cluster_name: adempiere-grpc-server
+      endpoints:
+      - lb_endpoints:
+        - endpoint:
+            address:
+              socket_address:
+                # WARNING: "docker.for.mac.localhost" has been deprecated from Docker v18.03.0.
+                # If you're running an older version of Docker, please use "docker.for.mac.localhost" instead.
+                # Reference: https://docs.docker.com/docker-for-mac/release-notes/#docker-community-edition-18030-ce-mac59-2018-03-26
+                address: adempiere.grpc.server # for local testing change for your ip
+                port_value: 50059
+
+  - name: adempiere-processor
+    type: LOGICAL_DNS
+    lb_policy: ROUND_ROBIN
+    dns_lookup_family: V4_ONLY
+    typed_extension_protocol_options:
+      envoy.extensions.upstreams.http.v3.HttpProtocolOptions:
+        "@type": type.googleapis.com/envoy.extensions.upstreams.http.v3.HttpProtocolOptions
+        explicit_http_config:
+          http2_protocol_options: {}
+    load_assignment:
+      cluster_name: adempiere-processor
+      endpoints:
+      - lb_endpoints:
+        - endpoint:
+            address:
+              socket_address:
+                # WARNING: "docker.for.mac.localhost" has been deprecated from Docker v18.03.0.
+                # If you're running an older version of Docker, please use "docker.for.mac.localhost" instead.
+                # Reference: https://docs.docker.com/docker-for-mac/release-notes/#docker-community-edition-18030-ce-mac59-2018-03-26
+                address: adempiere.processor # for local testing change for your ip
+                port_value: 50060
