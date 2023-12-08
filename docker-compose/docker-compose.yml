@@ -66,6 +66,12 @@ services:
   grpc.proxy:
     image: ${GRPC_PROXY_IMAGE}
     container_name: ${GRPC_PROXY_NAME}
+    healthcheck:
+      test: "bash -c 'printf \"GET / HTTP/1.1\n\n\" > /dev/tcp/127.0.0.1/5555; exit $?;'"
+      interval: 10s
+      retries: 60
+      start_period: 20s
+      timeout: 10s
     # ports: 
     #  - ${GRPC_PROXY_BACKEND_PORT}:5555
     # Processor Port
@@ -79,24 +85,6 @@ services:
       - adempiere.processor
     networks:
     - shared_network
-
-  ui.gateway:
-    image: ${GATEWAY_IMAGE}
-    container_name: ${GATEWAY_NAME}
-    depends_on:
-      - grpc.proxy
-      - vue.ui
-    ports:
-      - ${GATEWAY_PORT}:80
-    volumes:
-      - ./nginx.conf:/etc/nginx/nginx.conf
-      - ./backend/:/etc/nginx/api_backend_conf.d
-      - ./api/:/etc/nginx/api_conf.d
-      - ./gateway/api_gateway.conf:/etc/nginx/api_gateway.conf
-      - ./api_json_errors.conf:/etc/nginx/api_json_errors.conf
-      #- ./keys/api_keys.conf:/etc/nginx/api_keys.conf
-    networks:
-      - shared_network
 
   s3.service:
     image: ${S3_IMAGE}
@@ -121,10 +109,17 @@ services:
     image: ${VUE_UI_IMAGE}
     container_name: ${VUE_UI_HOST}
     restart: ${GENERIC_RESTART}
+    # healthcheck:
+    #   test: curl --fail http://127.0.0.1/ || exit 1
+    #   interval: 10s
+    #   retries: 60
+    #   start_period: 20s
+    #   timeout: 10s
     ports:
       - ${VUE_UI_PORT}:80
     environment:
       API_URL: ${VUE_UI_API_URL}
+      PUBLIC_PATH: ${VUE_UI_PUBLIC_PATH}
 
   dkron.scheduler:
     image: ${DKRON_IMAGE}
@@ -172,8 +167,8 @@ services:
     environment:
       ZOOKEEPER_CLIENT_PORT: 2181
       ZOOKEEPER_TICK_TIME: 2000
-    ports:
-      - ${ZOOKEEPER_PORT}:2181
+    # ports:
+    #   - ${ZOOKEEPER_PORT}:2181
     networks:
       - shared_network
   
@@ -182,8 +177,8 @@ services:
     container_name: ${KAFKA_HOST}
     depends_on:
       - zookeeper
-    ports:
-      - ${KAFKA_PORT}:29092
+    # ports:
+    #   - ${KAFKA_PORT}:29092
     environment:
       KAFKA_BROKER_ID: 1
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
@@ -203,6 +198,28 @@ services:
       OPENSEARCH_URL: ${OPENSEARCH_GATEWAY_RS_OPENSEARCH_URL}
     ports:
       - ${OPENSEARCH_GATEWAY_RS_PORT}:7878
+    networks:
+      - shared_network
+  
+  ui.gateway:
+    image: ${GATEWAY_IMAGE}
+    container_name: ${GATEWAY_NAME}
+    depends_on:
+      grpc.proxy:
+        condition: service_healthy
+      # vue.ui:
+      #   condition: service_healthy
+      opensearch.gateway.rs:
+        condition: service_started
+    ports:
+      - ${GATEWAY_PORT}:80
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+      - ./backend/:/etc/nginx/api_backend_conf.d
+      - ./api/:/etc/nginx/api_conf.d
+      - ./gateway/api_gateway.conf:/etc/nginx/api_gateway.conf
+      - ./api_json_errors.conf:/etc/nginx/api_json_errors.conf
+      #- ./keys/api_keys.conf:/etc/nginx/api_keys.conf
     networks:
       - shared_network
 
