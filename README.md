@@ -37,8 +37,10 @@ cd adempiere-ui-gateway
 ```
 
 ```Shell
-docker compose -f docker-compose/docker-compose.yml up
+docker compose up -d
 ```
+
+After it just open your browser at http://0.0.0.0/
 
 ## Some Info
 
