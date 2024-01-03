@@ -71,6 +71,7 @@ static_resources:
                 - security.Security
                 - time_control.TimeControl
                 - time_record.TimeRecord
+                - trial_balance_drillable.TrialBalanceDrillable
                 - updates.UpdateCenter
                 - user_customization.UserCustomization
                 - user_interface.UserInterface
