@@ -7,3 +7,9 @@ then
     createdb -U adempiere adempiere
     psql -U adempiere -d adempiere < Adempiere_pg.dmp
 fi
+
+AFTER_RUN_DIR="/tmp/after_run"
+for file in $AFTER_RUN_DIR/*; do
+    echo "importing $file"
+    psql -U postgres < $file
+done
