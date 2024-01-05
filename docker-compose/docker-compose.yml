@@ -169,6 +169,12 @@ services:
       - discovery.type=single-node
       - "DISABLE_INSTALL_DEMO_CONFIG=true" # Prevents execution of bundled demo script which installs demo certificates and security configurations to OpenSearch
       - "DISABLE_SECURITY_PLUGIN=true" # Disables Security plugin
+    healthcheck:
+      test: "bash -c 'printf \"GET / HTTP/1.1\n\n\" > /dev/tcp/127.0.0.1/9200; exit $?;'"
+      interval: 10s
+      retries: 60
+      start_period: 20s
+      timeout: 10s 
     ulimits:
       memlock:
         soft: -1
@@ -178,9 +184,23 @@ services:
         hard: 65536
     volumes:
       - volume_opensearch:/usr/share/opensearch/data
+      - ./opensearch/opensearch.yml:/usr/share/opensearch/config/opensearch.yml
+      - ./opensearch/snapshots:/mnt/snapshots
     ports:
       - ${OPENSEARCH_PORT}:9200
       - ${OPENSEARCH_PERFORMANCE_PORT}:9600 # required for Performance Analyzer
+    networks:
+      - shared_network
+  
+  open-search-setup:
+    build:
+      context: opensearch/
+      dockerfile: Setup_Dockerfile
+    container_name: ${OPENSEARCH_SETUP_HOST}
+    image: ${OPENSEARCH_SETUP_HOST}
+    depends_on:
+       opensearch-node:
+        condition: service_healthy
     networks:
       - shared_network
 
@@ -234,14 +254,16 @@ services:
       #   condition: service_healthy
       opensearch.gateway.rs:
         condition: service_started
+      adempiere.site:
+        condition: service_started
     ports:
       - ${GATEWAY_PORT}:80
     volumes:
-      - ./nginx.conf:/etc/nginx/nginx.conf
-      - ./backend/:/etc/nginx/api_backend_conf.d
-      - ./api/:/etc/nginx/api_conf.d
-      - ./gateway/api_gateway.conf:/etc/nginx/api_gateway.conf
-      - ./api_json_errors.conf:/etc/nginx/api_json_errors.conf
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./nginx/upstreams/:/etc/nginx/api_upstreams_conf.d
+      - ./nginx/api/:/etc/nginx/api_conf.d
+      - ./nginx/gateway/api_gateway.conf:/etc/nginx/api_gateway.conf
+      - ./nginx/api_json_errors.conf:/etc/nginx/api_json_errors.conf
       #- ./keys/api_keys.conf:/etc/nginx/api_keys.conf
     networks:
       - shared_network
