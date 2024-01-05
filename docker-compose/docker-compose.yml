@@ -99,8 +99,8 @@ services:
       retries: 60
       start_period: 20s
       timeout: 10s
-    # ports: 
-    #  - ${GRPC_PROXY_BACKEND_PORT}:5555
+    ports:
+     - ${GRPC_PROXY_BACKEND_PORT}:5555
     # Processor Port
     #  - ${GRPC_PROXY_PROCESSOR_PORT}:5556
     volumes:
