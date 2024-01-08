@@ -1,0 +1,164 @@
+version: "3.9"
+
+name: adempiere-ui-gateway
+
+# Example API for images
+services:
+  adempiere.database:
+    build:
+      context: postgresql/
+      dockerfile: Dockerfile
+    container_name: ${POSTGRES_NAME}
+    image: ${POSTGRES_NAME}
+    restart: ${GENERIC_RESTART}
+    volumes:
+      - volume_postgres:/var/lib/postgresql/data
+    healthcheck:
+      test: "bash -c 'printf \"GET / HTTP/1.1\n\n\" > /dev/tcp/127.0.0.1/5432; exit $?;'"
+      interval: 10s
+      retries: 60
+      start_period: 20s
+      timeout: 10s
+    environment:
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    networks:
+      - shared_network
+
+  adempiere.grpc.server:
+    image: ${GRPC_SERVER_IMAGE}
+    container_name: ${GRPC_SERVER_NAME}
+    restart: ${GENERIC_RESTART}
+    healthcheck:
+      test: "bash -c 'printf \"GET / HTTP/1.1\n\n\" > /dev/tcp/127.0.0.1/50059; exit $?;'"
+      interval: 10s
+      retries: 60
+      start_period: 20s
+      timeout: 10s
+    depends_on:
+      adempiere.database:
+        condition: service_healthy
+    environment:
+      DB_HOST: ${POSTGRES_NAME}
+      # JWT_SECRET_KEY: ${GRPC_SERVER_JWT_SECRET_KEY}
+      # SERVICES_ENABLED: ${GRPC_SERVER_SERVICES_ENABLED}
+    networks:
+      - shared_network
+
+  grpc.proxy:
+    image: ${GRPC_PROXY_IMAGE}
+    container_name: ${GRPC_PROXY_NAME}
+    healthcheck:
+      test: "bash -c 'printf \"GET / HTTP/1.1\n\n\" > /dev/tcp/127.0.0.1/5555; exit $?;'"
+      interval: 10s
+      retries: 60
+      start_period: 20s
+      timeout: 10s
+    ports:
+     - ${GRPC_PROXY_BACKEND_PORT}:5555
+    # Processor Port
+    #  - ${GRPC_PROXY_PROCESSOR_PORT}:5556
+    volumes:
+      - ./envoy/envoy.yaml:/etc/envoy/envoy.yaml:ro
+      - ./envoy/definitions/adempiere-grpc-server.pb:/data/adempiere-grpc-server.pb:ro
+      - ./envoy/definitions/adempiere-processors-service-service.pb:/data/adempiere-processors-service-service.pb:ro
+    depends_on:
+      - adempiere.grpc.server
+      # - adempiere.processor
+    networks:
+    - shared_network
+  
+  opensearch-node:
+    image: ${OPENSEARCH_IMAGE}
+    container_name: ${OPENSEARCH_HOST}
+    environment:
+      - node.name=opensearch-node
+      - discovery.type=single-node
+      - "DISABLE_INSTALL_DEMO_CONFIG=true" # Prevents execution of bundled demo script which installs demo certificates and security configurations to OpenSearch
+      - "DISABLE_SECURITY_PLUGIN=true" # Disables Security plugin
+    healthcheck:
+      test: "bash -c 'printf \"GET / HTTP/1.1\n\n\" > /dev/tcp/127.0.0.1/9200; exit $?;'"
+      interval: 10s
+      retries: 60
+      start_period: 20s
+      timeout: 10s 
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+      nofile:
+        soft: 65536 # maximum number of open files for the OpenSearch user, set to at least 65536 on modern systems
+        hard: 65536
+    volumes:
+      - volume_opensearch:/usr/share/opensearch/data
+      - ./opensearch/opensearch.yml:/usr/share/opensearch/config/opensearch.yml
+      - ./opensearch/snapshots:/mnt/snapshots
+    # ports:
+    #   - ${OPENSEARCH_PORT}:9200
+    #   - ${OPENSEARCH_PERFORMANCE_PORT}:9600 # required for Performance Analyzer
+    networks:
+      - shared_network
+  
+  open-search-setup:
+    build:
+      context: opensearch/
+      dockerfile: Setup_Dockerfile
+    container_name: ${OPENSEARCH_SETUP_HOST}
+    image: ${OPENSEARCH_SETUP_HOST}
+    depends_on:
+       opensearch-node:
+        condition: service_healthy
+    networks:
+      - shared_network
+
+  opensearch.gateway.rs:
+    image: ${OPENSEARCH_GATEWAY_RS_IMAGE}
+    container_name: ${OPENSEARCH_GATEWAY_RS_HOST}
+    restart: ${GENERIC_RESTART}
+    environment:
+      KAFKA_HOST: ${OPENSEARCH_GATEWAY_RS_KAFKA_HOST}
+      OPENSEARCH_URL: ${OPENSEARCH_GATEWAY_RS_OPENSEARCH_URL}
+    depends_on:
+       opensearch-node:
+        condition: service_healthy
+    # ports:
+    #   - ${OPENSEARCH_GATEWAY_RS_PORT}:7878
+    networks:
+      - shared_network
+  
+  ui.gateway:
+    image: ${GATEWAY_IMAGE}
+    container_name: ${GATEWAY_NAME}
+    depends_on:
+      grpc.proxy:
+        condition: service_healthy
+      # vue.ui:
+      #   condition: service_healthy
+      opensearch.gateway.rs:
+        condition: service_started
+      # adempiere.site:
+      #   condition: service_started
+    ports:
+      - ${GATEWAY_PORT}:80
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./nginx/upstreams/adempiere_backend.conf:/etc/nginx/api_upstreams_conf.d/adempiere_backend.conf
+      - ./nginx/upstreams/opensearch_gateway.conf:/etc/nginx/api_upstreams_conf.d/opensearch_gateway.conf
+      - ./nginx/api/backend/:/etc/nginx/api_conf.d/backend
+      - ./nginx/api/opensearch/:/etc/nginx/api_conf.d/opensearch
+      - ./nginx/gateway/api_gateway.conf:/etc/nginx/api_gateway.conf
+      - ./nginx/api_json_errors.conf:/etc/nginx/api_json_errors.conf
+      #- ./keys/api_keys.conf:/etc/nginx/api_keys.conf
+    networks:
+      - shared_network
+
+networks:
+  shared_network:
+    name: ${DEFAULT_NETWORK}
+
+volumes:
+  volume_nginx:
+    name: ${GATEWAY_VOLUME}
+  volume_postgres:
+    name: ${POSTGRES_VOLUME}
+  volume_opensearch:
+    name: ${OPENSEARCH_VOLUME}

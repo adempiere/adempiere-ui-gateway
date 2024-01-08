@@ -186,9 +186,9 @@ services:
       - volume_opensearch:/usr/share/opensearch/data
       - ./opensearch/opensearch.yml:/usr/share/opensearch/config/opensearch.yml
       - ./opensearch/snapshots:/mnt/snapshots
-    ports:
-      - ${OPENSEARCH_PORT}:9200
-      - ${OPENSEARCH_PERFORMANCE_PORT}:9600 # required for Performance Analyzer
+    # ports:
+    #   - ${OPENSEARCH_PORT}:9200
+    #   - ${OPENSEARCH_PERFORMANCE_PORT}:9600 # required for Performance Analyzer
     networks:
       - shared_network
   
