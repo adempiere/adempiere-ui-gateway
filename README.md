@@ -36,8 +36,22 @@ git clone https://github.com/adempiere/adempiere-ui-gateway
 cd adempiere-ui-gateway
 ```
 
+Go to default folder
+
+```Shell
+cd docker-compose
+```
+
+Run it
+
 ```Shell
 docker compose up -d
+```
+
+Note: For develop option (Only backend services) you can run the follow command:
+
+```Shell
+docker compose -f docker-compose-develop.yml up -d
 ```
 
 After it just open your browser at http://0.0.0.0/
