@@ -195,7 +195,7 @@ services:
   open-search-setup:
     build:
       context: opensearch/
-      dockerfile: Setup_Dockerfile
+      dockerfile: setup.Dockerfile
     container_name: ${OPENSEARCH_SETUP_HOST}
     image: ${OPENSEARCH_SETUP_HOST}
     depends_on:
