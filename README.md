@@ -74,12 +74,12 @@ GNU nano 4.8                                                                    
 
 This request use the `nginx` + `envoy` + `adempiere-grpc-server` using [transcoding](https://cloud.google.com/endpoints/docs/grpc/transcoding).
 
-The base URL is `/v1/`
+The base URL is `/api/`
 
 **Example Request**
 
 ```Shell
-curl --location 'http://api.adempiere.io/v1/open-id/services'
+curl --location 'http://api.adempiere.io/api/security/services'
 ```
 
 **Response**
