@@ -8,8 +8,8 @@ services:
     build:
       context: postgresql/
       dockerfile: Dockerfile
-    container_name: ${POSTGRES_NAME}
-    image: ${POSTGRES_NAME}
+    container_name: ${POSTGRES_HOST}
+    image: ${POSTGRES_HOST}
     restart: ${GENERIC_RESTART}
     volumes:
       - volume_postgres:/var/lib/postgresql/data
@@ -26,7 +26,7 @@ services:
 
   adempiere.grpc.server:
     image: ${GRPC_SERVER_IMAGE}
-    container_name: ${GRPC_SERVER_NAME}
+    container_name: ${GRPC_SERVER_HOST}
     restart: ${GENERIC_RESTART}
     healthcheck:
       test: "bash -c 'printf \"GET / HTTP/1.1\n\n\" > /dev/tcp/127.0.0.1/50059; exit $?;'"
@@ -38,7 +38,9 @@ services:
       adempiere.database:
         condition: service_healthy
     environment:
-      DB_HOST: ${POSTGRES_NAME}
+      DB_HOST: ${POSTGRES_HOST}
+      DB_NAME: ${GRPC_SERVER_DB_NAME}
+      DB_PASSWORD: ${GRPC_SERVER_DB_PASSWORD}
       # JWT_SECRET_KEY: ${GRPC_SERVER_JWT_SECRET_KEY}
       # SERVICES_ENABLED: ${GRPC_SERVER_SERVICES_ENABLED}
     networks:
@@ -127,7 +129,7 @@ services:
   
   ui.gateway:
     image: ${GATEWAY_IMAGE}
-    container_name: ${GATEWAY_NAME}
+    container_name: ${GATEWAY_HOST}
     depends_on:
       grpc.proxy:
         condition: service_healthy
