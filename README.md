@@ -48,13 +48,26 @@ Run it
 docker compose up -d
 ```
 
+After it just open your browser at http://0.0.0.0/
+
+#### Vue Stack
+Note: For vue minimal stack services you can run the follow command:
+
+```Shell
+docker compose -f docker-compose-vue.yml up -d
+```
+
+After it just open your browser at http://0.0.0.0:9528
+<!-- After it just open your browser at http://0.0.0.0/vue -->
+
+
+#### Backend Stack
+
 Note: For develop option (Only backend services) you can run the follow command:
 
 ```Shell
 docker compose -f docker-compose-develop.yml up -d
 ```
-
-After it just open your browser at http://0.0.0.0/
 
 ## Some Info
 
