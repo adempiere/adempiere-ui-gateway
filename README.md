@@ -54,7 +54,7 @@ After it just open your browser at http://0.0.0.0/
 Note: For vue minimal stack services you can run the follow command:
 
 ```Shell
-docker compose -f docker-compose-vue.yml up -d
+docker compose -f docker-compose-vue.yaml up -d
 ```
 
 After it just open your browser at http://0.0.0.0:9528
