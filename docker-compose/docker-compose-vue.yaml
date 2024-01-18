@@ -105,7 +105,5 @@ networks:
 
 
 volumes:
-  volume_nginx:
-    name: ${GATEWAY_VOLUME}
   volume_postgres:
     name: ${POSTGRES_VOLUME}

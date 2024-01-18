@@ -280,8 +280,6 @@ networks:
     name: ${DEFAULT_NETWORK}
 
 volumes:
-  volume_nginx:
-    name: ${GATEWAY_VOLUME}
   volume_postgres:
     name: ${POSTGRES_VOLUME}
   volume_dkron:
