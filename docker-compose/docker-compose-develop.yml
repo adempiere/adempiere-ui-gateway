@@ -57,8 +57,8 @@ services:
       timeout: 10s
     ports:
      - ${GRPC_PROXY_BACKEND_PORT}:5555
-    # Processor Port
-    #  - ${GRPC_PROXY_PROCESSOR_PORT}:5556
+     # Processor Port
+     - ${GRPC_PROXY_PROCESSOR_PORT}:5556
     volumes:
       - ./envoy/envoy.yaml:/etc/envoy/envoy.yaml:ro
       - ./envoy/definitions/adempiere-grpc-server.pb:/data/adempiere-grpc-server.pb:ro
@@ -68,7 +68,7 @@ services:
       # - adempiere.processor
     networks:
     - shared_network
-  
+
   opensearch-node:
     image: ${OPENSEARCH_IMAGE}
     container_name: ${OPENSEARCH_HOST}
@@ -94,9 +94,9 @@ services:
       - volume_opensearch:/usr/share/opensearch/data
       - ./opensearch/opensearch.yml:/usr/share/opensearch/config/opensearch.yml
       - ./opensearch/snapshots:/mnt/snapshots
-    # ports:
-    #   - ${OPENSEARCH_PORT}:9200
-    #   - ${OPENSEARCH_PERFORMANCE_PORT}:9600 # required for Performance Analyzer
+    ports:
+      - ${OPENSEARCH_PORT}:9200
+      - ${OPENSEARCH_PERFORMANCE_PORT}:9600 # required for Performance Analyzer
     networks:
       - shared_network
   
@@ -122,11 +122,11 @@ services:
     depends_on:
        opensearch-node:
         condition: service_healthy
-    # ports:
-    #   - ${OPENSEARCH_GATEWAY_RS_PORT}:7878
+    ports:
+      - ${OPENSEARCH_GATEWAY_RS_PORT}:7878
     networks:
       - shared_network
-  
+
   ui.gateway:
     image: ${GATEWAY_IMAGE}
     container_name: ${GATEWAY_HOST}
@@ -158,8 +158,6 @@ networks:
     name: ${DEFAULT_NETWORK}
 
 volumes:
-  volume_nginx:
-    name: ${GATEWAY_VOLUME}
   volume_postgres:
     name: ${POSTGRES_VOLUME}
   volume_opensearch:
