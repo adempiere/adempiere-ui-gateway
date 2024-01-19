@@ -94,6 +94,7 @@ services:
       - ${VUE_UI_PORT}:80
     environment:
       API_URL: ${VUE_UI_API_URL}
+      API_DICTIONARY_URL: ${VUE_UI_API_DICTIONARY_URL}
       # PUBLIC_PATH: ${VUE_UI_PUBLIC_PATH}
     networks:
       - shared_network
