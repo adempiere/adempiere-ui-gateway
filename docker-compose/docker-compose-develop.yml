@@ -1,13 +1,13 @@
 version: "3.9"
 
-name: adempiere-ui-gateway
+name: services-gateway-develop
 
 # Example API for images
 services:
   adempiere.database:
     build:
       context: postgresql/
-      dockerfile: Dockerfile
+      dockerfile: postgres.Dockerfile
     container_name: ${POSTGRES_HOST}
     image: ${POSTGRES_HOST}
     restart: ${GENERIC_RESTART}
@@ -39,16 +39,17 @@ services:
         condition: service_healthy
     environment:
       DB_HOST: ${POSTGRES_HOST}
+      DB_PORT: ${GRPC_SERVER_DB_PORT}
       DB_NAME: ${GRPC_SERVER_DB_NAME}
       DB_PASSWORD: ${GRPC_SERVER_DB_PASSWORD}
-      # JWT_SECRET_KEY: ${GRPC_SERVER_JWT_SECRET_KEY}
+      JWT_SECRET_KEY: ${GRPC_SERVER_JWT_SECRET_KEY}
       # SERVICES_ENABLED: ${GRPC_SERVER_SERVICES_ENABLED}
     networks:
       - shared_network
 
   grpc.proxy:
     image: ${GRPC_PROXY_IMAGE}
-    container_name: ${GRPC_PROXY_NAME}
+    container_name: ${GRPC_PROXY_HOST}
     healthcheck:
       test: "bash -c 'printf \"GET / HTTP/1.1\n\n\" > /dev/tcp/127.0.0.1/5555; exit $?;'"
       interval: 10s

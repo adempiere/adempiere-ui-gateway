@@ -57,8 +57,7 @@ Note: For vue minimal stack services you can run the follow command:
 docker compose -f docker-compose-vue.yaml up -d
 ```
 
-After it just open your browser at http://0.0.0.0:9528
-<!-- After it just open your browser at http://0.0.0.0/vue -->
+After it just open your browser at http://0.0.0.0/vue
 
 
 #### Backend Stack
