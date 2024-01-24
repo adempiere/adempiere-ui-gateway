@@ -69,6 +69,7 @@ static_resources:
                 - record_management.RecordManagement
                 - report_management.ReportManagement
                 - security.Security
+                - task_management.TaskManagement
                 - time_control.TimeControl
                 - time_record.TimeRecord
                 - trial_balance_drillable.TrialBalanceDrillable
