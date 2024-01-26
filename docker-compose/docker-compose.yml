@@ -2,27 +2,49 @@ version: "3.9"
 
 name: services-gateway
 
-# Example API for images
+# Docker Compose Services
 services:
   adempiere.database:
     build:
-      context: postgresql/
-      dockerfile: postgres.Dockerfile
-    container_name: ${POSTGRES_HOST}
-    image: ${POSTGRES_HOST}
+      context: ${POSTGRES_CONTEXT_PATH_ON_HOST}              # Path relative to Working Directory where Dockerfile will be found
+      dockerfile: ${DOCKERFILE_NAME}                         # Must exist in context. Otherwise, error. Valid only if no "image" defined.
+      args:
+        POSTGRES_IMAGE: ${POSTGRES_IMAGE}                    # Only this is actually needed for the Dockerfile. The other args are left just in case.
+        POSTGRES_DATABASE_NAME: ${POSTGRES_DATABASE_NAME}
+        POSTGRES_DEFAULT_RESTORE_FILE: ${POSTGRES_DEFAULT_RESTORE_FILE}
+        HOME_PATH_ON_CONTAINERS: ${HOME_PATH_ON_CONTAINERS}
+        POSTGRES_DB_BACKUP_PATH_ON_CONTAINER: ${POSTGRES_DB_BACKUP_PATH_ON_CONTAINER}
+        ADEMPIERE_GITHUB_ARTIFACT: ${ADEMPIERE_GITHUB_ARTIFACT}
+        ADEMPIERE_GITHUB_COMPRESSED_FILE: ${ADEMPIERE_GITHUB_COMPRESSED_FILE}
+        POSTGRES_RESTORE_FILE_NAME: ${POSTGRES_RESTORE_FILE_NAME}
+    container_name: ${POSTGRES_CONTAINER_NAME}
+    hostname: ${POSTGRES_HOSTNAME}
+    #image: ${POSTGRES_IMAGE}       # If there is an image, Dockerfile will be ignored! Use this if you want to bypass the Dockerfile + initdb.sh.
     restart: ${GENERIC_RESTART}
+    ports:
+      - ${POSTGRES_EXTERNAL_PORT}:${POSTGRES_PORT}          # Set a fixed external port
     volumes:
-      - volume_postgres:/var/lib/postgresql/data
+      - volume_postgres:${POSTGRES_DEFAULT_DB_PATH_ON_CONTAINER} # Database dir for container. Default for Postgres.
+      #- volume_backups:${POSTGRES_DB_BACKUP_PATH_ON_CONTAINER}   # Backup dir for container. Must be created with Dockerfile
+      - ${TIMEZONE_PATH_ON_HOST}:${TIMEZONE_PATH_ON_CONTAINER}:${TIMEZONE_OPTIONS}    # Map the Timezone  of the host to the Timezone of the container
+      - ${LOCALTIME_PATH_ON_HOST}:${LOCALTIME_PATH_ON_CONTAINER}:${LOCALTIME_OPTIONS} # Map the Localtime of the host to the Timezone of the container
     healthcheck:
       test: "bash -c 'printf \"GET / HTTP/1.1\n\n\" > /dev/tcp/127.0.0.1/5432; exit $?;'"
       interval: 10s
       retries: 60
       start_period: 20s
       timeout: 10s
-    environment:
+    environment:            # Values might be needed for debugging
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DATABASE_NAME: ${POSTGRES_DATABASE_NAME}
+      POSTGRES_DEFAULT_RESTORE_FILE: ${POSTGRES_DEFAULT_RESTORE_FILE}
+      HOME_PATH_ON_CONTAINERS: ${HOME_PATH_ON_CONTAINERS}
+      POSTGRES_DB_BACKUP_PATH_ON_CONTAINER: ${POSTGRES_DB_BACKUP_PATH_ON_CONTAINER}
+      ADEMPIERE_GITHUB_ARTIFACT: ${ADEMPIERE_GITHUB_ARTIFACT}
+      ADEMPIERE_GITHUB_COMPRESSED_FILE: ${ADEMPIERE_GITHUB_COMPRESSED_FILE}
+      POSTGRES_RESTORE_FILE_NAME: ${POSTGRES_RESTORE_FILE_NAME}
     networks:
-      - shared_network
+      - adempiere_network
   
   adempiere.site:
     image: ${ADEMPIERE_SITE_IMAGE}
@@ -35,7 +57,7 @@ services:
       VUE_HOST: ${ADEMPIERE_SITE_VUE_HOST}
       SCHEDULER_HOST: ${ADEMPIERE_SITE_SCHEDULER_HOST}
     networks:
-      - shared_network
+      - adempiere_network
   
   adempiere.zk:
     image: ${ADEMPIERE_ZK_IMAGE}
@@ -51,7 +73,7 @@ services:
       adempiere.database:
         condition: service_healthy
     networks:
-      - shared_network 
+      - adempiere_network 
 
   adempiere.grpc.server:
     image: ${GRPC_SERVER_IMAGE}
@@ -74,7 +96,7 @@ services:
       JWT_SECRET_KEY: ${GRPC_SERVER_JWT_SECRET_KEY}
       # SERVICES_ENABLED: ${GRPC_SERVER_SERVICES_ENABLED}
     networks:
-      - shared_network
+      - adempiere_network
 
   adempiere.processor:
     image: ${ADEMPIERE_PROCESSOR_IMAGE}
@@ -87,13 +109,13 @@ services:
       start_period: 20s
       timeout: 10s
     environment:
-      DB_HOST: ${POSTGRES_HOST}
+      DB_HOST: ${POSTGRES_HOSTNAME}
       SERVER_PORT: ${ADEMPIERE_PROCESSOR_PORT}
     depends_on:
       adempiere.database:
         condition: service_healthy
     networks:
-      - shared_network
+      - adempiere_network
 
   grpc.proxy:
     image: ${GRPC_PROXY_IMAGE}
@@ -116,7 +138,7 @@ services:
       - adempiere.grpc.server
       - adempiere.processor
     networks:
-    - shared_network
+    - adempiere_network
 
   s3.service:
     image: ${S3_IMAGE}
@@ -135,7 +157,7 @@ services:
     volumes:
       - volume_s3:/data
     networks:
-      - shared_network
+      - adempiere_network
 
   vue.ui:
     image: ${VUE_UI_IMAGE}
@@ -147,7 +169,7 @@ services:
       API_URL: ${VUE_UI_API_URL}
       PUBLIC_PATH: ${VUE_UI_PUBLIC_PATH}
     networks:
-      - shared_network
+      - adempiere_network
 
   dkron.scheduler:
     image: ${DKRON_IMAGE}
@@ -164,7 +186,7 @@ services:
     volumes:
       - volume_dkron:/dkron.data
     networks:
-      - shared_network
+      - adempiere_network
   
   opensearch-node:
     image: ${OPENSEARCH_IMAGE}
@@ -195,7 +217,7 @@ services:
     #   - ${OPENSEARCH_PORT}:9200
     #   - ${OPENSEARCH_PERFORMANCE_PORT}:9600 # required for Performance Analyzer
     networks:
-      - shared_network
+      - adempiere_network
   
   open-search-setup:
     build:
@@ -207,7 +229,7 @@ services:
        opensearch-node:
         condition: service_healthy
     networks:
-      - shared_network
+      - adempiere_network
 
   zookeeper:
     image: ${ZOOKEEPER_IMAGE}
@@ -218,7 +240,7 @@ services:
     # ports:
     #   - ${ZOOKEEPER_PORT}:2181
     networks:
-      - shared_network
+      - adempiere_network
   
   kafka:
     image: ${KAFKA_IMAGE}
@@ -235,7 +257,7 @@ services:
       KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
     networks:
-      - shared_network
+      - adempiere_network
 
   opensearch.gateway.rs:
     image: ${OPENSEARCH_GATEWAY_RS_IMAGE}
@@ -250,7 +272,7 @@ services:
     # ports:
     #   - ${OPENSEARCH_GATEWAY_RS_PORT}:7878
     networks:
-      - shared_network
+      - adempiere_network
   
   ui.gateway:
     image: ${GATEWAY_IMAGE}
@@ -274,15 +296,31 @@ services:
       - ./nginx/api_json_errors.conf:/etc/nginx/api_json_errors.conf
       #- ./keys/api_keys.conf:/etc/nginx/api_keys.conf
     networks:
-      - shared_network
+      - adempiere_network
 
 networks:
-  shared_network:
-    name: ${DEFAULT_NETWORK}
+  adempiere_network:
+    name: ${ADEMPIERE_NETWORK}
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: ${NETWORK_SUBNET}      # Set subnet for all containers created.
+          gateway: ${NETWORK_GATEWAY}
+          # ip-range: ${NETWORK_IP_RANGE}   # supposedly not allowed
+  
+  # FOLGENDE ZEILEN MUSS MAN AM ENDE ENTFERNENT!!!
+  #shared_network:
+  #  name: ${DEFAULT_NETWORK}
 
 volumes:
   volume_postgres:
     name: ${POSTGRES_VOLUME}
+    # SPÄTER KOMMENTARE ENTFERNEN, DAMIT PERSISTENZ FUNKTIONIERT!
+    #driver_opts:
+    #  type: none
+    #  o: bind
+    #  device: ${POSTGRES_DB_PATH_ON_HOST} # Must be created on host before calling docker compose. The persistent database will be located locally here.
   volume_dkron:
     name: ${DKRON_VOLUME}
   volume_s3:
