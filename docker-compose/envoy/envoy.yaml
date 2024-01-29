@@ -41,7 +41,7 @@ static_resources:
                 - bank_statement_match.BankStatementMatch
                 - business_partner.BusinessPartner
                 - data.BusinessData
-                - data.CoreFunctionality
+                - core_functionality.CoreFunctionality
                 - dashboarding.Dashboarding
                 - dictionary.Dictionary
                 - enrollment.Register
