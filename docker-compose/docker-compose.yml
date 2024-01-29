@@ -26,7 +26,7 @@ services:
     hostname: ${POSTGRES_HOSTNAME}
     #image: ${POSTGRES_HOST}
     #image: ${POSTGRES_IMAGE_REPO_NAME}                        # This is just another image RepoTag, visible with "docker image inspect" and "docker images"
-                                                               # Omitting it, the Repository name will be "Project name+Service name"
+                                                               # Omitting it, the Repository name will be "${COMPOSE_PROJECT_NAME}+Service name"
     restart: ${GENERIC_RESTART}
     ports:
       - ${POSTGRES_EXTERNAL_PORT}:${POSTGRES_PORT}          # Set a fixed external port
