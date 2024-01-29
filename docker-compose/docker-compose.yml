@@ -53,7 +53,7 @@ services:
       POSTGRES_RESTORE_FILE_NAME: ${POSTGRES_RESTORE_FILE_NAME}
       POSTGRES_EXTERNAL_PORT:  ${POSTGRES_EXTERNAL_PORT}
     networks:
-      - shared_network
+      - adempiere_network
   
   adempiere.site:
     image: ${ADEMPIERE_SITE_IMAGE}
@@ -66,7 +66,7 @@ services:
       VUE_HOST: ${ADEMPIERE_SITE_VUE_HOST}
       SCHEDULER_HOST: ${ADEMPIERE_SITE_SCHEDULER_HOST}
     networks:
-      - shared_network
+      - adempiere_network
   
   adempiere.zk:
     image: ${ADEMPIERE_ZK_IMAGE}
@@ -82,7 +82,7 @@ services:
       adempiere.database:
         condition: service_healthy
     networks:
-      - shared_network 
+      - adempiere_network
 
   adempiere.grpc.server:
     image: ${GRPC_SERVER_IMAGE}
@@ -105,7 +105,7 @@ services:
       JWT_SECRET_KEY: ${GRPC_SERVER_JWT_SECRET_KEY}
       # SERVICES_ENABLED: ${GRPC_SERVER_SERVICES_ENABLED}
     networks:
-      - shared_network
+      - adempiere_network
 
   adempiere.processor:
     image: ${ADEMPIERE_PROCESSOR_IMAGE}
@@ -125,7 +125,7 @@ services:
       adempiere.database:
         condition: service_healthy
     networks:
-      - shared_network
+      - adempiere_network
 
   grpc.proxy:
     image: ${GRPC_PROXY_IMAGE}
@@ -148,7 +148,7 @@ services:
       - adempiere.grpc.server
       - adempiere.processor
     networks:
-    - shared_network
+    - adempiere_network
 
   s3.service:
     image: ${S3_IMAGE}
@@ -167,7 +167,7 @@ services:
     volumes:
       - volume_s3:/data
     networks:
-      - shared_network
+      - adempiere_network
 
   vue.ui:
     image: ${VUE_UI_IMAGE}
@@ -179,7 +179,7 @@ services:
       API_URL: ${VUE_UI_API_URL}
       PUBLIC_PATH: ${VUE_UI_PUBLIC_PATH}
     networks:
-      - shared_network
+      - adempiere_network
 
   dkron.scheduler:
     image: ${DKRON_IMAGE}
@@ -196,7 +196,7 @@ services:
     volumes:
       - volume_dkron:/dkron.data
     networks:
-      - shared_network
+      - adempiere_network
   
   opensearch-node:
     image: ${OPENSEARCH_IMAGE}
@@ -227,7 +227,7 @@ services:
     #   - ${OPENSEARCH_PORT}:9200
     #   - ${OPENSEARCH_PERFORMANCE_PORT}:9600 # required for Performance Analyzer
     networks:
-      - shared_network
+      - adempiere_network
   
   open-search-setup:
     build:
@@ -239,7 +239,7 @@ services:
        opensearch-node:
         condition: service_healthy
     networks:
-      - shared_network
+      - adempiere_network
 
   zookeeper:
     image: ${ZOOKEEPER_IMAGE}
@@ -250,7 +250,7 @@ services:
     # ports:
     #   - ${ZOOKEEPER_PORT}:2181
     networks:
-      - shared_network
+      - adempiere_network
   
   kafka:
     image: ${KAFKA_IMAGE}
@@ -267,7 +267,7 @@ services:
       KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
     networks:
-      - shared_network
+      - adempiere_network
 
   opensearch.gateway.rs:
     image: ${OPENSEARCH_GATEWAY_RS_IMAGE}
@@ -282,7 +282,7 @@ services:
     # ports:
     #   - ${OPENSEARCH_GATEWAY_RS_PORT}:7878
     networks:
-      - shared_network
+      - adempiere_network
   
   ui.gateway:
     image: ${GATEWAY_IMAGE}
@@ -306,11 +306,22 @@ services:
       - ./nginx/api_json_errors.conf:/etc/nginx/api_json_errors.conf
       #- ./keys/api_keys.conf:/etc/nginx/api_keys.conf
     networks:
-      - shared_network
+      - adempiere_network
 
+#networks:
+#  shared_network:
+#    name: ${DEFAULT_NETWORK}
+      
 networks:
-  shared_network:
-    name: ${DEFAULT_NETWORK}
+  adempiere_network:
+    name: ${ADEMPIERE_NETWORK}
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: ${NETWORK_SUBNET}      # Set subnet for all containers created.
+          gateway: ${NETWORK_GATEWAY}
+          # ip-range: ${NETWORK_IP_RANGE}   # supposedly not allowed
 
 volumes:
   volume_postgres:
