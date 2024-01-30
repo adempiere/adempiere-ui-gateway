@@ -77,15 +77,18 @@ services:
     container_name: ${ADEMPIERE_SITE_CONTAINER_NAME}
     hostname: ${ADEMPIERE_SITE_HOSTNAME}
     restart: ${GENERIC_RESTART}
-    # ports:
-    #   - ${ADEMPIERE_SITE_PORT}:80
+    # ports:                                                                          # Im original von Edwin ist auskommentiert
+    #   - ${ADEMPIERE_SITE_PORT}:80                                                   # Im original von Edwin ist auskommentiert
+    #  - ${ADEMPIERE_SITE_EXTERNAL_PORT}:${ADEMPIERE_SITE_PORT}                       # Ich muß herausfinden, wie URL + Ports bei adempiere.site funktionierren.
     volumes:
       - ${TIMEZONE_PATH_ON_HOST}:${TIMEZONE_PATH_ON_CONTAINER}:${TIMEZONE_OPTIONS}    # Map the Timezone  of the host to the Timezone of the container
       - ${LOCALTIME_PATH_ON_HOST}:${LOCALTIME_PATH_ON_CONTAINER}:${LOCALTIME_OPTIONS} # Map the Localtime of the host to the Timezone of the container
     environment:
-      # ZK_HOST: ${ADEMPIERE_SITE_ZK_HOST}
+      # ZK_HOST: ${ADEMPIERE_SITE_ZK_HOST}                                            # Original Edwin
+      # ZK_HOST: ${ADEMPIERE_SITE_ZK_URL}:${ADEMPIERE_ZK_EXTERNAL_PORT}               # Ich muß herausfinden, wie URL + Ports bei adempiere.site funktionieren.
       ZK_HOST: ${ADEMPIERE_SITE_ZK_URL}
-      # VUE_HOST: ${ADEMPIERE_SITE_VUE_HOST}
+      # VUE_HOST: ${ADEMPIERE_SITE_VUE_HOST}                                          # Original Edwin
+      # VUE_HOST: ${ADEMPIERE_SITE_VUE_URL}:${VUE_UI_EXTERNAL_PORT}                   # Ich muß herausfinden, wie URL + Ports bei adempiere.site funktionieren.
       VUE_HOST: ${ADEMPIERE_SITE_VUE_URL}
       # SCHEDULER_HOST: ${ADEMPIERE_SITE_SCHEDULER_HOST}
       SCHEDULER_HOST: ${ADEMPIERE_SITE_SCHEDULER_URL}
