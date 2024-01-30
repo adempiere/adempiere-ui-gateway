@@ -56,14 +56,22 @@ services:
   
   adempiere.zk:
     image: ${ADEMPIERE_ZK_IMAGE}
-    container_name: ${ADEMPIERE_ZK_HOST}
+    # container_name: ${ADEMPIERE_ZK_HOST}
+    container_name: ${ADEMPIERE_ZK_CONTAINER_NAME}
+    hostname: ${ADEMPIERE_ZK_HOSTNAME}
     restart: ${GENERIC_RESTART}
-    # ports:
-    #   - ${ADEMPIERE_ZK_PORT}:8080
+    # ports:                                                    # Im original von Edwin ist auskommentiert
+    #   - ${ADEMPIERE_ZK_PORT}:8080                             # Im original von Edwin ist auskommentiert
+    #  - ${ADEMPIERE_ZK_EXTERNAL_PORT}:${ADEMPIERE_ZK_PORT}     # Ich muß herausfinden, wie URL + Ports bei adempiere.zk funktionierren.
+    volumes:
+      # - volume_persistent_files:${ADEMPIERE_ZK_PERSISTENT_FILES_PATH_ON_CONTAINER}    # Persistent Directory for files to be copied.
+      - ${TIMEZONE_PATH_ON_HOST}:${TIMEZONE_PATH_ON_CONTAINER}:${TIMEZONE_OPTIONS}    # Map the Timezone  of the host to the Timezone of the container
+      - ${LOCALTIME_PATH_ON_HOST}:${LOCALTIME_PATH_ON_CONTAINER}:${LOCALTIME_OPTIONS} # Map the Localtime of the host to the Timezone of the container
     environment:
       ADEMPIERE_DB_SERVER: ${ADEMPIERE_ZK_DB_HOST}
       ADEMPIERE_DB_NAME: ${ADEMPIERE_ZK_DB_NAME}
       ADEMPIERE_DB_PASSWORD: ${ADEMPIERE_ZK_DB_PASSWORD}
+      ADEMPIERE_ZK_DB_PORT: ${ADEMPIERE_ZK_DB_PORT}
     depends_on:
       adempiere.database:
         condition: service_healthy
