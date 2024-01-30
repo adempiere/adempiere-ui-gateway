@@ -3,7 +3,7 @@
 # Containers Stak
 STACK_NAME="adempiere-ui-gateway"
 
-# Project name. Ist Name des Projektes bei "docker compose convert"
+# Project name. Ist Name des Projektes bei Aufruf von "docker compose convert" oder "docker compose ls"
 CLIENT_NAME="shw-test"
 COMPOSE_PROJECT_NAME=${CLIENT_NAME}-gateway
 
@@ -61,7 +61,7 @@ POSTGRES_BACKUP_PATH_ON_HOST=${POSTGRES_CONTEXT_PATH_ON_HOST}/backups
 POSTGRES_RESTORE_FILE_NAME=seed.backup
 POSTGRES_DEFAULT_RESTORE_FILE=${POSTGRES_DB_BACKUP_PATH_ON_CONTAINER}/${POSTGRES_RESTORE_FILE_NAME}
 
-POSTGRES_IMAGE_REPO_NAME=${CLIENT_NAME}.repository
+POSTGRES_IMAGE_REPO_NAME=${COMPOSE_PROJECT_NAME}.virtual_repo.pg
 
 POSTGRES_IMAGE="postgres:13"
 #POSTGRES_HOST="${STACK_NAME}.adempiere.database"  # 1. Änderung: 

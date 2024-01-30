@@ -1,7 +1,6 @@
 version: "3.9"
 
-# Ich weiß nicht, welche Auswirkung das hat. Ersetzen mit ${COMPOSE_PROJECT_NAME}     # To be displayed when running "docker compose ls"
-name: xxxxxyyyyy
+# name: xxxxxyyyyy                                          # Im original von Edwin. Da in der Literatur nicht dokumentiert ist, wird auskommentiert 
 
 services:
   # Docker Compose Services
@@ -25,7 +24,7 @@ services:
     container_name: ${POSTGRES_CONTAINER_NAME}
     hostname: ${POSTGRES_HOSTNAME}
     #image: ${POSTGRES_HOST}
-    #image: ${POSTGRES_IMAGE_REPO_NAME}                        # This is just another image RepoTag, visible with "docker image inspect" and "docker images"
+    image: ${POSTGRES_IMAGE_REPO_NAME}                        # This is just another image RepoTag, visible with "docker image inspect" and "docker images"
                                                                # Omitting it, the Repository name will be "${COMPOSE_PROJECT_NAME}+Service name"
     restart: ${GENERIC_RESTART}
     ports:
