@@ -55,19 +55,6 @@ services:
     networks:
       - adempiere_network
   
-  adempiere.site:
-    image: ${ADEMPIERE_SITE_IMAGE}
-    container_name: ${ADEMPIERE_SITE_HOST}
-    restart: ${GENERIC_RESTART}
-    # ports:
-    #   - ${ADEMPIERE_SITE_PORT}:80
-    environment:
-      ZK_HOST: ${ADEMPIERE_SITE_ZK_HOST}
-      VUE_HOST: ${ADEMPIERE_SITE_VUE_HOST}
-      SCHEDULER_HOST: ${ADEMPIERE_SITE_SCHEDULER_HOST}
-    networks:
-      - adempiere_network
-  
   adempiere.zk:
     image: ${ADEMPIERE_ZK_IMAGE}
     container_name: ${ADEMPIERE_ZK_HOST}
@@ -81,6 +68,29 @@ services:
     depends_on:
       adempiere.database:
         condition: service_healthy
+    networks:
+      - adempiere_network
+  
+  adempiere.site:
+    image: ${ADEMPIERE_SITE_IMAGE}
+    #container_name: ${ADEMPIERE_SITE_HOST}
+    container_name: ${ADEMPIERE_SITE_CONTAINER_NAME}
+    hostname: ${ADEMPIERE_SITE_HOSTNAME}
+    restart: ${GENERIC_RESTART}
+    # ports:
+    #   - ${ADEMPIERE_SITE_PORT}:80
+    volumes:
+      - ${TIMEZONE_PATH_ON_HOST}:${TIMEZONE_PATH_ON_CONTAINER}:${TIMEZONE_OPTIONS}    # Map the Timezone  of the host to the Timezone of the container
+      - ${LOCALTIME_PATH_ON_HOST}:${LOCALTIME_PATH_ON_CONTAINER}:${LOCALTIME_OPTIONS} # Map the Localtime of the host to the Timezone of the container
+    environment:
+      # ZK_HOST: ${ADEMPIERE_SITE_ZK_HOST}
+      ZK_HOST: ${ADEMPIERE_SITE_ZK_URL}
+      # VUE_HOST: ${ADEMPIERE_SITE_VUE_HOST}
+      VUE_HOST: ${ADEMPIERE_SITE_VUE_URL}
+      # SCHEDULER_HOST: ${ADEMPIERE_SITE_SCHEDULER_HOST}
+      SCHEDULER_HOST: ${ADEMPIERE_SITE_SCHEDULER_URL}
+    depends_on:
+      - adempiere.zk     # Docker Compose Service
     networks:
       - adempiere_network
 
