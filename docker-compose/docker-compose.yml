@@ -218,7 +218,8 @@ services:
 
   dkron.scheduler:
     image: ${DKRON_IMAGE}
-    container_name: ${DKRON_HOST}
+    container_name: ${DKRON_CONTAINER_NAME}
+    hostname: ${DKRON_HOSTNAME}
     restart: ${GENERIC_RESTART}
     # ports:
     #   - ${DKRON_PORT}:8080
@@ -230,6 +231,8 @@ services:
       - "--ui=true"
     volumes:
       - volume_dkron:/dkron.data
+      - ${TIMEZONE_PATH_ON_HOST}:${TIMEZONE_PATH_ON_CONTAINER}:${TIMEZONE_OPTIONS}    # Map the Timezone  of the host to the Timezone of the container
+      - ${LOCALTIME_PATH_ON_HOST}:${LOCALTIME_PATH_ON_CONTAINER}:${LOCALTIME_OPTIONS} # Map the Localtime of the host to the Timezone of the container
     networks:
       - adempiere_network
   

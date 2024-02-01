@@ -110,9 +110,11 @@ ADEMPIERE_PROCESSOR_DB_PASSWORD=${POSTGRES_PASSWORD}
 
 # dKron task scheduler
 DKRON_IMAGE="dkron/dkron"
-DKRON_HOST="${STACK_NAME}.dkron"
+DKRON_CONTAINER_NAME=${COMPOSE_PROJECT_NAME}.scheduler.dkron
+DKRON_HOSTNAME="${CLIENT_NAME}.dkron"
 DKRON_PORT=8088
-DKRON_VOLUME="${STACK_NAME}.volume_dkron"
+DKRON_EXTERNAL_PORT=8899                            # NOCH NICHT VERWENDET
+DKRON_VOLUME="${COMPOSE_PROJECT_NAME}.volume_dkron"
 
 
 # Zookeeper manage kafka brokers
