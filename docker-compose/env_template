@@ -170,7 +170,8 @@ NGINX_UI_GATEWAY_VOLUME="${COMPOSE_PROJECT_NAME}.volume_nginx"                 #
 
 # S3
 S3_IMAGE="quay.io/minio/minio"
-S3_HOST="${STACK_NAME}.s3.service"
+S3_CONTAINER_NAME="${COMPOSE_PROJECT_NAME}.s3.service"
+S3_HOSTNAME="${CLIENT_NAME}.s3"
 S3_PORT=1066
 S3_CONSOLE_PORT=1067
 S3_USER="adempiere"

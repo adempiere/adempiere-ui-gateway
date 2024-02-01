@@ -190,7 +190,8 @@ services:
 
   s3.service:
     image: ${S3_IMAGE}
-    container_name: ${S3_HOST}
+    container_name: ${S3_CONTAINER_NAME}
+    hostname: ${S3_HOSTNAME}
     restart: ${GENERIC_RESTART}
     ports:
       - ${S3_PORT}:9000
@@ -204,6 +205,8 @@ services:
       MINIO_ROOT_PASSWORD: ${S3_PASSWORD}
     volumes:
       - volume_s3:/data
+      - ${TIMEZONE_PATH_ON_HOST}:${TIMEZONE_PATH_ON_CONTAINER}:${TIMEZONE_OPTIONS}    # Map the Timezone  of the host to the Timezone of the container
+      - ${LOCALTIME_PATH_ON_HOST}:${LOCALTIME_PATH_ON_CONTAINER}:${LOCALTIME_OPTIONS} # Map the Localtime of the host to the Timezone of the container
     networks:
       - adempiere_network
 
