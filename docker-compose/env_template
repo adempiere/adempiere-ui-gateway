@@ -147,15 +147,16 @@ VUE_BACKEND_GRPC_SERVER_SERVICES_ENABLED="bank_statement_match; business; busine
 VUE_BACKEND_GRPC_SERVER_LOG_LEVEL="WARNING"   # Available values: OFF, SEVERE, WARNING, INFO, CONFIG, FINE, FINER, FINEST, ALL
 VUE_BACKEND_GRPC_SERVER_PORT=50059
 
-# Envoy Proxy Definition
-GRPC_PROXY_IMAGE="envoyproxy/envoy:v1.27.0"
-GRPC_PROXY_HOST="${STACK_NAME}.grpc.proxy"
-GRPC_PROXY_BACKEND_IMAGE="solopcloud/adempiere-grpc-proxy:2.2.1"
-GRPC_PROXY_BACKEND_PORT=5555
-GRPC_PROXY_BACKEND_HOST=${VUE_BACKEND_GRPC_SERVER_CONTAINER_NAME}
-#GRPC_PROXY_PROCESSOR_HOST=${ADEMPIERE_PROCESSOR_HOST}                          # Zurzeit keine Anwendung in docker-compose.yml
-GRPC_PROXY_PROCESSOR_HOST=${ADEMPIERE_PROCESSOR_CONTAINER_NAME}                 # Zurzeit keine Anwendung in docker-compose.yml
-GRPC_PROXY_PROCESSOR_PORT=5556
+# Envoy Proxy Definition for Processors
+ENVOY_GRPC_PROXY_IMAGE="envoyproxy/envoy:v1.27.0"
+ENVOY_GRPC_PROXY_CONTAINER_NAME="${COMPOSE_PROJECT_NAME}.grpc.proxy"
+ENVOY_GRPC_PROXY_HOSTNAME="${CLIENT_NAME}.envoy"
+ENVOY_GRPC_PROXY_BACKEND_IMAGE="solopcloud/adempiere-grpc-proxy:2.2.1"          # Zurzeit keine Anwendung in docker-compose.yml
+ENVOY_GRPC_PROXY_EXTERNAL_PORT=5555
+ENVOY_GRPC_PROXY_BACKEND_PORT=5555
+ENVOY_GRPC_PROXY_BACKEND_HOST=${VUE_BACKEND_GRPC_SERVER_CONTAINER_NAME}         # Zurzeit keine Anwendung in docker-compose.yml
+ENVOY_GRPC_PROXY_PROCESSOR_HOST=${ADEMPIERE_PROCESSOR_CONTAINER_NAME}           # Zurzeit keine Anwendung in docker-compose.yml
+ENVOY_GRPC_PROXY_PROCESSOR_PORT=5556
 
 
 # Nginx Gateway

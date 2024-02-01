@@ -163,8 +163,9 @@ services:
       - adempiere_network
 
   grpc.proxy:
-    image: ${GRPC_PROXY_IMAGE}
-    container_name: ${GRPC_PROXY_HOST}
+    image: ${ENVOY_GRPC_PROXY_IMAGE}
+    container_name: ${ENVOY_GRPC_PROXY_CONTAINER_NAME}
+    hostname: ${ENVOY_GRPC_PROXY_HOSTNAME}
     healthcheck:
       test: "bash -c 'printf \"GET / HTTP/1.1\n\n\" > /dev/tcp/127.0.0.1/5555; exit $?;'"
       interval: 10s
@@ -172,13 +173,15 @@ services:
       start_period: 20s
       timeout: 10s
     ports:
-     - ${GRPC_PROXY_BACKEND_PORT}:5555
+     - ${ENVOY_GRPC_PROXY_EXTERNAL_PORT}:${ENVOY_GRPC_PROXY_BACKEND_PORT}
     # Processor Port
-    #  - ${GRPC_PROXY_PROCESSOR_PORT}:5556
+    #  - ${ENVOY_GRPC_PROXY_PROCESSOR_PORT}:5556
     volumes:
       - ./envoy/envoy.yaml:/etc/envoy/envoy.yaml:ro
       - ./envoy/definitions/adempiere-grpc-server.pb:/data/adempiere-grpc-server.pb:ro
       - ./envoy/definitions/adempiere-processors-service-service.pb:/data/adempiere-processors-service-service.pb:ro
+      - ${TIMEZONE_PATH_ON_HOST}:${TIMEZONE_PATH_ON_CONTAINER}:${TIMEZONE_OPTIONS}    # Map the Timezone  of the host to the Timezone of the container
+      - ${LOCALTIME_PATH_ON_HOST}:${LOCALTIME_PATH_ON_CONTAINER}:${LOCALTIME_OPTIONS} # Map the Localtime of the host to the Timezone of the container
     depends_on:
       - adempiere.grpc.server
       - adempiere.processor
