@@ -334,7 +334,8 @@ services:
 
   opensearch.gateway.rs:
     image: ${OPENSEARCH_GATEWAY_RS_IMAGE}
-    container_name: ${OPENSEARCH_GATEWAY_RS_HOST}
+    container_name: ${OPENSEARCH_GATEWAY_RS_CONTAINER_NAME}
+    hostname: ${OPENSEARCH_GATEWAY_RS_HOSTNAME}
     restart: ${GENERIC_RESTART}
     environment:
       KAFKA_HOST: ${OPENSEARCH_GATEWAY_RS_KAFKA_HOST}
@@ -344,6 +345,9 @@ services:
         condition: service_healthy
     # ports:
     #   - ${OPENSEARCH_GATEWAY_RS_PORT}:7878
+    volumes:
+      - ${TIMEZONE_PATH_ON_HOST}:${TIMEZONE_PATH_ON_CONTAINER}:${TIMEZONE_OPTIONS}    # Map the Timezone  of the host to the Timezone of the container
+      - ${LOCALTIME_PATH_ON_HOST}:${LOCALTIME_PATH_ON_CONTAINER}:${LOCALTIME_OPTIONS} # Map the Localtime of the host to the Timezone of the container
     networks:
       - adempiere_network
   
