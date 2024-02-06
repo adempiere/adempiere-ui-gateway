@@ -284,11 +284,15 @@ services:
     build:
       context: opensearch/
       dockerfile: setup.Dockerfile
-    container_name: ${OPENSEARCH_SETUP_HOST}
-    image: ${OPENSEARCH_SETUP_HOST}
+    container_name: ${OPENSEARCH_SETUP_CONTAINER_NAME}
+    hostname: ${OPENSEARCH_SETUP_HOSTNAME}
+    image: ${OPENSEARCH_SETUP_IMAGE_REPO_NAME}
     depends_on:
        opensearch-node:
         condition: service_healthy
+    volumes:
+      - ${TIMEZONE_PATH_ON_HOST}:${TIMEZONE_PATH_ON_CONTAINER}:${TIMEZONE_OPTIONS}    # Map the Timezone  of the host to the Timezone of the container
+      - ${LOCALTIME_PATH_ON_HOST}:${LOCALTIME_PATH_ON_CONTAINER}:${LOCALTIME_OPTIONS} # Map the Localtime of the host to the Timezone of the container
     networks:
       - adempiere_network
 
