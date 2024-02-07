@@ -394,8 +394,14 @@ networks:
           # ip-range: ${NETWORK_IP_RANGE}   # supposedly not allowed
 
 volumes:
+  #volume_postgres:
+  #  name: ${POSTGRES_VOLUME}
   volume_postgres:
     name: ${POSTGRES_VOLUME}
+    driver_opts:
+      type: none
+      o: bind
+      device: ${POSTGRES_DB_PATH_ON_HOST} # Must be created on host before calling docker compose. The persistent database will be located locally here.
   volume_dkron:
     name: ${DKRON_VOLUME}
   volume_s3:
