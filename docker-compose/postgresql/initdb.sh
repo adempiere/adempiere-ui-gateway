@@ -1,6 +1,8 @@
 #!/bin/bash
 
-# This file is skipped automatically when in docker compose there is an image defined or the database is already installed in the container.
+# This file is skipped automatically when 
+#     - in docker compose there is an image already defined or 
+#     - the database is already installed in the container.
 
 echo "Starting DB initialization."
 echo "Check if database 'adempiere' exists."
@@ -15,10 +17,10 @@ echo "Check if database 'adempiere' exists."
 
     echo "Restore of database 'adempiere' starting..."
     echo "Check if a seed restore file exists ($POSTGRES_DEFAULT_RESTORE_FILE)"
- #   if [ -f "$POSTGRES_DEFAULT_RESTORE_FILE" ]
- #   then
- #     echo "File $POSTGRES_DEFAULT_RESTORE_FILE exists -->> Proceed to restore DB using this file."
- #   else
+    if [ -f "$POSTGRES_DEFAULT_RESTORE_FILE" ]
+    then
+      echo "File $POSTGRES_DEFAULT_RESTORE_FILE exists -->> Proceed to restore DB using this file."
+    else
       echo "File $POSTGRES_DEFAULT_RESTORE_FILE does not exist -->> Proceed to restore DB using ADempiere's seed."
       echo "I am the user: " `whoami`   # It should be "postgres"
       echo "Download ADempiere artifact from Github."
@@ -37,7 +39,7 @@ echo "Check if database 'adempiere' exists."
       echo "Delete $ADEMPIERE_GITHUB_COMPRESSED_FILE    "
       rm $ADEMPIERE_GITHUB_COMPRESSED_FILE
       echo "Result from ls -la: " `ls -la`
- #   fi
+    fi
 
     # The following commands are not used anymore. Left because od legacy.
     #psql -U adempiere -d adempiere < Adempiere/data/Adempiere_pg.dmp
