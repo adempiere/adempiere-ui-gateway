@@ -32,7 +32,7 @@ services:
     volumes:
       #- volume_postgres:/var/lib/postgresql/data
       - volume_postgres:${POSTGRES_DEFAULT_DB_PATH_ON_CONTAINER} # Database dir for container. Default for Postgres.
-      #- volume_backups:${POSTGRES_DB_BACKUP_PATH_ON_CONTAINER}   # Backup dir for container. Must be created with Dockerfile
+      - volume_backups:${POSTGRES_DB_BACKUP_PATH_ON_CONTAINER}   # Backup dir for container. Must be created with Dockerfile
       - ${TIMEZONE_PATH_ON_HOST}:${TIMEZONE_PATH_ON_CONTAINER}:${TIMEZONE_OPTIONS}    # Map the Timezone  of the host to the Timezone of the container
       - ${LOCALTIME_PATH_ON_HOST}:${LOCALTIME_PATH_ON_CONTAINER}:${LOCALTIME_OPTIONS} # Map the Localtime of the host to the Timezone of the container
     healthcheck:
@@ -402,6 +402,12 @@ volumes:
       type: none
       o: bind
       device: ${POSTGRES_DB_PATH_ON_HOST} # Must be created on host before calling docker compose. The persistent database will be located locally here.
+  volume_backups:
+    name: ${BACKUPS_VOLUME}
+    driver_opts:
+      type: none
+      o: bind
+      device: ${POSTGRES_BACKUP_PATH_ON_HOST} # Must be created on host before calling docker compose. Backups must be copied here to be restored.
   volume_dkron:
     name: ${DKRON_VOLUME}
   volume_s3:
