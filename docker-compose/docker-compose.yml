@@ -64,7 +64,7 @@ services:
     #   - ${ADEMPIERE_ZK_PORT}:8080                             # Im original von Edwin ist auskommentiert
     #  - ${ADEMPIERE_ZK_EXTERNAL_PORT}:${ADEMPIERE_ZK_PORT}     # Ich muß herausfinden, wie URL + Ports bei adempiere.zk funktionierren.
     volumes:
-      # - volume_persistent_files:${ADEMPIERE_ZK_PERSISTENT_FILES_PATH_ON_CONTAINER}    # Persistent Directory for files to be copied.
+      - volume_persistent_files:${ADEMPIERE_ZK_PERSISTENT_FILES_PATH_ON_CONTAINER}    # Persistent Directory for files to be copied.
       - ${TIMEZONE_PATH_ON_HOST}:${TIMEZONE_PATH_ON_CONTAINER}:${TIMEZONE_OPTIONS}    # Map the Timezone  of the host to the Timezone of the container
       - ${LOCALTIME_PATH_ON_HOST}:${LOCALTIME_PATH_ON_CONTAINER}:${LOCALTIME_OPTIONS} # Map the Localtime of the host to the Timezone of the container
     environment:
@@ -408,6 +408,12 @@ volumes:
       type: none
       o: bind
       device: ${POSTGRES_BACKUP_PATH_ON_HOST} # Must be created on host before calling docker compose. Backups must be copied here to be restored.
+  volume_persistent_files:
+    name: ${PERSISTENT_FILES_VOLUME}
+    driver_opts:
+      type: none
+      o: bind
+      device: ${ADEMPIERE_ZK_PERSISTENT_FILES_PATH_ON_HOST} # Must be created on host before calling docker compose. The persistent directory will be located locally here.
   volume_dkron:
     name: ${DKRON_VOLUME}
   volume_s3:
