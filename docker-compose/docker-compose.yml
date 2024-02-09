@@ -4,7 +4,7 @@ name: services-gateway
 
 # Example API for images
 services:
-  postgresql.database:
+  postgresql.service:
     build:
       context: postgresql/
       dockerfile: postgres.Dockerfile
@@ -108,7 +108,7 @@ services:
       ADEMPIERE_DB_USER: ${ADEMPIERE_ZK_DB_USER}
       ADEMPIERE_DB_PASSWORD: ${ADEMPIERE_ZK_DB_PASSWORD}
     depends_on:
-      postgresql.database:
+      postgresql.service:
         condition: service_healthy
     networks:
       - shared_network 
@@ -124,7 +124,7 @@ services:
       start_period: 20s
       timeout: 10s
     depends_on:
-      postgresql.database:
+      postgresql.service:
         condition: service_healthy
     environment:
       DB_HOST: ${GRPC_SERVER_DB_HOST}
@@ -154,7 +154,7 @@ services:
       DB_USER: ${ADEMPIERE_PROCESSOR_DB_USER}
       DB_PASSWORD: ${ADEMPIERE_PROCESSOR_DB_PASSWORD}
     depends_on:
-      postgresql.database:
+      postgresql.service:
         condition: service_healthy
     networks:
       - shared_network
