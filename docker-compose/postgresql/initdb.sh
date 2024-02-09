@@ -9,7 +9,7 @@ then
 fi
 
 AFTER_RUN_DIR="/tmp/after_run"
-for file in $AFTER_RUN_DIR/*; do
+for file in $AFTER_RUN_DIR/*.sql; do
     echo "importing $file"
     psql -U postgres < $file
 done
