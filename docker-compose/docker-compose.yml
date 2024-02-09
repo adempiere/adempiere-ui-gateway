@@ -4,7 +4,7 @@ name: services-gateway
 
 # Example API for images
 services:
-  adempiere.database:
+  postgresql.service:
     build:
       context: postgresql/
       dockerfile: postgres.Dockerfile
@@ -20,6 +20,7 @@ services:
       start_period: 20s
       timeout: 10s
     environment:
+      POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     networks:
       - shared_network
@@ -104,9 +105,10 @@ services:
     environment:
       ADEMPIERE_DB_SERVER: ${ADEMPIERE_ZK_DB_HOST}
       ADEMPIERE_DB_NAME: ${ADEMPIERE_ZK_DB_NAME}
+      ADEMPIERE_DB_USER: ${ADEMPIERE_ZK_DB_USER}
       ADEMPIERE_DB_PASSWORD: ${ADEMPIERE_ZK_DB_PASSWORD}
     depends_on:
-      adempiere.database:
+      postgresql.service:
         condition: service_healthy
     networks:
       - shared_network 
@@ -122,12 +124,13 @@ services:
       start_period: 20s
       timeout: 10s
     depends_on:
-      adempiere.database:
+      postgresql.service:
         condition: service_healthy
     environment:
       DB_HOST: ${GRPC_SERVER_DB_HOST}
       DB_PORT: ${GRPC_SERVER_DB_PORT}
       DB_NAME: ${GRPC_SERVER_DB_NAME}
+      DB_USER: ${GRPC_SERVER_DB_USER}
       DB_PASSWORD: ${GRPC_SERVER_DB_PASSWORD}
       JWT_SECRET_KEY: ${GRPC_SERVER_JWT_SECRET_KEY}
       # SERVICES_ENABLED: ${GRPC_SERVER_SERVICES_ENABLED}
@@ -145,10 +148,13 @@ services:
       start_period: 20s
       timeout: 10s
     environment:
-      DB_HOST: ${POSTGRES_HOST}
-      SERVER_PORT: ${ADEMPIERE_PROCESSOR_PORT}
+      DB_HOST: ${ADEMPIERE_PROCESSOR_DB_HOST}
+      DB_PORT: ${ADEMPIERE_PROCESSOR_DB_PORT}
+      DB_NAME: ${ADEMPIERE_PROCESSOR_DB_NAME}
+      DB_USER: ${ADEMPIERE_PROCESSOR_DB_USER}
+      DB_PASSWORD: ${ADEMPIERE_PROCESSOR_DB_PASSWORD}
     depends_on:
-      adempiere.database:
+      postgresql.service:
         condition: service_healthy
     networks:
       - shared_network

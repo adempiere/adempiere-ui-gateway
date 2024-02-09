@@ -68,6 +68,14 @@ Note: For develop option (Only backend services) you can run the follow command:
 docker compose -f docker-compose-develop.yml up -d
 ```
 
+#### Complete Stack with Open-ID authentication
+
+Note: A experimental compose file that start a keycloak service and allows use it as SSO service connecting ADempiere by Open-ID:
+
+```Shell
+docker compose -f docker-compose-auth.yml up -d
+```
+
 ## Some Info
 
 This service just expose the `80` port and you should request using `api.adempiere.io` (for linux just add this domain to `/etc/hosts`).
