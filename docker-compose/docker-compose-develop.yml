@@ -4,7 +4,7 @@ name: services-gateway-develop
 
 # Example API for images
 services:
-  adempiere.database:
+  postgresql.service:
     build:
       context: postgresql/
       dockerfile: postgres.Dockerfile
@@ -20,6 +20,7 @@ services:
       start_period: 20s
       timeout: 10s
     environment:
+      POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     networks:
       - shared_network
@@ -35,12 +36,13 @@ services:
       start_period: 20s
       timeout: 10s
     depends_on:
-      adempiere.database:
+      postgresql.service:
         condition: service_healthy
     environment:
-      DB_HOST: ${POSTGRES_HOST}
+      DB_HOST: ${GRPC_SERVER_DB_HOST}
       DB_PORT: ${GRPC_SERVER_DB_PORT}
       DB_NAME: ${GRPC_SERVER_DB_NAME}
+      DB_USER: ${GRPC_SERVER_DB_USER}
       DB_PASSWORD: ${GRPC_SERVER_DB_PASSWORD}
       JWT_SECRET_KEY: ${GRPC_SERVER_JWT_SECRET_KEY}
       # SERVICES_ENABLED: ${GRPC_SERVER_SERVICES_ENABLED}

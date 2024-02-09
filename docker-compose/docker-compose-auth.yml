@@ -1,6 +1,6 @@
 version: "3.9"
 
-name: services-gateway
+name: services-gateway-auth
 
 # Example API for images
 services:
@@ -95,6 +95,7 @@ services:
       DB_NAME: ${ADEMPIERE_PROCESSOR_DB_NAME}
       DB_USER: ${ADEMPIERE_PROCESSOR_DB_USER}
       DB_PASSWORD: ${ADEMPIERE_PROCESSOR_DB_PASSWORD}
+      SERVER_PORT: ${ADEMPIERE_PROCESSOR_PORT}
     depends_on:
       postgresql.service:
         condition: service_healthy
@@ -255,6 +256,31 @@ services:
         condition: service_healthy
     # ports:
     #   - ${OPENSEARCH_GATEWAY_RS_PORT}:7878
+    networks:
+      - shared_network
+
+  keycloak:
+    image: ${KEYCLOAK_IMAGE}
+    container_name: ${KEYCLOAK_NAME}
+    restart: ${GENERIC_RESTART}
+    environment:
+      DB_VENDOR: ${KEYCLOAK_DB_VENDOR}
+      DB_ADDR: ${POSTGRES_HOST}
+      DB_DATABASE: ${KEYCLOAK_DB_DATABASE}
+      DB_USER: ${POSTGRES_USER}
+      DB_SCHEMA: ${KEYCLOAK_DB_SCHEMA}
+      DB_PASSWORD: ${POSTGRES_PASSWORD}
+      KEYCLOAK_ADMIN: ${KEYCLOAK_ADMIN}
+      KEYCLOAK_ADMIN_PASSWORD: ${KEYCLOAK_ADMIN_PASSWORD}
+    depends_on:
+      postgresql.service:
+        condition: service_healthy
+    command: "start-dev --import-realm"
+    ports:
+      - ${KEYCLOAK_PORT}:8080
+    volumes:
+      - ./keycloak/master-realm.json:/opt/keycloak/data/import/master-realm.json
+      - ./keycloak/adempiere-realm.json:/opt/keycloak/data/import/adempiere-realm.json
     networks:
       - shared_network
   
