@@ -279,6 +279,7 @@
         "attributes" : { }
       } ],
       "security-admin-console" : [ ],
+      "adempiere-zk-cli" : [ ],
       "admin-cli" : [ ],
       "account-console" : [ ],
       "broker" : [ {
@@ -365,7 +366,14 @@
         "containerId" : "1809a32e-3b24-45aa-b3b9-c2d68255ca7b",
         "attributes" : { }
       } ],
-      "adempiere-cli" : [ ]
+      "adempiere-cli" : [ {
+        "id" : "fc2fa09b-72a9-4632-904f-d23ea9a1d8ee",
+        "name" : "uma_protection",
+        "composite" : false,
+        "clientRole" : true,
+        "containerId" : "de5d8944-c320-4ad1-9aa5-196364979722",
+        "attributes" : { }
+      } ]
     }
   },
   "groups" : [ {
@@ -375,7 +383,9 @@
     "subGroups" : [ ],
     "attributes" : { },
     "realmRoles" : [ "offline_access", "System Administrator", "Garden World User", "Garden World Admin" ],
-    "clientRoles" : { }
+    "clientRoles" : {
+      "account" : [ "view-profile" ]
+    }
   } ],
   "defaultRole" : {
     "id" : "530d7204-18dd-46ac-8bac-589acf1deea1",
@@ -424,6 +434,9 @@
     "enabled" : true,
     "totp" : false,
     "emailVerified" : true,
+    "firstName" : "Garden",
+    "lastName" : "Admin",
+    "email" : "gardenadmin@adempiere.io",
     "credentials" : [ {
       "id" : "743a4361-34e0-4340-a1dd-8008bdffd21b",
       "type" : "password",
@@ -581,11 +594,93 @@
     "baseUrl" : "",
     "surrogateAuthRequired" : false,
     "enabled" : true,
-    "alwaysDisplayInConsole" : false,
+    "alwaysDisplayInConsole" : true,
     "clientAuthenticatorType" : "client-secret",
     "secret" : "x69TUdPsdQDG39laVeHkPYv3KjPs4B5E",
-    "redirectUris" : [ "http://0.0.0.0/webui" ],
+    "redirectUris" : [ "*" ],
     "webOrigins" : [ "*" ],
+    "notBefore" : 0,
+    "bearerOnly" : false,
+    "consentRequired" : false,
+    "standardFlowEnabled" : true,
+    "implicitFlowEnabled" : true,
+    "directAccessGrantsEnabled" : true,
+    "serviceAccountsEnabled" : false,
+    "publicClient" : false,
+    "frontchannelLogout" : true,
+    "protocol" : "openid-connect",
+    "attributes" : {
+      "oidc.ciba.grant.enabled" : "false",
+      "client.secret.creation.time" : "1707436388",
+      "backchannel.logout.session.required" : "true",
+      "post.logout.redirect.uris" : "+",
+      "oauth2.device.authorization.grant.enabled" : "false",
+      "display.on.consent.screen" : "false",
+      "backchannel.logout.revoke.offline.tokens" : "false"
+    },
+    "authenticationFlowBindingOverrides" : { },
+    "fullScopeAllowed" : true,
+    "nodeReRegistrationTimeout" : -1,
+    "protocolMappers" : [ {
+      "id" : "f11c9901-2ed4-4644-abe0-301bb3dd1064",
+      "name" : "Client IP Address",
+      "protocol" : "openid-connect",
+      "protocolMapper" : "oidc-usersessionmodel-note-mapper",
+      "consentRequired" : false,
+      "config" : {
+        "user.session.note" : "clientAddress",
+        "introspection.token.claim" : "true",
+        "id.token.claim" : "true",
+        "access.token.claim" : "true",
+        "claim.name" : "clientAddress",
+        "jsonType.label" : "String"
+      }
+    }, {
+      "id" : "9b5a4185-50bf-4f3c-801a-10e81bfd1b5a",
+      "name" : "Client Host",
+      "protocol" : "openid-connect",
+      "protocolMapper" : "oidc-usersessionmodel-note-mapper",
+      "consentRequired" : false,
+      "config" : {
+        "user.session.note" : "clientHost",
+        "introspection.token.claim" : "true",
+        "id.token.claim" : "true",
+        "access.token.claim" : "true",
+        "claim.name" : "clientHost",
+        "jsonType.label" : "String"
+      }
+    }, {
+      "id" : "4a070200-bb74-46ed-879f-52080d70db8d",
+      "name" : "Client ID",
+      "protocol" : "openid-connect",
+      "protocolMapper" : "oidc-usersessionmodel-note-mapper",
+      "consentRequired" : false,
+      "config" : {
+        "user.session.note" : "client_id",
+        "introspection.token.claim" : "true",
+        "id.token.claim" : "true",
+        "access.token.claim" : "true",
+        "claim.name" : "client_id",
+        "jsonType.label" : "String"
+      }
+    } ],
+    "defaultClientScopes" : [ "web-origins", "acr", "profile", "roles", "email" ],
+    "optionalClientScopes" : [ "address", "phone", "offline_access", "microprofile-jwt" ]
+  }, {
+    "id" : "9cd168db-8771-48f2-b7bc-77d200ab0e74",
+    "clientId" : "adempiere-zk-cli",
+    "name" : "ADempiere ZK Client",
+    "description" : "",
+    "rootUrl" : "",
+    "adminUrl" : "",
+    "baseUrl" : "",
+    "surrogateAuthRequired" : false,
+    "enabled" : true,
+    "alwaysDisplayInConsole" : false,
+    "clientAuthenticatorType" : "client-secret",
+    "secret" : "lvrT2aJq7qIiRlxuxd9kctCVajpO53G5",
+    "redirectUris" : [ "*" ],
+    "webOrigins" : [ ],
     "notBefore" : 0,
     "bearerOnly" : false,
     "consentRequired" : false,
@@ -599,7 +694,7 @@
     "attributes" : {
       "oidc.ciba.grant.enabled" : "false",
       "oauth2.device.authorization.grant.enabled" : "false",
-      "client.secret.creation.time" : "1707436388",
+      "client.secret.creation.time" : "1707492440",
       "backchannel.logout.session.required" : "true",
       "backchannel.logout.revoke.offline.tokens" : "false"
     },
@@ -716,6 +811,7 @@
       "config" : {
         "user.session.note" : "clientAddress",
         "introspection.token.claim" : "true",
+        "userinfo.token.claim" : "true",
         "id.token.claim" : "true",
         "access.token.claim" : "true",
         "claim.name" : "clientAddress",
@@ -730,6 +826,7 @@
       "config" : {
         "user.session.note" : "client_id",
         "introspection.token.claim" : "true",
+        "userinfo.token.claim" : "true",
         "id.token.claim" : "true",
         "access.token.claim" : "true",
         "claim.name" : "client_id",
@@ -744,6 +841,7 @@
       "config" : {
         "user.session.note" : "clientHost",
         "introspection.token.claim" : "true",
+        "userinfo.token.claim" : "true",
         "id.token.claim" : "true",
         "access.token.claim" : "true",
         "claim.name" : "clientHost",
@@ -1358,7 +1456,7 @@
       "subType" : "authenticated",
       "subComponents" : { },
       "config" : {
-        "allowed-protocol-mapper-types" : [ "oidc-sha256-pairwise-sub-mapper", "oidc-address-mapper", "saml-role-list-mapper", "oidc-usermodel-attribute-mapper", "oidc-full-name-mapper", "saml-user-property-mapper", "oidc-usermodel-property-mapper", "saml-user-attribute-mapper" ]
+        "allowed-protocol-mapper-types" : [ "saml-role-list-mapper", "saml-user-property-mapper", "oidc-usermodel-attribute-mapper", "oidc-full-name-mapper", "oidc-usermodel-property-mapper", "saml-user-attribute-mapper", "oidc-sha256-pairwise-sub-mapper", "oidc-address-mapper" ]
       }
     }, {
       "id" : "76c870d0-5199-4864-b9ac-371575a763cc",
@@ -1390,7 +1488,7 @@
       "subType" : "anonymous",
       "subComponents" : { },
       "config" : {
-        "allowed-protocol-mapper-types" : [ "saml-role-list-mapper", "oidc-usermodel-property-mapper", "oidc-full-name-mapper", "saml-user-property-mapper", "oidc-sha256-pairwise-sub-mapper", "oidc-address-mapper", "saml-user-attribute-mapper", "oidc-usermodel-attribute-mapper" ]
+        "allowed-protocol-mapper-types" : [ "saml-role-list-mapper", "oidc-full-name-mapper", "saml-user-property-mapper", "oidc-usermodel-property-mapper", "oidc-sha256-pairwise-sub-mapper", "oidc-address-mapper", "oidc-usermodel-attribute-mapper", "saml-user-attribute-mapper" ]
       }
     }, {
       "id" : "b11bdb69-9d30-444d-8f4e-58fba786ccb7",
