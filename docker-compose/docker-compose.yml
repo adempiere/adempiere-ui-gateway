@@ -1,9 +1,6 @@
 version: "3.9"
 
-# name: xxxxxyyyyy                                          # Im original von Edwin. Da in der Literatur nicht dokumentiert ist, wird auskommentiert 
-
 services:
-  # Docker Compose Services
   adempiere.database:
     build:
       context:  ${POSTGRES_CONTEXT_PATH_ON_HOST}              # Path relative to Working Directory where Dockerfile will be found
@@ -20,17 +17,14 @@ services:
         ADEMPIERE_GITHUB_ARTIFACT: ${ADEMPIERE_GITHUB_ARTIFACT}
         ADEMPIERE_GITHUB_COMPRESSED_FILE: ${ADEMPIERE_GITHUB_COMPRESSED_FILE}
         POSTGRES_RESTORE_FILE_NAME: ${POSTGRES_RESTORE_FILE_NAME}
-    #container_name: ${POSTGRES_HOST}
     container_name: ${POSTGRES_CONTAINER_NAME}
     hostname: ${POSTGRES_HOSTNAME}
-    #image: ${POSTGRES_HOST}
-    image: ${POSTGRES_IMAGE_REPO_NAME}                        # This is just another image RepoTag, visible with "docker image inspect" and "docker images"
+    image: ${POSTGRES_IMAGE_REPO_NAME}                        # "image" is in this context just another image RepoTag, visible with "docker image inspect" and "docker images"
                                                                # Omitting it, the Repository name will be "${COMPOSE_PROJECT_NAME}+Service name"
     restart: ${GENERIC_RESTART}
     ports:
       - ${POSTGRES_EXTERNAL_PORT}:${POSTGRES_PORT}          # Set a fixed external port
     volumes:
-      #- volume_postgres:/var/lib/postgresql/data
       - volume_postgres:${POSTGRES_DEFAULT_DB_PATH_ON_CONTAINER} # Database dir for container. Default for Postgres.
       - volume_backups:${POSTGRES_DB_BACKUP_PATH_ON_CONTAINER}   # Backup dir for container. Must be created with Dockerfile
       - ${TIMEZONE_PATH_ON_HOST}:${TIMEZONE_PATH_ON_CONTAINER}:${TIMEZONE_OPTIONS}    # Map the Timezone  of the host to the Timezone of the container
@@ -56,7 +50,6 @@ services:
   
   adempiere.zk:
     image: ${ADEMPIERE_ZK_IMAGE}
-    # container_name: ${ADEMPIERE_ZK_HOST}
     container_name: ${ADEMPIERE_ZK_CONTAINER_NAME}
     hostname: ${ADEMPIERE_ZK_HOSTNAME}
     restart: ${GENERIC_RESTART}
@@ -91,13 +84,8 @@ services:
       - ${TIMEZONE_PATH_ON_HOST}:${TIMEZONE_PATH_ON_CONTAINER}:${TIMEZONE_OPTIONS}    # Map the Timezone  of the host to the Timezone of the container
       - ${LOCALTIME_PATH_ON_HOST}:${LOCALTIME_PATH_ON_CONTAINER}:${LOCALTIME_OPTIONS} # Map the Localtime of the host to the Timezone of the container
     environment:
-      # ZK_HOST: ${ADEMPIERE_SITE_ZK_HOST}                                            # Original Edwin
-      # ZK_HOST: ${ADEMPIERE_SITE_ZK_URL}:${ADEMPIERE_ZK_EXTERNAL_PORT}               # Ich muß herausfinden, wie URL + Ports bei adempiere.site funktionieren.
       ZK_HOST: ${ADEMPIERE_SITE_ZK_URL}
-      # VUE_HOST: ${ADEMPIERE_SITE_VUE_HOST}                                          # Original Edwin
-      # VUE_HOST: ${ADEMPIERE_SITE_VUE_URL}:${VUE_UI_EXTERNAL_PORT}                   # Ich muß herausfinden, wie URL + Ports bei adempiere.site funktionieren.
       VUE_HOST: ${ADEMPIERE_SITE_VUE_URL}
-      # SCHEDULER_HOST: ${ADEMPIERE_SITE_SCHEDULER_HOST}
       SCHEDULER_HOST: ${ADEMPIERE_SITE_SCHEDULER_URL}
     depends_on:
       - adempiere.zk     # Docker Compose Service
@@ -109,8 +97,8 @@ services:
     container_name: ${VUE_BACKEND_GRPC_SERVER_CONTAINER_NAME}
     hostname: ${VUE_BACKEND_GRPC_SERVER_HOSTNAME}
     restart: ${GENERIC_RESTART}
-    #ports:                             # IN ADEMPIERE-ALL-SERVICES, NICHT AUSKOMMENTIERT!
-    #  - ${VUE_BACKEND_PORT}            # IN ADEMPIERE-ALL-SERVICES, NICHT AUSKOMMENTIERT!
+    #ports:                             # IN ADEMPIERE-ALL-SERVICES, NOT COMMENTED
+    #  - ${VUE_BACKEND_PORT}            # IN ADEMPIERE-ALL-SERVICES, NOT COMMENTED
     volumes:
       - ${TIMEZONE_PATH_ON_HOST}:${TIMEZONE_PATH_ON_CONTAINER}:${TIMEZONE_OPTIONS}    # Map the Timezone  of the host to the Timezone of the container
       - ${LOCALTIME_PATH_ON_HOST}:${LOCALTIME_PATH_ON_CONTAINER}:${LOCALTIME_OPTIONS} # Map the Localtime of the host to the Timezone of the container
@@ -129,7 +117,7 @@ services:
       DB_NAME: ${VUE_BACKEND_GRPC_SERVER_DB_NAME}
       DB_PASSWORD: ${VUE_BACKEND_GRPC_SERVER_DB_PASSWORD}
       JWT_SECRET_KEY: ${VUE_BACKEND_GRPC_SERVER_JWT_SECRET_KEY}
-      # SERVICES_ENABLED: ${VUE_BACKEND_GRPC_SERVER_SERVICES_ENABLED}           # IN ADEMPIERE-ALL-SERVICES, NICHT AUSKOMMENTIERT!
+      # SERVICES_ENABLED: ${VUE_BACKEND_GRPC_SERVER_SERVICES_ENABLED}           # IN ADEMPIERE-ALL-SERVICES, NOT COMMENTED
       SERVER_LOG_LEVEL: ${VUE_BACKEND_GRPC_SERVER_LOG_LEVEL}
     networks:
       - adempiere_network
@@ -150,7 +138,6 @@ services:
       start_period: 20s
       timeout: 10s
     environment:
-      #DB_HOST: ${POSTGRES_HOST}
       DB_HOST: ${ADEMPIERE_PROCESSOR_DB_CONTAINER_NAME}
       SERVER_PORT: ${ADEMPIERE_PROCESSOR_PORT}
       DB_PORT: ${ADEMPIERE_PROCESSOR_DB_PORT}
@@ -377,10 +364,6 @@ services:
       - ${LOCALTIME_PATH_ON_HOST}:${LOCALTIME_PATH_ON_CONTAINER}:${LOCALTIME_OPTIONS} # Map the Localtime of the host to the Timezone of the container
     networks:
       - adempiere_network
-
-#networks:
-#  shared_network:
-#    name: ${DEFAULT_NETWORK}
       
 networks:
   adempiere_network:
@@ -394,8 +377,6 @@ networks:
           # ip-range: ${NETWORK_IP_RANGE}   # supposedly not allowed
 
 volumes:
-  #volume_postgres:
-  #  name: ${POSTGRES_VOLUME}
   volume_postgres:
     name: ${POSTGRES_VOLUME}
     driver_opts:

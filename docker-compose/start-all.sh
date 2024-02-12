@@ -23,6 +23,7 @@ if [ ! -d "$BACKUPDIR" ]; then
     echo "Directory \"$BACKUPDIR\" does not exist. It must be created."
     echo "Create directory \"$BACKUPDIR\""
     mkdir $BACKUPDIR
+    chmod 777 $BACKUPDIR
 else
     echo "Directory \"$BACKUPDIR\" exists already: no need to create it"
 fi
@@ -35,7 +36,7 @@ if [ ! -d "$PERSISTENTDIR" ]; then
     echo "Directory \"$PERSISTENTDIR\" does not exist. It must be created."
     echo "Create directory \"$PERSISTENTDIR\""
     mkdir $PERSISTENTDIR
-    chmod 755 $PERSISTENTDIR
+    chmod 777 $PERSISTENTDIR
 else
     echo "Directory \"$PERSISTENTDIR\" exists already: no need to create it"
 fi
