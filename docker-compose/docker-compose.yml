@@ -58,9 +58,8 @@ services:
     container_name: ${ADEMPIERE_ZK_CONTAINER_NAME}
     hostname: ${ADEMPIERE_ZK_HOSTNAME}
     restart: ${GENERIC_RESTART}
-    # ports:                                                    # Im original von Edwin ist auskommentiert
-    #   - ${ADEMPIERE_ZK_PORT}:8080                             # Im original von Edwin ist auskommentiert
-    #  - ${ADEMPIERE_ZK_EXTERNAL_PORT}:${ADEMPIERE_ZK_PORT}     # Ich muß herausfinden, wie URL + Ports bei adempiere.zk funktionierren.
+    # ports:                                                    # Ports not configured. Why?
+    #  - ${ADEMPIERE_ZK_EXTERNAL_PORT}:${ADEMPIERE_ZK_PORT}     # Ports not configured. Why?
     volumes:
       - volume_persistent_files:${ADEMPIERE_ZK_PERSISTENT_FILES_PATH_ON_CONTAINER}    # Persistent Directory for files to be copied.
       - ${TIMEZONE_PATH_ON_HOST}:${TIMEZONE_PATH_ON_CONTAINER}:${TIMEZONE_OPTIONS}    # Map the Timezone  of the host to the Timezone of the container
@@ -83,9 +82,8 @@ services:
     container_name: ${ADEMPIERE_SITE_CONTAINER_NAME}
     hostname: ${ADEMPIERE_SITE_HOSTNAME}
     restart: ${GENERIC_RESTART}
-    # ports:                                                                          # Im original von Edwin ist auskommentiert
-    #   - ${ADEMPIERE_SITE_PORT}:80                                                   # Im original von Edwin ist auskommentiert
-    #  - ${ADEMPIERE_SITE_EXTERNAL_PORT}:${ADEMPIERE_SITE_PORT}                       # Ich muß herausfinden, wie URL + Ports bei adempiere.site funktionierren.
+    # ports:                                                                          # Ports not configured. Why?
+    #  - ${ADEMPIERE_SITE_EXTERNAL_PORT}:${ADEMPIERE_SITE_PORT}                       # Ports not configured. Why?
     volumes:
       - ${TIMEZONE_PATH_ON_HOST}:${TIMEZONE_PATH_ON_CONTAINER}:${TIMEZONE_OPTIONS}    # Map the Timezone  of the host to the Timezone of the container
       - ${LOCALTIME_PATH_ON_HOST}:${LOCALTIME_PATH_ON_CONTAINER}:${LOCALTIME_OPTIONS} # Map the Localtime of the host to the Timezone of the container
@@ -241,12 +239,12 @@ services:
     networks:
       - adempiere_network
   
-  opensearch-node:
+  opensearch.node:
     image: ${OPENSEARCH_IMAGE}
     container_name: ${OPENSEARCH_CONTAINER_NAME}
     hostname: ${OPENSEARCH_HOSTNAME}
     environment:
-      - node.name=opensearch-node
+      - node.name=opensearch.node
       - discovery.type=single-node
       - "DISABLE_INSTALL_DEMO_CONFIG=true" # Prevents execution of bundled demo script which installs demo certificates and security configurations to OpenSearch
       - "DISABLE_SECURITY_PLUGIN=true" # Disables Security plugin
@@ -275,7 +273,7 @@ services:
     networks:
       - adempiere_network
   
-  open-search-setup:
+  opensearch.setup:
     build:
       context: opensearch/
       dockerfile: setup.Dockerfile
@@ -283,7 +281,7 @@ services:
     hostname: ${OPENSEARCH_SETUP_HOSTNAME}
     image: ${OPENSEARCH_SETUP_IMAGE_REPO_NAME}
     depends_on:
-       opensearch-node:
+       opensearch.node:
         condition: service_healthy
     volumes:
       - ${TIMEZONE_PATH_ON_HOST}:${TIMEZONE_PATH_ON_CONTAINER}:${TIMEZONE_OPTIONS}    # Map the Timezone  of the host to the Timezone of the container
@@ -336,7 +334,7 @@ services:
       KAFKA_HOST: ${OPENSEARCH_GATEWAY_RS_KAFKA_HOST}
       OPENSEARCH_URL: ${OPENSEARCH_GATEWAY_RS_OPENSEARCH_URL}
     depends_on:
-       opensearch-node:
+       opensearch.node:
         condition: service_healthy
     # ports:
     #   - ${OPENSEARCH_GATEWAY_RS_PORT}:7878
