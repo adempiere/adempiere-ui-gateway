@@ -1,7 +1,7 @@
 version: "3.9"
 
 services:
-  adempiere.database:
+  postgresql.service:
     build:
       context:  ${POSTGRES_CONTEXT_PATH_ON_HOST}              # Path relative to Working Directory where Dockerfile will be found
       dockerfile:  ${DOCKERFILE_NAME}                         # Must exist in context. Otherwise, error. Valid only if no "image" defined.
@@ -10,7 +10,9 @@ services:
         # ARG is not available in the final image, whereas ENV is set in the final image.
         # ARG can be overridden during the build process using the "build-arg" flag, whereas ENV cannot be overridden during the build process.
         POSTGRES_IMAGE: ${POSTGRES_IMAGE}                    # Only this is actually needed for the Dockerfile. The other args are left just in case.
-        POSTGRES_DATABASE_NAME: ${POSTGRES_DATABASE_NAME}
+        ADEMPIERE_DB_NAME: ${ADEMPIERE_DB_NAME}
+        ADEMPIERE_DB_USER: ${ADEMPIERE_DB_USER}
+        ADEMPIERE_DB_PASSWORD: ${ADEMPIERE_DB_PASSWORD}
         POSTGRES_DEFAULT_RESTORE_FILE: ${POSTGRES_DEFAULT_RESTORE_FILE}
         HOME_PATH_ON_CONTAINERS: ${HOME_PATH_ON_CONTAINERS}
         POSTGRES_DB_BACKUP_PATH_ON_CONTAINER: ${POSTGRES_DB_BACKUP_PATH_ON_CONTAINER}
@@ -36,8 +38,11 @@ services:
       start_period: 20s
       timeout: 10s
     environment:            # Values might be needed for debugging
+      POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-      POSTGRES_DATABASE_NAME: ${POSTGRES_DATABASE_NAME}
+      ADEMPIERE_DB_NAME: ${ADEMPIERE_DB_NAME}
+      ADEMPIERE_DB_USER: ${ADEMPIERE_DB_USER}
+      ADEMPIERE_DB_PASSWORD: ${ADEMPIERE_DB_PASSWORD}
       POSTGRES_DEFAULT_RESTORE_FILE: ${POSTGRES_DEFAULT_RESTORE_FILE}
       HOME_PATH_ON_CONTAINERS: ${HOME_PATH_ON_CONTAINERS}
       POSTGRES_DB_BACKUP_PATH_ON_CONTAINER: ${POSTGRES_DB_BACKUP_PATH_ON_CONTAINER}
@@ -63,10 +68,11 @@ services:
     environment:
       ADEMPIERE_DB_SERVER: ${ADEMPIERE_ZK_DB_CONTAINER_NAME}
       ADEMPIERE_DB_NAME: ${ADEMPIERE_ZK_DB_NAME}
+      ADEMPIERE_DB_USER: ${ADEMPIERE_ZK_DB_USER}
       ADEMPIERE_DB_PASSWORD: ${ADEMPIERE_ZK_DB_PASSWORD}
       ADEMPIERE_ZK_DB_PORT: ${ADEMPIERE_ZK_DB_PORT}
     depends_on:
-      adempiere.database:
+      postgresql.service:
         condition: service_healthy
     networks:
       - adempiere_network
@@ -109,12 +115,13 @@ services:
       start_period: 20s
       timeout: 10s
     depends_on:
-      adempiere.database:
+      postgresql.service:
         condition: service_healthy
     environment:
       DB_HOST: ${VUE_BACKEND_GRPC_SERVER_DB_CONTAINER_NAME}
       DB_PORT: ${VUE_BACKEND_GRPC_SERVER_DB_PORT}
       DB_NAME: ${VUE_BACKEND_GRPC_SERVER_DB_NAME}
+      DB_USER: ${VUE_BACKEND_GRPC_SERVER_DB_USER}
       DB_PASSWORD: ${VUE_BACKEND_GRPC_SERVER_DB_PASSWORD}
       JWT_SECRET_KEY: ${VUE_BACKEND_GRPC_SERVER_JWT_SECRET_KEY}
       # SERVICES_ENABLED: ${VUE_BACKEND_GRPC_SERVER_SERVICES_ENABLED}           # IN ADEMPIERE-ALL-SERVICES, NOT COMMENTED
@@ -142,9 +149,10 @@ services:
       SERVER_PORT: ${ADEMPIERE_PROCESSOR_PORT}
       DB_PORT: ${ADEMPIERE_PROCESSOR_DB_PORT}
       DB_NAME: ${ADEMPIERE_PROCESSOR_DB_NAME}
+      DB_USER: ${ADEMPIERE_PROCESSOR_DB_USER}
       DB_PASSWORD: ${ADEMPIERE_PROCESSOR_DB_PASSWORD}
     depends_on:
-      adempiere.database:
+      postgresql.service:
         condition: service_healthy
     networks:
       - adempiere_network
