@@ -46,8 +46,8 @@ services:
     volumes:
       - volume_s3:/data
     ports:
-      - 9000
-      - ${S3_CONSOLE_EXTERNAL_PORT}:9090
+      - ${S3_EXTERNAL_PORT}:9000
+      - ${S3_CONSOLE_EXTERNAL_PORT}:${S3_CONSOLE_PORT}
     networks:
       - shared_network
 
