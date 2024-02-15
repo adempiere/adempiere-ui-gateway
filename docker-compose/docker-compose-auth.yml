@@ -302,17 +302,17 @@ services:
 
   keycloak:
     image: ${KEYCLOAK_IMAGE}
-    container_name: ${KEYCLOAK_NAME}
+    container_name: ${KEYCLOAK_HOST}
     restart: ${GENERIC_RESTART}
     environment:
+      KEYCLOAK_ADMIN: ${KEYCLOAK_ADMIN}
+      KEYCLOAK_ADMIN_PASSWORD: ${KEYCLOAK_ADMIN_PASSWORD}
       DB_VENDOR: ${KEYCLOAK_DB_VENDOR}
-      DB_ADDR: ${POSTGRES_HOST}
+      DB_ADDR: ${KEYCLOAK_DB_HOST}
       DB_DATABASE: ${KEYCLOAK_DB_DATABASE}
       DB_USER: ${POSTGRES_USER}
       DB_SCHEMA: ${KEYCLOAK_DB_SCHEMA}
       DB_PASSWORD: ${POSTGRES_PASSWORD}
-      KEYCLOAK_ADMIN: ${KEYCLOAK_ADMIN}
-      KEYCLOAK_ADMIN_PASSWORD: ${KEYCLOAK_ADMIN_PASSWORD}
     depends_on:
       postgresql.service:
         condition: service_healthy
