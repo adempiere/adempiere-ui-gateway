@@ -7,6 +7,6 @@ RUN echo 'Install wget'
 RUN apt-get install -y wget
 RUN echo 'wget installed'
 
-COPY --chown=1  initdb.sh /docker-entrypoint-initdb.d
-COPY --chown=1  after_run /tmp/after_run
+COPY --chown=1 initdb.sh /docker-entrypoint-initdb.d
+COPY --chown=1 after_run/*.sql /tmp/after_run/
 RUN chmod +x /docker-entrypoint-initdb.d/initdb.sh
