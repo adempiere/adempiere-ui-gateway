@@ -78,6 +78,7 @@ services:
       API_KEY: ${S3_GATEWAY_RS_API_KEY}
       SECRET_KEY: ${S3_GATEWAY_RS_SECRET_KEY}
       BUCKET_NAME: ${S3_GATEWAY_RS_BUCKET_NAME}
+      ALLOWED_ORIGIN: ${ALLOWED_ORIGIN}
     ports:
       - ${S3_GATEWAY_RS_EXTERNAL_PORT}:7878
     networks:
@@ -289,6 +290,7 @@ services:
     environment:
       KAFKA_HOST: ${OPENSEARCH_GATEWAY_RS_KAFKA_HOST}
       OPENSEARCH_URL: ${OPENSEARCH_GATEWAY_RS_OPENSEARCH_URL}
+      ALLOWED_ORIGIN: ${ALLOWED_ORIGIN}
     depends_on:
        opensearch-node:
         condition: service_healthy
