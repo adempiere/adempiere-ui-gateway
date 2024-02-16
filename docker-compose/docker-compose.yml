@@ -205,8 +205,8 @@ services:
       - ${TIMEZONE_PATH_ON_HOST}:${TIMEZONE_PATH_ON_CONTAINER}:${TIMEZONE_OPTIONS}    # Map the Timezone  of the host to the Timezone of the container
       - ${LOCALTIME_PATH_ON_HOST}:${LOCALTIME_PATH_ON_CONTAINER}:${LOCALTIME_OPTIONS} # Map the Localtime of the host to the Timezone of the container
     ports:
-      - 9000
-      - ${S3_CONSOLE_EXTERNAL_PORT}:9090
+      - ${S3_EXTERNAL_PORT}:9000
+      - ${S3_CONSOLE_EXTERNAL_PORT}:${S3_CONSOLE_PORT}
     networks:
       - adempiere_network
 
@@ -242,8 +242,9 @@ services:
       API_KEY: ${S3_GATEWAY_RS_API_KEY}
       SECRET_KEY: ${S3_GATEWAY_RS_SECRET_KEY}
       BUCKET_NAME: ${S3_GATEWAY_RS_BUCKET_NAME}
+      ALLOWED_ORIGIN: ${ALLOWED_ORIGIN}
     ports:
-      - ${S3_GATEWAY_RS_PORT}:7878
+      - ${S3_GATEWAY_RS_EXTERNAL_PORT}:7878
     volumes:
       - ${TIMEZONE_PATH_ON_HOST}:${TIMEZONE_PATH_ON_CONTAINER}:${TIMEZONE_OPTIONS}    # Map the Timezone  of the host to the Timezone of the container
       - ${LOCALTIME_PATH_ON_HOST}:${LOCALTIME_PATH_ON_CONTAINER}:${LOCALTIME_OPTIONS} # Map the Localtime of the host to the Timezone of the container
@@ -362,7 +363,7 @@ services:
     environment:
       KAFKA_BROKER_ID: 1
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:${ZOOKEEPER_PORT}
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092,PLAINTEXT_HOST://${KAFKA_BROKER_HOST}:29092
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092,PLAINTEXT_HOST://${KAFKA_BROKER_HOST}:${KAFKA_PORT}
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
       KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
@@ -380,11 +381,12 @@ services:
     environment:
       KAFKA_HOST: ${OPENSEARCH_GATEWAY_RS_KAFKA_HOST}
       OPENSEARCH_URL: ${OPENSEARCH_GATEWAY_RS_OPENSEARCH_URL}
+      ALLOWED_ORIGIN: ${ALLOWED_ORIGIN}
     depends_on:
        opensearch.node:
         condition: service_healthy
     # ports:
-    #   - ${OPENSEARCH_GATEWAY_RS_PORT}:7878
+    #   - ${OPENSEARCH_GATEWAY_RS_EXTERNAL_PORT}:7878
     volumes:
       - ${TIMEZONE_PATH_ON_HOST}:${TIMEZONE_PATH_ON_CONTAINER}:${TIMEZONE_OPTIONS}    # Map the Timezone  of the host to the Timezone of the container
       - ${LOCALTIME_PATH_ON_HOST}:${LOCALTIME_PATH_ON_CONTAINER}:${LOCALTIME_OPTIONS} # Map the Localtime of the host to the Timezone of the container
