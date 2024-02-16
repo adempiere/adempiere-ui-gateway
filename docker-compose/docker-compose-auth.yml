@@ -1,7 +1,8 @@
 version: "3.9"
 
-name: services-gateway-develop
+name: services-gateway-auth
 
+# Example API for images
 services:
   postgresql.service:
     build:
@@ -54,6 +55,122 @@ services:
       POSTGRES_EXTERNAL_PORT:  ${POSTGRES_EXTERNAL_PORT}
     networks:
       - adempiere_network
+  
+  adempiere.site:
+    image: ${ADEMPIERE_SITE_IMAGE}
+    container_name: ${ADEMPIERE_SITE_CONTAINER_NAME}
+    hostname: ${ADEMPIERE_SITE_HOSTNAME}
+    restart: ${GENERIC_RESTART}
+    # ports:                                                                          # Ports not configured. Why?
+    #  - ${ADEMPIERE_SITE_EXTERNAL_PORT}:${ADEMPIERE_SITE_PORT}                       # Ports not configured. Why?
+    environment:
+      ZK_HOST: ${ADEMPIERE_SITE_ZK_URL}
+      VUE_HOST: ${ADEMPIERE_SITE_VUE_URL}
+      SCHEDULER_HOST: ${ADEMPIERE_SITE_SCHEDULER_URL}
+    depends_on:
+      - adempiere.zk     # Docker Compose Service
+    networks:
+      - adempiere_network
+  
+  adempiere.zk:
+    image: ${ADEMPIERE_ZK_IMAGE}
+    container_name: ${ADEMPIERE_ZK_CONTAINER_NAME}
+    hostname: ${ADEMPIERE_ZK_HOSTNAME}
+    restart: ${GENERIC_RESTART}
+    # ports:                                                    # Ports not configured. Why?
+    #  - ${ADEMPIERE_ZK_EXTERNAL_PORT}:${ADEMPIERE_ZK_PORT}     # Ports not configured. Why?
+    volumes:
+      - volume_persistent_files:${ADEMPIERE_ZK_PERSISTENT_FILES_PATH_ON_CONTAINER}    # Persistent Directory for files to be copied.
+    environment:
+      ADEMPIERE_DB_SERVER: ${ADEMPIERE_ZK_DB_CONTAINER_NAME}
+      ADEMPIERE_DB_NAME: ${ADEMPIERE_ZK_DB_NAME}
+      ADEMPIERE_DB_USER: ${ADEMPIERE_ZK_DB_USER}
+      ADEMPIERE_DB_PASSWORD: ${ADEMPIERE_ZK_DB_PASSWORD}
+      ADEMPIERE_ZK_DB_PORT: ${ADEMPIERE_ZK_DB_PORT}
+    depends_on:
+      postgresql.service:
+        condition: service_healthy
+    networks:
+      - adempiere_network
+
+  adempiere.grpc.server:
+    image: ${VUE_BACKEND_GRPC_SERVER_IMAGE}
+    container_name: ${VUE_BACKEND_GRPC_SERVER_CONTAINER_NAME}
+    hostname: ${VUE_BACKEND_GRPC_SERVER_HOSTNAME}
+    restart: ${GENERIC_RESTART}
+    #ports:                             # IN ADEMPIERE-ALL-SERVICES, NOT COMMENTED
+    #  - ${VUE_BACKEND_PORT}            # IN ADEMPIERE-ALL-SERVICES, NOT COMMENTED
+    healthcheck:
+      test: "bash -c 'printf \"GET / HTTP/1.1\n\n\" > /dev/tcp/127.0.0.1/50059; exit $?;'"
+      interval: 10s
+      retries: 60
+      start_period: 20s
+      timeout: 10s
+    depends_on:
+      postgresql.service:
+        condition: service_healthy
+    environment:
+      DB_HOST: ${VUE_BACKEND_GRPC_SERVER_DB_CONTAINER_NAME}
+      DB_PORT: ${VUE_BACKEND_GRPC_SERVER_DB_PORT}
+      DB_NAME: ${VUE_BACKEND_GRPC_SERVER_DB_NAME}
+      DB_USER: ${VUE_BACKEND_GRPC_SERVER_DB_USER}
+      DB_PASSWORD: ${VUE_BACKEND_GRPC_SERVER_DB_PASSWORD}
+      JWT_SECRET_KEY: ${VUE_BACKEND_GRPC_SERVER_JWT_SECRET_KEY}
+      # SERVICES_ENABLED: ${VUE_BACKEND_GRPC_SERVER_SERVICES_ENABLED}           # IN ADEMPIERE-ALL-SERVICES, NOT COMMENTED
+      SERVER_LOG_LEVEL: ${VUE_BACKEND_GRPC_SERVER_LOG_LEVEL}
+    networks:
+      - adempiere_network
+
+  adempiere.processor:
+    image: ${ADEMPIERE_PROCESSOR_IMAGE}
+    container_name: ${ADEMPIERE_PROCESSOR_CONTAINER_NAME}
+    hostname: ${ADEMPIERE_PROCESSOR_HOSTNAME}
+    restart: ${GENERIC_RESTART}
+    volumes:
+      - ${TIMEZONE_PATH_ON_HOST}:${TIMEZONE_PATH_ON_CONTAINER}:${TIMEZONE_OPTIONS}    # Map the Timezone  of the host to the Timezone of the container
+      - ${LOCALTIME_PATH_ON_HOST}:${LOCALTIME_PATH_ON_CONTAINER}:${LOCALTIME_OPTIONS} # Map the Localtime of the host to the Timezone of the container
+    healthcheck:
+      test: "bash -c 'printf \"GET / HTTP/1.1\n\n\" > /dev/tcp/127.0.0.1/50059; exit $?;'"
+      interval: 10s
+      retries: 60
+      start_period: 20s
+      timeout: 10s
+    environment:
+      DB_HOST: ${ADEMPIERE_PROCESSOR_DB_CONTAINER_NAME}
+      DB_PORT: ${ADEMPIERE_PROCESSOR_DB_PORT}
+      DB_NAME: ${ADEMPIERE_PROCESSOR_DB_NAME}
+      DB_USER: ${ADEMPIERE_PROCESSOR_DB_USER}
+      DB_PASSWORD: ${ADEMPIERE_PROCESSOR_DB_PASSWORD}
+      SERVER_PORT: ${ADEMPIERE_PROCESSOR_PORT}
+    depends_on:
+      postgresql.service:
+        condition: service_healthy
+    networks:
+      - adempiere_network
+
+  grpc.proxy:
+    image: ${ENVOY_GRPC_PROXY_IMAGE}
+    container_name: ${ENVOY_GRPC_PROXY_CONTAINER_NAME}
+    hostname: ${ENVOY_GRPC_PROXY_HOSTNAME}
+    healthcheck:
+      test: "bash -c 'printf \"GET / HTTP/1.1\n\n\" > /dev/tcp/127.0.0.1/5555; exit $?;'"
+      interval: 10s
+      retries: 60
+      start_period: 20s
+      timeout: 10s
+    ports:
+     - ${ENVOY_GRPC_PROXY_EXTERNAL_PORT}:${ENVOY_GRPC_PROXY_BACKEND_PORT}
+    # Processor Port
+    #  - ${ENVOY_GRPC_PROXY_PROCESSOR_PORT}:5556
+    volumes:
+      - ./envoy/envoy.yaml:/etc/envoy/envoy.yaml:ro
+      - ./envoy/definitions/adempiere-grpc-server.pb:/data/adempiere-grpc-server.pb:ro
+      - ./envoy/definitions/adempiere-processors-service-service.pb:/data/adempiere-processors-service-service.pb:ro
+    depends_on:
+      - adempiere.grpc.server
+      - adempiere.processor
+    networks:
+    - adempiere_network
 
   s3.storage:
     image: ${S3_IMAGE}
@@ -113,60 +230,41 @@ services:
       BUCKET_NAME: ${S3_GATEWAY_RS_BUCKET_NAME}
       ALLOWED_ORIGIN: ${ALLOWED_ORIGIN}
     ports:
-      - ${S3_GATEWAY_RS_PORT}:7878
+      - ${S3_GATEWAY_RS_EXTERNAL_PORT}:7878
     networks:
       - adempiere_network
 
-  adempiere.grpc.server:
-    image: ${VUE_BACKEND_GRPC_SERVER_IMAGE}
-    container_name: ${VUE_BACKEND_GRPC_SERVER_CONTAINER_NAME}
-    hostname: ${VUE_BACKEND_GRPC_SERVER_HOSTNAME}
+  vue.ui:
+    image: ${VUE_UI_IMAGE}
+    container_name: ${VUE_UI_CONTAINER_NAME}
+    hostname: ${VUE_UI_HOSTNAME}
     restart: ${GENERIC_RESTART}
-    healthcheck:
-      test: "bash -c 'printf \"GET / HTTP/1.1\n\n\" > /dev/tcp/127.0.0.1/50059; exit $?;'"
-      interval: 10s
-      retries: 60
-      start_period: 20s
-      timeout: 10s
-    depends_on:
-      postgresql.service:
-        condition: service_healthy
+    # ports:
+    #   - ${VUE_UI_PORT}:80
     environment:
-      DB_HOST: ${VUE_BACKEND_GRPC_SERVER_DB_CONTAINER_NAME}
-      DB_PORT: ${VUE_BACKEND_GRPC_SERVER_DB_PORT}
-      DB_NAME: ${VUE_BACKEND_GRPC_SERVER_DB_NAME}
-      DB_USER: ${VUE_BACKEND_GRPC_SERVER_DB_USER}
-      DB_PASSWORD: ${VUE_BACKEND_GRPC_SERVER_DB_PASSWORD}
-      JWT_SECRET_KEY: ${VUE_BACKEND_GRPC_SERVER_JWT_SECRET_KEY}
-      # SERVICES_ENABLED: ${VUE_BACKEND_GRPC_SERVER_SERVICES_ENABLED}           # IN ADEMPIERE-ALL-SERVICES, NOT COMMENTED
-      SERVER_LOG_LEVEL: ${VUE_BACKEND_GRPC_SERVER_LOG_LEVEL}
+      API_URL: ${VUE_UI_API_URL}
+      PUBLIC_PATH: ${VUE_UI_PUBLIC_PATH}
     networks:
       - adempiere_network
 
-  grpc.proxy:
-    image: ${ENVOY_GRPC_PROXY_IMAGE}
-    container_name: ${ENVOY_GRPC_PROXY_CONTAINER_NAME}
-    hostname: ${ENVOY_GRPC_PROXY_HOSTNAME}
-    healthcheck:
-      test: "bash -c 'printf \"GET / HTTP/1.1\n\n\" > /dev/tcp/127.0.0.1/5555; exit $?;'"
-      interval: 10s
-      retries: 60
-      start_period: 20s
-      timeout: 10s
-    ports:
-     - ${ENVOY_GRPC_PROXY_EXTERNAL_PORT}:${ENVOY_GRPC_PROXY_BACKEND_PORT}
-     # Processor Port
-     - ${ENVOY_GRPC_PROXY_PROCESSOR_PORT}:5556
+  dkron.scheduler:
+    image: ${DKRON_IMAGE}
+    container_name: ${DKRON_CONTAINER_NAME}
+    hostname: ${DKRON_HOSTNAME}
+    restart: ${GENERIC_RESTART}
+    # ports:
+    #   - ${DKRON_PORT}:8080
+    command:
+      - "agent"
+      - "--bootstrap-expect=1"
+      - "--node-name=node1"
+      - "--server"
+      - "--ui=true"
     volumes:
-      - ./envoy/envoy.yaml:/etc/envoy/envoy.yaml:ro
-      - ./envoy/definitions/adempiere-grpc-server.pb:/data/adempiere-grpc-server.pb:ro
-      - ./envoy/definitions/adempiere-processors-service-service.pb:/data/adempiere-processors-service-service.pb:ro
-    depends_on:
-      - adempiere.grpc.server
-      # - adempiere.processor
+      - volume_dkron:/dkron.data
     networks:
-    - adempiere_network
-
+      - adempiere_network
+  
   opensearch.node:
     image: ${OPENSEARCH_IMAGE}
     container_name: ${OPENSEARCH_CONTAINER_NAME}
@@ -193,9 +291,9 @@ services:
       - volume_opensearch:/usr/share/opensearch/data
       - ./opensearch/opensearch.yml:/usr/share/opensearch/config/opensearch.yml
       - ./opensearch/snapshots:/mnt/snapshots
-    ports:
-      - ${OPENSEARCH_PORT}:9200
-      - ${OPENSEARCH_PERFORMANCE_PORT}:9600 # required for Performance Analyzer
+    # ports:
+    #   - ${OPENSEARCH_PORT}:9200
+    #   - ${OPENSEARCH_PERFORMANCE_PORT}:9600 # required for Performance Analyzer
     networks:
       - adempiere_network
   
@@ -212,6 +310,36 @@ services:
     networks:
       - adempiere_network
 
+  zookeeper:
+    image: ${ZOOKEEPER_IMAGE}
+    container_name: ${ZOOKEEPER_CONTAINER_NAME}
+    hostname: ${ZOOKEEPER_HOSTNAME}
+    environment:
+      ZOOKEEPER_CLIENT_PORT: ${ZOOKEEPER_PORT}
+      ZOOKEEPER_TICK_TIME: ${ZOOKEEPER_TICK_TIME}
+    # ports:
+    #   - ${ZOOKEEPER_PORT}:2181
+    networks:
+      - adempiere_network
+  
+  kafka:
+    image: ${KAFKA_IMAGE}
+    container_name: ${KAFKA_CONTAINER_NAME}
+    hostname: ${KAFKA_HOSTNAME}
+    depends_on:
+      - zookeeper
+    # ports:
+    #   - ${KAFKA_PORT}:29092
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:${ZOOKEEPER_PORT}
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092,PLAINTEXT_HOST://${KAFKA_BROKER_HOST}:${KAFKA_PORT}
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+    networks:
+      - adempiere_network
+
   opensearch.gateway.rs:
     image: ${OPENSEARCH_GATEWAY_RS_IMAGE}
     container_name: ${OPENSEARCH_GATEWAY_RS_CONTAINER_NAME}
@@ -224,11 +352,37 @@ services:
     depends_on:
        opensearch.node:
         condition: service_healthy
-    ports:
-      - ${OPENSEARCH_GATEWAY_RS_PORT}:7878
+    # ports:
+    #   - ${OPENSEARCH_GATEWAY_RS_EXTERNAL_PORT}:7878
     networks:
       - adempiere_network
 
+  keycloak:
+    image: ${KEYCLOAK_IMAGE}
+    container_name: ${KEYCLOAK_CONTAINER_NAME}
+    hostname: ${KEYCLOAK_HOSTNAME}
+    restart: ${GENERIC_RESTART}
+    environment:
+      KEYCLOAK_ADMIN: ${KEYCLOAK_ADMIN}
+      KEYCLOAK_ADMIN_PASSWORD: ${KEYCLOAK_ADMIN_PASSWORD}
+      DB_VENDOR: ${KEYCLOAK_DB_VENDOR}
+      DB_ADDR: ${KEYCLOAK_DB_HOST}
+      DB_DATABASE: ${KEYCLOAK_DB_DATABASE}
+      DB_USER: ${POSTGRES_USER}
+      DB_SCHEMA: ${KEYCLOAK_DB_SCHEMA}
+      DB_PASSWORD: ${POSTGRES_PASSWORD}
+    depends_on:
+      postgresql.service:
+        condition: service_healthy
+    command: "start-dev --import-realm"
+    ports:
+      - ${KEYCLOAK_PORT}:8080
+    volumes:
+      - ./keycloak/master-realm.json:/opt/keycloak/data/import/master-realm.json
+      - ./keycloak/adempiere-realm.json:/opt/keycloak/data/import/adempiere-realm.json
+    networks:
+      - shared_network
+  
   ui.gateway:
     image: ${NGINX_UI_GATEWAY_IMAGE}
     container_name: ${NGINX_UI_GATEWAY_CONTAINER_NAME}
@@ -240,24 +394,22 @@ services:
       #   condition: service_healthy
       opensearch.gateway.rs:
         condition: service_started
-      # adempiere.site:
-      #   condition: service_started
+      adempiere.site:
+        condition: service_started
+      s3.gateway.rs:
+        condition: service_started
     ports:
       - ${NGINX_UI_GATEWAY_EXTERNAL_PORT}:${NGINX_UI_GATEWAY_INTERNAL_PORT}
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf
-      - ./nginx/upstreams/adempiere_backend.conf:/etc/nginx/api_upstreams_conf.d/adempiere_backend.conf
-      - ./nginx/upstreams/opensearch_gateway.conf:/etc/nginx/api_upstreams_conf.d/opensearch_gateway.conf
-      - ./nginx/api/backend/:/etc/nginx/api_conf.d/backend
-      - ./nginx/api/opensearch/:/etc/nginx/api_conf.d/opensearch
+      - ./nginx/upstreams/:/etc/nginx/api_upstreams_conf.d
+      - ./nginx/api/:/etc/nginx/api_conf.d
       - ./nginx/gateway/api_gateway.conf:/etc/nginx/api_gateway.conf
       - ./nginx/api_json_errors.conf:/etc/nginx/api_json_errors.conf
       #- ./keys/api_keys.conf:/etc/nginx/api_keys.conf
     networks:
       - adempiere_network
 
-
-      
 networks:
   adempiere_network:
     name: ${ADEMPIERE_NETWORK}
@@ -267,6 +419,7 @@ networks:
       config:
         - subnet: ${NETWORK_SUBNET}      # Set subnet for all containers created.
           gateway: ${NETWORK_GATEWAY}
+          # ip-range: ${NETWORK_IP_RANGE}   # supposedly not allowed
 
 volumes:
   volume_postgres:
@@ -281,6 +434,14 @@ volumes:
       type: none
       o: bind
       device: ${POSTGRES_BACKUP_PATH_ON_HOST} # Must be created on host before calling docker compose. Backups must be copied here to be restored.
+  volume_persistent_files:
+    name: ${PERSISTENT_FILES_VOLUME}
+    driver_opts:
+      type: none
+      o: bind
+      device: ${ADEMPIERE_ZK_PERSISTENT_FILES_PATH_ON_HOST} # Must be created on host before calling docker compose. The persistent directory will be located locally here.
+  volume_dkron:
+    name: ${DKRON_VOLUME}
   volume_s3:
     name: ${S3_VOLUME}
   volume_opensearch:

@@ -37,7 +37,7 @@ services:
       retries: 60
       start_period: 20s
       timeout: 10s
-    environment:            # Values might be needed for debugging
+    environment:            # Values needed for initdb.sh and debugging
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
       ADEMPIERE_DB_NAME: ${ADEMPIERE_DB_NAME}
@@ -78,7 +78,6 @@ services:
   
   adempiere.site:
     image: ${ADEMPIERE_SITE_IMAGE}
-    #container_name: ${ADEMPIERE_SITE_HOST}
     container_name: ${ADEMPIERE_SITE_CONTAINER_NAME}
     hostname: ${ADEMPIERE_SITE_HOSTNAME}
     restart: ${GENERIC_RESTART}
@@ -129,7 +128,6 @@ services:
 
   adempiere.processor:
     image: ${ADEMPIERE_PROCESSOR_IMAGE}
-    # container_name: ${ADEMPIERE_PROCESSOR_HOST}
     container_name: ${ADEMPIERE_PROCESSOR_CONTAINER_NAME}
     hostname: ${ADEMPIERE_PROCESSOR_HOSTNAME}
     restart: ${GENERIC_RESTART}
