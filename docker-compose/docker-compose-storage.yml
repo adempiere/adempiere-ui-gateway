@@ -165,6 +165,7 @@ services:
       - shared_network
 
 
+
 networks:
   shared_network:
     name: ${DEFAULT_NETWORK}
