@@ -83,7 +83,7 @@ services:
       - adempiere_network
 
   grpc.proxy:
-    image: ${ENVOY_GRPC_PROXY_IMAGE}
+    image: ${ENVOY_GRPC_PROXY_BACKEND_IMAGE}
     container_name: ${ENVOY_GRPC_PROXY_CONTAINER_NAME}
     hostname: ${ENVOY_GRPC_PROXY_HOSTNAME}
     depends_on:
@@ -100,7 +100,7 @@ services:
       BACKEND_HOST: ${ENVOY_GRPC_PROXY_BACKEND_HOST}
       BACKEND_PORT: 50059
     networks:
-      - shared_network
+      - adempiere_network
 
   ui.gateway:
     image: ${NGINX_UI_GATEWAY_IMAGE}
