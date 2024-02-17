@@ -70,6 +70,12 @@ services:
     image: ${S3_GATEWAY_RS_IMAGE}
     container_name: ${S3_GATEWAY_RS_HOST}
     restart: ${GENERIC_RESTART}
+    healthcheck:
+      test: "bash -c 'printf \"GET / HTTP/1.1\n\n\" > /dev/tcp/127.0.0.1/7878; exit $?;'"
+      interval: 10s
+      retries: 60
+      start_period: 20s
+      timeout: 10s
     depends_on:
       s3.storage:
         condition: service_healthy
@@ -211,7 +217,7 @@ services:
       - volume_dkron:/dkron.data
     networks:
       - shared_network
-  
+
   opensearch-node:
     image: ${OPENSEARCH_IMAGE}
     container_name: ${OPENSEARCH_HOST}
@@ -225,7 +231,7 @@ services:
       interval: 10s
       retries: 60
       start_period: 20s
-      timeout: 10s 
+      timeout: 10s
     ulimits:
       memlock:
         soft: -1
@@ -258,8 +264,14 @@ services:
   zookeeper:
     image: ${ZOOKEEPER_IMAGE}
     container_name: ${ZOOKEEPER_HOST}
+    healthcheck:
+      test: "bash -c 'printf \"GET / HTTP/1.1\n\n\" > /dev/tcp/127.0.0.1/${ZOOKEEPER_PORT}; exit $?;'"
+      interval: 10s
+      retries: 60
+      start_period: 20s
+      timeout: 10s
     environment:
-      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_CLIENT_PORT: ${ZOOKEEPER_PORT}
       ZOOKEEPER_TICK_TIME: 2000
     # ports:
     #   - ${ZOOKEEPER_PORT}:2181
@@ -271,12 +283,12 @@ services:
     container_name: ${KAFKA_HOST}
     depends_on:
       - zookeeper
-    # ports:
-    #   - ${KAFKA_PORT}:29092
+    ports:
+      - ${KAFKA_EXTERNAL_PORT}:29092
     environment:
       KAFKA_BROKER_ID: 1
-      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092,PLAINTEXT_HOST://${KAFKA_BROKER_HOST}:${KAFKA_PORT}
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:{ZOOKEEPER_PORT}
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092,PLAINTEXT_HOST://${KAFKA_BROKER_HOST}:${KAFKA_EXTERNAL_PORT}
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
       KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
