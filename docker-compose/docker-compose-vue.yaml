@@ -30,7 +30,7 @@ services:
     container_name: ${GRPC_SERVER_HOST}
     restart: ${GENERIC_RESTART}
     healthcheck:
-      test: "bash -c 'printf \"GET / HTTP/1.1\n\n\" > /dev/tcp/127.0.0.1/50059; exit $?;'"
+      test: "bash -c 'printf \"GET / HTTP/1.1\n\n\" > /dev/tcp/127.0.0.1/${GRPC_SERVER_PORT}; exit $?;'"
       interval: 10s
       retries: 60
       start_period: 20s
@@ -39,6 +39,7 @@ services:
       postgresql.service:
         condition: service_healthy
     environment:
+      SERVER_PORT: ${GRPC_SERVER_PORT}
       DB_HOST: ${GRPC_SERVER_DB_HOST}
       DB_PORT: ${GRPC_SERVER_DB_PORT}
       DB_NAME: ${GRPC_SERVER_DB_NAME}
@@ -55,16 +56,17 @@ services:
     depends_on:
       - adempiere.grpc.server
     healthcheck:
-      test: "bash -c 'printf \"GET / HTTP/1.1\n\n\" > /dev/tcp/127.0.0.1/5555; exit $?;'"
+      test: "bash -c 'printf \"GET / HTTP/1.1\n\n\" > /dev/tcp/127.0.0.1/${GRPC_PROXY_BACKEND_PORT}; exit $?;'"
       interval: 10s
       retries: 60
       start_period: 20s
       timeout: 10s
-    ports:
-      - ${GRPC_PROXY_BACKEND_PORT}:5555
+    # ports:
+    #   - ${GRPC_PROXY_BACKEND_PORT}:${GRPC_PROXY_BACKEND_PORT}
     environment:
+      SERVER_PORT: ${GRPC_PROXY_BACKEND_PORT}
       BACKEND_HOST: ${GRPC_PROXY_BACKEND_HOST}
-      BACKEND_PORT: 50059
+      BACKEND_PORT: ${GRPC_PROXY_BACKEND_SERVER_PORT}
     networks:
       - shared_network
 
