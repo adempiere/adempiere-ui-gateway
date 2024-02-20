@@ -1,6 +1,6 @@
 static_resources:
   listeners:
-  - name: adempiere_grpc_server
+  - name: adempiere_grpc_backend_proxy
     address:
       socket_address: {
         address: 0.0.0.0,
@@ -28,7 +28,7 @@ static_resources:
                   grpc: {}
                 }
                 route: {
-                  cluster: adempiere-grpc-server,
+                  cluster: adempiere_grpc_backend_cluster,
                   timeout: 60s
                 }
           http_filters:
@@ -39,15 +39,15 @@ static_resources:
               services:
                 # package.service
                 - bank_statement_match.BankStatementMatch
-                - business_partner.BusinessPartner
                 - data.BusinessData
-                - data.CoreFunctionality
+                - core_functionality.CoreFunctionality
                 - dashboarding.Dashboarding
                 - dictionary.Dictionary
                 - enrollment.Register
                 - express_movement.ExpressMovement
                 - express_receipt.ExpressReceipt
                 - express_shipment.ExpressShipment
+                - field.business_partner.BusinessPartnerInfoService
                 - file_management.FileManagement
                 - general_ledger.GeneralLedger
                 - import_file_loader.ImportFileLoader
@@ -69,6 +69,7 @@ static_resources:
                 - record_management.RecordManagement
                 - report_management.ReportManagement
                 - security.Security
+                - task_management.TaskManagement
                 - time_control.TimeControl
                 - time_record.TimeRecord
                 - trial_balance_drillable.TrialBalanceDrillable
@@ -89,7 +90,7 @@ static_resources:
             typed_config:
               "@type": type.googleapis.com/envoy.extensions.filters.http.router.v3.Router
 
-  - name: adempiere_processor
+  - name: adempiere_processor_proxy
     address:
       socket_address: {
         address: 0.0.0.0,
@@ -115,7 +116,7 @@ static_resources:
                   prefix: "/"
                 }
                 route: {
-                  cluster: adempiere-processor,
+                  cluster: adempiere_processor_cluster,
                   timeout: 60s
                 }
           http_filters:
@@ -138,7 +139,7 @@ static_resources:
 
 
   clusters:
-  - name: adempiere-grpc-server
+  - name: adempiere_grpc_backend_cluster
     type: LOGICAL_DNS
     lb_policy: ROUND_ROBIN
     dns_lookup_family: V4_ONLY
@@ -148,7 +149,7 @@ static_resources:
         explicit_http_config:
           http2_protocol_options: {}
     load_assignment:
-      cluster_name: adempiere-grpc-server
+      cluster_name: adempiere_grpc_backend_cluster
       endpoints:
       - lb_endpoints:
         - endpoint:
@@ -160,7 +161,7 @@ static_resources:
                 address: adempiere.grpc.server # for local testing change for your ip
                 port_value: 50059
 
-  - name: adempiere-processor
+  - name: adempiere_processor_cluster
     type: LOGICAL_DNS
     lb_policy: ROUND_ROBIN
     dns_lookup_family: V4_ONLY
@@ -170,7 +171,7 @@ static_resources:
         explicit_http_config:
           http2_protocol_options: {}
     load_assignment:
-      cluster_name: adempiere-processor
+      cluster_name: adempiere_processor_cluster
       endpoints:
       - lb_endpoints:
         - endpoint:
