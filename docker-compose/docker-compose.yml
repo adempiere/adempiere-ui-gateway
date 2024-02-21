@@ -52,6 +52,95 @@ services:
       POSTGRES_EXTERNAL_PORT:  ${POSTGRES_EXTERNAL_PORT}
     networks:
       - adempiere_network
+
+  s3.storage:
+    image: ${S3_IMAGE}
+    container_name: ${S3_CONTAINER_NAME}
+    hostname: ${S3_HOSTNAME}
+    restart: ${GENERIC_RESTART}
+    command:
+      - "server"
+      - "/data"
+      - "--console-address=:${S3_CONSOLE_PORT}"
+    healthcheck:
+      test: "bash -c 'printf \"GET / HTTP/1.1\n\n\" > /dev/tcp/127.0.0.1/9000; exit $?;'"
+      interval: 10s
+      retries: 60
+      start_period: 20s
+      timeout: 10s
+    environment:
+      MINIO_ROOT_USER: ${S3_USER}
+      MINIO_ROOT_PASSWORD: ${S3_PASSWORD}
+      # MINIO_BROWSER_REDIRECT_URL: ${S3_CONSOLE_BROWSER_REDIRECT_URL}
+    volumes:
+      - volume_s3:/data
+      - ${TIMEZONE_PATH_ON_HOST}:${TIMEZONE_PATH_ON_CONTAINER}:${TIMEZONE_OPTIONS}    # Map the Timezone  of the host to the Timezone of the container
+      - ${LOCALTIME_PATH_ON_HOST}:${LOCALTIME_PATH_ON_CONTAINER}:${LOCALTIME_OPTIONS} # Map the Localtime of the host to the Timezone of the container
+    ports:
+      - ${S3_EXTERNAL_PORT}:9000
+      - ${S3_CONSOLE_EXTERNAL_PORT}:${S3_CONSOLE_PORT}
+    networks:
+      - adempiere_network
+
+  s3.client:
+    image: ${S3_CLIENT_IMAGE}
+    container_name: ${S3_CLIENT_CONTAINER_NAME}
+    hostname: ${S3_CLIENT_HOSTNAME}
+    depends_on:
+      s3.storage:
+        condition: service_healthy
+    entrypoint: >
+      /bin/sh -c "
+      /usr/bin/mc alias set s3_minio_server http://s3.storage:9000 ${S3_CLIENT_ACCESS_KEY} ${S3_CLIENT_SECRET_KEY};
+      /usr/bin/mc mb s3_minio_server/${S3_CLIENT_BUCKET_NAME} || true;
+      exit 0;
+      "
+    volumes:
+      - ${TIMEZONE_PATH_ON_HOST}:${TIMEZONE_PATH_ON_CONTAINER}:${TIMEZONE_OPTIONS}    # Map the Timezone  of the host to the Timezone of the container
+      - ${LOCALTIME_PATH_ON_HOST}:${LOCALTIME_PATH_ON_CONTAINER}:${LOCALTIME_OPTIONS} # Map the Localtime of the host to the Timezone of the container
+    networks:
+      - adempiere_network
+
+  s3.gateway.rs:
+    image: ${S3_GATEWAY_RS_IMAGE}
+    container_name: ${S3_GATEWAY_RS_CONTAINER_NAME}
+    hostname: ${S3_GATEWAY_RS_HOSTNAME}
+    restart: ${GENERIC_RESTART}
+    depends_on:
+      s3.storage:
+        condition: service_healthy
+    environment:
+      S3_URL: ${S3_GATEWAY_RS_S3_URL}
+      API_KEY: ${S3_GATEWAY_RS_API_KEY}
+      SECRET_KEY: ${S3_GATEWAY_RS_SECRET_KEY}
+      BUCKET_NAME: ${S3_GATEWAY_RS_BUCKET_NAME}
+      ALLOWED_ORIGIN: ${ALLOWED_ORIGIN}
+    ports:
+      - ${S3_GATEWAY_RS_EXTERNAL_PORT}:7878
+    volumes:
+      - ${TIMEZONE_PATH_ON_HOST}:${TIMEZONE_PATH_ON_CONTAINER}:${TIMEZONE_OPTIONS}    # Map the Timezone  of the host to the Timezone of the container
+      - ${LOCALTIME_PATH_ON_HOST}:${LOCALTIME_PATH_ON_CONTAINER}:${LOCALTIME_OPTIONS} # Map the Localtime of the host to the Timezone of the container
+    networks:
+      - adempiere_network
+  
+  adempiere.site:
+    image: ${ADEMPIERE_SITE_IMAGE}
+    container_name: ${ADEMPIERE_SITE_CONTAINER_NAME}
+    hostname: ${ADEMPIERE_SITE_HOSTNAME}
+    restart: ${GENERIC_RESTART}
+    # ports:                                                                          # Ports not configured. Why?
+    #  - ${ADEMPIERE_SITE_EXTERNAL_PORT}:${ADEMPIERE_SITE_PORT}                       # Ports not configured. Why?
+    volumes:
+      - ${TIMEZONE_PATH_ON_HOST}:${TIMEZONE_PATH_ON_CONTAINER}:${TIMEZONE_OPTIONS}    # Map the Timezone  of the host to the Timezone of the container
+      - ${LOCALTIME_PATH_ON_HOST}:${LOCALTIME_PATH_ON_CONTAINER}:${LOCALTIME_OPTIONS} # Map the Localtime of the host to the Timezone of the container
+    environment:
+      ZK_HOST: ${ADEMPIERE_SITE_ZK_URL}
+      VUE_HOST: ${ADEMPIERE_SITE_VUE_URL}
+      SCHEDULER_HOST: ${ADEMPIERE_SITE_SCHEDULER_URL}
+    depends_on:
+      - adempiere.zk     # Docker Compose Service
+    networks:
+      - adempiere_network
   
   adempiere.zk:
     image: ${ADEMPIERE_ZK_IMAGE}
@@ -73,25 +162,6 @@ services:
     depends_on:
       postgresql.service:
         condition: service_healthy
-    networks:
-      - adempiere_network
-  
-  adempiere.site:
-    image: ${ADEMPIERE_SITE_IMAGE}
-    container_name: ${ADEMPIERE_SITE_CONTAINER_NAME}
-    hostname: ${ADEMPIERE_SITE_HOSTNAME}
-    restart: ${GENERIC_RESTART}
-    # ports:                                                                          # Ports not configured. Why?
-    #  - ${ADEMPIERE_SITE_EXTERNAL_PORT}:${ADEMPIERE_SITE_PORT}                       # Ports not configured. Why?
-    volumes:
-      - ${TIMEZONE_PATH_ON_HOST}:${TIMEZONE_PATH_ON_CONTAINER}:${TIMEZONE_OPTIONS}    # Map the Timezone  of the host to the Timezone of the container
-      - ${LOCALTIME_PATH_ON_HOST}:${LOCALTIME_PATH_ON_CONTAINER}:${LOCALTIME_OPTIONS} # Map the Localtime of the host to the Timezone of the container
-    environment:
-      ZK_HOST: ${ADEMPIERE_SITE_ZK_URL}
-      VUE_HOST: ${ADEMPIERE_SITE_VUE_URL}
-      SCHEDULER_HOST: ${ADEMPIERE_SITE_SCHEDULER_URL}
-    depends_on:
-      - adempiere.zk     # Docker Compose Service
     networks:
       - adempiere_network
 
@@ -178,76 +248,6 @@ services:
       - adempiere.processor
     networks:
     - adempiere_network
-
-  s3.storage:
-    image: ${S3_IMAGE}
-    container_name: ${S3_CONTAINER_NAME}
-    hostname: ${S3_HOSTNAME}
-    restart: ${GENERIC_RESTART}
-    command:
-      - "server"
-      - "/data"
-      - "--console-address=:${S3_CONSOLE_PORT}"
-    healthcheck:
-      test: "bash -c 'printf \"GET / HTTP/1.1\n\n\" > /dev/tcp/127.0.0.1/9000; exit $?;'"
-      interval: 10s
-      retries: 60
-      start_period: 20s
-      timeout: 10s
-    environment:
-      MINIO_ROOT_USER: ${S3_USER}
-      MINIO_ROOT_PASSWORD: ${S3_PASSWORD}
-      # MINIO_BROWSER_REDIRECT_URL: ${S3_CONSOLE_BROWSER_REDIRECT_URL}
-    volumes:
-      - volume_s3:/data
-      - ${TIMEZONE_PATH_ON_HOST}:${TIMEZONE_PATH_ON_CONTAINER}:${TIMEZONE_OPTIONS}    # Map the Timezone  of the host to the Timezone of the container
-      - ${LOCALTIME_PATH_ON_HOST}:${LOCALTIME_PATH_ON_CONTAINER}:${LOCALTIME_OPTIONS} # Map the Localtime of the host to the Timezone of the container
-    ports:
-      - ${S3_EXTERNAL_PORT}:9000
-      - ${S3_CONSOLE_EXTERNAL_PORT}:${S3_CONSOLE_PORT}
-    networks:
-      - adempiere_network
-
-  s3.client:
-    image: ${S3_CLIENT_IMAGE}
-    container_name: ${S3_CLIENT_CONTAINER_NAME}
-    hostname: ${S3_CLIENT_HOSTNAME}
-    depends_on:
-      s3.storage:
-        condition: service_healthy
-    entrypoint: >
-      /bin/sh -c "
-      /usr/bin/mc alias set s3_minio_server http://s3.storage:9000 ${S3_CLIENT_ACCESS_KEY} ${S3_CLIENT_SECRET_KEY};
-      /usr/bin/mc mb s3_minio_server/${S3_CLIENT_BUCKET_NAME} || true;
-      exit 0;
-      "
-    volumes:
-      - ${TIMEZONE_PATH_ON_HOST}:${TIMEZONE_PATH_ON_CONTAINER}:${TIMEZONE_OPTIONS}    # Map the Timezone  of the host to the Timezone of the container
-      - ${LOCALTIME_PATH_ON_HOST}:${LOCALTIME_PATH_ON_CONTAINER}:${LOCALTIME_OPTIONS} # Map the Localtime of the host to the Timezone of the container
-    networks:
-      - adempiere_network
-
-  s3.gateway.rs:
-    image: ${S3_GATEWAY_RS_IMAGE}
-    container_name: ${S3_GATEWAY_RS_CONTAINER_NAME}
-    hostname: ${S3_GATEWAY_RS_HOSTNAME}
-    restart: ${GENERIC_RESTART}
-    depends_on:
-      s3.storage:
-        condition: service_healthy
-    environment:
-      S3_URL: ${S3_GATEWAY_RS_S3_URL}
-      API_KEY: ${S3_GATEWAY_RS_API_KEY}
-      SECRET_KEY: ${S3_GATEWAY_RS_SECRET_KEY}
-      BUCKET_NAME: ${S3_GATEWAY_RS_BUCKET_NAME}
-      ALLOWED_ORIGIN: ${ALLOWED_ORIGIN}
-    ports:
-      - ${S3_GATEWAY_RS_EXTERNAL_PORT}:7878
-    volumes:
-      - ${TIMEZONE_PATH_ON_HOST}:${TIMEZONE_PATH_ON_CONTAINER}:${TIMEZONE_OPTIONS}    # Map the Timezone  of the host to the Timezone of the container
-      - ${LOCALTIME_PATH_ON_HOST}:${LOCALTIME_PATH_ON_CONTAINER}:${LOCALTIME_OPTIONS} # Map the Localtime of the host to the Timezone of the container
-    networks:
-      - adempiere_network
 
   vue.ui:
     image: ${VUE_UI_IMAGE}
