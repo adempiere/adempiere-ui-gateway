@@ -381,7 +381,7 @@ services:
       - ./keycloak/master-realm.json:/opt/keycloak/data/import/master-realm.json
       - ./keycloak/adempiere-realm.json:/opt/keycloak/data/import/adempiere-realm.json
     networks:
-      - shared_network
+      - adempiere_network
   
   ui.gateway:
     image: ${NGINX_UI_GATEWAY_IMAGE}
