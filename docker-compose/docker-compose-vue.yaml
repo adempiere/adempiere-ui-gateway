@@ -61,6 +61,9 @@ services:
     container_name: ${VUE_BACKEND_GRPC_SERVER_CONTAINER_NAME}
     hostname: ${VUE_BACKEND_GRPC_SERVER_HOSTNAME}
     restart: ${GENERIC_RESTART}
+    volumes:
+      - ${TIMEZONE_PATH_ON_HOST}:${TIMEZONE_PATH_ON_CONTAINER}:${TIMEZONE_OPTIONS}    # Map the Timezone  of the host to the Timezone of the container
+      - ${LOCALTIME_PATH_ON_HOST}:${LOCALTIME_PATH_ON_CONTAINER}:${LOCALTIME_OPTIONS} # Map the Localtime of the host to the Timezone of the container
     healthcheck:
       test: "bash -c 'printf \"GET / HTTP/1.1\n\n\" > /dev/tcp/127.0.0.1/50059; exit $?;'"
       interval: 10s
@@ -96,6 +99,9 @@ services:
       timeout: 10s
     ports:
      - ${ENVOY_GRPC_PROXY_EXTERNAL_PORT}:${ENVOY_GRPC_PROXY_BACKEND_PORT}
+    volumes:
+      - ${TIMEZONE_PATH_ON_HOST}:${TIMEZONE_PATH_ON_CONTAINER}:${TIMEZONE_OPTIONS}    # Map the Timezone  of the host to the Timezone of the container
+      - ${LOCALTIME_PATH_ON_HOST}:${LOCALTIME_PATH_ON_CONTAINER}:${LOCALTIME_OPTIONS} # Map the Localtime of the host to the Timezone of the container
     environment:
       BACKEND_HOST: ${ENVOY_GRPC_PROXY_BACKEND_HOST}
       BACKEND_PORT: 50059
@@ -121,6 +127,8 @@ services:
       - ./nginx/gateway/api_gateway_vue.conf:/etc/nginx/api_gateway.conf
       - ./nginx/api_json_errors.conf:/etc/nginx/api_json_errors.conf
       #- ./keys/api_keys.conf:/etc/nginx/api_keys.conf
+      - ${TIMEZONE_PATH_ON_HOST}:${TIMEZONE_PATH_ON_CONTAINER}:${TIMEZONE_OPTIONS}    # Map the Timezone  of the host to the Timezone of the container
+      - ${LOCALTIME_PATH_ON_HOST}:${LOCALTIME_PATH_ON_CONTAINER}:${LOCALTIME_OPTIONS} # Map the Localtime of the host to the Timezone of the container
     networks:
       - adempiere_network
 
@@ -131,6 +139,9 @@ services:
     restart: ${GENERIC_RESTART}
     ports:
       - ${VUE_UI_PORT}:80
+    volumes:
+      - ${TIMEZONE_PATH_ON_HOST}:${TIMEZONE_PATH_ON_CONTAINER}:${TIMEZONE_OPTIONS}    # Map the Timezone  of the host to the Timezone of the container
+      - ${LOCALTIME_PATH_ON_HOST}:${LOCALTIME_PATH_ON_CONTAINER}:${LOCALTIME_OPTIONS} # Map the Localtime of the host to the Timezone of the container
     environment:
       API_URL: ${VUE_UI_API_URL}
       PUBLIC_PATH: ${VUE_UI_PUBLIC_PATH}

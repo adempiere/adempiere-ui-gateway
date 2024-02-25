@@ -13,6 +13,8 @@ services:
     restart: ${GENERIC_RESTART}
     volumes:
       - volume_postgres:/var/lib/postgresql/data
+      - ${TIMEZONE_PATH_ON_HOST}:${TIMEZONE_PATH_ON_CONTAINER}:${TIMEZONE_OPTIONS}    # Map the Timezone  of the host to the Timezone of the container
+      - ${LOCALTIME_PATH_ON_HOST}:${LOCALTIME_PATH_ON_CONTAINER}:${LOCALTIME_OPTIONS} # Map the Localtime of the host to the Timezone of the container
     healthcheck:
       test: "bash -c 'printf \"GET / HTTP/1.1\n\n\" > /dev/tcp/127.0.0.1/5432; exit $?;'"
       interval: 10s
@@ -47,6 +49,8 @@ services:
       # MINIO_BROWSER_REDIRECT_URL: ${S3_CONSOLE_BROWSER_REDIRECT_URL}
     volumes:
       - volume_s3:/data
+      - ${TIMEZONE_PATH_ON_HOST}:${TIMEZONE_PATH_ON_CONTAINER}:${TIMEZONE_OPTIONS}    # Map the Timezone  of the host to the Timezone of the container
+      - ${LOCALTIME_PATH_ON_HOST}:${LOCALTIME_PATH_ON_CONTAINER}:${LOCALTIME_OPTIONS} # Map the Localtime of the host to the Timezone of the container
     ports:
       - ${S3_EXTERNAL_PORT}:9000
       - ${S3_CONSOLE_EXTERNAL_PORT}:${S3_CONSOLE_PORT}
@@ -56,6 +60,9 @@ services:
   s3.client:
     image: ${S3_CLIENT_IMAGE}
     container_name: ${S3_CLIENT_HOST}
+    volumes:
+      - ${TIMEZONE_PATH_ON_HOST}:${TIMEZONE_PATH_ON_CONTAINER}:${TIMEZONE_OPTIONS}    # Map the Timezone  of the host to the Timezone of the container
+      - ${LOCALTIME_PATH_ON_HOST}:${LOCALTIME_PATH_ON_CONTAINER}:${LOCALTIME_OPTIONS} # Map the Localtime of the host to the Timezone of the container
     depends_on:
       s3.storage:
         condition: service_healthy
@@ -72,6 +79,9 @@ services:
     image: ${S3_GATEWAY_RS_IMAGE}
     container_name: ${S3_GATEWAY_RS_HOST}
     restart: ${GENERIC_RESTART}
+    volumes:
+      - ${TIMEZONE_PATH_ON_HOST}:${TIMEZONE_PATH_ON_CONTAINER}:${TIMEZONE_OPTIONS}    # Map the Timezone  of the host to the Timezone of the container
+      - ${LOCALTIME_PATH_ON_HOST}:${LOCALTIME_PATH_ON_CONTAINER}:${LOCALTIME_OPTIONS} # Map the Localtime of the host to the Timezone of the container
     healthcheck:
       test: "bash -c 'printf \"GET / HTTP/1.1\n\n\" > /dev/tcp/127.0.0.1/7878; exit $?;'"
       interval: 10s
@@ -98,6 +108,9 @@ services:
     image: ${GRPC_SERVER_IMAGE}
     container_name: ${GRPC_SERVER_HOST}
     restart: ${GENERIC_RESTART}
+    volumes:
+      - ${TIMEZONE_PATH_ON_HOST}:${TIMEZONE_PATH_ON_CONTAINER}:${TIMEZONE_OPTIONS}    # Map the Timezone  of the host to the Timezone of the container
+      - ${LOCALTIME_PATH_ON_HOST}:${LOCALTIME_PATH_ON_CONTAINER}:${LOCALTIME_OPTIONS} # Map the Localtime of the host to the Timezone of the container
     healthcheck:
       test: "bash -c 'printf \"GET / HTTP/1.1\n\n\" > /dev/tcp/127.0.0.1/${GRPC_SERVER_PORT}; exit $?;'"
       interval: 10s
@@ -122,6 +135,9 @@ services:
   grpc.proxy:
     image: ${GRPC_PROXY_BACKEND_IMAGE}
     container_name: ${GRPC_PROXY_HOST}
+    volumes:
+      - ${TIMEZONE_PATH_ON_HOST}:${TIMEZONE_PATH_ON_CONTAINER}:${TIMEZONE_OPTIONS}    # Map the Timezone  of the host to the Timezone of the container
+      - ${LOCALTIME_PATH_ON_HOST}:${LOCALTIME_PATH_ON_CONTAINER}:${LOCALTIME_OPTIONS} # Map the Localtime of the host to the Timezone of the container
     healthcheck:
       test: "bash -c 'printf \"GET / HTTP/1.1\n\n\" > /dev/tcp/127.0.0.1/${GRPC_PROXY_BACKEND_PORT}; exit $?;'"
       interval: 10s
@@ -163,6 +179,8 @@ services:
       - ./nginx/upstreams/s3_console_ui.conf:/etc/nginx/api_upstreams_conf.d/s3_console_ui.conf
       - ./nginx/upstreams/s3_gateway_rs.conf:/etc/nginx/api_upstreams_conf.d/s3_gateway_rs.conf
       - ./nginx/api/s3/:/etc/nginx/api_conf.d/s3/
+      - ${TIMEZONE_PATH_ON_HOST}:${TIMEZONE_PATH_ON_CONTAINER}:${TIMEZONE_OPTIONS}    # Map the Timezone  of the host to the Timezone of the container
+      - ${LOCALTIME_PATH_ON_HOST}:${LOCALTIME_PATH_ON_CONTAINER}:${LOCALTIME_OPTIONS} # Map the Localtime of the host to the Timezone of the container
     networks:
       - shared_network
 
