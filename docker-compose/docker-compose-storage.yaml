@@ -173,10 +173,6 @@ services:
       retries: 60
       start_period: 20s
       timeout: 10s
-    ports:
-     - ${ENVOY_GRPC_PROXY_EXTERNAL_PORT}:${ENVOY_GRPC_PROXY_BACKEND_PORT}
-    # Processor Port
-    #  - ${ENVOY_GRPC_PROXY_PROCESSOR_PORT}:5556
     volumes:
       - ${TIMEZONE_PATH_ON_HOST}:${TIMEZONE_PATH_ON_CONTAINER}:${TIMEZONE_OPTIONS}    # Map the Timezone  of the host to the Timezone of the container
       - ${LOCALTIME_PATH_ON_HOST}:${LOCALTIME_PATH_ON_CONTAINER}:${LOCALTIME_OPTIONS} # Map the Localtime of the host to the Timezone of the container
