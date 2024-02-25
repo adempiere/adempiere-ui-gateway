@@ -1,6 +1,6 @@
 version: "3.9"
 
-name: services-gateway-develop
+name: services-gateway-cache
 
 # Example API for images
 services:
@@ -228,7 +228,9 @@ services:
       OPENSEARCH_URL: ${OPENSEARCH_GATEWAY_RS_OPENSEARCH_URL}
       ALLOWED_ORIGIN: ${ALLOWED_ORIGIN}
     depends_on:
-       opensearch.node:
+      opensearch-node:
+        condition: service_healthy
+      kafka:
         condition: service_healthy
     ports:
       - ${OPENSEARCH_GATEWAY_RS_EXTERNAL_PORT}:7878

@@ -2,17 +2,35 @@ version: "3.9"
 
 name: services-gateway-storage
 
-# Example API for images
 services:
   postgresql.service:
     build:
-      context: postgresql/
-      dockerfile: postgres.Dockerfile
-    container_name: ${POSTGRES_HOST}
-    image: ${POSTGRES_HOST}
+      context:  ${POSTGRES_CONTEXT_PATH_ON_HOST}              # Path relative to Working Directory where Dockerfile will be found
+      dockerfile:  ${DOCKERFILE_NAME}                         # Must exist in context. Otherwise, error. Valid only if no "image" defined.
+      args:
+        # ARG is used to define build-time variables, whereas ENV is used to define run-time variables.
+        # ARG is not available in the final image, whereas ENV is set in the final image.
+        # ARG can be overridden during the build process using the "build-arg" flag, whereas ENV cannot be overridden during the build process.
+        POSTGRES_IMAGE: ${POSTGRES_IMAGE}                    # Only this is actually needed for the Dockerfile. The other args are left just in case.
+        ADEMPIERE_DB_NAME: ${ADEMPIERE_DB_NAME}
+        ADEMPIERE_DB_USER: ${ADEMPIERE_DB_USER}
+        ADEMPIERE_DB_PASSWORD: ${ADEMPIERE_DB_PASSWORD}
+        POSTGRES_DEFAULT_RESTORE_FILE: ${POSTGRES_DEFAULT_RESTORE_FILE}
+        HOME_PATH_ON_CONTAINERS: ${HOME_PATH_ON_CONTAINERS}
+        POSTGRES_DB_BACKUP_PATH_ON_CONTAINER: ${POSTGRES_DB_BACKUP_PATH_ON_CONTAINER}
+        ADEMPIERE_GITHUB_ARTIFACT: ${ADEMPIERE_GITHUB_ARTIFACT}
+        ADEMPIERE_GITHUB_COMPRESSED_FILE: ${ADEMPIERE_GITHUB_COMPRESSED_FILE}
+        POSTGRES_RESTORE_FILE_NAME: ${POSTGRES_RESTORE_FILE_NAME}
+    container_name: ${POSTGRES_CONTAINER_NAME}
+    hostname: ${POSTGRES_HOSTNAME}
+    image: ${POSTGRES_IMAGE_REPO_NAME}                        # "image" is in this context just another image RepoTag, visible with "docker image inspect" and "docker images"
+                                                               # Omitting it, the Repository name will be "${COMPOSE_PROJECT_NAME}+Service name"
     restart: ${GENERIC_RESTART}
+    ports:
+      - ${POSTGRES_EXTERNAL_PORT}:${POSTGRES_PORT}          # Set a fixed external port
     volumes:
-      - volume_postgres:/var/lib/postgresql/data
+      - volume_postgres:${POSTGRES_DEFAULT_DB_PATH_ON_CONTAINER} # Database dir for container. Default for Postgres.
+      - volume_backups:${POSTGRES_DB_BACKUP_PATH_ON_CONTAINER}   # Backup dir for container. Must be created with Dockerfile
       - ${TIMEZONE_PATH_ON_HOST}:${TIMEZONE_PATH_ON_CONTAINER}:${TIMEZONE_OPTIONS}    # Map the Timezone  of the host to the Timezone of the container
       - ${LOCALTIME_PATH_ON_HOST}:${LOCALTIME_PATH_ON_CONTAINER}:${LOCALTIME_OPTIONS} # Map the Localtime of the host to the Timezone of the container
     healthcheck:
@@ -21,17 +39,26 @@ services:
       retries: 60
       start_period: 20s
       timeout: 10s
-    environment:
+    environment:            # Values needed for initdb.sh and debugging
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      ADEMPIERE_DB_NAME: ${ADEMPIERE_DB_NAME}
+      ADEMPIERE_DB_USER: ${ADEMPIERE_DB_USER}
+      ADEMPIERE_DB_PASSWORD: ${ADEMPIERE_DB_PASSWORD}
+      POSTGRES_DEFAULT_RESTORE_FILE: ${POSTGRES_DEFAULT_RESTORE_FILE}
+      HOME_PATH_ON_CONTAINERS: ${HOME_PATH_ON_CONTAINERS}
+      POSTGRES_DB_BACKUP_PATH_ON_CONTAINER: ${POSTGRES_DB_BACKUP_PATH_ON_CONTAINER}
+      ADEMPIERE_GITHUB_ARTIFACT: ${ADEMPIERE_GITHUB_ARTIFACT}
+      ADEMPIERE_GITHUB_COMPRESSED_FILE: ${ADEMPIERE_GITHUB_COMPRESSED_FILE}
+      POSTGRES_RESTORE_FILE_NAME: ${POSTGRES_RESTORE_FILE_NAME}
+      POSTGRES_EXTERNAL_PORT:  ${POSTGRES_EXTERNAL_PORT}
     networks:
-      - shared_network
-
-
+      - adempiere_network
 
   s3.storage:
     image: ${S3_IMAGE}
-    container_name: ${S3_HOST}
+    container_name: ${S3_CONTAINER_NAME}
+    hostname: ${S3_HOSTNAME}
     restart: ${GENERIC_RESTART}
     command:
       - "server"
@@ -55,14 +82,12 @@ services:
       - ${S3_EXTERNAL_PORT}:9000
       - ${S3_CONSOLE_EXTERNAL_PORT}:${S3_CONSOLE_PORT}
     networks:
-      - shared_network
+      - adempiere_network
 
   s3.client:
     image: ${S3_CLIENT_IMAGE}
-    container_name: ${S3_CLIENT_HOST}
-    volumes:
-      - ${TIMEZONE_PATH_ON_HOST}:${TIMEZONE_PATH_ON_CONTAINER}:${TIMEZONE_OPTIONS}    # Map the Timezone  of the host to the Timezone of the container
-      - ${LOCALTIME_PATH_ON_HOST}:${LOCALTIME_PATH_ON_CONTAINER}:${LOCALTIME_OPTIONS} # Map the Localtime of the host to the Timezone of the container
+    container_name: ${S3_CLIENT_CONTAINER_NAME}
+    hostname: ${S3_CLIENT_HOSTNAME}
     depends_on:
       s3.storage:
         condition: service_healthy
@@ -72,16 +97,17 @@ services:
       /usr/bin/mc mb s3_minio_server/${S3_CLIENT_BUCKET_NAME} || true;
       exit 0;
       "
-    networks:
-      - shared_network
-
-  s3.gateway.rs:
-    image: ${S3_GATEWAY_RS_IMAGE}
-    container_name: ${S3_GATEWAY_RS_HOST}
-    restart: ${GENERIC_RESTART}
     volumes:
       - ${TIMEZONE_PATH_ON_HOST}:${TIMEZONE_PATH_ON_CONTAINER}:${TIMEZONE_OPTIONS}    # Map the Timezone  of the host to the Timezone of the container
       - ${LOCALTIME_PATH_ON_HOST}:${LOCALTIME_PATH_ON_CONTAINER}:${LOCALTIME_OPTIONS} # Map the Localtime of the host to the Timezone of the container
+    networks:
+      - adempiere_network
+
+  s3.gateway.rs:
+    image: ${S3_GATEWAY_RS_IMAGE}
+    container_name: ${S3_GATEWAY_RS_CONTAINER_NAME}
+    hostname: ${S3_GATEWAY_RS_HOSTNAME}
+    restart: ${GENERIC_RESTART}
     healthcheck:
       test: "bash -c 'printf \"GET / HTTP/1.1\n\n\" > /dev/tcp/127.0.0.1/7878; exit $?;'"
       interval: 10s
@@ -98,21 +124,25 @@ services:
       BUCKET_NAME: ${S3_GATEWAY_RS_BUCKET_NAME}
       # ALLOWED_ORIGIN: ${ALLOWED_ORIGIN}
     ports:
-      - ${S3_GATEWAY_RS_PORT}:7878
+      - ${S3_GATEWAY_RS_EXTERNAL_PORT}:7878
+    volumes:
+      - ${TIMEZONE_PATH_ON_HOST}:${TIMEZONE_PATH_ON_CONTAINER}:${TIMEZONE_OPTIONS}    # Map the Timezone  of the host to the Timezone of the container
+      - ${LOCALTIME_PATH_ON_HOST}:${LOCALTIME_PATH_ON_CONTAINER}:${LOCALTIME_OPTIONS} # Map the Localtime of the host to the Timezone of the container
     networks:
-      - shared_network
-
-
+      - adempiere_network
 
   adempiere.grpc.server:
-    image: ${GRPC_SERVER_IMAGE}
-    container_name: ${GRPC_SERVER_HOST}
+    image: ${VUE_BACKEND_GRPC_SERVER_IMAGE}
+    container_name: ${VUE_BACKEND_GRPC_SERVER_CONTAINER_NAME}
+    hostname: ${VUE_BACKEND_GRPC_SERVER_HOSTNAME}
     restart: ${GENERIC_RESTART}
+    #ports:                             # IN ADEMPIERE-ALL-SERVICES, NOT COMMENTED
+    #  - ${VUE_BACKEND_PORT}            # IN ADEMPIERE-ALL-SERVICES, NOT COMMENTED
     volumes:
       - ${TIMEZONE_PATH_ON_HOST}:${TIMEZONE_PATH_ON_CONTAINER}:${TIMEZONE_OPTIONS}    # Map the Timezone  of the host to the Timezone of the container
       - ${LOCALTIME_PATH_ON_HOST}:${LOCALTIME_PATH_ON_CONTAINER}:${LOCALTIME_OPTIONS} # Map the Localtime of the host to the Timezone of the container
     healthcheck:
-      test: "bash -c 'printf \"GET / HTTP/1.1\n\n\" > /dev/tcp/127.0.0.1/${GRPC_SERVER_PORT}; exit $?;'"
+      test: "bash -c 'printf \"GET / HTTP/1.1\n\n\" > /dev/tcp/127.0.0.1/${VUE_BACKEND_GRPC_SERVER_PORT}; exit $?;'"
       interval: 10s
       retries: 60
       start_period: 20s
@@ -121,51 +151,56 @@ services:
       postgresql.service:
         condition: service_healthy
     environment:
-      SERVER_PORT: ${GRPC_SERVER_PORT}
-      DB_HOST: ${GRPC_SERVER_DB_HOST}
-      DB_PORT: ${GRPC_SERVER_DB_PORT}
-      DB_NAME: ${GRPC_SERVER_DB_NAME}
-      DB_USER: ${GRPC_SERVER_DB_USER}
-      DB_PASSWORD: ${GRPC_SERVER_DB_PASSWORD}
-      JWT_SECRET_KEY: ${GRPC_SERVER_JWT_SECRET_KEY}
-      # - SERVICES_ENABLED: ${GRPC_SERVER_SERVICES_ENABLED}
+      SERVER_PORT: ${VUE_BACKEND_GRPC_SERVER_PORT}
+      DB_HOST: ${VUE_BACKEND_GRPC_SERVER_DB_CONTAINER_NAME}
+      DB_PORT: ${VUE_BACKEND_GRPC_SERVER_DB_PORT}
+      DB_NAME: ${VUE_BACKEND_GRPC_SERVER_DB_NAME}
+      DB_USER: ${VUE_BACKEND_GRPC_SERVER_DB_USER}
+      DB_PASSWORD: ${VUE_BACKEND_GRPC_SERVER_DB_PASSWORD}
+      JWT_SECRET_KEY: ${VUE_BACKEND_GRPC_SERVER_JWT_SECRET_KEY}
+      # SERVICES_ENABLED: ${VUE_BACKEND_GRPC_SERVER_SERVICES_ENABLED}           # IN ADEMPIERE-ALL-SERVICES, NOT COMMENTED
+      SERVER_LOG_LEVEL: ${VUE_BACKEND_GRPC_SERVER_LOG_LEVEL}
     networks:
-      - shared_network
+      - adempiere_network
 
   grpc.proxy:
-    image: ${GRPC_PROXY_BACKEND_IMAGE}
-    container_name: ${GRPC_PROXY_HOST}
-    volumes:
-      - ${TIMEZONE_PATH_ON_HOST}:${TIMEZONE_PATH_ON_CONTAINER}:${TIMEZONE_OPTIONS}    # Map the Timezone  of the host to the Timezone of the container
-      - ${LOCALTIME_PATH_ON_HOST}:${LOCALTIME_PATH_ON_CONTAINER}:${LOCALTIME_OPTIONS} # Map the Localtime of the host to the Timezone of the container
+    image: ${ENVOY_GRPC_PROXY_IMAGE}
+    container_name: ${ENVOY_GRPC_PROXY_CONTAINER_NAME}
+    hostname: ${ENVOY_GRPC_PROXY_HOSTNAME}
     healthcheck:
-      test: "bash -c 'printf \"GET / HTTP/1.1\n\n\" > /dev/tcp/127.0.0.1/${GRPC_PROXY_BACKEND_PORT}; exit $?;'"
+      test: "bash -c 'printf \"GET / HTTP/1.1\n\n\" > /dev/tcp/127.0.0.1/${ENVOY_GRPC_PROXY_BACKEND_PORT}; exit $?;'"
       interval: 10s
       retries: 60
       start_period: 20s
       timeout: 10s
-    environment:
-      SERVER_PORT: ${GRPC_PROXY_BACKEND_PORT}
-      BACKEND_HOST: ${GRPC_PROXY_BACKEND_HOST}
-      BACKEND_PORT: ${GRPC_PROXY_BACKEND_SERVER_PORT}
+    ports:
+     - ${ENVOY_GRPC_PROXY_EXTERNAL_PORT}:${ENVOY_GRPC_PROXY_BACKEND_PORT}
+    # Processor Port
+    #  - ${ENVOY_GRPC_PROXY_PROCESSOR_PORT}:5556
+    volumes:
+      - ${TIMEZONE_PATH_ON_HOST}:${TIMEZONE_PATH_ON_CONTAINER}:${TIMEZONE_OPTIONS}    # Map the Timezone  of the host to the Timezone of the container
+      - ${LOCALTIME_PATH_ON_HOST}:${LOCALTIME_PATH_ON_CONTAINER}:${LOCALTIME_OPTIONS} # Map the Localtime of the host to the Timezone of the container
     depends_on:
       adempiere.grpc.server:
         condition: service_healthy
+    environment:
+      SERVER_PORT: ${ENVOY_GRPC_PROXY_BACKEND_PORT}
+      BACKEND_HOST: ${ENVOY_GRPC_PROXY_BACKEND_HOST}
+      BACKEND_PORT: ${ENVOY_GRPC_PROXY_BACKEND_SERVER_PORT}
     networks:
-    - shared_network
-
-
-
+    - adempiere_network
+  
   ui.gateway:
-    image: ${GATEWAY_IMAGE}
-    container_name: ${GATEWAY_HOST}
+    image: ${NGINX_UI_GATEWAY_IMAGE}
+    container_name: ${NGINX_UI_GATEWAY_CONTAINER_NAME}
+    hostname: ${NGINX_UI_GATEWAY_HOSTNAME}
     depends_on:
       grpc.proxy:
         condition: service_healthy
       s3.gateway.rs:
         condition: service_started
     ports:
-      - ${GATEWAY_PORT}:80
+      - ${NGINX_UI_GATEWAY_EXTERNAL_PORT}:${NGINX_UI_GATEWAY_INTERNAL_PORT}
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf
       - ./nginx/api_json_errors.conf:/etc/nginx/api_json_errors.conf
@@ -182,16 +217,31 @@ services:
       - ${TIMEZONE_PATH_ON_HOST}:${TIMEZONE_PATH_ON_CONTAINER}:${TIMEZONE_OPTIONS}    # Map the Timezone  of the host to the Timezone of the container
       - ${LOCALTIME_PATH_ON_HOST}:${LOCALTIME_PATH_ON_CONTAINER}:${LOCALTIME_OPTIONS} # Map the Localtime of the host to the Timezone of the container
     networks:
-      - shared_network
-
-
-
+      - adempiere_network
+      
 networks:
-  shared_network:
-    name: ${DEFAULT_NETWORK}
+  adempiere_network:
+    name: ${ADEMPIERE_NETWORK}
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: ${NETWORK_SUBNET}      # Set subnet for all containers created.
+          gateway: ${NETWORK_GATEWAY}
+          # ip-range: ${NETWORK_IP_RANGE}   # supposedly not allowed
 
 volumes:
   volume_postgres:
     name: ${POSTGRES_VOLUME}
+    driver_opts:
+      type: none
+      o: bind
+      device: ${POSTGRES_DB_PATH_ON_HOST} # Must be created on host before calling docker compose. The persistent database will be located locally here.
+  volume_backups:
+    name: ${BACKUPS_VOLUME}
+    driver_opts:
+      type: none
+      o: bind
+      device: ${POSTGRES_BACKUP_PATH_ON_HOST} # Must be created on host before calling docker compose. Backups must be copied here to be restored.
   volume_s3:
     name: ${S3_VOLUME}
