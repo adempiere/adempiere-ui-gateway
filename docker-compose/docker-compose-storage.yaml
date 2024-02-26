@@ -108,6 +108,9 @@ services:
     container_name: ${S3_GATEWAY_RS_CONTAINER_NAME}
     hostname: ${S3_GATEWAY_RS_HOSTNAME}
     restart: ${GENERIC_RESTART}
+    volumes:
+      - ${TIMEZONE_PATH_ON_HOST}:${TIMEZONE_PATH_ON_CONTAINER}:${TIMEZONE_OPTIONS}    # Map the Timezone  of the host to the Timezone of the container
+      - ${LOCALTIME_PATH_ON_HOST}:${LOCALTIME_PATH_ON_CONTAINER}:${LOCALTIME_OPTIONS} # Map the Localtime of the host to the Timezone of the container
     healthcheck:
       test: "bash -c 'printf \"GET / HTTP/1.1\n\n\" > /dev/tcp/127.0.0.1/7878; exit $?;'"
       interval: 10s
