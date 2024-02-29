@@ -84,7 +84,7 @@ The application stack as graphic:
 ### File Structure
 - *README.md*: this very file
 - *env_template*: template for definition of all variables. Usually, this file is edited and tested before copied to *.env*.
-- *.env*: definition of all variables used in *docker-compose.yml*.
+- *.env*: definition of all variables used in *docker-compose files*.
 - *docker-compose files*: the docker compose definition files to be used. Here are defined all services.
   Variables used in these files are taken from file *.env*.
   - **docker-compose.yml**: the sandard
@@ -165,7 +165,7 @@ git checkout main
 ##### 1 Execute With One Script
 Execute script `start-all.sh -d  [auth, cache, develop, storage, vue, default]`:
 ```Shell
-cd adempiere-ui-gateway/docker-compose**
+cd adempiere-ui-gateway/docker-compose
 ./start-all.sh -d auth    , or
 ./start-all.sh -d cache   , or
 ./start-all.sh -d develop , or
