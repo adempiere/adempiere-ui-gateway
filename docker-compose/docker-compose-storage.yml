@@ -1,6 +1,6 @@
 version: "3.9"
 
-name: services-gateway-develop
+name: services-gateway-storage
 
 services:
   postgresql.service:
@@ -88,9 +88,6 @@ services:
     image: ${S3_CLIENT_IMAGE}
     container_name: ${S3_CLIENT_CONTAINER_NAME}
     hostname: ${S3_CLIENT_HOSTNAME}
-    volumes:
-      - ${TIMEZONE_PATH_ON_HOST}:${TIMEZONE_PATH_ON_CONTAINER}:${TIMEZONE_OPTIONS}    # Map the Timezone  of the host to the Timezone of the container
-      - ${LOCALTIME_PATH_ON_HOST}:${LOCALTIME_PATH_ON_CONTAINER}:${LOCALTIME_OPTIONS} # Map the Localtime of the host to the Timezone of the container
     depends_on:
       s3.storage:
         condition: service_healthy
@@ -100,6 +97,9 @@ services:
       /usr/bin/mc mb s3_minio_server/${S3_CLIENT_BUCKET_NAME} || true;
       exit 0;
       "
+    volumes:
+      - ${TIMEZONE_PATH_ON_HOST}:${TIMEZONE_PATH_ON_CONTAINER}:${TIMEZONE_OPTIONS}    # Map the Timezone  of the host to the Timezone of the container
+      - ${LOCALTIME_PATH_ON_HOST}:${LOCALTIME_PATH_ON_CONTAINER}:${LOCALTIME_OPTIONS} # Map the Localtime of the host to the Timezone of the container
     networks:
       - adempiere_network
 
@@ -111,6 +111,12 @@ services:
     volumes:
       - ${TIMEZONE_PATH_ON_HOST}:${TIMEZONE_PATH_ON_CONTAINER}:${TIMEZONE_OPTIONS}    # Map the Timezone  of the host to the Timezone of the container
       - ${LOCALTIME_PATH_ON_HOST}:${LOCALTIME_PATH_ON_CONTAINER}:${LOCALTIME_OPTIONS} # Map the Localtime of the host to the Timezone of the container
+    healthcheck:
+      test: "bash -c 'printf \"GET / HTTP/1.1\n\n\" > /dev/tcp/127.0.0.1/7878; exit $?;'"
+      interval: 10s
+      retries: 60
+      start_period: 20s
+      timeout: 10s
     depends_on:
       s3.storage:
         condition: service_healthy
@@ -119,9 +125,12 @@ services:
       API_KEY: ${S3_GATEWAY_RS_API_KEY}
       SECRET_KEY: ${S3_GATEWAY_RS_SECRET_KEY}
       BUCKET_NAME: ${S3_GATEWAY_RS_BUCKET_NAME}
-      ALLOWED_ORIGIN: ${ALLOWED_ORIGIN}
+      # ALLOWED_ORIGIN: ${ALLOWED_ORIGIN}
     ports:
-      - ${S3_GATEWAY_RS_PORT}:7878
+      - ${S3_GATEWAY_RS_EXTERNAL_PORT}:7878
+    volumes:
+      - ${TIMEZONE_PATH_ON_HOST}:${TIMEZONE_PATH_ON_CONTAINER}:${TIMEZONE_OPTIONS}    # Map the Timezone  of the host to the Timezone of the container
+      - ${LOCALTIME_PATH_ON_HOST}:${LOCALTIME_PATH_ON_CONTAINER}:${LOCALTIME_OPTIONS} # Map the Localtime of the host to the Timezone of the container
     networks:
       - adempiere_network
 
@@ -130,6 +139,8 @@ services:
     container_name: ${VUE_BACKEND_GRPC_SERVER_CONTAINER_NAME}
     hostname: ${VUE_BACKEND_GRPC_SERVER_HOSTNAME}
     restart: ${GENERIC_RESTART}
+    #ports:                             # IN ADEMPIERE-ALL-SERVICES, NOT COMMENTED
+    #  - ${VUE_BACKEND_PORT}            # IN ADEMPIERE-ALL-SERVICES, NOT COMMENTED
     volumes:
       - ${TIMEZONE_PATH_ON_HOST}:${TIMEZONE_PATH_ON_CONTAINER}:${TIMEZONE_OPTIONS}    # Map the Timezone  of the host to the Timezone of the container
       - ${LOCALTIME_PATH_ON_HOST}:${LOCALTIME_PATH_ON_CONTAINER}:${LOCALTIME_OPTIONS} # Map the Localtime of the host to the Timezone of the container
@@ -143,6 +154,7 @@ services:
       postgresql.service:
         condition: service_healthy
     environment:
+      SERVER_PORT: ${VUE_BACKEND_GRPC_SERVER_PORT}
       DB_HOST: ${VUE_BACKEND_GRPC_SERVER_DB_CONTAINER_NAME}
       DB_PORT: ${VUE_BACKEND_GRPC_SERVER_DB_PORT}
       DB_NAME: ${VUE_BACKEND_GRPC_SERVER_DB_NAME}
@@ -164,92 +176,19 @@ services:
       retries: 60
       start_period: 20s
       timeout: 10s
-    ports:
-     - ${ENVOY_GRPC_PROXY_EXTERNAL_PORT}:${ENVOY_GRPC_PROXY_BACKEND_PORT}
-     # Processor Port
-     - ${ENVOY_GRPC_PROXY_PROCESSOR_PORT}:5556
     volumes:
-      - ./envoy/envoy.yaml:/etc/envoy/envoy.yaml:ro
-      - ./envoy/definitions/adempiere-grpc-server.pb:/data/adempiere-grpc-server.pb:ro
-      - ./envoy/definitions/adempiere-processors-service-service.pb:/data/adempiere-processors-service-service.pb:ro
       - ${TIMEZONE_PATH_ON_HOST}:${TIMEZONE_PATH_ON_CONTAINER}:${TIMEZONE_OPTIONS}    # Map the Timezone  of the host to the Timezone of the container
       - ${LOCALTIME_PATH_ON_HOST}:${LOCALTIME_PATH_ON_CONTAINER}:${LOCALTIME_OPTIONS} # Map the Localtime of the host to the Timezone of the container
     depends_on:
-      - adempiere.grpc.server
-      # - adempiere.processor
+      adempiere.grpc.server:
+        condition: service_healthy
+    environment:
+      SERVER_PORT: ${ENVOY_GRPC_PROXY_BACKEND_PORT}
+      BACKEND_HOST: ${ENVOY_GRPC_PROXY_BACKEND_HOST}
+      BACKEND_PORT: ${ENVOY_GRPC_PROXY_BACKEND_SERVER_PORT}
     networks:
     - adempiere_network
-
-  opensearch.node:
-    image: ${OPENSEARCH_IMAGE}
-    container_name: ${OPENSEARCH_CONTAINER_NAME}
-    hostname: ${OPENSEARCH_HOSTNAME}
-    environment:
-      - node.name=opensearch.node
-      - discovery.type=single-node
-      - "DISABLE_INSTALL_DEMO_CONFIG=true" # Prevents execution of bundled demo script which installs demo certificates and security configurations to OpenSearch
-      - "DISABLE_SECURITY_PLUGIN=true" # Disables Security plugin
-    healthcheck:
-      test: "bash -c 'printf \"GET / HTTP/1.1\n\n\" > /dev/tcp/127.0.0.1/9200; exit $?;'"
-      interval: 10s
-      retries: 60
-      start_period: 20s
-      timeout: 10s 
-    ulimits:
-      memlock:
-        soft: -1
-        hard: -1
-      nofile:
-        soft: 65536 # maximum number of open files for the OpenSearch user, set to at least 65536 on modern systems
-        hard: 65536
-    volumes:
-      - volume_opensearch:/usr/share/opensearch/data
-      - ./opensearch/opensearch.yml:/usr/share/opensearch/config/opensearch.yml
-      - ./opensearch/snapshots:/mnt/snapshots
-      - ${TIMEZONE_PATH_ON_HOST}:${TIMEZONE_PATH_ON_CONTAINER}:${TIMEZONE_OPTIONS}    # Map the Timezone  of the host to the Timezone of the container
-      - ${LOCALTIME_PATH_ON_HOST}:${LOCALTIME_PATH_ON_CONTAINER}:${LOCALTIME_OPTIONS} # Map the Localtime of the host to the Timezone of the container
-    ports:
-      - ${OPENSEARCH_PORT}:9200
-      - ${OPENSEARCH_PERFORMANCE_PORT}:9600 # required for Performance Analyzer
-    networks:
-      - adempiere_network
   
-  opensearch.setup:
-    build:
-      context: opensearch/
-      dockerfile: setup.Dockerfile
-    container_name: ${OPENSEARCH_SETUP_CONTAINER_NAME}
-    hostname: ${OPENSEARCH_SETUP_HOSTNAME}
-    volumes:
-      - ${TIMEZONE_PATH_ON_HOST}:${TIMEZONE_PATH_ON_CONTAINER}:${TIMEZONE_OPTIONS}    # Map the Timezone  of the host to the Timezone of the container
-      - ${LOCALTIME_PATH_ON_HOST}:${LOCALTIME_PATH_ON_CONTAINER}:${LOCALTIME_OPTIONS} # Map the Localtime of the host to the Timezone of the container
-    image: ${OPENSEARCH_SETUP_IMAGE_REPO_NAME}
-    depends_on:
-       opensearch.node:
-        condition: service_healthy
-    networks:
-      - adempiere_network
-
-  opensearch.gateway.rs:
-    image: ${OPENSEARCH_GATEWAY_RS_IMAGE}
-    container_name: ${OPENSEARCH_GATEWAY_RS_CONTAINER_NAME}
-    hostname: ${OPENSEARCH_GATEWAY_RS_HOSTNAME}
-    restart: ${GENERIC_RESTART}
-    volumes:
-      - ${TIMEZONE_PATH_ON_HOST}:${TIMEZONE_PATH_ON_CONTAINER}:${TIMEZONE_OPTIONS}    # Map the Timezone  of the host to the Timezone of the container
-      - ${LOCALTIME_PATH_ON_HOST}:${LOCALTIME_PATH_ON_CONTAINER}:${LOCALTIME_OPTIONS} # Map the Localtime of the host to the Timezone of the container
-    environment:
-      KAFKA_HOST: ${OPENSEARCH_GATEWAY_RS_KAFKA_HOST}
-      OPENSEARCH_URL: ${OPENSEARCH_GATEWAY_RS_OPENSEARCH_URL}
-      ALLOWED_ORIGIN: ${ALLOWED_ORIGIN}
-    depends_on:
-       opensearch.node:
-        condition: service_healthy
-    ports:
-      - ${OPENSEARCH_GATEWAY_RS_PORT}:7878
-    networks:
-      - adempiere_network
-
   ui.gateway:
     image: ${NGINX_UI_GATEWAY_IMAGE}
     container_name: ${NGINX_UI_GATEWAY_CONTAINER_NAME}
@@ -257,29 +196,27 @@ services:
     depends_on:
       grpc.proxy:
         condition: service_healthy
-      # vue.ui:
-      #   condition: service_healthy
-      opensearch.gateway.rs:
+      s3.gateway.rs:
         condition: service_started
-      # adempiere.site:
-      #   condition: service_started
     ports:
       - ${NGINX_UI_GATEWAY_EXTERNAL_PORT}:${NGINX_UI_GATEWAY_INTERNAL_PORT}
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf
-      - ./nginx/upstreams/adempiere_backend.conf:/etc/nginx/api_upstreams_conf.d/adempiere_backend.conf
-      - ./nginx/upstreams/opensearch_gateway.conf:/etc/nginx/api_upstreams_conf.d/opensearch_gateway.conf
-      - ./nginx/api/backend/:/etc/nginx/api_conf.d/backend
-      - ./nginx/api/opensearch/:/etc/nginx/api_conf.d/opensearch
-      - ./nginx/gateway/api_gateway.conf:/etc/nginx/api_gateway.conf
       - ./nginx/api_json_errors.conf:/etc/nginx/api_json_errors.conf
+      - ./nginx/gateway/api_gateway_storage.conf:/etc/nginx/api_gateway.conf
       #- ./keys/api_keys.conf:/etc/nginx/api_keys.conf
+      # backend
+      - ./nginx/upstreams/adempiere_backend.conf:/etc/nginx/api_upstreams_conf.d/adempiere_backend.conf
+      - ./nginx/api/backend/:/etc/nginx/api_conf.d/backend/
+      # s3
+      - ./nginx/upstreams/s3_storage.conf:/etc/nginx/api_upstreams_conf.d/s3_storage.conf
+      - ./nginx/upstreams/s3_console_ui.conf:/etc/nginx/api_upstreams_conf.d/s3_console_ui.conf
+      - ./nginx/upstreams/s3_gateway_rs.conf:/etc/nginx/api_upstreams_conf.d/s3_gateway_rs.conf
+      - ./nginx/api/s3/:/etc/nginx/api_conf.d/s3/
       - ${TIMEZONE_PATH_ON_HOST}:${TIMEZONE_PATH_ON_CONTAINER}:${TIMEZONE_OPTIONS}    # Map the Timezone  of the host to the Timezone of the container
       - ${LOCALTIME_PATH_ON_HOST}:${LOCALTIME_PATH_ON_CONTAINER}:${LOCALTIME_OPTIONS} # Map the Localtime of the host to the Timezone of the container
     networks:
       - adempiere_network
-
-
       
 networks:
   adempiere_network:
@@ -290,6 +227,7 @@ networks:
       config:
         - subnet: ${NETWORK_SUBNET}      # Set subnet for all containers created.
           gateway: ${NETWORK_GATEWAY}
+          # ip-range: ${NETWORK_IP_RANGE}   # supposedly not allowed
 
 volumes:
   volume_postgres:
@@ -306,5 +244,3 @@ volumes:
       device: ${POSTGRES_BACKUP_PATH_ON_HOST} # Must be created on host before calling docker compose. Backups must be copied here to be restored.
   volume_s3:
     name: ${S3_VOLUME}
-  volume_opensearch:
-    name: ${OPENSEARCH_VOLUME}
