@@ -35,9 +35,9 @@ There are several docker compose files that start different services, according 
 - [Content Caching](https://docs.nginx.com/nginx/admin-guide/content-cache/content-caching/#:~:text=Overview,the%20same%20content%20every%20time.)
 
 ### Example of Application Running
-![ADempiere Vue](docs/ADempiere_All_Services_Vue.gif)
+![ADempiere Vue](docs/adempiere_ui_gateway_Vue.gif)
 
-![ADempiere ZK](docs/ADempiere_All_Services_ZK.gif)
+![ADempiere ZK](docs/adempiere_ui_gateway_ZK.gif)
 
 ## General Explanations
 ### User's perspective
@@ -79,7 +79,7 @@ Additional objects defined in the *docker-compose files*:
 
 ### Architecture
 The application stack as graphic:
-![ADempiere Architecture](docs/ADempiere_All_Services_Architecture.png)
+![ADempiere Architecture](docs/adempiere_ui_gateway_Architecture.png)
 
 ### File Structure
 - *README.md*: this very file
@@ -165,7 +165,7 @@ git checkout main
 ##### 1 Execute With One Script
 Execute script `start-all.sh -d  [auth, cache, develop, storage, vue, default]`:
 ```Shell
-cd adempiere-ui-gateway/docker-compose
+cd adempiere-ui-gateway/docker-compose**
 ./start-all.sh -d auth    , or
 ./start-all.sh -d cache   , or
 ./start-all.sh -d develop , or
@@ -247,7 +247,7 @@ The only variables actually needed to change are
 - *ADEMPIERE_GITHUB_VERSION* -> to the DB version needed.
 - *ADEMPIERE_GITHUB_COMPRESSED_FILE* -> to the DB version needed.
 
-![ADempiere Template](docs/ADempiere_All_Services_env_template.png)
+![ADempiere Template](docs/adempiere_ui_gateway_env_template.png)
 
 Other values in *env_template* are default values.
 Feel free to change them accordingly to your wishes/purposes.
