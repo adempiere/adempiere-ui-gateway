@@ -68,7 +68,9 @@ else
 fi
 
 AFTER_RUN_DIR="/tmp/after_run"
-for file in $AFTER_RUN_DIR/*.sql; do
-    echo "importing $file"
-    psql -U postgres < $file
-done
+if [ -d "$AFTER_RUN_DIR" ]; then
+    find "$AFTER_RUN_DIR" -maxdepth 1 -type f -name '*.sql' -print0 | while IFS= read -r -d '' file; do
+        echo "importing $file"
+        psql -U postgres < "$file"
+    done
+fi
