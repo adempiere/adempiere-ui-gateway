@@ -26,15 +26,13 @@ services:
     image: ${POSTGRES_IMAGE_REPO_NAME}                        # "image" is in this context just another image RepoTag, visible with "docker image inspect" and "docker images"
                                                                # Omitting it, the Repository name will be "${COMPOSE_PROJECT_NAME}+Service name"
     restart: ${GENERIC_RESTART}
-    ports:
-      - ${POSTGRES_EXTERNAL_PORT}:${POSTGRES_PORT}          # Set a fixed external port
     volumes:
       - volume_postgres:${POSTGRES_DEFAULT_DB_PATH_ON_CONTAINER} # Database dir for container. Default for Postgres.
       - volume_backups:${POSTGRES_DB_BACKUP_PATH_ON_CONTAINER}   # Backup dir for container. Must be created with Dockerfile
       - ${TIMEZONE_PATH_ON_HOST}:${TIMEZONE_PATH_ON_CONTAINER}:${TIMEZONE_OPTIONS}    # Map the Timezone  of the host to the Timezone of the container
       - ${LOCALTIME_PATH_ON_HOST}:${LOCALTIME_PATH_ON_CONTAINER}:${LOCALTIME_OPTIONS} # Map the Localtime of the host to the Timezone of the container
     healthcheck:
-      test: "bash -c 'printf \"GET / HTTP/1.1\n\n\" > /dev/tcp/127.0.0.1/5432; exit $?;'"
+      test: ["CMD-SHELL", "pg_isready -U postgres && psql -U postgres -d ${ADEMPIERE_DB_NAME} -c 'SELECT 1'"]
       interval: 10s
       retries: 60
       start_period: 20s
@@ -52,8 +50,12 @@ services:
       ADEMPIERE_GITHUB_COMPRESSED_FILE: ${ADEMPIERE_GITHUB_COMPRESSED_FILE}
       POSTGRES_RESTORE_FILE_NAME: ${POSTGRES_RESTORE_FILE_NAME}
       POSTGRES_EXTERNAL_PORT:  ${POSTGRES_EXTERNAL_PORT}
+    ports:
+      - ${POSTGRES_EXTERNAL_PORT}:${POSTGRES_PORT}          # Set a fixed external port
     networks:
       - adempiere_network
+
+
 
   s3.storage:
     image: ${S3_IMAGE}
@@ -108,6 +110,12 @@ services:
     container_name: ${S3_GATEWAY_RS_CONTAINER_NAME}
     hostname: ${S3_GATEWAY_RS_HOSTNAME}
     restart: ${GENERIC_RESTART}
+    healthcheck:
+      test: "bash -c 'printf \"GET / HTTP/1.1\n\n\" > /dev/tcp/127.0.0.1/7878; exit $?;'"
+      interval: 10s
+      retries: 60
+      start_period: 20s
+      timeout: 10s
     volumes:
       - ${TIMEZONE_PATH_ON_HOST}:${TIMEZONE_PATH_ON_CONTAINER}:${TIMEZONE_OPTIONS}    # Map the Timezone  of the host to the Timezone of the container
       - ${LOCALTIME_PATH_ON_HOST}:${LOCALTIME_PATH_ON_CONTAINER}:${LOCALTIME_OPTIONS} # Map the Localtime of the host to the Timezone of the container
@@ -124,6 +132,8 @@ services:
       - ${S3_GATEWAY_RS_PORT}:7878
     networks:
       - adempiere_network
+
+
 
   adempiere.grpc.server:
     image: ${VUE_BACKEND_GRPC_SERVER_IMAGE}
@@ -143,6 +153,7 @@ services:
       postgresql.service:
         condition: service_healthy
     environment:
+      SERVER_PORT: ${VUE_BACKEND_GRPC_SERVER_PORT}
       DB_HOST: ${VUE_BACKEND_GRPC_SERVER_DB_CONTAINER_NAME}
       DB_PORT: ${VUE_BACKEND_GRPC_SERVER_DB_PORT}
       DB_NAME: ${VUE_BACKEND_GRPC_SERVER_DB_NAME}
@@ -155,7 +166,7 @@ services:
       - adempiere_network
 
   grpc.proxy:
-    image: ${ENVOY_GRPC_PROXY_IMAGE}
+    image: ${ENVOY_GRPC_PROXY_BACKEND_IMAGE}
     container_name: ${ENVOY_GRPC_PROXY_CONTAINER_NAME}
     hostname: ${ENVOY_GRPC_PROXY_HOSTNAME}
     healthcheck:
@@ -164,21 +175,17 @@ services:
       retries: 60
       start_period: 20s
       timeout: 10s
-    ports:
-     - ${ENVOY_GRPC_PROXY_EXTERNAL_PORT}:${ENVOY_GRPC_PROXY_BACKEND_PORT}
-     # Processor Port
-     - ${ENVOY_GRPC_PROXY_PROCESSOR_PORT}:5556
     volumes:
-      - ./envoy/envoy.yaml:/etc/envoy/envoy.yaml:ro
-      - ./envoy/definitions/adempiere-grpc-server.pb:/data/adempiere-grpc-server.pb:ro
-      - ./envoy/definitions/adempiere-processors-service-service.pb:/data/adempiere-processors-service-service.pb:ro
       - ${TIMEZONE_PATH_ON_HOST}:${TIMEZONE_PATH_ON_CONTAINER}:${TIMEZONE_OPTIONS}    # Map the Timezone  of the host to the Timezone of the container
       - ${LOCALTIME_PATH_ON_HOST}:${LOCALTIME_PATH_ON_CONTAINER}:${LOCALTIME_OPTIONS} # Map the Localtime of the host to the Timezone of the container
     depends_on:
       - adempiere.grpc.server
-      # - adempiere.processor
+    ports:
+      - ${ENVOY_GRPC_PROXY_BACKEND_EXTERNAL_PORT}:${ENVOY_GRPC_PROXY_BACKEND_PORT}
     networks:
     - adempiere_network
+
+
 
   opensearch.node:
     image: ${OPENSEARCH_IMAGE}
@@ -225,7 +232,7 @@ services:
       - ${LOCALTIME_PATH_ON_HOST}:${LOCALTIME_PATH_ON_CONTAINER}:${LOCALTIME_OPTIONS} # Map the Localtime of the host to the Timezone of the container
     image: ${OPENSEARCH_SETUP_IMAGE_REPO_NAME}
     depends_on:
-       opensearch.node:
+      opensearch.node:
         condition: service_healthy
     networks:
       - adempiere_network
@@ -243,12 +250,14 @@ services:
       OPENSEARCH_URL: ${OPENSEARCH_GATEWAY_RS_OPENSEARCH_URL}
       ALLOWED_ORIGIN: ${ALLOWED_ORIGIN}
     depends_on:
-       opensearch.node:
+      opensearch.node:
         condition: service_healthy
     ports:
       - ${OPENSEARCH_GATEWAY_RS_PORT}:7878
     networks:
       - adempiere_network
+
+
 
   ui.gateway:
     image: ${NGINX_UI_GATEWAY_IMAGE}
@@ -263,24 +272,32 @@ services:
         condition: service_started
       # adempiere.site:
       #   condition: service_started
-    ports:
-      - ${NGINX_UI_GATEWAY_EXTERNAL_PORT}:${NGINX_UI_GATEWAY_INTERNAL_PORT}
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf
-      - ./nginx/upstreams/adempiere_backend.conf:/etc/nginx/api_upstreams_conf.d/adempiere_backend.conf
-      - ./nginx/upstreams/opensearch_gateway.conf:/etc/nginx/api_upstreams_conf.d/opensearch_gateway.conf
-      - ./nginx/api/backend/:/etc/nginx/api_conf.d/backend
-      - ./nginx/api/opensearch/:/etc/nginx/api_conf.d/opensearch
       - ./nginx/gateway/api_gateway.conf:/etc/nginx/api_gateway.conf
       - ./nginx/api_json_errors.conf:/etc/nginx/api_json_errors.conf
+      # backend
+      - ./nginx/upstreams/adempiere_backend.conf:/etc/nginx/api_upstreams_conf.d/adempiere_backend.conf
+      - ./nginx/api/backend/:/etc/nginx/api_conf.d/backend/
+      # open search
+      - ./nginx/upstreams/opensearch_gateway_rs.conf:/etc/nginx/api_upstreams_conf.d/opensearch_gateway_rs.conf
+      - ./nginx/api/opensearch/:/etc/nginx/api_conf.d/opensearch/
+      # s3
+      - ./nginx/upstreams/s3_storage.conf:/etc/nginx/api_upstreams_conf.d/s3_storage.conf
+      - ./nginx/upstreams/s3_console_ui.conf:/etc/nginx/api_upstreams_conf.d/s3_console_ui.conf
+      - ./nginx/upstreams/s3_gateway_rs.conf:/etc/nginx/api_upstreams_conf.d/s3_gateway_rs.conf
+      - ./nginx/api/s3/:/etc/nginx/api_conf.d/s3/
       #- ./keys/api_keys.conf:/etc/nginx/api_keys.conf
+      # time zone
       - ${TIMEZONE_PATH_ON_HOST}:${TIMEZONE_PATH_ON_CONTAINER}:${TIMEZONE_OPTIONS}    # Map the Timezone  of the host to the Timezone of the container
       - ${LOCALTIME_PATH_ON_HOST}:${LOCALTIME_PATH_ON_CONTAINER}:${LOCALTIME_OPTIONS} # Map the Localtime of the host to the Timezone of the container
+    ports:
+      - ${NGINX_UI_GATEWAY_EXTERNAL_PORT}:${NGINX_UI_GATEWAY_INTERNAL_PORT}
     networks:
       - adempiere_network
 
 
-      
+
 networks:
   adempiere_network:
     name: ${ADEMPIERE_NETWORK}
@@ -299,7 +316,7 @@ volumes:
       o: bind
       device: ${POSTGRES_DB_PATH_ON_HOST} # Must be created on host before calling docker compose. The persistent database will be located locally here.
   volume_backups:
-    name: ${BACKUPS_VOLUME}
+    name: ${POSTGRES_BACKUPS_VOLUME}
     driver_opts:
       type: none
       o: bind

@@ -2,12 +2,11 @@ version: "3.9"
 
 name: services-gateway-vue
 
-# Example API for images
 services:
   postgresql.service:
     build:
-      context:  ${POSTGRES_CONTEXT_PATH_ON_HOST}              # Path relative to Working Directory where Dockerfile will be found
-      dockerfile:  ${DOCKERFILE_NAME}                         # Must exist in context. Otherwise, error. Valid only if no "image" defined.
+      context: ${POSTGRES_CONTEXT_PATH_ON_HOST}              # Path relative to Working Directory where Dockerfile will be found
+      dockerfile: ${DOCKERFILE_NAME}                         # Must exist in context. Otherwise, error. Valid only if no "image" defined.
       args:
         # ARG is used to define build-time variables, whereas ENV is used to define run-time variables.
         # ARG is not available in the final image, whereas ENV is set in the final image.
@@ -25,17 +24,15 @@ services:
     container_name: ${POSTGRES_CONTAINER_NAME}
     hostname: ${POSTGRES_HOSTNAME}
     image: ${POSTGRES_IMAGE_REPO_NAME}                        # "image" is in this context just another image RepoTag, visible with "docker image inspect" and "docker images"
-                                                               # Omitting it, the Repository name will be "${COMPOSE_PROJECT_NAME}+Service name"
+                                                              # Omitting it, the Repository name will be "${COMPOSE_PROJECT_NAME}+Service name"
     restart: ${GENERIC_RESTART}
-    ports:
-      - ${POSTGRES_EXTERNAL_PORT}:${POSTGRES_PORT}          # Set a fixed external port
     volumes:
       - volume_postgres:${POSTGRES_DEFAULT_DB_PATH_ON_CONTAINER} # Database dir for container. Default for Postgres.
       - volume_backups:${POSTGRES_DB_BACKUP_PATH_ON_CONTAINER}   # Backup dir for container. Must be created with Dockerfile
       - ${TIMEZONE_PATH_ON_HOST}:${TIMEZONE_PATH_ON_CONTAINER}:${TIMEZONE_OPTIONS}    # Map the Timezone  of the host to the Timezone of the container
       - ${LOCALTIME_PATH_ON_HOST}:${LOCALTIME_PATH_ON_CONTAINER}:${LOCALTIME_OPTIONS} # Map the Localtime of the host to the Timezone of the container
     healthcheck:
-      test: "bash -c 'printf \"GET / HTTP/1.1\n\n\" > /dev/tcp/127.0.0.1/5432; exit $?;'"
+      test: ["CMD-SHELL", "pg_isready -U postgres && psql -U postgres -d ${ADEMPIERE_DB_NAME} -c 'SELECT 1'"]
       interval: 10s
       retries: 60
       start_period: 20s
@@ -52,9 +49,13 @@ services:
       ADEMPIERE_GITHUB_ARTIFACT: ${ADEMPIERE_GITHUB_ARTIFACT}
       ADEMPIERE_GITHUB_COMPRESSED_FILE: ${ADEMPIERE_GITHUB_COMPRESSED_FILE}
       POSTGRES_RESTORE_FILE_NAME: ${POSTGRES_RESTORE_FILE_NAME}
-      POSTGRES_EXTERNAL_PORT:  ${POSTGRES_EXTERNAL_PORT}
+      POSTGRES_EXTERNAL_PORT: ${POSTGRES_EXTERNAL_PORT}
+    # ports:
+    #   - ${POSTGRES_EXTERNAL_PORT}:${POSTGRES_PORT}          # Set a fixed external port
     networks:
       - adempiere_network
+
+
 
   adempiere.grpc.server:
     image: ${VUE_BACKEND_GRPC_SERVER_IMAGE}
@@ -74,6 +75,7 @@ services:
       postgresql.service:
         condition: service_healthy
     environment:
+      SERVER_PORT: ${VUE_BACKEND_GRPC_SERVER_PORT}
       DB_HOST: ${VUE_BACKEND_GRPC_SERVER_DB_CONTAINER_NAME}
       DB_PORT: ${VUE_BACKEND_GRPC_SERVER_DB_PORT}
       DB_NAME: ${VUE_BACKEND_GRPC_SERVER_DB_NAME}
@@ -84,6 +86,8 @@ services:
       SERVER_LOG_LEVEL: ${VUE_BACKEND_GRPC_SERVER_LOG_LEVEL}
     networks:
       - adempiere_network
+
+
 
   grpc.proxy:
     image: ${ENVOY_GRPC_PROXY_BACKEND_IMAGE}
@@ -97,16 +101,19 @@ services:
       retries: 60
       start_period: 20s
       timeout: 10s
-    ports:
-     - ${ENVOY_GRPC_PROXY_EXTERNAL_PORT}:${ENVOY_GRPC_PROXY_BACKEND_PORT}
     volumes:
       - ${TIMEZONE_PATH_ON_HOST}:${TIMEZONE_PATH_ON_CONTAINER}:${TIMEZONE_OPTIONS}    # Map the Timezone  of the host to the Timezone of the container
       - ${LOCALTIME_PATH_ON_HOST}:${LOCALTIME_PATH_ON_CONTAINER}:${LOCALTIME_OPTIONS} # Map the Localtime of the host to the Timezone of the container
     environment:
+      SERVER_PORT: ${ENVOY_GRPC_PROXY_BACKEND_PORT}
       BACKEND_HOST: ${ENVOY_GRPC_PROXY_BACKEND_HOST}
-      BACKEND_PORT: 50059
+      BACKEND_PORT: ${ENVOY_GRPC_PROXY_BACKEND_SERVER_PORT}
+    # ports:
+    #  - ${ENVOY_GRPC_PROXY_BACKEND_EXTERNAL_PORT}:${ENVOY_GRPC_PROXY_BACKEND_PORT}
     networks:
       - adempiere_network
+
+
 
   ui.gateway:
     image: ${NGINX_UI_GATEWAY_IMAGE}
@@ -116,37 +123,43 @@ services:
       grpc.proxy:
         condition: service_healthy
       # vue.ui:
-      #   condition: service_healthy   
-    ports:
-      - ${NGINX_UI_GATEWAY_EXTERNAL_PORT}:${NGINX_UI_GATEWAY_INTERNAL_PORT}
+      #   condition: service_healthy
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf
-      - ./nginx/upstreams/adempiere_backend.conf:/etc/nginx/api_upstreams_conf.d/adempiere_backend.conf
-      - ./nginx/upstreams/adempiere_frontend.conf:/etc/nginx/api_upstreams_conf.d/adempiere_frontend.conf
-      - ./nginx/api/backend/:/etc/nginx/api_conf.d/backend
       - ./nginx/gateway/api_gateway_vue.conf:/etc/nginx/api_gateway.conf
       - ./nginx/api_json_errors.conf:/etc/nginx/api_json_errors.conf
       #- ./keys/api_keys.conf:/etc/nginx/api_keys.conf
+      # backend
+      - ./nginx/upstreams/adempiere_backend.conf:/etc/nginx/api_upstreams_conf.d/adempiere_backend.conf
+      - ./nginx/api/backend/:/etc/nginx/api_conf.d/backend/
+      # vue
+      - ./nginx/upstreams/adempiere_frontend.conf:/etc/nginx/api_upstreams_conf.d/adempiere_frontend.conf
+      # time zone
       - ${TIMEZONE_PATH_ON_HOST}:${TIMEZONE_PATH_ON_CONTAINER}:${TIMEZONE_OPTIONS}    # Map the Timezone  of the host to the Timezone of the container
       - ${LOCALTIME_PATH_ON_HOST}:${LOCALTIME_PATH_ON_CONTAINER}:${LOCALTIME_OPTIONS} # Map the Localtime of the host to the Timezone of the container
+    ports:
+      - ${NGINX_UI_GATEWAY_EXTERNAL_PORT}:${NGINX_UI_GATEWAY_INTERNAL_PORT}
     networks:
       - adempiere_network
+
+
 
   vue.ui:
     image: ${VUE_UI_IMAGE}
     container_name: ${VUE_UI_CONTAINER_NAME}
     hostname: ${VUE_UI_HOSTNAME}
     restart: ${GENERIC_RESTART}
-    ports:
-      - ${VUE_UI_PORT}:80
     volumes:
       - ${TIMEZONE_PATH_ON_HOST}:${TIMEZONE_PATH_ON_CONTAINER}:${TIMEZONE_OPTIONS}    # Map the Timezone  of the host to the Timezone of the container
       - ${LOCALTIME_PATH_ON_HOST}:${LOCALTIME_PATH_ON_CONTAINER}:${LOCALTIME_OPTIONS} # Map the Localtime of the host to the Timezone of the container
     environment:
       API_URL: ${VUE_UI_API_URL}
       PUBLIC_PATH: ${VUE_UI_PUBLIC_PATH}
+    # ports:
+    #   - ${VUE_UI_EXTERNAL_PORT}:80
     networks:
       - adempiere_network
+
 
 
 networks:
@@ -168,7 +181,7 @@ volumes:
       o: bind
       device: ${POSTGRES_DB_PATH_ON_HOST} # Must be created on host before calling docker compose. The persistent database will be located locally here.
   volume_backups:
-    name: ${BACKUPS_VOLUME}
+    name: ${POSTGRES_BACKUPS_VOLUME}
     driver_opts:
       type: none
       o: bind

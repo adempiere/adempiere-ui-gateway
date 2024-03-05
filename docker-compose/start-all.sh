@@ -9,7 +9,7 @@ DBDIR=postgresql/postgres_database
 if [ ! -d "$DBDIR" ]; then
     echo "Directory \"$DBDIR\" does not exist. It must be created."
     echo "Create directory \"$DBDIR\""
-    mkdir $DBDIR
+	mkdir -p $DBDIR
 else
     echo "Directory \"$DBDIR\" exists already: no need to create it"
 fi
@@ -22,7 +22,7 @@ BACKUPDIR=postgresql/postgres_backups
 if [ ! -d "$BACKUPDIR" ]; then
     echo "Directory \"$BACKUPDIR\" does not exist. It must be created."
     echo "Create directory \"$BACKUPDIR\""
-    mkdir $BACKUPDIR
+	mkdir -p $BACKUPDIR
     chmod 777 $BACKUPDIR
 else
     echo "Directory \"$BACKUPDIR\" exists already: no need to create it"
@@ -35,7 +35,7 @@ PERSISTENTDIR=postgresql/persistent_files
 if [ ! -d "$PERSISTENTDIR" ]; then
     echo "Directory \"$PERSISTENTDIR\" does not exist. It must be created."
     echo "Create directory \"$PERSISTENTDIR\""
-    mkdir $PERSISTENTDIR
+	mkdir -p $PERSISTENTDIR
     chmod 777 $PERSISTENTDIR
 else
     echo "Directory \"$PERSISTENTDIR\" exists already: no need to create it"
@@ -72,5 +72,5 @@ echo $docker_compose_file > $savefile
 
 
 echo "Docker Compose will be executed with file: \"$docker_compose_file\"";
-cp env_template .env
+cp env_template.env .env
 docker compose -f $docker_compose_file up -d
