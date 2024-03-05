@@ -27,15 +27,15 @@ services:
     image: ${POSTGRES_IMAGE_REPO_NAME}                        # "image" is in this context just another image RepoTag, visible with "docker image inspect" and "docker images"
                                                                # Omitting it, the Repository name will be "${COMPOSE_PROJECT_NAME}+Service name"
     restart: ${GENERIC_RESTART}
-    ports:
-      - ${POSTGRES_EXTERNAL_PORT}:${POSTGRES_PORT}          # Set a fixed external port
+    # ports:
+    #   - ${POSTGRES_EXTERNAL_PORT}:${POSTGRES_PORT}          # Set a fixed external port
     volumes:
       - volume_postgres:${POSTGRES_DEFAULT_DB_PATH_ON_CONTAINER} # Database dir for container. Default for Postgres.
       - volume_backups:${POSTGRES_DB_BACKUP_PATH_ON_CONTAINER}   # Backup dir for container. Must be created with Dockerfile
       - ${TIMEZONE_PATH_ON_HOST}:${TIMEZONE_PATH_ON_CONTAINER}:${TIMEZONE_OPTIONS}    # Map the Timezone  of the host to the Timezone of the container
       - ${LOCALTIME_PATH_ON_HOST}:${LOCALTIME_PATH_ON_CONTAINER}:${LOCALTIME_OPTIONS} # Map the Localtime of the host to the Timezone of the container
     healthcheck:
-      test: "bash -c 'printf \"GET / HTTP/1.1\n\n\" > /dev/tcp/127.0.0.1/5432; exit $?;'"
+      test: ["CMD-SHELL", "pg_isready -U postgres && psql -U postgres -d ${ADEMPIERE_DB_NAME} -c 'SELECT 1'"]
       interval: 10s
       retries: 60
       start_period: 20s
@@ -55,7 +55,9 @@ services:
       POSTGRES_EXTERNAL_PORT:  ${POSTGRES_EXTERNAL_PORT}
     networks:
       - adempiere_network
-  
+
+
+
   adempiere.site:
     image: ${ADEMPIERE_SITE_IMAGE}
     container_name: ${ADEMPIERE_SITE_CONTAINER_NAME}
@@ -74,7 +76,9 @@ services:
       - adempiere.zk     # Docker Compose Service
     networks:
       - adempiere_network
-  
+
+
+
   adempiere.zk:
     image: ${ADEMPIERE_ZK_IMAGE}
     container_name: ${ADEMPIERE_ZK_CONTAINER_NAME}
@@ -98,36 +102,7 @@ services:
     networks:
       - adempiere_network
 
-  adempiere.grpc.server:
-    image: ${VUE_BACKEND_GRPC_SERVER_IMAGE}
-    container_name: ${VUE_BACKEND_GRPC_SERVER_CONTAINER_NAME}
-    hostname: ${VUE_BACKEND_GRPC_SERVER_HOSTNAME}
-    restart: ${GENERIC_RESTART}
-    #ports:                             # IN ADEMPIERE-ALL-SERVICES, NOT COMMENTED
-    #  - ${VUE_BACKEND_PORT}            # IN ADEMPIERE-ALL-SERVICES, NOT COMMENTED
-    volumes:
-      - ${TIMEZONE_PATH_ON_HOST}:${TIMEZONE_PATH_ON_CONTAINER}:${TIMEZONE_OPTIONS}    # Map the Timezone  of the host to the Timezone of the container
-      - ${LOCALTIME_PATH_ON_HOST}:${LOCALTIME_PATH_ON_CONTAINER}:${LOCALTIME_OPTIONS} # Map the Localtime of the host to the Timezone of the container
-    healthcheck:
-      test: "bash -c 'printf \"GET / HTTP/1.1\n\n\" > /dev/tcp/127.0.0.1/${VUE_BACKEND_GRPC_SERVER_PORT}; exit $?;'"
-      interval: 10s
-      retries: 60
-      start_period: 20s
-      timeout: 10s
-    depends_on:
-      postgresql.service:
-        condition: service_healthy
-    environment:
-      DB_HOST: ${VUE_BACKEND_GRPC_SERVER_DB_CONTAINER_NAME}
-      DB_PORT: ${VUE_BACKEND_GRPC_SERVER_DB_PORT}
-      DB_NAME: ${VUE_BACKEND_GRPC_SERVER_DB_NAME}
-      DB_USER: ${VUE_BACKEND_GRPC_SERVER_DB_USER}
-      DB_PASSWORD: ${VUE_BACKEND_GRPC_SERVER_DB_PASSWORD}
-      JWT_SECRET_KEY: ${VUE_BACKEND_GRPC_SERVER_JWT_SECRET_KEY}
-      # SERVICES_ENABLED: ${VUE_BACKEND_GRPC_SERVER_SERVICES_ENABLED}           # IN ADEMPIERE-ALL-SERVICES, NOT COMMENTED
-      SERVER_LOG_LEVEL: ${VUE_BACKEND_GRPC_SERVER_LOG_LEVEL}
-    networks:
-      - adempiere_network
+
 
   adempiere.processor:
     image: ${ADEMPIERE_PROCESSOR_IMAGE}
@@ -156,6 +131,58 @@ services:
     networks:
       - adempiere_network
 
+  dkron.scheduler:
+    image: ${DKRON_IMAGE}
+    container_name: ${DKRON_CONTAINER_NAME}
+    hostname: ${DKRON_HOSTNAME}
+    restart: ${GENERIC_RESTART}
+    # ports:
+    #   - ${DKRON_PORT}:8080
+    command:
+      - "agent"
+      - "--bootstrap-expect=1"
+      - "--node-name=node1"
+      - "--server"
+      - "--ui=true"
+    volumes:
+      - volume_dkron:/dkron.data
+      - ${TIMEZONE_PATH_ON_HOST}:${TIMEZONE_PATH_ON_CONTAINER}:${TIMEZONE_OPTIONS}    # Map the Timezone  of the host to the Timezone of the container
+      - ${LOCALTIME_PATH_ON_HOST}:${LOCALTIME_PATH_ON_CONTAINER}:${LOCALTIME_OPTIONS} # Map the Localtime of the host to the Timezone of the container
+    networks:
+      - adempiere_network
+
+
+
+  adempiere.grpc.server:
+    image: ${VUE_BACKEND_GRPC_SERVER_IMAGE}
+    container_name: ${VUE_BACKEND_GRPC_SERVER_CONTAINER_NAME}
+    hostname: ${VUE_BACKEND_GRPC_SERVER_HOSTNAME}
+    restart: ${GENERIC_RESTART}
+    volumes:
+      - ${TIMEZONE_PATH_ON_HOST}:${TIMEZONE_PATH_ON_CONTAINER}:${TIMEZONE_OPTIONS}    # Map the Timezone  of the host to the Timezone of the container
+      - ${LOCALTIME_PATH_ON_HOST}:${LOCALTIME_PATH_ON_CONTAINER}:${LOCALTIME_OPTIONS} # Map the Localtime of the host to the Timezone of the container
+    healthcheck:
+      test: "bash -c 'printf \"GET / HTTP/1.1\n\n\" > /dev/tcp/127.0.0.1/${VUE_BACKEND_GRPC_SERVER_PORT}; exit $?;'"
+      interval: 10s
+      retries: 60
+      start_period: 20s
+      timeout: 10s
+    depends_on:
+      postgresql.service:
+        condition: service_healthy
+    environment:
+      SERVER_PORT: ${VUE_BACKEND_GRPC_SERVER_PORT}
+      DB_HOST: ${VUE_BACKEND_GRPC_SERVER_DB_CONTAINER_NAME}
+      DB_PORT: ${VUE_BACKEND_GRPC_SERVER_DB_PORT}
+      DB_NAME: ${VUE_BACKEND_GRPC_SERVER_DB_NAME}
+      DB_USER: ${VUE_BACKEND_GRPC_SERVER_DB_USER}
+      DB_PASSWORD: ${VUE_BACKEND_GRPC_SERVER_DB_PASSWORD}
+      JWT_SECRET_KEY: ${VUE_BACKEND_GRPC_SERVER_JWT_SECRET_KEY}
+      # SERVICES_ENABLED: ${VUE_BACKEND_GRPC_SERVER_SERVICES_ENABLED}           # IN ADEMPIERE-ALL-SERVICES, NOT COMMENTED
+      SERVER_LOG_LEVEL: ${VUE_BACKEND_GRPC_SERVER_LOG_LEVEL}
+    networks:
+      - adempiere_network
+
   grpc.proxy:
     image: ${ENVOY_GRPC_PROXY_IMAGE}
     container_name: ${ENVOY_GRPC_PROXY_CONTAINER_NAME}
@@ -166,8 +193,6 @@ services:
       retries: 60
       start_period: 20s
       timeout: 10s
-    ports:
-     - ${ENVOY_GRPC_PROXY_EXTERNAL_PORT}:${ENVOY_GRPC_PROXY_BACKEND_PORT}
     # Processor Port
     #  - ${ENVOY_GRPC_PROXY_PROCESSOR_PORT}:5556
     volumes:
@@ -179,8 +204,12 @@ services:
     depends_on:
       - adempiere.grpc.server
       - adempiere.processor
+    # ports:
+    #  - ${ENVOY_GRPC_PROXY_BACKEND_EXTERNAL_PORT}:${ENVOY_GRPC_PROXY_BACKEND_PORT}
     networks:
     - adempiere_network
+
+
 
   s3.storage:
     image: ${S3_IMAGE}
@@ -247,47 +276,13 @@ services:
       SECRET_KEY: ${S3_GATEWAY_RS_SECRET_KEY}
       BUCKET_NAME: ${S3_GATEWAY_RS_BUCKET_NAME}
       ALLOWED_ORIGIN: ${ALLOWED_ORIGIN}
-    ports:
-      - ${S3_GATEWAY_RS_EXTERNAL_PORT}:7878
+    # ports:
+    #   - ${S3_GATEWAY_RS_EXTERNAL_PORT}:7878
     networks:
       - adempiere_network
 
-  vue.ui:
-    image: ${VUE_UI_IMAGE}
-    container_name: ${VUE_UI_CONTAINER_NAME}
-    hostname: ${VUE_UI_HOSTNAME}
-    restart: ${GENERIC_RESTART}
-    # ports:
-    #   - ${VUE_UI_PORT}:80
-    volumes:
-      - ${TIMEZONE_PATH_ON_HOST}:${TIMEZONE_PATH_ON_CONTAINER}:${TIMEZONE_OPTIONS}    # Map the Timezone  of the host to the Timezone of the container
-      - ${LOCALTIME_PATH_ON_HOST}:${LOCALTIME_PATH_ON_CONTAINER}:${LOCALTIME_OPTIONS} # Map the Localtime of the host to the Timezone of the container
-    environment:
-      API_URL: ${VUE_UI_API_URL}
-      PUBLIC_PATH: ${VUE_UI_PUBLIC_PATH}
-    networks:
-      - adempiere_network
 
-  dkron.scheduler:
-    image: ${DKRON_IMAGE}
-    container_name: ${DKRON_CONTAINER_NAME}
-    hostname: ${DKRON_HOSTNAME}
-    restart: ${GENERIC_RESTART}
-    # ports:
-    #   - ${DKRON_PORT}:8080
-    command:
-      - "agent"
-      - "--bootstrap-expect=1"
-      - "--node-name=node1"
-      - "--server"
-      - "--ui=true"
-    volumes:
-      - volume_dkron:/dkron.data
-      - ${TIMEZONE_PATH_ON_HOST}:${TIMEZONE_PATH_ON_CONTAINER}:${TIMEZONE_OPTIONS}    # Map the Timezone  of the host to the Timezone of the container
-      - ${LOCALTIME_PATH_ON_HOST}:${LOCALTIME_PATH_ON_CONTAINER}:${LOCALTIME_OPTIONS} # Map the Localtime of the host to the Timezone of the container
-    networks:
-      - adempiere_network
-  
+
   opensearch.node:
     image: ${OPENSEARCH_IMAGE}
     container_name: ${OPENSEARCH_CONTAINER_NAME}
@@ -352,18 +347,19 @@ services:
     #   - ${ZOOKEEPER_PORT}:2181
     networks:
       - adempiere_network
-  
+
   kafka:
     image: ${KAFKA_IMAGE}
     container_name: ${KAFKA_CONTAINER_NAME}
     hostname: ${KAFKA_HOSTNAME}
-    volumes:
-      - ${TIMEZONE_PATH_ON_HOST}:${TIMEZONE_PATH_ON_CONTAINER}:${TIMEZONE_OPTIONS}    # Map the Timezone  of the host to the Timezone of the container
-      - ${LOCALTIME_PATH_ON_HOST}:${LOCALTIME_PATH_ON_CONTAINER}:${LOCALTIME_OPTIONS} # Map the Localtime of the host to the Timezone of the container
+    healthcheck:
+      test: "bash -c 'printf \"GET / HTTP/1.1\n\n\" > /dev/tcp/127.0.0.1/${KAFKA_PORT}; exit $?;'"
+      interval: 10s
+      retries: 60
+      start_period: 20s
+      timeout: 10s
     depends_on:
       - zookeeper
-    # ports:
-    #   - ${KAFKA_PORT}:29092
     environment:
       KAFKA_BROKER_ID: 1
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:${ZOOKEEPER_PORT}
@@ -371,6 +367,11 @@ services:
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
       KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+    volumes:
+      - ${TIMEZONE_PATH_ON_HOST}:${TIMEZONE_PATH_ON_CONTAINER}:${TIMEZONE_OPTIONS}    # Map the Timezone  of the host to the Timezone of the container
+      - ${LOCALTIME_PATH_ON_HOST}:${LOCALTIME_PATH_ON_CONTAINER}:${LOCALTIME_OPTIONS} # Map the Localtime of the host to the Timezone of the container
+    ports:
+      - ${KAFKA_EXTERNAL_PORT}:${KAFKA_PORT}
     networks:
       - adempiere_network
 
@@ -387,12 +388,16 @@ services:
       OPENSEARCH_URL: ${OPENSEARCH_GATEWAY_RS_OPENSEARCH_URL}
       ALLOWED_ORIGIN: ${ALLOWED_ORIGIN}
     depends_on:
-       opensearch.node:
+      opensearch.node:
+        condition: service_healthy
+      kafka:
         condition: service_healthy
     # ports:
     #   - ${OPENSEARCH_GATEWAY_RS_EXTERNAL_PORT}:7878
     networks:
       - adempiere_network
+
+
 
   keycloak:
     image: ${KEYCLOAK_IMAGE}
@@ -412,44 +417,67 @@ services:
       postgresql.service:
         condition: service_healthy
     command: "start-dev --import-realm"
-    ports:
-      - ${KEYCLOAK_PORT}:8080
     volumes:
       - ./keycloak/master-realm.json:/opt/keycloak/data/import/master-realm.json
       - ./keycloak/adempiere-realm.json:/opt/keycloak/data/import/adempiere-realm.json
       - ${TIMEZONE_PATH_ON_HOST}:${TIMEZONE_PATH_ON_CONTAINER}:${TIMEZONE_OPTIONS}    # Map the Timezone  of the host to the Timezone of the container
       - ${LOCALTIME_PATH_ON_HOST}:${LOCALTIME_PATH_ON_CONTAINER}:${LOCALTIME_OPTIONS} # Map the Localtime of the host to the Timezone of the container
+    ports:
+      - ${KEYCLOAK_PORT}:8080
     networks:
       - adempiere_network
-  
+
+
+
   ui.gateway:
     image: ${NGINX_UI_GATEWAY_IMAGE}
     container_name: ${NGINX_UI_GATEWAY_CONTAINER_NAME}
     hostname: ${NGINX_UI_GATEWAY_HOSTNAME}
     depends_on:
+      opensearch.gateway.rs:
+        condition: service_started
+      s3.gateway.rs:
+        condition: service_started
       grpc.proxy:
         condition: service_healthy
       # vue.ui:
       #   condition: service_healthy
-      opensearch.gateway.rs:
-        condition: service_started
       adempiere.site:
         condition: service_started
-      s3.gateway.rs:
-        condition: service_started
-    ports:
-      - ${NGINX_UI_GATEWAY_EXTERNAL_PORT}:${NGINX_UI_GATEWAY_INTERNAL_PORT}
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf
-      - ./nginx/upstreams/:/etc/nginx/api_upstreams_conf.d
+      - ./nginx/upstreams/:/etc/nginx/api_upstreams_conf.d/
       - ./nginx/api/:/etc/nginx/api_conf.d
       - ./nginx/gateway/api_gateway.conf:/etc/nginx/api_gateway.conf
       - ./nginx/api_json_errors.conf:/etc/nginx/api_json_errors.conf
       #- ./keys/api_keys.conf:/etc/nginx/api_keys.conf
+      # time zone
       - ${TIMEZONE_PATH_ON_HOST}:${TIMEZONE_PATH_ON_CONTAINER}:${TIMEZONE_OPTIONS}    # Map the Timezone  of the host to the Timezone of the container
       - ${LOCALTIME_PATH_ON_HOST}:${LOCALTIME_PATH_ON_CONTAINER}:${LOCALTIME_OPTIONS} # Map the Localtime of the host to the Timezone of the container
+    ports:
+      - ${NGINX_UI_GATEWAY_EXTERNAL_PORT}:${NGINX_UI_GATEWAY_INTERNAL_PORT}
     networks:
       - adempiere_network
+
+
+
+  vue.ui:
+    image: ${VUE_UI_IMAGE}
+    container_name: ${VUE_UI_CONTAINER_NAME}
+    hostname: ${VUE_UI_HOSTNAME}
+    restart: ${GENERIC_RESTART}
+    volumes:
+      - ${TIMEZONE_PATH_ON_HOST}:${TIMEZONE_PATH_ON_CONTAINER}:${TIMEZONE_OPTIONS}    # Map the Timezone  of the host to the Timezone of the container
+      - ${LOCALTIME_PATH_ON_HOST}:${LOCALTIME_PATH_ON_CONTAINER}:${LOCALTIME_OPTIONS} # Map the Localtime of the host to the Timezone of the container
+    environment:
+      API_URL: ${VUE_UI_API_URL}
+      PUBLIC_PATH: ${VUE_UI_PUBLIC_PATH}
+    # ports:
+    #   - ${VUE_UI_EXTERNAL_PORT}:80
+    networks:
+      - adempiere_network
+
+
 
 networks:
   adempiere_network:
@@ -470,7 +498,7 @@ volumes:
       o: bind
       device: ${POSTGRES_DB_PATH_ON_HOST} # Must be created on host before calling docker compose. The persistent database will be located locally here.
   volume_backups:
-    name: ${BACKUPS_VOLUME}
+    name: ${POSTGRES_BACKUPS_VOLUME}
     driver_opts:
       type: none
       o: bind
