@@ -138,10 +138,10 @@ services:
       - ${LOCALTIME_PATH_ON_HOST}:${LOCALTIME_PATH_ON_CONTAINER}:${LOCALTIME_OPTIONS} # Map the Localtime of the host to the Timezone of the container
     environment:
       ADEMPIERE_DB_SERVER: ${ADEMPIERE_ZK_DB_CONTAINER_NAME}
+      ADEMPIERE_DB_PORT: ${ADEMPIERE_ZK_DB_PORT}
       ADEMPIERE_DB_NAME: ${ADEMPIERE_ZK_DB_NAME}
       ADEMPIERE_DB_USER: ${ADEMPIERE_ZK_DB_USER}
       ADEMPIERE_DB_PASSWORD: ${ADEMPIERE_ZK_DB_PASSWORD}
-      ADEMPIERE_ZK_DB_PORT: ${ADEMPIERE_ZK_DB_PORT}
     depends_on:
       postgresql.service:
         condition: service_healthy
