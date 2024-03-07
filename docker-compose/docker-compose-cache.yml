@@ -109,7 +109,7 @@ services:
     depends_on:
       - adempiere.grpc.server
     networks:
-    - adempiere_network
+      - adempiere_network
 
 
 
@@ -157,6 +157,8 @@ services:
     depends_on:
       opensearch.node:
         condition: service_healthy
+    environment:
+      OPENSEARCH_HOST: ${OPENSEARCH_SETUP_NODE_HOSTNAME}
     volumes:
       - ${TIMEZONE_PATH_ON_HOST}:${TIMEZONE_PATH_ON_CONTAINER}:${TIMEZONE_OPTIONS}    # Map the Timezone  of the host to the Timezone of the container
       - ${LOCALTIME_PATH_ON_HOST}:${LOCALTIME_PATH_ON_CONTAINER}:${LOCALTIME_OPTIONS} # Map the Localtime of the host to the Timezone of the container
@@ -231,7 +233,7 @@ services:
       OPENSEARCH_URL: ${OPENSEARCH_GATEWAY_RS_OPENSEARCH_URL}
       ALLOWED_ORIGIN: ${ALLOWED_ORIGIN}
     depends_on:
-      opensearch-node:
+      opensearch.node:
         condition: service_healthy
       kafka:
         condition: service_healthy
