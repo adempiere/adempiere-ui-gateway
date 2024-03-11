@@ -1,0 +1,38 @@
+
+
+networks:
+  adempiere_network:
+    name: ${ADEMPIERE_NETWORK}
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: ${NETWORK_SUBNET}      # Set subnet for all containers created.
+          gateway: ${NETWORK_GATEWAY}
+
+
+volumes:
+  volume_postgres:
+    name: ${POSTGRES_VOLUME}
+    driver_opts:
+      type: none
+      o: bind
+      device: ${POSTGRES_DB_PATH_ON_HOST} # Must be created on host before calling docker compose. The persistent database will be located locally here.
+  volume_backups:
+    name: ${POSTGRES_BACKUPS_VOLUME}
+    driver_opts:
+      type: none
+      o: bind
+      device: ${POSTGRES_BACKUP_PATH_ON_HOST} # Must be created on host before calling docker compose. Backups must be copied here to be restored.
+  volume_persistent_files:
+    name: ${PERSISTENT_FILES_VOLUME}
+    driver_opts:
+      type: none
+      o: bind
+      device: ${ADEMPIERE_ZK_PERSISTENT_FILES_PATH_ON_HOST} # Must be created on host before calling docker compose. The persistent directory will be located locally here.
+  volume_dkron:
+    name: ${DKRON_VOLUME}
+  volume_s3:
+    name: ${S3_VOLUME}
+  volume_opensearch:
+    name: ${OPENSEARCH_VOLUME}

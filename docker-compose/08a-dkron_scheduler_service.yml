@@ -1,0 +1,21 @@
+
+  # For modes: STANDARD, AUTH
+  dkron.scheduler:
+    image: ${DKRON_IMAGE}
+    container_name: ${DKRON_CONTAINER_NAME}
+    hostname: ${DKRON_HOSTNAME}
+    restart: ${GENERIC_RESTART}
+    command:
+      - "agent"
+      - "--bootstrap-expect=1"
+      - "--node-name=node1"
+      - "--server"
+      - "--ui=true"
+    # ports:
+    #   - ${DKRON_PORT}:8080
+    volumes:
+      - volume_dkron:/dkron.data
+      - ${TIMEZONE_PATH_ON_HOST}:${TIMEZONE_PATH_ON_CONTAINER}:${TIMEZONE_OPTIONS}    # Map the Timezone  of the host to the Timezone of the container
+      - ${LOCALTIME_PATH_ON_HOST}:${LOCALTIME_PATH_ON_CONTAINER}:${LOCALTIME_OPTIONS} # Map the Localtime of the host to the Timezone of the container
+    networks:
+      - adempiere_network

@@ -1,0 +1,35 @@
+
+  # For modes: DEVELOP, CACHE
+  opensearch.node:
+    image: ${OPENSEARCH_IMAGE}
+    container_name: ${OPENSEARCH_CONTAINER_NAME}
+    hostname: ${OPENSEARCH_HOSTNAME}
+    healthcheck:
+      test: "bash -c 'printf \"GET / HTTP/1.1\n\n\" > /dev/tcp/127.0.0.1/9200; exit $?;'"
+      interval: 10s
+      retries: 60
+      start_period: 20s
+      timeout: 10s 
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+      nofile:
+        soft: 65536 # maximum number of open files for the OpenSearch user, set to at least 65536 on modern systems
+        hard: 65536
+    environment:
+      - node.name=opensearch.node
+      - discovery.type=single-node
+      - "DISABLE_INSTALL_DEMO_CONFIG=true" # Prevents execution of bundled demo script which installs demo certificates and security configurations to OpenSearch
+      - "DISABLE_SECURITY_PLUGIN=true" # Disables Security plugin
+    ports:
+      - ${OPENSEARCH_PORT}:9200
+      - ${OPENSEARCH_PERFORMANCE_PORT}:9600 # required for Performance Analyzer
+    volumes:
+      - volume_opensearch:/usr/share/opensearch/data
+      - ./opensearch/opensearch.yml:/usr/share/opensearch/config/opensearch.yml
+      - ./opensearch/snapshots:/mnt/snapshots
+      - ${TIMEZONE_PATH_ON_HOST}:${TIMEZONE_PATH_ON_CONTAINER}:${TIMEZONE_OPTIONS}    # Map the Timezone  of the host to the Timezone of the container
+      - ${LOCALTIME_PATH_ON_HOST}:${LOCALTIME_PATH_ON_CONTAINER}:${LOCALTIME_OPTIONS} # Map the Localtime of the host to the Timezone of the container
+    networks:
+      - adempiere_network

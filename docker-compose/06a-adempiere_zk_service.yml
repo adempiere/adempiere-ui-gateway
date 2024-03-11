@@ -1,0 +1,24 @@
+
+  # For modes: STANDARD, AUTH
+  adempiere.zk:
+    image: ${ADEMPIERE_ZK_IMAGE}
+    container_name: ${ADEMPIERE_ZK_CONTAINER_NAME}
+    hostname: ${ADEMPIERE_ZK_HOSTNAME}
+    depends_on:
+      postgresql.service:
+        condition: service_healthy
+    restart: ${GENERIC_RESTART}
+    environment:
+      ADEMPIERE_DB_SERVER: ${ADEMPIERE_ZK_DB_CONTAINER_NAME}
+      ADEMPIERE_DB_NAME: ${ADEMPIERE_ZK_DB_NAME}
+      ADEMPIERE_DB_USER: ${ADEMPIERE_ZK_DB_USER}
+      ADEMPIERE_DB_PASSWORD: ${ADEMPIERE_ZK_DB_PASSWORD}
+      ADEMPIERE_ZK_DB_PORT: ${ADEMPIERE_ZK_DB_PORT}
+    # ports:                                                    # Ports not configured. Why?
+    #  - ${ADEMPIERE_ZK_EXTERNAL_PORT}:${ADEMPIERE_ZK_PORT}     # Ports not configured. Why?
+    volumes:
+      - volume_persistent_files:${ADEMPIERE_ZK_PERSISTENT_FILES_PATH_ON_CONTAINER}    # Persistent Directory for files to be copied.
+      - ${TIMEZONE_PATH_ON_HOST}:${TIMEZONE_PATH_ON_CONTAINER}:${TIMEZONE_OPTIONS}    # Map the Timezone  of the host to the Timezone of the container
+      - ${LOCALTIME_PATH_ON_HOST}:${LOCALTIME_PATH_ON_CONTAINER}:${LOCALTIME_OPTIONS} # Map the Localtime of the host to the Timezone of the container
+    networks:
+      - adempiere_network
