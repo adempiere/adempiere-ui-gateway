@@ -5,8 +5,8 @@ name: services-gateway-develop
 services:
   postgresql.service:
     build:
-      context:  ${POSTGRES_CONTEXT_PATH_ON_HOST}              # Path relative to Working Directory where Dockerfile will be found
-      dockerfile:  ${DOCKERFILE_NAME}                         # Must exist in context. Otherwise, error. Valid only if no "image" defined.
+      context: ${POSTGRES_CONTEXT_PATH_ON_HOST}              # Path relative to Working Directory where Dockerfile will be found
+      dockerfile: ${DOCKERFILE_NAME}                         # Must exist in context. Otherwise, error. Valid only if no "image" defined.
       args:
         # ARG is used to define build-time variables, whereas ENV is used to define run-time variables.
         # ARG is not available in the final image, whereas ENV is set in the final image.
@@ -32,7 +32,7 @@ services:
       - ${TIMEZONE_PATH_ON_HOST}:${TIMEZONE_PATH_ON_CONTAINER}:${TIMEZONE_OPTIONS}    # Map the Timezone  of the host to the Timezone of the container
       - ${LOCALTIME_PATH_ON_HOST}:${LOCALTIME_PATH_ON_CONTAINER}:${LOCALTIME_OPTIONS} # Map the Localtime of the host to the Timezone of the container
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U postgres && psql -U postgres -d ${ADEMPIERE_DB_NAME} -c 'SELECT 1'"]
+      test: ["CMD-SHELL", "pg_isready -U postgres && psql -U ${ADEMPIERE_DB_USER} -d ${ADEMPIERE_DB_NAME} -c 'SELECT Version FROM AD_SYSTEM'"]
       interval: 10s
       retries: 60
       start_period: 20s
@@ -183,7 +183,7 @@ services:
     ports:
       - ${ENVOY_GRPC_PROXY_BACKEND_EXTERNAL_PORT}:${ENVOY_GRPC_PROXY_BACKEND_PORT}
     networks:
-    - adempiere_network
+      - adempiere_network
 
 
 
@@ -234,6 +234,8 @@ services:
     depends_on:
       opensearch.node:
         condition: service_healthy
+    environment:
+      OPENSEARCH_HOST: ${OPENSEARCH_SETUP_NODE_HOSTNAME}
     networks:
       - adempiere_network
 

@@ -10,6 +10,8 @@
       opensearch.node:
         condition: service_healthy
     image: ${OPENSEARCH_SETUP_IMAGE_REPO_NAME}
+    environment:
+      OPENSEARCH_HOST: ${OPENSEARCH_SETUP_NODE_HOSTNAME}
     volumes:
       - ${TIMEZONE_PATH_ON_HOST}:${TIMEZONE_PATH_ON_CONTAINER}:${TIMEZONE_OPTIONS}    # Map the Timezone  of the host to the Timezone of the container
       - ${LOCALTIME_PATH_ON_HOST}:${LOCALTIME_PATH_ON_CONTAINER}:${LOCALTIME_OPTIONS} # Map the Localtime of the host to the Timezone of the container

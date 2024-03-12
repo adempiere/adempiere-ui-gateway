@@ -24,7 +24,7 @@
                                                               # Omitting it, the Repository name will be "${COMPOSE_PROJECT_NAME}+Service name"
     restart: ${GENERIC_RESTART}
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U postgres && psql -U postgres -d ${ADEMPIERE_DB_NAME} -c 'SELECT 1'"]
+      test: ["CMD-SHELL", "pg_isready -U postgres && psql -U ${ADEMPIERE_DB_USER} -d ${ADEMPIERE_DB_NAME} -c 'SELECT Version FROM AD_SYSTEM'"]
       interval: 10s
       retries: 60
       start_period: 20s
