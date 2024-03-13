@@ -1,1 +1,4 @@
 /bin/
+/docker-compose
+/docs
+/templates
