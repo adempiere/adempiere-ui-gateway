@@ -21,7 +21,7 @@ There are several docker compose files that start different services, according 
 - It can run on different hosts just by changing
   - the target IP to the one of the host or
   - the client name
-- Completly configurable: any value can be changed for the whole application at the single configuration file **env_template**.
+- Completly configurable: any value can be changed for the whole application at the single configuration file **env_template.env**.
 - Single containers or images can be updated and/or replaced easily, making deployments and test speedy.
 - The timezone and location for all containers are the same as the hosts'.
 - Ideal for testing situations due to its ease of configuration and execution.
@@ -42,7 +42,7 @@ There are several docker compose files that start different services, according 
 ## General Explanations
 ### User's perspective
 From a user's point of view, the application consists of the following.
-Take note that the ports are defined in file *env_template* as external ports and can be changed if needed or desired.
+Take note that the ports are defined in file *env_template.env* as external ports and can be changed if needed or desired.
 - A home web site accesible via port **8080**
   From which all applications can be called
 - An ADempiere ZK UI accesible via port **8888**
@@ -109,22 +109,22 @@ The combination of one or more of these docker compose service files implement t
   - **docker-compose-storage.yml**
   - **docker-compose-vue.yml**: for vue minimal stack services
 - *start-all.sh*: shell script to automatically execute docker compose.
-  The persistent directory (database) and the backup directory are created when needed, the file *env_template* is copied to *.env* and docker compose is started.
+  The persistent directory (database) and the backup directory are created when needed, the file *env_template.env* is copied to *.env* and docker compose is started.
   The script must be called with the docker-compose flag **-d** + one of the following parameters [**auth**, **cache**, **develop**, **storage**, **vue**, **default**]. It can also be called with the legacy flag  **-l** (this is only legacy and not intended to be continued).
   Depending on the parameters, Docker Compose is executed for the eventually assembled *docker-compose.yml* file.
 Here, some examples of how the parameters work:
     - **./start-all.sh -d auth**
-      The services combination for Auth will be assembled and copied to file *docker-compose.yml* by using the corresonding docker compose service files, and docker compose will be executed with the file *docker-compose.yml*.
+      The services combination for Auth will be assembled and copied to file *docker-compose.yml* by using the corresponding docker compose service files, and docker compose will be executed with the file *docker-compose.yml*.
     - **./start-all.sh -d vue**
-      The services combination for Vue will be assembled and copied to file *docker-compose.yml* by using the corresonding docker compose service files, and docker compose will be executed with the file *docker-compose.yml*.
+      The services combination for Vue will be assembled and copied to file *docker-compose.yml* by using the corresponding docker compose service files, and docker compose will be executed with the file *docker-compose.yml*.
     - **./start-all.sh -d cache**
-      The services combination for Cache will be assembled and copied to file *docker-compose.yml* by using the corresonding docker compose service files, and docker compose will be executed with the file *docker-compose.yml*.
+      The services combination for Cache will be assembled and copied to file *docker-compose.yml* by using the corresponding docker compose service files, and docker compose will be executed with the file *docker-compose.yml*.
     - **./start-all.sh** (without parameters)
       If the script is called without a flag, the 'standard' purpose will be taken and also no legacy assumed (i.e. the docker compose service files for "standard" will be used to assemble the file *docker-compose.yml*).
     - **./start-all.sh -d vue -l**
-      The file *docker-compose-vue.yml* will be copied to *docker-compose.yml*, and docker compose will be executed with this file.
+      (legacy behavior) The file *docker-compose-vue.yml* will be copied to *docker-compose.yml*, and docker compose will be executed with this file.
     - **./start-all.sh -d cache -l**
-      The file *docker-compose-cache.yml* will be copied to docker-compose.yml, and docker compose will be executed with this file.
+      (legacy behavior) The file *docker-compose-cache.yml* will be copied to docker-compose.yml, and docker compose will be executed with this file.
 
     In the end, the file **docker-compose.yml** will always exist, and docker compose will be executed with this file.
     The file **docker-compose.yml** will be used only for the duration of the docker compose cycle. It will be deleted when *stop-all.sh* is executed
@@ -145,7 +145,7 @@ Here, some examples of how the parameters work:
   The database contents are kept always persistently on the host.
 - *postgresql/backups*: directory on host used as the mounting point for the backups/restores from the Postgres container.
   Here the seed file for a potential restore can be copied.
-  The name of the seed can be defined in *env_template*.
+  The name of the seed can be defined in *env_template.env*.
   The seed is a backup file created with psql.
   If there is a seed, but a database exists already, there will be no restore.
   This directory is useful when creating a backup: it can be created here, without needing to transfer it from the container to the host.
@@ -229,8 +229,8 @@ This might take some time, depending on your bandwith and the size of the restor
 
 ##### 3 Cases When Database Will Be Restored
 If
-- there is a file *seed.backup* (or as defined in env_template, variable POSTGRES_RESTORE_FILE_NAME) in directory  *postgresql/backups*, and 
-- the database as specified in *env_template*, variable *POSTGRES_DATABASE_NAME* does not exist in Postgres, and
+- there is a file *seed.backup* (or as defined in env_template.env, variable POSTGRES_RESTORE_FILE_NAME) in directory  *postgresql/backups*, and 
+- the database as specified in *env_template.env*, variable *POSTGRES_DATABASE_NAME* does not exist in Postgres, and
 - directory *postgresql/postgres_database* has no contents
 
 *The database  will be restored*.
@@ -245,17 +245,17 @@ The execution of *postgresql/initdb.sh* will be skipped if
 ## Open Applications
 - Project site: open browser and type in the following url [http://localhost:8080](http://localhost:8080)
   http://0.0.0.0/
-  Or use IP as defined in configuration file (env_template or .env) in variables HOST_URL, ADEMPIERE_SITE_EXTERNAL_PORT
+  Or use IP as defined in configuration file (env_template.env or .env) in variables HOST_URL, ADEMPIERE_SITE_EXTERNAL_PORT
   From here, the user can navigate via buttons to ZK UI, Vue UI or Envoy browser.
 - Open separately Adempiere ZK: open browser and type in the following url
   - [${HOST_URL}/webui](${HOST_URL}/webui)
-  HOST_URL as defined in configuration file (env_template or .env)
+  HOST_URL as defined in configuration file (env_template.env or .env)
   - [http://localhost:8888/webui](http://localhost:8888/webui)
-  Or use IP as defined in configuration file (env_template or .env) in variables HOST_URL, ADEMPIERE_ZK_EXTERNAL_PORT
+  Or use IP as defined in configuration file (env_template.env or .env) in variables HOST_URL, ADEMPIERE_ZK_EXTERNAL_PORT
   (`TO BE VERIFIED YET`)
 - Open separately Adempiere Vue: open browser and type in the following url
   - [${HOST_URL}/vue](${HOST_URL}/vue)
-  HOST_URL as defined in configuration file (env_template or .env)
+  HOST_URL as defined in configuration file (env_template.env or .env)
 - Open separately Envoy:  (`TO BE IMPLEMENTED YET`)
 
 
@@ -273,7 +273,7 @@ mkdir postgresql/backups
 ##### 3 Copy backup file (if restore is needed)
 - If you are executing this project for the first time or you want to restore the database, execute a database backup e.g.:
 `pg_dump -v --no-owner -h localhost -U postgres <DB-NAME> > adempiere-$(date '+%Y-%m-%d').backup`.
-- The file must be named `seed.backup` or as it was defined in *env_template*, variable *POSTGRES_RESTORE_FILE_NAME*.
+- The file must be named `seed.backup` or as it was defined in *env_template.env*, variable *POSTGRES_RESTORE_FILE_NAME*.
   Then, copy or move it to `adempiere-all-service/postgresql/backups`.
 - Make sure it is not the compressed backup (e.g. .jar).
 - The database directory `adempiere-all-service/postgresql/postgres_database` must be empty for the restore to ocurr.
@@ -281,7 +281,7 @@ mkdir postgresql/backups
 ```Shell
 cp <PATH-TO-BACKUP-FILE> postgresql/backups
 ```
-##### 5 Modify env_template as needed
+##### 5 Modify env_template.env as needed
 The only variables actually needed to change are
 - *COMPOSE_PROJECT_NAME* -> to the name you want to give the project, e.g. the name of your client).
   From this name, all images and container names are derived.
@@ -292,13 +292,13 @@ The only variables actually needed to change are
 
 ![ADempiere Template](docs/adempiere_ui_gateway_env_template.png)
 
-Other values in *env_template* are default values.
+Other values in *env_template.env* are default values.
 Feel free to change them accordingly to your wishes/purposes.
 There should be no need to change file *docker-compose.yml*.
-##### 6 Copy env_template if it was modified
-Once you modified *env_template* as needed, copy it to *.env*. This is not needed if you run *start-all.sh*.
+##### 6 Copy env_template.env if it was modified
+Once you modified *env_template.env* as needed, copy it to *.env*. This is not needed if you run *start-all.sh*.
 ```Shell
-cp env_template .env
+cp env_template.env .env
 ```
 ##### 7 File initdb.sh (optional)
 Modify `postgresql/initdb.sh` as necessary, depending on what you may want to do at database first start.
@@ -340,7 +340,7 @@ cd adempiere-ui-gateway/docker-compose
 
 ### Database Access
 Connect to database via port **55432** with a DB connector, e.g. PGAdmin.
-Or to the port the variable *POSTGRES_EXTERNAL_PORT* points in file *env_template*.
+Or to the port the variable *POSTGRES_EXTERNAL_PORT* points in file *env_template.env*.
 
 ## Useful Commands
 This application uses **Docker Compose** and as such, all docker and docker compose commands can be called to work wit it.
@@ -402,18 +402,18 @@ docker ps -a --format "{{.ID}}: {{.Names}}"
 ```
 
 ##### Debug I: Display Values To Be Used In Application
-Renders the actual data model to be applied on the Docker engine by merging *env_template* and *docker-compose.yml*.
-If you have modified *env_template*, make sure to copy it to *.env*.
+Renders the actual data model to be applied on the Docker engine by merging *env_template.env* and *docker-compose.yml*.
+If you have modified *env_template.env*, make sure to copy it to *.env*.
 ```Shell
-cp env_template .env
+cp env_template.env .env
 docker compose convert
 
 ```
 
 ##### Debug II: Display Container Logs
 ```Shell
-docker container logs <CONTAINER>                         -->> variable defined in *env_template*
-docker container logs <CONTAINER> | less                  -->> variable defined in *env_template*
+docker container logs <CONTAINER>                         -->> variable defined in *env_template.env*
+docker container logs <CONTAINER> | less                  -->> variable defined in *env_template.env*
 docker container logs adempiere-all.postgres
 docker container logs adempiere-all.postgres | less
 
@@ -443,7 +443,7 @@ Sometimes it is needed to delete all files that comprises the database.
 Be careful with these commands, once done, there is no way to undo it!
 The database directory must be empty for the restore to work.
 ```Shell
-sudo ls -al /var/lib/docker/volumes/<POSTGRES_VOLUME>              -->> variable defined in *env_template*
+sudo ls -al /var/lib/docker/volumes/<POSTGRES_VOLUME>              -->> variable defined in *env_template.env*
 sudo ls -al /var/lib/docker/volumes/adempiere-all.volume_postgres  -->> default value
 
 sudo rm -rf /var/lib/docker/volumes/<POSTGRES_VOLUME>/_data
@@ -456,7 +456,7 @@ Sometimes it is needed to delete all files that comprises the database.
 Be careful with these commands, once done, there is no way to undo it!
 The database directory must be empty for the restore to work.
 ```Shell
-sudo ls -al <POSTGRES_DB_PATH_ON_HOST>                         -->> variable defined in *env_template*
+sudo ls -al <POSTGRES_DB_PATH_ON_HOST>                         -->> variable defined in *env_template.env*
 sudo ls -al <PATH TO REPOSITORY>/postgresql/postgres_database  -->> default value
 
 sudo rm -rf <POSTGRES_DB_PATH_ON_HOST>
@@ -467,7 +467,7 @@ sudo rm -rf <PATH TO REPOSITORY>/postgresql/postgres_database
 ## Additional Info
 
 This service just exposes the port `80`. You should configure to use `api.adempiere.io` (for linux just add this domain to `/etc/hosts`).
-Or: change the variable HOST_IP in file env_template and .env.
+Or: change the variable HOST_IP in file env_template.env and .env.
 
 The main service responding to all request a `nginx`.
 
