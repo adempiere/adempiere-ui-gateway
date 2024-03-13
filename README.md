@@ -110,22 +110,24 @@ The combination of one or more of these docker compose service files implement t
   - **docker-compose-vue.yml**: for vue minimal stack services
 - *start-all.sh*: shell script to automatically execute docker compose.
   The persistent directory (database) and the backup directory are created when needed, the file *env_template* is copied to *.env* and docker compose is started.
-  The script must be called with the docker-compose flag **-d** + one of the following parameters [**auth**, **cache**, **develop**, **storage**, **vue**, **default**]. It can also be called with the legacy flag  **-l** (this is only legacy ans not intended to be continued).
-  Depending on the parameters, Docker Compose is executed for the assemblage the corresponding *docker-compose.yml* file that will be executed.
+  The script must be called with the docker-compose flag **-d** + one of the following parameters [**auth**, **cache**, **develop**, **storage**, **vue**, **default**]. It can also be called with the legacy flag  **-l** (this is only legacy and not intended to be continued).
+  Depending on the parameters, Docker Compose is executed for the eventually assembled *docker-compose.yml* file.
 Here, some examples of how the parameters work:
+    - **./start-all.sh -d auth**
+      The services combination for Auth will be assembled and copied to file *docker-compose.yml* by using the corresonding docker compose service files, and docker compose will be executed with the file *docker-compose.yml*.
     - **./start-all.sh -d vue**
-      The services combination for Vue will be assembled and copied to file *docker-compose.yml* by using the corresonding docker compose service files, and docker compose will be executed with this file *docker-compose.yml*.
-    - **./start-all.sh -d vue -l**
-      The file *docker-compose-vue.yml* will be copied to *docker-compose.yml*, and docker compose will be executed with this file.
+      The services combination for Vue will be assembled and copied to file *docker-compose.yml* by using the corresonding docker compose service files, and docker compose will be executed with the file *docker-compose.yml*.
     - **./start-all.sh -d cache**
-      The services combination for Cache will be assembled and copied to file *docker-compose.yml* by using the corresonding docker compose service files, and docker compose will be executed with this file *docker-compose.yml*.
-    - **./start-all.sh -d cache -l**
-      The file *docker-compose-cache.yml* will be copied to docker-compose.yml, and docker compose will be executed with this file.
+      The services combination for Cache will be assembled and copied to file *docker-compose.yml* by using the corresonding docker compose service files, and docker compose will be executed with the file *docker-compose.yml*.
     - **./start-all.sh** (without parameters)
       If the script is called without a flag, the 'standard' purpose will be taken and also no legacy assumed (i.e. the docker compose service files for "standard" will be used to assemble the file *docker-compose.yml*).
+    - **./start-all.sh -d vue -l**
+      The file *docker-compose-vue.yml* will be copied to *docker-compose.yml*, and docker compose will be executed with this file.
+    - **./start-all.sh -d cache -l**
+      The file *docker-compose-cache.yml* will be copied to docker-compose.yml, and docker compose will be executed with this file.
 
-    In the end, always the file **docker-compose.yml** will exist, and docker compose will be executed with this file.
-    The used **docker-compose.yml** will be used only for the duration of the docker compose cycle. It will be erased when *stop-all.sh* is executed
+    In the end, the file **docker-compose.yml** will always exist, and docker compose will be executed with this file.
+    The file **docker-compose.yml** will be used only for the duration of the docker compose cycle. It will be deleted when *stop-all.sh* is executed
 - *stop-all.sh*: shell script to automatically stop all services that were started with the script *start-all.sh*.
   The file *docker-compose.yml* is deleted after stopping all services.
 - *stop-and-delete-all.sh*: shell script to delete all containers, images, networks, cache and volumnes created with *start-all.sh* or by executing *docker-compose.yml*.
@@ -192,7 +194,7 @@ git checkout main
 ##### 1 Execute With One Script
 Execute script `start-all.sh -d  [auth, cache, develop, storage, vue, default]`:
 ```Shell
-cd adempiere-ui-gateway/docker-compose**
+cd adempiere-ui-gateway/docker-compose
 ./start-all.sh -d auth    , or
 ./start-all.sh -d cache   , or
 ./start-all.sh -d develop , or
@@ -201,15 +203,15 @@ cd adempiere-ui-gateway/docker-compose**
 ./start-all.sh -d default , or
 ./start-all.sh -d
 ```
-The script *start-all.sh* carries out the steps of the manual installation.
-Depending on the parameter follwing the *-d* flag, it calls docker compose with the correct file (`docker compose -f <filename>`).
-If no flag and/or parameter is given, the call will default to `docker compose -f docker-compose.yml`
+The script *start-all.sh* carries out the steps of the automatic installation.
+Depending on the parameter following the *-d* flag, the script assembles the file **docker-compose.yml** by appending the contents of the corresponding docker compose service files; it then calls docker compose with the correct file (`docker compose -f docker-compose.yml`).
+If no flag and/or parameter is given, the call will default to `docker compose -f docker-compose.yml` for the services combination standard.
 If directories *postgresql/postgres_database* and *postgresql/backups* do not exist, they are created.
 
 **Legacy** (flag "-l")
 Execute script `start-all.sh -d  [auth, cache, develop, storage, vue, default] -l`:
 ```Shell
-cd adempiere-ui-gateway/docker-compose**
+cd adempiere-ui-gateway/docker-compose
 ./start-all.sh -d auth -l    , or
 ./start-all.sh -d cache -l   , or
 ./start-all.sh -d develop -l,  or
