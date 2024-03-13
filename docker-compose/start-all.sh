@@ -213,59 +213,143 @@ VUE_array[$KEYCLOAK]="$NO_SERVICE_IMPLEMENTED"
 
 # 3.- Find out which Docker Compose service combination will be executed.
 #     The script must be called with the flag "-d" + one of the following parameters [auth, cache, develop, storage, vue, default]
-#     e.g.: ./start-all.sh -d vue
-#     If script is called without or with a wrong flag, 'default' will be taken.
-#     e.g.: ./start-all.sh
-while getopts d: flag
-do
-    case "${flag}" in
-        d) docker_compose_option=${OPTARG};;
-        *) docker_compose_option=default;;
-    esac
-done
-echo "Script called with parameter: \"$docker_compose_option\"";
+#     Additionally, it can be called with the flag "-l" (legacy). This means, it will use the old docker-compose.yml files insrtead of the new services files.
+#     The defaults are "no legacy" (= -l non-existent) and -d = "default" (=standard services file)
+#     Examples:
+#       ./start-all.sh -d vue
+#           The services combination for Vue will be assembled to docker-compose.yml, and docker compose will be executed with this file.
+#       ./start-all.sh -d vue -l
+#           The file docker-compose-vue.yml will be copied to docker-compose.yml, and docker compose will be executed with this file.
+#       ./start-all.sh -d cache
+#           The services combination for Cache will be assembled to docker-compose.yml, and docker compose will be executed with this file.
+#       ./start-all.sh -d cache -l
+#           The file docker-compose-cache.yml will be copied to docker-compose.yml, and docker compose will be executed with this file.
+#       ./start-all.sh
+#           If script is called without or with a flag, 'default' will be taken.
+#           The services combination for Standard will be assembled to docker-compose.yml, and docker compose will be executed with this file.
+
+legacy_behavior=0              # don't do legacy behavior by default
+docker_compose_option=default  # Default: the "standard" file.
+
+# Catch when there is only one parameter, and it is = "-l"
+if [ ${#} -eq 1 ] && [ "${1}" == "-l" ]
+then
+    legacy_behavior=1
+else
+    # There is more than one parameter; the order is irrelevant.
+    while getopts ':d:l:' flag
+    do
+        case "${flag}" in
+            d) # ./start-all.sh -d [auth, cache, develop, storage, vue, default] -l
+               # ${1}="-d" ${2}=(string after "-d") ${3}="-l" ${OPTARG}=(string after "-d")
+               docker_compose_option=${OPTARG}
+               if [ "${3}" = "-l" ];then legacy_behavior=1;fi;;
+            l) # ./start-all.sh -l -d [auth, cache, develop, storage, vue, default]
+               # ${1}="-l" ${2}="-l" ${3}=(string after "-l") ${OPTARG}="-d"
+               legacy_behavior=1;
+               if [ "${OPTARG}"="-d" ];then docker_compose_option=${3};fi;;
+            # *) echo "By getopts loop this is called at the end. That's why it shouldn't be programmed";;
+        esac
+    done
+fi
+
+echo "Script called with mode parameter: \"$docker_compose_option\" and legacy parameter: $legacy_behavior";
     
 # 4.- Set the services array that will be used depending on the input flag "-d"
+DOCKER_COMPOSE_FILE=docker-compose.yml
+
+LEGACY_AUTH_DOCKER_COMPOSE_FILE=docker-compose-auth.yml
+LEGACY_CACHE_DOCKER_COMPOSE_FILE=docker-compose-cache.yml
+LEGACY_DEVELOP_DOCKER_COMPOSE_FILE=docker-compose-develop.yml
+LEGACY_STANDARD_DOCKER_COMPOSE_FILE=docker-compose-standard.yml
+LEGACY_STORAGE_DOCKER_COMPOSE_FILE=docker-compose-storage.yml
+LEGACY_VUE_DOCKER_COMPOSE_FILE=docker-compose-vue.yml
+
 case "${docker_compose_option}" in
-    auth)    services_array=(${AUTH_array[*]})
-             MODE_SERVICES=AUTH;;
-    cache)   services_array=(${CACHE_array[*]})
-             MODE_SERVICES=CACHE;;
-    develop) services_array=(${DEVELOP_array[*]})
-             MODE_SERVICES=DEVELOP;;
-    storage) services_array=(${STORAGE_array[*]})
-             MODE_SERVICES=STORAGE;;
-    vue)     services_array=(${VUE_array[*]})
-             MODE_SERVICES=VUE;;
-    default) services_array=(${STANDARD_array[*]})
-             MODE_SERVICES=STANDARD;;
-    *)       services_array=(${STANDARD_array[*]})
-             MODE_SERVICES=STANDARD;;
+    auth)    MODE_SERVICES=AUTH
+             if [ $legacy_behavior -eq 1 ]
+             then
+               cp $LEGACY_AUTH_DOCKER_COMPOSE_FILE $DOCKER_COMPOSE_FILE && echo "File \"$LEGACY_AUTH_DOCKER_COMPOSE_FILE\" copied to  \"$DOCKER_COMPOSE_FILE\""; 
+             else
+               services_array=(${AUTH_array[*]})
+             fi;;
+
+    cache)   MODE_SERVICES=CACHE
+             if [ $legacy_behavior -eq 1 ]
+             then
+               cp $LEGACY_CACHE_DOCKER_COMPOSE_FILE $DOCKER_COMPOSE_FILE && echo "File \"$LEGACY_CACHE_DOCKER_COMPOSE_FILE\" copied to \"$DOCKER_COMPOSE_FILE\""; 
+             else
+               services_array=(${CACHE_array[*]})
+             fi;;
+
+    develop) MODE_SERVICES=DEVELOP
+             if [ $legacy_behavior -eq 1 ]
+             then
+               cp $LEGACY_DEVELOP_DOCKER_COMPOSE_FILE $DOCKER_COMPOSE_FILE && echo "File \"$LEGACY_DEVELOP_DOCKER_COMPOSE_FILE\" copied to  \"$DOCKER_COMPOSE_FILE\""; 
+             else
+               services_array=(${DEVELOP_array[*]})
+             fi;;
+
+    storage) MODE_SERVICES=STORAGE
+             if [ $legacy_behavior -eq 1 ]
+             then
+               cp $LEGACY_STORAGE_DOCKER_COMPOSE_FILE $DOCKER_COMPOSE_FILE && echo "File \"$LEGACY_STORAGE_DOCKER_COMPOSE_FILE\" copied to  \"$DOCKER_COMPOSE_FILE\""; 
+             else
+               services_array=(${STORAGE_array[*]})
+             fi;;
+
+    vue)     MODE_SERVICES=VUE
+             if [ $legacy_behavior -eq 1 ]
+             then
+               cp $LEGACY_VUE_DOCKER_COMPOSE_FILE $DOCKER_COMPOSE_FILE && echo "File \"$LEGACY_VUE_DOCKER_COMPOSE_FILE\" copied to \"$DOCKER_COMPOSE_FILE\""; 
+             else
+               services_array=(${VUE_array[*]})
+             fi;;
+
+    default) MODE_SERVICES=STANDARD
+             if [ $legacy_behavior -eq 1 ]
+             then
+               cp $LEGACY_STANDARD_DOCKER_COMPOSE_FILE $DOCKER_COMPOSE_FILE && echo "File \"$LEGACY_STANDARD_DOCKER_COMPOSE_FILE\" copied to  \"$DOCKER_COMPOSE_FILE\""; 
+             else
+               services_array=(${STANDARD_array[*]})
+             fi;;
+
+    *)       MODE_SERVICES=STANDARD
+             if [ $legacy_behavior -eq 1 ]
+             then
+               cp $LEGACY_STANDARD_DOCKER_COMPOSE_FILE $DOCKER_COMPOSE_FILE && echo "File \"$LEGACY_STANDARD_DOCKER_COMPOSE_FILE\" copied to  \"$DOCKER_COMPOSE_FILE\""; 
+             else
+               services_array=(${STANDARD_array[*]})
+             fi;;
 esac
 
 # 5.- Reset the Docker Compose file and
 #     Fill the  Docker Compose file with the contents of the files specified in the array
 #     Header and footer are used for anything but services.
-DOCKER_COMPOSE_FILE=docker-compose.yml
-DOCKER_COMPOSE_HEADER_FILE=90-docker_compose_HEADER.yml
-DOCKER_COMPOSE_FOOTER_FILE=91-docker_compose_FOOTER.yml
+# This is valid only if NOT in legacy mode.
+# When in legacy mode, the docker compose file was already copied and no creation of a docker compose file is needed.
+if [ $legacy_behavior -eq 0 ]
+then
+    DOCKER_COMPOSE_HEADER_FILE=90-docker_compose_HEADER.yml
+    DOCKER_COMPOSE_FOOTER_FILE=91-docker_compose_FOOTER.yml
 
-echo Fill the  Docker Compose file with services for $MODE_SERVICES
-> $DOCKER_COMPOSE_FILE
+    echo Fill the  Docker Compose file with services for $MODE_SERVICES
+    > $DOCKER_COMPOSE_FILE
 
-cat $DOCKER_COMPOSE_HEADER_FILE >> $DOCKER_COMPOSE_FILE
-echo "# Services definition for $MODE_SERVICES" >> $DOCKER_COMPOSE_FILE
-for service_index in ${!services_array[@]}  # Loop on indexes ($service_index is the index)
-do
-    if [ ${services_array[$service_index]} = "$NO_SERVICE_IMPLEMENTED" ]
-    then
-       echo $'\n' "# Service $(($service_index+1)) (${SERVICES_ordered_array[$service_index]}) not implemented" | tee -a $DOCKER_COMPOSE_FILE
-    else
-      cat ${services_array[$service_index]} >> $DOCKER_COMPOSE_FILE
-      echo Contents of ${services_array[$service_index]} copied to  $DOCKER_COMPOSE_FILE
-    fi
-done
-cat $DOCKER_COMPOSE_FOOTER_FILE >> $DOCKER_COMPOSE_FILE
+    cat $DOCKER_COMPOSE_HEADER_FILE >> $DOCKER_COMPOSE_FILE
+    echo "# Services definition for $MODE_SERVICES" >> $DOCKER_COMPOSE_FILE
+    for service_index in ${!services_array[@]}  # Loop on indexes ($service_index is the index)
+    do
+        if [ ${services_array[$service_index]} = "$NO_SERVICE_IMPLEMENTED" ]
+        then
+        echo $'\n' "# Service $(($service_index+1)) (${SERVICES_ordered_array[$service_index]}) not implemented" | tee -a $DOCKER_COMPOSE_FILE
+        else
+        cat ${services_array[$service_index]} >> $DOCKER_COMPOSE_FILE
+        echo Contents of ${services_array[$service_index]} copied to  $DOCKER_COMPOSE_FILE
+        fi
+    done
+    cat $DOCKER_COMPOSE_FOOTER_FILE >> $DOCKER_COMPOSE_FILE
+fi
 
 # 6.- Execute docker compose
 echo "Docker Compose will be executed with file: \"$DOCKER_COMPOSE_FILE\"";
