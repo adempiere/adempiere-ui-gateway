@@ -1,0 +1,533 @@
+openapi: 3.0.0
+info:
+  title: User_customization
+  version: 1.0.0
+servers:
+  - url: http://{{host}}
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+paths:
+  /user-customization/users:
+    get:
+      tags:
+        - default
+      summary: ListUsers
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: OK
+          headers:
+            Server:
+              schema:
+                type: string
+                example: nginx/1.25.2
+            Date:
+              schema:
+                type: string
+                example: Thu, 07 Mar 2024 19:06:16 GMT
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Content-Length:
+              schema:
+                type: integer
+                example: '998'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            grpc-encoding:
+              schema:
+                type: string
+                example: identity
+            grpc-accept-encoding:
+              schema:
+                type: string
+                example: gzip
+            x-envoy-upstream-service-time:
+              schema:
+                type: integer
+                example: '106'
+            grpc-status:
+              schema:
+                type: integer
+                example: '0'
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Max-Age:
+              schema:
+                type: integer
+                example: '3600'
+            Access-Control-Expose-Headers:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+                example: '*'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                record_count: '9'
+                records:
+                  - id: 100
+                    value: SuperUser
+                    name: SuperUser
+                    description: Super User with Access to all levels
+                  - id: 0
+                    value: System
+                    name: System
+                    description: '** Do not change **'
+                  - id: 50004
+                    value: '50000'
+                    name: Contact of Joe Block
+                    description: ''
+                  - id: 104
+                    value: ''
+                    name: Carl Boss
+                    description: ''
+                  - id: 105
+                    value: ''
+                    name: Henry Seed
+                    description: ''
+                  - id: 50001
+                    value: WebService
+                    name: WebService
+                    description: ''
+                  - id: 103
+                    value: joesales
+                    name: Joe Sales
+                    description: ''
+                  - id: 101
+                    value: gardenadmin@adempiere.io
+                    name: GardenAdmin
+                    description: GardenAdmin
+                  - id: 102
+                    value: gardenuser@adempiere.io
+                    name: GardenUser
+                    description: GardenUser
+                next_page_token: ''
+  /user-customization/roles:
+    get:
+      tags:
+        - default
+      summary: ListRoles
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: OK
+          headers:
+            Server:
+              schema:
+                type: string
+                example: nginx/1.25.2
+            Date:
+              schema:
+                type: string
+                example: Thu, 07 Mar 2024 19:07:13 GMT
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Content-Length:
+              schema:
+                type: integer
+                example: '608'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            grpc-encoding:
+              schema:
+                type: string
+                example: identity
+            grpc-accept-encoding:
+              schema:
+                type: string
+                example: gzip
+            x-envoy-upstream-service-time:
+              schema:
+                type: integer
+                example: '92'
+            grpc-status:
+              schema:
+                type: integer
+                example: '0'
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Max-Age:
+              schema:
+                type: integer
+                example: '3600'
+            Access-Control-Expose-Headers:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+                example: '*'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                record_count: '5'
+                records:
+                  - id: 0
+                    value: ''
+                    name: System Administrator
+                    description: System Administrator Role (cannot be changed)
+                  - id: 50008
+                    value: ''
+                    name: Role Template
+                    description: ''
+                  - id: 102
+                    value: ''
+                    name: GardenWorld Admin
+                    description: GardenWorld Admin
+                  - id: 103
+                    value: ''
+                    name: GardenWorld User
+                    description: GardenWorld User
+                  - id: 50004
+                    value: ''
+                    name: Web Service Execution
+                    description: ''
+                next_page_token: ''
+  /user-customization/levels:
+    get:
+      tags:
+        - default
+      summary: ListCustomizationsLevel
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /user-customization/windows/{tab_id}/{level_type}/{level_value}:
+    post:
+      tags:
+        - default
+      summary: SaveWindowCustomization
+      description: |-
+        ### Request Params
+
+        - tab_id (int32, required)
+        - level_type (int32, required)
+        - level_value (int32, required)
+      requestBody:
+        content: {}
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: tab_id
+          in: path
+          schema:
+            type: integer
+          required: true
+          example: '394'
+        - name: level_type
+          in: path
+          schema:
+            type: integer
+          required: true
+          example: '1'
+        - name: level_value
+          in: path
+          schema:
+            type: integer
+          required: true
+          example: '102'
+      responses:
+        '200':
+          description: OK
+          headers:
+            Server:
+              schema:
+                type: string
+                example: nginx/1.25.2
+            Date:
+              schema:
+                type: string
+                example: Thu, 14 Mar 2024 19:25:17 GMT
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Content-Length:
+              schema:
+                type: integer
+                example: '3'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            grpc-encoding:
+              schema:
+                type: string
+                example: identity
+            grpc-accept-encoding:
+              schema:
+                type: string
+                example: gzip
+            x-envoy-upstream-service-time:
+              schema:
+                type: integer
+                example: '2874'
+            grpc-status:
+              schema:
+                type: integer
+                example: '0'
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Max-Age:
+              schema:
+                type: integer
+                example: '3600'
+            Access-Control-Expose-Headers:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+                example: '*'
+          content:
+            application/json:
+              schema:
+                type: object
+              example: {}
+  /user-customization/browsers/{browse_id}/{level_type}/{level_value}:
+    post:
+      tags:
+        - default
+      summary: SaveBrowseCustomization
+      description: |-
+        ### Request Params
+
+        - browse_id (int32, required)
+        - level_type (int32, required)
+        - level_value (int32, required)
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                field_attributes: {}
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: browse_id
+          in: path
+          schema:
+            type: integer
+          required: true
+          example: '50110'
+        - name: level_type
+          in: path
+          schema:
+            type: integer
+          required: true
+          example: '1'
+        - name: level_value
+          in: path
+          schema:
+            type: integer
+          required: true
+          example: '100'
+      responses:
+        '200':
+          description: OK
+          headers:
+            Server:
+              schema:
+                type: string
+                example: nginx/1.25.2
+            Date:
+              schema:
+                type: string
+                example: Thu, 14 Mar 2024 19:29:03 GMT
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Content-Length:
+              schema:
+                type: integer
+                example: '3'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            grpc-encoding:
+              schema:
+                type: string
+                example: identity
+            grpc-accept-encoding:
+              schema:
+                type: string
+                example: gzip
+            x-envoy-upstream-service-time:
+              schema:
+                type: integer
+                example: '4839'
+            grpc-status:
+              schema:
+                type: integer
+                example: '0'
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Max-Age:
+              schema:
+                type: integer
+                example: '3600'
+            Access-Control-Expose-Headers:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+                example: '*'
+          content:
+            application/json:
+              schema:
+                type: object
+              example: {}
+  /user-customization/processes/{process_id}/{level_type}/{level_value}:
+    post:
+      tags:
+        - default
+      summary: SaveProcessCustomization
+      description: |-
+        ### Request Params
+
+        - process_id (int32, required)
+            
+        - level_type (int32, required)
+        - level_value (int32, required)
+      requestBody:
+        content: {}
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: process_id
+          in: path
+          schema:
+            type: integer
+          required: true
+          example: '205'
+        - name: level_type
+          in: path
+          schema:
+            type: integer
+          required: true
+          example: '1'
+        - name: level_value
+          in: path
+          schema:
+            type: integer
+          required: true
+          example: '100'
+      responses:
+        '200':
+          description: OK
+          headers:
+            Server:
+              schema:
+                type: string
+                example: nginx/1.25.2
+            Date:
+              schema:
+                type: string
+                example: Thu, 14 Mar 2024 19:38:15 GMT
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Content-Length:
+              schema:
+                type: integer
+                example: '3'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            grpc-encoding:
+              schema:
+                type: string
+                example: identity
+            grpc-accept-encoding:
+              schema:
+                type: string
+                example: gzip
+            x-envoy-upstream-service-time:
+              schema:
+                type: integer
+                example: '387'
+            grpc-status:
+              schema:
+                type: integer
+                example: '0'
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Max-Age:
+              schema:
+                type: integer
+                example: '3600'
+            Access-Control-Expose-Headers:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+                example: '*'
+          content:
+            application/json:
+              schema:
+                type: object
+              example: {}

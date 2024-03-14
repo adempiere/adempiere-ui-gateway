@@ -1,0 +1,781 @@
+{
+	"info": {
+		"_postman_id": "5c9ebf75-f497-4ba9-9f57-7a75392f0248",
+		"name": "Business",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "28978517"
+	},
+	"item": [
+		{
+			"name": "business-data",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"parameters\":{\n        \"M_Product_Category_ID\":50000,\n        \"C_AcctSchema_ID\":101\n    },\n    \"report_type\":\"png\",\n    \"print_format_id\":0,\n    \"report_view_id\":0,\n    \"is_summary\":false,\n    \"browser_id\":0,\n    \"selections\":{},\n    \"workflow_id\":0\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{HOST}}/business-data/process/:id",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"business-data",
+						"process",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "140"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "/business-data/process/{id}",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"parameters\":{\n        \"M_Product_Category_ID\":50000,\n        \"C_AcctSchema_ID\":101\n    },\n    \"report_type\":\"png\",\n    \"print_format_id\":0,\n    \"report_view_id\":0,\n    \"is_summary\":false,\n    \"browser_id\":0,\n    \"selections\":{},\n    \"workflow_id\":0\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HOST}}/business-data/process/:id",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"business-data",
+								"process",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "140"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.25.2"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 14 Mar 2024 15:19:48 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "368"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "grpc-encoding",
+							"value": "identity"
+						},
+						{
+							"key": "grpc-accept-encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "x-envoy-upstream-service-time",
+							"value": "172"
+						},
+						{
+							"key": "grpc-status",
+							"value": "0"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Max-Age",
+							"value": "3600"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 140,\n    \"name\": \"\",\n    \"description\": \"\",\n    \"instance_id\": 1001242,\n    \"is_error\": false,\n    \"summary\": \"Creado=0, Actualizado=3\",\n    \"result_table_name\": \"\",\n    \"is_processing\": false,\n    \"last_run\": \"2024-03-14T15:19:48Z\",\n    \"logs\": [\n        {\n            \"record_id\": 0,\n            \"log\": \"Actualizado\"\n        },\n        {\n            \"record_id\": 0,\n            \"log\": \"Creado\"\n        }\n    ],\n    \"process_intance_parameters\": []\n}"
+				}
+			]
+		},
+		{
+			"name": "business-data_report",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"parameters\":{\n        \"M_Product_Category_ID\":50000,\n        \"C_AcctSchema_ID\":101\n    },\n    \"report_type\":\"png\",\n    \"print_format_id\":0,\n    \"report_view_id\":0,\n    \"is_summary\":false,\n    \"browser_id\":0,\n    \"selections\":{},\n    \"workflow_id\":0\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{HOST}}/business-data/report/:id",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"business-data",
+						"report",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "140"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "business-data",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"parameters\":{\n        \"M_Product_Category_ID\":50000,\n        \"C_AcctSchema_ID\":101\n    },\n    \"report_type\":\"png\",\n    \"print_format_id\":0,\n    \"report_view_id\":0,\n    \"is_summary\":false,\n    \"browser_id\":0,\n    \"selections\":{},\n    \"workflow_id\":0\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HOST}}/business-data/report/:id",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"business-data",
+								"report",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "140"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.25.2"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 14 Mar 2024 15:17:43 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "368"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "grpc-encoding",
+							"value": "identity"
+						},
+						{
+							"key": "grpc-accept-encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "x-envoy-upstream-service-time",
+							"value": "167"
+						},
+						{
+							"key": "grpc-status",
+							"value": "0"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Max-Age",
+							"value": "3600"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 140,\n    \"name\": \"\",\n    \"description\": \"\",\n    \"instance_id\": 1001240,\n    \"is_error\": false,\n    \"summary\": \"Creado=0, Actualizado=3\",\n    \"result_table_name\": \"\",\n    \"is_processing\": false,\n    \"last_run\": \"2024-03-14T15:17:43Z\",\n    \"logs\": [\n        {\n            \"record_id\": 0,\n            \"log\": \"Actualizado\"\n        },\n        {\n            \"record_id\": 0,\n            \"log\": \"Creado\"\n        }\n    ],\n    \"process_intance_parameters\": []\n}"
+				}
+			]
+		},
+		{
+			"name": "{{HOST}}/business-data/process/:id/workflow/:table_name/:record_id/:document_action",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"parameters\":{\n        \"M_Product_Category_ID\":50000,\n        \"C_AcctSchema_ID\":101\n    },\n    \"report_type\":\"png\",\n    \"print_format_id\":0,\n    \"report_view_id\":0,\n    \"is_summary\":false,\n    \"browser_id\":0,\n    \"selections\":{},\n    \"workflow_id\":0\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{HOST}}/business-data/process/:id/workflow/:table_name/:record_id/:document_action",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"business-data",
+						"process",
+						":id",
+						"workflow",
+						":table_name",
+						":record_id",
+						":document_action"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "140"
+						},
+						{
+							"key": "table_name",
+							"value": "C_TaxCategory"
+						},
+						{
+							"key": "record_id",
+							"value": "120"
+						},
+						{
+							"key": "document_action",
+							"value": "AP"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "{{HOST}}/business-data/process/:id/workflow/:table_name/:record_id/:document_action",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"parameters\":{\n        \"M_Product_Category_ID\":50000,\n        \"C_AcctSchema_ID\":101\n    },\n    \"report_type\":\"png\",\n    \"print_format_id\":0,\n    \"report_view_id\":0,\n    \"is_summary\":false,\n    \"browser_id\":0,\n    \"selections\":{},\n    \"workflow_id\":0\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HOST}}/business-data/process/:id/workflow/:table_name/:record_id/:document_action",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"business-data",
+								"process",
+								":id",
+								"workflow",
+								":table_name",
+								":record_id",
+								":document_action"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "140"
+								},
+								{
+									"key": "table_name",
+									"value": "C_TaxCategory"
+								},
+								{
+									"key": "record_id",
+									"value": "120"
+								},
+								{
+									"key": "document_action",
+									"value": "AP"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.25.2"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 14 Mar 2024 14:52:01 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "368"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "grpc-encoding",
+							"value": "identity"
+						},
+						{
+							"key": "grpc-accept-encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "x-envoy-upstream-service-time",
+							"value": "343"
+						},
+						{
+							"key": "grpc-status",
+							"value": "0"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Max-Age",
+							"value": "3600"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 140,\n    \"name\": \"\",\n    \"description\": \"\",\n    \"instance_id\": 1001229,\n    \"is_error\": false,\n    \"summary\": \"Creado=0, Actualizado=3\",\n    \"result_table_name\": \"\",\n    \"is_processing\": false,\n    \"last_run\": \"2024-03-14T14:52:01Z\",\n    \"logs\": [\n        {\n            \"record_id\": 0,\n            \"log\": \"Actualizado\"\n        },\n        {\n            \"record_id\": 0,\n            \"log\": \"Creado\"\n        }\n    ],\n    \"process_intance_parameters\": []\n}"
+				}
+			]
+		},
+		{
+			"name": "{{HOST}}/business-data/process/:id/window/:table_name/:record_id",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"parameters\":{\n        \n    },\n    \"report_type\":\"png\",\n    \"print_format_id\":0,\n    \"report_view_id\":0,\n    \"is_summary\":false,\n    \"browser_id\":0,\n    \"selections\":{\n        \n    },\n    \"table_name\": \"\",\n    \"record_id\":0,\n    \"workflow_id\":0,\n    \"document_action\":\"png\"\n        \n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{HOST}}/business-data/process/:id/window/:table_name/:record_id",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"business-data",
+						"process",
+						":id",
+						"window",
+						":table_name",
+						":record_id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "205"
+						},
+						{
+							"key": "table_name",
+							"value": "\"\""
+						},
+						{
+							"key": "record_id",
+							"value": "0"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "{{HOST}}/business-data/process/:id/window/:table_name/:record_id",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"parameters\":{\n        \n    },\n    \"report_type\":\"png\",\n    \"print_format_id\":0,\n    \"report_view_id\":0,\n    \"is_summary\":false,\n    \"browser_id\":0,\n    \"selections\":{\n        \n    },\n    \"table_name\": \"\",\n    \"record_id\":0,\n    \"workflow_id\":0,\n    \"document_action\":\"png\"\n        \n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HOST}}/business-data/process/:id/window/:table_name/:record_id",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"business-data",
+								"process",
+								":id",
+								"window",
+								":table_name",
+								":record_id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "205"
+								},
+								{
+									"key": "table_name",
+									"value": "\"\""
+								},
+								{
+									"key": "record_id",
+									"value": "0"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.25.2"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 14 Mar 2024 14:52:18 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "256"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "grpc-encoding",
+							"value": "identity"
+						},
+						{
+							"key": "grpc-accept-encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "x-envoy-upstream-service-time",
+							"value": "505"
+						},
+						{
+							"key": "grpc-status",
+							"value": "0"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Max-Age",
+							"value": "3600"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 205,\n    \"name\": \"\",\n    \"description\": \"\",\n    \"instance_id\": 1001231,\n    \"is_error\": false,\n    \"summary\": \"Cache Reset\",\n    \"result_table_name\": \"\",\n    \"is_processing\": false,\n    \"last_run\": \"2024-03-14T14:52:18Z\",\n    \"logs\": [],\n    \"process_intance_parameters\": []\n}"
+				}
+			]
+		},
+		{
+			"name": "{{HOST}}/business-data/process/:id/smart-browse/:browser_id",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"parameters\":{\n        \"DocAction\":\"AP\"\n    },\n    \"report_type\":\"date\",\n    \"print_format_id\":0,\n    \"report_view_id\":0,\n    \"is_summary\":false,\n    \"selections\":{\n        \"selectionId\":50055\n    },\n    \"table_name\": \"\",\n    \"record_id\":0,\n    \"workflow_id\":0,\n    \"document_action\":\"png\"\n        \n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{HOST}}/business-data/process/:id/smart-browse/:browser_id",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"business-data",
+						"process",
+						":id",
+						"smart-browse",
+						":browser_id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "53924"
+						},
+						{
+							"key": "browser_id",
+							"value": "50075"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "{{HOST}}/business-data/process/:id/smart-browse/:browser_id",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"parameters\":{\n        \"DocAction\":\"AP\"\n    },\n    \"report_type\":\"date\",\n    \"print_format_id\":0,\n    \"report_view_id\":0,\n    \"is_summary\":false,\n    \"selections\":{\n        \"selectionId\":50055\n    },\n    \"table_name\": \"\",\n    \"record_id\":0,\n    \"workflow_id\":0,\n    \"document_action\":\"png\"\n        \n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HOST}}/business-data/process/:id/smart-browse/:browser_id",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"business-data",
+								"process",
+								":id",
+								"smart-browse",
+								":browser_id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "53924"
+								},
+								{
+									"key": "browser_id",
+									"value": "50075"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.25.2"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 14 Mar 2024 14:52:11 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "360"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "grpc-encoding",
+							"value": "identity"
+						},
+						{
+							"key": "grpc-accept-encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "x-envoy-upstream-service-time",
+							"value": "331"
+						},
+						{
+							"key": "grpc-status",
+							"value": "0"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Max-Age",
+							"value": "3600"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 53924,\n    \"name\": \"\",\n    \"description\": \"\",\n    \"instance_id\": 1001230,\n    \"is_error\": false,\n    \"summary\": \"Actualizado=0, Errores=1\",\n    \"result_table_name\": \"\",\n    \"is_processing\": false,\n    \"last_run\": \"2024-03-14T14:52:11Z\",\n    \"logs\": [\n        {\n            \"record_id\": 0,\n            \"log\": \"Status=DR - Invalid Actions: Process=AP, Doc=AP\"\n        }\n    ],\n    \"process_intance_parameters\": []\n}"
+				}
+			]
+		}
+	]
+}

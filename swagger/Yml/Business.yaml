@@ -1,0 +1,596 @@
+openapi: 3.0.0
+info:
+  title: Business
+  version: 1.0.0
+servers:
+  - url: http://{{host}}
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+paths:
+  /business-data/process/{id}:
+    post:
+      tags:
+        - default
+      summary: business-data
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                parameters:
+                  M_Product_Category_ID: 50000
+                  C_AcctSchema_ID: 101
+                report_type: png
+                print_format_id: 0
+                report_view_id: 0
+                is_summary: false
+                browser_id: 0
+                selections: {}
+                workflow_id: 0
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: integer
+          required: true
+          example: '140'
+      responses:
+        '200':
+          description: OK
+          headers:
+            Server:
+              schema:
+                type: string
+                example: nginx/1.25.2
+            Date:
+              schema:
+                type: string
+                example: Thu, 14 Mar 2024 15:19:48 GMT
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Content-Length:
+              schema:
+                type: integer
+                example: '368'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            grpc-encoding:
+              schema:
+                type: string
+                example: identity
+            grpc-accept-encoding:
+              schema:
+                type: string
+                example: gzip
+            x-envoy-upstream-service-time:
+              schema:
+                type: integer
+                example: '172'
+            grpc-status:
+              schema:
+                type: integer
+                example: '0'
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Max-Age:
+              schema:
+                type: integer
+                example: '3600'
+            Access-Control-Expose-Headers:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+                example: '*'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                id: 140
+                name: ''
+                description: ''
+                instance_id: 1001242
+                is_error: false
+                summary: Creado=0, Actualizado=3
+                result_table_name: ''
+                is_processing: false
+                last_run: '2024-03-14T15:19:48Z'
+                logs:
+                  - record_id: 0
+                    log: Actualizado
+                  - record_id: 0
+                    log: Creado
+                process_intance_parameters: []
+  /business-data/report/{id}:
+    post:
+      tags:
+        - default
+      summary: business-data_report
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                parameters:
+                  M_Product_Category_ID: 50000
+                  C_AcctSchema_ID: 101
+                report_type: png
+                print_format_id: 0
+                report_view_id: 0
+                is_summary: false
+                browser_id: 0
+                selections: {}
+                workflow_id: 0
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: integer
+          required: true
+          example: '140'
+      responses:
+        '200':
+          description: OK
+          headers:
+            Server:
+              schema:
+                type: string
+                example: nginx/1.25.2
+            Date:
+              schema:
+                type: string
+                example: Thu, 14 Mar 2024 15:17:43 GMT
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Content-Length:
+              schema:
+                type: integer
+                example: '368'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            grpc-encoding:
+              schema:
+                type: string
+                example: identity
+            grpc-accept-encoding:
+              schema:
+                type: string
+                example: gzip
+            x-envoy-upstream-service-time:
+              schema:
+                type: integer
+                example: '167'
+            grpc-status:
+              schema:
+                type: integer
+                example: '0'
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Max-Age:
+              schema:
+                type: integer
+                example: '3600'
+            Access-Control-Expose-Headers:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+                example: '*'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                id: 140
+                name: ''
+                description: ''
+                instance_id: 1001240
+                is_error: false
+                summary: Creado=0, Actualizado=3
+                result_table_name: ''
+                is_processing: false
+                last_run: '2024-03-14T15:17:43Z'
+                logs:
+                  - record_id: 0
+                    log: Actualizado
+                  - record_id: 0
+                    log: Creado
+                process_intance_parameters: []
+  /business-data/process/{id}/workflow/{table_name}/{record_id}/{document_action}:
+    post:
+      tags:
+        - default
+      summary: >-
+        {{HOST}}/business-data/process/:id/workflow/:table_name/:record_id/:document_action
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                parameters:
+                  M_Product_Category_ID: 50000
+                  C_AcctSchema_ID: 101
+                report_type: png
+                print_format_id: 0
+                report_view_id: 0
+                is_summary: false
+                browser_id: 0
+                selections: {}
+                workflow_id: 0
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: integer
+          required: true
+          example: '140'
+        - name: table_name
+          in: path
+          schema:
+            type: string
+          required: true
+          example: C_TaxCategory
+        - name: record_id
+          in: path
+          schema:
+            type: integer
+          required: true
+          example: '120'
+        - name: document_action
+          in: path
+          schema:
+            type: string
+          required: true
+          example: AP
+      responses:
+        '200':
+          description: OK
+          headers:
+            Server:
+              schema:
+                type: string
+                example: nginx/1.25.2
+            Date:
+              schema:
+                type: string
+                example: Thu, 14 Mar 2024 14:52:01 GMT
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Content-Length:
+              schema:
+                type: integer
+                example: '368'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            grpc-encoding:
+              schema:
+                type: string
+                example: identity
+            grpc-accept-encoding:
+              schema:
+                type: string
+                example: gzip
+            x-envoy-upstream-service-time:
+              schema:
+                type: integer
+                example: '343'
+            grpc-status:
+              schema:
+                type: integer
+                example: '0'
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Max-Age:
+              schema:
+                type: integer
+                example: '3600'
+            Access-Control-Expose-Headers:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+                example: '*'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                id: 140
+                name: ''
+                description: ''
+                instance_id: 1001229
+                is_error: false
+                summary: Creado=0, Actualizado=3
+                result_table_name: ''
+                is_processing: false
+                last_run: '2024-03-14T14:52:01Z'
+                logs:
+                  - record_id: 0
+                    log: Actualizado
+                  - record_id: 0
+                    log: Creado
+                process_intance_parameters: []
+  /business-data/process/{id}/window/{table_name}/{record_id}:
+    post:
+      tags:
+        - default
+      summary: '{{HOST}}/business-data/process/:id/window/:table_name/:record_id'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                parameters: {}
+                report_type: png
+                print_format_id: 0
+                report_view_id: 0
+                is_summary: false
+                browser_id: 0
+                selections: {}
+                table_name: ''
+                record_id: 0
+                workflow_id: 0
+                document_action: png
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: integer
+          required: true
+          example: '205'
+        - name: table_name
+          in: path
+          schema:
+            type: string
+          required: true
+          example: '""'
+        - name: record_id
+          in: path
+          schema:
+            type: integer
+          required: true
+          example: '0'
+      responses:
+        '200':
+          description: OK
+          headers:
+            Server:
+              schema:
+                type: string
+                example: nginx/1.25.2
+            Date:
+              schema:
+                type: string
+                example: Thu, 14 Mar 2024 14:52:18 GMT
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Content-Length:
+              schema:
+                type: integer
+                example: '256'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            grpc-encoding:
+              schema:
+                type: string
+                example: identity
+            grpc-accept-encoding:
+              schema:
+                type: string
+                example: gzip
+            x-envoy-upstream-service-time:
+              schema:
+                type: integer
+                example: '505'
+            grpc-status:
+              schema:
+                type: integer
+                example: '0'
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Max-Age:
+              schema:
+                type: integer
+                example: '3600'
+            Access-Control-Expose-Headers:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+                example: '*'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                id: 205
+                name: ''
+                description: ''
+                instance_id: 1001231
+                is_error: false
+                summary: Cache Reset
+                result_table_name: ''
+                is_processing: false
+                last_run: '2024-03-14T14:52:18Z'
+                logs: []
+                process_intance_parameters: []
+  /business-data/process/{id}/smart-browse/{browser_id}:
+    post:
+      tags:
+        - default
+      summary: '{{HOST}}/business-data/process/:id/smart-browse/:browser_id'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                parameters:
+                  DocAction: AP
+                report_type: date
+                print_format_id: 0
+                report_view_id: 0
+                is_summary: false
+                selections:
+                  selectionId: 50055
+                table_name: ''
+                record_id: 0
+                workflow_id: 0
+                document_action: png
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: integer
+          required: true
+          example: '53924'
+        - name: browser_id
+          in: path
+          schema:
+            type: integer
+          required: true
+          example: '50075'
+      responses:
+        '200':
+          description: OK
+          headers:
+            Server:
+              schema:
+                type: string
+                example: nginx/1.25.2
+            Date:
+              schema:
+                type: string
+                example: Thu, 14 Mar 2024 14:52:11 GMT
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Content-Length:
+              schema:
+                type: integer
+                example: '360'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            grpc-encoding:
+              schema:
+                type: string
+                example: identity
+            grpc-accept-encoding:
+              schema:
+                type: string
+                example: gzip
+            x-envoy-upstream-service-time:
+              schema:
+                type: integer
+                example: '331'
+            grpc-status:
+              schema:
+                type: integer
+                example: '0'
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Max-Age:
+              schema:
+                type: integer
+                example: '3600'
+            Access-Control-Expose-Headers:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+                example: '*'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                id: 53924
+                name: ''
+                description: ''
+                instance_id: 1001230
+                is_error: false
+                summary: Actualizado=0, Errores=1
+                result_table_name: ''
+                is_processing: false
+                last_run: '2024-03-14T14:52:11Z'
+                logs:
+                  - record_id: 0
+                    log: 'Status=DR - Invalid Actions: Process=AP, Doc=AP'
+                process_intance_parameters: []

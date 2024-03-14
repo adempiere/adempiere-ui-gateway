@@ -1,0 +1,1337 @@
+openapi: 3.0.0
+info:
+  title: Web_store
+  version: 1.0.0
+servers:
+  - url: http://{{host}}
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+paths:
+  /store/web-store/user:
+    post:
+      tags:
+        - default
+      summary: CreateCustomer
+      description: |-
+        ### Request Body
+
+        - email (String, required)
+        - first_name (String, required)
+        - last_name (String)
+        - password (String)
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                email: prueba5
+                first_name: prueba7
+                last_name: prueba5
+                password: '1234'
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: OK
+          headers:
+            Server:
+              schema:
+                type: string
+                example: nginx/1.25.2
+            Date:
+              schema:
+                type: string
+                example: Thu, 07 Mar 2024 19:22:25 GMT
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Content-Length:
+              schema:
+                type: integer
+                example: '279'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            grpc-encoding:
+              schema:
+                type: string
+                example: identity
+            grpc-accept-encoding:
+              schema:
+                type: string
+                example: gzip
+            x-envoy-upstream-service-time:
+              schema:
+                type: integer
+                example: '112'
+            grpc-status:
+              schema:
+                type: integer
+                example: '0'
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Max-Age:
+              schema:
+                type: integer
+                example: '3600'
+            Access-Control-Expose-Headers:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+                example: '*'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                id: 1000000
+                business_partner_group_id: 0
+                created: '2024-03-07T19:22:25Z'
+                updated: '2024-03-07T19:22:25Z'
+                organization_name: Store West
+                email: prueba
+                first_name: prueba
+                last_name: ''
+                web_store_id: 0
+                website_id: 0
+                addresses: []
+  /store/web-store/user/change-password:
+    post:
+      tags:
+        - default
+      summary: ChangePassword
+      description: |-
+        ### Request Body
+
+        - current_password (String, required)
+        - new_password (String, required)
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                current_password: '1234'
+                new_password: '1234'
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /store/web-store/user/me:
+    get:
+      tags:
+        - default
+      summary: GetCustomer
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: OK
+          headers:
+            Server:
+              schema:
+                type: string
+                example: nginx/1.25.2
+            Date:
+              schema:
+                type: string
+                example: Thu, 07 Mar 2024 19:28:37 GMT
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Content-Length:
+              schema:
+                type: integer
+                example: '262'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            grpc-encoding:
+              schema:
+                type: string
+                example: identity
+            grpc-accept-encoding:
+              schema:
+                type: string
+                example: gzip
+            x-envoy-upstream-service-time:
+              schema:
+                type: integer
+                example: '88'
+            grpc-status:
+              schema:
+                type: integer
+                example: '0'
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Max-Age:
+              schema:
+                type: integer
+                example: '3600'
+            Access-Control-Expose-Headers:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+                example: '*'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                id: 100
+                business_partner_group_id: 0
+                created: '1999-12-09T22:15:00Z'
+                updated: '2005-10-18T11:58:59Z'
+                organization_name: ''
+                email: ''
+                first_name: SuperUser
+                last_name: ''
+                web_store_id: 0
+                website_id: 0
+                addresses: []
+    post:
+      tags:
+        - default
+      summary: UpdateCustomer
+      description: |-
+        ### Request Body
+
+        - id (int32, required)
+        - business_partner_group_id (int32)
+        - organization_name (String)
+        - email (String, required)
+        - first_name (String, required)
+        - last_name (String)
+        - web_store_id (int32)
+            
+        - website_id (int32)
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                id: 1000000
+                business_partner_group_id: 0
+                organization_name: Store West
+                email: asd
+                first_name: asd
+                last_name: asd
+                web_store_id: 0
+                website_id: 0
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: OK
+          headers:
+            Server:
+              schema:
+                type: string
+                example: nginx/1.25.2
+            Date:
+              schema:
+                type: string
+                example: Sat, 09 Mar 2024 16:48:51 GMT
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Content-Length:
+              schema:
+                type: integer
+                example: '270'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            grpc-encoding:
+              schema:
+                type: string
+                example: identity
+            grpc-accept-encoding:
+              schema:
+                type: string
+                example: gzip
+            x-envoy-upstream-service-time:
+              schema:
+                type: integer
+                example: '62'
+            grpc-status:
+              schema:
+                type: integer
+                example: '0'
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Max-Age:
+              schema:
+                type: integer
+                example: '3600'
+            Access-Control-Expose-Headers:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+                example: '*'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                id: 1000000
+                business_partner_group_id: 0
+                created: '2024-03-09T16:37:04Z'
+                updated: '2024-03-09T16:48:51.472Z'
+                organization_name: ''
+                email: asd
+                first_name: asd
+                last_name: asd
+                web_store_id: 0
+                website_id: 0
+                addresses: []
+  /store/web-store/stock/{sku}:
+    get:
+      tags:
+        - default
+      summary: GetStock
+      description: |-
+        ### Request Params
+
+        - sku (int32, required)
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: sku
+          in: path
+          schema:
+            type: integer
+          required: true
+          example: '12345'
+      responses:
+        '200':
+          description: OK
+          headers:
+            Server:
+              schema:
+                type: string
+                example: nginx/1.25.2
+            Date:
+              schema:
+                type: string
+                example: Thu, 14 Mar 2024 17:16:00 GMT
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Content-Length:
+              schema:
+                type: integer
+                example: '796'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            grpc-encoding:
+              schema:
+                type: string
+                example: identity
+            grpc-accept-encoding:
+              schema:
+                type: string
+                example: gzip
+            x-envoy-upstream-service-time:
+              schema:
+                type: integer
+                example: '81'
+            grpc-status:
+              schema:
+                type: integer
+                example: '0'
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Max-Age:
+              schema:
+                type: integer
+                example: '3600'
+            Access-Control-Expose-Headers:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+                example: '*'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                product_id: 0
+                store_id: 0
+                quantity: 0
+                is_in_stock: false
+                is_decimal_quantity: false
+                is_show_default_notification_message: false
+                is_use_config_minimum_quantity: false
+                minimum_quantity: 0
+                is_use_config_minimum_sale_quantity: false
+                minimum_sale_quantity: 0
+                is_use_config_maximum_sale_quantity: false
+                maximum_sale_quantity: 0
+                is_use_config_backorders: false
+                backorders: 0
+                is_use_config_notify_stock_quantity: false
+                notify_stock_quantity: 0
+                is_use_config_quantity_increments: false
+                quantity_increments: 0
+                is_use_config_enable_quantity_increments: false
+                is_enable_quantity_increments: false
+                is_use_config_manage_stock: false
+                is_manage_stock: false
+                is_decimal_divided: false
+                stock_status_changed_auto: 0
+  /store/web-store/stock/list/{sku}:
+    get:
+      tags:
+        - default
+      summary: ListStocks
+      description: |-
+        ### Request Body
+
+        - sku (int32, required)
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: sku
+          in: path
+          schema:
+            type: integer
+          required: true
+          example: '12345'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /store/web-store/product/list:
+    get:
+      tags:
+        - default
+      summary: ListProducts
+      description: |-
+        ### Request Body
+
+        - skus (String, required)
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: skus
+          in: query
+          schema:
+            type: integer
+          example: '12345'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /store/web-store/product/render-list:
+    get:
+      tags:
+        - default
+      summary: ListRenderProducts
+      description: |-
+        ### Request Body
+
+        - skus (String, required)
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: skus
+          in: query
+          schema:
+            type: integer
+          example: '12345'
+      responses:
+        '200':
+          description: OK
+          headers:
+            Server:
+              schema:
+                type: string
+                example: nginx/1.25.2
+            Date:
+              schema:
+                type: string
+                example: Thu, 14 Mar 2024 17:24:09 GMT
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Content-Length:
+              schema:
+                type: integer
+                example: '1929'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            grpc-encoding:
+              schema:
+                type: string
+                example: identity
+            grpc-accept-encoding:
+              schema:
+                type: string
+                example: gzip
+            x-envoy-upstream-service-time:
+              schema:
+                type: integer
+                example: '221'
+            grpc-status:
+              schema:
+                type: integer
+                example: '0'
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Max-Age:
+              schema:
+                type: integer
+                example: '3600'
+            Access-Control-Expose-Headers:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+                example: '*'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                record_count: '1'
+                render_products:
+                  - id: 1000003
+                    name: prueba
+                    type: ''
+                    store_id: 50006
+                    url: ''
+                    product_type: CONFIGURABLE
+                    price_info:
+                      final_price: 0
+                      max_price: 0
+                      max_regular_price: 0
+                      minimal_regular_price: 0
+                      special_price: 0
+                      minimal_price: 0
+                      regular_price: 0
+                      formatted_price:
+                        final_price: <span class="price">$0.00</span>
+                        max_price: <span class="price">$0.00</span>
+                        minimal_price: <span class="price">$0.00</span>
+                        max_regular_price: <span class="price">$0.00</span>
+                        minimal_regular_price: <span class="price">$0.00</span>
+                        special_price: <span class="price">$0.00</span>
+                        regular_price: <span class="price">$0.00</span>
+                      tax_adjustment:
+                        final_price: 0
+                        max_price: 0
+                        max_regular_price: 0
+                        minimal_regular_price: 0
+                        special_price: 0
+                        minimal_price: 0
+                        regular_price: 0
+                        weee_adjustment: <span class="price">$0.00</span>
+                        formatted_price:
+                          final_price: <span class="price">$0.00</span>
+                          max_price: <span class="price">$0.00</span>
+                          minimal_price: <span class="price">$0.00</span>
+                          max_regular_price: <span class="price">$0.00</span>
+                          minimal_regular_price: <span class="price">$0.00</span>
+                          special_price: <span class="price">$0.00</span>
+                          regular_price: <span class="price">$0.00</span>
+                      currency_code: USD
+                next_page_token: ''
+  /store/web-store/img:
+    get:
+      tags:
+        - default
+      summary: GetResource
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /store/web-store/cart/create:
+    post:
+      tags:
+        - default
+      summary: CreateCart
+      description: |-
+        ### Request Body
+
+        - is_guest (bool)
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                cart_id: 12345
+                customer_id: 102
+                user_id: 50000
+                shipping_address: {}
+                billing_address: {}
+                method_code: ''
+                carrier_code: ''
+                payment_method_code: ''
+                products: {}
+                payments: {}
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: OK
+          headers:
+            Server:
+              schema:
+                type: string
+                example: nginx/1.25.2
+            Date:
+              schema:
+                type: string
+                example: Thu, 14 Mar 2024 17:35:50 GMT
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Content-Length:
+              schema:
+                type: integer
+                example: '380'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            grpc-encoding:
+              schema:
+                type: string
+                example: identity
+            grpc-accept-encoding:
+              schema:
+                type: string
+                example: gzip
+            x-envoy-upstream-service-time:
+              schema:
+                type: integer
+                example: '164'
+            grpc-status:
+              schema:
+                type: integer
+                example: '0'
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Max-Age:
+              schema:
+                type: integer
+                example: '3600'
+            Access-Control-Expose-Headers:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+                example: '*'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                id: 1000000
+                grand_total: 0
+                subtotal: 0
+                discount_amount: 0
+                subtotal_with_discount: 0
+                tax_amount: 0
+                shipping_amount: 0
+                shipping_discount_amount: 0
+                shipping_tax_amount: 0
+                base_shipping_tax_amount: 0
+                subtotal_incl_tax: 0
+                shipping_incl_tax: 0
+                base_currency_code: ''
+                quote_currency_code: ''
+                items_quantity: 0
+                items: []
+  /store/web-store/cart/pull:
+    get:
+      tags:
+        - default
+      summary: GetCart
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: OK
+          headers:
+            Server:
+              schema:
+                type: string
+                example: nginx/1.25.2
+            Date:
+              schema:
+                type: string
+                example: Tue, 12 Mar 2024 13:31:10 GMT
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Content-Length:
+              schema:
+                type: integer
+                example: '374'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            grpc-encoding:
+              schema:
+                type: string
+                example: identity
+            grpc-accept-encoding:
+              schema:
+                type: string
+                example: gzip
+            x-envoy-upstream-service-time:
+              schema:
+                type: integer
+                example: '156'
+            grpc-status:
+              schema:
+                type: integer
+                example: '0'
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Max-Age:
+              schema:
+                type: integer
+                example: '3600'
+            Access-Control-Expose-Headers:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+                example: '*'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                id: 0
+                grand_total: 0
+                subtotal: 0
+                discount_amount: 0
+                subtotal_with_discount: 0
+                tax_amount: 0
+                shipping_amount: 0
+                shipping_discount_amount: 0
+                shipping_tax_amount: 0
+                base_shipping_tax_amount: 0
+                subtotal_incl_tax: 0
+                shipping_incl_tax: 0
+                base_currency_code: ''
+                quote_currency_code: ''
+                items_quantity: 0
+                items: []
+  /store/web-store/cart/update:
+    post:
+      tags:
+        - default
+      summary: UpdateCart
+      description: |-
+        ### Request Body
+
+        - cart_id (int32)
+            
+        - is_guest (Bool)
+            
+        - sku (String)
+            
+        - quantity (int32)
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                cart_id: 1000000
+                is_guest: true
+                sku: '12345'
+                quantity: 1
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: OK
+          headers:
+            Server:
+              schema:
+                type: string
+                example: nginx/1.25.2
+            Date:
+              schema:
+                type: string
+                example: Thu, 14 Mar 2024 17:36:48 GMT
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Content-Length:
+              schema:
+                type: integer
+                example: '370'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            grpc-encoding:
+              schema:
+                type: string
+                example: identity
+            grpc-accept-encoding:
+              schema:
+                type: string
+                example: gzip
+            x-envoy-upstream-service-time:
+              schema:
+                type: integer
+                example: '149'
+            grpc-status:
+              schema:
+                type: integer
+                example: '0'
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Max-Age:
+              schema:
+                type: integer
+                example: '3600'
+            Access-Control-Expose-Headers:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+                example: '*'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                product_id: 1000003
+                sku: '12345'
+                quantity: 1
+                name: prueba
+                price: 0
+                product_type: CONFIGURABLE
+                row_total: 0
+                row_total_with_discount: 0
+                tax_amount: 0
+                tax_percent: 0
+                discount_amount: 0
+                discount_percent: 0
+                price_incl_tax: 0
+                row_total_incl_tax: 0
+                base_row_total_incl_tax: 0
+                configurable_item_options: []
+  /store/web-store/order/create:
+    post:
+      tags:
+        - default
+      summary: CreateOrder
+      description: |-
+        ### Request Body
+
+        - cart_id (int32)
+        - customer_id (int32)
+        - user_id (int32)
+        - shipping_address (AddressRequest)
+        - billing_address (AddressRequest)
+        - method_code (String)
+            
+        - carrier_code (String)
+            
+        - payment_method_code (String)
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                cart_id: 1000000
+                customer_id: 1
+                user_id: 1
+                shipping_address:
+                  address: a
+                billing_address: {}
+                method_code: a
+                carrier_code: '3301'
+                payment_method_code: a
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /store/web-store/cart/payment-methods:
+    get:
+      tags:
+        - default
+      summary: ListPaymentMethods
+      description: |-
+        ### Request Params
+
+        - cart_id (int32)
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: cart_id
+          in: query
+          schema:
+            type: integer
+          example: '1000000'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /store/web-store/cart/shipping-methods:
+    get:
+      tags:
+        - default
+      summary: ListShippingMethods
+      description: |-
+        ### Request Body
+
+        - cart_id (int32)
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: cart_id
+          in: query
+          schema:
+            type: integer
+          example: '1000000'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /store/web-store/cart/shipping-information:
+    get:
+      tags:
+        - default
+      summary: GetShippingInformation
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: cart_id
+          in: query
+          schema:
+            type: integer
+          example: '1000000'
+      responses:
+        '200':
+          description: OK
+          headers:
+            Server:
+              schema:
+                type: string
+                example: nginx/1.25.2
+            Date:
+              schema:
+                type: string
+                example: Thu, 14 Mar 2024 20:31:57 GMT
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Content-Length:
+              schema:
+                type: integer
+                example: '1005'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            grpc-encoding:
+              schema:
+                type: string
+                example: identity
+            grpc-accept-encoding:
+              schema:
+                type: string
+                example: gzip
+            x-envoy-upstream-service-time:
+              schema:
+                type: integer
+                example: '87'
+            grpc-status:
+              schema:
+                type: integer
+                example: '0'
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Max-Age:
+              schema:
+                type: integer
+                example: '3600'
+            Access-Control-Expose-Headers:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+                example: '*'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                cart:
+                  id: 1000000
+                  grand_total: 0
+                  subtotal: 0
+                  discount_amount: 0
+                  subtotal_with_discount: 0
+                  tax_amount: 0
+                  shipping_amount: 0
+                  shipping_discount_amount: 0
+                  shipping_tax_amount: 0
+                  base_shipping_tax_amount: 0
+                  subtotal_incl_tax: 0
+                  shipping_incl_tax: 0
+                  base_currency_code: ''
+                  quote_currency_code: ''
+                  items_quantity: 0
+                  items: []
+                payment_methods: []
+                total_segments:
+                  - code: subtotal
+                    name: Sub-Total
+                    value: 0
+                    area: ''
+                    taxes: []
+                  - code: shipping
+                    name: Envío y Manejo (Tarifa plana - Fija)
+                    value: 0
+                    area: ''
+                    taxes: []
+                  - code: discount
+                    name: Descuentos
+                    value: 0
+                    area: ''
+                    taxes: []
+                  - code: tax
+                    name: Impuestos
+                    value: 0
+                    area: taxes
+                    taxes: []
+                  - code: grand_total
+                    name: Total a Pagar
+                    value: 0
+                    area: footer
+                    taxes: []
+  /store/web-store/cart/totals:
+    get:
+      tags:
+        - default
+      summary: GetCartTotals
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: cart_id
+          in: query
+          schema:
+            type: integer
+          example: '1000000'
+      responses:
+        '200':
+          description: OK
+          headers:
+            Server:
+              schema:
+                type: string
+                example: nginx/1.25.2
+            Date:
+              schema:
+                type: string
+                example: Thu, 14 Mar 2024 20:32:07 GMT
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Content-Length:
+              schema:
+                type: integer
+                example: '981'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            grpc-encoding:
+              schema:
+                type: string
+                example: identity
+            grpc-accept-encoding:
+              schema:
+                type: string
+                example: gzip
+            x-envoy-upstream-service-time:
+              schema:
+                type: integer
+                example: '99'
+            grpc-status:
+              schema:
+                type: integer
+                example: '0'
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Max-Age:
+              schema:
+                type: integer
+                example: '3600'
+            Access-Control-Expose-Headers:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+                example: '*'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                cart:
+                  id: 1000000
+                  grand_total: 0
+                  subtotal: 0
+                  discount_amount: 0
+                  subtotal_with_discount: 0
+                  tax_amount: 0
+                  shipping_amount: 0
+                  shipping_discount_amount: 0
+                  shipping_tax_amount: 0
+                  base_shipping_tax_amount: 0
+                  subtotal_incl_tax: 0
+                  shipping_incl_tax: 0
+                  base_currency_code: ''
+                  quote_currency_code: ''
+                  items_quantity: 0
+                  items: []
+                total_segments:
+                  - code: subtotal
+                    name: Sub-Total
+                    value: 0
+                    area: ''
+                    taxes: []
+                  - code: shipping
+                    name: Envío y Manejo (Tarifa plana - Fija)
+                    value: 0
+                    area: ''
+                    taxes: []
+                  - code: discount
+                    name: Descuentos
+                    value: 0
+                    area: ''
+                    taxes: []
+                  - code: tax
+                    name: Impuestos
+                    value: 0
+                    area: taxes
+                    taxes: []
+                  - code: grand_total
+                    name: Total a Pagar
+                    value: 0
+                    area: footer
+                    taxes: []
+  /store/web-store/cart/delete:
+    post:
+      tags:
+        - default
+      summary: DeleteCartItem
+      description: |-
+        ### Request Body
+
+        - cart_id (int32)
+            
+        - sku (String)
+            
+        - product_id (int32)
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                cart_id: 1000000
+                sku: '12345'
+                product_id: 10000002
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: OK
+          headers:
+            Server:
+              schema:
+                type: string
+                example: nginx/1.25.2
+            Date:
+              schema:
+                type: string
+                example: Thu, 14 Mar 2024 17:43:57 GMT
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Content-Length:
+              schema:
+                type: integer
+                example: '3'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            grpc-encoding:
+              schema:
+                type: string
+                example: identity
+            grpc-accept-encoding:
+              schema:
+                type: string
+                example: gzip
+            x-envoy-upstream-service-time:
+              schema:
+                type: integer
+                example: '125'
+            grpc-status:
+              schema:
+                type: integer
+                example: '0'
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Max-Age:
+              schema:
+                type: integer
+                example: '3600'
+            Access-Control-Expose-Headers:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+                example: '*'
+          content:
+            application/json:
+              schema:
+                type: object
+              example: {}

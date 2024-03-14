@@ -1,0 +1,2016 @@
+openapi: 3.0.0
+info:
+  title: Workflow
+  version: 1.0.0
+servers:
+  - url: http://{{host}}
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+paths:
+  /workflow/workflows/{id}:
+    get:
+      tags:
+        - default
+      summary: WorkflowDefinitionRequest
+      description: |-
+        ### Request Params
+
+        - id (int32)
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: integer
+          required: true
+          example: '120'
+      responses:
+        '200':
+          description: OK
+          headers:
+            Server:
+              schema:
+                type: string
+                example: nginx/1.25.2
+            Date:
+              schema:
+                type: string
+                example: Fri, 08 Mar 2024 12:29:37 GMT
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Content-Length:
+              schema:
+                type: integer
+                example: '3002'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            grpc-encoding:
+              schema:
+                type: string
+                example: identity
+            grpc-accept-encoding:
+              schema:
+                type: string
+                example: gzip
+            x-envoy-upstream-service-time:
+              schema:
+                type: integer
+                example: '147'
+            grpc-status:
+              schema:
+                type: integer
+                example: '0'
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Max-Age:
+              schema:
+                type: integer
+                example: '3600'
+            Access-Control-Expose-Headers:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+                example: '*'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                id: 120
+                value: Process_Payment
+                name: Proceso Pagos
+                description: (Proceso de Pagos Estándar)
+                help: ''
+                table_name: C_Payment
+                responsible_id: 0
+                responsible_name: ''
+                priority: 0
+                is_default: false
+                is_valid: true
+                publish_status: RELEASED
+                duration_unit: HOUR
+                start_node:
+                  id: 199
+                  value: (Start)
+                  name: (Start)
+                  description: (Standard Node)
+                  help: ''
+                  responsible_id: 0
+                  responsible_name: ''
+                  document_action_value: ''
+                  document_action_name: ''
+                  priority: 0
+                  action: WAIT_SLEEP
+                  transitions:
+                    - id: 193
+                      description: (Standard Transition)
+                      is_std_user_workflow: false
+                      sequence: 100
+                      node_next_id: 200
+                      node_next_name: (DocAuto)
+                      workflow_conditions: []
+                    - id: 194
+                      description: (Standard Approval)
+                      is_std_user_workflow: true
+                      sequence: 10
+                      node_next_id: 201
+                      node_next_name: (DocPrepare)
+                      workflow_conditions: []
+                workflow_nodes:
+                  - id: 199
+                    value: (Start)
+                    name: (Start)
+                    description: (Standard Node)
+                    help: ''
+                    responsible_id: 0
+                    responsible_name: ''
+                    document_action_value: ''
+                    document_action_name: ''
+                    priority: 0
+                    action: WAIT_SLEEP
+                    transitions:
+                      - id: 193
+                        description: (Standard Transition)
+                        is_std_user_workflow: false
+                        sequence: 100
+                        node_next_id: 200
+                        node_next_name: (DocAuto)
+                        workflow_conditions: []
+                      - id: 194
+                        description: (Standard Approval)
+                        is_std_user_workflow: true
+                        sequence: 10
+                        node_next_id: 201
+                        node_next_name: (DocPrepare)
+                        workflow_conditions: []
+                  - id: 200
+                    value: (DocAuto)
+                    name: (DocAuto)
+                    description: (Standard Node)
+                    help: ''
+                    responsible_id: 0
+                    responsible_name: ''
+                    document_action_value: ''
+                    document_action_name: ''
+                    priority: 0
+                    action: DOCUMENT_ACTION
+                    transitions: []
+                  - id: 201
+                    value: (DocPrepare)
+                    name: (DocPrepare)
+                    description: (Standard Node)
+                    help: ''
+                    responsible_id: 0
+                    responsible_name: ''
+                    document_action_value: ''
+                    document_action_name: ''
+                    priority: 0
+                    action: DOCUMENT_ACTION
+                    transitions:
+                      - id: 195
+                        description: (Standard Transition)
+                        is_std_user_workflow: false
+                        sequence: 100
+                        node_next_id: 202
+                        node_next_name: (DocComplete)
+                        workflow_conditions: []
+                  - id: 202
+                    value: (DocComplete)
+                    name: (DocComplete)
+                    description: (Standard Node)
+                    help: ''
+                    responsible_id: 0
+                    responsible_name: ''
+                    document_action_value: ''
+                    document_action_name: ''
+                    priority: 0
+                    action: DOCUMENT_ACTION
+                    transitions: []
+  /workflow/workflows:
+    get:
+      tags:
+        - default
+      summary: ListWorkflows
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: OK
+          headers:
+            Server:
+              schema:
+                type: string
+                example: nginx/1.25.2
+            Date:
+              schema:
+                type: string
+                example: Fri, 08 Mar 2024 12:30:56 GMT
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Content-Length:
+              schema:
+                type: integer
+                example: '3341'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            grpc-encoding:
+              schema:
+                type: string
+                example: identity
+            grpc-accept-encoding:
+              schema:
+                type: string
+                example: gzip
+            x-envoy-upstream-service-time:
+              schema:
+                type: integer
+                example: '116'
+            grpc-status:
+              schema:
+                type: integer
+                example: '0'
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Max-Age:
+              schema:
+                type: integer
+                example: '3600'
+            Access-Control-Expose-Headers:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+                example: '*'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                record_count: '1'
+                workflows:
+                  - id: 120
+                    value: Process_Payment
+                    name: Proceso Pagos
+                    description: (Proceso de Pagos Estándar)
+                    help: ''
+                    table_name: C_Payment
+                    responsible_id: 0
+                    responsible_name: ''
+                    priority: 0
+                    is_default: false
+                    is_valid: true
+                    publish_status: RELEASED
+                    duration_unit: HOUR
+                    start_node:
+                      id: 199
+                      value: (Start)
+                      name: (Start)
+                      description: (Standard Node)
+                      help: ''
+                      responsible_id: 0
+                      responsible_name: ''
+                      document_action_value: ''
+                      document_action_name: ''
+                      priority: 0
+                      action: WAIT_SLEEP
+                      transitions:
+                        - id: 193
+                          description: (Standard Transition)
+                          is_std_user_workflow: false
+                          sequence: 100
+                          node_next_id: 200
+                          node_next_name: (DocAuto)
+                          workflow_conditions: []
+                        - id: 194
+                          description: (Standard Approval)
+                          is_std_user_workflow: true
+                          sequence: 10
+                          node_next_id: 201
+                          node_next_name: (DocPrepare)
+                          workflow_conditions: []
+                    workflow_nodes:
+                      - id: 199
+                        value: (Start)
+                        name: (Start)
+                        description: (Standard Node)
+                        help: ''
+                        responsible_id: 0
+                        responsible_name: ''
+                        document_action_value: ''
+                        document_action_name: ''
+                        priority: 0
+                        action: WAIT_SLEEP
+                        transitions:
+                          - id: 193
+                            description: (Standard Transition)
+                            is_std_user_workflow: false
+                            sequence: 100
+                            node_next_id: 200
+                            node_next_name: (DocAuto)
+                            workflow_conditions: []
+                          - id: 194
+                            description: (Standard Approval)
+                            is_std_user_workflow: true
+                            sequence: 10
+                            node_next_id: 201
+                            node_next_name: (DocPrepare)
+                            workflow_conditions: []
+                      - id: 200
+                        value: (DocAuto)
+                        name: (DocAuto)
+                        description: (Standard Node)
+                        help: ''
+                        responsible_id: 0
+                        responsible_name: ''
+                        document_action_value: ''
+                        document_action_name: ''
+                        priority: 0
+                        action: DOCUMENT_ACTION
+                        transitions: []
+                      - id: 201
+                        value: (DocPrepare)
+                        name: (DocPrepare)
+                        description: (Standard Node)
+                        help: ''
+                        responsible_id: 0
+                        responsible_name: ''
+                        document_action_value: ''
+                        document_action_name: ''
+                        priority: 0
+                        action: DOCUMENT_ACTION
+                        transitions:
+                          - id: 195
+                            description: (Standard Transition)
+                            is_std_user_workflow: false
+                            sequence: 100
+                            node_next_id: 202
+                            node_next_name: (DocComplete)
+                            workflow_conditions: []
+                      - id: 202
+                        value: (DocComplete)
+                        name: (DocComplete)
+                        description: (Standard Node)
+                        help: ''
+                        responsible_id: 0
+                        responsible_name: ''
+                        document_action_value: ''
+                        document_action_name: ''
+                        priority: 0
+                        action: DOCUMENT_ACTION
+                        transitions: []
+                next_page_token: ''
+  /workflow/actions/{table_name}/{id}:
+    get:
+      tags:
+        - default
+      summary: ListDocumentActions
+      description: |-
+        ### Request Body
+
+        - table_name (String, required)
+            
+        - id (int, required)
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: table_name
+          in: path
+          schema:
+            type: string
+          required: true
+          example: C_DocTypeCounter
+        - name: id
+          in: path
+          schema:
+            type: integer
+          required: true
+          example: '100'
+      responses:
+        '200':
+          description: OK
+          headers:
+            Server:
+              schema:
+                type: string
+                example: nginx/1.25.2
+            Date:
+              schema:
+                type: string
+                example: Fri, 08 Mar 2024 12:48:34 GMT
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Content-Length:
+              schema:
+                type: integer
+                example: '74'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            grpc-encoding:
+              schema:
+                type: string
+                example: identity
+            grpc-accept-encoding:
+              schema:
+                type: string
+                example: gzip
+            x-envoy-upstream-service-time:
+              schema:
+                type: integer
+                example: '152'
+            grpc-status:
+              schema:
+                type: integer
+                example: '0'
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Max-Age:
+              schema:
+                type: integer
+                example: '3600'
+            Access-Control-Expose-Headers:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+                example: '*'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                record_count: '0'
+                document_actions: []
+                next_page_token: ''
+  /workflow/statuses/{table_name}/{id}:
+    get:
+      tags:
+        - default
+      summary: ListDocumentStatuses
+      description: |-
+        ### Request Body
+
+        - table_name (String, required)
+            
+        - id (int, required)
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: table_name
+          in: path
+          schema:
+            type: string
+          required: true
+          example: C_Payment
+        - name: id
+          in: path
+          schema:
+            type: integer
+          required: true
+          example: '120'
+      responses:
+        '200':
+          description: OK
+          headers:
+            Server:
+              schema:
+                type: string
+                example: nginx/1.25.2
+            Date:
+              schema:
+                type: string
+                example: Fri, 08 Mar 2024 12:33:54 GMT
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Content-Length:
+              schema:
+                type: integer
+                example: '288'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            grpc-encoding:
+              schema:
+                type: string
+                example: identity
+            grpc-accept-encoding:
+              schema:
+                type: string
+                example: gzip
+            x-envoy-upstream-service-time:
+              schema:
+                type: integer
+                example: '146'
+            grpc-status:
+              schema:
+                type: integer
+                example: '0'
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Max-Age:
+              schema:
+                type: integer
+                example: '3600'
+            Access-Control-Expose-Headers:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+                example: '*'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                record_count: '3'
+                document_statuses:
+                  - value: DR
+                    name: Borrador
+                    description: ''
+                  - value: CO
+                    name: Completo
+                    description: ''
+                  - value: VO
+                    name: Anulado
+                    description: ''
+                next_page_token: ''
+  /workflow/workflows/{id}/activities:
+    get:
+      tags:
+        - default
+      summary: ListWorkflowActivities
+      description: |-
+        ### Request Params
+
+        - user_id (int32, required)
+        - id (int32, required)
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: user_id
+          in: query
+          schema:
+            type: integer
+          example: '100'
+        - name: id
+          in: path
+          schema:
+            type: integer
+          required: true
+          example: '120'
+      responses:
+        '200':
+          description: OK
+          headers:
+            Server:
+              schema:
+                type: string
+                example: nginx/1.25.2
+            Date:
+              schema:
+                type: string
+                example: Fri, 08 Mar 2024 12:36:28 GMT
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Content-Length:
+              schema:
+                type: integer
+                example: '39372'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            grpc-encoding:
+              schema:
+                type: string
+                example: identity
+            grpc-accept-encoding:
+              schema:
+                type: string
+                example: gzip
+            x-envoy-upstream-service-time:
+              schema:
+                type: integer
+                example: '368'
+            grpc-status:
+              schema:
+                type: integer
+                example: '0'
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Max-Age:
+              schema:
+                type: integer
+                example: '3600'
+            Access-Control-Expose-Headers:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+                example: '*'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                record_count: '9'
+                activities:
+                  - id: 50000
+                    table_name: C_BPartner
+                    record_id: 50000
+                    user_id: 100
+                    user_name: SuperUser
+                    responsible_id: 100
+                    responsible_name: Organization
+                    text_message: ''
+                    processed: false
+                    priority: 0
+                    created: '2008-09-22T18:13:29Z'
+                    workflow_process:
+                      process_id: 50000
+                      workflow_id: 131
+                      workflow_name: Aprobación Tercero
+                      id: 50000
+                      table_name: C_BPartner
+                      user_id: 100
+                      user_name: SuperUser
+                      responsible_id: 101
+                      responsible_name: Invoker
+                      text_message: ''
+                      processed: false
+                      workflow_state: SUSPENDED
+                      priority: URGENT
+                      workflow_events:
+                        - node_id: 244
+                          node_name: Socio del Negocio
+                          id: 50000
+                          table_name: C_BPartner
+                          user_id: 100
+                          user_name: SuperUser
+                          responsible_id: 100
+                          responsible_name: Organization
+                          text_message: ''
+                          time_elapsed: '0'
+                          attribute_name: ''
+                          old_value: ''
+                          new_value: ''
+                          workflow_state: SUSPENDED
+                          event_type: PROCESS_CREATED
+                          log_date: '2008-09-22T18:13:32Z'
+                      log_date: '2008-09-22T18:13:24Z'
+                    workflow:
+                      id: 131
+                      value: Business Partner Approval
+                      name: Aprobación Tercero
+                      description: Documento ejemplo basado en un flujo de trabajo
+                      help: >-
+                        Cuando un nuevo tercero es creado, éste es notificado
+                        para revisión y chequeo de crédito
+                      table_name: C_BPartner
+                      responsible_id: 0
+                      responsible_name: ''
+                      priority: 0
+                      is_default: false
+                      is_valid: true
+                      publish_status: RELEASED
+                      duration_unit: MINUTE
+                      start_node:
+                        id: 244
+                        value: Business Partner
+                        name: Socio del Negocio
+                        description: Mantener Socios del Negocio
+                        help: >-
+                          Esta ventana permite definir a cualquier ente con el
+                          cual se tenga relación de negocios (Socios del
+                          Negocio). Esto incluye clientes, proveedores y
+                          empleados. Antes de entrar o importar productos, es
+                          necesario definir proveedores. La ventana mantiene
+                          toda la información sobre los tercerso y los valores
+                          que aqui se definan, serán usados en todas las
+                          transacciones de documentos de la aplicación.
+                        responsible_id: 100
+                        responsible_name: Organization
+                        document_action_value: ''
+                        document_action_name: ''
+                        priority: 0
+                        action: USER_WINDOW
+                        transitions: []
+                      workflow_nodes:
+                        - id: 244
+                          value: Business Partner
+                          name: Socio del Negocio
+                          description: Mantener Socios del Negocio
+                          help: >-
+                            Esta ventana permite definir a cualquier ente con el
+                            cual se tenga relación de negocios (Socios del
+                            Negocio). Esto incluye clientes, proveedores y
+                            empleados. Antes de entrar o importar productos, es
+                            necesario definir proveedores. La ventana mantiene
+                            toda la información sobre los tercerso y los valores
+                            que aqui se definan, serán usados en todas las
+                            transacciones de documentos de la aplicación.
+                          responsible_id: 100
+                          responsible_name: Organization
+                          document_action_value: ''
+                          document_action_name: ''
+                          priority: 0
+                          action: USER_WINDOW
+                          transitions: []
+                    node:
+                      id: 244
+                      value: Business Partner
+                      name: Socio del Negocio
+                      description: Mantener Socios del Negocio
+                      help: >-
+                        Esta ventana permite definir a cualquier ente con el
+                        cual se tenga relación de negocios (Socios del Negocio).
+                        Esto incluye clientes, proveedores y empleados. Antes de
+                        entrar o importar productos, es necesario definir
+                        proveedores. La ventana mantiene toda la información
+                        sobre los tercerso y los valores que aqui se definan,
+                        serán usados en todas las transacciones de documentos de
+                        la aplicación.
+                      responsible_id: 100
+                      responsible_name: Organization
+                      document_action_value: ''
+                      document_action_name: ''
+                      priority: 0
+                      action: USER_WINDOW
+                      transitions: []
+                    zoom_windows:
+                      - id: 123
+                        name: Socio del Negocio
+                        description: Mantener Socios del Negocio
+                        is_sales_transaction: true
+                        is_active: false
+                    is_sales_transaction: false
+                  - id: 50001
+                    table_name: C_BPartner
+                    record_id: 50001
+                    user_id: 100
+                    user_name: SuperUser
+                    responsible_id: 100
+                    responsible_name: Organization
+                    text_message: ''
+                    processed: false
+                    priority: 0
+                    created: '2008-09-22T18:14:58Z'
+                    workflow_process:
+                      process_id: 50001
+                      workflow_id: 131
+                      workflow_name: Aprobación Tercero
+                      id: 50001
+                      table_name: C_BPartner
+                      user_id: 100
+                      user_name: SuperUser
+                      responsible_id: 101
+                      responsible_name: Invoker
+                      text_message: ''
+                      processed: false
+                      workflow_state: SUSPENDED
+                      priority: URGENT
+                      workflow_events:
+                        - node_id: 244
+                          node_name: Socio del Negocio
+                          id: 50001
+                          table_name: C_BPartner
+                          user_id: 100
+                          user_name: SuperUser
+                          responsible_id: 100
+                          responsible_name: Organization
+                          text_message: ''
+                          time_elapsed: '0'
+                          attribute_name: ''
+                          old_value: ''
+                          new_value: ''
+                          workflow_state: SUSPENDED
+                          event_type: PROCESS_CREATED
+                          log_date: '2008-09-22T18:15:00Z'
+                      log_date: '2008-09-22T18:14:48Z'
+                    workflow:
+                      id: 131
+                      value: Business Partner Approval
+                      name: Aprobación Tercero
+                      description: Documento ejemplo basado en un flujo de trabajo
+                      help: >-
+                        Cuando un nuevo tercero es creado, éste es notificado
+                        para revisión y chequeo de crédito
+                      table_name: C_BPartner
+                      responsible_id: 0
+                      responsible_name: ''
+                      priority: 0
+                      is_default: false
+                      is_valid: true
+                      publish_status: RELEASED
+                      duration_unit: MINUTE
+                      start_node:
+                        id: 244
+                        value: Business Partner
+                        name: Socio del Negocio
+                        description: Mantener Socios del Negocio
+                        help: >-
+                          Esta ventana permite definir a cualquier ente con el
+                          cual se tenga relación de negocios (Socios del
+                          Negocio). Esto incluye clientes, proveedores y
+                          empleados. Antes de entrar o importar productos, es
+                          necesario definir proveedores. La ventana mantiene
+                          toda la información sobre los tercerso y los valores
+                          que aqui se definan, serán usados en todas las
+                          transacciones de documentos de la aplicación.
+                        responsible_id: 100
+                        responsible_name: Organization
+                        document_action_value: ''
+                        document_action_name: ''
+                        priority: 0
+                        action: USER_WINDOW
+                        transitions: []
+                      workflow_nodes:
+                        - id: 244
+                          value: Business Partner
+                          name: Socio del Negocio
+                          description: Mantener Socios del Negocio
+                          help: >-
+                            Esta ventana permite definir a cualquier ente con el
+                            cual se tenga relación de negocios (Socios del
+                            Negocio). Esto incluye clientes, proveedores y
+                            empleados. Antes de entrar o importar productos, es
+                            necesario definir proveedores. La ventana mantiene
+                            toda la información sobre los tercerso y los valores
+                            que aqui se definan, serán usados en todas las
+                            transacciones de documentos de la aplicación.
+                          responsible_id: 100
+                          responsible_name: Organization
+                          document_action_value: ''
+                          document_action_name: ''
+                          priority: 0
+                          action: USER_WINDOW
+                          transitions: []
+                    node:
+                      id: 244
+                      value: Business Partner
+                      name: Socio del Negocio
+                      description: Mantener Socios del Negocio
+                      help: >-
+                        Esta ventana permite definir a cualquier ente con el
+                        cual se tenga relación de negocios (Socios del Negocio).
+                        Esto incluye clientes, proveedores y empleados. Antes de
+                        entrar o importar productos, es necesario definir
+                        proveedores. La ventana mantiene toda la información
+                        sobre los tercerso y los valores que aqui se definan,
+                        serán usados en todas las transacciones de documentos de
+                        la aplicación.
+                      responsible_id: 100
+                      responsible_name: Organization
+                      document_action_value: ''
+                      document_action_name: ''
+                      priority: 0
+                      action: USER_WINDOW
+                      transitions: []
+                    zoom_windows:
+                      - id: 123
+                        name: Socio del Negocio
+                        description: Mantener Socios del Negocio
+                        is_sales_transaction: true
+                        is_active: false
+                    is_sales_transaction: false
+                  - id: 50002
+                    table_name: C_BPartner
+                    record_id: 50002
+                    user_id: 100
+                    user_name: SuperUser
+                    responsible_id: 100
+                    responsible_name: Organization
+                    text_message: ''
+                    processed: false
+                    priority: 0
+                    created: '2008-09-22T18:16:05Z'
+                    workflow_process:
+                      process_id: 50002
+                      workflow_id: 131
+                      workflow_name: Aprobación Tercero
+                      id: 50002
+                      table_name: C_BPartner
+                      user_id: 100
+                      user_name: SuperUser
+                      responsible_id: 101
+                      responsible_name: Invoker
+                      text_message: ''
+                      processed: false
+                      workflow_state: SUSPENDED
+                      priority: URGENT
+                      workflow_events:
+                        - node_id: 244
+                          node_name: Socio del Negocio
+                          id: 50002
+                          table_name: C_BPartner
+                          user_id: 100
+                          user_name: SuperUser
+                          responsible_id: 100
+                          responsible_name: Organization
+                          text_message: ''
+                          time_elapsed: '0'
+                          attribute_name: ''
+                          old_value: ''
+                          new_value: ''
+                          workflow_state: SUSPENDED
+                          event_type: PROCESS_CREATED
+                          log_date: '2008-09-22T18:16:08Z'
+                      log_date: '2008-09-22T18:16:00Z'
+                    workflow:
+                      id: 131
+                      value: Business Partner Approval
+                      name: Aprobación Tercero
+                      description: Documento ejemplo basado en un flujo de trabajo
+                      help: >-
+                        Cuando un nuevo tercero es creado, éste es notificado
+                        para revisión y chequeo de crédito
+                      table_name: C_BPartner
+                      responsible_id: 0
+                      responsible_name: ''
+                      priority: 0
+                      is_default: false
+                      is_valid: true
+                      publish_status: RELEASED
+                      duration_unit: MINUTE
+                      start_node:
+                        id: 244
+                        value: Business Partner
+                        name: Socio del Negocio
+                        description: Mantener Socios del Negocio
+                        help: >-
+                          Esta ventana permite definir a cualquier ente con el
+                          cual se tenga relación de negocios (Socios del
+                          Negocio). Esto incluye clientes, proveedores y
+                          empleados. Antes de entrar o importar productos, es
+                          necesario definir proveedores. La ventana mantiene
+                          toda la información sobre los tercerso y los valores
+                          que aqui se definan, serán usados en todas las
+                          transacciones de documentos de la aplicación.
+                        responsible_id: 100
+                        responsible_name: Organization
+                        document_action_value: ''
+                        document_action_name: ''
+                        priority: 0
+                        action: USER_WINDOW
+                        transitions: []
+                      workflow_nodes:
+                        - id: 244
+                          value: Business Partner
+                          name: Socio del Negocio
+                          description: Mantener Socios del Negocio
+                          help: >-
+                            Esta ventana permite definir a cualquier ente con el
+                            cual se tenga relación de negocios (Socios del
+                            Negocio). Esto incluye clientes, proveedores y
+                            empleados. Antes de entrar o importar productos, es
+                            necesario definir proveedores. La ventana mantiene
+                            toda la información sobre los tercerso y los valores
+                            que aqui se definan, serán usados en todas las
+                            transacciones de documentos de la aplicación.
+                          responsible_id: 100
+                          responsible_name: Organization
+                          document_action_value: ''
+                          document_action_name: ''
+                          priority: 0
+                          action: USER_WINDOW
+                          transitions: []
+                    node:
+                      id: 244
+                      value: Business Partner
+                      name: Socio del Negocio
+                      description: Mantener Socios del Negocio
+                      help: >-
+                        Esta ventana permite definir a cualquier ente con el
+                        cual se tenga relación de negocios (Socios del Negocio).
+                        Esto incluye clientes, proveedores y empleados. Antes de
+                        entrar o importar productos, es necesario definir
+                        proveedores. La ventana mantiene toda la información
+                        sobre los tercerso y los valores que aqui se definan,
+                        serán usados en todas las transacciones de documentos de
+                        la aplicación.
+                      responsible_id: 100
+                      responsible_name: Organization
+                      document_action_value: ''
+                      document_action_name: ''
+                      priority: 0
+                      action: USER_WINDOW
+                      transitions: []
+                    zoom_windows:
+                      - id: 123
+                        name: Socio del Negocio
+                        description: Mantener Socios del Negocio
+                        is_sales_transaction: true
+                        is_active: false
+                    is_sales_transaction: false
+                  - id: 50003
+                    table_name: C_BPartner
+                    record_id: 50003
+                    user_id: 100
+                    user_name: SuperUser
+                    responsible_id: 100
+                    responsible_name: Organization
+                    text_message: ''
+                    processed: false
+                    priority: 0
+                    created: '2008-09-22T18:17:30Z'
+                    workflow_process:
+                      process_id: 50003
+                      workflow_id: 131
+                      workflow_name: Aprobación Tercero
+                      id: 50003
+                      table_name: C_BPartner
+                      user_id: 100
+                      user_name: SuperUser
+                      responsible_id: 101
+                      responsible_name: Invoker
+                      text_message: ''
+                      processed: false
+                      workflow_state: SUSPENDED
+                      priority: URGENT
+                      workflow_events:
+                        - node_id: 244
+                          node_name: Socio del Negocio
+                          id: 50003
+                          table_name: C_BPartner
+                          user_id: 100
+                          user_name: SuperUser
+                          responsible_id: 100
+                          responsible_name: Organization
+                          text_message: ''
+                          time_elapsed: '0'
+                          attribute_name: ''
+                          old_value: ''
+                          new_value: ''
+                          workflow_state: SUSPENDED
+                          event_type: PROCESS_CREATED
+                          log_date: '2008-09-22T18:17:34Z'
+                      log_date: '2008-09-22T18:17:29Z'
+                    workflow:
+                      id: 131
+                      value: Business Partner Approval
+                      name: Aprobación Tercero
+                      description: Documento ejemplo basado en un flujo de trabajo
+                      help: >-
+                        Cuando un nuevo tercero es creado, éste es notificado
+                        para revisión y chequeo de crédito
+                      table_name: C_BPartner
+                      responsible_id: 0
+                      responsible_name: ''
+                      priority: 0
+                      is_default: false
+                      is_valid: true
+                      publish_status: RELEASED
+                      duration_unit: MINUTE
+                      start_node:
+                        id: 244
+                        value: Business Partner
+                        name: Socio del Negocio
+                        description: Mantener Socios del Negocio
+                        help: >-
+                          Esta ventana permite definir a cualquier ente con el
+                          cual se tenga relación de negocios (Socios del
+                          Negocio). Esto incluye clientes, proveedores y
+                          empleados. Antes de entrar o importar productos, es
+                          necesario definir proveedores. La ventana mantiene
+                          toda la información sobre los tercerso y los valores
+                          que aqui se definan, serán usados en todas las
+                          transacciones de documentos de la aplicación.
+                        responsible_id: 100
+                        responsible_name: Organization
+                        document_action_value: ''
+                        document_action_name: ''
+                        priority: 0
+                        action: USER_WINDOW
+                        transitions: []
+                      workflow_nodes:
+                        - id: 244
+                          value: Business Partner
+                          name: Socio del Negocio
+                          description: Mantener Socios del Negocio
+                          help: >-
+                            Esta ventana permite definir a cualquier ente con el
+                            cual se tenga relación de negocios (Socios del
+                            Negocio). Esto incluye clientes, proveedores y
+                            empleados. Antes de entrar o importar productos, es
+                            necesario definir proveedores. La ventana mantiene
+                            toda la información sobre los tercerso y los valores
+                            que aqui se definan, serán usados en todas las
+                            transacciones de documentos de la aplicación.
+                          responsible_id: 100
+                          responsible_name: Organization
+                          document_action_value: ''
+                          document_action_name: ''
+                          priority: 0
+                          action: USER_WINDOW
+                          transitions: []
+                    node:
+                      id: 244
+                      value: Business Partner
+                      name: Socio del Negocio
+                      description: Mantener Socios del Negocio
+                      help: >-
+                        Esta ventana permite definir a cualquier ente con el
+                        cual se tenga relación de negocios (Socios del Negocio).
+                        Esto incluye clientes, proveedores y empleados. Antes de
+                        entrar o importar productos, es necesario definir
+                        proveedores. La ventana mantiene toda la información
+                        sobre los tercerso y los valores que aqui se definan,
+                        serán usados en todas las transacciones de documentos de
+                        la aplicación.
+                      responsible_id: 100
+                      responsible_name: Organization
+                      document_action_value: ''
+                      document_action_name: ''
+                      priority: 0
+                      action: USER_WINDOW
+                      transitions: []
+                    zoom_windows:
+                      - id: 123
+                        name: Socio del Negocio
+                        description: Mantener Socios del Negocio
+                        is_sales_transaction: true
+                        is_active: false
+                    is_sales_transaction: false
+                  - id: 50004
+                    table_name: C_BPartner
+                    record_id: 50004
+                    user_id: 100
+                    user_name: SuperUser
+                    responsible_id: 100
+                    responsible_name: Organization
+                    text_message: ''
+                    processed: false
+                    priority: 0
+                    created: '2008-09-24T19:14:16Z'
+                    workflow_process:
+                      process_id: 50004
+                      workflow_id: 131
+                      workflow_name: Aprobación Tercero
+                      id: 50004
+                      table_name: C_BPartner
+                      user_id: 100
+                      user_name: SuperUser
+                      responsible_id: 101
+                      responsible_name: Invoker
+                      text_message: ''
+                      processed: false
+                      workflow_state: SUSPENDED
+                      priority: URGENT
+                      workflow_events:
+                        - node_id: 244
+                          node_name: Socio del Negocio
+                          id: 50004
+                          table_name: C_BPartner
+                          user_id: 100
+                          user_name: SuperUser
+                          responsible_id: 100
+                          responsible_name: Organization
+                          text_message: ''
+                          time_elapsed: '0'
+                          attribute_name: ''
+                          old_value: ''
+                          new_value: ''
+                          workflow_state: SUSPENDED
+                          event_type: PROCESS_CREATED
+                          log_date: '2008-09-24T19:14:18Z'
+                      log_date: '2008-09-24T19:14:15Z'
+                    workflow:
+                      id: 131
+                      value: Business Partner Approval
+                      name: Aprobación Tercero
+                      description: Documento ejemplo basado en un flujo de trabajo
+                      help: >-
+                        Cuando un nuevo tercero es creado, éste es notificado
+                        para revisión y chequeo de crédito
+                      table_name: C_BPartner
+                      responsible_id: 0
+                      responsible_name: ''
+                      priority: 0
+                      is_default: false
+                      is_valid: true
+                      publish_status: RELEASED
+                      duration_unit: MINUTE
+                      start_node:
+                        id: 244
+                        value: Business Partner
+                        name: Socio del Negocio
+                        description: Mantener Socios del Negocio
+                        help: >-
+                          Esta ventana permite definir a cualquier ente con el
+                          cual se tenga relación de negocios (Socios del
+                          Negocio). Esto incluye clientes, proveedores y
+                          empleados. Antes de entrar o importar productos, es
+                          necesario definir proveedores. La ventana mantiene
+                          toda la información sobre los tercerso y los valores
+                          que aqui se definan, serán usados en todas las
+                          transacciones de documentos de la aplicación.
+                        responsible_id: 100
+                        responsible_name: Organization
+                        document_action_value: ''
+                        document_action_name: ''
+                        priority: 0
+                        action: USER_WINDOW
+                        transitions: []
+                      workflow_nodes:
+                        - id: 244
+                          value: Business Partner
+                          name: Socio del Negocio
+                          description: Mantener Socios del Negocio
+                          help: >-
+                            Esta ventana permite definir a cualquier ente con el
+                            cual se tenga relación de negocios (Socios del
+                            Negocio). Esto incluye clientes, proveedores y
+                            empleados. Antes de entrar o importar productos, es
+                            necesario definir proveedores. La ventana mantiene
+                            toda la información sobre los tercerso y los valores
+                            que aqui se definan, serán usados en todas las
+                            transacciones de documentos de la aplicación.
+                          responsible_id: 100
+                          responsible_name: Organization
+                          document_action_value: ''
+                          document_action_name: ''
+                          priority: 0
+                          action: USER_WINDOW
+                          transitions: []
+                    node:
+                      id: 244
+                      value: Business Partner
+                      name: Socio del Negocio
+                      description: Mantener Socios del Negocio
+                      help: >-
+                        Esta ventana permite definir a cualquier ente con el
+                        cual se tenga relación de negocios (Socios del Negocio).
+                        Esto incluye clientes, proveedores y empleados. Antes de
+                        entrar o importar productos, es necesario definir
+                        proveedores. La ventana mantiene toda la información
+                        sobre los tercerso y los valores que aqui se definan,
+                        serán usados en todas las transacciones de documentos de
+                        la aplicación.
+                      responsible_id: 100
+                      responsible_name: Organization
+                      document_action_value: ''
+                      document_action_name: ''
+                      priority: 0
+                      action: USER_WINDOW
+                      transitions: []
+                    zoom_windows:
+                      - id: 123
+                        name: Socio del Negocio
+                        description: Mantener Socios del Negocio
+                        is_sales_transaction: true
+                        is_active: false
+                    is_sales_transaction: false
+                  - id: 50005
+                    table_name: C_BPartner
+                    record_id: 50005
+                    user_id: 100
+                    user_name: SuperUser
+                    responsible_id: 100
+                    responsible_name: Organization
+                    text_message: ''
+                    processed: false
+                    priority: 0
+                    created: '2008-09-24T19:15:48Z'
+                    workflow_process:
+                      process_id: 50005
+                      workflow_id: 131
+                      workflow_name: Aprobación Tercero
+                      id: 50005
+                      table_name: C_BPartner
+                      user_id: 100
+                      user_name: SuperUser
+                      responsible_id: 101
+                      responsible_name: Invoker
+                      text_message: ''
+                      processed: false
+                      workflow_state: SUSPENDED
+                      priority: URGENT
+                      workflow_events:
+                        - node_id: 244
+                          node_name: Socio del Negocio
+                          id: 50005
+                          table_name: C_BPartner
+                          user_id: 100
+                          user_name: SuperUser
+                          responsible_id: 100
+                          responsible_name: Organization
+                          text_message: ''
+                          time_elapsed: '0'
+                          attribute_name: ''
+                          old_value: ''
+                          new_value: ''
+                          workflow_state: SUSPENDED
+                          event_type: PROCESS_CREATED
+                          log_date: '2008-09-24T19:15:49Z'
+                      log_date: '2008-09-24T19:15:47Z'
+                    workflow:
+                      id: 131
+                      value: Business Partner Approval
+                      name: Aprobación Tercero
+                      description: Documento ejemplo basado en un flujo de trabajo
+                      help: >-
+                        Cuando un nuevo tercero es creado, éste es notificado
+                        para revisión y chequeo de crédito
+                      table_name: C_BPartner
+                      responsible_id: 0
+                      responsible_name: ''
+                      priority: 0
+                      is_default: false
+                      is_valid: true
+                      publish_status: RELEASED
+                      duration_unit: MINUTE
+                      start_node:
+                        id: 244
+                        value: Business Partner
+                        name: Socio del Negocio
+                        description: Mantener Socios del Negocio
+                        help: >-
+                          Esta ventana permite definir a cualquier ente con el
+                          cual se tenga relación de negocios (Socios del
+                          Negocio). Esto incluye clientes, proveedores y
+                          empleados. Antes de entrar o importar productos, es
+                          necesario definir proveedores. La ventana mantiene
+                          toda la información sobre los tercerso y los valores
+                          que aqui se definan, serán usados en todas las
+                          transacciones de documentos de la aplicación.
+                        responsible_id: 100
+                        responsible_name: Organization
+                        document_action_value: ''
+                        document_action_name: ''
+                        priority: 0
+                        action: USER_WINDOW
+                        transitions: []
+                      workflow_nodes:
+                        - id: 244
+                          value: Business Partner
+                          name: Socio del Negocio
+                          description: Mantener Socios del Negocio
+                          help: >-
+                            Esta ventana permite definir a cualquier ente con el
+                            cual se tenga relación de negocios (Socios del
+                            Negocio). Esto incluye clientes, proveedores y
+                            empleados. Antes de entrar o importar productos, es
+                            necesario definir proveedores. La ventana mantiene
+                            toda la información sobre los tercerso y los valores
+                            que aqui se definan, serán usados en todas las
+                            transacciones de documentos de la aplicación.
+                          responsible_id: 100
+                          responsible_name: Organization
+                          document_action_value: ''
+                          document_action_name: ''
+                          priority: 0
+                          action: USER_WINDOW
+                          transitions: []
+                    node:
+                      id: 244
+                      value: Business Partner
+                      name: Socio del Negocio
+                      description: Mantener Socios del Negocio
+                      help: >-
+                        Esta ventana permite definir a cualquier ente con el
+                        cual se tenga relación de negocios (Socios del Negocio).
+                        Esto incluye clientes, proveedores y empleados. Antes de
+                        entrar o importar productos, es necesario definir
+                        proveedores. La ventana mantiene toda la información
+                        sobre los tercerso y los valores que aqui se definan,
+                        serán usados en todas las transacciones de documentos de
+                        la aplicación.
+                      responsible_id: 100
+                      responsible_name: Organization
+                      document_action_value: ''
+                      document_action_name: ''
+                      priority: 0
+                      action: USER_WINDOW
+                      transitions: []
+                    zoom_windows:
+                      - id: 123
+                        name: Socio del Negocio
+                        description: Mantener Socios del Negocio
+                        is_sales_transaction: true
+                        is_active: false
+                    is_sales_transaction: false
+                  - id: 50007
+                    table_name: C_BPartner
+                    record_id: 50007
+                    user_id: 100
+                    user_name: SuperUser
+                    responsible_id: 100
+                    responsible_name: Organization
+                    text_message: ''
+                    processed: false
+                    priority: 0
+                    created: '2008-09-24T19:18:34Z'
+                    workflow_process:
+                      process_id: 50007
+                      workflow_id: 131
+                      workflow_name: Aprobación Tercero
+                      id: 50007
+                      table_name: C_BPartner
+                      user_id: 100
+                      user_name: SuperUser
+                      responsible_id: 101
+                      responsible_name: Invoker
+                      text_message: ''
+                      processed: false
+                      workflow_state: SUSPENDED
+                      priority: URGENT
+                      workflow_events:
+                        - node_id: 244
+                          node_name: Socio del Negocio
+                          id: 50007
+                          table_name: C_BPartner
+                          user_id: 100
+                          user_name: SuperUser
+                          responsible_id: 100
+                          responsible_name: Organization
+                          text_message: ''
+                          time_elapsed: '0'
+                          attribute_name: ''
+                          old_value: ''
+                          new_value: ''
+                          workflow_state: SUSPENDED
+                          event_type: PROCESS_CREATED
+                          log_date: '2008-09-24T19:18:35Z'
+                      log_date: '2008-09-24T19:18:34Z'
+                    workflow:
+                      id: 131
+                      value: Business Partner Approval
+                      name: Aprobación Tercero
+                      description: Documento ejemplo basado en un flujo de trabajo
+                      help: >-
+                        Cuando un nuevo tercero es creado, éste es notificado
+                        para revisión y chequeo de crédito
+                      table_name: C_BPartner
+                      responsible_id: 0
+                      responsible_name: ''
+                      priority: 0
+                      is_default: false
+                      is_valid: true
+                      publish_status: RELEASED
+                      duration_unit: MINUTE
+                      start_node:
+                        id: 244
+                        value: Business Partner
+                        name: Socio del Negocio
+                        description: Mantener Socios del Negocio
+                        help: >-
+                          Esta ventana permite definir a cualquier ente con el
+                          cual se tenga relación de negocios (Socios del
+                          Negocio). Esto incluye clientes, proveedores y
+                          empleados. Antes de entrar o importar productos, es
+                          necesario definir proveedores. La ventana mantiene
+                          toda la información sobre los tercerso y los valores
+                          que aqui se definan, serán usados en todas las
+                          transacciones de documentos de la aplicación.
+                        responsible_id: 100
+                        responsible_name: Organization
+                        document_action_value: ''
+                        document_action_name: ''
+                        priority: 0
+                        action: USER_WINDOW
+                        transitions: []
+                      workflow_nodes:
+                        - id: 244
+                          value: Business Partner
+                          name: Socio del Negocio
+                          description: Mantener Socios del Negocio
+                          help: >-
+                            Esta ventana permite definir a cualquier ente con el
+                            cual se tenga relación de negocios (Socios del
+                            Negocio). Esto incluye clientes, proveedores y
+                            empleados. Antes de entrar o importar productos, es
+                            necesario definir proveedores. La ventana mantiene
+                            toda la información sobre los tercerso y los valores
+                            que aqui se definan, serán usados en todas las
+                            transacciones de documentos de la aplicación.
+                          responsible_id: 100
+                          responsible_name: Organization
+                          document_action_value: ''
+                          document_action_name: ''
+                          priority: 0
+                          action: USER_WINDOW
+                          transitions: []
+                    node:
+                      id: 244
+                      value: Business Partner
+                      name: Socio del Negocio
+                      description: Mantener Socios del Negocio
+                      help: >-
+                        Esta ventana permite definir a cualquier ente con el
+                        cual se tenga relación de negocios (Socios del Negocio).
+                        Esto incluye clientes, proveedores y empleados. Antes de
+                        entrar o importar productos, es necesario definir
+                        proveedores. La ventana mantiene toda la información
+                        sobre los tercerso y los valores que aqui se definan,
+                        serán usados en todas las transacciones de documentos de
+                        la aplicación.
+                      responsible_id: 100
+                      responsible_name: Organization
+                      document_action_value: ''
+                      document_action_name: ''
+                      priority: 0
+                      action: USER_WINDOW
+                      transitions: []
+                    zoom_windows:
+                      - id: 123
+                        name: Socio del Negocio
+                        description: Mantener Socios del Negocio
+                        is_sales_transaction: true
+                        is_active: false
+                    is_sales_transaction: false
+                  - id: 50008
+                    table_name: C_BPartner
+                    record_id: 50008
+                    user_id: 100
+                    user_name: SuperUser
+                    responsible_id: 100
+                    responsible_name: Organization
+                    text_message: ''
+                    processed: false
+                    priority: 0
+                    created: '2008-09-24T19:19:41Z'
+                    workflow_process:
+                      process_id: 50008
+                      workflow_id: 131
+                      workflow_name: Aprobación Tercero
+                      id: 50008
+                      table_name: C_BPartner
+                      user_id: 100
+                      user_name: SuperUser
+                      responsible_id: 101
+                      responsible_name: Invoker
+                      text_message: ''
+                      processed: false
+                      workflow_state: SUSPENDED
+                      priority: URGENT
+                      workflow_events:
+                        - node_id: 244
+                          node_name: Socio del Negocio
+                          id: 50008
+                          table_name: C_BPartner
+                          user_id: 100
+                          user_name: SuperUser
+                          responsible_id: 100
+                          responsible_name: Organization
+                          text_message: ''
+                          time_elapsed: '0'
+                          attribute_name: ''
+                          old_value: ''
+                          new_value: ''
+                          workflow_state: SUSPENDED
+                          event_type: PROCESS_CREATED
+                          log_date: '2008-09-24T19:19:42Z'
+                      log_date: '2008-09-24T19:19:39Z'
+                    workflow:
+                      id: 131
+                      value: Business Partner Approval
+                      name: Aprobación Tercero
+                      description: Documento ejemplo basado en un flujo de trabajo
+                      help: >-
+                        Cuando un nuevo tercero es creado, éste es notificado
+                        para revisión y chequeo de crédito
+                      table_name: C_BPartner
+                      responsible_id: 0
+                      responsible_name: ''
+                      priority: 0
+                      is_default: false
+                      is_valid: true
+                      publish_status: RELEASED
+                      duration_unit: MINUTE
+                      start_node:
+                        id: 244
+                        value: Business Partner
+                        name: Socio del Negocio
+                        description: Mantener Socios del Negocio
+                        help: >-
+                          Esta ventana permite definir a cualquier ente con el
+                          cual se tenga relación de negocios (Socios del
+                          Negocio). Esto incluye clientes, proveedores y
+                          empleados. Antes de entrar o importar productos, es
+                          necesario definir proveedores. La ventana mantiene
+                          toda la información sobre los tercerso y los valores
+                          que aqui se definan, serán usados en todas las
+                          transacciones de documentos de la aplicación.
+                        responsible_id: 100
+                        responsible_name: Organization
+                        document_action_value: ''
+                        document_action_name: ''
+                        priority: 0
+                        action: USER_WINDOW
+                        transitions: []
+                      workflow_nodes:
+                        - id: 244
+                          value: Business Partner
+                          name: Socio del Negocio
+                          description: Mantener Socios del Negocio
+                          help: >-
+                            Esta ventana permite definir a cualquier ente con el
+                            cual se tenga relación de negocios (Socios del
+                            Negocio). Esto incluye clientes, proveedores y
+                            empleados. Antes de entrar o importar productos, es
+                            necesario definir proveedores. La ventana mantiene
+                            toda la información sobre los tercerso y los valores
+                            que aqui se definan, serán usados en todas las
+                            transacciones de documentos de la aplicación.
+                          responsible_id: 100
+                          responsible_name: Organization
+                          document_action_value: ''
+                          document_action_name: ''
+                          priority: 0
+                          action: USER_WINDOW
+                          transitions: []
+                    node:
+                      id: 244
+                      value: Business Partner
+                      name: Socio del Negocio
+                      description: Mantener Socios del Negocio
+                      help: >-
+                        Esta ventana permite definir a cualquier ente con el
+                        cual se tenga relación de negocios (Socios del Negocio).
+                        Esto incluye clientes, proveedores y empleados. Antes de
+                        entrar o importar productos, es necesario definir
+                        proveedores. La ventana mantiene toda la información
+                        sobre los tercerso y los valores que aqui se definan,
+                        serán usados en todas las transacciones de documentos de
+                        la aplicación.
+                      responsible_id: 100
+                      responsible_name: Organization
+                      document_action_value: ''
+                      document_action_name: ''
+                      priority: 0
+                      action: USER_WINDOW
+                      transitions: []
+                    zoom_windows:
+                      - id: 123
+                        name: Socio del Negocio
+                        description: Mantener Socios del Negocio
+                        is_sales_transaction: true
+                        is_active: false
+                    is_sales_transaction: false
+                  - id: 50009
+                    table_name: C_BPartner
+                    record_id: 50009
+                    user_id: 100
+                    user_name: SuperUser
+                    responsible_id: 100
+                    responsible_name: Organization
+                    text_message: ''
+                    processed: false
+                    priority: 0
+                    created: '2008-09-24T19:20:37Z'
+                    workflow_process:
+                      process_id: 50009
+                      workflow_id: 131
+                      workflow_name: Aprobación Tercero
+                      id: 50009
+                      table_name: C_BPartner
+                      user_id: 100
+                      user_name: SuperUser
+                      responsible_id: 101
+                      responsible_name: Invoker
+                      text_message: ''
+                      processed: false
+                      workflow_state: SUSPENDED
+                      priority: URGENT
+                      workflow_events:
+                        - node_id: 244
+                          node_name: Socio del Negocio
+                          id: 50009
+                          table_name: C_BPartner
+                          user_id: 100
+                          user_name: SuperUser
+                          responsible_id: 100
+                          responsible_name: Organization
+                          text_message: ''
+                          time_elapsed: '0'
+                          attribute_name: ''
+                          old_value: ''
+                          new_value: ''
+                          workflow_state: SUSPENDED
+                          event_type: PROCESS_CREATED
+                          log_date: '2008-09-24T19:20:37Z'
+                      log_date: '2008-09-24T19:20:36Z'
+                    workflow:
+                      id: 131
+                      value: Business Partner Approval
+                      name: Aprobación Tercero
+                      description: Documento ejemplo basado en un flujo de trabajo
+                      help: >-
+                        Cuando un nuevo tercero es creado, éste es notificado
+                        para revisión y chequeo de crédito
+                      table_name: C_BPartner
+                      responsible_id: 0
+                      responsible_name: ''
+                      priority: 0
+                      is_default: false
+                      is_valid: true
+                      publish_status: RELEASED
+                      duration_unit: MINUTE
+                      start_node:
+                        id: 244
+                        value: Business Partner
+                        name: Socio del Negocio
+                        description: Mantener Socios del Negocio
+                        help: >-
+                          Esta ventana permite definir a cualquier ente con el
+                          cual se tenga relación de negocios (Socios del
+                          Negocio). Esto incluye clientes, proveedores y
+                          empleados. Antes de entrar o importar productos, es
+                          necesario definir proveedores. La ventana mantiene
+                          toda la información sobre los tercerso y los valores
+                          que aqui se definan, serán usados en todas las
+                          transacciones de documentos de la aplicación.
+                        responsible_id: 100
+                        responsible_name: Organization
+                        document_action_value: ''
+                        document_action_name: ''
+                        priority: 0
+                        action: USER_WINDOW
+                        transitions: []
+                      workflow_nodes:
+                        - id: 244
+                          value: Business Partner
+                          name: Socio del Negocio
+                          description: Mantener Socios del Negocio
+                          help: >-
+                            Esta ventana permite definir a cualquier ente con el
+                            cual se tenga relación de negocios (Socios del
+                            Negocio). Esto incluye clientes, proveedores y
+                            empleados. Antes de entrar o importar productos, es
+                            necesario definir proveedores. La ventana mantiene
+                            toda la información sobre los tercerso y los valores
+                            que aqui se definan, serán usados en todas las
+                            transacciones de documentos de la aplicación.
+                          responsible_id: 100
+                          responsible_name: Organization
+                          document_action_value: ''
+                          document_action_name: ''
+                          priority: 0
+                          action: USER_WINDOW
+                          transitions: []
+                    node:
+                      id: 244
+                      value: Business Partner
+                      name: Socio del Negocio
+                      description: Mantener Socios del Negocio
+                      help: >-
+                        Esta ventana permite definir a cualquier ente con el
+                        cual se tenga relación de negocios (Socios del Negocio).
+                        Esto incluye clientes, proveedores y empleados. Antes de
+                        entrar o importar productos, es necesario definir
+                        proveedores. La ventana mantiene toda la información
+                        sobre los tercerso y los valores que aqui se definan,
+                        serán usados en todas las transacciones de documentos de
+                        la aplicación.
+                      responsible_id: 100
+                      responsible_name: Organization
+                      document_action_value: ''
+                      document_action_name: ''
+                      priority: 0
+                      action: USER_WINDOW
+                      transitions: []
+                    zoom_windows:
+                      - id: 123
+                        name: Socio del Negocio
+                        description: Mantener Socios del Negocio
+                        is_sales_transaction: true
+                        is_active: false
+                    is_sales_transaction: false
+                next_page_token: ''
+  /workflow/workflows/{id}/process:
+    post:
+      tags:
+        - default
+      summary: Process
+      description: |-
+        ### Request Params
+
+        - id (int32, required)
+            
+
+        ### Request Body
+
+        - message (String)
+            
+        - is_approved (String)
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                message: hola
+                is_approved: false
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: integer
+          required: true
+          example: '50000'
+      responses:
+        '200':
+          description: OK
+          headers:
+            Server:
+              schema:
+                type: string
+                example: nginx/1.25.2
+            Date:
+              schema:
+                type: string
+                example: Fri, 08 Mar 2024 12:38:11 GMT
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Content-Length:
+              schema:
+                type: integer
+                example: '3'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            grpc-encoding:
+              schema:
+                type: string
+                example: identity
+            grpc-accept-encoding:
+              schema:
+                type: string
+                example: gzip
+            x-envoy-upstream-service-time:
+              schema:
+                type: integer
+                example: '176'
+            grpc-status:
+              schema:
+                type: integer
+                example: '0'
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Max-Age:
+              schema:
+                type: integer
+                example: '3600'
+            Access-Control-Expose-Headers:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+                example: '*'
+          content:
+            application/json:
+              schema:
+                type: object
+              example: {}
+  /workflow/workflows/{id}/forward:
+    post:
+      tags:
+        - default
+      summary: Forward
+      description: |-
+        ### Request Params
+
+        - id (int32, required)
+            
+
+        ### Request Body
+
+        - message (String)
+        - user_id (int32, required)
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                message: mensaje
+                user_id: 100
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: integer
+          required: true
+          example: '50000'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /workflow/workflows/run-action/{table_name}/{id}/{document_action}:
+    post:
+      tags:
+        - default
+      summary: RunDocumentAction
+      description: |-
+        ### Request Params
+
+        - table_name (String, required)
+            
+        - id (int32, required)
+            
+        - document_action (String, required)
+      requestBody:
+        content: {}
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: table_name
+          in: path
+          schema:
+            type: string
+          required: true
+          example: C_Order
+        - name: id
+          in: path
+          schema:
+            type: integer
+          required: true
+          example: '106'
+        - name: document_action
+          in: path
+          schema:
+            type: string
+          required: true
+          example: JPG
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}

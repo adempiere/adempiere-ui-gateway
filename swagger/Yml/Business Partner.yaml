@@ -1,0 +1,1870 @@
+openapi: 3.0.0
+info:
+  title: Business Partner
+  version: 1.0.0
+servers:
+  - url: http://{{host}}
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+paths:
+  /field/business-partners/table/{table_name}/{column_name}:
+    get:
+      tags:
+        - default
+      summary: businnes-parners_tableName_columnNAme
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: table_name
+          in: path
+          schema:
+            type: string
+          required: true
+          example: AD_Window
+        - name: column_name
+          in: path
+          schema:
+            type: string
+          required: true
+          example: AD_Window_ID
+      responses:
+        '200':
+          description: OK
+          headers:
+            Server:
+              schema:
+                type: string
+                example: nginx/1.25.2
+            Date:
+              schema:
+                type: string
+                example: Wed, 13 Mar 2024 20:33:37 GMT
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Content-Length:
+              schema:
+                type: integer
+                example: '7910'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            grpc-encoding:
+              schema:
+                type: string
+                example: identity
+            grpc-accept-encoding:
+              schema:
+                type: string
+                example: gzip
+            x-envoy-upstream-service-time:
+              schema:
+                type: integer
+                example: '154'
+            grpc-status:
+              schema:
+                type: integer
+                example: '0'
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Max-Age:
+              schema:
+                type: integer
+                example: '3600'
+            Access-Control-Expose-Headers:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+                example: '*'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                record_count: '19'
+                records:
+                  - id: 1000000
+                    uuid: d75d2f7f-3af5-4bb7-bba4-1d53fa1e44a9
+                    display_value: Prueba
+                    value: '10000000'
+                    tax_id: ''
+                    name: Prueba
+                    name2: ''
+                    description: Walk-In Customer
+                    business_partner_group: Standard Customers
+                    open_balance_amount: '0'
+                    credit_available_amount: '0'
+                    credit_used_amount: '0'
+                    revenue_amount: '0'
+                    is_active: true
+                  - id: 1000001
+                    uuid: 66dda445-3600-442b-9e08-7824974d9a2e
+                    display_value: Prueba
+                    value: '10000001'
+                    tax_id: ''
+                    name: Prueba
+                    name2: ''
+                    description: Walk-In Customer
+                    business_partner_group: Standard Customers
+                    open_balance_amount: '0'
+                    credit_available_amount: '0'
+                    credit_used_amount: '0'
+                    revenue_amount: '0'
+                    is_active: true
+                  - id: 50003
+                    uuid: b14b6c53-ca82-4dbc-841a-640b04de76bb
+                    display_value: Chemical Product, inc
+                    value: Chemical Product, inc
+                    tax_id: ''
+                    name: Chemical Product, inc
+                    name2: ''
+                    description: ''
+                    business_partner_group: Vendors
+                    open_balance_amount: '0'
+                    credit_available_amount: '0'
+                    credit_used_amount: '0'
+                    revenue_amount: '0'
+                    is_active: true
+                  - id: 50002
+                    uuid: f472cd49-4f19-4fc3-856a-cb9038cf2924
+                    display_value: Chrome, Inc
+                    value: Chrome, Inc
+                    tax_id: ''
+                    name: Chrome, Inc
+                    name2: ''
+                    description: ''
+                    business_partner_group: Vendors
+                    open_balance_amount: '0'
+                    credit_available_amount: '0'
+                    credit_used_amount: '0'
+                    revenue_amount: '0'
+                    is_active: true
+                  - id: 50001
+                    uuid: 5e616d3e-c55b-4ede-9b0e-ac3ae834556b
+                    display_value: Color, Inc
+                    value: Color, Inc
+                    tax_id: ''
+                    name: Color, Inc
+                    name2: ''
+                    description: ''
+                    business_partner_group: Vendors
+                    open_balance_amount: '0'
+                    credit_available_amount: '0'
+                    credit_used_amount: '0'
+                    revenue_amount: '0'
+                    is_active: true
+                  - id: 117
+                    uuid: b7bafd8e-ae3b-4bbc-9a0d-d47fdbef390f
+                    display_value: C&W Construction
+                    value: C&W
+                    tax_id: ''
+                    name: C&W Construction
+                    name2: Unlimited Projects Corp.
+                    description: ''
+                    business_partner_group: Standard Customers
+                    open_balance_amount: '161.12'
+                    credit_available_amount: '9838.88'
+                    credit_used_amount: '161.12'
+                    revenue_amount: '161.12'
+                    is_active: true
+                  - id: 113
+                    uuid: d430bdde-e5e4-476b-8dc9-4b0b5d5b02cc
+                    display_value: GardenAdmin BP
+                    value: GardenAdmin
+                    tax_id: ''
+                    name: GardenAdmin BP
+                    name2: ''
+                    description: ''
+                    business_partner_group: Staff
+                    open_balance_amount: '0.00'
+                    credit_available_amount: '-999.33'
+                    credit_used_amount: '999.33'
+                    revenue_amount: '1000.00'
+                    is_active: true
+                  - id: 119
+                    uuid: 0b870ceb-a34f-4876-8225-0053f11385d2
+                    display_value: GardenUser BP
+                    value: GardenUser
+                    tax_id: ''
+                    name: GardenUser BP
+                    name2: ''
+                    description: ''
+                    business_partner_group: Staff
+                    open_balance_amount: '0'
+                    credit_available_amount: '0'
+                    credit_used_amount: '0'
+                    revenue_amount: '0'
+                    is_active: true
+                  - id: 118
+                    uuid: c3cfeb5f-1b2f-4f4b-a16c-d9cda23f59e1
+                    display_value: Joe Block
+                    value: JoeBlock
+                    tax_id: ''
+                    name: Joe Block
+                    name2: ''
+                    description: ''
+                    business_partner_group: Standard Customers
+                    open_balance_amount: '503.48'
+                    credit_available_amount: '9748.26'
+                    credit_used_amount: '251.74'
+                    revenue_amount: '251.73'
+                    is_active: true
+                  - id: 121
+                    uuid: ca5b584a-c9e8-448f-a388-8ac7c0f02501
+                    display_value: Patio Fun, Inc.
+                    value: Patio
+                    tax_id: ''
+                    name: Patio Fun, Inc.
+                    name2: ''
+                    description: ''
+                    business_partner_group: Vendors
+                    open_balance_amount: '-2160'
+                    credit_available_amount: '0'
+                    credit_used_amount: '0'
+                    revenue_amount: '0'
+                    is_active: true
+                  - id: 120
+                    uuid: 2ad2a623-3d1f-47f4-969a-f44f7a05481f
+                    display_value: Seed Farm Inc.
+                    value: SeedFarm
+                    tax_id: ''
+                    name: Seed Farm Inc.
+                    name2: ''
+                    description: Customer & Vendor
+                    business_partner_group: Vendors
+                    open_balance_amount: '-2731.5'
+                    credit_available_amount: '0'
+                    credit_used_amount: '0'
+                    revenue_amount: '0'
+                    is_active: true
+                  - id: 112
+                    uuid: f5388c95-7424-447d-85de-91424f9da147
+                    display_value: Standard
+                    value: Standard
+                    tax_id: ''
+                    name: Standard
+                    name2: ''
+                    description: Walk-In Customer
+                    business_partner_group: Standard Customers
+                    open_balance_amount: '0'
+                    credit_available_amount: '0'
+                    credit_used_amount: '0'
+                    revenue_amount: '151.05'
+                    is_active: true
+                  - id: 50004
+                    uuid: 8b894863-afbe-4384-a8ed-bf0325a5ec25
+                    display_value: Store Central
+                    value: Store Central
+                    tax_id: ''
+                    name: Store Central
+                    name2: ''
+                    description: ''
+                    business_partner_group: Staff
+                    open_balance_amount: '0'
+                    credit_available_amount: '0'
+                    credit_used_amount: '0'
+                    revenue_amount: '0'
+                    is_active: true
+                  - id: 50005
+                    uuid: c6c2de1e-2f0f-4ef8-b7f3-29d80d0cfdb8
+                    display_value: Store East
+                    value: Store East
+                    tax_id: ''
+                    name: Store East
+                    name2: ''
+                    description: ''
+                    business_partner_group: Staff
+                    open_balance_amount: '0'
+                    credit_available_amount: '0'
+                    credit_used_amount: '0'
+                    revenue_amount: '0'
+                    is_active: true
+                  - id: 50007
+                    uuid: 01c65f4b-272c-4fb6-b12a-089d207cadb8
+                    display_value: Store North
+                    value: Store North
+                    tax_id: ''
+                    name: Store North
+                    name2: ''
+                    description: ''
+                    business_partner_group: Staff
+                    open_balance_amount: '0'
+                    credit_available_amount: '0'
+                    credit_used_amount: '0'
+                    revenue_amount: '0'
+                    is_active: true
+                  - id: 50008
+                    uuid: 88f0d79e-bc97-447d-8245-91bd79c0dcf7
+                    display_value: Store South
+                    value: Store South
+                    tax_id: ''
+                    name: Store South
+                    name2: ''
+                    description: ''
+                    business_partner_group: Staff
+                    open_balance_amount: '0'
+                    credit_available_amount: '0'
+                    credit_used_amount: '0'
+                    revenue_amount: '0'
+                    is_active: true
+                  - id: 50009
+                    uuid: b419cad9-bb5b-4a2f-bbdb-1c3c70657408
+                    display_value: Store West
+                    value: Store West
+                    tax_id: ''
+                    name: Store West
+                    name2: ''
+                    description: ''
+                    business_partner_group: Staff
+                    open_balance_amount: '0'
+                    credit_available_amount: '0'
+                    credit_used_amount: '0'
+                    revenue_amount: '0'
+                    is_active: true
+                  - id: 114
+                    uuid: 254e660c-4863-460a-8a69-2b75f6461a33
+                    display_value: Tree Farm Inc.
+                    value: TreeFarm
+                    tax_id: ''
+                    name: Tree Farm Inc.
+                    name2: ''
+                    description: Vendor
+                    business_partner_group: Vendors
+                    open_balance_amount: '-4217.5'
+                    credit_available_amount: '0'
+                    credit_used_amount: '0'
+                    revenue_amount: '0'
+                    is_active: true
+                  - id: 50000
+                    uuid: 2d96ae84-d50e-447a-bdb7-496242fd846f
+                    display_value: Wood, Inc
+                    value: Wood, Inc
+                    tax_id: ''
+                    name: Wood, Inc
+                    name2: ''
+                    description: ''
+                    business_partner_group: Vendors
+                    open_balance_amount: '0'
+                    credit_available_amount: '0'
+                    credit_used_amount: '0'
+                    revenue_amount: '0'
+                    is_active: true
+                next_page_token: ''
+  /field/business-partners/column/{column_id}:
+    get:
+      tags:
+        - default
+      summary: businnes-parners_columnID
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: column_id
+          in: path
+          schema:
+            type: integer
+          required: true
+          example: '809'
+      responses:
+        '200':
+          description: OK
+          headers:
+            Server:
+              schema:
+                type: string
+                example: nginx/1.25.2
+            Date:
+              schema:
+                type: string
+                example: Wed, 13 Mar 2024 20:46:24 GMT
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Content-Length:
+              schema:
+                type: integer
+                example: '7910'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            grpc-encoding:
+              schema:
+                type: string
+                example: identity
+            grpc-accept-encoding:
+              schema:
+                type: string
+                example: gzip
+            x-envoy-upstream-service-time:
+              schema:
+                type: integer
+                example: '156'
+            grpc-status:
+              schema:
+                type: integer
+                example: '0'
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Max-Age:
+              schema:
+                type: integer
+                example: '3600'
+            Access-Control-Expose-Headers:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+                example: '*'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                record_count: '19'
+                records:
+                  - id: 1000000
+                    uuid: d75d2f7f-3af5-4bb7-bba4-1d53fa1e44a9
+                    display_value: Prueba
+                    value: '10000000'
+                    tax_id: ''
+                    name: Prueba
+                    name2: ''
+                    description: Walk-In Customer
+                    business_partner_group: Standard Customers
+                    open_balance_amount: '0'
+                    credit_available_amount: '0'
+                    credit_used_amount: '0'
+                    revenue_amount: '0'
+                    is_active: true
+                  - id: 1000001
+                    uuid: 66dda445-3600-442b-9e08-7824974d9a2e
+                    display_value: Prueba
+                    value: '10000001'
+                    tax_id: ''
+                    name: Prueba
+                    name2: ''
+                    description: Walk-In Customer
+                    business_partner_group: Standard Customers
+                    open_balance_amount: '0'
+                    credit_available_amount: '0'
+                    credit_used_amount: '0'
+                    revenue_amount: '0'
+                    is_active: true
+                  - id: 50003
+                    uuid: b14b6c53-ca82-4dbc-841a-640b04de76bb
+                    display_value: Chemical Product, inc
+                    value: Chemical Product, inc
+                    tax_id: ''
+                    name: Chemical Product, inc
+                    name2: ''
+                    description: ''
+                    business_partner_group: Vendors
+                    open_balance_amount: '0'
+                    credit_available_amount: '0'
+                    credit_used_amount: '0'
+                    revenue_amount: '0'
+                    is_active: true
+                  - id: 50002
+                    uuid: f472cd49-4f19-4fc3-856a-cb9038cf2924
+                    display_value: Chrome, Inc
+                    value: Chrome, Inc
+                    tax_id: ''
+                    name: Chrome, Inc
+                    name2: ''
+                    description: ''
+                    business_partner_group: Vendors
+                    open_balance_amount: '0'
+                    credit_available_amount: '0'
+                    credit_used_amount: '0'
+                    revenue_amount: '0'
+                    is_active: true
+                  - id: 50001
+                    uuid: 5e616d3e-c55b-4ede-9b0e-ac3ae834556b
+                    display_value: Color, Inc
+                    value: Color, Inc
+                    tax_id: ''
+                    name: Color, Inc
+                    name2: ''
+                    description: ''
+                    business_partner_group: Vendors
+                    open_balance_amount: '0'
+                    credit_available_amount: '0'
+                    credit_used_amount: '0'
+                    revenue_amount: '0'
+                    is_active: true
+                  - id: 117
+                    uuid: b7bafd8e-ae3b-4bbc-9a0d-d47fdbef390f
+                    display_value: C&W Construction
+                    value: C&W
+                    tax_id: ''
+                    name: C&W Construction
+                    name2: Unlimited Projects Corp.
+                    description: ''
+                    business_partner_group: Standard Customers
+                    open_balance_amount: '161.12'
+                    credit_available_amount: '9838.88'
+                    credit_used_amount: '161.12'
+                    revenue_amount: '161.12'
+                    is_active: true
+                  - id: 113
+                    uuid: d430bdde-e5e4-476b-8dc9-4b0b5d5b02cc
+                    display_value: GardenAdmin BP
+                    value: GardenAdmin
+                    tax_id: ''
+                    name: GardenAdmin BP
+                    name2: ''
+                    description: ''
+                    business_partner_group: Staff
+                    open_balance_amount: '0.00'
+                    credit_available_amount: '-999.33'
+                    credit_used_amount: '999.33'
+                    revenue_amount: '1000.00'
+                    is_active: true
+                  - id: 119
+                    uuid: 0b870ceb-a34f-4876-8225-0053f11385d2
+                    display_value: GardenUser BP
+                    value: GardenUser
+                    tax_id: ''
+                    name: GardenUser BP
+                    name2: ''
+                    description: ''
+                    business_partner_group: Staff
+                    open_balance_amount: '0'
+                    credit_available_amount: '0'
+                    credit_used_amount: '0'
+                    revenue_amount: '0'
+                    is_active: true
+                  - id: 118
+                    uuid: c3cfeb5f-1b2f-4f4b-a16c-d9cda23f59e1
+                    display_value: Joe Block
+                    value: JoeBlock
+                    tax_id: ''
+                    name: Joe Block
+                    name2: ''
+                    description: ''
+                    business_partner_group: Standard Customers
+                    open_balance_amount: '503.48'
+                    credit_available_amount: '9748.26'
+                    credit_used_amount: '251.74'
+                    revenue_amount: '251.73'
+                    is_active: true
+                  - id: 121
+                    uuid: ca5b584a-c9e8-448f-a388-8ac7c0f02501
+                    display_value: Patio Fun, Inc.
+                    value: Patio
+                    tax_id: ''
+                    name: Patio Fun, Inc.
+                    name2: ''
+                    description: ''
+                    business_partner_group: Vendors
+                    open_balance_amount: '-2160'
+                    credit_available_amount: '0'
+                    credit_used_amount: '0'
+                    revenue_amount: '0'
+                    is_active: true
+                  - id: 120
+                    uuid: 2ad2a623-3d1f-47f4-969a-f44f7a05481f
+                    display_value: Seed Farm Inc.
+                    value: SeedFarm
+                    tax_id: ''
+                    name: Seed Farm Inc.
+                    name2: ''
+                    description: Customer & Vendor
+                    business_partner_group: Vendors
+                    open_balance_amount: '-2731.5'
+                    credit_available_amount: '0'
+                    credit_used_amount: '0'
+                    revenue_amount: '0'
+                    is_active: true
+                  - id: 112
+                    uuid: f5388c95-7424-447d-85de-91424f9da147
+                    display_value: Standard
+                    value: Standard
+                    tax_id: ''
+                    name: Standard
+                    name2: ''
+                    description: Walk-In Customer
+                    business_partner_group: Standard Customers
+                    open_balance_amount: '0'
+                    credit_available_amount: '0'
+                    credit_used_amount: '0'
+                    revenue_amount: '151.05'
+                    is_active: true
+                  - id: 50004
+                    uuid: 8b894863-afbe-4384-a8ed-bf0325a5ec25
+                    display_value: Store Central
+                    value: Store Central
+                    tax_id: ''
+                    name: Store Central
+                    name2: ''
+                    description: ''
+                    business_partner_group: Staff
+                    open_balance_amount: '0'
+                    credit_available_amount: '0'
+                    credit_used_amount: '0'
+                    revenue_amount: '0'
+                    is_active: true
+                  - id: 50005
+                    uuid: c6c2de1e-2f0f-4ef8-b7f3-29d80d0cfdb8
+                    display_value: Store East
+                    value: Store East
+                    tax_id: ''
+                    name: Store East
+                    name2: ''
+                    description: ''
+                    business_partner_group: Staff
+                    open_balance_amount: '0'
+                    credit_available_amount: '0'
+                    credit_used_amount: '0'
+                    revenue_amount: '0'
+                    is_active: true
+                  - id: 50007
+                    uuid: 01c65f4b-272c-4fb6-b12a-089d207cadb8
+                    display_value: Store North
+                    value: Store North
+                    tax_id: ''
+                    name: Store North
+                    name2: ''
+                    description: ''
+                    business_partner_group: Staff
+                    open_balance_amount: '0'
+                    credit_available_amount: '0'
+                    credit_used_amount: '0'
+                    revenue_amount: '0'
+                    is_active: true
+                  - id: 50008
+                    uuid: 88f0d79e-bc97-447d-8245-91bd79c0dcf7
+                    display_value: Store South
+                    value: Store South
+                    tax_id: ''
+                    name: Store South
+                    name2: ''
+                    description: ''
+                    business_partner_group: Staff
+                    open_balance_amount: '0'
+                    credit_available_amount: '0'
+                    credit_used_amount: '0'
+                    revenue_amount: '0'
+                    is_active: true
+                  - id: 50009
+                    uuid: b419cad9-bb5b-4a2f-bbdb-1c3c70657408
+                    display_value: Store West
+                    value: Store West
+                    tax_id: ''
+                    name: Store West
+                    name2: ''
+                    description: ''
+                    business_partner_group: Staff
+                    open_balance_amount: '0'
+                    credit_available_amount: '0'
+                    credit_used_amount: '0'
+                    revenue_amount: '0'
+                    is_active: true
+                  - id: 114
+                    uuid: 254e660c-4863-460a-8a69-2b75f6461a33
+                    display_value: Tree Farm Inc.
+                    value: TreeFarm
+                    tax_id: ''
+                    name: Tree Farm Inc.
+                    name2: ''
+                    description: Vendor
+                    business_partner_group: Vendors
+                    open_balance_amount: '-4217.5'
+                    credit_available_amount: '0'
+                    credit_used_amount: '0'
+                    revenue_amount: '0'
+                    is_active: true
+                  - id: 50000
+                    uuid: 2d96ae84-d50e-447a-bdb7-496242fd846f
+                    display_value: Wood, Inc
+                    value: Wood, Inc
+                    tax_id: ''
+                    name: Wood, Inc
+                    name2: ''
+                    description: ''
+                    business_partner_group: Vendors
+                    open_balance_amount: '0'
+                    credit_available_amount: '0'
+                    credit_used_amount: '0'
+                    revenue_amount: '0'
+                    is_active: true
+                next_page_token: ''
+  /field/business-partners/field/{field_id}:
+    get:
+      tags:
+        - default
+      summary: business-partners_fieldId
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: field_id
+          in: path
+          schema:
+            type: integer
+          required: true
+          example: '102'
+      responses:
+        '200':
+          description: OK
+          headers:
+            Server:
+              schema:
+                type: string
+                example: nginx/1.25.2
+            Date:
+              schema:
+                type: string
+                example: Tue, 12 Mar 2024 14:55:14 GMT
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Content-Length:
+              schema:
+                type: integer
+                example: '7910'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            grpc-encoding:
+              schema:
+                type: string
+                example: identity
+            grpc-accept-encoding:
+              schema:
+                type: string
+                example: gzip
+            x-envoy-upstream-service-time:
+              schema:
+                type: integer
+                example: '773'
+            grpc-status:
+              schema:
+                type: integer
+                example: '0'
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Max-Age:
+              schema:
+                type: integer
+                example: '3600'
+            Access-Control-Expose-Headers:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+                example: '*'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                record_count: '19'
+                records:
+                  - id: 1000000
+                    uuid: d75d2f7f-3af5-4bb7-bba4-1d53fa1e44a9
+                    display_value: Prueba
+                    value: '10000000'
+                    tax_id: ''
+                    name: Prueba
+                    name2: ''
+                    description: Walk-In Customer
+                    business_partner_group: Standard Customers
+                    open_balance_amount: '0'
+                    credit_available_amount: '0'
+                    credit_used_amount: '0'
+                    revenue_amount: '0'
+                    is_active: true
+                  - id: 1000001
+                    uuid: 66dda445-3600-442b-9e08-7824974d9a2e
+                    display_value: Prueba
+                    value: '10000001'
+                    tax_id: ''
+                    name: Prueba
+                    name2: ''
+                    description: Walk-In Customer
+                    business_partner_group: Standard Customers
+                    open_balance_amount: '0'
+                    credit_available_amount: '0'
+                    credit_used_amount: '0'
+                    revenue_amount: '0'
+                    is_active: true
+                  - id: 50003
+                    uuid: b14b6c53-ca82-4dbc-841a-640b04de76bb
+                    display_value: Chemical Product, inc
+                    value: Chemical Product, inc
+                    tax_id: ''
+                    name: Chemical Product, inc
+                    name2: ''
+                    description: ''
+                    business_partner_group: Vendors
+                    open_balance_amount: '0'
+                    credit_available_amount: '0'
+                    credit_used_amount: '0'
+                    revenue_amount: '0'
+                    is_active: true
+                  - id: 50002
+                    uuid: f472cd49-4f19-4fc3-856a-cb9038cf2924
+                    display_value: Chrome, Inc
+                    value: Chrome, Inc
+                    tax_id: ''
+                    name: Chrome, Inc
+                    name2: ''
+                    description: ''
+                    business_partner_group: Vendors
+                    open_balance_amount: '0'
+                    credit_available_amount: '0'
+                    credit_used_amount: '0'
+                    revenue_amount: '0'
+                    is_active: true
+                  - id: 50001
+                    uuid: 5e616d3e-c55b-4ede-9b0e-ac3ae834556b
+                    display_value: Color, Inc
+                    value: Color, Inc
+                    tax_id: ''
+                    name: Color, Inc
+                    name2: ''
+                    description: ''
+                    business_partner_group: Vendors
+                    open_balance_amount: '0'
+                    credit_available_amount: '0'
+                    credit_used_amount: '0'
+                    revenue_amount: '0'
+                    is_active: true
+                  - id: 117
+                    uuid: b7bafd8e-ae3b-4bbc-9a0d-d47fdbef390f
+                    display_value: C&W Construction
+                    value: C&W
+                    tax_id: ''
+                    name: C&W Construction
+                    name2: Unlimited Projects Corp.
+                    description: ''
+                    business_partner_group: Standard Customers
+                    open_balance_amount: '161.12'
+                    credit_available_amount: '9838.88'
+                    credit_used_amount: '161.12'
+                    revenue_amount: '161.12'
+                    is_active: true
+                  - id: 113
+                    uuid: d430bdde-e5e4-476b-8dc9-4b0b5d5b02cc
+                    display_value: GardenAdmin BP
+                    value: GardenAdmin
+                    tax_id: ''
+                    name: GardenAdmin BP
+                    name2: ''
+                    description: ''
+                    business_partner_group: Staff
+                    open_balance_amount: '0.00'
+                    credit_available_amount: '-999.33'
+                    credit_used_amount: '999.33'
+                    revenue_amount: '1000.00'
+                    is_active: true
+                  - id: 119
+                    uuid: 0b870ceb-a34f-4876-8225-0053f11385d2
+                    display_value: GardenUser BP
+                    value: GardenUser
+                    tax_id: ''
+                    name: GardenUser BP
+                    name2: ''
+                    description: ''
+                    business_partner_group: Staff
+                    open_balance_amount: '0'
+                    credit_available_amount: '0'
+                    credit_used_amount: '0'
+                    revenue_amount: '0'
+                    is_active: true
+                  - id: 118
+                    uuid: c3cfeb5f-1b2f-4f4b-a16c-d9cda23f59e1
+                    display_value: Joe Block
+                    value: JoeBlock
+                    tax_id: ''
+                    name: Joe Block
+                    name2: ''
+                    description: ''
+                    business_partner_group: Standard Customers
+                    open_balance_amount: '503.48'
+                    credit_available_amount: '9748.26'
+                    credit_used_amount: '251.74'
+                    revenue_amount: '251.73'
+                    is_active: true
+                  - id: 121
+                    uuid: ca5b584a-c9e8-448f-a388-8ac7c0f02501
+                    display_value: Patio Fun, Inc.
+                    value: Patio
+                    tax_id: ''
+                    name: Patio Fun, Inc.
+                    name2: ''
+                    description: ''
+                    business_partner_group: Vendors
+                    open_balance_amount: '-2160'
+                    credit_available_amount: '0'
+                    credit_used_amount: '0'
+                    revenue_amount: '0'
+                    is_active: true
+                  - id: 120
+                    uuid: 2ad2a623-3d1f-47f4-969a-f44f7a05481f
+                    display_value: Seed Farm Inc.
+                    value: SeedFarm
+                    tax_id: ''
+                    name: Seed Farm Inc.
+                    name2: ''
+                    description: Customer & Vendor
+                    business_partner_group: Vendors
+                    open_balance_amount: '-2731.5'
+                    credit_available_amount: '0'
+                    credit_used_amount: '0'
+                    revenue_amount: '0'
+                    is_active: true
+                  - id: 112
+                    uuid: f5388c95-7424-447d-85de-91424f9da147
+                    display_value: Standard
+                    value: Standard
+                    tax_id: ''
+                    name: Standard
+                    name2: ''
+                    description: Walk-In Customer
+                    business_partner_group: Standard Customers
+                    open_balance_amount: '0'
+                    credit_available_amount: '0'
+                    credit_used_amount: '0'
+                    revenue_amount: '151.05'
+                    is_active: true
+                  - id: 50004
+                    uuid: 8b894863-afbe-4384-a8ed-bf0325a5ec25
+                    display_value: Store Central
+                    value: Store Central
+                    tax_id: ''
+                    name: Store Central
+                    name2: ''
+                    description: ''
+                    business_partner_group: Staff
+                    open_balance_amount: '0'
+                    credit_available_amount: '0'
+                    credit_used_amount: '0'
+                    revenue_amount: '0'
+                    is_active: true
+                  - id: 50005
+                    uuid: c6c2de1e-2f0f-4ef8-b7f3-29d80d0cfdb8
+                    display_value: Store East
+                    value: Store East
+                    tax_id: ''
+                    name: Store East
+                    name2: ''
+                    description: ''
+                    business_partner_group: Staff
+                    open_balance_amount: '0'
+                    credit_available_amount: '0'
+                    credit_used_amount: '0'
+                    revenue_amount: '0'
+                    is_active: true
+                  - id: 50007
+                    uuid: 01c65f4b-272c-4fb6-b12a-089d207cadb8
+                    display_value: Store North
+                    value: Store North
+                    tax_id: ''
+                    name: Store North
+                    name2: ''
+                    description: ''
+                    business_partner_group: Staff
+                    open_balance_amount: '0'
+                    credit_available_amount: '0'
+                    credit_used_amount: '0'
+                    revenue_amount: '0'
+                    is_active: true
+                  - id: 50008
+                    uuid: 88f0d79e-bc97-447d-8245-91bd79c0dcf7
+                    display_value: Store South
+                    value: Store South
+                    tax_id: ''
+                    name: Store South
+                    name2: ''
+                    description: ''
+                    business_partner_group: Staff
+                    open_balance_amount: '0'
+                    credit_available_amount: '0'
+                    credit_used_amount: '0'
+                    revenue_amount: '0'
+                    is_active: true
+                  - id: 50009
+                    uuid: b419cad9-bb5b-4a2f-bbdb-1c3c70657408
+                    display_value: Store West
+                    value: Store West
+                    tax_id: ''
+                    name: Store West
+                    name2: ''
+                    description: ''
+                    business_partner_group: Staff
+                    open_balance_amount: '0'
+                    credit_available_amount: '0'
+                    credit_used_amount: '0'
+                    revenue_amount: '0'
+                    is_active: true
+                  - id: 114
+                    uuid: 254e660c-4863-460a-8a69-2b75f6461a33
+                    display_value: Tree Farm Inc.
+                    value: TreeFarm
+                    tax_id: ''
+                    name: Tree Farm Inc.
+                    name2: ''
+                    description: Vendor
+                    business_partner_group: Vendors
+                    open_balance_amount: '-4217.5'
+                    credit_available_amount: '0'
+                    credit_used_amount: '0'
+                    revenue_amount: '0'
+                    is_active: true
+                  - id: 50000
+                    uuid: 2d96ae84-d50e-447a-bdb7-496242fd846f
+                    display_value: Wood, Inc
+                    value: Wood, Inc
+                    tax_id: ''
+                    name: Wood, Inc
+                    name2: ''
+                    description: ''
+                    business_partner_group: Vendors
+                    open_balance_amount: '0'
+                    credit_available_amount: '0'
+                    credit_used_amount: '0'
+                    revenue_amount: '0'
+                    is_active: true
+                next_page_token: ''
+  /field/business-partners/parameter/{process_parameter_id}:
+    get:
+      tags:
+        - default
+      summary: business-partners_proceesParameter
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: process_parameter_id
+          in: path
+          schema:
+            type: integer
+          required: true
+          example: '50001'
+      responses:
+        '200':
+          description: OK
+          headers:
+            Server:
+              schema:
+                type: string
+                example: nginx/1.25.2
+            Date:
+              schema:
+                type: string
+                example: Wed, 13 Mar 2024 20:52:19 GMT
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Content-Length:
+              schema:
+                type: integer
+                example: '7910'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            grpc-encoding:
+              schema:
+                type: string
+                example: identity
+            grpc-accept-encoding:
+              schema:
+                type: string
+                example: gzip
+            x-envoy-upstream-service-time:
+              schema:
+                type: integer
+                example: '228'
+            grpc-status:
+              schema:
+                type: integer
+                example: '0'
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Max-Age:
+              schema:
+                type: integer
+                example: '3600'
+            Access-Control-Expose-Headers:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+                example: '*'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                record_count: '19'
+                records:
+                  - id: 1000000
+                    uuid: d75d2f7f-3af5-4bb7-bba4-1d53fa1e44a9
+                    display_value: Prueba
+                    value: '10000000'
+                    tax_id: ''
+                    name: Prueba
+                    name2: ''
+                    description: Walk-In Customer
+                    business_partner_group: Standard Customers
+                    open_balance_amount: '0'
+                    credit_available_amount: '0'
+                    credit_used_amount: '0'
+                    revenue_amount: '0'
+                    is_active: true
+                  - id: 1000001
+                    uuid: 66dda445-3600-442b-9e08-7824974d9a2e
+                    display_value: Prueba
+                    value: '10000001'
+                    tax_id: ''
+                    name: Prueba
+                    name2: ''
+                    description: Walk-In Customer
+                    business_partner_group: Standard Customers
+                    open_balance_amount: '0'
+                    credit_available_amount: '0'
+                    credit_used_amount: '0'
+                    revenue_amount: '0'
+                    is_active: true
+                  - id: 50003
+                    uuid: b14b6c53-ca82-4dbc-841a-640b04de76bb
+                    display_value: Chemical Product, inc
+                    value: Chemical Product, inc
+                    tax_id: ''
+                    name: Chemical Product, inc
+                    name2: ''
+                    description: ''
+                    business_partner_group: Vendors
+                    open_balance_amount: '0'
+                    credit_available_amount: '0'
+                    credit_used_amount: '0'
+                    revenue_amount: '0'
+                    is_active: true
+                  - id: 50002
+                    uuid: f472cd49-4f19-4fc3-856a-cb9038cf2924
+                    display_value: Chrome, Inc
+                    value: Chrome, Inc
+                    tax_id: ''
+                    name: Chrome, Inc
+                    name2: ''
+                    description: ''
+                    business_partner_group: Vendors
+                    open_balance_amount: '0'
+                    credit_available_amount: '0'
+                    credit_used_amount: '0'
+                    revenue_amount: '0'
+                    is_active: true
+                  - id: 50001
+                    uuid: 5e616d3e-c55b-4ede-9b0e-ac3ae834556b
+                    display_value: Color, Inc
+                    value: Color, Inc
+                    tax_id: ''
+                    name: Color, Inc
+                    name2: ''
+                    description: ''
+                    business_partner_group: Vendors
+                    open_balance_amount: '0'
+                    credit_available_amount: '0'
+                    credit_used_amount: '0'
+                    revenue_amount: '0'
+                    is_active: true
+                  - id: 117
+                    uuid: b7bafd8e-ae3b-4bbc-9a0d-d47fdbef390f
+                    display_value: C&W Construction
+                    value: C&W
+                    tax_id: ''
+                    name: C&W Construction
+                    name2: Unlimited Projects Corp.
+                    description: ''
+                    business_partner_group: Standard Customers
+                    open_balance_amount: '161.12'
+                    credit_available_amount: '9838.88'
+                    credit_used_amount: '161.12'
+                    revenue_amount: '161.12'
+                    is_active: true
+                  - id: 113
+                    uuid: d430bdde-e5e4-476b-8dc9-4b0b5d5b02cc
+                    display_value: GardenAdmin BP
+                    value: GardenAdmin
+                    tax_id: ''
+                    name: GardenAdmin BP
+                    name2: ''
+                    description: ''
+                    business_partner_group: Staff
+                    open_balance_amount: '0.00'
+                    credit_available_amount: '-999.33'
+                    credit_used_amount: '999.33'
+                    revenue_amount: '1000.00'
+                    is_active: true
+                  - id: 119
+                    uuid: 0b870ceb-a34f-4876-8225-0053f11385d2
+                    display_value: GardenUser BP
+                    value: GardenUser
+                    tax_id: ''
+                    name: GardenUser BP
+                    name2: ''
+                    description: ''
+                    business_partner_group: Staff
+                    open_balance_amount: '0'
+                    credit_available_amount: '0'
+                    credit_used_amount: '0'
+                    revenue_amount: '0'
+                    is_active: true
+                  - id: 118
+                    uuid: c3cfeb5f-1b2f-4f4b-a16c-d9cda23f59e1
+                    display_value: Joe Block
+                    value: JoeBlock
+                    tax_id: ''
+                    name: Joe Block
+                    name2: ''
+                    description: ''
+                    business_partner_group: Standard Customers
+                    open_balance_amount: '503.48'
+                    credit_available_amount: '9748.26'
+                    credit_used_amount: '251.74'
+                    revenue_amount: '251.73'
+                    is_active: true
+                  - id: 121
+                    uuid: ca5b584a-c9e8-448f-a388-8ac7c0f02501
+                    display_value: Patio Fun, Inc.
+                    value: Patio
+                    tax_id: ''
+                    name: Patio Fun, Inc.
+                    name2: ''
+                    description: ''
+                    business_partner_group: Vendors
+                    open_balance_amount: '-2160'
+                    credit_available_amount: '0'
+                    credit_used_amount: '0'
+                    revenue_amount: '0'
+                    is_active: true
+                  - id: 120
+                    uuid: 2ad2a623-3d1f-47f4-969a-f44f7a05481f
+                    display_value: Seed Farm Inc.
+                    value: SeedFarm
+                    tax_id: ''
+                    name: Seed Farm Inc.
+                    name2: ''
+                    description: Customer & Vendor
+                    business_partner_group: Vendors
+                    open_balance_amount: '-2731.5'
+                    credit_available_amount: '0'
+                    credit_used_amount: '0'
+                    revenue_amount: '0'
+                    is_active: true
+                  - id: 112
+                    uuid: f5388c95-7424-447d-85de-91424f9da147
+                    display_value: Standard
+                    value: Standard
+                    tax_id: ''
+                    name: Standard
+                    name2: ''
+                    description: Walk-In Customer
+                    business_partner_group: Standard Customers
+                    open_balance_amount: '0'
+                    credit_available_amount: '0'
+                    credit_used_amount: '0'
+                    revenue_amount: '151.05'
+                    is_active: true
+                  - id: 50004
+                    uuid: 8b894863-afbe-4384-a8ed-bf0325a5ec25
+                    display_value: Store Central
+                    value: Store Central
+                    tax_id: ''
+                    name: Store Central
+                    name2: ''
+                    description: ''
+                    business_partner_group: Staff
+                    open_balance_amount: '0'
+                    credit_available_amount: '0'
+                    credit_used_amount: '0'
+                    revenue_amount: '0'
+                    is_active: true
+                  - id: 50005
+                    uuid: c6c2de1e-2f0f-4ef8-b7f3-29d80d0cfdb8
+                    display_value: Store East
+                    value: Store East
+                    tax_id: ''
+                    name: Store East
+                    name2: ''
+                    description: ''
+                    business_partner_group: Staff
+                    open_balance_amount: '0'
+                    credit_available_amount: '0'
+                    credit_used_amount: '0'
+                    revenue_amount: '0'
+                    is_active: true
+                  - id: 50007
+                    uuid: 01c65f4b-272c-4fb6-b12a-089d207cadb8
+                    display_value: Store North
+                    value: Store North
+                    tax_id: ''
+                    name: Store North
+                    name2: ''
+                    description: ''
+                    business_partner_group: Staff
+                    open_balance_amount: '0'
+                    credit_available_amount: '0'
+                    credit_used_amount: '0'
+                    revenue_amount: '0'
+                    is_active: true
+                  - id: 50008
+                    uuid: 88f0d79e-bc97-447d-8245-91bd79c0dcf7
+                    display_value: Store South
+                    value: Store South
+                    tax_id: ''
+                    name: Store South
+                    name2: ''
+                    description: ''
+                    business_partner_group: Staff
+                    open_balance_amount: '0'
+                    credit_available_amount: '0'
+                    credit_used_amount: '0'
+                    revenue_amount: '0'
+                    is_active: true
+                  - id: 50009
+                    uuid: b419cad9-bb5b-4a2f-bbdb-1c3c70657408
+                    display_value: Store West
+                    value: Store West
+                    tax_id: ''
+                    name: Store West
+                    name2: ''
+                    description: ''
+                    business_partner_group: Staff
+                    open_balance_amount: '0'
+                    credit_available_amount: '0'
+                    credit_used_amount: '0'
+                    revenue_amount: '0'
+                    is_active: true
+                  - id: 114
+                    uuid: 254e660c-4863-460a-8a69-2b75f6461a33
+                    display_value: Tree Farm Inc.
+                    value: TreeFarm
+                    tax_id: ''
+                    name: Tree Farm Inc.
+                    name2: ''
+                    description: Vendor
+                    business_partner_group: Vendors
+                    open_balance_amount: '-4217.5'
+                    credit_available_amount: '0'
+                    credit_used_amount: '0'
+                    revenue_amount: '0'
+                    is_active: true
+                  - id: 50000
+                    uuid: 2d96ae84-d50e-447a-bdb7-496242fd846f
+                    display_value: Wood, Inc
+                    value: Wood, Inc
+                    tax_id: ''
+                    name: Wood, Inc
+                    name2: ''
+                    description: ''
+                    business_partner_group: Vendors
+                    open_balance_amount: '0'
+                    credit_available_amount: '0'
+                    credit_used_amount: '0'
+                    revenue_amount: '0'
+                    is_active: true
+                next_page_token: ''
+  /field/business-partners/query-criteria/{browse_field_id}:
+    get:
+      tags:
+        - default
+      summary: business-partners_browseFieldID
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: browse_field_id
+          in: path
+          schema:
+            type: integer
+          required: true
+          example: '50001'
+      responses:
+        '200':
+          description: OK
+          headers:
+            Server:
+              schema:
+                type: string
+                example: nginx/1.25.2
+            Date:
+              schema:
+                type: string
+                example: Wed, 13 Mar 2024 20:56:06 GMT
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Content-Length:
+              schema:
+                type: integer
+                example: '7910'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            grpc-encoding:
+              schema:
+                type: string
+                example: identity
+            grpc-accept-encoding:
+              schema:
+                type: string
+                example: gzip
+            x-envoy-upstream-service-time:
+              schema:
+                type: integer
+                example: '144'
+            grpc-status:
+              schema:
+                type: integer
+                example: '0'
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Max-Age:
+              schema:
+                type: integer
+                example: '3600'
+            Access-Control-Expose-Headers:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+                example: '*'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                record_count: '19'
+                records:
+                  - id: 1000000
+                    uuid: d75d2f7f-3af5-4bb7-bba4-1d53fa1e44a9
+                    display_value: Prueba
+                    value: '10000000'
+                    tax_id: ''
+                    name: Prueba
+                    name2: ''
+                    description: Walk-In Customer
+                    business_partner_group: Standard Customers
+                    open_balance_amount: '0'
+                    credit_available_amount: '0'
+                    credit_used_amount: '0'
+                    revenue_amount: '0'
+                    is_active: true
+                  - id: 1000001
+                    uuid: 66dda445-3600-442b-9e08-7824974d9a2e
+                    display_value: Prueba
+                    value: '10000001'
+                    tax_id: ''
+                    name: Prueba
+                    name2: ''
+                    description: Walk-In Customer
+                    business_partner_group: Standard Customers
+                    open_balance_amount: '0'
+                    credit_available_amount: '0'
+                    credit_used_amount: '0'
+                    revenue_amount: '0'
+                    is_active: true
+                  - id: 50003
+                    uuid: b14b6c53-ca82-4dbc-841a-640b04de76bb
+                    display_value: Chemical Product, inc
+                    value: Chemical Product, inc
+                    tax_id: ''
+                    name: Chemical Product, inc
+                    name2: ''
+                    description: ''
+                    business_partner_group: Vendors
+                    open_balance_amount: '0'
+                    credit_available_amount: '0'
+                    credit_used_amount: '0'
+                    revenue_amount: '0'
+                    is_active: true
+                  - id: 50002
+                    uuid: f472cd49-4f19-4fc3-856a-cb9038cf2924
+                    display_value: Chrome, Inc
+                    value: Chrome, Inc
+                    tax_id: ''
+                    name: Chrome, Inc
+                    name2: ''
+                    description: ''
+                    business_partner_group: Vendors
+                    open_balance_amount: '0'
+                    credit_available_amount: '0'
+                    credit_used_amount: '0'
+                    revenue_amount: '0'
+                    is_active: true
+                  - id: 50001
+                    uuid: 5e616d3e-c55b-4ede-9b0e-ac3ae834556b
+                    display_value: Color, Inc
+                    value: Color, Inc
+                    tax_id: ''
+                    name: Color, Inc
+                    name2: ''
+                    description: ''
+                    business_partner_group: Vendors
+                    open_balance_amount: '0'
+                    credit_available_amount: '0'
+                    credit_used_amount: '0'
+                    revenue_amount: '0'
+                    is_active: true
+                  - id: 117
+                    uuid: b7bafd8e-ae3b-4bbc-9a0d-d47fdbef390f
+                    display_value: C&W Construction
+                    value: C&W
+                    tax_id: ''
+                    name: C&W Construction
+                    name2: Unlimited Projects Corp.
+                    description: ''
+                    business_partner_group: Standard Customers
+                    open_balance_amount: '161.12'
+                    credit_available_amount: '9838.88'
+                    credit_used_amount: '161.12'
+                    revenue_amount: '161.12'
+                    is_active: true
+                  - id: 113
+                    uuid: d430bdde-e5e4-476b-8dc9-4b0b5d5b02cc
+                    display_value: GardenAdmin BP
+                    value: GardenAdmin
+                    tax_id: ''
+                    name: GardenAdmin BP
+                    name2: ''
+                    description: ''
+                    business_partner_group: Staff
+                    open_balance_amount: '0.00'
+                    credit_available_amount: '-999.33'
+                    credit_used_amount: '999.33'
+                    revenue_amount: '1000.00'
+                    is_active: true
+                  - id: 119
+                    uuid: 0b870ceb-a34f-4876-8225-0053f11385d2
+                    display_value: GardenUser BP
+                    value: GardenUser
+                    tax_id: ''
+                    name: GardenUser BP
+                    name2: ''
+                    description: ''
+                    business_partner_group: Staff
+                    open_balance_amount: '0'
+                    credit_available_amount: '0'
+                    credit_used_amount: '0'
+                    revenue_amount: '0'
+                    is_active: true
+                  - id: 118
+                    uuid: c3cfeb5f-1b2f-4f4b-a16c-d9cda23f59e1
+                    display_value: Joe Block
+                    value: JoeBlock
+                    tax_id: ''
+                    name: Joe Block
+                    name2: ''
+                    description: ''
+                    business_partner_group: Standard Customers
+                    open_balance_amount: '503.48'
+                    credit_available_amount: '9748.26'
+                    credit_used_amount: '251.74'
+                    revenue_amount: '251.73'
+                    is_active: true
+                  - id: 121
+                    uuid: ca5b584a-c9e8-448f-a388-8ac7c0f02501
+                    display_value: Patio Fun, Inc.
+                    value: Patio
+                    tax_id: ''
+                    name: Patio Fun, Inc.
+                    name2: ''
+                    description: ''
+                    business_partner_group: Vendors
+                    open_balance_amount: '-2160'
+                    credit_available_amount: '0'
+                    credit_used_amount: '0'
+                    revenue_amount: '0'
+                    is_active: true
+                  - id: 120
+                    uuid: 2ad2a623-3d1f-47f4-969a-f44f7a05481f
+                    display_value: Seed Farm Inc.
+                    value: SeedFarm
+                    tax_id: ''
+                    name: Seed Farm Inc.
+                    name2: ''
+                    description: Customer & Vendor
+                    business_partner_group: Vendors
+                    open_balance_amount: '-2731.5'
+                    credit_available_amount: '0'
+                    credit_used_amount: '0'
+                    revenue_amount: '0'
+                    is_active: true
+                  - id: 112
+                    uuid: f5388c95-7424-447d-85de-91424f9da147
+                    display_value: Standard
+                    value: Standard
+                    tax_id: ''
+                    name: Standard
+                    name2: ''
+                    description: Walk-In Customer
+                    business_partner_group: Standard Customers
+                    open_balance_amount: '0'
+                    credit_available_amount: '0'
+                    credit_used_amount: '0'
+                    revenue_amount: '151.05'
+                    is_active: true
+                  - id: 50004
+                    uuid: 8b894863-afbe-4384-a8ed-bf0325a5ec25
+                    display_value: Store Central
+                    value: Store Central
+                    tax_id: ''
+                    name: Store Central
+                    name2: ''
+                    description: ''
+                    business_partner_group: Staff
+                    open_balance_amount: '0'
+                    credit_available_amount: '0'
+                    credit_used_amount: '0'
+                    revenue_amount: '0'
+                    is_active: true
+                  - id: 50005
+                    uuid: c6c2de1e-2f0f-4ef8-b7f3-29d80d0cfdb8
+                    display_value: Store East
+                    value: Store East
+                    tax_id: ''
+                    name: Store East
+                    name2: ''
+                    description: ''
+                    business_partner_group: Staff
+                    open_balance_amount: '0'
+                    credit_available_amount: '0'
+                    credit_used_amount: '0'
+                    revenue_amount: '0'
+                    is_active: true
+                  - id: 50007
+                    uuid: 01c65f4b-272c-4fb6-b12a-089d207cadb8
+                    display_value: Store North
+                    value: Store North
+                    tax_id: ''
+                    name: Store North
+                    name2: ''
+                    description: ''
+                    business_partner_group: Staff
+                    open_balance_amount: '0'
+                    credit_available_amount: '0'
+                    credit_used_amount: '0'
+                    revenue_amount: '0'
+                    is_active: true
+                  - id: 50008
+                    uuid: 88f0d79e-bc97-447d-8245-91bd79c0dcf7
+                    display_value: Store South
+                    value: Store South
+                    tax_id: ''
+                    name: Store South
+                    name2: ''
+                    description: ''
+                    business_partner_group: Staff
+                    open_balance_amount: '0'
+                    credit_available_amount: '0'
+                    credit_used_amount: '0'
+                    revenue_amount: '0'
+                    is_active: true
+                  - id: 50009
+                    uuid: b419cad9-bb5b-4a2f-bbdb-1c3c70657408
+                    display_value: Store West
+                    value: Store West
+                    tax_id: ''
+                    name: Store West
+                    name2: ''
+                    description: ''
+                    business_partner_group: Staff
+                    open_balance_amount: '0'
+                    credit_available_amount: '0'
+                    credit_used_amount: '0'
+                    revenue_amount: '0'
+                    is_active: true
+                  - id: 114
+                    uuid: 254e660c-4863-460a-8a69-2b75f6461a33
+                    display_value: Tree Farm Inc.
+                    value: TreeFarm
+                    tax_id: ''
+                    name: Tree Farm Inc.
+                    name2: ''
+                    description: Vendor
+                    business_partner_group: Vendors
+                    open_balance_amount: '-4217.5'
+                    credit_available_amount: '0'
+                    credit_used_amount: '0'
+                    revenue_amount: '0'
+                    is_active: true
+                  - id: 50000
+                    uuid: 2d96ae84-d50e-447a-bdb7-496242fd846f
+                    display_value: Wood, Inc
+                    value: Wood, Inc
+                    tax_id: ''
+                    name: Wood, Inc
+                    name2: ''
+                    description: ''
+                    business_partner_group: Vendors
+                    open_balance_amount: '0'
+                    credit_available_amount: '0'
+                    credit_used_amount: '0'
+                    revenue_amount: '0'
+                    is_active: true
+                next_page_token: ''
+  /field/business-partners/{business_partner_id}/contacts:
+    get:
+      tags:
+        - default
+      summary: ListBusinessPartnerContacts
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: business_partner_id
+          in: path
+          schema:
+            type: integer
+          required: true
+          example: '50003'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /field/business-partners/{business_partner_id}/address-locations:
+    get:
+      tags:
+        - default
+      summary: ListBusinessPartnerAddressLocations
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: business_partner_id
+          in: path
+          schema:
+            type: integer
+          required: true
+          example: '1000000'
+      responses:
+        '200':
+          description: OK
+          headers:
+            Server:
+              schema:
+                type: string
+                example: nginx/1.25.2
+            Date:
+              schema:
+                type: string
+                example: Wed, 13 Mar 2024 20:59:59 GMT
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Content-Length:
+              schema:
+                type: integer
+                example: '361'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            grpc-encoding:
+              schema:
+                type: string
+                example: identity
+            grpc-accept-encoding:
+              schema:
+                type: string
+                example: gzip
+            x-envoy-upstream-service-time:
+              schema:
+                type: integer
+                example: '132'
+            grpc-status:
+              schema:
+                type: integer
+                example: '0'
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Max-Age:
+              schema:
+                type: integer
+                example: '3600'
+            Access-Control-Expose-Headers:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+                example: '*'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                record_count: '1'
+                records:
+                  - id: 1000000
+                    uuid: f8a8b3d7-09a3-42ca-a0ce-f44296314f47
+                    phone: ''
+                    phone2: ''
+                    fax: ''
+                    address: ', ,  '
+                    is_ship_to_address: true
+                    is_bill_to_address: true
+                    is_remit_to_address: true
+                    is_pay_form_address: true
+                    is_active: true
+                next_page_token: ''

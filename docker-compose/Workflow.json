@@ -1,0 +1,895 @@
+{
+	"info": {
+		"_postman_id": "5c2612ca-f920-4eba-8734-a48dd578fe7b",
+		"name": "Workflow",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "28978517"
+	},
+	"item": [
+		{
+			"name": "WorkflowDefinitionRequest",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{HOST}}/workflow/workflows/:id",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"workflow",
+						"workflows",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "120"
+						}
+					]
+				},
+				"description": "### Request Params\n\n- id (int32)"
+			},
+			"response": [
+				{
+					"name": "WorkflowDefinitionRequest",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/workflow/workflows/:id",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"workflow",
+								"workflows",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "120"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.25.2"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 08 Mar 2024 12:29:37 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "3002"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "grpc-encoding",
+							"value": "identity"
+						},
+						{
+							"key": "grpc-accept-encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "x-envoy-upstream-service-time",
+							"value": "147"
+						},
+						{
+							"key": "grpc-status",
+							"value": "0"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Max-Age",
+							"value": "3600"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 120,\n    \"value\": \"Process_Payment\",\n    \"name\": \"Proceso Pagos\",\n    \"description\": \"(Proceso de Pagos Estándar)\",\n    \"help\": \"\",\n    \"table_name\": \"C_Payment\",\n    \"responsible_id\": 0,\n    \"responsible_name\": \"\",\n    \"priority\": 0,\n    \"is_default\": false,\n    \"is_valid\": true,\n    \"publish_status\": \"RELEASED\",\n    \"duration_unit\": \"HOUR\",\n    \"start_node\": {\n        \"id\": 199,\n        \"value\": \"(Start)\",\n        \"name\": \"(Start)\",\n        \"description\": \"(Standard Node)\",\n        \"help\": \"\",\n        \"responsible_id\": 0,\n        \"responsible_name\": \"\",\n        \"document_action_value\": \"\",\n        \"document_action_name\": \"\",\n        \"priority\": 0,\n        \"action\": \"WAIT_SLEEP\",\n        \"transitions\": [\n            {\n                \"id\": 193,\n                \"description\": \"(Standard Transition)\",\n                \"is_std_user_workflow\": false,\n                \"sequence\": 100,\n                \"node_next_id\": 200,\n                \"node_next_name\": \"(DocAuto)\",\n                \"workflow_conditions\": []\n            },\n            {\n                \"id\": 194,\n                \"description\": \"(Standard Approval)\",\n                \"is_std_user_workflow\": true,\n                \"sequence\": 10,\n                \"node_next_id\": 201,\n                \"node_next_name\": \"(DocPrepare)\",\n                \"workflow_conditions\": []\n            }\n        ]\n    },\n    \"workflow_nodes\": [\n        {\n            \"id\": 199,\n            \"value\": \"(Start)\",\n            \"name\": \"(Start)\",\n            \"description\": \"(Standard Node)\",\n            \"help\": \"\",\n            \"responsible_id\": 0,\n            \"responsible_name\": \"\",\n            \"document_action_value\": \"\",\n            \"document_action_name\": \"\",\n            \"priority\": 0,\n            \"action\": \"WAIT_SLEEP\",\n            \"transitions\": [\n                {\n                    \"id\": 193,\n                    \"description\": \"(Standard Transition)\",\n                    \"is_std_user_workflow\": false,\n                    \"sequence\": 100,\n                    \"node_next_id\": 200,\n                    \"node_next_name\": \"(DocAuto)\",\n                    \"workflow_conditions\": []\n                },\n                {\n                    \"id\": 194,\n                    \"description\": \"(Standard Approval)\",\n                    \"is_std_user_workflow\": true,\n                    \"sequence\": 10,\n                    \"node_next_id\": 201,\n                    \"node_next_name\": \"(DocPrepare)\",\n                    \"workflow_conditions\": []\n                }\n            ]\n        },\n        {\n            \"id\": 200,\n            \"value\": \"(DocAuto)\",\n            \"name\": \"(DocAuto)\",\n            \"description\": \"(Standard Node)\",\n            \"help\": \"\",\n            \"responsible_id\": 0,\n            \"responsible_name\": \"\",\n            \"document_action_value\": \"\",\n            \"document_action_name\": \"\",\n            \"priority\": 0,\n            \"action\": \"DOCUMENT_ACTION\",\n            \"transitions\": []\n        },\n        {\n            \"id\": 201,\n            \"value\": \"(DocPrepare)\",\n            \"name\": \"(DocPrepare)\",\n            \"description\": \"(Standard Node)\",\n            \"help\": \"\",\n            \"responsible_id\": 0,\n            \"responsible_name\": \"\",\n            \"document_action_value\": \"\",\n            \"document_action_name\": \"\",\n            \"priority\": 0,\n            \"action\": \"DOCUMENT_ACTION\",\n            \"transitions\": [\n                {\n                    \"id\": 195,\n                    \"description\": \"(Standard Transition)\",\n                    \"is_std_user_workflow\": false,\n                    \"sequence\": 100,\n                    \"node_next_id\": 202,\n                    \"node_next_name\": \"(DocComplete)\",\n                    \"workflow_conditions\": []\n                }\n            ]\n        },\n        {\n            \"id\": 202,\n            \"value\": \"(DocComplete)\",\n            \"name\": \"(DocComplete)\",\n            \"description\": \"(Standard Node)\",\n            \"help\": \"\",\n            \"responsible_id\": 0,\n            \"responsible_name\": \"\",\n            \"document_action_value\": \"\",\n            \"document_action_name\": \"\",\n            \"priority\": 0,\n            \"action\": \"DOCUMENT_ACTION\",\n            \"transitions\": []\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "ListWorkflows",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"table_name\":\"C_Payment\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{HOST}}/workflow/workflows",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"workflow",
+						"workflows"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "ListWorkflows",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/workflow/workflows",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"workflow",
+								"workflows"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.25.2"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 08 Mar 2024 12:30:56 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "3341"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "grpc-encoding",
+							"value": "identity"
+						},
+						{
+							"key": "grpc-accept-encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "x-envoy-upstream-service-time",
+							"value": "116"
+						},
+						{
+							"key": "grpc-status",
+							"value": "0"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Max-Age",
+							"value": "3600"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"record_count\": \"1\",\n    \"workflows\": [\n        {\n            \"id\": 120,\n            \"value\": \"Process_Payment\",\n            \"name\": \"Proceso Pagos\",\n            \"description\": \"(Proceso de Pagos Estándar)\",\n            \"help\": \"\",\n            \"table_name\": \"C_Payment\",\n            \"responsible_id\": 0,\n            \"responsible_name\": \"\",\n            \"priority\": 0,\n            \"is_default\": false,\n            \"is_valid\": true,\n            \"publish_status\": \"RELEASED\",\n            \"duration_unit\": \"HOUR\",\n            \"start_node\": {\n                \"id\": 199,\n                \"value\": \"(Start)\",\n                \"name\": \"(Start)\",\n                \"description\": \"(Standard Node)\",\n                \"help\": \"\",\n                \"responsible_id\": 0,\n                \"responsible_name\": \"\",\n                \"document_action_value\": \"\",\n                \"document_action_name\": \"\",\n                \"priority\": 0,\n                \"action\": \"WAIT_SLEEP\",\n                \"transitions\": [\n                    {\n                        \"id\": 193,\n                        \"description\": \"(Standard Transition)\",\n                        \"is_std_user_workflow\": false,\n                        \"sequence\": 100,\n                        \"node_next_id\": 200,\n                        \"node_next_name\": \"(DocAuto)\",\n                        \"workflow_conditions\": []\n                    },\n                    {\n                        \"id\": 194,\n                        \"description\": \"(Standard Approval)\",\n                        \"is_std_user_workflow\": true,\n                        \"sequence\": 10,\n                        \"node_next_id\": 201,\n                        \"node_next_name\": \"(DocPrepare)\",\n                        \"workflow_conditions\": []\n                    }\n                ]\n            },\n            \"workflow_nodes\": [\n                {\n                    \"id\": 199,\n                    \"value\": \"(Start)\",\n                    \"name\": \"(Start)\",\n                    \"description\": \"(Standard Node)\",\n                    \"help\": \"\",\n                    \"responsible_id\": 0,\n                    \"responsible_name\": \"\",\n                    \"document_action_value\": \"\",\n                    \"document_action_name\": \"\",\n                    \"priority\": 0,\n                    \"action\": \"WAIT_SLEEP\",\n                    \"transitions\": [\n                        {\n                            \"id\": 193,\n                            \"description\": \"(Standard Transition)\",\n                            \"is_std_user_workflow\": false,\n                            \"sequence\": 100,\n                            \"node_next_id\": 200,\n                            \"node_next_name\": \"(DocAuto)\",\n                            \"workflow_conditions\": []\n                        },\n                        {\n                            \"id\": 194,\n                            \"description\": \"(Standard Approval)\",\n                            \"is_std_user_workflow\": true,\n                            \"sequence\": 10,\n                            \"node_next_id\": 201,\n                            \"node_next_name\": \"(DocPrepare)\",\n                            \"workflow_conditions\": []\n                        }\n                    ]\n                },\n                {\n                    \"id\": 200,\n                    \"value\": \"(DocAuto)\",\n                    \"name\": \"(DocAuto)\",\n                    \"description\": \"(Standard Node)\",\n                    \"help\": \"\",\n                    \"responsible_id\": 0,\n                    \"responsible_name\": \"\",\n                    \"document_action_value\": \"\",\n                    \"document_action_name\": \"\",\n                    \"priority\": 0,\n                    \"action\": \"DOCUMENT_ACTION\",\n                    \"transitions\": []\n                },\n                {\n                    \"id\": 201,\n                    \"value\": \"(DocPrepare)\",\n                    \"name\": \"(DocPrepare)\",\n                    \"description\": \"(Standard Node)\",\n                    \"help\": \"\",\n                    \"responsible_id\": 0,\n                    \"responsible_name\": \"\",\n                    \"document_action_value\": \"\",\n                    \"document_action_name\": \"\",\n                    \"priority\": 0,\n                    \"action\": \"DOCUMENT_ACTION\",\n                    \"transitions\": [\n                        {\n                            \"id\": 195,\n                            \"description\": \"(Standard Transition)\",\n                            \"is_std_user_workflow\": false,\n                            \"sequence\": 100,\n                            \"node_next_id\": 202,\n                            \"node_next_name\": \"(DocComplete)\",\n                            \"workflow_conditions\": []\n                        }\n                    ]\n                },\n                {\n                    \"id\": 202,\n                    \"value\": \"(DocComplete)\",\n                    \"name\": \"(DocComplete)\",\n                    \"description\": \"(Standard Node)\",\n                    \"help\": \"\",\n                    \"responsible_id\": 0,\n                    \"responsible_name\": \"\",\n                    \"document_action_value\": \"\",\n                    \"document_action_name\": \"\",\n                    \"priority\": 0,\n                    \"action\": \"DOCUMENT_ACTION\",\n                    \"transitions\": []\n                }\n            ]\n        }\n    ],\n    \"next_page_token\": \"\"\n}"
+				}
+			]
+		},
+		{
+			"name": "ListDocumentActions",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{HOST}}/workflow/actions/:table_name/:id",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"workflow",
+						"actions",
+						":table_name",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "table_name",
+							"value": "C_DocTypeCounter"
+						},
+						{
+							"key": "id",
+							"value": "100"
+						}
+					]
+				},
+				"description": "### Request Body\n\n- table_name (String, required)\n    \n- id (int, required)"
+			},
+			"response": [
+				{
+					"name": "ListDocumentActions",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/workflow/actions/:table_name/:id",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"workflow",
+								"actions",
+								":table_name",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "table_name",
+									"value": "C_DocTypeCounter"
+								},
+								{
+									"key": "id",
+									"value": "100"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.25.2"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 08 Mar 2024 12:48:34 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "74"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "grpc-encoding",
+							"value": "identity"
+						},
+						{
+							"key": "grpc-accept-encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "x-envoy-upstream-service-time",
+							"value": "152"
+						},
+						{
+							"key": "grpc-status",
+							"value": "0"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Max-Age",
+							"value": "3600"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"record_count\": \"0\",\n    \"document_actions\": [],\n    \"next_page_token\": \"\"\n}"
+				}
+			]
+		},
+		{
+			"name": "ListDocumentStatuses",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{HOST}}/workflow/statuses/:table_name/:id",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"workflow",
+						"statuses",
+						":table_name",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "table_name",
+							"value": "C_Payment"
+						},
+						{
+							"key": "id",
+							"value": "120"
+						}
+					]
+				},
+				"description": "### Request Body\n\n- table_name (String, required)\n    \n- id (int, required)"
+			},
+			"response": [
+				{
+					"name": "ListDocumentStatuses",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/workflow/statuses/:table_name/:id",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"workflow",
+								"statuses",
+								":table_name",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "table_name",
+									"value": "C_Payment"
+								},
+								{
+									"key": "id",
+									"value": "120"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.25.2"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 08 Mar 2024 12:33:54 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "288"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "grpc-encoding",
+							"value": "identity"
+						},
+						{
+							"key": "grpc-accept-encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "x-envoy-upstream-service-time",
+							"value": "146"
+						},
+						{
+							"key": "grpc-status",
+							"value": "0"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Max-Age",
+							"value": "3600"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"record_count\": \"3\",\n    \"document_statuses\": [\n        {\n            \"value\": \"DR\",\n            \"name\": \"Borrador\",\n            \"description\": \"\"\n        },\n        {\n            \"value\": \"CO\",\n            \"name\": \"Completo\",\n            \"description\": \"\"\n        },\n        {\n            \"value\": \"VO\",\n            \"name\": \"Anulado\",\n            \"description\": \"\"\n        }\n    ],\n    \"next_page_token\": \"\"\n}"
+				}
+			]
+		},
+		{
+			"name": "ListWorkflowActivities",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{HOST}}/workflow/workflows/:id/activities?user_id=100",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"workflow",
+						"workflows",
+						":id",
+						"activities"
+					],
+					"query": [
+						{
+							"key": "user_id",
+							"value": "100"
+						}
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "120"
+						}
+					]
+				},
+				"description": "### Request Params\n\n- user_id (int32, required)\n- id (int32, required)"
+			},
+			"response": [
+				{
+					"name": "ListWorkflowActivities",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/workflow/workflows/:id/activities",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"workflow",
+								"workflows",
+								":id",
+								"activities"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "120"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.25.2"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 08 Mar 2024 12:36:28 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "39372"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "grpc-encoding",
+							"value": "identity"
+						},
+						{
+							"key": "grpc-accept-encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "x-envoy-upstream-service-time",
+							"value": "368"
+						},
+						{
+							"key": "grpc-status",
+							"value": "0"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Max-Age",
+							"value": "3600"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"record_count\": \"9\",\n    \"activities\": [\n        {\n            \"id\": 50000,\n            \"table_name\": \"C_BPartner\",\n            \"record_id\": 50000,\n            \"user_id\": 100,\n            \"user_name\": \"SuperUser\",\n            \"responsible_id\": 100,\n            \"responsible_name\": \"Organization\",\n            \"text_message\": \"\",\n            \"processed\": false,\n            \"priority\": 0,\n            \"created\": \"2008-09-22T18:13:29Z\",\n            \"workflow_process\": {\n                \"process_id\": 50000,\n                \"workflow_id\": 131,\n                \"workflow_name\": \"Aprobación Tercero\",\n                \"id\": 50000,\n                \"table_name\": \"C_BPartner\",\n                \"user_id\": 100,\n                \"user_name\": \"SuperUser\",\n                \"responsible_id\": 101,\n                \"responsible_name\": \"Invoker\",\n                \"text_message\": \"\",\n                \"processed\": false,\n                \"workflow_state\": \"SUSPENDED\",\n                \"priority\": \"URGENT\",\n                \"workflow_events\": [\n                    {\n                        \"node_id\": 244,\n                        \"node_name\": \"Socio del Negocio\",\n                        \"id\": 50000,\n                        \"table_name\": \"C_BPartner\",\n                        \"user_id\": 100,\n                        \"user_name\": \"SuperUser\",\n                        \"responsible_id\": 100,\n                        \"responsible_name\": \"Organization\",\n                        \"text_message\": \"\",\n                        \"time_elapsed\": \"0\",\n                        \"attribute_name\": \"\",\n                        \"old_value\": \"\",\n                        \"new_value\": \"\",\n                        \"workflow_state\": \"SUSPENDED\",\n                        \"event_type\": \"PROCESS_CREATED\",\n                        \"log_date\": \"2008-09-22T18:13:32Z\"\n                    }\n                ],\n                \"log_date\": \"2008-09-22T18:13:24Z\"\n            },\n            \"workflow\": {\n                \"id\": 131,\n                \"value\": \"Business Partner Approval\",\n                \"name\": \"Aprobación Tercero\",\n                \"description\": \"Documento ejemplo basado en un flujo de trabajo\",\n                \"help\": \"Cuando un nuevo tercero es creado, éste es notificado para revisión y chequeo de crédito\",\n                \"table_name\": \"C_BPartner\",\n                \"responsible_id\": 0,\n                \"responsible_name\": \"\",\n                \"priority\": 0,\n                \"is_default\": false,\n                \"is_valid\": true,\n                \"publish_status\": \"RELEASED\",\n                \"duration_unit\": \"MINUTE\",\n                \"start_node\": {\n                    \"id\": 244,\n                    \"value\": \"Business Partner\",\n                    \"name\": \"Socio del Negocio\",\n                    \"description\": \"Mantener Socios del Negocio\",\n                    \"help\": \"Esta ventana permite definir a cualquier ente con el cual se tenga relación de negocios (Socios del Negocio). Esto incluye clientes, proveedores y empleados. Antes de entrar o importar productos, es necesario definir proveedores. La ventana mantiene toda la información sobre los tercerso y los valores que aqui se definan, serán usados en todas las transacciones de documentos de la aplicación.\",\n                    \"responsible_id\": 100,\n                    \"responsible_name\": \"Organization\",\n                    \"document_action_value\": \"\",\n                    \"document_action_name\": \"\",\n                    \"priority\": 0,\n                    \"action\": \"USER_WINDOW\",\n                    \"transitions\": []\n                },\n                \"workflow_nodes\": [\n                    {\n                        \"id\": 244,\n                        \"value\": \"Business Partner\",\n                        \"name\": \"Socio del Negocio\",\n                        \"description\": \"Mantener Socios del Negocio\",\n                        \"help\": \"Esta ventana permite definir a cualquier ente con el cual se tenga relación de negocios (Socios del Negocio). Esto incluye clientes, proveedores y empleados. Antes de entrar o importar productos, es necesario definir proveedores. La ventana mantiene toda la información sobre los tercerso y los valores que aqui se definan, serán usados en todas las transacciones de documentos de la aplicación.\",\n                        \"responsible_id\": 100,\n                        \"responsible_name\": \"Organization\",\n                        \"document_action_value\": \"\",\n                        \"document_action_name\": \"\",\n                        \"priority\": 0,\n                        \"action\": \"USER_WINDOW\",\n                        \"transitions\": []\n                    }\n                ]\n            },\n            \"node\": {\n                \"id\": 244,\n                \"value\": \"Business Partner\",\n                \"name\": \"Socio del Negocio\",\n                \"description\": \"Mantener Socios del Negocio\",\n                \"help\": \"Esta ventana permite definir a cualquier ente con el cual se tenga relación de negocios (Socios del Negocio). Esto incluye clientes, proveedores y empleados. Antes de entrar o importar productos, es necesario definir proveedores. La ventana mantiene toda la información sobre los tercerso y los valores que aqui se definan, serán usados en todas las transacciones de documentos de la aplicación.\",\n                \"responsible_id\": 100,\n                \"responsible_name\": \"Organization\",\n                \"document_action_value\": \"\",\n                \"document_action_name\": \"\",\n                \"priority\": 0,\n                \"action\": \"USER_WINDOW\",\n                \"transitions\": []\n            },\n            \"zoom_windows\": [\n                {\n                    \"id\": 123,\n                    \"name\": \"Socio del Negocio\",\n                    \"description\": \"Mantener Socios del Negocio\",\n                    \"is_sales_transaction\": true,\n                    \"is_active\": false\n                }\n            ],\n            \"is_sales_transaction\": false\n        },\n        {\n            \"id\": 50001,\n            \"table_name\": \"C_BPartner\",\n            \"record_id\": 50001,\n            \"user_id\": 100,\n            \"user_name\": \"SuperUser\",\n            \"responsible_id\": 100,\n            \"responsible_name\": \"Organization\",\n            \"text_message\": \"\",\n            \"processed\": false,\n            \"priority\": 0,\n            \"created\": \"2008-09-22T18:14:58Z\",\n            \"workflow_process\": {\n                \"process_id\": 50001,\n                \"workflow_id\": 131,\n                \"workflow_name\": \"Aprobación Tercero\",\n                \"id\": 50001,\n                \"table_name\": \"C_BPartner\",\n                \"user_id\": 100,\n                \"user_name\": \"SuperUser\",\n                \"responsible_id\": 101,\n                \"responsible_name\": \"Invoker\",\n                \"text_message\": \"\",\n                \"processed\": false,\n                \"workflow_state\": \"SUSPENDED\",\n                \"priority\": \"URGENT\",\n                \"workflow_events\": [\n                    {\n                        \"node_id\": 244,\n                        \"node_name\": \"Socio del Negocio\",\n                        \"id\": 50001,\n                        \"table_name\": \"C_BPartner\",\n                        \"user_id\": 100,\n                        \"user_name\": \"SuperUser\",\n                        \"responsible_id\": 100,\n                        \"responsible_name\": \"Organization\",\n                        \"text_message\": \"\",\n                        \"time_elapsed\": \"0\",\n                        \"attribute_name\": \"\",\n                        \"old_value\": \"\",\n                        \"new_value\": \"\",\n                        \"workflow_state\": \"SUSPENDED\",\n                        \"event_type\": \"PROCESS_CREATED\",\n                        \"log_date\": \"2008-09-22T18:15:00Z\"\n                    }\n                ],\n                \"log_date\": \"2008-09-22T18:14:48Z\"\n            },\n            \"workflow\": {\n                \"id\": 131,\n                \"value\": \"Business Partner Approval\",\n                \"name\": \"Aprobación Tercero\",\n                \"description\": \"Documento ejemplo basado en un flujo de trabajo\",\n                \"help\": \"Cuando un nuevo tercero es creado, éste es notificado para revisión y chequeo de crédito\",\n                \"table_name\": \"C_BPartner\",\n                \"responsible_id\": 0,\n                \"responsible_name\": \"\",\n                \"priority\": 0,\n                \"is_default\": false,\n                \"is_valid\": true,\n                \"publish_status\": \"RELEASED\",\n                \"duration_unit\": \"MINUTE\",\n                \"start_node\": {\n                    \"id\": 244,\n                    \"value\": \"Business Partner\",\n                    \"name\": \"Socio del Negocio\",\n                    \"description\": \"Mantener Socios del Negocio\",\n                    \"help\": \"Esta ventana permite definir a cualquier ente con el cual se tenga relación de negocios (Socios del Negocio). Esto incluye clientes, proveedores y empleados. Antes de entrar o importar productos, es necesario definir proveedores. La ventana mantiene toda la información sobre los tercerso y los valores que aqui se definan, serán usados en todas las transacciones de documentos de la aplicación.\",\n                    \"responsible_id\": 100,\n                    \"responsible_name\": \"Organization\",\n                    \"document_action_value\": \"\",\n                    \"document_action_name\": \"\",\n                    \"priority\": 0,\n                    \"action\": \"USER_WINDOW\",\n                    \"transitions\": []\n                },\n                \"workflow_nodes\": [\n                    {\n                        \"id\": 244,\n                        \"value\": \"Business Partner\",\n                        \"name\": \"Socio del Negocio\",\n                        \"description\": \"Mantener Socios del Negocio\",\n                        \"help\": \"Esta ventana permite definir a cualquier ente con el cual se tenga relación de negocios (Socios del Negocio). Esto incluye clientes, proveedores y empleados. Antes de entrar o importar productos, es necesario definir proveedores. La ventana mantiene toda la información sobre los tercerso y los valores que aqui se definan, serán usados en todas las transacciones de documentos de la aplicación.\",\n                        \"responsible_id\": 100,\n                        \"responsible_name\": \"Organization\",\n                        \"document_action_value\": \"\",\n                        \"document_action_name\": \"\",\n                        \"priority\": 0,\n                        \"action\": \"USER_WINDOW\",\n                        \"transitions\": []\n                    }\n                ]\n            },\n            \"node\": {\n                \"id\": 244,\n                \"value\": \"Business Partner\",\n                \"name\": \"Socio del Negocio\",\n                \"description\": \"Mantener Socios del Negocio\",\n                \"help\": \"Esta ventana permite definir a cualquier ente con el cual se tenga relación de negocios (Socios del Negocio). Esto incluye clientes, proveedores y empleados. Antes de entrar o importar productos, es necesario definir proveedores. La ventana mantiene toda la información sobre los tercerso y los valores que aqui se definan, serán usados en todas las transacciones de documentos de la aplicación.\",\n                \"responsible_id\": 100,\n                \"responsible_name\": \"Organization\",\n                \"document_action_value\": \"\",\n                \"document_action_name\": \"\",\n                \"priority\": 0,\n                \"action\": \"USER_WINDOW\",\n                \"transitions\": []\n            },\n            \"zoom_windows\": [\n                {\n                    \"id\": 123,\n                    \"name\": \"Socio del Negocio\",\n                    \"description\": \"Mantener Socios del Negocio\",\n                    \"is_sales_transaction\": true,\n                    \"is_active\": false\n                }\n            ],\n            \"is_sales_transaction\": false\n        },\n        {\n            \"id\": 50002,\n            \"table_name\": \"C_BPartner\",\n            \"record_id\": 50002,\n            \"user_id\": 100,\n            \"user_name\": \"SuperUser\",\n            \"responsible_id\": 100,\n            \"responsible_name\": \"Organization\",\n            \"text_message\": \"\",\n            \"processed\": false,\n            \"priority\": 0,\n            \"created\": \"2008-09-22T18:16:05Z\",\n            \"workflow_process\": {\n                \"process_id\": 50002,\n                \"workflow_id\": 131,\n                \"workflow_name\": \"Aprobación Tercero\",\n                \"id\": 50002,\n                \"table_name\": \"C_BPartner\",\n                \"user_id\": 100,\n                \"user_name\": \"SuperUser\",\n                \"responsible_id\": 101,\n                \"responsible_name\": \"Invoker\",\n                \"text_message\": \"\",\n                \"processed\": false,\n                \"workflow_state\": \"SUSPENDED\",\n                \"priority\": \"URGENT\",\n                \"workflow_events\": [\n                    {\n                        \"node_id\": 244,\n                        \"node_name\": \"Socio del Negocio\",\n                        \"id\": 50002,\n                        \"table_name\": \"C_BPartner\",\n                        \"user_id\": 100,\n                        \"user_name\": \"SuperUser\",\n                        \"responsible_id\": 100,\n                        \"responsible_name\": \"Organization\",\n                        \"text_message\": \"\",\n                        \"time_elapsed\": \"0\",\n                        \"attribute_name\": \"\",\n                        \"old_value\": \"\",\n                        \"new_value\": \"\",\n                        \"workflow_state\": \"SUSPENDED\",\n                        \"event_type\": \"PROCESS_CREATED\",\n                        \"log_date\": \"2008-09-22T18:16:08Z\"\n                    }\n                ],\n                \"log_date\": \"2008-09-22T18:16:00Z\"\n            },\n            \"workflow\": {\n                \"id\": 131,\n                \"value\": \"Business Partner Approval\",\n                \"name\": \"Aprobación Tercero\",\n                \"description\": \"Documento ejemplo basado en un flujo de trabajo\",\n                \"help\": \"Cuando un nuevo tercero es creado, éste es notificado para revisión y chequeo de crédito\",\n                \"table_name\": \"C_BPartner\",\n                \"responsible_id\": 0,\n                \"responsible_name\": \"\",\n                \"priority\": 0,\n                \"is_default\": false,\n                \"is_valid\": true,\n                \"publish_status\": \"RELEASED\",\n                \"duration_unit\": \"MINUTE\",\n                \"start_node\": {\n                    \"id\": 244,\n                    \"value\": \"Business Partner\",\n                    \"name\": \"Socio del Negocio\",\n                    \"description\": \"Mantener Socios del Negocio\",\n                    \"help\": \"Esta ventana permite definir a cualquier ente con el cual se tenga relación de negocios (Socios del Negocio). Esto incluye clientes, proveedores y empleados. Antes de entrar o importar productos, es necesario definir proveedores. La ventana mantiene toda la información sobre los tercerso y los valores que aqui se definan, serán usados en todas las transacciones de documentos de la aplicación.\",\n                    \"responsible_id\": 100,\n                    \"responsible_name\": \"Organization\",\n                    \"document_action_value\": \"\",\n                    \"document_action_name\": \"\",\n                    \"priority\": 0,\n                    \"action\": \"USER_WINDOW\",\n                    \"transitions\": []\n                },\n                \"workflow_nodes\": [\n                    {\n                        \"id\": 244,\n                        \"value\": \"Business Partner\",\n                        \"name\": \"Socio del Negocio\",\n                        \"description\": \"Mantener Socios del Negocio\",\n                        \"help\": \"Esta ventana permite definir a cualquier ente con el cual se tenga relación de negocios (Socios del Negocio). Esto incluye clientes, proveedores y empleados. Antes de entrar o importar productos, es necesario definir proveedores. La ventana mantiene toda la información sobre los tercerso y los valores que aqui se definan, serán usados en todas las transacciones de documentos de la aplicación.\",\n                        \"responsible_id\": 100,\n                        \"responsible_name\": \"Organization\",\n                        \"document_action_value\": \"\",\n                        \"document_action_name\": \"\",\n                        \"priority\": 0,\n                        \"action\": \"USER_WINDOW\",\n                        \"transitions\": []\n                    }\n                ]\n            },\n            \"node\": {\n                \"id\": 244,\n                \"value\": \"Business Partner\",\n                \"name\": \"Socio del Negocio\",\n                \"description\": \"Mantener Socios del Negocio\",\n                \"help\": \"Esta ventana permite definir a cualquier ente con el cual se tenga relación de negocios (Socios del Negocio). Esto incluye clientes, proveedores y empleados. Antes de entrar o importar productos, es necesario definir proveedores. La ventana mantiene toda la información sobre los tercerso y los valores que aqui se definan, serán usados en todas las transacciones de documentos de la aplicación.\",\n                \"responsible_id\": 100,\n                \"responsible_name\": \"Organization\",\n                \"document_action_value\": \"\",\n                \"document_action_name\": \"\",\n                \"priority\": 0,\n                \"action\": \"USER_WINDOW\",\n                \"transitions\": []\n            },\n            \"zoom_windows\": [\n                {\n                    \"id\": 123,\n                    \"name\": \"Socio del Negocio\",\n                    \"description\": \"Mantener Socios del Negocio\",\n                    \"is_sales_transaction\": true,\n                    \"is_active\": false\n                }\n            ],\n            \"is_sales_transaction\": false\n        },\n        {\n            \"id\": 50003,\n            \"table_name\": \"C_BPartner\",\n            \"record_id\": 50003,\n            \"user_id\": 100,\n            \"user_name\": \"SuperUser\",\n            \"responsible_id\": 100,\n            \"responsible_name\": \"Organization\",\n            \"text_message\": \"\",\n            \"processed\": false,\n            \"priority\": 0,\n            \"created\": \"2008-09-22T18:17:30Z\",\n            \"workflow_process\": {\n                \"process_id\": 50003,\n                \"workflow_id\": 131,\n                \"workflow_name\": \"Aprobación Tercero\",\n                \"id\": 50003,\n                \"table_name\": \"C_BPartner\",\n                \"user_id\": 100,\n                \"user_name\": \"SuperUser\",\n                \"responsible_id\": 101,\n                \"responsible_name\": \"Invoker\",\n                \"text_message\": \"\",\n                \"processed\": false,\n                \"workflow_state\": \"SUSPENDED\",\n                \"priority\": \"URGENT\",\n                \"workflow_events\": [\n                    {\n                        \"node_id\": 244,\n                        \"node_name\": \"Socio del Negocio\",\n                        \"id\": 50003,\n                        \"table_name\": \"C_BPartner\",\n                        \"user_id\": 100,\n                        \"user_name\": \"SuperUser\",\n                        \"responsible_id\": 100,\n                        \"responsible_name\": \"Organization\",\n                        \"text_message\": \"\",\n                        \"time_elapsed\": \"0\",\n                        \"attribute_name\": \"\",\n                        \"old_value\": \"\",\n                        \"new_value\": \"\",\n                        \"workflow_state\": \"SUSPENDED\",\n                        \"event_type\": \"PROCESS_CREATED\",\n                        \"log_date\": \"2008-09-22T18:17:34Z\"\n                    }\n                ],\n                \"log_date\": \"2008-09-22T18:17:29Z\"\n            },\n            \"workflow\": {\n                \"id\": 131,\n                \"value\": \"Business Partner Approval\",\n                \"name\": \"Aprobación Tercero\",\n                \"description\": \"Documento ejemplo basado en un flujo de trabajo\",\n                \"help\": \"Cuando un nuevo tercero es creado, éste es notificado para revisión y chequeo de crédito\",\n                \"table_name\": \"C_BPartner\",\n                \"responsible_id\": 0,\n                \"responsible_name\": \"\",\n                \"priority\": 0,\n                \"is_default\": false,\n                \"is_valid\": true,\n                \"publish_status\": \"RELEASED\",\n                \"duration_unit\": \"MINUTE\",\n                \"start_node\": {\n                    \"id\": 244,\n                    \"value\": \"Business Partner\",\n                    \"name\": \"Socio del Negocio\",\n                    \"description\": \"Mantener Socios del Negocio\",\n                    \"help\": \"Esta ventana permite definir a cualquier ente con el cual se tenga relación de negocios (Socios del Negocio). Esto incluye clientes, proveedores y empleados. Antes de entrar o importar productos, es necesario definir proveedores. La ventana mantiene toda la información sobre los tercerso y los valores que aqui se definan, serán usados en todas las transacciones de documentos de la aplicación.\",\n                    \"responsible_id\": 100,\n                    \"responsible_name\": \"Organization\",\n                    \"document_action_value\": \"\",\n                    \"document_action_name\": \"\",\n                    \"priority\": 0,\n                    \"action\": \"USER_WINDOW\",\n                    \"transitions\": []\n                },\n                \"workflow_nodes\": [\n                    {\n                        \"id\": 244,\n                        \"value\": \"Business Partner\",\n                        \"name\": \"Socio del Negocio\",\n                        \"description\": \"Mantener Socios del Negocio\",\n                        \"help\": \"Esta ventana permite definir a cualquier ente con el cual se tenga relación de negocios (Socios del Negocio). Esto incluye clientes, proveedores y empleados. Antes de entrar o importar productos, es necesario definir proveedores. La ventana mantiene toda la información sobre los tercerso y los valores que aqui se definan, serán usados en todas las transacciones de documentos de la aplicación.\",\n                        \"responsible_id\": 100,\n                        \"responsible_name\": \"Organization\",\n                        \"document_action_value\": \"\",\n                        \"document_action_name\": \"\",\n                        \"priority\": 0,\n                        \"action\": \"USER_WINDOW\",\n                        \"transitions\": []\n                    }\n                ]\n            },\n            \"node\": {\n                \"id\": 244,\n                \"value\": \"Business Partner\",\n                \"name\": \"Socio del Negocio\",\n                \"description\": \"Mantener Socios del Negocio\",\n                \"help\": \"Esta ventana permite definir a cualquier ente con el cual se tenga relación de negocios (Socios del Negocio). Esto incluye clientes, proveedores y empleados. Antes de entrar o importar productos, es necesario definir proveedores. La ventana mantiene toda la información sobre los tercerso y los valores que aqui se definan, serán usados en todas las transacciones de documentos de la aplicación.\",\n                \"responsible_id\": 100,\n                \"responsible_name\": \"Organization\",\n                \"document_action_value\": \"\",\n                \"document_action_name\": \"\",\n                \"priority\": 0,\n                \"action\": \"USER_WINDOW\",\n                \"transitions\": []\n            },\n            \"zoom_windows\": [\n                {\n                    \"id\": 123,\n                    \"name\": \"Socio del Negocio\",\n                    \"description\": \"Mantener Socios del Negocio\",\n                    \"is_sales_transaction\": true,\n                    \"is_active\": false\n                }\n            ],\n            \"is_sales_transaction\": false\n        },\n        {\n            \"id\": 50004,\n            \"table_name\": \"C_BPartner\",\n            \"record_id\": 50004,\n            \"user_id\": 100,\n            \"user_name\": \"SuperUser\",\n            \"responsible_id\": 100,\n            \"responsible_name\": \"Organization\",\n            \"text_message\": \"\",\n            \"processed\": false,\n            \"priority\": 0,\n            \"created\": \"2008-09-24T19:14:16Z\",\n            \"workflow_process\": {\n                \"process_id\": 50004,\n                \"workflow_id\": 131,\n                \"workflow_name\": \"Aprobación Tercero\",\n                \"id\": 50004,\n                \"table_name\": \"C_BPartner\",\n                \"user_id\": 100,\n                \"user_name\": \"SuperUser\",\n                \"responsible_id\": 101,\n                \"responsible_name\": \"Invoker\",\n                \"text_message\": \"\",\n                \"processed\": false,\n                \"workflow_state\": \"SUSPENDED\",\n                \"priority\": \"URGENT\",\n                \"workflow_events\": [\n                    {\n                        \"node_id\": 244,\n                        \"node_name\": \"Socio del Negocio\",\n                        \"id\": 50004,\n                        \"table_name\": \"C_BPartner\",\n                        \"user_id\": 100,\n                        \"user_name\": \"SuperUser\",\n                        \"responsible_id\": 100,\n                        \"responsible_name\": \"Organization\",\n                        \"text_message\": \"\",\n                        \"time_elapsed\": \"0\",\n                        \"attribute_name\": \"\",\n                        \"old_value\": \"\",\n                        \"new_value\": \"\",\n                        \"workflow_state\": \"SUSPENDED\",\n                        \"event_type\": \"PROCESS_CREATED\",\n                        \"log_date\": \"2008-09-24T19:14:18Z\"\n                    }\n                ],\n                \"log_date\": \"2008-09-24T19:14:15Z\"\n            },\n            \"workflow\": {\n                \"id\": 131,\n                \"value\": \"Business Partner Approval\",\n                \"name\": \"Aprobación Tercero\",\n                \"description\": \"Documento ejemplo basado en un flujo de trabajo\",\n                \"help\": \"Cuando un nuevo tercero es creado, éste es notificado para revisión y chequeo de crédito\",\n                \"table_name\": \"C_BPartner\",\n                \"responsible_id\": 0,\n                \"responsible_name\": \"\",\n                \"priority\": 0,\n                \"is_default\": false,\n                \"is_valid\": true,\n                \"publish_status\": \"RELEASED\",\n                \"duration_unit\": \"MINUTE\",\n                \"start_node\": {\n                    \"id\": 244,\n                    \"value\": \"Business Partner\",\n                    \"name\": \"Socio del Negocio\",\n                    \"description\": \"Mantener Socios del Negocio\",\n                    \"help\": \"Esta ventana permite definir a cualquier ente con el cual se tenga relación de negocios (Socios del Negocio). Esto incluye clientes, proveedores y empleados. Antes de entrar o importar productos, es necesario definir proveedores. La ventana mantiene toda la información sobre los tercerso y los valores que aqui se definan, serán usados en todas las transacciones de documentos de la aplicación.\",\n                    \"responsible_id\": 100,\n                    \"responsible_name\": \"Organization\",\n                    \"document_action_value\": \"\",\n                    \"document_action_name\": \"\",\n                    \"priority\": 0,\n                    \"action\": \"USER_WINDOW\",\n                    \"transitions\": []\n                },\n                \"workflow_nodes\": [\n                    {\n                        \"id\": 244,\n                        \"value\": \"Business Partner\",\n                        \"name\": \"Socio del Negocio\",\n                        \"description\": \"Mantener Socios del Negocio\",\n                        \"help\": \"Esta ventana permite definir a cualquier ente con el cual se tenga relación de negocios (Socios del Negocio). Esto incluye clientes, proveedores y empleados. Antes de entrar o importar productos, es necesario definir proveedores. La ventana mantiene toda la información sobre los tercerso y los valores que aqui se definan, serán usados en todas las transacciones de documentos de la aplicación.\",\n                        \"responsible_id\": 100,\n                        \"responsible_name\": \"Organization\",\n                        \"document_action_value\": \"\",\n                        \"document_action_name\": \"\",\n                        \"priority\": 0,\n                        \"action\": \"USER_WINDOW\",\n                        \"transitions\": []\n                    }\n                ]\n            },\n            \"node\": {\n                \"id\": 244,\n                \"value\": \"Business Partner\",\n                \"name\": \"Socio del Negocio\",\n                \"description\": \"Mantener Socios del Negocio\",\n                \"help\": \"Esta ventana permite definir a cualquier ente con el cual se tenga relación de negocios (Socios del Negocio). Esto incluye clientes, proveedores y empleados. Antes de entrar o importar productos, es necesario definir proveedores. La ventana mantiene toda la información sobre los tercerso y los valores que aqui se definan, serán usados en todas las transacciones de documentos de la aplicación.\",\n                \"responsible_id\": 100,\n                \"responsible_name\": \"Organization\",\n                \"document_action_value\": \"\",\n                \"document_action_name\": \"\",\n                \"priority\": 0,\n                \"action\": \"USER_WINDOW\",\n                \"transitions\": []\n            },\n            \"zoom_windows\": [\n                {\n                    \"id\": 123,\n                    \"name\": \"Socio del Negocio\",\n                    \"description\": \"Mantener Socios del Negocio\",\n                    \"is_sales_transaction\": true,\n                    \"is_active\": false\n                }\n            ],\n            \"is_sales_transaction\": false\n        },\n        {\n            \"id\": 50005,\n            \"table_name\": \"C_BPartner\",\n            \"record_id\": 50005,\n            \"user_id\": 100,\n            \"user_name\": \"SuperUser\",\n            \"responsible_id\": 100,\n            \"responsible_name\": \"Organization\",\n            \"text_message\": \"\",\n            \"processed\": false,\n            \"priority\": 0,\n            \"created\": \"2008-09-24T19:15:48Z\",\n            \"workflow_process\": {\n                \"process_id\": 50005,\n                \"workflow_id\": 131,\n                \"workflow_name\": \"Aprobación Tercero\",\n                \"id\": 50005,\n                \"table_name\": \"C_BPartner\",\n                \"user_id\": 100,\n                \"user_name\": \"SuperUser\",\n                \"responsible_id\": 101,\n                \"responsible_name\": \"Invoker\",\n                \"text_message\": \"\",\n                \"processed\": false,\n                \"workflow_state\": \"SUSPENDED\",\n                \"priority\": \"URGENT\",\n                \"workflow_events\": [\n                    {\n                        \"node_id\": 244,\n                        \"node_name\": \"Socio del Negocio\",\n                        \"id\": 50005,\n                        \"table_name\": \"C_BPartner\",\n                        \"user_id\": 100,\n                        \"user_name\": \"SuperUser\",\n                        \"responsible_id\": 100,\n                        \"responsible_name\": \"Organization\",\n                        \"text_message\": \"\",\n                        \"time_elapsed\": \"0\",\n                        \"attribute_name\": \"\",\n                        \"old_value\": \"\",\n                        \"new_value\": \"\",\n                        \"workflow_state\": \"SUSPENDED\",\n                        \"event_type\": \"PROCESS_CREATED\",\n                        \"log_date\": \"2008-09-24T19:15:49Z\"\n                    }\n                ],\n                \"log_date\": \"2008-09-24T19:15:47Z\"\n            },\n            \"workflow\": {\n                \"id\": 131,\n                \"value\": \"Business Partner Approval\",\n                \"name\": \"Aprobación Tercero\",\n                \"description\": \"Documento ejemplo basado en un flujo de trabajo\",\n                \"help\": \"Cuando un nuevo tercero es creado, éste es notificado para revisión y chequeo de crédito\",\n                \"table_name\": \"C_BPartner\",\n                \"responsible_id\": 0,\n                \"responsible_name\": \"\",\n                \"priority\": 0,\n                \"is_default\": false,\n                \"is_valid\": true,\n                \"publish_status\": \"RELEASED\",\n                \"duration_unit\": \"MINUTE\",\n                \"start_node\": {\n                    \"id\": 244,\n                    \"value\": \"Business Partner\",\n                    \"name\": \"Socio del Negocio\",\n                    \"description\": \"Mantener Socios del Negocio\",\n                    \"help\": \"Esta ventana permite definir a cualquier ente con el cual se tenga relación de negocios (Socios del Negocio). Esto incluye clientes, proveedores y empleados. Antes de entrar o importar productos, es necesario definir proveedores. La ventana mantiene toda la información sobre los tercerso y los valores que aqui se definan, serán usados en todas las transacciones de documentos de la aplicación.\",\n                    \"responsible_id\": 100,\n                    \"responsible_name\": \"Organization\",\n                    \"document_action_value\": \"\",\n                    \"document_action_name\": \"\",\n                    \"priority\": 0,\n                    \"action\": \"USER_WINDOW\",\n                    \"transitions\": []\n                },\n                \"workflow_nodes\": [\n                    {\n                        \"id\": 244,\n                        \"value\": \"Business Partner\",\n                        \"name\": \"Socio del Negocio\",\n                        \"description\": \"Mantener Socios del Negocio\",\n                        \"help\": \"Esta ventana permite definir a cualquier ente con el cual se tenga relación de negocios (Socios del Negocio). Esto incluye clientes, proveedores y empleados. Antes de entrar o importar productos, es necesario definir proveedores. La ventana mantiene toda la información sobre los tercerso y los valores que aqui se definan, serán usados en todas las transacciones de documentos de la aplicación.\",\n                        \"responsible_id\": 100,\n                        \"responsible_name\": \"Organization\",\n                        \"document_action_value\": \"\",\n                        \"document_action_name\": \"\",\n                        \"priority\": 0,\n                        \"action\": \"USER_WINDOW\",\n                        \"transitions\": []\n                    }\n                ]\n            },\n            \"node\": {\n                \"id\": 244,\n                \"value\": \"Business Partner\",\n                \"name\": \"Socio del Negocio\",\n                \"description\": \"Mantener Socios del Negocio\",\n                \"help\": \"Esta ventana permite definir a cualquier ente con el cual se tenga relación de negocios (Socios del Negocio). Esto incluye clientes, proveedores y empleados. Antes de entrar o importar productos, es necesario definir proveedores. La ventana mantiene toda la información sobre los tercerso y los valores que aqui se definan, serán usados en todas las transacciones de documentos de la aplicación.\",\n                \"responsible_id\": 100,\n                \"responsible_name\": \"Organization\",\n                \"document_action_value\": \"\",\n                \"document_action_name\": \"\",\n                \"priority\": 0,\n                \"action\": \"USER_WINDOW\",\n                \"transitions\": []\n            },\n            \"zoom_windows\": [\n                {\n                    \"id\": 123,\n                    \"name\": \"Socio del Negocio\",\n                    \"description\": \"Mantener Socios del Negocio\",\n                    \"is_sales_transaction\": true,\n                    \"is_active\": false\n                }\n            ],\n            \"is_sales_transaction\": false\n        },\n        {\n            \"id\": 50007,\n            \"table_name\": \"C_BPartner\",\n            \"record_id\": 50007,\n            \"user_id\": 100,\n            \"user_name\": \"SuperUser\",\n            \"responsible_id\": 100,\n            \"responsible_name\": \"Organization\",\n            \"text_message\": \"\",\n            \"processed\": false,\n            \"priority\": 0,\n            \"created\": \"2008-09-24T19:18:34Z\",\n            \"workflow_process\": {\n                \"process_id\": 50007,\n                \"workflow_id\": 131,\n                \"workflow_name\": \"Aprobación Tercero\",\n                \"id\": 50007,\n                \"table_name\": \"C_BPartner\",\n                \"user_id\": 100,\n                \"user_name\": \"SuperUser\",\n                \"responsible_id\": 101,\n                \"responsible_name\": \"Invoker\",\n                \"text_message\": \"\",\n                \"processed\": false,\n                \"workflow_state\": \"SUSPENDED\",\n                \"priority\": \"URGENT\",\n                \"workflow_events\": [\n                    {\n                        \"node_id\": 244,\n                        \"node_name\": \"Socio del Negocio\",\n                        \"id\": 50007,\n                        \"table_name\": \"C_BPartner\",\n                        \"user_id\": 100,\n                        \"user_name\": \"SuperUser\",\n                        \"responsible_id\": 100,\n                        \"responsible_name\": \"Organization\",\n                        \"text_message\": \"\",\n                        \"time_elapsed\": \"0\",\n                        \"attribute_name\": \"\",\n                        \"old_value\": \"\",\n                        \"new_value\": \"\",\n                        \"workflow_state\": \"SUSPENDED\",\n                        \"event_type\": \"PROCESS_CREATED\",\n                        \"log_date\": \"2008-09-24T19:18:35Z\"\n                    }\n                ],\n                \"log_date\": \"2008-09-24T19:18:34Z\"\n            },\n            \"workflow\": {\n                \"id\": 131,\n                \"value\": \"Business Partner Approval\",\n                \"name\": \"Aprobación Tercero\",\n                \"description\": \"Documento ejemplo basado en un flujo de trabajo\",\n                \"help\": \"Cuando un nuevo tercero es creado, éste es notificado para revisión y chequeo de crédito\",\n                \"table_name\": \"C_BPartner\",\n                \"responsible_id\": 0,\n                \"responsible_name\": \"\",\n                \"priority\": 0,\n                \"is_default\": false,\n                \"is_valid\": true,\n                \"publish_status\": \"RELEASED\",\n                \"duration_unit\": \"MINUTE\",\n                \"start_node\": {\n                    \"id\": 244,\n                    \"value\": \"Business Partner\",\n                    \"name\": \"Socio del Negocio\",\n                    \"description\": \"Mantener Socios del Negocio\",\n                    \"help\": \"Esta ventana permite definir a cualquier ente con el cual se tenga relación de negocios (Socios del Negocio). Esto incluye clientes, proveedores y empleados. Antes de entrar o importar productos, es necesario definir proveedores. La ventana mantiene toda la información sobre los tercerso y los valores que aqui se definan, serán usados en todas las transacciones de documentos de la aplicación.\",\n                    \"responsible_id\": 100,\n                    \"responsible_name\": \"Organization\",\n                    \"document_action_value\": \"\",\n                    \"document_action_name\": \"\",\n                    \"priority\": 0,\n                    \"action\": \"USER_WINDOW\",\n                    \"transitions\": []\n                },\n                \"workflow_nodes\": [\n                    {\n                        \"id\": 244,\n                        \"value\": \"Business Partner\",\n                        \"name\": \"Socio del Negocio\",\n                        \"description\": \"Mantener Socios del Negocio\",\n                        \"help\": \"Esta ventana permite definir a cualquier ente con el cual se tenga relación de negocios (Socios del Negocio). Esto incluye clientes, proveedores y empleados. Antes de entrar o importar productos, es necesario definir proveedores. La ventana mantiene toda la información sobre los tercerso y los valores que aqui se definan, serán usados en todas las transacciones de documentos de la aplicación.\",\n                        \"responsible_id\": 100,\n                        \"responsible_name\": \"Organization\",\n                        \"document_action_value\": \"\",\n                        \"document_action_name\": \"\",\n                        \"priority\": 0,\n                        \"action\": \"USER_WINDOW\",\n                        \"transitions\": []\n                    }\n                ]\n            },\n            \"node\": {\n                \"id\": 244,\n                \"value\": \"Business Partner\",\n                \"name\": \"Socio del Negocio\",\n                \"description\": \"Mantener Socios del Negocio\",\n                \"help\": \"Esta ventana permite definir a cualquier ente con el cual se tenga relación de negocios (Socios del Negocio). Esto incluye clientes, proveedores y empleados. Antes de entrar o importar productos, es necesario definir proveedores. La ventana mantiene toda la información sobre los tercerso y los valores que aqui se definan, serán usados en todas las transacciones de documentos de la aplicación.\",\n                \"responsible_id\": 100,\n                \"responsible_name\": \"Organization\",\n                \"document_action_value\": \"\",\n                \"document_action_name\": \"\",\n                \"priority\": 0,\n                \"action\": \"USER_WINDOW\",\n                \"transitions\": []\n            },\n            \"zoom_windows\": [\n                {\n                    \"id\": 123,\n                    \"name\": \"Socio del Negocio\",\n                    \"description\": \"Mantener Socios del Negocio\",\n                    \"is_sales_transaction\": true,\n                    \"is_active\": false\n                }\n            ],\n            \"is_sales_transaction\": false\n        },\n        {\n            \"id\": 50008,\n            \"table_name\": \"C_BPartner\",\n            \"record_id\": 50008,\n            \"user_id\": 100,\n            \"user_name\": \"SuperUser\",\n            \"responsible_id\": 100,\n            \"responsible_name\": \"Organization\",\n            \"text_message\": \"\",\n            \"processed\": false,\n            \"priority\": 0,\n            \"created\": \"2008-09-24T19:19:41Z\",\n            \"workflow_process\": {\n                \"process_id\": 50008,\n                \"workflow_id\": 131,\n                \"workflow_name\": \"Aprobación Tercero\",\n                \"id\": 50008,\n                \"table_name\": \"C_BPartner\",\n                \"user_id\": 100,\n                \"user_name\": \"SuperUser\",\n                \"responsible_id\": 101,\n                \"responsible_name\": \"Invoker\",\n                \"text_message\": \"\",\n                \"processed\": false,\n                \"workflow_state\": \"SUSPENDED\",\n                \"priority\": \"URGENT\",\n                \"workflow_events\": [\n                    {\n                        \"node_id\": 244,\n                        \"node_name\": \"Socio del Negocio\",\n                        \"id\": 50008,\n                        \"table_name\": \"C_BPartner\",\n                        \"user_id\": 100,\n                        \"user_name\": \"SuperUser\",\n                        \"responsible_id\": 100,\n                        \"responsible_name\": \"Organization\",\n                        \"text_message\": \"\",\n                        \"time_elapsed\": \"0\",\n                        \"attribute_name\": \"\",\n                        \"old_value\": \"\",\n                        \"new_value\": \"\",\n                        \"workflow_state\": \"SUSPENDED\",\n                        \"event_type\": \"PROCESS_CREATED\",\n                        \"log_date\": \"2008-09-24T19:19:42Z\"\n                    }\n                ],\n                \"log_date\": \"2008-09-24T19:19:39Z\"\n            },\n            \"workflow\": {\n                \"id\": 131,\n                \"value\": \"Business Partner Approval\",\n                \"name\": \"Aprobación Tercero\",\n                \"description\": \"Documento ejemplo basado en un flujo de trabajo\",\n                \"help\": \"Cuando un nuevo tercero es creado, éste es notificado para revisión y chequeo de crédito\",\n                \"table_name\": \"C_BPartner\",\n                \"responsible_id\": 0,\n                \"responsible_name\": \"\",\n                \"priority\": 0,\n                \"is_default\": false,\n                \"is_valid\": true,\n                \"publish_status\": \"RELEASED\",\n                \"duration_unit\": \"MINUTE\",\n                \"start_node\": {\n                    \"id\": 244,\n                    \"value\": \"Business Partner\",\n                    \"name\": \"Socio del Negocio\",\n                    \"description\": \"Mantener Socios del Negocio\",\n                    \"help\": \"Esta ventana permite definir a cualquier ente con el cual se tenga relación de negocios (Socios del Negocio). Esto incluye clientes, proveedores y empleados. Antes de entrar o importar productos, es necesario definir proveedores. La ventana mantiene toda la información sobre los tercerso y los valores que aqui se definan, serán usados en todas las transacciones de documentos de la aplicación.\",\n                    \"responsible_id\": 100,\n                    \"responsible_name\": \"Organization\",\n                    \"document_action_value\": \"\",\n                    \"document_action_name\": \"\",\n                    \"priority\": 0,\n                    \"action\": \"USER_WINDOW\",\n                    \"transitions\": []\n                },\n                \"workflow_nodes\": [\n                    {\n                        \"id\": 244,\n                        \"value\": \"Business Partner\",\n                        \"name\": \"Socio del Negocio\",\n                        \"description\": \"Mantener Socios del Negocio\",\n                        \"help\": \"Esta ventana permite definir a cualquier ente con el cual se tenga relación de negocios (Socios del Negocio). Esto incluye clientes, proveedores y empleados. Antes de entrar o importar productos, es necesario definir proveedores. La ventana mantiene toda la información sobre los tercerso y los valores que aqui se definan, serán usados en todas las transacciones de documentos de la aplicación.\",\n                        \"responsible_id\": 100,\n                        \"responsible_name\": \"Organization\",\n                        \"document_action_value\": \"\",\n                        \"document_action_name\": \"\",\n                        \"priority\": 0,\n                        \"action\": \"USER_WINDOW\",\n                        \"transitions\": []\n                    }\n                ]\n            },\n            \"node\": {\n                \"id\": 244,\n                \"value\": \"Business Partner\",\n                \"name\": \"Socio del Negocio\",\n                \"description\": \"Mantener Socios del Negocio\",\n                \"help\": \"Esta ventana permite definir a cualquier ente con el cual se tenga relación de negocios (Socios del Negocio). Esto incluye clientes, proveedores y empleados. Antes de entrar o importar productos, es necesario definir proveedores. La ventana mantiene toda la información sobre los tercerso y los valores que aqui se definan, serán usados en todas las transacciones de documentos de la aplicación.\",\n                \"responsible_id\": 100,\n                \"responsible_name\": \"Organization\",\n                \"document_action_value\": \"\",\n                \"document_action_name\": \"\",\n                \"priority\": 0,\n                \"action\": \"USER_WINDOW\",\n                \"transitions\": []\n            },\n            \"zoom_windows\": [\n                {\n                    \"id\": 123,\n                    \"name\": \"Socio del Negocio\",\n                    \"description\": \"Mantener Socios del Negocio\",\n                    \"is_sales_transaction\": true,\n                    \"is_active\": false\n                }\n            ],\n            \"is_sales_transaction\": false\n        },\n        {\n            \"id\": 50009,\n            \"table_name\": \"C_BPartner\",\n            \"record_id\": 50009,\n            \"user_id\": 100,\n            \"user_name\": \"SuperUser\",\n            \"responsible_id\": 100,\n            \"responsible_name\": \"Organization\",\n            \"text_message\": \"\",\n            \"processed\": false,\n            \"priority\": 0,\n            \"created\": \"2008-09-24T19:20:37Z\",\n            \"workflow_process\": {\n                \"process_id\": 50009,\n                \"workflow_id\": 131,\n                \"workflow_name\": \"Aprobación Tercero\",\n                \"id\": 50009,\n                \"table_name\": \"C_BPartner\",\n                \"user_id\": 100,\n                \"user_name\": \"SuperUser\",\n                \"responsible_id\": 101,\n                \"responsible_name\": \"Invoker\",\n                \"text_message\": \"\",\n                \"processed\": false,\n                \"workflow_state\": \"SUSPENDED\",\n                \"priority\": \"URGENT\",\n                \"workflow_events\": [\n                    {\n                        \"node_id\": 244,\n                        \"node_name\": \"Socio del Negocio\",\n                        \"id\": 50009,\n                        \"table_name\": \"C_BPartner\",\n                        \"user_id\": 100,\n                        \"user_name\": \"SuperUser\",\n                        \"responsible_id\": 100,\n                        \"responsible_name\": \"Organization\",\n                        \"text_message\": \"\",\n                        \"time_elapsed\": \"0\",\n                        \"attribute_name\": \"\",\n                        \"old_value\": \"\",\n                        \"new_value\": \"\",\n                        \"workflow_state\": \"SUSPENDED\",\n                        \"event_type\": \"PROCESS_CREATED\",\n                        \"log_date\": \"2008-09-24T19:20:37Z\"\n                    }\n                ],\n                \"log_date\": \"2008-09-24T19:20:36Z\"\n            },\n            \"workflow\": {\n                \"id\": 131,\n                \"value\": \"Business Partner Approval\",\n                \"name\": \"Aprobación Tercero\",\n                \"description\": \"Documento ejemplo basado en un flujo de trabajo\",\n                \"help\": \"Cuando un nuevo tercero es creado, éste es notificado para revisión y chequeo de crédito\",\n                \"table_name\": \"C_BPartner\",\n                \"responsible_id\": 0,\n                \"responsible_name\": \"\",\n                \"priority\": 0,\n                \"is_default\": false,\n                \"is_valid\": true,\n                \"publish_status\": \"RELEASED\",\n                \"duration_unit\": \"MINUTE\",\n                \"start_node\": {\n                    \"id\": 244,\n                    \"value\": \"Business Partner\",\n                    \"name\": \"Socio del Negocio\",\n                    \"description\": \"Mantener Socios del Negocio\",\n                    \"help\": \"Esta ventana permite definir a cualquier ente con el cual se tenga relación de negocios (Socios del Negocio). Esto incluye clientes, proveedores y empleados. Antes de entrar o importar productos, es necesario definir proveedores. La ventana mantiene toda la información sobre los tercerso y los valores que aqui se definan, serán usados en todas las transacciones de documentos de la aplicación.\",\n                    \"responsible_id\": 100,\n                    \"responsible_name\": \"Organization\",\n                    \"document_action_value\": \"\",\n                    \"document_action_name\": \"\",\n                    \"priority\": 0,\n                    \"action\": \"USER_WINDOW\",\n                    \"transitions\": []\n                },\n                \"workflow_nodes\": [\n                    {\n                        \"id\": 244,\n                        \"value\": \"Business Partner\",\n                        \"name\": \"Socio del Negocio\",\n                        \"description\": \"Mantener Socios del Negocio\",\n                        \"help\": \"Esta ventana permite definir a cualquier ente con el cual se tenga relación de negocios (Socios del Negocio). Esto incluye clientes, proveedores y empleados. Antes de entrar o importar productos, es necesario definir proveedores. La ventana mantiene toda la información sobre los tercerso y los valores que aqui se definan, serán usados en todas las transacciones de documentos de la aplicación.\",\n                        \"responsible_id\": 100,\n                        \"responsible_name\": \"Organization\",\n                        \"document_action_value\": \"\",\n                        \"document_action_name\": \"\",\n                        \"priority\": 0,\n                        \"action\": \"USER_WINDOW\",\n                        \"transitions\": []\n                    }\n                ]\n            },\n            \"node\": {\n                \"id\": 244,\n                \"value\": \"Business Partner\",\n                \"name\": \"Socio del Negocio\",\n                \"description\": \"Mantener Socios del Negocio\",\n                \"help\": \"Esta ventana permite definir a cualquier ente con el cual se tenga relación de negocios (Socios del Negocio). Esto incluye clientes, proveedores y empleados. Antes de entrar o importar productos, es necesario definir proveedores. La ventana mantiene toda la información sobre los tercerso y los valores que aqui se definan, serán usados en todas las transacciones de documentos de la aplicación.\",\n                \"responsible_id\": 100,\n                \"responsible_name\": \"Organization\",\n                \"document_action_value\": \"\",\n                \"document_action_name\": \"\",\n                \"priority\": 0,\n                \"action\": \"USER_WINDOW\",\n                \"transitions\": []\n            },\n            \"zoom_windows\": [\n                {\n                    \"id\": 123,\n                    \"name\": \"Socio del Negocio\",\n                    \"description\": \"Mantener Socios del Negocio\",\n                    \"is_sales_transaction\": true,\n                    \"is_active\": false\n                }\n            ],\n            \"is_sales_transaction\": false\n        }\n    ],\n    \"next_page_token\": \"\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Process",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"message\":\"hola\",\n    \"is_approved\":false\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{HOST}}/workflow/workflows/:id/process",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"workflow",
+						"workflows",
+						":id",
+						"process"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "50000"
+						}
+					]
+				},
+				"description": "### Request Params\n\n- id (int32, required)\n    \n\n### Request Body\n\n- message (String)\n    \n- is_approved (String)"
+			},
+			"response": [
+				{
+					"name": "Process",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/workflow/workflows/:id/process",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"workflow",
+								"workflows",
+								":id",
+								"process"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "50001"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.25.2"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 08 Mar 2024 12:38:11 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "3"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "grpc-encoding",
+							"value": "identity"
+						},
+						{
+							"key": "grpc-accept-encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "x-envoy-upstream-service-time",
+							"value": "176"
+						},
+						{
+							"key": "grpc-status",
+							"value": "0"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Max-Age",
+							"value": "3600"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{}"
+				}
+			]
+		},
+		{
+			"name": "Forward",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"message\":\"mensaje\",\n    \"user_id\":100\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{HOST}}/workflow/workflows/:id/forward",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"workflow",
+						"workflows",
+						":id",
+						"forward"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "50000"
+						}
+					]
+				},
+				"description": "### Request Params\n\n- id (int32, required)\n    \n\n### Request Body\n\n- message (String)\n- user_id (int32, required)"
+			},
+			"response": []
+		},
+		{
+			"name": "RunDocumentAction",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{HOST}}/workflow/workflows/run-action/:table_name/:id/:document_action",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"workflow",
+						"workflows",
+						"run-action",
+						":table_name",
+						":id",
+						":document_action"
+					],
+					"variable": [
+						{
+							"key": "table_name",
+							"value": "C_Order"
+						},
+						{
+							"key": "id",
+							"value": "106"
+						},
+						{
+							"key": "document_action",
+							"value": "JPG"
+						}
+					]
+				},
+				"description": "### Request Params\n\n- table_name (String, required)\n    \n- id (int32, required)\n    \n- document_action (String, required)"
+			},
+			"response": []
+		}
+	]
+}

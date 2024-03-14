@@ -1,0 +1,1687 @@
+{
+	"info": {
+		"_postman_id": "af384c02-bdf7-48fc-b36d-fe142ca96208",
+		"name": "Web_store",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "28978517"
+	},
+	"item": [
+		{
+			"name": "CreateCustomer",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\":\"prueba5\",\n    \"first_name\":\"prueba7\",\n    \"last_name\":\"prueba5\",\n    \"password\":\"1234\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{HOST}}/store/web-store/user",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"store",
+						"web-store",
+						"user"
+					]
+				},
+				"description": "### Request Body\n\n- email (String, required)\n- first_name (String, required)\n- last_name (String)\n- password (String)"
+			},
+			"response": [
+				{
+					"name": "CreateCustomer",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\":\"prueba\",\n    \"first_name\":\"prueba\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HOST}}/store/web-store/user",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"store",
+								"web-store",
+								"user"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.25.2"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 07 Mar 2024 19:22:25 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "279"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "grpc-encoding",
+							"value": "identity"
+						},
+						{
+							"key": "grpc-accept-encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "x-envoy-upstream-service-time",
+							"value": "112"
+						},
+						{
+							"key": "grpc-status",
+							"value": "0"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Max-Age",
+							"value": "3600"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 1000000,\n    \"business_partner_group_id\": 0,\n    \"created\": \"2024-03-07T19:22:25Z\",\n    \"updated\": \"2024-03-07T19:22:25Z\",\n    \"organization_name\": \"Store West\",\n    \"email\": \"prueba\",\n    \"first_name\": \"prueba\",\n    \"last_name\": \"\",\n    \"web_store_id\": 0,\n    \"website_id\": 0,\n    \"addresses\": []\n}"
+				}
+			]
+		},
+		{
+			"name": "ChangePassword",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"current_password\":\"1234\",\n    \"new_password\":\"1234\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{HOST}}/store/web-store/user/change-password",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"store",
+						"web-store",
+						"user",
+						"change-password"
+					]
+				},
+				"description": "### Request Body\n\n- current_password (String, required)\n- new_password (String, required)"
+			},
+			"response": []
+		},
+		{
+			"name": "GetCustomer",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{HOST}}/store/web-store/user/me",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"store",
+						"web-store",
+						"user",
+						"me"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "GetCustomer",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/store/web-store/user/me",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"store",
+								"web-store",
+								"user",
+								"me"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.25.2"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 07 Mar 2024 19:28:37 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "262"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "grpc-encoding",
+							"value": "identity"
+						},
+						{
+							"key": "grpc-accept-encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "x-envoy-upstream-service-time",
+							"value": "88"
+						},
+						{
+							"key": "grpc-status",
+							"value": "0"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Max-Age",
+							"value": "3600"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 100,\n    \"business_partner_group_id\": 0,\n    \"created\": \"1999-12-09T22:15:00Z\",\n    \"updated\": \"2005-10-18T11:58:59Z\",\n    \"organization_name\": \"\",\n    \"email\": \"\",\n    \"first_name\": \"SuperUser\",\n    \"last_name\": \"\",\n    \"web_store_id\": 0,\n    \"website_id\": 0,\n    \"addresses\": []\n}"
+				}
+			]
+		},
+		{
+			"name": "UpdateCustomer",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\":1000000,\n    \"business_partner_group_id\":0,\n    \"organization_name\":\"Store West\",\n    \"email\":\"asd\",\n    \"first_name\":\"asd\",\n    \"last_name\":\"asd\",\n    \"web_store_id\":0,\n    \"website_id\":0\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{HOST}}/store/web-store/user/me",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"store",
+						"web-store",
+						"user",
+						"me"
+					]
+				},
+				"description": "### Request Body\n\n- id (int32, required)\n- business_partner_group_id (int32)\n- organization_name (String)\n- email (String, required)\n- first_name (String, required)\n- last_name (String)\n- web_store_id (int32)\n    \n- website_id (int32)"
+			},
+			"response": [
+				{
+					"name": "UpdateCustomer",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\":1000000,\n    \"business_partner_group_id\":0,\n    \"organization_name\":\"Store West\",\n    \"email\":\"asd\",\n    \"first_name\":\"asd\",\n    \"last_name\":\"asd\",\n    \"web_store_id\":0,\n    \"website_id\":0\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HOST}}/store/web-store/user/me",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"store",
+								"web-store",
+								"user",
+								"me"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.25.2"
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 09 Mar 2024 16:48:51 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "270"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "grpc-encoding",
+							"value": "identity"
+						},
+						{
+							"key": "grpc-accept-encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "x-envoy-upstream-service-time",
+							"value": "62"
+						},
+						{
+							"key": "grpc-status",
+							"value": "0"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Max-Age",
+							"value": "3600"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 1000000,\n    \"business_partner_group_id\": 0,\n    \"created\": \"2024-03-09T16:37:04Z\",\n    \"updated\": \"2024-03-09T16:48:51.472Z\",\n    \"organization_name\": \"\",\n    \"email\": \"asd\",\n    \"first_name\": \"asd\",\n    \"last_name\": \"asd\",\n    \"web_store_id\": 0,\n    \"website_id\": 0,\n    \"addresses\": []\n}"
+				}
+			]
+		},
+		{
+			"name": "GetStock",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{HOST}}/store/web-store/stock/:sku",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"store",
+						"web-store",
+						"stock",
+						":sku"
+					],
+					"variable": [
+						{
+							"key": "sku",
+							"value": "12345"
+						}
+					]
+				},
+				"description": "### Request Params\n\n- sku (int32, required)"
+			},
+			"response": [
+				{
+					"name": "GetStock",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HOST}}/store/web-store/stock/:sku",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"store",
+								"web-store",
+								"stock",
+								":sku"
+							],
+							"variable": [
+								{
+									"key": "sku",
+									"value": "12345"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.25.2"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 14 Mar 2024 17:16:00 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "796"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "grpc-encoding",
+							"value": "identity"
+						},
+						{
+							"key": "grpc-accept-encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "x-envoy-upstream-service-time",
+							"value": "81"
+						},
+						{
+							"key": "grpc-status",
+							"value": "0"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Max-Age",
+							"value": "3600"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"product_id\": 0,\n    \"store_id\": 0,\n    \"quantity\": 0,\n    \"is_in_stock\": false,\n    \"is_decimal_quantity\": false,\n    \"is_show_default_notification_message\": false,\n    \"is_use_config_minimum_quantity\": false,\n    \"minimum_quantity\": 0,\n    \"is_use_config_minimum_sale_quantity\": false,\n    \"minimum_sale_quantity\": 0,\n    \"is_use_config_maximum_sale_quantity\": false,\n    \"maximum_sale_quantity\": 0,\n    \"is_use_config_backorders\": false,\n    \"backorders\": 0,\n    \"is_use_config_notify_stock_quantity\": false,\n    \"notify_stock_quantity\": 0,\n    \"is_use_config_quantity_increments\": false,\n    \"quantity_increments\": 0,\n    \"is_use_config_enable_quantity_increments\": false,\n    \"is_enable_quantity_increments\": false,\n    \"is_use_config_manage_stock\": false,\n    \"is_manage_stock\": false,\n    \"is_decimal_divided\": false,\n    \"stock_status_changed_auto\": 0\n}"
+				}
+			]
+		},
+		{
+			"name": "ListStocks",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{HOST}}/store/web-store/stock/list/:sku",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"store",
+						"web-store",
+						"stock",
+						"list",
+						":sku"
+					],
+					"variable": [
+						{
+							"key": "sku",
+							"value": "12345"
+						}
+					]
+				},
+				"description": "### Request Body\n\n- sku (int32, required)"
+			},
+			"response": []
+		},
+		{
+			"name": "ListProducts",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{HOST}}/store/web-store/product/list?skus=12345",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"store",
+						"web-store",
+						"product",
+						"list"
+					],
+					"query": [
+						{
+							"key": "skus",
+							"value": "12345"
+						}
+					]
+				},
+				"description": "### Request Body\n\n- skus (String, required)"
+			},
+			"response": []
+		},
+		{
+			"name": "ListRenderProducts",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{HOST}}/store/web-store/product/render-list?skus=12345",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"store",
+						"web-store",
+						"product",
+						"render-list"
+					],
+					"query": [
+						{
+							"key": "skus",
+							"value": "12345"
+						}
+					]
+				},
+				"description": "### Request Body\n\n- skus (String, required)"
+			},
+			"response": [
+				{
+					"name": "ListRenderProducts",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/store/web-store/product/render-list?skus=12345",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"store",
+								"web-store",
+								"product",
+								"render-list"
+							],
+							"query": [
+								{
+									"key": "skus",
+									"value": "12345"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.25.2"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 14 Mar 2024 17:24:09 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "1929"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "grpc-encoding",
+							"value": "identity"
+						},
+						{
+							"key": "grpc-accept-encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "x-envoy-upstream-service-time",
+							"value": "221"
+						},
+						{
+							"key": "grpc-status",
+							"value": "0"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Max-Age",
+							"value": "3600"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"record_count\": \"1\",\n    \"render_products\": [\n        {\n            \"id\": 1000003,\n            \"name\": \"prueba\",\n            \"type\": \"\",\n            \"store_id\": 50006,\n            \"url\": \"\",\n            \"product_type\": \"CONFIGURABLE\",\n            \"price_info\": {\n                \"final_price\": 0,\n                \"max_price\": 0,\n                \"max_regular_price\": 0,\n                \"minimal_regular_price\": 0,\n                \"special_price\": 0,\n                \"minimal_price\": 0,\n                \"regular_price\": 0,\n                \"formatted_price\": {\n                    \"final_price\": \"<span class=\\\"price\\\">$0.00</span>\",\n                    \"max_price\": \"<span class=\\\"price\\\">$0.00</span>\",\n                    \"minimal_price\": \"<span class=\\\"price\\\">$0.00</span>\",\n                    \"max_regular_price\": \"<span class=\\\"price\\\">$0.00</span>\",\n                    \"minimal_regular_price\": \"<span class=\\\"price\\\">$0.00</span>\",\n                    \"special_price\": \"<span class=\\\"price\\\">$0.00</span>\",\n                    \"regular_price\": \"<span class=\\\"price\\\">$0.00</span>\"\n                },\n                \"tax_adjustment\": {\n                    \"final_price\": 0,\n                    \"max_price\": 0,\n                    \"max_regular_price\": 0,\n                    \"minimal_regular_price\": 0,\n                    \"special_price\": 0,\n                    \"minimal_price\": 0,\n                    \"regular_price\": 0,\n                    \"weee_adjustment\": \"<span class=\\\"price\\\">$0.00</span>\",\n                    \"formatted_price\": {\n                        \"final_price\": \"<span class=\\\"price\\\">$0.00</span>\",\n                        \"max_price\": \"<span class=\\\"price\\\">$0.00</span>\",\n                        \"minimal_price\": \"<span class=\\\"price\\\">$0.00</span>\",\n                        \"max_regular_price\": \"<span class=\\\"price\\\">$0.00</span>\",\n                        \"minimal_regular_price\": \"<span class=\\\"price\\\">$0.00</span>\",\n                        \"special_price\": \"<span class=\\\"price\\\">$0.00</span>\",\n                        \"regular_price\": \"<span class=\\\"price\\\">$0.00</span>\"\n                    }\n                },\n                \"currency_code\": \"USD\"\n            }\n        }\n    ],\n    \"next_page_token\": \"\"\n}"
+				}
+			]
+		},
+		{
+			"name": "GetResource",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{HOST}}/store/web-store/img",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"store",
+						"web-store",
+						"img"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreateCart",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"cart_id\":12345,\n    \"customer_id\":102,\n    \"user_id\":50000,\n    \"shipping_address\":{},\n    \"billing_address\":{},\n    \"method_code\":\"\",\n    \"carrier_code\":\"\",\n    \"payment_method_code\":\"\",\n    \"products\":{},\n    \"payments\":{}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{HOST}}/store/web-store/cart/create",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"store",
+						"web-store",
+						"cart",
+						"create"
+					]
+				},
+				"description": "### Request Body\n\n- is_guest (bool)"
+			},
+			"response": [
+				{
+					"name": "CreateCart",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"cart_id\":12345,\n    \"customer_id\":102,\n    \"user_id\":50000,\n    \"shipping_address\":{},\n    \"billing_address\":{},\n    \"method_code\":\"\",\n    \"carrier_code\":\"\",\n    \"payment_method_code\":\"\",\n    \"products\":{},\n    \"payments\":{}\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HOST}}/store/web-store/cart/create",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"store",
+								"web-store",
+								"cart",
+								"create"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.25.2"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 14 Mar 2024 17:35:50 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "380"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "grpc-encoding",
+							"value": "identity"
+						},
+						{
+							"key": "grpc-accept-encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "x-envoy-upstream-service-time",
+							"value": "164"
+						},
+						{
+							"key": "grpc-status",
+							"value": "0"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Max-Age",
+							"value": "3600"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 1000000,\n    \"grand_total\": 0,\n    \"subtotal\": 0,\n    \"discount_amount\": 0,\n    \"subtotal_with_discount\": 0,\n    \"tax_amount\": 0,\n    \"shipping_amount\": 0,\n    \"shipping_discount_amount\": 0,\n    \"shipping_tax_amount\": 0,\n    \"base_shipping_tax_amount\": 0,\n    \"subtotal_incl_tax\": 0,\n    \"shipping_incl_tax\": 0,\n    \"base_currency_code\": \"\",\n    \"quote_currency_code\": \"\",\n    \"items_quantity\": 0,\n    \"items\": []\n}"
+				}
+			]
+		},
+		{
+			"name": "GetCart",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{HOST}}/store/web-store/cart/pull",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"store",
+						"web-store",
+						"cart",
+						"pull"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "GetCart",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/store/web-store/cart/pull",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"store",
+								"web-store",
+								"cart",
+								"pull"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.25.2"
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 12 Mar 2024 13:31:10 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "374"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "grpc-encoding",
+							"value": "identity"
+						},
+						{
+							"key": "grpc-accept-encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "x-envoy-upstream-service-time",
+							"value": "156"
+						},
+						{
+							"key": "grpc-status",
+							"value": "0"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Max-Age",
+							"value": "3600"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 0,\n    \"grand_total\": 0,\n    \"subtotal\": 0,\n    \"discount_amount\": 0,\n    \"subtotal_with_discount\": 0,\n    \"tax_amount\": 0,\n    \"shipping_amount\": 0,\n    \"shipping_discount_amount\": 0,\n    \"shipping_tax_amount\": 0,\n    \"base_shipping_tax_amount\": 0,\n    \"subtotal_incl_tax\": 0,\n    \"shipping_incl_tax\": 0,\n    \"base_currency_code\": \"\",\n    \"quote_currency_code\": \"\",\n    \"items_quantity\": 0,\n    \"items\": []\n}"
+				}
+			]
+		},
+		{
+			"name": "UpdateCart",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"cart_id\":1000000,\n    \"is_guest\":true,\n    \"sku\":\"12345\",\n    \"quantity\":1\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{HOST}}/store/web-store/cart/update",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"store",
+						"web-store",
+						"cart",
+						"update"
+					]
+				},
+				"description": "### Request Body\n\n- cart_id (int32)\n    \n- is_guest (Bool)\n    \n- sku (String)\n    \n- quantity (int32)"
+			},
+			"response": [
+				{
+					"name": "UpdateCart",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"cart_id\":1000000,\n    \"is_guest\":true,\n    \"sku\":\"12345\",\n    \"quantity\":1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HOST}}/store/web-store/cart/update",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"store",
+								"web-store",
+								"cart",
+								"update"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.25.2"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 14 Mar 2024 17:36:48 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "370"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "grpc-encoding",
+							"value": "identity"
+						},
+						{
+							"key": "grpc-accept-encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "x-envoy-upstream-service-time",
+							"value": "149"
+						},
+						{
+							"key": "grpc-status",
+							"value": "0"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Max-Age",
+							"value": "3600"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"product_id\": 1000003,\n    \"sku\": \"12345\",\n    \"quantity\": 1,\n    \"name\": \"prueba\",\n    \"price\": 0,\n    \"product_type\": \"CONFIGURABLE\",\n    \"row_total\": 0,\n    \"row_total_with_discount\": 0,\n    \"tax_amount\": 0,\n    \"tax_percent\": 0,\n    \"discount_amount\": 0,\n    \"discount_percent\": 0,\n    \"price_incl_tax\": 0,\n    \"row_total_incl_tax\": 0,\n    \"base_row_total_incl_tax\": 0,\n    \"configurable_item_options\": []\n}"
+				}
+			]
+		},
+		{
+			"name": "CreateOrder",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"cart_id\":1000000,\n    \"customer_id\":1,\n    \"user_id\":1,\n    \"shipping_address\":{\n        \"address\":\"a\"\n    },\n    \"billing_address\":{\n        \n    },\n    \"method_code\":\"a\",\n    \"carrier_code\":\"3301\",\n    \"payment_method_code\":\"a\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{HOST}}/store/web-store/order/create",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"store",
+						"web-store",
+						"order",
+						"create"
+					]
+				},
+				"description": "### Request Body\n\n- cart_id (int32)\n- customer_id (int32)\n- user_id (int32)\n- shipping_address (AddressRequest)\n- billing_address (AddressRequest)\n- method_code (String)\n    \n- carrier_code (String)\n    \n- payment_method_code (String)"
+			},
+			"response": []
+		},
+		{
+			"name": "ListPaymentMethods",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{HOST}}/store/web-store/cart/payment-methods?cart_id=1000000",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"store",
+						"web-store",
+						"cart",
+						"payment-methods"
+					],
+					"query": [
+						{
+							"key": "cart_id",
+							"value": "1000000"
+						}
+					]
+				},
+				"description": "### Request Params\n\n- cart_id (int32)"
+			},
+			"response": []
+		},
+		{
+			"name": "ListShippingMethods",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{HOST}}/store/web-store/cart/shipping-methods?cart_id=1000000",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"store",
+						"web-store",
+						"cart",
+						"shipping-methods"
+					],
+					"query": [
+						{
+							"key": "cart_id",
+							"value": "1000000"
+						}
+					]
+				},
+				"description": "### Request Body\n\n- cart_id (int32)"
+			},
+			"response": []
+		},
+		{
+			"name": "GetShippingInformation",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{HOST}}/store/web-store/cart/shipping-information?cart_id=1000000",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"store",
+						"web-store",
+						"cart",
+						"shipping-information"
+					],
+					"query": [
+						{
+							"key": "cart_id",
+							"value": "1000000"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "GetShippingInformation",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/store/web-store/cart/shipping-information?cart_id=1000000",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"store",
+								"web-store",
+								"cart",
+								"shipping-information"
+							],
+							"query": [
+								{
+									"key": "cart_id",
+									"value": "1000000"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.25.2"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 14 Mar 2024 20:31:57 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "1005"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "grpc-encoding",
+							"value": "identity"
+						},
+						{
+							"key": "grpc-accept-encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "x-envoy-upstream-service-time",
+							"value": "87"
+						},
+						{
+							"key": "grpc-status",
+							"value": "0"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Max-Age",
+							"value": "3600"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"cart\": {\n        \"id\": 1000000,\n        \"grand_total\": 0,\n        \"subtotal\": 0,\n        \"discount_amount\": 0,\n        \"subtotal_with_discount\": 0,\n        \"tax_amount\": 0,\n        \"shipping_amount\": 0,\n        \"shipping_discount_amount\": 0,\n        \"shipping_tax_amount\": 0,\n        \"base_shipping_tax_amount\": 0,\n        \"subtotal_incl_tax\": 0,\n        \"shipping_incl_tax\": 0,\n        \"base_currency_code\": \"\",\n        \"quote_currency_code\": \"\",\n        \"items_quantity\": 0,\n        \"items\": []\n    },\n    \"payment_methods\": [],\n    \"total_segments\": [\n        {\n            \"code\": \"subtotal\",\n            \"name\": \"Sub-Total\",\n            \"value\": 0,\n            \"area\": \"\",\n            \"taxes\": []\n        },\n        {\n            \"code\": \"shipping\",\n            \"name\": \"Envío y Manejo (Tarifa plana - Fija)\",\n            \"value\": 0,\n            \"area\": \"\",\n            \"taxes\": []\n        },\n        {\n            \"code\": \"discount\",\n            \"name\": \"Descuentos\",\n            \"value\": 0,\n            \"area\": \"\",\n            \"taxes\": []\n        },\n        {\n            \"code\": \"tax\",\n            \"name\": \"Impuestos\",\n            \"value\": 0,\n            \"area\": \"taxes\",\n            \"taxes\": []\n        },\n        {\n            \"code\": \"grand_total\",\n            \"name\": \"Total a Pagar\",\n            \"value\": 0,\n            \"area\": \"footer\",\n            \"taxes\": []\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "GetCartTotals",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{HOST}}/store/web-store/cart/totals?cart_id=1000000",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"store",
+						"web-store",
+						"cart",
+						"totals"
+					],
+					"query": [
+						{
+							"key": "cart_id",
+							"value": "1000000"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "GetCartTotals",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/store/web-store/cart/totals?cart_id=1000000",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"store",
+								"web-store",
+								"cart",
+								"totals"
+							],
+							"query": [
+								{
+									"key": "cart_id",
+									"value": "1000000"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.25.2"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 14 Mar 2024 20:32:07 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "981"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "grpc-encoding",
+							"value": "identity"
+						},
+						{
+							"key": "grpc-accept-encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "x-envoy-upstream-service-time",
+							"value": "99"
+						},
+						{
+							"key": "grpc-status",
+							"value": "0"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Max-Age",
+							"value": "3600"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"cart\": {\n        \"id\": 1000000,\n        \"grand_total\": 0,\n        \"subtotal\": 0,\n        \"discount_amount\": 0,\n        \"subtotal_with_discount\": 0,\n        \"tax_amount\": 0,\n        \"shipping_amount\": 0,\n        \"shipping_discount_amount\": 0,\n        \"shipping_tax_amount\": 0,\n        \"base_shipping_tax_amount\": 0,\n        \"subtotal_incl_tax\": 0,\n        \"shipping_incl_tax\": 0,\n        \"base_currency_code\": \"\",\n        \"quote_currency_code\": \"\",\n        \"items_quantity\": 0,\n        \"items\": []\n    },\n    \"total_segments\": [\n        {\n            \"code\": \"subtotal\",\n            \"name\": \"Sub-Total\",\n            \"value\": 0,\n            \"area\": \"\",\n            \"taxes\": []\n        },\n        {\n            \"code\": \"shipping\",\n            \"name\": \"Envío y Manejo (Tarifa plana - Fija)\",\n            \"value\": 0,\n            \"area\": \"\",\n            \"taxes\": []\n        },\n        {\n            \"code\": \"discount\",\n            \"name\": \"Descuentos\",\n            \"value\": 0,\n            \"area\": \"\",\n            \"taxes\": []\n        },\n        {\n            \"code\": \"tax\",\n            \"name\": \"Impuestos\",\n            \"value\": 0,\n            \"area\": \"taxes\",\n            \"taxes\": []\n        },\n        {\n            \"code\": \"grand_total\",\n            \"name\": \"Total a Pagar\",\n            \"value\": 0,\n            \"area\": \"footer\",\n            \"taxes\": []\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "DeleteCartItem",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"cart_id\":1000000,\n    \"sku\":\"12345\",\n    \"product_id\":10000002\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{HOST}}/store/web-store/cart/delete",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"store",
+						"web-store",
+						"cart",
+						"delete"
+					]
+				},
+				"description": "### Request Body\n\n- cart_id (int32)\n    \n- sku (String)\n    \n- product_id (int32)"
+			},
+			"response": [
+				{
+					"name": "DeleteCartItem",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"cart_id\":1000000,\n    \"sku\":\"12345\",\n    \"product_id\":10000002\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HOST}}/store/web-store/cart/delete",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"store",
+								"web-store",
+								"cart",
+								"delete"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.25.2"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 14 Mar 2024 17:43:57 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "3"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "grpc-encoding",
+							"value": "identity"
+						},
+						{
+							"key": "grpc-accept-encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "x-envoy-upstream-service-time",
+							"value": "125"
+						},
+						{
+							"key": "grpc-status",
+							"value": "0"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Max-Age",
+							"value": "3600"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{}"
+				}
+			]
+		}
+	]
+}

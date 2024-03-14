@@ -1,0 +1,946 @@
+openapi: 3.0.0
+info:
+  title: dashboarding
+  version: 1.0.0
+servers:
+  - url: http://{{host}}
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+paths:
+  /dashboarding/dashboards:
+    get:
+      tags:
+        - default
+      summary: ListDashboards
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: OK
+          headers:
+            Server:
+              schema:
+                type: string
+                example: nginx/1.25.2
+            Date:
+              schema:
+                type: string
+                example: Wed, 06 Mar 2024 17:46:16 GMT
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Content-Length:
+              schema:
+                type: integer
+                example: '4575'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            grpc-encoding:
+              schema:
+                type: string
+                example: identity
+            grpc-accept-encoding:
+              schema:
+                type: string
+                example: gzip
+            x-envoy-upstream-service-time:
+              schema:
+                type: integer
+                example: '100'
+            grpc-status:
+              schema:
+                type: integer
+                example: '0'
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Max-Age:
+              schema:
+                type: integer
+                example: '3600'
+            Access-Control-Expose-Headers:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+                example: '*'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                record_count: '12'
+                dashboards:
+                  - id: 101
+                    name: Invoice Revenue
+                    description: 100k in Revenue
+                    file_name: ''
+                    dashboard_type: chart
+                    chart_type: BC
+                    sequence: 0
+                    html: ''
+                    column_no: 0
+                    line_no: 0
+                    is_collapsible: true
+                    is_open_by_default: true
+                    is_event_required: false
+                    browser_id: 0
+                    window_id: 0
+                  - id: 102
+                    name: Open Invoices
+                    description: Open Invoices max $1000
+                    file_name: ''
+                    dashboard_type: chart
+                    chart_type: BC
+                    sequence: 0
+                    html: ''
+                    column_no: 0
+                    line_no: 0
+                    is_collapsible: true
+                    is_open_by_default: true
+                    is_event_required: false
+                    browser_id: 0
+                    window_id: 0
+                  - id: 104
+                    name: Service Requests (Quarter)
+                    description: Open Service Requests in Time
+                    file_name: ''
+                    dashboard_type: chart
+                    chart_type: BC
+                    sequence: 0
+                    html: ''
+                    column_no: 0
+                    line_no: 0
+                    is_collapsible: true
+                    is_open_by_default: true
+                    is_event_required: false
+                    browser_id: 0
+                    window_id: 0
+                  - id: 105
+                    name: Total Open Service Requests
+                    description: Open Service Requests by Status
+                    file_name: ''
+                    dashboard_type: chart
+                    chart_type: BC
+                    sequence: 0
+                    html: ''
+                    column_no: 0
+                    line_no: 0
+                    is_collapsible: true
+                    is_open_by_default: true
+                    is_event_required: false
+                    browser_id: 0
+                    window_id: 0
+                  - id: 50009
+                    name: Favorites (User)
+                    description: User's Favorites Menu Display
+                    file_name: userfavorites
+                    dashboard_type: dashboard
+                    chart_type: ''
+                    sequence: 0
+                    html: ''
+                    column_no: 0
+                    line_no: 1
+                    is_collapsible: true
+                    is_open_by_default: true
+                    is_event_required: false
+                    browser_id: 0
+                    window_id: 0
+                  - id: 200000
+                    name: Recent Items
+                    description: Recent items
+                    file_name: recentItems
+                    dashboard_type: dashboard
+                    chart_type: ''
+                    sequence: 0
+                    html: ''
+                    column_no: 0
+                    line_no: 2
+                    is_collapsible: true
+                    is_open_by_default: true
+                    is_event_required: false
+                    browser_id: 0
+                    window_id: 0
+                  - id: 50001
+                    name: Favourites (System)
+                    description: Favourities by System
+                    file_name: favourites
+                    dashboard_type: dashboard
+                    chart_type: ''
+                    sequence: 0
+                    html: ''
+                    column_no: 0
+                    line_no: 3
+                    is_collapsible: true
+                    is_open_by_default: true
+                    is_event_required: false
+                    browser_id: 0
+                    window_id: 0
+                  - id: 50014
+                    name: Document tasks
+                    description: Pending documents to finish
+                    file_name: docstatus
+                    dashboard_type: dashboard
+                    chart_type: ''
+                    sequence: 0
+                    html: ''
+                    column_no: 1
+                    line_no: 0
+                    is_collapsible: true
+                    is_open_by_default: true
+                    is_event_required: false
+                    browser_id: 0
+                    window_id: 0
+                  - id: 50000
+                    name: Activities
+                    description: Workflow activities, notices and requests
+                    file_name: activities
+                    dashboard_type: dashboard
+                    chart_type: ''
+                    sequence: 0
+                    html: ''
+                    column_no: 1
+                    line_no: 1
+                    is_collapsible: true
+                    is_open_by_default: true
+                    is_event_required: false
+                    browser_id: 0
+                    window_id: 0
+                  - id: 50002
+                    name: Views
+                    description: Info views
+                    file_name: views
+                    dashboard_type: dashboard
+                    chart_type: ''
+                    sequence: 0
+                    html: ''
+                    column_no: 1
+                    line_no: 2
+                    is_collapsible: true
+                    is_open_by_default: true
+                    is_event_required: false
+                    browser_id: 0
+                    window_id: 0
+                  - id: 50004
+                    name: Calendar
+                    description: Google Calendar
+                    file_name: calendar
+                    dashboard_type: dashboard
+                    chart_type: ''
+                    sequence: 0
+                    html: ''
+                    column_no: 1
+                    line_no: 3
+                    is_collapsible: true
+                    is_open_by_default: true
+                    is_event_required: false
+                    browser_id: 0
+                    window_id: 0
+                  - id: 50003
+                    name: Performance
+                    description: Performance meters
+                    file_name: performance
+                    dashboard_type: dashboard
+                    chart_type: ''
+                    sequence: 0
+                    html: ''
+                    column_no: 2
+                    line_no: 0
+                    is_collapsible: true
+                    is_open_by_default: true
+                    is_event_required: false
+                    browser_id: 0
+                    window_id: 0
+                next_page_token: ''
+  /dashboarding/dashboards/{id}/metrics:
+    get:
+      tags:
+        - default
+      summary: GetMetrics
+      description: |-
+        ### Request Params
+
+        - id (int32, required)
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: integer
+          required: true
+          example: '101'
+      responses:
+        '200':
+          description: OK
+          headers:
+            Server:
+              schema:
+                type: string
+                example: nginx/1.25.2
+            Date:
+              schema:
+                type: string
+                example: Wed, 06 Mar 2024 17:47:01 GMT
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Content-Length:
+              schema:
+                type: integer
+                example: '906'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            grpc-encoding:
+              schema:
+                type: string
+                example: identity
+            grpc-accept-encoding:
+              schema:
+                type: string
+                example: gzip
+            x-envoy-upstream-service-time:
+              schema:
+                type: integer
+                example: '75'
+            grpc-status:
+              schema:
+                type: integer
+                example: '0'
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Max-Age:
+              schema:
+                type: integer
+                example: '3600'
+            Access-Control-Expose-Headers:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+                example: '*'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                id: 101
+                name: Invoice Revenue
+                description: 100k in Revenue
+                x_axis_label: Mes
+                y_axis_label: Invoice Revenue
+                measure_target: '100000'
+                measure_actual: '0'
+                performance_goal: '0.000000'
+                color_schemas:
+                  - name: ''
+                    color: '#FF0000'
+                    percent: '50'
+                  - name: ''
+                    color: '#FFFF00'
+                    percent: '100'
+                  - name: ''
+                    color: '#00FF00'
+                    percent: '9999'
+                  - name: ''
+                    color: ''
+                    percent: '0'
+                series:
+                  - name: '2024'
+                    data_set:
+                      - name: 08/2024
+                        value: '0.0'
+                  - name: '2022'
+                    data_set:
+                      - name: 01/2022
+                        value: '228.85'
+                  - name: '2021'
+                    data_set:
+                      - name: 01/2021
+                        value: '151.05'
+                      - name: 07/2021
+                        value: '161.12'
+  /dashboarding/favorites:
+    get:
+      tags:
+        - default
+      summary: ListFavorites
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: OK
+          headers:
+            Server:
+              schema:
+                type: string
+                example: nginx/1.25.2
+            Date:
+              schema:
+                type: string
+                example: Wed, 06 Mar 2024 15:48:35 GMT
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Content-Length:
+              schema:
+                type: integer
+                example: '1981'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            grpc-encoding:
+              schema:
+                type: string
+                example: identity
+            grpc-accept-encoding:
+              schema:
+                type: string
+                example: gzip
+            x-envoy-upstream-service-time:
+              schema:
+                type: integer
+                example: '195'
+            grpc-status:
+              schema:
+                type: integer
+                example: '0'
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Max-Age:
+              schema:
+                type: integer
+                example: '3600'
+            Access-Control-Expose-Headers:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+                example: '*'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                record_count: '12'
+                favorites:
+                  - menu_id: 176
+                    menu_name: Informe y Proceso
+                    menu_description: Mantener informes y procesos
+                    reference_id: 165
+                    action: W
+                  - menu_id: 138
+                    menu_name: Elemento
+                    menu_description: Mantener elementos de campos
+                    reference_id: 151
+                    action: W
+                  - menu_id: 139
+                    menu_name: Tabla y Columna
+                    menu_description: Mantener tablas y columnas
+                    reference_id: 100
+                    action: W
+                  - menu_id: 140
+                    menu_name: Referencia
+                    menu_description: Mantener Referencias del Sistema
+                    reference_id: 101
+                    action: W
+                  - menu_id: 141
+                    menu_name: Ventana, Pestaña y Campo
+                    menu_description: Mantener ventanas, pestañas y campos
+                    reference_id: 102
+                    action: W
+                  - menu_id: 143
+                    menu_name: Mensaje
+                    menu_description: Mantener mensajes de información y error
+                    reference_id: 104
+                    action: W
+                  - menu_id: 144
+                    menu_name: Menú
+                    menu_description: Mantener Menú
+                    reference_id: 105
+                    action: W
+                  - menu_id: 50008
+                    menu_name: Configurador del Sistema
+                    menu_description: ''
+                    reference_id: 50006
+                    action: W
+                  - menu_id: 110
+                    menu_name: Socio del Negocio
+                    menu_description: Mantener Socios del Negocio
+                    reference_id: 123
+                    action: W
+                  - menu_id: 126
+                    menu_name: Producto
+                    menu_description: Mantener Productos
+                    reference_id: 140
+                    action: W
+                  - menu_id: 129
+                    menu_name: Órdenes de Venta
+                    menu_description: Entrar y cambiar ordenes de ventas
+                    reference_id: 143
+                    action: W
+                  - menu_id: 383
+                    menu_name: Cache Reset
+                    menu_description: >-
+                      Reset Cache of the System ** Close all Windows before
+                      proceeding **
+                    reference_id: 205
+                    action: P
+                next_page_token: ''
+  /dashboarding/pending-documents:
+    get:
+      tags:
+        - default
+      summary: ListPendingDocuments
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: OK
+          headers:
+            Server:
+              schema:
+                type: string
+                example: nginx/1.25.2
+            Date:
+              schema:
+                type: string
+                example: Wed, 06 Mar 2024 17:47:27 GMT
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Content-Length:
+              schema:
+                type: integer
+                example: '464'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            grpc-encoding:
+              schema:
+                type: string
+                example: identity
+            grpc-accept-encoding:
+              schema:
+                type: string
+                example: gzip
+            x-envoy-upstream-service-time:
+              schema:
+                type: integer
+                example: '123'
+            grpc-status:
+              schema:
+                type: integer
+                example: '0'
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Max-Age:
+              schema:
+                type: integer
+                example: '3600'
+            Access-Control-Expose-Headers:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+                example: '*'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                record_count: '0'
+                pending_documents:
+                  - window_id: 169
+                    form_id: 0
+                    table_name: M_InOut
+                    document_name: Pending Customer Shipments
+                    document_description: ''
+                    sequence: 0
+                    record_count: '0'
+                  - window_id: 143
+                    form_id: 0
+                    table_name: C_Order
+                    document_name: Pending Sales Orders
+                    document_description: ''
+                    sequence: 0
+                    record_count: '1'
+                next_page_token: ''
+  /dashboarding/notifications:
+    get:
+      tags:
+        - default
+      summary: ListNotifications
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: OK
+          headers:
+            Server:
+              schema:
+                type: string
+                example: nginx/1.25.2
+            Date:
+              schema:
+                type: string
+                example: Wed, 06 Mar 2024 15:50:24 GMT
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Content-Length:
+              schema:
+                type: integer
+                example: '521'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            grpc-encoding:
+              schema:
+                type: string
+                example: identity
+            grpc-accept-encoding:
+              schema:
+                type: string
+                example: gzip
+            x-envoy-upstream-service-time:
+              schema:
+                type: integer
+                example: '91'
+            grpc-status:
+              schema:
+                type: integer
+                example: '0'
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Max-Age:
+              schema:
+                type: integer
+                example: '3600'
+            Access-Control-Expose-Headers:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+                example: '*'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                record_count: '0'
+                notifications:
+                  - name: Aviso
+                    description: Ver avisos del sistema
+                    quantity: 0
+                    action: WINDOW
+                    action_id: 193
+                  - name: Solicitud
+                    description: Trabajar en sus solicitudes
+                    quantity: 0
+                    action: WINDOW
+                    action_id: 201
+                  - name: Actividades de Flujo de Trabajo
+                    description: Actividades Flujo de Trabajo activas
+                    quantity: 9
+                    action: FORM
+                    action_id: 117
+                next_page_token: ''
+  /dashboarding/dashboards/windows/{window_id}/exists:
+    get:
+      tags:
+        - default
+      summary: ExistsWindowDashboards
+      description: |-
+        ### Request Params
+
+        - Window_id (int32, required)
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: window_id
+          in: path
+          schema:
+            type: integer
+          required: true
+          example: '120'
+      responses:
+        '200':
+          description: OK
+          headers:
+            Server:
+              schema:
+                type: string
+                example: nginx/1.25.2
+            Date:
+              schema:
+                type: string
+                example: Thu, 07 Mar 2024 20:44:44 GMT
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Content-Length:
+              schema:
+                type: integer
+                example: '23'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            grpc-encoding:
+              schema:
+                type: string
+                example: identity
+            grpc-accept-encoding:
+              schema:
+                type: string
+                example: gzip
+            x-envoy-upstream-service-time:
+              schema:
+                type: integer
+                example: '97'
+            grpc-status:
+              schema:
+                type: integer
+                example: '0'
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Max-Age:
+              schema:
+                type: integer
+                example: '3600'
+            Access-Control-Expose-Headers:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+                example: '*'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                record_count: 0
+  /dashboarding/dashboards/windows/{window_id}:
+    get:
+      tags:
+        - default
+      summary: ListWindowDashboards
+      description: |-
+        ### Request Params
+
+        - window_id (int32, required)
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: window_id
+          in: path
+          schema:
+            type: integer
+          required: true
+          example: '120'
+      responses:
+        '200':
+          description: OK
+          headers:
+            Server:
+              schema:
+                type: string
+                example: nginx/1.25.2
+            Date:
+              schema:
+                type: string
+                example: Fri, 08 Mar 2024 18:26:36 GMT
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Content-Length:
+              schema:
+                type: integer
+                example: '65'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            grpc-encoding:
+              schema:
+                type: string
+                example: identity
+            grpc-accept-encoding:
+              schema:
+                type: string
+                example: gzip
+            x-envoy-upstream-service-time:
+              schema:
+                type: integer
+                example: '38'
+            grpc-status:
+              schema:
+                type: integer
+                example: '0'
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Max-Age:
+              schema:
+                type: integer
+                example: '3600'
+            Access-Control-Expose-Headers:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+                example: '*'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                record_count: '0'
+                records: []
+                next_page_token: ''
+  /dashboarding/dashboards/windows/metrics/{id}/{table_name}/{record_id}:
+    get:
+      tags:
+        - default
+      summary: GetWindowMetrics
+      description: |-
+        ### Request Params
+
+        - id (int32, required)
+            
+        - table_name (String,required)
+            
+        - record_id (int32,required)
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: integer
+          required: true
+          example: '100'
+        - name: table_name
+          in: path
+          schema:
+            type: string
+          required: true
+          example: C_DocTypeCounter
+        - name: record_id
+          in: path
+          schema:
+            type: integer
+          required: true
+          example: '100'
+      responses:
+        '500':
+          description: Internal Server Error
+          headers:
+            Server:
+              schema:
+                type: string
+                example: nginx/1.25.2
+            Date:
+              schema:
+                type: string
+                example: Fri, 08 Mar 2024 18:26:46 GMT
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Content-Length:
+              schema:
+                type: integer
+                example: '85'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            x-envoy-upstream-service-time:
+              schema:
+                type: integer
+                example: '51'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                code: 13
+                message: Gráfico de Ventana * No encontrado *
+                details: []
