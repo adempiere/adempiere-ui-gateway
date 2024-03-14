@@ -100,6 +100,16 @@ It may exist more than one docker compose service file for every service (see be
   - **04a-s3_gateway_rs_service_develop.yml**: one implementation of s3 gateway rs service.
   - **04b-s3_gateway_rs_service_standard.yml**: another implementation of s3 gateway rs service.
   - **04c-s3_gateway_rs_service_storage.yml**: another implementation of s3 gateway rs service.
+  - **05a-adempiere_site_service.yml**: implementation of home site service.
+  - **06a-adempiere_zk_service.yml**: implementation of ZK service.
+  - **07a-adempiere_processor_service.yml**: implementation of processor service.
+  - **08a-dkron_scheduler_service.yml**: implementation of dkron service.
+  - **09a-adempiere_grpc_server_service.yml**: implementation of grpc service.
+  - **10a-grpc_proxy_service_cache.yml**: implementation of grpc proxy service.
+  - **10b-grpc_proxy_service_develop.yml**: other implementation of grpc proxy service.
+  - **10c-grpc_proxy_service_standard.yml**: other implementation of grpc proxy service.
+  - **10d-grpc_proxy_service_vue.yml**: yet other implementation of grpc proxy service.
+  - **11a-vue_ui_service.yml**: implementation of Vue service.
   - **etc**: see all docker compose service files.
 - *docker-compose files*: the docker compose service files to be used. Here are defined all services.
   Variables used in these files are taken from file *.env*.  
