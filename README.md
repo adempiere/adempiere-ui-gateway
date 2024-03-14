@@ -83,21 +83,21 @@ The application stack as graphic:
 
 ### File Structure
 - *README.md*: this very file
-- *env_template.env*: template for definition of all variables.  
-Usually, this file is edited for testing and copied copied to *.env* before running docker compose.
+- *env_template.env*: template for definition of all variables used in docker composed files.  
+Usually, this file is edited for testing and copied to *.env* before running docker compose.
 - *.env*: definition of all variables used in *docker-compose files*.
 - *docker compose service files*: there are several of them; each of these files define a service only.  
 It may exist more than one docker compose service file for every service (see docker compose service files listing below). This may be the case when a service is used in different configurations for different purposes.  
 
   The combination of several of these docker compose service files implements the services needed for a special purpose (auth, cache, develop, storage, vue, default).  
-  The definition of one service in a single file permits reutilization and the combination of existing services to new purposes; for which hitherto a new docker-compose file was needed. Also, as one service version is only defined once, possible repetitions and small unwanted different definitions in docker-compose files are avoided.  
+  The definition of one service in a single file permits reutilization and the combination of existing services to new purposes for which hitherto a new docker-compose file was needed. Also, as one service version is only defined once, possible repetitions and small unwanted different definitions in docker-compose files are avoided.  
   See explanation of start-all.sh to understand how these files are used.  
 
   Example of files are:
   - **01a-postgres_service_with_ports.yml**: one implementation of postgres service.
   - **01b-postgres_service_without_ports.yml**: another implementation of postgres service.
-  - **02a-s3_storage_service.yml**: one implementation of s3 storage service.
-  - **03a-s3_client_service.yml**: one implementation of s3 client service.
+  - **02a-s3_storage_service.yml**: implementation of s3 storage service.
+  - **03a-s3_client_service.yml**: implementation of s3 client service.
   - **04a-s3_gateway_rs_service_develop.yml**: one implementation of s3 gateway rs service.
   - **04b-s3_gateway_rs_service_standard.yml**: another implementation of s3 gateway rs service.
   - **04c-s3_gateway_rs_service_storage.yml**: another implementation of s3 gateway rs service.
@@ -106,12 +106,12 @@ It may exist more than one docker compose service file for every service (see do
   - **07a-adempiere_processor_service.yml**: implementation of processor service.
   - **08a-dkron_scheduler_service.yml**: implementation of dkron service.
   - **09a-adempiere_grpc_server_service.yml**: implementation of grpc service.
-  - **10a-grpc_proxy_service_cache.yml**: implementation of grpc proxy service.
+  - **10a-grpc_proxy_service_cache.yml**: one implementation of grpc proxy service.
   - **10b-grpc_proxy_service_develop.yml**: other implementation of grpc proxy service.
   - **10c-grpc_proxy_service_standard.yml**: other implementation of grpc proxy service.
   - **10d-grpc_proxy_service_vue.yml**: yet other implementation of grpc proxy service.
   - **11a-vue_ui_service.yml**: implementation of Vue service.
-  - **and many more**: see all docker compose service files.
+  - **and many more**: see for project [all docker compose service files](https://github.com/Systemhaus-Westfalia/adempiere-ui-gateway/tree/feature/flexible_services_definition/docker-compose).
 - *docker-compose files*: the docker compose service files to be used. Here all services are defined in one file.
   Variables used in these files are taken from file *.env*.  
 These files are now legacy, i.e. they were the first attempt, but -due to more flexibility and reusability- the service definition files are now preferred (see preceeding section).  
@@ -124,7 +124,7 @@ These files are now legacy, i.e. they were the first attempt, but -due to more f
   - **docker-compose-develop.yml**: only backend services for for development
   - **docker-compose-storage.yml**
   - **docker-compose-vue.yml**: for vue minimal stack services
-- *start-all.sh*: shell script to eventually automatically execute docker compose.  
+- *start-all.sh*: shell script to create and eventually automatically execute docker compose.  
 
   This bash script must be called with the docker-compose flag **-d** + one of the following parameters [**auth**, **cache**, **develop**, **storage**, **vue**, **default**].  
 It can also be called with the legacy flag  **-l** (this is only legacy and not intended to be continued).  
