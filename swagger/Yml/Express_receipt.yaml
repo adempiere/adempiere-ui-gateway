@@ -1,0 +1,847 @@
+openapi: 3.0.0
+info:
+  title: Express_receipt
+  version: 1.0.0
+servers:
+  - url: http://{{host}}
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+paths:
+  /express-receipt/business-partners:
+    get:
+      tags:
+        - default
+      summary: ListBusinessPartners
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: OK
+          headers:
+            Server:
+              schema:
+                type: string
+                example: nginx/1.25.2
+            Date:
+              schema:
+                type: string
+                example: Wed, 06 Mar 2024 20:25:12 GMT
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Content-Length:
+              schema:
+                type: integer
+                example: '1139'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            grpc-encoding:
+              schema:
+                type: string
+                example: identity
+            grpc-accept-encoding:
+              schema:
+                type: string
+                example: gzip
+            x-envoy-upstream-service-time:
+              schema:
+                type: integer
+                example: '159'
+            grpc-status:
+              schema:
+                type: integer
+                example: '0'
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Max-Age:
+              schema:
+                type: integer
+                example: '3600'
+            Access-Control-Expose-Headers:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+                example: '*'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                record_count: '9'
+                records:
+                  - id: 113
+                    value: GardenAdmin
+                    tax_id: ''
+                    name: GardenAdmin BP
+                    description: ''
+                  - id: 119
+                    value: GardenUser
+                    tax_id: ''
+                    name: GardenUser BP
+                    description: ''
+                  - id: 121
+                    value: Patio
+                    tax_id: ''
+                    name: Patio Fun, Inc.
+                    description: ''
+                  - id: 50000
+                    value: Wood, Inc
+                    tax_id: ''
+                    name: Wood, Inc
+                    description: ''
+                  - id: 50001
+                    value: Color, Inc
+                    tax_id: ''
+                    name: Color, Inc
+                    description: ''
+                  - id: 50002
+                    value: Chrome, Inc
+                    tax_id: ''
+                    name: Chrome, Inc
+                    description: ''
+                  - id: 50003
+                    value: Chemical Product, inc
+                    tax_id: ''
+                    name: Chemical Product, inc
+                    description: ''
+                  - id: 120
+                    value: SeedFarm
+                    tax_id: ''
+                    name: Seed Farm Inc.
+                    description: Customer & Vendor
+                  - id: 114
+                    value: TreeFarm
+                    tax_id: ''
+                    name: Tree Farm Inc.
+                    description: Vendor
+                next_page_token: ''
+  /express-receipt/orders:
+    get:
+      tags:
+        - default
+      summary: ListPurchaseOrders
+      description: |-
+        ### Request Params
+
+        - business_partner_id (int32, required)
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: business_partner_id
+          in: query
+          schema:
+            type: integer
+          example: '121'
+      responses:
+        '200':
+          description: OK
+          headers:
+            Server:
+              schema:
+                type: string
+                example: nginx/1.25.2
+            Date:
+              schema:
+                type: string
+                example: Thu, 07 Mar 2024 21:01:31 GMT
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Content-Length:
+              schema:
+                type: integer
+                example: '159'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            grpc-encoding:
+              schema:
+                type: string
+                example: identity
+            grpc-accept-encoding:
+              schema:
+                type: string
+                example: gzip
+            x-envoy-upstream-service-time:
+              schema:
+                type: integer
+                example: '141'
+            grpc-status:
+              schema:
+                type: integer
+                example: '0'
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Max-Age:
+              schema:
+                type: integer
+                example: '3600'
+            Access-Control-Expose-Headers:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+                example: '*'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                record_count: '1'
+                records:
+                  - id: 106
+                    document_no: '800002'
+                    date_ordered: '2021-12-22T04:00:00Z'
+                next_page_token: ''
+  /express-receipt/products:
+    get:
+      tags:
+        - default
+      summary: ListProducts
+      description: |-
+        ### Request Params
+
+        - order_id (int32, required)
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: order_id
+          in: query
+          schema:
+            type: integer
+          example: '102'
+      responses:
+        '200':
+          description: OK
+          headers:
+            Server:
+              schema:
+                type: string
+                example: nginx/1.25.2
+            Date:
+              schema:
+                type: string
+                example: Thu, 07 Mar 2024 21:03:17 GMT
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Content-Length:
+              schema:
+                type: integer
+                example: '428'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            grpc-encoding:
+              schema:
+                type: string
+                example: identity
+            grpc-accept-encoding:
+              schema:
+                type: string
+                example: gzip
+            x-envoy-upstream-service-time:
+              schema:
+                type: integer
+                example: '111'
+            grpc-status:
+              schema:
+                type: integer
+                example: '0'
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Max-Age:
+              schema:
+                type: integer
+                example: '3600'
+            Access-Control-Expose-Headers:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+                example: '*'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                record_count: '3'
+                records:
+                  - id: 130
+                    upc: ''
+                    sku: ''
+                    value: Plum Tree
+                    name: Plum Tree
+                    description: ''
+                  - id: 126
+                    upc: ''
+                    sku: ''
+                    value: Planting
+                    name: Planting Service
+                    description: ''
+                  - id: 123
+                    upc: ''
+                    sku: ''
+                    value: Oak
+                    name: Oak Tree
+                    description: ''
+                next_page_token: ''
+  /express-receipt/receipts:
+    post:
+      tags:
+        - default
+      summary: CreateReceipt
+      description: |-
+        ### Request Body
+
+        - order_id (int32, required)
+        - is_create_lines_from_order (bool)
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                order_id: 106
+                is_create_lines_from_order: true
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: OK
+          headers:
+            Server:
+              schema:
+                type: string
+                example: nginx/1.25.2
+            Date:
+              schema:
+                type: string
+                example: Fri, 08 Mar 2024 18:37:08 GMT
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Content-Length:
+              schema:
+                type: integer
+                example: '172'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            grpc-encoding:
+              schema:
+                type: string
+                example: identity
+            grpc-accept-encoding:
+              schema:
+                type: string
+                example: gzip
+            x-envoy-upstream-service-time:
+              schema:
+                type: integer
+                example: '146'
+            grpc-status:
+              schema:
+                type: integer
+                example: '0'
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Max-Age:
+              schema:
+                type: integer
+                example: '3600'
+            Access-Control-Expose-Headers:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+                example: '*'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                id: 1000000
+                document_no: '10000511'
+                date_ordered: '2021-12-22T04:00:00Z'
+                movement_date: '2024-03-08T04:00:00Z'
+                order_id: 106
+                is_completed: false
+  /express-receipt/receipts/{id}:
+    delete:
+      tags:
+        - default
+      summary: DeleteReceipt
+      description: |-
+        ### Request Params
+
+        - id (int32, required)
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: integer
+          required: true
+          example: '1000000'
+      responses:
+        '200':
+          description: OK
+          headers:
+            Server:
+              schema:
+                type: string
+                example: nginx/1.25.2
+            Date:
+              schema:
+                type: string
+                example: Sun, 10 Mar 2024 18:23:35 GMT
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Content-Length:
+              schema:
+                type: integer
+                example: '3'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            grpc-encoding:
+              schema:
+                type: string
+                example: identity
+            grpc-accept-encoding:
+              schema:
+                type: string
+                example: gzip
+            x-envoy-upstream-service-time:
+              schema:
+                type: integer
+                example: '138'
+            grpc-status:
+              schema:
+                type: integer
+                example: '0'
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Max-Age:
+              schema:
+                type: integer
+                example: '3600'
+            Access-Control-Expose-Headers:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+                example: '*'
+          content:
+            application/json:
+              schema:
+                type: object
+              example: {}
+  /express-receipt/receipts/{id}/process:
+    post:
+      tags:
+        - default
+      summary: ProcessReceipt
+      description: |-
+        ### Request Params
+
+        - id (int32, required)
+            
+
+        ### Request Body
+
+        - description (String)
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                description: prueba
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: integer
+          required: true
+          example: '106'
+      responses:
+        '500':
+          description: Internal Server Error
+          headers:
+            Server:
+              schema:
+                type: string
+                example: nginx/1.25.2
+            Date:
+              schema:
+                type: string
+                example: Fri, 08 Mar 2024 18:37:21 GMT
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Content-Length:
+              schema:
+                type: integer
+                example: '74'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            x-envoy-upstream-service-time:
+              schema:
+                type: integer
+                example: '69'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                code: 13
+                message: Entrega / Recibo Procesado
+                details: []
+  /express-receipt/receipts/{receipt_id}/lines:
+    post:
+      tags:
+        - default
+      summary: CreateReceiptLine
+      description: |-
+        ### Request Params
+
+        - receipt_id (int32, required)
+            
+
+        ### Request Body
+
+        - description (String)
+        - product_id(int32, required)
+        - quantity(String)
+            
+        - is_quantity_from_order_line(bool)
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                description: prueba
+                product_id: 130
+                quantity: qwe
+                is_quantity_from_order_line: true
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: receipt_id
+          in: path
+          schema:
+            type: integer
+          required: true
+          example: '1000001'
+      responses:
+        '200':
+          description: OK
+          headers:
+            Server:
+              schema:
+                type: string
+                example: nginx/1.25.2
+            Date:
+              schema:
+                type: string
+                example: Mon, 11 Mar 2024 15:19:25 GMT
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Content-Length:
+              schema:
+                type: integer
+                example: '217'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            grpc-encoding:
+              schema:
+                type: string
+                example: identity
+            grpc-accept-encoding:
+              schema:
+                type: string
+                example: gzip
+            x-envoy-upstream-service-time:
+              schema:
+                type: integer
+                example: '181'
+            grpc-status:
+              schema:
+                type: integer
+                example: '0'
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Max-Age:
+              schema:
+                type: integer
+                example: '3600'
+            Access-Control-Expose-Headers:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+                example: '*'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                id: 1000000
+                order_line_id: 100
+                product:
+                  id: 130
+                  upc: ''
+                  sku: ''
+                  value: Plum Tree
+                  name: Plum Tree
+                  description: ''
+                description: ''
+                quantity: '0'
+                line: 10
+    get:
+      tags:
+        - default
+      summary: ListReceiptLines
+      description: |-
+        ### Request Params
+
+        - receipt_id (int32, required)
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: receipt_id
+          in: path
+          schema:
+            type: integer
+          required: true
+          example: '1000002'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /express-receipt/receipts/{receipt_id}/lines/{id}:
+    delete:
+      tags:
+        - default
+      summary: DeleteReceiptLine
+      description: |-
+        ### Request Params
+
+        - receipt_id (int32, required)
+        - id (int32, required)
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: receipt_id
+          in: path
+          schema:
+            type: integer
+          required: true
+          example: '1000001'
+        - name: id
+          in: path
+          schema:
+            type: integer
+          required: true
+          example: '106'
+      responses:
+        '500':
+          description: Internal Server Error
+          headers:
+            Server:
+              schema:
+                type: string
+                example: nginx/1.25.2
+            Date:
+              schema:
+                type: string
+                example: Sun, 10 Mar 2024 18:32:09 GMT
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Content-Length:
+              schema:
+                type: integer
+                example: '81'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            x-envoy-upstream-service-time:
+              schema:
+                type: integer
+                example: '112'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                code: 13
+                message: Línea Entrega / Recibo Procesado
+                details: []
+    patch:
+      tags:
+        - default
+      summary: UpdateReceiptLine
+      description: |-
+        ### Request Params
+
+        - receipt_id (int32, required)
+        - id (int32, required)
+            
+
+        ### Request Body
+
+        - description (String)
+            
+        - quantity(String)
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                description: asd
+                quantity: qwe
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: receipt_id
+          in: path
+          schema:
+            type: integer
+          required: true
+          example: '1000002'
+        - name: id
+          in: path
+          schema:
+            type: integer
+          required: true
+          example: '106'
+      responses:
+        '500':
+          description: Internal Server Error
+          headers:
+            Server:
+              schema:
+                type: string
+                example: nginx/1.25.2
+            Date:
+              schema:
+                type: string
+                example: Mon, 11 Mar 2024 15:20:22 GMT
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Content-Length:
+              schema:
+                type: integer
+                example: '81'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            x-envoy-upstream-service-time:
+              schema:
+                type: integer
+                example: '114'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                code: 13
+                message: Línea Entrega / Recibo Procesado
+                details: []

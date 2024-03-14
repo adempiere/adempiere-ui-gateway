@@ -1,0 +1,551 @@
+openapi: 3.0.0
+info:
+  title: Time_control
+  version: 1.0.0
+servers:
+  - url: http://{{host}}
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+paths:
+  /time-control/assignements:
+    post:
+      tags:
+        - default
+      summary: CreateResourceAssignment
+      description: |-
+        ### Request Body
+
+        - resource_type_id (int32, required)
+        - name (string, required)
+        - description (string)
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                resource_type_id: 100
+                name: Consultant
+                description: prueba
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: OK
+          headers:
+            Server:
+              schema:
+                type: string
+                example: nginx/1.25.2
+            Date:
+              schema:
+                type: string
+                example: Thu, 07 Mar 2024 18:37:08 GMT
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Content-Length:
+              schema:
+                type: integer
+                example: '504'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            grpc-encoding:
+              schema:
+                type: string
+                example: identity
+            grpc-accept-encoding:
+              schema:
+                type: string
+                example: gzip
+            x-envoy-upstream-service-time:
+              schema:
+                type: integer
+                example: '99'
+            grpc-status:
+              schema:
+                type: integer
+                example: '0'
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Max-Age:
+              schema:
+                type: integer
+                example: '3600'
+            Access-Control-Expose-Headers:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+                example: '*'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                id: 1000000
+                resource:
+                  id: 100
+                  resource_type:
+                    id: 100
+                    value: Consultant
+                    name: Consultant
+                    description: ''
+                    unit_of_measure:
+                      id: 101
+                      code: HR
+                      symbol: 'h  '
+                      name: Hora
+                      description: ''
+                      standard_precision: 2
+                      costing_precision: 2
+                  name: Mary Consultant
+                name: Consultant
+                description: ''
+                assign_date_from: '2024-03-07T18:37:08Z'
+                is_confirmed: false
+                quantity: '0'
+    get:
+      tags:
+        - default
+      summary: ListResourcesAssignment
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: OK
+          headers:
+            Server:
+              schema:
+                type: string
+                example: nginx/1.25.2
+            Date:
+              schema:
+                type: string
+                example: Thu, 07 Mar 2024 18:36:39 GMT
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Content-Length:
+              schema:
+                type: integer
+                example: '1304'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            grpc-encoding:
+              schema:
+                type: string
+                example: identity
+            grpc-accept-encoding:
+              schema:
+                type: string
+                example: gzip
+            x-envoy-upstream-service-time:
+              schema:
+                type: integer
+                example: '162'
+            grpc-status:
+              schema:
+                type: integer
+                example: '0'
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Max-Age:
+              schema:
+                type: integer
+                example: '3600'
+            Access-Control-Expose-Headers:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+                example: '*'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                record_count: '2'
+                records:
+                  - id: 100
+                    resource:
+                      id: 100
+                      resource_type:
+                        id: 100
+                        value: Consultant
+                        name: Consultant
+                        description: ''
+                        unit_of_measure:
+                          id: 101
+                          code: HR
+                          symbol: 'h  '
+                          name: Hora
+                          description: ''
+                          standard_precision: 2
+                          costing_precision: 2
+                      name: Mary Consultant
+                    name: Garden Layout
+                    description: Initial Discussion
+                    assign_date_from: '2003-02-05T14:00:00Z'
+                    assign_date_to: '2003-02-05T17:00:00Z'
+                    is_confirmed: false
+                    quantity: '3'
+                  - id: 101
+                    resource:
+                      id: 100
+                      resource_type:
+                        id: 100
+                        value: Consultant
+                        name: Consultant
+                        description: ''
+                        unit_of_measure:
+                          id: 101
+                          code: HR
+                          symbol: 'h  '
+                          name: Hora
+                          description: ''
+                          standard_precision: 2
+                          costing_precision: 2
+                      name: Mary Consultant
+                    name: Garden Layout
+                    description: Discuss Budget
+                    assign_date_from: '2003-02-05T21:00:00Z'
+                    assign_date_to: '2003-02-05T22:00:00Z'
+                    is_confirmed: false
+                    quantity: '1'
+                next_page_token: ''
+  /time-control/assignements/{id}:
+    put:
+      tags:
+        - default
+      summary: UpdateResourceAssignment
+      description: |-
+        ### Request Params
+
+        - id (int32, required)
+            
+
+        ### Request Body
+
+        - name (String)
+        - description (String)
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                name: qwe
+                description: prueba
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: integer
+          required: true
+          example: '1000001'
+      responses:
+        '200':
+          description: OK
+          headers:
+            Server:
+              schema:
+                type: string
+                example: nginx/1.25.2
+            Date:
+              schema:
+                type: string
+                example: Thu, 07 Mar 2024 18:39:07 GMT
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Content-Length:
+              schema:
+                type: integer
+                example: '536'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            grpc-encoding:
+              schema:
+                type: string
+                example: identity
+            grpc-accept-encoding:
+              schema:
+                type: string
+                example: gzip
+            x-envoy-upstream-service-time:
+              schema:
+                type: integer
+                example: '108'
+            grpc-status:
+              schema:
+                type: integer
+                example: '0'
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Max-Age:
+              schema:
+                type: integer
+                example: '3600'
+            Access-Control-Expose-Headers:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+                example: '*'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                id: 100
+                resource:
+                  id: 100
+                  resource_type:
+                    id: 100
+                    value: Consultant
+                    name: Consultant
+                    description: ''
+                    unit_of_measure:
+                      id: 101
+                      code: HR
+                      symbol: 'h  '
+                      name: Hora
+                      description: ''
+                      standard_precision: 2
+                      costing_precision: 2
+                  name: Mary Consultant
+                name: qwe
+                description: ''
+                assign_date_from: '2003-02-05T14:00:00Z'
+                assign_date_to: '2003-02-05T17:00:00Z'
+                is_confirmed: false
+                quantity: '3'
+    delete:
+      tags:
+        - default
+      summary: DeleteResourceAssignment
+      description: |-
+        ### Request Params
+
+        - id (int32, required)
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: integer
+          required: true
+          example: '1000001'
+      responses:
+        '200':
+          description: OK
+          headers:
+            Server:
+              schema:
+                type: string
+                example: nginx/1.25.2
+            Date:
+              schema:
+                type: string
+                example: Thu, 07 Mar 2024 18:41:02 GMT
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Content-Length:
+              schema:
+                type: integer
+                example: '3'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            grpc-encoding:
+              schema:
+                type: string
+                example: identity
+            grpc-accept-encoding:
+              schema:
+                type: string
+                example: gzip
+            x-envoy-upstream-service-time:
+              schema:
+                type: integer
+                example: '123'
+            grpc-status:
+              schema:
+                type: integer
+                example: '0'
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Max-Age:
+              schema:
+                type: integer
+                example: '3600'
+            Access-Control-Expose-Headers:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+                example: '*'
+          content:
+            application/json:
+              schema:
+                type: object
+              example: {}
+  /time-control/assignements/{id}/confirm:
+    post:
+      tags:
+        - default
+      summary: ConfirmResourceAssignment
+      description: |-
+        ### Request Params
+
+        - id (int32, required)
+      requestBody:
+        content: {}
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: integer
+          required: true
+          example: '1000002'
+      responses:
+        '200':
+          description: OK
+          headers:
+            Server:
+              schema:
+                type: string
+                example: nginx/1.25.2
+            Date:
+              schema:
+                type: string
+                example: Thu, 07 Mar 2024 18:42:48 GMT
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Content-Length:
+              schema:
+                type: integer
+                example: '553'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            grpc-encoding:
+              schema:
+                type: string
+                example: identity
+            grpc-accept-encoding:
+              schema:
+                type: string
+                example: gzip
+            x-envoy-upstream-service-time:
+              schema:
+                type: integer
+                example: '130'
+            grpc-status:
+              schema:
+                type: integer
+                example: '0'
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Max-Age:
+              schema:
+                type: integer
+                example: '3600'
+            Access-Control-Expose-Headers:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+                example: '*'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                id: 1000002
+                resource:
+                  id: 100
+                  resource_type:
+                    id: 100
+                    value: Consultant
+                    name: Consultant
+                    description: ''
+                    unit_of_measure:
+                      id: 101
+                      code: HR
+                      symbol: 'h  '
+                      name: Hora
+                      description: ''
+                      standard_precision: 2
+                      costing_precision: 2
+                  name: Mary Consultant
+                name: Consultant
+                description: ''
+                assign_date_from: '2024-03-07T18:42:31Z'
+                assign_date_to: '2024-03-07T18:42:48.278Z'
+                is_confirmed: true
+                quantity: '0.00'

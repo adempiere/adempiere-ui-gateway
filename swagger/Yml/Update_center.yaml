@@ -1,0 +1,48 @@
+openapi: 3.0.0
+info:
+  title: Update_center
+  version: 1.0.0
+servers:
+  - url: http://{{host}}
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+paths:
+  /updates/packages:
+    get:
+      tags:
+        - default
+      summary: ListPackages
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /updates/updates:
+    get:
+      tags:
+        - default
+      summary: ListUpdates
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /updates/steps:
+    get:
+      tags:
+        - default
+      summary: ListSteps
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}

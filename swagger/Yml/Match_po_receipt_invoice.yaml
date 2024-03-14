@@ -1,0 +1,978 @@
+openapi: 3.0.0
+info:
+  title: Match_po_receipt_invoice
+  version: 1.0.0
+servers:
+  - url: http://{{host}}
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+paths:
+  /match-po-receipt-invoice/matches-types/from:
+    get:
+      tags:
+        - default
+      summary: ListMatchesTypesFrom
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: OK
+          headers:
+            Server:
+              schema:
+                type: string
+                example: nginx/1.25.2
+            Date:
+              schema:
+                type: string
+                example: Thu, 07 Mar 2024 13:56:24 GMT
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Content-Length:
+              schema:
+                type: integer
+                example: '496'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            grpc-encoding:
+              schema:
+                type: string
+                example: identity
+            grpc-accept-encoding:
+              schema:
+                type: string
+                example: gzip
+            x-envoy-upstream-service-time:
+              schema:
+                type: integer
+                example: '79'
+            grpc-status:
+              schema:
+                type: integer
+                example: '0'
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Max-Age:
+              schema:
+                type: integer
+                example: '3600'
+            Access-Control-Expose-Headers:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+                example: '*'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                record_count: '3'
+                records:
+                  - id: 0
+                    table_name: ''
+                    values:
+                      ValueColumn: 0
+                      DisplayColumn: Factura
+                    is_active: false
+                  - id: 1
+                    table_name: ''
+                    values:
+                      ValueColumn: 1
+                      DisplayColumn: Entrega / Recibo
+                    is_active: false
+                  - id: 2
+                    table_name: ''
+                    values:
+                      ValueColumn: 2
+                      DisplayColumn: Orden de Venta
+                    is_active: false
+                next_page_token: ''
+  /match-po-receipt-invoice/matches-types/to:
+    get:
+      tags:
+        - default
+      summary: ListMatchesTypesTo
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: OK
+          headers:
+            Server:
+              schema:
+                type: string
+                example: nginx/1.25.2
+            Date:
+              schema:
+                type: string
+                example: Thu, 07 Mar 2024 13:57:54 GMT
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Content-Length:
+              schema:
+                type: integer
+                example: '213'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            grpc-encoding:
+              schema:
+                type: string
+                example: identity
+            grpc-accept-encoding:
+              schema:
+                type: string
+                example: gzip
+            x-envoy-upstream-service-time:
+              schema:
+                type: integer
+                example: '89'
+            grpc-status:
+              schema:
+                type: integer
+                example: '0'
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Max-Age:
+              schema:
+                type: integer
+                example: '3600'
+            Access-Control-Expose-Headers:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+                example: '*'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                record_count: '1'
+                records:
+                  - id: 1
+                    table_name: ''
+                    values:
+                      ValueColumn: 1
+                      DisplayColumn: Entrega / Recibo
+                    is_active: false
+                next_page_token: ''
+  /match-po-receipt-invoice/search-modes:
+    get:
+      tags:
+        - default
+      summary: ListSearchModes
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: OK
+          headers:
+            Server:
+              schema:
+                type: string
+                example: nginx/1.25.2
+            Date:
+              schema:
+                type: string
+                example: Thu, 07 Mar 2024 13:58:38 GMT
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Content-Length:
+              schema:
+                type: integer
+                example: '347'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            grpc-encoding:
+              schema:
+                type: string
+                example: identity
+            grpc-accept-encoding:
+              schema:
+                type: string
+                example: gzip
+            x-envoy-upstream-service-time:
+              schema:
+                type: integer
+                example: '79'
+            grpc-status:
+              schema:
+                type: integer
+                example: '0'
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Max-Age:
+              schema:
+                type: integer
+                example: '3600'
+            Access-Control-Expose-Headers:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+                example: '*'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                record_count: '2'
+                records:
+                  - id: 0
+                    table_name: ''
+                    values:
+                      ValueColumn: 0
+                      DisplayColumn: No Asignado
+                    is_active: false
+                  - id: 0
+                    table_name: ''
+                    values:
+                      ValueColumn: 1
+                      DisplayColumn: Asignado
+                    is_active: false
+                next_page_token: ''
+  /match-po-receipt-invoice/vendors:
+    get:
+      tags:
+        - default
+      summary: ListVendors
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: OK
+          headers:
+            Server:
+              schema:
+                type: string
+                example: nginx/1.25.2
+            Date:
+              schema:
+                type: string
+                example: Thu, 07 Mar 2024 13:59:17 GMT
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Content-Length:
+              schema:
+                type: integer
+                example: '1949'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            grpc-encoding:
+              schema:
+                type: string
+                example: identity
+            grpc-accept-encoding:
+              schema:
+                type: string
+                example: gzip
+            x-envoy-upstream-service-time:
+              schema:
+                type: integer
+                example: '92'
+            grpc-status:
+              schema:
+                type: integer
+                example: '0'
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Max-Age:
+              schema:
+                type: integer
+                example: '3600'
+            Access-Control-Expose-Headers:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+                example: '*'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                record_count: '9'
+                records:
+                  - id: 50003
+                    table_name: C_BPartner
+                    values:
+                      KeyColumn: 50003
+                      DisplayColumn: Chemical Product, inc
+                      UUID: b14b6c53-ca82-4dbc-841a-640b04de76bb
+                    is_active: true
+                  - id: 50002
+                    table_name: C_BPartner
+                    values:
+                      KeyColumn: 50002
+                      DisplayColumn: Chrome, Inc
+                      UUID: f472cd49-4f19-4fc3-856a-cb9038cf2924
+                    is_active: true
+                  - id: 50001
+                    table_name: C_BPartner
+                    values:
+                      KeyColumn: 50001
+                      DisplayColumn: Color, Inc
+                      UUID: 5e616d3e-c55b-4ede-9b0e-ac3ae834556b
+                    is_active: true
+                  - id: 113
+                    table_name: C_BPartner
+                    values:
+                      KeyColumn: 113
+                      DisplayColumn: GardenAdmin BP
+                      UUID: d430bdde-e5e4-476b-8dc9-4b0b5d5b02cc
+                    is_active: true
+                  - id: 119
+                    table_name: C_BPartner
+                    values:
+                      KeyColumn: 119
+                      DisplayColumn: GardenUser BP
+                      UUID: 0b870ceb-a34f-4876-8225-0053f11385d2
+                    is_active: true
+                  - id: 121
+                    table_name: C_BPartner
+                    values:
+                      KeyColumn: 121
+                      DisplayColumn: Patio Fun, Inc.
+                      UUID: ca5b584a-c9e8-448f-a388-8ac7c0f02501
+                    is_active: true
+                  - id: 120
+                    table_name: C_BPartner
+                    values:
+                      KeyColumn: 120
+                      DisplayColumn: Seed Farm Inc.
+                      UUID: 2ad2a623-3d1f-47f4-969a-f44f7a05481f
+                    is_active: true
+                  - id: 114
+                    table_name: C_BPartner
+                    values:
+                      KeyColumn: 114
+                      DisplayColumn: Tree Farm Inc.
+                      UUID: 254e660c-4863-460a-8a69-2b75f6461a33
+                    is_active: true
+                  - id: 50000
+                    table_name: C_BPartner
+                    values:
+                      KeyColumn: 50000
+                      DisplayColumn: Wood, Inc
+                      UUID: 2d96ae84-d50e-447a-bdb7-496242fd846f
+                    is_active: true
+                next_page_token: ''
+  /match-po-receipt-invoice/products:
+    get:
+      tags:
+        - default
+      summary: ListProducts
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: OK
+          headers:
+            Server:
+              schema:
+                type: string
+                example: nginx/1.25.2
+            Date:
+              schema:
+                type: string
+                example: Thu, 07 Mar 2024 13:59:47 GMT
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Content-Length:
+              schema:
+                type: integer
+                example: '6515'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            grpc-encoding:
+              schema:
+                type: string
+                example: identity
+            grpc-accept-encoding:
+              schema:
+                type: string
+                example: gzip
+            x-envoy-upstream-service-time:
+              schema:
+                type: integer
+                example: '141'
+            grpc-status:
+              schema:
+                type: integer
+                example: '0'
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Max-Age:
+              schema:
+                type: integer
+                example: '3600'
+            Access-Control-Expose-Headers:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+                example: '*'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                record_count: '51'
+                records:
+                  - id: 50005
+                    upc: ''
+                    sku: ''
+                    value: BackSupport
+                    name: Back Support
+                    description: ''
+                  - id: 137
+                    upc: ''
+                    sku: ''
+                    value: Mulch
+                    name: Mulch 10#
+                    description: ''
+                  - id: 50041
+                    upc: ''
+                    sku: ''
+                    value: Peat
+                    name: Peat
+                    description: ''
+                  - id: 50042
+                    upc: ''
+                    sku: ''
+                    value: PottingSoil
+                    name: Potting Soil
+                    description: ''
+                  - id: 50045
+                    upc: ''
+                    sku: ''
+                    value: Seed-Daisy
+                    name: Seed Pack Daisy
+                    description: ''
+                  - id: 50047
+                    upc: ''
+                    sku: ''
+                    value: Seed-ForgetMeNot
+                    name: Seed Packet Forget Me Not
+                    description: ''
+                  - id: 133
+                    upc: ''
+                    sku: ''
+                    value: PChair
+                    name: Patio Chair
+                    description: ''
+                  - id: 50043
+                    upc: ''
+                    sku: ''
+                    value: Kit-Starter
+                    name: Plant Starter Kit
+                    description: ''
+                  - id: 50044
+                    upc: ''
+                    sku: ''
+                    value: GrowLight
+                    name: Grow Light and Stand
+                    description: ''
+                  - id: 50038
+                    upc: ''
+                    sku: ''
+                    value: SeedTray-16
+                    name: Seedling Tray - 16 Bins
+                    description: ''
+                  - id: 50039
+                    upc: ''
+                    sku: ''
+                    value: SeedTray-32
+                    name: Seedling Tray - 32 bins
+                    description: ''
+                  - id: 50046
+                    upc: ''
+                    sku: ''
+                    value: Seed-BabyBreath
+                    name: Seed Packet Baby Breath
+                    description: ''
+                  - id: 134
+                    upc: ''
+                    sku: ''
+                    value: PTable
+                    name: Patio Table
+                    description: ''
+                  - id: 135
+                    upc: ''
+                    sku: ''
+                    value: Screen
+                    name: Patio Sun Screen
+                    description: ''
+                  - id: 136
+                    upc: ''
+                    sku: ''
+                    value: Fertilizer#50
+                    name: 'Fertilizer #50'
+                    description: ''
+                  - id: 138
+                    upc: ''
+                    sku: ''
+                    value: Hoe
+                    name: Hoe 4 ft
+                    description: ''
+                  - id: 139
+                    upc: ''
+                    sku: ''
+                    value: Rake-Bamboo
+                    name: Rake Bamboo
+                    description: ''
+                  - id: 140
+                    upc: ''
+                    sku: ''
+                    value: Rake-Metal
+                    name: Rake Metal
+                    description: ''
+                  - id: 141
+                    upc: ''
+                    sku: ''
+                    value: Weeder
+                    name: Weeder
+                    description: ''
+                  - id: 142
+                    upc: ''
+                    sku: ''
+                    value: Transplanter
+                    name: Transplanter
+                    description: ''
+                  - id: 143
+                    upc: ''
+                    sku: ''
+                    value: Seeder
+                    name: Grass Seeder
+                    description: ''
+                  - id: 144
+                    upc: ''
+                    sku: ''
+                    value: Tiller
+                    name: Lawn Tiller
+                    description: ''
+                  - id: 127
+                    upc: ''
+                    sku: ''
+                    value: Rose Bush
+                    name: Rose Bush
+                    description: ''
+                  - id: 123
+                    upc: ''
+                    sku: ''
+                    value: Oak
+                    name: Oak Tree
+                    description: ''
+                  - id: 124
+                    upc: ''
+                    sku: ''
+                    value: Elm
+                    name: Elm Tree
+                    description: ''
+                  - id: 125
+                    upc: ''
+                    sku: ''
+                    value: Grass
+                    name: Grass Seed Container
+                    description: ''
+                  - id: 126
+                    upc: ''
+                    sku: ''
+                    value: Planting
+                    name: Planting Service
+                    description: ''
+                  - id: 129
+                    upc: ''
+                    sku: ''
+                    value: Holly Bush
+                    name: Holly Bush
+                    description: ''
+                  - id: 130
+                    upc: ''
+                    sku: ''
+                    value: Plum Tree
+                    name: Plum Tree
+                    description: ''
+                  - id: 147
+                    upc: ''
+                    sku: ''
+                    value: TShirt-RL
+                    name: TShirt - Red Large
+                    description: ''
+                  - id: 148
+                    upc: ''
+                    sku: ''
+                    value: TShirt-GL
+                    name: TShirt - Green Large
+                    description: ''
+                  - id: 50002
+                    upc: ''
+                    sku: ''
+                    value: Screw
+                    name: '#6-32 x 3/8 Socket Head Cap Screw'
+                    description: ''
+                  - id: 50013
+                    upc: ''
+                    sku: ''
+                    value: Bag50
+                    name: Bag 50 Kg
+                    description: ''
+                  - id: 50014
+                    upc: ''
+                    sku: ''
+                    value: Bag70
+                    name: Bag 70 Kg
+                    description: ''
+                  - id: 50003
+                    upc: ''
+                    sku: ''
+                    value: UltraGlue
+                    name: Ultra Glue
+                    description: ''
+                  - id: 50015
+                    upc: ''
+                    sku: ''
+                    value: FrontLeg
+                    name: Front Leg
+                    description: ''
+                  - id: 50010
+                    upc: ''
+                    sku: ''
+                    value: Phosphorus
+                    name: Phosphorus
+                    description: ''
+                  - id: 50016
+                    upc: ''
+                    sku: ''
+                    value: BackLeg
+                    name: Back Leg
+                    description: ''
+                  - id: 50018
+                    upc: ''
+                    sku: ''
+                    value: Fertilizer Plant
+                    name: Fertilizer Plant
+                    description: ''
+                  - id: 50019
+                    upc: ''
+                    sku: ''
+                    value: Assembly Area
+                    name: Assembly Area
+                    description: ''
+                  - id: 50020
+                    upc: ''
+                    sku: ''
+                    value: Paint Area
+                    name: Paint Area
+                    description: ''
+                  - id: 50021
+                    upc: ''
+                    sku: ''
+                    value: Chrome Subcontract Area
+                    name: Chrome Subcontract Area
+                    description: ''
+                  - id: 50022
+                    upc: ''
+                    sku: ''
+                    value: Inspection Area
+                    name: Inspection Area
+                    description: ''
+                  - id: 50023
+                    upc: ''
+                    sku: ''
+                    value: Furniture Plant
+                    name: Furniture Plant
+                    description: ''
+                  - id: 50024
+                    upc: ''
+                    sku: ''
+                    value: Packing Production Line
+                    name: Packing Production Line
+                    description: ''
+                  - id: 50025
+                    upc: ''
+                    sku: ''
+                    value: Mixed Area
+                    name: Mixed Area
+                    description: ''
+                  - id: 50026
+                    upc: ''
+                    sku: ''
+                    value: Dry Area
+                    name: Dry Area
+                    description: ''
+                  - id: 50027
+                    upc: ''
+                    sku: ''
+                    value: Fertilizer Inspection Area
+                    name: Fertilizer Inspection Area
+                    description: ''
+                  - id: 128
+                    upc: '81010123450901'
+                    sku: '1234567890'
+                    value: Azalea Bush
+                    name: Azalea Bush
+                    description: ''
+                  - id: 50009
+                    upc: ''
+                    sku: ''
+                    value: Nitrogen
+                    name: Nitrogen
+                    description: ''
+                next_page_token: 9d1ffadb-c355-420c-9514-bdd5b60b5b27-2
+  /match-po-receipt-invoice/matches/from:
+    get:
+      tags:
+        - default
+      summary: ListMatchedFrom
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: OK
+          headers:
+            Server:
+              schema:
+                type: string
+                example: nginx/1.25.2
+            Date:
+              schema:
+                type: string
+                example: Fri, 08 Mar 2024 16:23:44 GMT
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Content-Length:
+              schema:
+                type: integer
+                example: '65'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            grpc-encoding:
+              schema:
+                type: string
+                example: identity
+            grpc-accept-encoding:
+              schema:
+                type: string
+                example: gzip
+            x-envoy-upstream-service-time:
+              schema:
+                type: integer
+                example: '142'
+            grpc-status:
+              schema:
+                type: integer
+                example: '0'
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Max-Age:
+              schema:
+                type: integer
+                example: '3600'
+            Access-Control-Expose-Headers:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+                example: '*'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                record_count: '0'
+                records: []
+                next_page_token: ''
+  /match-po-receipt-invoice/matches/to/{vendor_id}/{product_id}:
+    get:
+      tags:
+        - default
+      summary: ListMatchedTo
+      description: |-
+        ### Request Params
+
+        - vendor_id (int32,required)
+            
+        - product_id (int32, required)
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: vendor_id
+          in: path
+          schema:
+            type: integer
+          required: true
+          example: '50003'
+        - name: product_id
+          in: path
+          schema:
+            type: integer
+          required: true
+          example: '50005'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /match-po-receipt-invoice/process:
+    post:
+      tags:
+        - default
+      summary: Process
+      description: |-
+        ### Request Body
+
+        - match_from_selected_id (int32,required)
+        - quantity (String)
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                match_from_selected_id: 120
+                quantity: '1'
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: OK
+          headers:
+            Server:
+              schema:
+                type: string
+                example: nginx/1.25.2
+            Date:
+              schema:
+                type: string
+                example: Fri, 08 Mar 2024 16:26:21 GMT
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Content-Length:
+              schema:
+                type: integer
+                example: '19'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            grpc-encoding:
+              schema:
+                type: string
+                example: identity
+            grpc-accept-encoding:
+              schema:
+                type: string
+                example: gzip
+            x-envoy-upstream-service-time:
+              schema:
+                type: integer
+                example: '191'
+            grpc-status:
+              schema:
+                type: integer
+                example: '0'
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Max-Age:
+              schema:
+                type: integer
+                example: '3600'
+            Access-Control-Expose-Headers:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+                example: '*'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                message: ''

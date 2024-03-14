@@ -1,0 +1,1005 @@
+{
+	"info": {
+		"_postman_id": "8b3c8003-2dc1-40f0-9712-9f825822f35d",
+		"name": "dashboarding",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "28978517"
+	},
+	"item": [
+		{
+			"name": "ListDashboards",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const res = pm.response.json();",
+							"const collection = res.collection;",
+							"",
+							"const makeVisualizerTemplate = (swagger, errors, warnings) => `Swagger:<br> <textarea style=\"width: 100vw; height: 100vh; font-family: monospace;\">${JSON.stringify(swagger)}</textarea><br>",
+							"Errors:<br><textarea style=\"width: 100vw; height: 100vh; font-family: monospace;\">${JSON.stringify(errors)}</textarea><br>",
+							"Warnings:<br><textarea style=\"width: 100vw; height: 100vh; font-family: monospace;\">${JSON.stringify(warnings)}</textarea>`;",
+							"",
+							"pm.sendRequest({",
+							"    url: `https://demo.postmansolutions.com/postman2swagger`,",
+							"    method: 'POST',",
+							"    header: 'Content-Type:application/json',",
+							"    body: {",
+							"        mode: 'raw',",
+							"        raw: JSON.stringify(collection) // Added JSON.stringify to collection",
+							"    }",
+							"}, (err, res) => {",
+							"    const payload = JSON.parse(res.text());",
+							"    const visualizerTemplate = makeVisualizerTemplate(payload.swagger, payload.errors, payload.warnings);",
+							"",
+							"    pm.visualizer.set(visualizerTemplate);",
+							"});",
+							"",
+							"pm.test(\"Response has the required fields - collection, info, item\", function () {",
+							"    const responseData = pm.response.json();",
+							"    ",
+							"    pm.expect(responseData).to.be.an('object');",
+							"    pm.expect(responseData.collection).to.exist;",
+							"    pm.expect(responseData.info).to.exist;",
+							"    pm.expect(responseData.item).to.exist;",
+							"});",
+							"",
+							"",
+							"pm.test(\"Response status code is 200\", function () {",
+							"  pm.expect(pm.response.code).to.equal(200);",
+							"});",
+							"",
+							"",
+							"pm.test(\"Response time is within an acceptable range\", function () {",
+							"  pm.expect(pm.response.responseTime).to.be.below(5000);",
+							"});",
+							"",
+							"",
+							"pm.test(\"Ensure the response body contains the required fields - swagger, errors, warnings\", function () {",
+							"    const responseData = pm.response.json();",
+							"    ",
+							"    pm.expect(responseData).to.have.property('swagger');",
+							"    pm.expect(responseData).to.have.property('errors');",
+							"    pm.expect(responseData).to.have.property('warnings');",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{HOST}}/dashboarding/dashboards",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"dashboarding",
+						"dashboards"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "ListDashboards",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/dashboarding/dashboards",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"dashboarding",
+								"dashboards"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.25.2"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 06 Mar 2024 17:46:16 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "4575"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "grpc-encoding",
+							"value": "identity"
+						},
+						{
+							"key": "grpc-accept-encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "x-envoy-upstream-service-time",
+							"value": "100"
+						},
+						{
+							"key": "grpc-status",
+							"value": "0"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Max-Age",
+							"value": "3600"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"record_count\": \"12\",\n    \"dashboards\": [\n        {\n            \"id\": 101,\n            \"name\": \"Invoice Revenue\",\n            \"description\": \"100k in Revenue\",\n            \"file_name\": \"\",\n            \"dashboard_type\": \"chart\",\n            \"chart_type\": \"BC\",\n            \"sequence\": 0,\n            \"html\": \"\",\n            \"column_no\": 0,\n            \"line_no\": 0,\n            \"is_collapsible\": true,\n            \"is_open_by_default\": true,\n            \"is_event_required\": false,\n            \"browser_id\": 0,\n            \"window_id\": 0\n        },\n        {\n            \"id\": 102,\n            \"name\": \"Open Invoices\",\n            \"description\": \"Open Invoices max $1000\",\n            \"file_name\": \"\",\n            \"dashboard_type\": \"chart\",\n            \"chart_type\": \"BC\",\n            \"sequence\": 0,\n            \"html\": \"\",\n            \"column_no\": 0,\n            \"line_no\": 0,\n            \"is_collapsible\": true,\n            \"is_open_by_default\": true,\n            \"is_event_required\": false,\n            \"browser_id\": 0,\n            \"window_id\": 0\n        },\n        {\n            \"id\": 104,\n            \"name\": \"Service Requests (Quarter)\",\n            \"description\": \"Open Service Requests in Time\",\n            \"file_name\": \"\",\n            \"dashboard_type\": \"chart\",\n            \"chart_type\": \"BC\",\n            \"sequence\": 0,\n            \"html\": \"\",\n            \"column_no\": 0,\n            \"line_no\": 0,\n            \"is_collapsible\": true,\n            \"is_open_by_default\": true,\n            \"is_event_required\": false,\n            \"browser_id\": 0,\n            \"window_id\": 0\n        },\n        {\n            \"id\": 105,\n            \"name\": \"Total Open Service Requests\",\n            \"description\": \"Open Service Requests by Status\",\n            \"file_name\": \"\",\n            \"dashboard_type\": \"chart\",\n            \"chart_type\": \"BC\",\n            \"sequence\": 0,\n            \"html\": \"\",\n            \"column_no\": 0,\n            \"line_no\": 0,\n            \"is_collapsible\": true,\n            \"is_open_by_default\": true,\n            \"is_event_required\": false,\n            \"browser_id\": 0,\n            \"window_id\": 0\n        },\n        {\n            \"id\": 50009,\n            \"name\": \"Favorites (User)\",\n            \"description\": \"User's Favorites Menu Display\",\n            \"file_name\": \"userfavorites\",\n            \"dashboard_type\": \"dashboard\",\n            \"chart_type\": \"\",\n            \"sequence\": 0,\n            \"html\": \"\",\n            \"column_no\": 0,\n            \"line_no\": 1,\n            \"is_collapsible\": true,\n            \"is_open_by_default\": true,\n            \"is_event_required\": false,\n            \"browser_id\": 0,\n            \"window_id\": 0\n        },\n        {\n            \"id\": 200000,\n            \"name\": \"Recent Items\",\n            \"description\": \"Recent items\",\n            \"file_name\": \"recentItems\",\n            \"dashboard_type\": \"dashboard\",\n            \"chart_type\": \"\",\n            \"sequence\": 0,\n            \"html\": \"\",\n            \"column_no\": 0,\n            \"line_no\": 2,\n            \"is_collapsible\": true,\n            \"is_open_by_default\": true,\n            \"is_event_required\": false,\n            \"browser_id\": 0,\n            \"window_id\": 0\n        },\n        {\n            \"id\": 50001,\n            \"name\": \"Favourites (System)\",\n            \"description\": \"Favourities by System\",\n            \"file_name\": \"favourites\",\n            \"dashboard_type\": \"dashboard\",\n            \"chart_type\": \"\",\n            \"sequence\": 0,\n            \"html\": \"\",\n            \"column_no\": 0,\n            \"line_no\": 3,\n            \"is_collapsible\": true,\n            \"is_open_by_default\": true,\n            \"is_event_required\": false,\n            \"browser_id\": 0,\n            \"window_id\": 0\n        },\n        {\n            \"id\": 50014,\n            \"name\": \"Document tasks\",\n            \"description\": \"Pending documents to finish\",\n            \"file_name\": \"docstatus\",\n            \"dashboard_type\": \"dashboard\",\n            \"chart_type\": \"\",\n            \"sequence\": 0,\n            \"html\": \"\",\n            \"column_no\": 1,\n            \"line_no\": 0,\n            \"is_collapsible\": true,\n            \"is_open_by_default\": true,\n            \"is_event_required\": false,\n            \"browser_id\": 0,\n            \"window_id\": 0\n        },\n        {\n            \"id\": 50000,\n            \"name\": \"Activities\",\n            \"description\": \"Workflow activities, notices and requests\",\n            \"file_name\": \"activities\",\n            \"dashboard_type\": \"dashboard\",\n            \"chart_type\": \"\",\n            \"sequence\": 0,\n            \"html\": \"\",\n            \"column_no\": 1,\n            \"line_no\": 1,\n            \"is_collapsible\": true,\n            \"is_open_by_default\": true,\n            \"is_event_required\": false,\n            \"browser_id\": 0,\n            \"window_id\": 0\n        },\n        {\n            \"id\": 50002,\n            \"name\": \"Views\",\n            \"description\": \"Info views\",\n            \"file_name\": \"views\",\n            \"dashboard_type\": \"dashboard\",\n            \"chart_type\": \"\",\n            \"sequence\": 0,\n            \"html\": \"\",\n            \"column_no\": 1,\n            \"line_no\": 2,\n            \"is_collapsible\": true,\n            \"is_open_by_default\": true,\n            \"is_event_required\": false,\n            \"browser_id\": 0,\n            \"window_id\": 0\n        },\n        {\n            \"id\": 50004,\n            \"name\": \"Calendar\",\n            \"description\": \"Google Calendar\",\n            \"file_name\": \"calendar\",\n            \"dashboard_type\": \"dashboard\",\n            \"chart_type\": \"\",\n            \"sequence\": 0,\n            \"html\": \"\",\n            \"column_no\": 1,\n            \"line_no\": 3,\n            \"is_collapsible\": true,\n            \"is_open_by_default\": true,\n            \"is_event_required\": false,\n            \"browser_id\": 0,\n            \"window_id\": 0\n        },\n        {\n            \"id\": 50003,\n            \"name\": \"Performance\",\n            \"description\": \"Performance meters\",\n            \"file_name\": \"performance\",\n            \"dashboard_type\": \"dashboard\",\n            \"chart_type\": \"\",\n            \"sequence\": 0,\n            \"html\": \"\",\n            \"column_no\": 2,\n            \"line_no\": 0,\n            \"is_collapsible\": true,\n            \"is_open_by_default\": true,\n            \"is_event_required\": false,\n            \"browser_id\": 0,\n            \"window_id\": 0\n        }\n    ],\n    \"next_page_token\": \"\"\n}"
+				}
+			]
+		},
+		{
+			"name": "GetMetrics",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{HOST}}/dashboarding/dashboards/:id/metrics",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"dashboarding",
+						"dashboards",
+						":id",
+						"metrics"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "101"
+						}
+					]
+				},
+				"description": "### Request Params\n\n- id (int32, required)"
+			},
+			"response": [
+				{
+					"name": "GetMetrics",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/dashboarding/dashboards/:id/metrics",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"dashboarding",
+								"dashboards",
+								":id",
+								"metrics"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "101"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.25.2"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 06 Mar 2024 17:47:01 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "906"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "grpc-encoding",
+							"value": "identity"
+						},
+						{
+							"key": "grpc-accept-encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "x-envoy-upstream-service-time",
+							"value": "75"
+						},
+						{
+							"key": "grpc-status",
+							"value": "0"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Max-Age",
+							"value": "3600"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 101,\n    \"name\": \"Invoice Revenue\",\n    \"description\": \"100k in Revenue\",\n    \"x_axis_label\": \"Mes\",\n    \"y_axis_label\": \"Invoice Revenue\",\n    \"measure_target\": \"100000\",\n    \"measure_actual\": \"0\",\n    \"performance_goal\": \"0.000000\",\n    \"color_schemas\": [\n        {\n            \"name\": \"\",\n            \"color\": \"#FF0000\",\n            \"percent\": \"50\"\n        },\n        {\n            \"name\": \"\",\n            \"color\": \"#FFFF00\",\n            \"percent\": \"100\"\n        },\n        {\n            \"name\": \"\",\n            \"color\": \"#00FF00\",\n            \"percent\": \"9999\"\n        },\n        {\n            \"name\": \"\",\n            \"color\": \"\",\n            \"percent\": \"0\"\n        }\n    ],\n    \"series\": [\n        {\n            \"name\": \"2024\",\n            \"data_set\": [\n                {\n                    \"name\": \"08/2024\",\n                    \"value\": \"0.0\"\n                }\n            ]\n        },\n        {\n            \"name\": \"2022\",\n            \"data_set\": [\n                {\n                    \"name\": \"01/2022\",\n                    \"value\": \"228.85\"\n                }\n            ]\n        },\n        {\n            \"name\": \"2021\",\n            \"data_set\": [\n                {\n                    \"name\": \"01/2021\",\n                    \"value\": \"151.05\"\n                },\n                {\n                    \"name\": \"07/2021\",\n                    \"value\": \"161.12\"\n                }\n            ]\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "ListFavorites",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{HOST}}/dashboarding/favorites",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"dashboarding",
+						"favorites"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "ListFavorites",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/dashboarding/favorites",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"dashboarding",
+								"favorites"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.25.2"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 06 Mar 2024 15:48:35 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "1981"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "grpc-encoding",
+							"value": "identity"
+						},
+						{
+							"key": "grpc-accept-encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "x-envoy-upstream-service-time",
+							"value": "195"
+						},
+						{
+							"key": "grpc-status",
+							"value": "0"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Max-Age",
+							"value": "3600"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"record_count\": \"12\",\n    \"favorites\": [\n        {\n            \"menu_id\": 176,\n            \"menu_name\": \"Informe y Proceso\",\n            \"menu_description\": \"Mantener informes y procesos\",\n            \"reference_id\": 165,\n            \"action\": \"W\"\n        },\n        {\n            \"menu_id\": 138,\n            \"menu_name\": \"Elemento\",\n            \"menu_description\": \"Mantener elementos de campos\",\n            \"reference_id\": 151,\n            \"action\": \"W\"\n        },\n        {\n            \"menu_id\": 139,\n            \"menu_name\": \"Tabla y Columna\",\n            \"menu_description\": \"Mantener tablas y columnas\",\n            \"reference_id\": 100,\n            \"action\": \"W\"\n        },\n        {\n            \"menu_id\": 140,\n            \"menu_name\": \"Referencia\",\n            \"menu_description\": \"Mantener Referencias del Sistema\",\n            \"reference_id\": 101,\n            \"action\": \"W\"\n        },\n        {\n            \"menu_id\": 141,\n            \"menu_name\": \"Ventana, Pestaña y Campo\",\n            \"menu_description\": \"Mantener ventanas, pestañas y campos\",\n            \"reference_id\": 102,\n            \"action\": \"W\"\n        },\n        {\n            \"menu_id\": 143,\n            \"menu_name\": \"Mensaje\",\n            \"menu_description\": \"Mantener mensajes de información y error\",\n            \"reference_id\": 104,\n            \"action\": \"W\"\n        },\n        {\n            \"menu_id\": 144,\n            \"menu_name\": \"Menú\",\n            \"menu_description\": \"Mantener Menú\",\n            \"reference_id\": 105,\n            \"action\": \"W\"\n        },\n        {\n            \"menu_id\": 50008,\n            \"menu_name\": \"Configurador del Sistema\",\n            \"menu_description\": \"\",\n            \"reference_id\": 50006,\n            \"action\": \"W\"\n        },\n        {\n            \"menu_id\": 110,\n            \"menu_name\": \"Socio del Negocio\",\n            \"menu_description\": \"Mantener Socios del Negocio\",\n            \"reference_id\": 123,\n            \"action\": \"W\"\n        },\n        {\n            \"menu_id\": 126,\n            \"menu_name\": \"Producto\",\n            \"menu_description\": \"Mantener Productos\",\n            \"reference_id\": 140,\n            \"action\": \"W\"\n        },\n        {\n            \"menu_id\": 129,\n            \"menu_name\": \"Órdenes de Venta\",\n            \"menu_description\": \"Entrar y cambiar ordenes de ventas\",\n            \"reference_id\": 143,\n            \"action\": \"W\"\n        },\n        {\n            \"menu_id\": 383,\n            \"menu_name\": \"Cache Reset\",\n            \"menu_description\": \"Reset Cache of the System ** Close all Windows before proceeding **\",\n            \"reference_id\": 205,\n            \"action\": \"P\"\n        }\n    ],\n    \"next_page_token\": \"\"\n}"
+				}
+			]
+		},
+		{
+			"name": "ListPendingDocuments",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{HOST}}/dashboarding/pending-documents",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"dashboarding",
+						"pending-documents"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "ListPendingDocuments",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/dashboarding/pending-documents",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"dashboarding",
+								"pending-documents"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.25.2"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 06 Mar 2024 17:47:27 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "464"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "grpc-encoding",
+							"value": "identity"
+						},
+						{
+							"key": "grpc-accept-encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "x-envoy-upstream-service-time",
+							"value": "123"
+						},
+						{
+							"key": "grpc-status",
+							"value": "0"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Max-Age",
+							"value": "3600"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"record_count\": \"0\",\n    \"pending_documents\": [\n        {\n            \"window_id\": 169,\n            \"form_id\": 0,\n            \"table_name\": \"M_InOut\",\n            \"document_name\": \"Pending Customer Shipments\",\n            \"document_description\": \"\",\n            \"sequence\": 0,\n            \"record_count\": \"0\"\n        },\n        {\n            \"window_id\": 143,\n            \"form_id\": 0,\n            \"table_name\": \"C_Order\",\n            \"document_name\": \"Pending Sales Orders\",\n            \"document_description\": \"\",\n            \"sequence\": 0,\n            \"record_count\": \"1\"\n        }\n    ],\n    \"next_page_token\": \"\"\n}"
+				}
+			]
+		},
+		{
+			"name": "ListNotifications",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{HOST}}/dashboarding/notifications",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"dashboarding",
+						"notifications"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "ListNotifications",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/dashboarding/notifications",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"dashboarding",
+								"notifications"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.25.2"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 06 Mar 2024 15:50:24 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "521"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "grpc-encoding",
+							"value": "identity"
+						},
+						{
+							"key": "grpc-accept-encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "x-envoy-upstream-service-time",
+							"value": "91"
+						},
+						{
+							"key": "grpc-status",
+							"value": "0"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Max-Age",
+							"value": "3600"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"record_count\": \"0\",\n    \"notifications\": [\n        {\n            \"name\": \"Aviso\",\n            \"description\": \"Ver avisos del sistema\",\n            \"quantity\": 0,\n            \"action\": \"WINDOW\",\n            \"action_id\": 193\n        },\n        {\n            \"name\": \"Solicitud\",\n            \"description\": \"Trabajar en sus solicitudes\",\n            \"quantity\": 0,\n            \"action\": \"WINDOW\",\n            \"action_id\": 201\n        },\n        {\n            \"name\": \"Actividades de Flujo de Trabajo\",\n            \"description\": \"Actividades Flujo de Trabajo activas\",\n            \"quantity\": 9,\n            \"action\": \"FORM\",\n            \"action_id\": 117\n        }\n    ],\n    \"next_page_token\": \"\"\n}"
+				}
+			]
+		},
+		{
+			"name": "ExistsWindowDashboards",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{HOST}}/dashboarding/dashboards/windows/:window_id/exists",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"dashboarding",
+						"dashboards",
+						"windows",
+						":window_id",
+						"exists"
+					],
+					"variable": [
+						{
+							"key": "window_id",
+							"value": "120"
+						}
+					]
+				},
+				"description": "### Request Params\n\n- Window_id (int32, required)"
+			},
+			"response": [
+				{
+					"name": "ExistsWindowDashboards",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/dashboarding/dashboards/windows/:window_id/exists",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"dashboarding",
+								"dashboards",
+								"windows",
+								":window_id",
+								"exists"
+							],
+							"variable": [
+								{
+									"key": "window_id",
+									"value": "327"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.25.2"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 07 Mar 2024 20:44:44 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "23"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "grpc-encoding",
+							"value": "identity"
+						},
+						{
+							"key": "grpc-accept-encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "x-envoy-upstream-service-time",
+							"value": "97"
+						},
+						{
+							"key": "grpc-status",
+							"value": "0"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Max-Age",
+							"value": "3600"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"record_count\": 0\n}"
+				}
+			]
+		},
+		{
+			"name": "ListWindowDashboards",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{HOST}}/dashboarding/dashboards/windows/:window_id",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"dashboarding",
+						"dashboards",
+						"windows",
+						":window_id"
+					],
+					"variable": [
+						{
+							"key": "window_id",
+							"value": "120"
+						}
+					]
+				},
+				"description": "### Request Params\n\n- window_id (int32, required)"
+			},
+			"response": [
+				{
+					"name": "ListWindowDashboards",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/dashboarding/dashboards/windows/:window_id",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"dashboarding",
+								"dashboards",
+								"windows",
+								":window_id"
+							],
+							"variable": [
+								{
+									"key": "window_id",
+									"value": "120"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.25.2"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 08 Mar 2024 18:26:36 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "65"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "grpc-encoding",
+							"value": "identity"
+						},
+						{
+							"key": "grpc-accept-encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "x-envoy-upstream-service-time",
+							"value": "38"
+						},
+						{
+							"key": "grpc-status",
+							"value": "0"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Max-Age",
+							"value": "3600"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"record_count\": \"0\",\n    \"records\": [],\n    \"next_page_token\": \"\"\n}"
+				}
+			]
+		},
+		{
+			"name": "GetWindowMetrics",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{HOST}}/dashboarding/dashboards/windows/metrics/:id/:table_name/:record_id",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"dashboarding",
+						"dashboards",
+						"windows",
+						"metrics",
+						":id",
+						":table_name",
+						":record_id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "100"
+						},
+						{
+							"key": "table_name",
+							"value": "C_DocTypeCounter"
+						},
+						{
+							"key": "record_id",
+							"value": "100"
+						}
+					]
+				},
+				"description": "### Request Params\n\n- id (int32, required)\n    \n- table_name (String,required)\n    \n- record_id (int32,required)"
+			},
+			"response": [
+				{
+					"name": "GetWindowMetrics",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/dashboarding/dashboards/windows/metrics/:id/:table_name/:record_id",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"dashboarding",
+								"dashboards",
+								"windows",
+								"metrics",
+								":id",
+								":table_name",
+								":record_id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "100"
+								},
+								{
+									"key": "table_name",
+									"value": "C_DocTypeCounter"
+								},
+								{
+									"key": "record_id",
+									"value": "100"
+								}
+							]
+						}
+					},
+					"status": "Internal Server Error",
+					"code": 500,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.25.2"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 08 Mar 2024 18:26:46 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "85"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "x-envoy-upstream-service-time",
+							"value": "51"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"code\": 13,\n    \"message\": \"Gráfico de Ventana * No encontrado *\",\n    \"details\": []\n}"
+				}
+			]
+		}
+	]
+}

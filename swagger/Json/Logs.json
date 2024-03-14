@@ -1,0 +1,1786 @@
+{
+	"info": {
+		"_postman_id": "afc145dd-7c90-4adf-918b-0b49e5a99583",
+		"name": "Logs",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "28978517"
+	},
+	"item": [
+		{
+			"name": "entities",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{HOST}}/logs/entities/:table_name/:id",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"logs",
+						"entities",
+						":table_name",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "table_name",
+							"value": "AD_Migration"
+						},
+						{
+							"key": "id",
+							"value": "1000437"
+						}
+					]
+				},
+				"description": "### Request Params\n\n- table_name (String,required)\n    \n- id (int32, required)"
+			},
+			"response": [
+				{
+					"name": "entities",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{HOST}}/logs/entities?table_name=AD_Migration&id=1000437",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"logs",
+								"entities"
+							],
+							"query": [
+								{
+									"key": "table_name",
+									"value": "AD_Migration"
+								},
+								{
+									"key": "id",
+									"value": "1000437"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.25.2"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 29 Sep 2023 17:36:28 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "2542"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "grpc-encoding",
+							"value": "identity"
+						},
+						{
+							"key": "grpc-accept-encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "x-envoy-upstream-service-time",
+							"value": "98"
+						},
+						{
+							"key": "grpc-status",
+							"value": "0"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Max-Age",
+							"value": "3600"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"record_count\": \"4\",\n    \"entity_logs\": [\n        {\n            \"log_id\": 1000003,\n            \"id\": 1000437,\n            \"displayed_name\": \"Migration\",\n            \"window_id\": 53084,\n            \"table_name\": \"AD_Migration\",\n            \"session_id\": 1000004,\n            \"user_id\": 100,\n            \"user_name\": \"SuperUser\",\n            \"transaction_name\": \"POSave_907c9717-123f-437d-9ef6-f84a876f4133\",\n            \"event_type\": \"UPDATE\",\n            \"log_date\": \"2017-08-01T05:40:26Z\",\n            \"change_logs\": [\n                {\n                    \"column_name\": \"StatusCode\",\n                    \"display_column_name\": \"Status Code\",\n                    \"old_value\": \"U\",\n                    \"old_display_value\": \"Unapplied\",\n                    \"new_value\": \"P\",\n                    \"new_display_value\": \"Partially applied\",\n                    \"description\": \"\"\n                }\n            ]\n        },\n        {\n            \"log_id\": 1000002,\n            \"id\": 1000437,\n            \"displayed_name\": \"Migration\",\n            \"window_id\": 53084,\n            \"table_name\": \"AD_Migration\",\n            \"session_id\": 1000004,\n            \"user_id\": 100,\n            \"user_name\": \"SuperUser\",\n            \"transaction_name\": \"POSave_78c6e563-e573-4002-b0df-e39867042a54\",\n            \"event_type\": \"UPDATE\",\n            \"log_date\": \"2017-08-01T05:26:14Z\",\n            \"change_logs\": [\n                {\n                    \"column_name\": \"StatusCode\",\n                    \"display_column_name\": \"Status Code\",\n                    \"old_value\": \"U\",\n                    \"old_display_value\": \"Unapplied\",\n                    \"new_value\": \"P\",\n                    \"new_display_value\": \"Partially applied\",\n                    \"description\": \"\"\n                }\n            ]\n        },\n        {\n            \"log_id\": 1000001,\n            \"id\": 1000437,\n            \"displayed_name\": \"Migration\",\n            \"window_id\": 53084,\n            \"table_name\": \"AD_Migration\",\n            \"session_id\": 1000003,\n            \"user_id\": 100,\n            \"user_name\": \"SuperUser\",\n            \"transaction_name\": \"POSave_137d3f42-cbd3-48bc-9b1a-7294514795ce\",\n            \"event_type\": \"UPDATE\",\n            \"log_date\": \"2017-08-01T05:11:09Z\",\n            \"change_logs\": [\n                {\n                    \"column_name\": \"StatusCode\",\n                    \"display_column_name\": \"Status Code\",\n                    \"old_value\": \"P\",\n                    \"old_display_value\": \"Partially applied\",\n                    \"new_value\": \"U\",\n                    \"new_display_value\": \"Unapplied\",\n                    \"description\": \"\"\n                }\n            ]\n        },\n        {\n            \"log_id\": 1000000,\n            \"id\": 1000437,\n            \"displayed_name\": \"Migration\",\n            \"window_id\": 53084,\n            \"table_name\": \"AD_Migration\",\n            \"session_id\": 1000001,\n            \"user_id\": 100,\n            \"user_name\": \"SuperUser\",\n            \"transaction_name\": \"POSave_48e9304f-bef6-4529-9238-3fa0e188d1bb\",\n            \"event_type\": \"UPDATE\",\n            \"log_date\": \"2017-08-01T04:54:25Z\",\n            \"change_logs\": [\n                {\n                    \"column_name\": \"StatusCode\",\n                    \"display_column_name\": \"Status Code\",\n                    \"old_value\": \"P\",\n                    \"old_display_value\": \"Partially applied\",\n                    \"new_value\": \"U\",\n                    \"new_display_value\": \"Unapplied\",\n                    \"description\": \"\"\n                }\n            ]\n        }\n    ],\n    \"next_page_token\": \"\"\n}"
+				}
+			]
+		},
+		{
+			"name": "chat-entities",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{HOST}}/logs/chat-entities/:table_name/:id",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"logs",
+						"chat-entities",
+						":table_name",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "table_name",
+							"value": "C_BPartner"
+						},
+						{
+							"key": "id",
+							"value": "50000"
+						}
+					]
+				},
+				"description": "### Request Params\n\n- table_name (String,required)\n    \n- id (int32, required)"
+			},
+			"response": [
+				{
+					"name": "chat-entities",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{HOST}}/logs/chat-entities?table_name=C_BPartner&id=50000",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"logs",
+								"chat-entities"
+							],
+							"query": [
+								{
+									"key": "table_name",
+									"value": "C_BPartner"
+								},
+								{
+									"key": "id",
+									"value": "50000"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.25.2"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 29 Sep 2023 17:36:47 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "70"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "grpc-encoding",
+							"value": "identity"
+						},
+						{
+							"key": "grpc-accept-encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "x-envoy-upstream-service-time",
+							"value": "24"
+						},
+						{
+							"key": "grpc-status",
+							"value": "0"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Max-Age",
+							"value": "3600"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"record_count\": \"0\",\n    \"entity_chats\": [],\n    \"next_page_token\": \"\"\n}"
+				}
+			]
+		},
+		{
+			"name": "chat-entries",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{HOST}}/logs/chat-entries?table_name=C_BPartner&id=50000",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"logs",
+						"chat-entries"
+					],
+					"query": [
+						{
+							"key": "table_name",
+							"value": "C_BPartner"
+						},
+						{
+							"key": "id",
+							"value": "50000"
+						}
+					]
+				},
+				"description": "### Request Params\n\n- table_name (String,required)\n    \n- id (int32, required)"
+			},
+			"response": [
+				{
+					"name": "chat-entries",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{HOST}}/logs/chat-entries?id=50000",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"logs",
+								"chat-entries"
+							],
+							"query": [
+								{
+									"key": "table_name",
+									"value": "C_BPartner",
+									"disabled": true
+								},
+								{
+									"key": "id",
+									"value": "50000"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.25.2"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 29 Sep 2023 17:36:52 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "70"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "grpc-encoding",
+							"value": "identity"
+						},
+						{
+							"key": "grpc-accept-encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "x-envoy-upstream-service-time",
+							"value": "23"
+						},
+						{
+							"key": "grpc-status",
+							"value": "0"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Max-Age",
+							"value": "3600"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"record_count\": \"0\",\n    \"chat_entries\": [],\n    \"next_page_token\": \"\"\n}"
+				}
+			]
+		},
+		{
+			"name": "chat-entries-exists",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{HOST}}/logs/chat-entries/:table_name/:record_id/exists",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"logs",
+						"chat-entries",
+						":table_name",
+						":record_id",
+						"exists"
+					],
+					"variable": [
+						{
+							"key": "table_name",
+							"value": "CM_ChatEntry"
+						},
+						{
+							"key": "record_id",
+							"value": "1000437"
+						}
+					]
+				},
+				"description": "### Request Params\n\n- table_name (String,required)\n    \n- record_id (int32, required)"
+			},
+			"response": [
+				{
+					"name": "chat-entries-exists",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{HOST}}/logs/chat-entries/:table_name/:record_id/exists",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"logs",
+								"chat-entries",
+								":table_name",
+								":record_id",
+								"exists"
+							],
+							"variable": [
+								{
+									"key": "table_name",
+									"value": "CM_ChatEntry"
+								},
+								{
+									"key": "record_id",
+									"value": "1000437"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.25.2"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 29 Sep 2023 17:42:54 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "23"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "grpc-encoding",
+							"value": "identity"
+						},
+						{
+							"key": "grpc-accept-encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "x-envoy-upstream-service-time",
+							"value": "18"
+						},
+						{
+							"key": "grpc-status",
+							"value": "0"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Max-Age",
+							"value": "3600"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"record_count\": 0\n}"
+				}
+			]
+		},
+		{
+			"name": "workflows",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{HOST}}/logs/workflows?table_name=C_BPartner&id=50000",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"logs",
+						"workflows"
+					],
+					"query": [
+						{
+							"key": "table_name",
+							"value": "C_BPartner"
+						},
+						{
+							"key": "id",
+							"value": "50000"
+						}
+					]
+				},
+				"description": "### Request Params\n\n- table_name (String,required)\n    \n- id (int32, required)"
+			},
+			"response": [
+				{
+					"name": "workflows",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{HOST}}/logs/workflows?table_name=C_BPartner&id=50000",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"logs",
+								"workflows"
+							],
+							"query": [
+								{
+									"key": "table_name",
+									"value": "C_BPartner"
+								},
+								{
+									"key": "id",
+									"value": "50000"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.25.2"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 29 Sep 2023 17:43:04 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "984"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "grpc-encoding",
+							"value": "identity"
+						},
+						{
+							"key": "grpc-accept-encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "x-envoy-upstream-service-time",
+							"value": "54"
+						},
+						{
+							"key": "grpc-status",
+							"value": "0"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Max-Age",
+							"value": "3600"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"record_count\": \"1\",\n    \"workflow_logs\": [\n        {\n            \"process_id\": 50000,\n            \"workflow_id\": 131,\n            \"workflow_name\": \"Business Partner Approval\",\n            \"id\": 50000,\n            \"table_name\": \"C_BPartner\",\n            \"user_id\": 100,\n            \"user_name\": \"SuperUser\",\n            \"responsible_id\": 101,\n            \"responsible_name\": \"Invoker\",\n            \"text_message\": \"\",\n            \"processed\": false,\n            \"workflow_state\": \"SUSPENDED\",\n            \"priority\": \"URGENT\",\n            \"workflow_events\": [\n                {\n                    \"node_id\": 244,\n                    \"node_name\": \"Business Partner\",\n                    \"id\": 50000,\n                    \"table_name\": \"C_BPartner\",\n                    \"user_id\": 100,\n                    \"user_name\": \"SuperUser\",\n                    \"responsible_id\": 100,\n                    \"responsible_name\": \"Organization\",\n                    \"text_message\": \"\",\n                    \"time_elapsed\": \"0\",\n                    \"attribute_name\": \"\",\n                    \"old_value\": \"\",\n                    \"new_value\": \"\",\n                    \"workflow_state\": \"SUSPENDED\",\n                    \"event_type\": \"PROCESS_CREATED\",\n                    \"log_date\": \"2008-09-22T18:13:32Z\"\n                }\n            ],\n            \"log_date\": \"2008-09-22T18:13:24Z\"\n        }\n    ],\n    \"next_page_token\": \"\"\n}"
+				}
+			]
+		},
+		{
+			"name": "recent-items",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{HOST}}/logs/recent-items",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"logs",
+						"recent-items"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "recent-items",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{HOST}}/logs/recent-items",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"logs",
+								"recent-items"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.25.2"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 29 Sep 2023 17:43:10 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "425"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "grpc-encoding",
+							"value": "identity"
+						},
+						{
+							"key": "grpc-accept-encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "x-envoy-upstream-service-time",
+							"value": "38"
+						},
+						{
+							"key": "grpc-status",
+							"value": "0"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Max-Age",
+							"value": "3600"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"record_count\": \"0\",\n    \"recent_items\": [\n        {\n            \"menu_id\": 495,\n            \"menu_name\": \"Role Access Update\",\n            \"menu_description\": \"Update the access rights of a role or roles of a client\",\n            \"window_id\": 0,\n            \"tab_id\": 0,\n            \"table_id\": 0,\n            \"table_name\": \"\",\n            \"id\": 0,\n            \"display_name\": \"Role Access Update\",\n            \"updated\": \"2019-05-04T03:42:11Z\",\n            \"reference_id\": 295,\n            \"action\": \"P\"\n        }\n    ],\n    \"next_page_token\": \"\"\n}"
+				}
+			]
+		},
+		{
+			"name": "user-activities",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{HOST}}/logs/user-activities",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"logs",
+						"user-activities"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "user-activities",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/logs/user-activities",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"logs",
+								"user-activities"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.25.2"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 08 Mar 2024 18:43:14 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "479"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "grpc-encoding",
+							"value": "identity"
+						},
+						{
+							"key": "grpc-accept-encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "x-envoy-upstream-service-time",
+							"value": "74"
+						},
+						{
+							"key": "grpc-status",
+							"value": "0"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Max-Age",
+							"value": "3600"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"record_count\": \"1\",\n    \"records\": [\n        {\n            \"user_activity_type\": \"PROCESS_LOG\",\n            \"process_log\": {\n                \"id\": 241,\n                \"name\": \"Delete Notices\",\n                \"description\": \"Delete all Notices\",\n                \"instance_id\": 1001235,\n                \"is_error\": false,\n                \"summary\": \"Borrado = 9\",\n                \"result_table_name\": \"\",\n                \"is_processing\": false,\n                \"last_run\": \"2024-03-08T18:14:38Z\",\n                \"logs\": [],\n                \"parameters\": {},\n                \"process_intance_parameters\": []\n            }\n        }\n    ],\n    \"next_page_token\": \"\"\n}"
+				}
+			]
+		},
+		{
+			"name": "ListEntityLogs",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{HOST}}/logs/entities/:table_name/:id",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"logs",
+						"entities",
+						":table_name",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "table_name",
+							"value": "AD_Migration"
+						},
+						{
+							"key": "id",
+							"value": "1000437"
+						}
+					]
+				},
+				"description": "### Request Params\n\n- table_name (String,required)\n    \n- id (int32, required)"
+			},
+			"response": []
+		},
+		{
+			"name": "ListEntityChats",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{HOST}}/logs/chat-entities/:table_name/:id",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"logs",
+						"chat-entities",
+						":table_name",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "table_name",
+							"value": "AD_Migration"
+						},
+						{
+							"key": "id",
+							"value": "1000437"
+						}
+					]
+				},
+				"description": "### Request Params\n\n- table_name (String,required)\n    \n- id (int32, required)"
+			},
+			"response": []
+		},
+		{
+			"name": "ExistsChatEntries",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{HOST}}/logs/chat-entries/:table_name/:record_id/exists",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"logs",
+						"chat-entries",
+						":table_name",
+						":record_id",
+						"exists"
+					],
+					"variable": [
+						{
+							"key": "table_name",
+							"value": "M_Warehouse"
+						},
+						{
+							"key": "record_id",
+							"value": "54135"
+						}
+					]
+				},
+				"description": "### Request Params\n\n- table_name (String,required)\n    \n- record_id (int32, required)"
+			},
+			"response": [
+				{
+					"name": "ExistsChatEntries",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/logs/chat-entries/:table_name/:record_id/exists",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"logs",
+								"chat-entries",
+								":table_name",
+								":record_id",
+								"exists"
+							],
+							"variable": [
+								{
+									"key": "table_name",
+									"value": "M_Warehouse"
+								},
+								{
+									"key": "record_id",
+									"value": "54135"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.25.2"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 08 Mar 2024 17:56:17 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "23"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "grpc-encoding",
+							"value": "identity"
+						},
+						{
+							"key": "grpc-accept-encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "x-envoy-upstream-service-time",
+							"value": "162"
+						},
+						{
+							"key": "grpc-status",
+							"value": "0"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Max-Age",
+							"value": "3600"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"record_count\": 0\n}"
+				}
+			]
+		},
+		{
+			"name": "ListChatEntriesRequest",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{HOST}}/logs/chat-entries/:id",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"logs",
+						"chat-entries",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "1000003"
+						}
+					]
+				},
+				"description": "### Request Params\n\n- id (int32, required)"
+			},
+			"response": []
+		},
+		{
+			"name": "ListWorkflowLogs",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{HOST}}/logs/workflows/:table_name/:id",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"logs",
+						"workflows",
+						":table_name",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "table_name",
+							"value": "AD_User"
+						},
+						{
+							"key": "id",
+							"value": "102"
+						}
+					]
+				},
+				"description": "### Request Params\n\n- table_name (String,required)\n    \n- id (int32, required)"
+			},
+			"response": []
+		},
+		{
+			"name": "ListRecentItems",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{HOST}}/logs/recent-items",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"logs",
+						"recent-items"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "ListRecentItems",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/logs/recent-items",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"logs",
+								"recent-items"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.25.2"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 08 Mar 2024 18:04:24 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "7263"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "grpc-encoding",
+							"value": "identity"
+						},
+						{
+							"key": "grpc-accept-encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "x-envoy-upstream-service-time",
+							"value": "149"
+						},
+						{
+							"key": "grpc-status",
+							"value": "0"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Max-Age",
+							"value": "3600"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"record_count\": \"20\",\n    \"recent_items\": [\n        {\n            \"menu_id\": 126,\n            \"menu_name\": \"Producto\",\n            \"menu_description\": \"Mantener Productos\",\n            \"window_id\": 140,\n            \"tab_id\": 0,\n            \"table_id\": 0,\n            \"table_name\": \"\",\n            \"id\": 0,\n            \"display_name\": \"Producto\",\n            \"updated\": \"2024-03-08T18:00:46.884Z\",\n            \"reference_id\": 140,\n            \"action\": \"W\"\n        },\n        {\n            \"menu_id\": 53055,\n            \"menu_name\": \"Orden de Manufactura\",\n            \"menu_description\": \"Mantenimiento de órdenes de manufactura\",\n            \"window_id\": 53009,\n            \"tab_id\": 0,\n            \"table_id\": 0,\n            \"table_name\": \"\",\n            \"id\": 0,\n            \"display_name\": \"Orden de Manufactura\",\n            \"updated\": \"2024-03-08T16:03:51Z\",\n            \"reference_id\": 53009,\n            \"action\": \"W\"\n        },\n        {\n            \"menu_id\": 53075,\n            \"menu_name\": \"Crear Tipo de Documento de Manufactura\",\n            \"menu_description\": \"Permite crear los tipos de documento para manufactura\",\n            \"window_id\": 0,\n            \"tab_id\": 0,\n            \"table_id\": 0,\n            \"table_name\": \"\",\n            \"id\": 0,\n            \"display_name\": \"Crear Tipo de Documento de Manufactura\",\n            \"updated\": \"2024-03-08T16:03:36Z\",\n            \"reference_id\": 53050,\n            \"action\": \"P\"\n        },\n        {\n            \"menu_id\": 347,\n            \"menu_name\": \"Imprimir Facturas\",\n            \"menu_description\": \"Imprima las facturas en papel o para enviar en PDF\",\n            \"window_id\": 0,\n            \"tab_id\": 0,\n            \"table_id\": 0,\n            \"table_name\": \"\",\n            \"id\": 0,\n            \"display_name\": \"Imprimir Facturas\",\n            \"updated\": \"2024-03-08T16:03:26.519Z\",\n            \"reference_id\": 200,\n            \"action\": \"P\"\n        },\n        {\n            \"menu_id\": 54771,\n            \"menu_name\": \"Catálogo de Productos\",\n            \"menu_description\": \"Muestra atributos de productos con precio, disponibilidad y otras características\",\n            \"window_id\": 0,\n            \"tab_id\": 0,\n            \"table_id\": 0,\n            \"table_name\": \"\",\n            \"id\": 0,\n            \"display_name\": \"Catálogo de Productos\",\n            \"updated\": \"2024-03-08T15:51:58.419Z\",\n            \"reference_id\": 54550,\n            \"action\": \"R\"\n        },\n        {\n            \"menu_id\": 178,\n            \"menu_name\": \"Documentos por Cobrar\",\n            \"menu_description\": \"Entrar factura de cliente\",\n            \"window_id\": 167,\n            \"tab_id\": 0,\n            \"table_id\": 0,\n            \"table_name\": \"\",\n            \"id\": 0,\n            \"display_name\": \"Documentos por Cobrar\",\n            \"updated\": \"2024-03-08T15:34:16Z\",\n            \"reference_id\": 167,\n            \"action\": \"W\"\n        },\n        {\n            \"menu_id\": 54597,\n            \"menu_name\": \"Consulta de Precios\",\n            \"menu_description\": \"Consulta precio de Productos y Valores\",\n            \"window_id\": 0,\n            \"tab_id\": 0,\n            \"table_id\": 0,\n            \"table_name\": \"\",\n            \"id\": 0,\n            \"display_name\": \"Consulta de Precios\",\n            \"updated\": \"2024-03-08T14:49:56Z\",\n            \"reference_id\": 53085,\n            \"action\": \"X\"\n        },\n        {\n            \"menu_id\": 419,\n            \"menu_name\": \"Punto de Venta\",\n            \"menu_description\": \"Terminal de Punto de Venta\",\n            \"window_id\": 0,\n            \"tab_id\": 0,\n            \"table_id\": 0,\n            \"table_name\": \"\",\n            \"id\": 0,\n            \"display_name\": \"Punto de Venta\",\n            \"updated\": \"2024-03-08T14:49:44.468Z\",\n            \"reference_id\": 113,\n            \"action\": \"X\"\n        },\n        {\n            \"menu_id\": 121,\n            \"menu_name\": \"Tipo de Documento\",\n            \"menu_description\": \"Mantener tipos de documentos\",\n            \"window_id\": 135,\n            \"tab_id\": 0,\n            \"table_id\": 0,\n            \"table_name\": \"\",\n            \"id\": 0,\n            \"display_name\": \"Tipo de Documento\",\n            \"updated\": \"2024-03-08T14:49:33Z\",\n            \"reference_id\": 135,\n            \"action\": \"W\"\n        },\n        {\n            \"menu_id\": 308,\n            \"menu_name\": \"Todas las Solicitudes\",\n            \"menu_description\": \"Ver y trabajar sobre todas las solicitudes\",\n            \"window_id\": 232,\n            \"tab_id\": 0,\n            \"table_id\": 0,\n            \"table_name\": \"\",\n            \"id\": 0,\n            \"display_name\": \"Todas las Solicitudes\",\n            \"updated\": \"2024-03-08T14:30:09Z\",\n            \"reference_id\": 232,\n            \"action\": \"W\"\n        },\n        {\n            \"menu_id\": 476,\n            \"menu_name\": \"Contra Documentos\",\n            \"menu_description\": \"Mantenga los tipos contra documento\",\n            \"window_id\": 327,\n            \"tab_id\": 0,\n            \"table_id\": 0,\n            \"table_name\": \"\",\n            \"id\": 0,\n            \"display_name\": \"Contra Documentos\",\n            \"updated\": \"2024-03-08T14:27:15.120Z\",\n            \"reference_id\": 327,\n            \"action\": \"W\"\n        },\n        {\n            \"menu_id\": 54538,\n            \"menu_name\": \"Orden de Devolución (Cliente)\",\n            \"menu_description\": \"Entre y Cambie las Autorizaciones de Devolución de Cliente\",\n            \"window_id\": 53695,\n            \"tab_id\": 0,\n            \"table_id\": 0,\n            \"table_name\": \"\",\n            \"id\": 0,\n            \"display_name\": \"Orden de Devolución (Cliente)\",\n            \"updated\": \"2024-03-08T13:38:50Z\",\n            \"reference_id\": 53695,\n            \"action\": \"W\"\n        },\n        {\n            \"menu_id\": 53233,\n            \"menu_name\": \"Generar Plan de Recolección basado en ventas\",\n            \"menu_description\": \"Esta consulta permite seleccionar las orden de venta para generar una Orden de Salida.\",\n            \"window_id\": 0,\n            \"tab_id\": 0,\n            \"table_id\": 0,\n            \"table_name\": \"\",\n            \"id\": 0,\n            \"display_name\": \"Generar Plan de Recolección basado en ventas\",\n            \"updated\": \"2024-03-08T13:34:50Z\",\n            \"reference_id\": 50000,\n            \"action\": \"S\"\n        },\n        {\n            \"menu_id\": 129,\n            \"menu_name\": \"Órdenes de Venta\",\n            \"menu_description\": \"Entrar y cambiar ordenes de ventas\",\n            \"window_id\": 143,\n            \"tab_id\": 0,\n            \"table_id\": 0,\n            \"table_name\": \"\",\n            \"id\": 0,\n            \"display_name\": \"Órdenes de Venta\",\n            \"updated\": \"2024-03-08T13:34:45Z\",\n            \"reference_id\": 143,\n            \"action\": \"W\"\n        },\n        {\n            \"menu_id\": 53362,\n            \"menu_name\": \"Tablero de Ventas\",\n            \"menu_description\": \"El tablero de ventas proporciona una ubicación única para gestionar las oportunidades de ventas\",\n            \"window_id\": 53156,\n            \"tab_id\": 0,\n            \"table_id\": 0,\n            \"table_name\": \"\",\n            \"id\": 0,\n            \"display_name\": \"Tablero de Ventas\",\n            \"updated\": \"2024-03-08T13:15:09Z\",\n            \"reference_id\": 53156,\n            \"action\": \"W\"\n        },\n        {\n            \"menu_id\": 452,\n            \"menu_name\": \"Tema de Solicitud para Cotización\",\n            \"menu_description\": \"Mantenimiento al Tema Solicitud para Cotización y los subscriptores\",\n            \"window_id\": 314,\n            \"tab_id\": 0,\n            \"table_id\": 0,\n            \"table_name\": \"\",\n            \"id\": 0,\n            \"display_name\": \"Tema de Solicitud para Cotización\",\n            \"updated\": \"2024-03-08T13:14:41Z\",\n            \"reference_id\": 314,\n            \"action\": \"W\"\n        },\n        {\n            \"menu_id\": 171,\n            \"menu_name\": \"Banco\",\n            \"menu_description\": \"Mantener Bancos\",\n            \"window_id\": 158,\n            \"tab_id\": 0,\n            \"table_id\": 0,\n            \"table_name\": \"\",\n            \"id\": 0,\n            \"display_name\": \"Banco\",\n            \"updated\": \"2024-03-08T13:13:06.814Z\",\n            \"reference_id\": 158,\n            \"action\": \"W\"\n        },\n        {\n            \"menu_id\": 135,\n            \"menu_name\": \"Presupuesto Contable\",\n            \"menu_description\": \"Mantener presupuestos de libro mayor\",\n            \"window_id\": 154,\n            \"tab_id\": 0,\n            \"table_id\": 0,\n            \"table_name\": \"\",\n            \"id\": 0,\n            \"display_name\": \"Presupuesto Contable\",\n            \"updated\": \"2024-03-08T13:09:26Z\",\n            \"reference_id\": 154,\n            \"action\": \"W\"\n        },\n        {\n            \"menu_id\": 53225,\n            \"menu_name\": \"Mis Documentos sin Procesar\",\n            \"menu_description\": \"Mis Documentos sin Procesar\",\n            \"window_id\": 53086,\n            \"tab_id\": 0,\n            \"table_id\": 0,\n            \"table_name\": \"\",\n            \"id\": 0,\n            \"display_name\": \"Mis Documentos sin Procesar\",\n            \"updated\": \"2024-03-08T12:50:05.611Z\",\n            \"reference_id\": 53086,\n            \"action\": \"W\"\n        },\n        {\n            \"menu_id\": 53499,\n            \"menu_name\": \"Programación de actividades\",\n            \"menu_description\": \"Consulta para programar las fechas de inicio y fin de las actividades de las órdenes de manufactura\",\n            \"window_id\": 0,\n            \"tab_id\": 0,\n            \"table_id\": 0,\n            \"table_name\": \"\",\n            \"id\": 0,\n            \"display_name\": \"Programación de actividades\",\n            \"updated\": \"2024-03-08T12:27:24Z\",\n            \"reference_id\": 50017,\n            \"action\": \"S\"\n        }\n    ],\n    \"next_page_token\": \"\"\n}"
+				}
+			]
+		},
+		{
+			"name": "ListUserActivites",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{HOST}}/logs/user-activities",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"logs",
+						"user-activities"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "ListUserActivites",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/logs/user-activities",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"logs",
+								"user-activities"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.25.2"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 08 Mar 2024 19:05:09 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "2259"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "grpc-encoding",
+							"value": "identity"
+						},
+						{
+							"key": "grpc-accept-encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "x-envoy-upstream-service-time",
+							"value": "63"
+						},
+						{
+							"key": "grpc-status",
+							"value": "0"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Max-Age",
+							"value": "3600"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"record_count\": \"4\",\n    \"records\": [\n        {\n            \"user_activity_type\": \"PROCESS_LOG\",\n            \"process_log\": {\n                \"id\": 140,\n                \"name\": \"Copy Accounts\",\n                \"description\": \"Copy and overwrite Accounts to Products of this category\",\n                \"instance_id\": 1001238,\n                \"is_error\": true,\n                \"summary\": \"Llenar campos obligatorios: Categoría del Producto, Esquema Contable\",\n                \"result_table_name\": \"\",\n                \"is_processing\": false,\n                \"last_run\": \"2024-03-08T18:56:50Z\",\n                \"logs\": [],\n                \"parameters\": {},\n                \"process_intance_parameters\": []\n            }\n        },\n        {\n            \"user_activity_type\": \"PROCESS_LOG\",\n            \"process_log\": {\n                \"id\": 140,\n                \"name\": \"Copy Accounts\",\n                \"description\": \"Copy and overwrite Accounts to Products of this category\",\n                \"instance_id\": 1001237,\n                \"is_error\": true,\n                \"summary\": \"Llenar campos obligatorios: Categoría del Producto, Esquema Contable\",\n                \"result_table_name\": \"\",\n                \"is_processing\": false,\n                \"last_run\": \"2024-03-08T18:55:59Z\",\n                \"logs\": [],\n                \"parameters\": {},\n                \"process_intance_parameters\": []\n            }\n        },\n        {\n            \"user_activity_type\": \"PROCESS_LOG\",\n            \"process_log\": {\n                \"id\": 120,\n                \"name\": \"Order Transactions\",\n                \"description\": \"Order Transactions\",\n                \"instance_id\": 1001236,\n                \"is_error\": true,\n                \"summary\": \"\",\n                \"result_table_name\": \"\",\n                \"is_processing\": false,\n                \"last_run\": \"2024-03-08T18:54:18Z\",\n                \"logs\": [],\n                \"parameters\": {},\n                \"output\": {\n                    \"id\": 0,\n                    \"name\": \"\",\n                    \"description\": \"\",\n                    \"file_name\": \"\",\n                    \"output\": \"\",\n                    \"mime_type\": \"\",\n                    \"data_cols\": \"0\",\n                    \"data_rows\": \"0\",\n                    \"header_name\": \"\",\n                    \"footer_name\": \"\",\n                    \"print_format_id\": 0,\n                    \"report_view_id\": 0,\n                    \"table_name\": \"\",\n                    \"output_stream\": \"\",\n                    \"report_type\": \"P\"\n                },\n                \"process_intance_parameters\": []\n            }\n        },\n        {\n            \"user_activity_type\": \"PROCESS_LOG\",\n            \"process_log\": {\n                \"id\": 241,\n                \"name\": \"Delete Notices\",\n                \"description\": \"Delete all Notices\",\n                \"instance_id\": 1001235,\n                \"is_error\": false,\n                \"summary\": \"Borrado = 9\",\n                \"result_table_name\": \"\",\n                \"is_processing\": false,\n                \"last_run\": \"2024-03-08T18:14:38Z\",\n                \"logs\": [],\n                \"parameters\": {},\n                \"process_intance_parameters\": []\n            }\n        }\n    ],\n    \"next_page_token\": \"\"\n}"
+				}
+			]
+		},
+		{
+			"name": "process",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{HOST}}/logs/process/100",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"logs",
+						"process",
+						"100"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "process",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{HOST}}/logs/process",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"logs",
+								"process"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.25.2"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 29 Sep 2023 16:17:14 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "70"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "grpc-encoding",
+							"value": "identity"
+						},
+						{
+							"key": "grpc-accept-encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "x-envoy-upstream-service-time",
+							"value": "15"
+						},
+						{
+							"key": "grpc-status",
+							"value": "0"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Max-Age",
+							"value": "3600"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"record_count\": \"0\",\n    \"process_logs\": [],\n    \"next_page_token\": \"\"\n}"
+				}
+			]
+		},
+		{
+			"name": "process_instanceId",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{HOST}}/logs/process/instance/:instance_id",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"logs",
+						"process",
+						"instance",
+						":instance_id"
+					],
+					"variable": [
+						{
+							"key": "instance_id",
+							"value": "1000437"
+						}
+					]
+				},
+				"description": "### Request Params\n\n- instance_id (int32,required)"
+			},
+			"response": [
+				{
+					"name": "process_instanceId",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/logs/process/instance/:instance_id",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"logs",
+								"process",
+								"instance",
+								":instance_id"
+							],
+							"variable": [
+								{
+									"key": "instance_id",
+									"value": "1000437"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.25.2"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 10 Mar 2024 19:41:33 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "1252"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "grpc-encoding",
+							"value": "identity"
+						},
+						{
+							"key": "grpc-accept-encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "x-envoy-upstream-service-time",
+							"value": "124"
+						},
+						{
+							"key": "grpc-status",
+							"value": "0"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Max-Age",
+							"value": "3600"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"record_count\": \"1\",\n    \"process_logs\": [\n        {\n            \"id\": 295,\n            \"name\": \"Role Access Update\",\n            \"description\": \"Update the access rights of a role or roles of a client\",\n            \"instance_id\": 1000437,\n            \"is_error\": false,\n            \"summary\": \"\",\n            \"result_table_name\": \"\",\n            \"is_processing\": false,\n            \"last_run\": \"2017-08-01T07:18:52Z\",\n            \"logs\": [\n                {\n                    \"record_id\": 0,\n                    \"log\": \"Role Template: -\"\n                },\n                {\n                    \"record_id\": 1,\n                    \"log\": \"System Administrator: Ventana #160 -  Proceso #87 -  Forma Especial #12 -  Smart Browse #1 -  Flujo de Trabajo #9 -  Acción en el Documento #14\"\n                },\n                {\n                    \"record_id\": 2,\n                    \"log\": \"GardenWorld Admin: Ventana #412 -  Proceso #461 -  Forma Especial #41 -  Smart Browse #44 -  Flujo de Trabajo #60 -  Acción en el Documento #686\"\n                },\n                {\n                    \"record_id\": 3,\n                    \"log\": \"GardenWorld User: Ventana #279 -  Proceso #415 -  Forma Especial #34 -  Smart Browse #44 -  Flujo de Trabajo #57 -  Acción en el Documento #686\"\n                },\n                {\n                    \"record_id\": 4,\n                    \"log\": \"Web Service Execution: -\"\n                }\n            ],\n            \"parameters\": {},\n            \"process_intance_parameters\": [\n                {\n                    \"id\": 538,\n                    \"name\": \"Compañía\",\n                    \"column_name\": \"AD_Client_ID\"\n                }\n            ]\n        }\n    ],\n    \"next_page_token\": \"\"\n}"
+				}
+			]
+		},
+		{
+			"name": "process_tableName_recordId",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{HOST}}/logs/process/:table_name/:record_id",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"logs",
+						"process",
+						":table_name",
+						":record_id"
+					],
+					"variable": [
+						{
+							"key": "table_name",
+							"value": "AD_Migration"
+						},
+						{
+							"key": "record_id",
+							"value": "1000437"
+						}
+					]
+				},
+				"description": "### Request Params\n\n- table_name (String,required)\n    \n- record_id (int32, required)"
+			},
+			"response": []
+		},
+		{
+			"name": "process_userId",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{HOST}}/logs/process/user/:user_id",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"logs",
+						"process",
+						"user",
+						":user_id"
+					],
+					"variable": [
+						{
+							"key": "user_id",
+							"value": "102"
+						}
+					]
+				},
+				"description": "### Request Params\n\n- user_id (int32,required)"
+			},
+			"response": []
+		}
+	]
+}

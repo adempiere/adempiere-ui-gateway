@@ -1,0 +1,146 @@
+openapi: 3.0.0
+info:
+  title: Notice_management
+  version: 1.0.0
+servers:
+  - url: http://{{host}}
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+paths:
+  /notice-management/notices:
+    get:
+      tags:
+        - default
+      summary: ListNotices
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    delete:
+      tags:
+        - default
+      summary: DeleteNotices
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /notice-management/notices/{id}/acknowledge:
+    patch:
+      tags:
+        - default
+      summary: AcknowledgeNotice
+      description: |-
+        ### Request Params
+
+        - id (int32, required)
+      requestBody:
+        content: {}
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /notice-management/notices/users:
+    get:
+      tags:
+        - default
+      summary: ListUsers
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: OK
+          headers:
+            Server:
+              schema:
+                type: string
+                example: nginx/1.25.2
+            Date:
+              schema:
+                type: string
+                example: Thu, 07 Mar 2024 14:24:00 GMT
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Content-Length:
+              schema:
+                type: integer
+                example: '441'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            grpc-encoding:
+              schema:
+                type: string
+                example: identity
+            grpc-accept-encoding:
+              schema:
+                type: string
+                example: gzip
+            x-envoy-upstream-service-time:
+              schema:
+                type: integer
+                example: '98'
+            grpc-status:
+              schema:
+                type: integer
+                example: '0'
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Max-Age:
+              schema:
+                type: integer
+                example: '3600'
+            Access-Control-Expose-Headers:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+                example: '*'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                record_count: '2'
+                records:
+                  - id: 101
+                    uuid: bef95ce0-1b93-411f-8eb3-170040f94f96
+                    value: gardenadmin@adempiere.io
+                    name: GardenAdmin
+                    description: GardenAdmin
+                    avatar: ''
+                  - id: 102
+                    uuid: 7e1a3529-af8d-48c1-b25e-a034f5a47865
+                    value: gardenuser@adempiere.io
+                    name: GardenUser
+                    description: GardenUser
+                    avatar: ''
+                next_page_token: ''

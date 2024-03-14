@@ -1,0 +1,242 @@
+openapi: 3.0.0
+info:
+  title: General Legder
+  version: 1.0.0
+servers:
+  - url: http://192.168.5.53:8080
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+paths:
+  /api/general-ledger/accounts/combinations/234:
+    get:
+      tags:
+        - default
+      summary: accounting-elements
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: OK
+          headers:
+            Server:
+              schema:
+                type: string
+                example: nginx/1.25.2
+            Date:
+              schema:
+                type: string
+                example: Sat, 25 Nov 2023 01:53:44 GMT
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Content-Length:
+              schema:
+                type: integer
+                example: '1997'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            grpc-encoding:
+              schema:
+                type: string
+                example: identity
+            grpc-accept-encoding:
+              schema:
+                type: string
+                example: gzip
+            x-envoy-upstream-service-time:
+              schema:
+                type: integer
+                example: '1044'
+            grpc-status:
+              schema:
+                type: integer
+                example: '0'
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Max-Age:
+              schema:
+                type: integer
+                example: '3600'
+            Access-Control-Expose-Headers:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+                example: '*'
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                example-0:
+                  summary: accounting-elements
+                  value:
+                    record_count: '8'
+                    accouting_elements:
+                      - element_type: ''
+                        column_name: Combination
+                        name: Combinación
+                        is_mandatory: false
+                        is_balanced: false
+                        sequece: 0
+                        context_column_names: []
+                        display_type: 14
+                        field_id: 1437
+                      - element_type: OO
+                        column_name: AD_Org_ID
+                        name: Organización
+                        is_mandatory: true
+                        is_balanced: true
+                        sequece: 10
+                        context_column_names: []
+                        display_type: 19
+                        field_id: 1511
+                      - element_type: AC
+                        column_name: Account_ID
+                        name: Cuenta
+                        is_mandatory: true
+                        is_balanced: false
+                        sequece: 20
+                        context_column_names:
+                          - C_AcctSchema_ID
+                        display_type: 30
+                        field_id: 1434
+                      - element_type: PR
+                        column_name: M_Product_ID
+                        name: Producto
+                        is_mandatory: false
+                        is_balanced: false
+                        sequece: 30
+                        context_column_names: []
+                        display_type: 30
+                        field_id: 1439
+                      - element_type: BP
+                        column_name: C_BPartner_ID
+                        name: Socio del Negocio
+                        is_mandatory: false
+                        is_balanced: false
+                        sequece: 40
+                        context_column_names: []
+                        display_type: 30
+                        field_id: 1594
+                      - element_type: PJ
+                        column_name: C_Project_ID
+                        name: Proyecto
+                        is_mandatory: false
+                        is_balanced: false
+                        sequece: 50
+                        context_column_names: []
+                        display_type: 18
+                        field_id: 1445
+                      - element_type: MC
+                        column_name: C_Campaign_ID
+                        name: Campaña
+                        is_mandatory: false
+                        is_balanced: false
+                        sequece: 60
+                        context_column_names: []
+                        display_type: 18
+                        field_id: 1446
+                      - element_type: OT
+                        column_name: AD_OrgTrx_ID
+                        name: Organización de la Trans.
+                        is_mandatory: true
+                        is_balanced: true
+                        sequece: 70
+                        context_column_names: []
+                        display_type: 18
+                        field_id: 1441
+                    next_page_token: ''
+                example-1:
+                  summary: accounting-elements
+                  value:
+                    record_count: '8'
+                    accouting_elements:
+                      - element_type: ''
+                        column_name: Combination
+                        name: Combinación
+                        is_mandatory: false
+                        is_balanced: false
+                        sequece: 0
+                        context_column_names: []
+                        display_type: 14
+                        field_id: 1437
+                      - element_type: OO
+                        column_name: AD_Org_ID
+                        name: Organización
+                        is_mandatory: true
+                        is_balanced: true
+                        sequece: 10
+                        context_column_names: []
+                        display_type: 19
+                        field_id: 1511
+                      - element_type: AC
+                        column_name: Account_ID
+                        name: Cuenta
+                        is_mandatory: true
+                        is_balanced: false
+                        sequece: 20
+                        context_column_names:
+                          - C_AcctSchema_ID
+                        display_type: 30
+                        field_id: 1434
+                      - element_type: PR
+                        column_name: M_Product_ID
+                        name: Producto
+                        is_mandatory: false
+                        is_balanced: false
+                        sequece: 30
+                        context_column_names: []
+                        display_type: 30
+                        field_id: 1439
+                      - element_type: BP
+                        column_name: C_BPartner_ID
+                        name: Socio del Negocio
+                        is_mandatory: false
+                        is_balanced: false
+                        sequece: 40
+                        context_column_names: []
+                        display_type: 30
+                        field_id: 1594
+                      - element_type: PJ
+                        column_name: C_Project_ID
+                        name: Proyecto
+                        is_mandatory: false
+                        is_balanced: false
+                        sequece: 50
+                        context_column_names: []
+                        display_type: 18
+                        field_id: 1445
+                      - element_type: MC
+                        column_name: C_Campaign_ID
+                        name: Campaña
+                        is_mandatory: false
+                        is_balanced: false
+                        sequece: 60
+                        context_column_names: []
+                        display_type: 18
+                        field_id: 1446
+                      - element_type: OT
+                        column_name: AD_OrgTrx_ID
+                        name: Organización de la Trans.
+                        is_mandatory: true
+                        is_balanced: true
+                        sequece: 70
+                        context_column_names: []
+                        display_type: 18
+                        field_id: 1441
+                    next_page_token: ''

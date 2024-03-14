@@ -1,0 +1,38 @@
+{
+	"info": {
+		"_postman_id": "7f696afe-9020-4059-b3ee-f696384916b8",
+		"name": "Task Management",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "28978517"
+	},
+	"item": [
+		{
+			"name": "list-tasks",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{HOST}}/task-management/tasks",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"task-management",
+						"tasks"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

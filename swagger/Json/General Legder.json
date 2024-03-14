@@ -1,0 +1,237 @@
+{
+	"info": {
+		"_postman_id": "ed489420-25d2-457e-9931-11cdccc09430",
+		"name": "General Legder",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "28978517"
+	},
+	"item": [
+		{
+			"name": "accounting-elements",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMDAyMjI2IiwiQURfQ2xpZW50X0lEIjoxMSwiQURfT3JnX0lEIjo1MDAwMSwiQURfUm9sZV9JRCI6MTAyLCJBRF9Vc2VyX0lEIjoxMDEsIk1fV2FyZWhvdXNlX0lEIjo1MDAwMiwiQURfTGFuZ3VhZ2UiOiJlc19NWCIsImlhdCI6MTcwMTE4NTkxNiwiZXhwIjoxNzAxMjcyMzE2fQ.Kls5A9V_ieDBD2fQV5DJ3N_nda1oPMyC28hs8hZaC0c",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://192.168.5.53:8080/api/general-ledger/accounts/combinations/234",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"5",
+						"53"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"general-ledger",
+						"accounts",
+						"combinations",
+						"234"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "accounting-elements",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8080/api/general-ledger/accounts/schemas/:accouting_schema_id/elements",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"general-ledger",
+								"accounts",
+								"schemas",
+								":accouting_schema_id",
+								"elements"
+							],
+							"variable": [
+								{
+									"key": "accouting_schema_id",
+									"value": "101"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.25.2"
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 25 Nov 2023 01:53:44 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "1997"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "grpc-encoding",
+							"value": "identity"
+						},
+						{
+							"key": "grpc-accept-encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "x-envoy-upstream-service-time",
+							"value": "1044"
+						},
+						{
+							"key": "grpc-status",
+							"value": "0"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Max-Age",
+							"value": "3600"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"record_count\": \"8\",\n    \"accouting_elements\": [\n        {\n            \"element_type\": \"\",\n            \"column_name\": \"Combination\",\n            \"name\": \"Combinación\",\n            \"is_mandatory\": false,\n            \"is_balanced\": false,\n            \"sequece\": 0,\n            \"context_column_names\": [],\n            \"display_type\": 14,\n            \"field_id\": 1437\n        },\n        {\n            \"element_type\": \"OO\",\n            \"column_name\": \"AD_Org_ID\",\n            \"name\": \"Organización\",\n            \"is_mandatory\": true,\n            \"is_balanced\": true,\n            \"sequece\": 10,\n            \"context_column_names\": [],\n            \"display_type\": 19,\n            \"field_id\": 1511\n        },\n        {\n            \"element_type\": \"AC\",\n            \"column_name\": \"Account_ID\",\n            \"name\": \"Cuenta\",\n            \"is_mandatory\": true,\n            \"is_balanced\": false,\n            \"sequece\": 20,\n            \"context_column_names\": [\n                \"C_AcctSchema_ID\"\n            ],\n            \"display_type\": 30,\n            \"field_id\": 1434\n        },\n        {\n            \"element_type\": \"PR\",\n            \"column_name\": \"M_Product_ID\",\n            \"name\": \"Producto\",\n            \"is_mandatory\": false,\n            \"is_balanced\": false,\n            \"sequece\": 30,\n            \"context_column_names\": [],\n            \"display_type\": 30,\n            \"field_id\": 1439\n        },\n        {\n            \"element_type\": \"BP\",\n            \"column_name\": \"C_BPartner_ID\",\n            \"name\": \"Socio del Negocio\",\n            \"is_mandatory\": false,\n            \"is_balanced\": false,\n            \"sequece\": 40,\n            \"context_column_names\": [],\n            \"display_type\": 30,\n            \"field_id\": 1594\n        },\n        {\n            \"element_type\": \"PJ\",\n            \"column_name\": \"C_Project_ID\",\n            \"name\": \"Proyecto\",\n            \"is_mandatory\": false,\n            \"is_balanced\": false,\n            \"sequece\": 50,\n            \"context_column_names\": [],\n            \"display_type\": 18,\n            \"field_id\": 1445\n        },\n        {\n            \"element_type\": \"MC\",\n            \"column_name\": \"C_Campaign_ID\",\n            \"name\": \"Campaña\",\n            \"is_mandatory\": false,\n            \"is_balanced\": false,\n            \"sequece\": 60,\n            \"context_column_names\": [],\n            \"display_type\": 18,\n            \"field_id\": 1446\n        },\n        {\n            \"element_type\": \"OT\",\n            \"column_name\": \"AD_OrgTrx_ID\",\n            \"name\": \"Organización de la Trans.\",\n            \"is_mandatory\": true,\n            \"is_balanced\": true,\n            \"sequece\": 70,\n            \"context_column_names\": [],\n            \"display_type\": 18,\n            \"field_id\": 1441\n        }\n    ],\n    \"next_page_token\": \"\"\n}"
+				},
+				{
+					"name": "accounting-elements",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8080/api/general-ledger/accounts/schemas/:accouting_schema_id/elements",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"general-ledger",
+								"accounts",
+								"schemas",
+								":accouting_schema_id",
+								"elements"
+							],
+							"variable": [
+								{
+									"key": "accouting_schema_id",
+									"value": "101"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.25.2"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 27 Nov 2023 21:40:43 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "1997"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "grpc-encoding",
+							"value": "identity"
+						},
+						{
+							"key": "grpc-accept-encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "x-envoy-upstream-service-time",
+							"value": "383"
+						},
+						{
+							"key": "grpc-status",
+							"value": "0"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Max-Age",
+							"value": "3600"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"record_count\": \"8\",\n    \"accouting_elements\": [\n        {\n            \"element_type\": \"\",\n            \"column_name\": \"Combination\",\n            \"name\": \"Combinación\",\n            \"is_mandatory\": false,\n            \"is_balanced\": false,\n            \"sequece\": 0,\n            \"context_column_names\": [],\n            \"display_type\": 14,\n            \"field_id\": 1437\n        },\n        {\n            \"element_type\": \"OO\",\n            \"column_name\": \"AD_Org_ID\",\n            \"name\": \"Organización\",\n            \"is_mandatory\": true,\n            \"is_balanced\": true,\n            \"sequece\": 10,\n            \"context_column_names\": [],\n            \"display_type\": 19,\n            \"field_id\": 1511\n        },\n        {\n            \"element_type\": \"AC\",\n            \"column_name\": \"Account_ID\",\n            \"name\": \"Cuenta\",\n            \"is_mandatory\": true,\n            \"is_balanced\": false,\n            \"sequece\": 20,\n            \"context_column_names\": [\n                \"C_AcctSchema_ID\"\n            ],\n            \"display_type\": 30,\n            \"field_id\": 1434\n        },\n        {\n            \"element_type\": \"PR\",\n            \"column_name\": \"M_Product_ID\",\n            \"name\": \"Producto\",\n            \"is_mandatory\": false,\n            \"is_balanced\": false,\n            \"sequece\": 30,\n            \"context_column_names\": [],\n            \"display_type\": 30,\n            \"field_id\": 1439\n        },\n        {\n            \"element_type\": \"BP\",\n            \"column_name\": \"C_BPartner_ID\",\n            \"name\": \"Socio del Negocio\",\n            \"is_mandatory\": false,\n            \"is_balanced\": false,\n            \"sequece\": 40,\n            \"context_column_names\": [],\n            \"display_type\": 30,\n            \"field_id\": 1594\n        },\n        {\n            \"element_type\": \"PJ\",\n            \"column_name\": \"C_Project_ID\",\n            \"name\": \"Proyecto\",\n            \"is_mandatory\": false,\n            \"is_balanced\": false,\n            \"sequece\": 50,\n            \"context_column_names\": [],\n            \"display_type\": 18,\n            \"field_id\": 1445\n        },\n        {\n            \"element_type\": \"MC\",\n            \"column_name\": \"C_Campaign_ID\",\n            \"name\": \"Campaña\",\n            \"is_mandatory\": false,\n            \"is_balanced\": false,\n            \"sequece\": 60,\n            \"context_column_names\": [],\n            \"display_type\": 18,\n            \"field_id\": 1446\n        },\n        {\n            \"element_type\": \"OT\",\n            \"column_name\": \"AD_OrgTrx_ID\",\n            \"name\": \"Organización de la Trans.\",\n            \"is_mandatory\": true,\n            \"is_balanced\": true,\n            \"sequece\": 70,\n            \"context_column_names\": [],\n            \"display_type\": 18,\n            \"field_id\": 1441\n        }\n    ],\n    \"next_page_token\": \"\"\n}"
+				}
+			]
+		}
+	]
+}

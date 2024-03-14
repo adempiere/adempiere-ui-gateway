@@ -1,0 +1,696 @@
+{
+	"info": {
+		"_postman_id": "ba199260-9660-4ade-b2a6-841d0ec282ec",
+		"name": "Time_control",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "28978517"
+	},
+	"item": [
+		{
+			"name": "CreateResourceAssignment",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Response contains an ID for the assignment\", function () {",
+							"    pm.expect(pm.response.json()).to.have.property('id');",
+							"});",
+							"",
+							"pm.test(\"Response contains a resource object with ID and resource_type\", function () {",
+							"    var resource = pm.response.json().resource;",
+							"    pm.expect(resource).to.be.an('object');",
+							"    pm.expect(resource).to.have.property('id');",
+							"    pm.expect(resource).to.have.property('resource_type').that.is.an('object');",
+							"});",
+							"",
+							"pm.test(\"Each resource_type contains an ID and a name\", function () {",
+							"    pm.response.json().resource.resource_type.forEach(function(type) {",
+							"        pm.expect(type).to.have.property('id');",
+							"        pm.expect(type).to.have.property('name');",
+							"    });",
+							"});",
+							"",
+							"pm.test(\"Each resource_type contains a unit_of_measure object with ID and name\", function () {",
+							"    pm.response.json().resource.resource_type.forEach(function(type) {",
+							"        pm.expect(type).to.have.property('unit_of_measure').that.is.an('object');",
+							"        pm.expect(type.unit_of_measure).to.have.property('id');",
+							"        pm.expect(type.unit_of_measure).to.have.property('name');",
+							"    });",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"resource_type_id\":100,\n    \"name\":\"Consultant\",\n    \"description\":\"prueba\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{HOST}}/time-control/assignements",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"time-control",
+						"assignements"
+					]
+				},
+				"description": "### Request Body\n\n- resource_type_id (int32, required)\n- name (string, required)\n- description (string)"
+			},
+			"response": [
+				{
+					"name": "CreateResourceAssignment",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"resource_type_id\":100,\n    \"name\":\"Consultant\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HOST}}/time-control/assignements",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"time-control",
+								"assignements"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.25.2"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 07 Mar 2024 18:37:08 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "504"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "grpc-encoding",
+							"value": "identity"
+						},
+						{
+							"key": "grpc-accept-encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "x-envoy-upstream-service-time",
+							"value": "99"
+						},
+						{
+							"key": "grpc-status",
+							"value": "0"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Max-Age",
+							"value": "3600"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 1000000,\n    \"resource\": {\n        \"id\": 100,\n        \"resource_type\": {\n            \"id\": 100,\n            \"value\": \"Consultant\",\n            \"name\": \"Consultant\",\n            \"description\": \"\",\n            \"unit_of_measure\": {\n                \"id\": 101,\n                \"code\": \"HR\",\n                \"symbol\": \"h  \",\n                \"name\": \"Hora\",\n                \"description\": \"\",\n                \"standard_precision\": 2,\n                \"costing_precision\": 2\n            }\n        },\n        \"name\": \"Mary Consultant\"\n    },\n    \"name\": \"Consultant\",\n    \"description\": \"\",\n    \"assign_date_from\": \"2024-03-07T18:37:08Z\",\n    \"is_confirmed\": false,\n    \"quantity\": \"0\"\n}"
+				}
+			]
+		},
+		{
+			"name": "ListResourcesAssignment",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{HOST}}/time-control/assignements",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"time-control",
+						"assignements"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "ListResourcesAssignment",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/time-control/assignements",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"time-control",
+								"assignements"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.25.2"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 07 Mar 2024 18:36:39 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "1304"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "grpc-encoding",
+							"value": "identity"
+						},
+						{
+							"key": "grpc-accept-encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "x-envoy-upstream-service-time",
+							"value": "162"
+						},
+						{
+							"key": "grpc-status",
+							"value": "0"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Max-Age",
+							"value": "3600"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"record_count\": \"2\",\n    \"records\": [\n        {\n            \"id\": 100,\n            \"resource\": {\n                \"id\": 100,\n                \"resource_type\": {\n                    \"id\": 100,\n                    \"value\": \"Consultant\",\n                    \"name\": \"Consultant\",\n                    \"description\": \"\",\n                    \"unit_of_measure\": {\n                        \"id\": 101,\n                        \"code\": \"HR\",\n                        \"symbol\": \"h  \",\n                        \"name\": \"Hora\",\n                        \"description\": \"\",\n                        \"standard_precision\": 2,\n                        \"costing_precision\": 2\n                    }\n                },\n                \"name\": \"Mary Consultant\"\n            },\n            \"name\": \"Garden Layout\",\n            \"description\": \"Initial Discussion\",\n            \"assign_date_from\": \"2003-02-05T14:00:00Z\",\n            \"assign_date_to\": \"2003-02-05T17:00:00Z\",\n            \"is_confirmed\": false,\n            \"quantity\": \"3\"\n        },\n        {\n            \"id\": 101,\n            \"resource\": {\n                \"id\": 100,\n                \"resource_type\": {\n                    \"id\": 100,\n                    \"value\": \"Consultant\",\n                    \"name\": \"Consultant\",\n                    \"description\": \"\",\n                    \"unit_of_measure\": {\n                        \"id\": 101,\n                        \"code\": \"HR\",\n                        \"symbol\": \"h  \",\n                        \"name\": \"Hora\",\n                        \"description\": \"\",\n                        \"standard_precision\": 2,\n                        \"costing_precision\": 2\n                    }\n                },\n                \"name\": \"Mary Consultant\"\n            },\n            \"name\": \"Garden Layout\",\n            \"description\": \"Discuss Budget\",\n            \"assign_date_from\": \"2003-02-05T21:00:00Z\",\n            \"assign_date_to\": \"2003-02-05T22:00:00Z\",\n            \"is_confirmed\": false,\n            \"quantity\": \"1\"\n        }\n    ],\n    \"next_page_token\": \"\"\n}"
+				}
+			]
+		},
+		{
+			"name": "UpdateResourceAssignment",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\":\"qwe\",\n    \"description\":\"prueba\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{HOST}}/time-control/assignements/:id",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"time-control",
+						"assignements",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "1000001"
+						}
+					]
+				},
+				"description": "### Request Params\n\n- id (int32, required)\n    \n\n### Request Body\n\n- name (String)\n- description (String)"
+			},
+			"response": [
+				{
+					"name": "UpdateResourceAssignment",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\":\"qwe\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HOST}}/time-control/assignements/:id",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"time-control",
+								"assignements",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "100"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.25.2"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 07 Mar 2024 18:39:07 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "536"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "grpc-encoding",
+							"value": "identity"
+						},
+						{
+							"key": "grpc-accept-encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "x-envoy-upstream-service-time",
+							"value": "108"
+						},
+						{
+							"key": "grpc-status",
+							"value": "0"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Max-Age",
+							"value": "3600"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 100,\n    \"resource\": {\n        \"id\": 100,\n        \"resource_type\": {\n            \"id\": 100,\n            \"value\": \"Consultant\",\n            \"name\": \"Consultant\",\n            \"description\": \"\",\n            \"unit_of_measure\": {\n                \"id\": 101,\n                \"code\": \"HR\",\n                \"symbol\": \"h  \",\n                \"name\": \"Hora\",\n                \"description\": \"\",\n                \"standard_precision\": 2,\n                \"costing_precision\": 2\n            }\n        },\n        \"name\": \"Mary Consultant\"\n    },\n    \"name\": \"qwe\",\n    \"description\": \"\",\n    \"assign_date_from\": \"2003-02-05T14:00:00Z\",\n    \"assign_date_to\": \"2003-02-05T17:00:00Z\",\n    \"is_confirmed\": false,\n    \"quantity\": \"3\"\n}"
+				}
+			]
+		},
+		{
+			"name": "DeleteResourceAssignment",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{HOST}}/time-control/assignements/:id",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"time-control",
+						"assignements",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "1000001"
+						}
+					]
+				},
+				"description": "### Request Params\n\n- id (int32, required)"
+			},
+			"response": [
+				{
+					"name": "DeleteResourceAssignment",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HOST}}/time-control/assignements/:id",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"time-control",
+								"assignements",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1000001"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.25.2"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 07 Mar 2024 18:41:02 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "3"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "grpc-encoding",
+							"value": "identity"
+						},
+						{
+							"key": "grpc-accept-encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "x-envoy-upstream-service-time",
+							"value": "123"
+						},
+						{
+							"key": "grpc-status",
+							"value": "0"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Max-Age",
+							"value": "3600"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{}"
+				}
+			]
+		},
+		{
+			"name": "ConfirmResourceAssignment",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{HOST}}/time-control/assignements/:id/confirm",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"time-control",
+						"assignements",
+						":id",
+						"confirm"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "1000002"
+						}
+					]
+				},
+				"description": "### Request Params\n\n- id (int32, required)"
+			},
+			"response": [
+				{
+					"name": "ConfirmResourceAssignment",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/time-control/assignements/:id/confirm",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"time-control",
+								"assignements",
+								":id",
+								"confirm"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1000002"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.25.2"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 07 Mar 2024 18:42:48 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "553"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "grpc-encoding",
+							"value": "identity"
+						},
+						{
+							"key": "grpc-accept-encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "x-envoy-upstream-service-time",
+							"value": "130"
+						},
+						{
+							"key": "grpc-status",
+							"value": "0"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Max-Age",
+							"value": "3600"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 1000002,\n    \"resource\": {\n        \"id\": 100,\n        \"resource_type\": {\n            \"id\": 100,\n            \"value\": \"Consultant\",\n            \"name\": \"Consultant\",\n            \"description\": \"\",\n            \"unit_of_measure\": {\n                \"id\": 101,\n                \"code\": \"HR\",\n                \"symbol\": \"h  \",\n                \"name\": \"Hora\",\n                \"description\": \"\",\n                \"standard_precision\": 2,\n                \"costing_precision\": 2\n            }\n        },\n        \"name\": \"Mary Consultant\"\n    },\n    \"name\": \"Consultant\",\n    \"description\": \"\",\n    \"assign_date_from\": \"2024-03-07T18:42:31Z\",\n    \"assign_date_to\": \"2024-03-07T18:42:48.278Z\",\n    \"is_confirmed\": true,\n    \"quantity\": \"0.00\"\n}"
+				}
+			]
+		}
+	]
+}

@@ -1,0 +1,4075 @@
+openapi: 3.0.0
+info:
+  title: Product
+  version: 1.0.0
+servers:
+  - url: http://{{host}}
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+paths:
+  /field/products/warehouses:
+    get:
+      tags:
+        - default
+      summary: ListWarehouses
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: OK
+          headers:
+            Server:
+              schema:
+                type: string
+                example: nginx/1.25.2
+            Date:
+              schema:
+                type: string
+                example: Thu, 07 Mar 2024 15:36:40 GMT
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Content-Length:
+              schema:
+                type: integer
+                example: '2379'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            grpc-encoding:
+              schema:
+                type: string
+                example: identity
+            grpc-accept-encoding:
+              schema:
+                type: string
+                example: gzip
+            x-envoy-upstream-service-time:
+              schema:
+                type: integer
+                example: '93'
+            grpc-status:
+              schema:
+                type: integer
+                example: '0'
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Max-Age:
+              schema:
+                type: integer
+                example: '3600'
+            Access-Control-Expose-Headers:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+                example: '*'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                record_count: '11'
+                records:
+                  - id: 50002
+                    table_name: M_Warehouse
+                    values:
+                      KeyColumn: 50002
+                      DisplayColumn: Fertilizer
+                      UUID: 705a709d-e054-4ec5-b58a-4bc2158ebbe8
+                    is_active: true
+                  - id: 50007
+                    table_name: M_Warehouse
+                    values:
+                      KeyColumn: 50007
+                      DisplayColumn: Fertilizer Transit
+                      UUID: 6a506779-274d-460f-a6ff-bd413da5722d
+                    is_active: true
+                  - id: 50001
+                    table_name: M_Warehouse
+                    values:
+                      KeyColumn: 50001
+                      DisplayColumn: Furniture
+                      UUID: 5844e1f7-4bac-4d87-aa0e-94dc67dee201
+                    is_active: true
+                  - id: 50008
+                    table_name: M_Warehouse
+                    values:
+                      KeyColumn: 50008
+                      DisplayColumn: Furniture Transit
+                      UUID: 0ffd8b7d-9ecc-429b-876e-4fc1fdcf9b25
+                    is_active: true
+                  - id: 50000
+                    table_name: M_Warehouse
+                    values:
+                      KeyColumn: 50000
+                      DisplayColumn: HQ Transit
+                      UUID: ac9cc472-10d0-4b7d-a2de-6ebf3125b99f
+                    is_active: true
+                  - id: 103
+                    table_name: M_Warehouse
+                    values:
+                      KeyColumn: 103
+                      DisplayColumn: HQ Warehouse
+                      UUID: fa346149-fe8c-4235-9b0c-dba0c8016471
+                    is_active: true
+                  - id: 104
+                    table_name: M_Warehouse
+                    values:
+                      KeyColumn: 104
+                      DisplayColumn: Store Central
+                      UUID: 0f34d879-0a77-4159-847b-400760508a25
+                    is_active: true
+                  - id: 50005
+                    table_name: M_Warehouse
+                    values:
+                      KeyColumn: 50005
+                      DisplayColumn: Store East
+                      UUID: ef1a3951-4a29-49c5-8853-32eb106f7748
+                    is_active: true
+                  - id: 50003
+                    table_name: M_Warehouse
+                    values:
+                      KeyColumn: 50003
+                      DisplayColumn: Store North
+                      UUID: a194fdd2-7c78-4303-81d0-9f0863ea0101
+                    is_active: true
+                  - id: 50004
+                    table_name: M_Warehouse
+                    values:
+                      KeyColumn: 50004
+                      DisplayColumn: Store South
+                      UUID: 39982608-9f44-4896-8aef-2a094cde35f5
+                    is_active: true
+                  - id: 50006
+                    table_name: M_Warehouse
+                    values:
+                      KeyColumn: 50006
+                      DisplayColumn: Store West
+                      UUID: 8333ca0c-8aaf-4fdf-bd2d-3c60b3655498
+                    is_active: true
+                next_page_token: ''
+  /field/products/table/{table_name}/{column_name}:
+    get:
+      tags:
+        - default
+      summary: Field_products_tableName_column_name
+      description: |-
+        ### Request Params
+
+        - table_name (String, required)
+            
+        - column_name (String, required)
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: table_name
+          in: path
+          schema:
+            type: string
+          required: true
+          example: C_RevenueRecognition
+        - name: column_name
+          in: path
+          schema:
+            type: string
+          required: true
+          example: C_RevenueRecognition_ID
+      responses:
+        '200':
+          description: OK
+          headers:
+            Server:
+              schema:
+                type: string
+                example: nginx/1.25.2
+            Date:
+              schema:
+                type: string
+                example: Mon, 11 Mar 2024 15:03:25 GMT
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Content-Length:
+              schema:
+                type: integer
+                example: '34870'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            grpc-encoding:
+              schema:
+                type: string
+                example: identity
+            grpc-accept-encoding:
+              schema:
+                type: string
+                example: gzip
+            x-envoy-upstream-service-time:
+              schema:
+                type: integer
+                example: '123'
+            grpc-status:
+              schema:
+                type: integer
+                example: '0'
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Max-Age:
+              schema:
+                type: integer
+                example: '3600'
+            Access-Control-Expose-Headers:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+                example: '*'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                record_count: '62'
+                records:
+                  - id: 50019
+                    uuid: c7b5c942-032b-490c-9ac8-4931f364bb70
+                    display_value: ''
+                    value: Assembly Area
+                    name: Assembly Area
+                    upc: ''
+                    sku: ''
+                    product_category: Resources
+                    product_group: ''
+                    product_class: ''
+                    uom: Hour
+                    list_price: ''
+                    standard_price: ''
+                    limit_price: ''
+                    margin: ''
+                    is_stocked: false
+                    available_quantity: ''
+                    on_hand_quantity: ''
+                    reserved_quantity: ''
+                    ordered_quantity: ''
+                    unconfirmed_quantity: ''
+                    unconfirmed_move_quantity: ''
+                    vendor: ''
+                    is_instance_attribute: false
+                    description: ''
+                    document_note: ''
+                    is_active: true
+                  - id: 128
+                    uuid: eaceec1c-9341-4f28-b2da-1513e8831eda
+                    display_value: ''
+                    value: Azalea Bush
+                    name: Azalea Bush
+                    upc: '81010123450901'
+                    sku: '1234567890'
+                    product_category: Bushes
+                    product_group: ''
+                    product_class: ''
+                    uom: Each
+                    list_price: ''
+                    standard_price: ''
+                    limit_price: ''
+                    margin: ''
+                    is_stocked: true
+                    available_quantity: ''
+                    on_hand_quantity: ''
+                    reserved_quantity: ''
+                    ordered_quantity: ''
+                    unconfirmed_quantity: ''
+                    unconfirmed_move_quantity: ''
+                    vendor: Tree Farm Inc.
+                    is_instance_attribute: false
+                    description: ''
+                    document_note: ''
+                    is_active: true
+                  - id: 50016
+                    uuid: 88b0fec7-e065-4877-ac1b-fe9f6c59f952
+                    display_value: ''
+                    value: BackLeg
+                    name: Back Leg
+                    upc: ''
+                    sku: ''
+                    product_category: Raw Material
+                    product_group: ''
+                    product_class: ''
+                    uom: Each
+                    list_price: ''
+                    standard_price: ''
+                    limit_price: ''
+                    margin: ''
+                    is_stocked: true
+                    available_quantity: ''
+                    on_hand_quantity: ''
+                    reserved_quantity: ''
+                    ordered_quantity: ''
+                    unconfirmed_quantity: ''
+                    unconfirmed_move_quantity: ''
+                    vendor: Wood, Inc
+                    is_instance_attribute: false
+                    description: ''
+                    document_note: ''
+                    is_active: true
+                  - id: 50005
+                    uuid: 9aff57d4-6368-11e9-b841-00ff97344bad
+                    display_value: ''
+                    value: BackSupport
+                    name: Back Support
+                    upc: ''
+                    sku: ''
+                    product_category: Raw Material
+                    product_group: ''
+                    product_class: ''
+                    uom: Each
+                    list_price: ''
+                    standard_price: ''
+                    limit_price: ''
+                    margin: ''
+                    is_stocked: true
+                    available_quantity: ''
+                    on_hand_quantity: ''
+                    reserved_quantity: ''
+                    ordered_quantity: ''
+                    unconfirmed_quantity: ''
+                    unconfirmed_move_quantity: ''
+                    vendor: Wood, Inc
+                    is_instance_attribute: false
+                    description: ''
+                    document_note: ''
+                    is_active: true
+                  - id: 50013
+                    uuid: be935754-4071-4ce9-ac7a-27705498dcf3
+                    display_value: ''
+                    value: Bag50
+                    name: Bag 50 Kg
+                    upc: ''
+                    sku: ''
+                    product_category: Packing
+                    product_group: ''
+                    product_class: ''
+                    uom: Each
+                    list_price: ''
+                    standard_price: ''
+                    limit_price: ''
+                    margin: ''
+                    is_stocked: true
+                    available_quantity: ''
+                    on_hand_quantity: ''
+                    reserved_quantity: ''
+                    ordered_quantity: ''
+                    unconfirmed_quantity: ''
+                    unconfirmed_move_quantity: ''
+                    vendor: ''
+                    is_instance_attribute: false
+                    description: ''
+                    document_note: ''
+                    is_active: true
+                  - id: 50014
+                    uuid: fe18a0a5-4ec1-4199-a83c-9f46ad7cf79c
+                    display_value: ''
+                    value: Bag70
+                    name: Bag 70 Kg
+                    upc: ''
+                    sku: ''
+                    product_category: Packing
+                    product_group: ''
+                    product_class: ''
+                    uom: Each
+                    list_price: ''
+                    standard_price: ''
+                    limit_price: ''
+                    margin: ''
+                    is_stocked: true
+                    available_quantity: ''
+                    on_hand_quantity: ''
+                    reserved_quantity: ''
+                    ordered_quantity: ''
+                    unconfirmed_quantity: ''
+                    unconfirmed_move_quantity: ''
+                    vendor: ''
+                    is_instance_attribute: false
+                    description: ''
+                    document_note: ''
+                    is_active: true
+                  - id: 50021
+                    uuid: 2be41896-1bbb-40e7-9263-d0b3f0882a1b
+                    display_value: ''
+                    value: Chrome Subcontract Area
+                    name: Chrome Subcontract Area
+                    upc: ''
+                    sku: ''
+                    product_category: Resources
+                    product_group: ''
+                    product_class: ''
+                    uom: Hour
+                    list_price: ''
+                    standard_price: ''
+                    limit_price: ''
+                    margin: ''
+                    is_stocked: false
+                    available_quantity: ''
+                    on_hand_quantity: ''
+                    reserved_quantity: ''
+                    ordered_quantity: ''
+                    unconfirmed_quantity: ''
+                    unconfirmed_move_quantity: ''
+                    vendor: ''
+                    is_instance_attribute: false
+                    description: ''
+                    document_note: ''
+                    is_active: true
+                  - id: 146
+                    uuid: 768f56ef-9cab-4cc0-817d-59fe3b0ac085
+                    display_value: ''
+                    value: Doc
+                    name: How To Plant
+                    upc: ''
+                    sku: ''
+                    product_category: Documentation
+                    product_group: ''
+                    product_class: ''
+                    uom: Each
+                    list_price: ''
+                    standard_price: ''
+                    limit_price: ''
+                    margin: ''
+                    is_stocked: false
+                    available_quantity: ''
+                    on_hand_quantity: ''
+                    reserved_quantity: ''
+                    ordered_quantity: ''
+                    unconfirmed_quantity: ''
+                    unconfirmed_move_quantity: ''
+                    vendor: ''
+                    is_instance_attribute: false
+                    description: ''
+                    document_note: ''
+                    is_active: true
+                  - id: 50026
+                    uuid: fb505593-7a0d-41c7-85c3-4f786cb638c7
+                    display_value: ''
+                    value: Dry Area
+                    name: Dry Area
+                    upc: ''
+                    sku: ''
+                    product_category: Resources
+                    product_group: ''
+                    product_class: ''
+                    uom: Hour
+                    list_price: ''
+                    standard_price: ''
+                    limit_price: ''
+                    margin: ''
+                    is_stocked: false
+                    available_quantity: ''
+                    on_hand_quantity: ''
+                    reserved_quantity: ''
+                    ordered_quantity: ''
+                    unconfirmed_quantity: ''
+                    unconfirmed_move_quantity: ''
+                    vendor: ''
+                    is_instance_attribute: false
+                    description: ''
+                    document_note: ''
+                    is_active: true
+                  - id: 124
+                    uuid: 446ec8c3-2aa4-4599-b78e-a37eb93323af
+                    display_value: ''
+                    value: Elm
+                    name: Elm Tree
+                    upc: ''
+                    sku: ''
+                    product_category: Trees
+                    product_group: ''
+                    product_class: ''
+                    uom: Each
+                    list_price: ''
+                    standard_price: ''
+                    limit_price: ''
+                    margin: ''
+                    is_stocked: true
+                    available_quantity: ''
+                    on_hand_quantity: ''
+                    reserved_quantity: ''
+                    ordered_quantity: ''
+                    unconfirmed_quantity: ''
+                    unconfirmed_move_quantity: ''
+                    vendor: Tree Farm Inc.
+                    is_instance_attribute: false
+                    description: ''
+                    document_note: ''
+                    is_active: true
+                  - id: 50008
+                    uuid: 5f28de99-1058-46a4-8429-4be7c1567362
+                    display_value: ''
+                    value: Fertilizer
+                    name: Lawn Fertilizer
+                    upc: ''
+                    sku: ''
+                    product_category: Assembly
+                    product_group: ''
+                    product_class: ''
+                    uom: kilogram
+                    list_price: ''
+                    standard_price: ''
+                    limit_price: ''
+                    margin: ''
+                    is_stocked: true
+                    available_quantity: ''
+                    on_hand_quantity: ''
+                    reserved_quantity: ''
+                    ordered_quantity: ''
+                    unconfirmed_quantity: ''
+                    unconfirmed_move_quantity: ''
+                    vendor: ''
+                    is_instance_attribute: false
+                    description: ''
+                    document_note: ''
+                    is_active: true
+                  - id: 136
+                    uuid: e98f4d23-bdd0-432d-95e6-d394ebd4f50a
+                    display_value: ''
+                    value: Fertilizer#50
+                    name: 'Fertilizer #50'
+                    upc: ''
+                    sku: ''
+                    product_category: Chemicals
+                    product_group: ''
+                    product_class: ''
+                    uom: Each
+                    list_price: ''
+                    standard_price: ''
+                    limit_price: ''
+                    margin: ''
+                    is_stocked: true
+                    available_quantity: ''
+                    on_hand_quantity: ''
+                    reserved_quantity: ''
+                    ordered_quantity: ''
+                    unconfirmed_quantity: ''
+                    unconfirmed_move_quantity: ''
+                    vendor: Seed Farm Inc.
+                    is_instance_attribute: true
+                    description: ''
+                    document_note: ''
+                    is_active: true
+                  - id: 50007
+                    uuid: a4940a4e-90b4-4053-a9bc-9ae0c597e7aa
+                    display_value: ''
+                    value: Fertilizer#70
+                    name: 'Fertilizer #70'
+                    upc: ''
+                    sku: ''
+                    product_category: Chemicals
+                    product_group: ''
+                    product_class: ''
+                    uom: Each
+                    list_price: ''
+                    standard_price: ''
+                    limit_price: ''
+                    margin: ''
+                    is_stocked: true
+                    available_quantity: ''
+                    on_hand_quantity: ''
+                    reserved_quantity: ''
+                    ordered_quantity: ''
+                    unconfirmed_quantity: ''
+                    unconfirmed_move_quantity: ''
+                    vendor: ''
+                    is_instance_attribute: false
+                    description: ''
+                    document_note: ''
+                    is_active: true
+                  - id: 50027
+                    uuid: 9e30e31c-71fa-4cb9-b0b5-143e58b0c551
+                    display_value: ''
+                    value: Fertilizer Inspection Area
+                    name: Fertilizer Inspection Area
+                    upc: ''
+                    sku: ''
+                    product_category: Resources
+                    product_group: ''
+                    product_class: ''
+                    uom: Hour
+                    list_price: ''
+                    standard_price: ''
+                    limit_price: ''
+                    margin: ''
+                    is_stocked: false
+                    available_quantity: ''
+                    on_hand_quantity: ''
+                    reserved_quantity: ''
+                    ordered_quantity: ''
+                    unconfirmed_quantity: ''
+                    unconfirmed_move_quantity: ''
+                    vendor: ''
+                    is_instance_attribute: false
+                    description: ''
+                    document_note: ''
+                    is_active: true
+                  - id: 50018
+                    uuid: 3ed7e39b-e10e-4ef8-9428-d43b7a205609
+                    display_value: ''
+                    value: Fertilizer Plant
+                    name: Fertilizer Plant
+                    upc: ''
+                    sku: ''
+                    product_category: Resources
+                    product_group: ''
+                    product_class: ''
+                    uom: Hour
+                    list_price: ''
+                    standard_price: ''
+                    limit_price: ''
+                    margin: ''
+                    is_stocked: false
+                    available_quantity: ''
+                    on_hand_quantity: ''
+                    reserved_quantity: ''
+                    ordered_quantity: ''
+                    unconfirmed_quantity: ''
+                    unconfirmed_move_quantity: ''
+                    vendor: ''
+                    is_instance_attribute: false
+                    description: ''
+                    document_note: ''
+                    is_active: true
+                  - id: 50015
+                    uuid: 0adfa95f-5fcd-48f4-8929-1318c15d03c2
+                    display_value: ''
+                    value: FrontLeg
+                    name: Front Leg
+                    upc: ''
+                    sku: ''
+                    product_category: Raw Material
+                    product_group: ''
+                    product_class: ''
+                    uom: Each
+                    list_price: ''
+                    standard_price: ''
+                    limit_price: ''
+                    margin: ''
+                    is_stocked: true
+                    available_quantity: ''
+                    on_hand_quantity: ''
+                    reserved_quantity: ''
+                    ordered_quantity: ''
+                    unconfirmed_quantity: ''
+                    unconfirmed_move_quantity: ''
+                    vendor: Wood, Inc
+                    is_instance_attribute: false
+                    description: ''
+                    document_note: ''
+                    is_active: true
+                  - id: 50023
+                    uuid: 7717f5bb-9756-4dda-a575-efd09df73819
+                    display_value: ''
+                    value: Furniture Plant
+                    name: Furniture Plant
+                    upc: ''
+                    sku: ''
+                    product_category: Resources
+                    product_group: ''
+                    product_class: ''
+                    uom: Hour
+                    list_price: ''
+                    standard_price: ''
+                    limit_price: ''
+                    margin: ''
+                    is_stocked: false
+                    available_quantity: ''
+                    on_hand_quantity: ''
+                    reserved_quantity: ''
+                    ordered_quantity: ''
+                    unconfirmed_quantity: ''
+                    unconfirmed_move_quantity: ''
+                    vendor: ''
+                    is_instance_attribute: false
+                    description: ''
+                    document_note: ''
+                    is_active: true
+                  - id: 125
+                    uuid: f9d39130-603d-4931-87d7-f1ac9f69cd10
+                    display_value: ''
+                    value: Grass
+                    name: Grass Seed Container
+                    upc: ''
+                    sku: ''
+                    product_category: Standard
+                    product_group: ''
+                    product_class: ''
+                    uom: Each
+                    list_price: ''
+                    standard_price: ''
+                    limit_price: ''
+                    margin: ''
+                    is_stocked: true
+                    available_quantity: ''
+                    on_hand_quantity: ''
+                    reserved_quantity: ''
+                    ordered_quantity: ''
+                    unconfirmed_quantity: ''
+                    unconfirmed_move_quantity: ''
+                    vendor: Seed Farm Inc.
+                    is_instance_attribute: false
+                    description: ''
+                    document_note: ''
+                    is_active: true
+                  - id: 50044
+                    uuid: e5ac219e-5fd6-11e9-ab47-00ff97344bad
+                    display_value: ''
+                    value: GrowLight
+                    name: Grow Light and Stand
+                    upc: ''
+                    sku: ''
+                    product_category: Standard
+                    product_group: ''
+                    product_class: ''
+                    uom: Each
+                    list_price: ''
+                    standard_price: ''
+                    limit_price: ''
+                    margin: ''
+                    is_stocked: true
+                    available_quantity: ''
+                    on_hand_quantity: ''
+                    reserved_quantity: ''
+                    ordered_quantity: ''
+                    unconfirmed_quantity: ''
+                    unconfirmed_move_quantity: ''
+                    vendor: ''
+                    is_instance_attribute: false
+                    description: ''
+                    document_note: ''
+                    is_active: true
+                  - id: 138
+                    uuid: 59721117-96ff-47e0-b58d-3789f4ca8c98
+                    display_value: ''
+                    value: Hoe
+                    name: Hoe 4 ft
+                    upc: ''
+                    sku: ''
+                    product_category: Tools
+                    product_group: ''
+                    product_class: ''
+                    uom: Each
+                    list_price: ''
+                    standard_price: ''
+                    limit_price: ''
+                    margin: ''
+                    is_stocked: true
+                    available_quantity: ''
+                    on_hand_quantity: ''
+                    reserved_quantity: ''
+                    ordered_quantity: ''
+                    unconfirmed_quantity: ''
+                    unconfirmed_move_quantity: ''
+                    vendor: Seed Farm Inc.
+                    is_instance_attribute: false
+                    description: ''
+                    document_note: ''
+                    is_active: true
+                  - id: 129
+                    uuid: ec0dcb70-11ee-4af1-bc89-71c500096625
+                    display_value: ''
+                    value: Holly Bush
+                    name: Holly Bush
+                    upc: ''
+                    sku: ''
+                    product_category: Bushes
+                    product_group: ''
+                    product_class: ''
+                    uom: Each
+                    list_price: ''
+                    standard_price: ''
+                    limit_price: ''
+                    margin: ''
+                    is_stocked: true
+                    available_quantity: ''
+                    on_hand_quantity: ''
+                    reserved_quantity: ''
+                    ordered_quantity: ''
+                    unconfirmed_quantity: ''
+                    unconfirmed_move_quantity: ''
+                    vendor: Tree Farm Inc.
+                    is_instance_attribute: false
+                    description: ''
+                    document_note: ''
+                    is_active: true
+                  - id: 50022
+                    uuid: 10d900cc-84c7-46b8-8fb5-ad8fd8b8231e
+                    display_value: ''
+                    value: Inspection Area
+                    name: Inspection Area
+                    upc: ''
+                    sku: ''
+                    product_category: Resources
+                    product_group: ''
+                    product_class: ''
+                    uom: Hour
+                    list_price: ''
+                    standard_price: ''
+                    limit_price: ''
+                    margin: ''
+                    is_stocked: false
+                    available_quantity: ''
+                    on_hand_quantity: ''
+                    reserved_quantity: ''
+                    ordered_quantity: ''
+                    unconfirmed_quantity: ''
+                    unconfirmed_move_quantity: ''
+                    vendor: ''
+                    is_instance_attribute: false
+                    description: ''
+                    document_note: ''
+                    is_active: true
+                  - id: 50043
+                    uuid: 8cee7bba-5563-11e9-8e5f-00ff97344bad
+                    display_value: ''
+                    value: Kit-Starter
+                    name: Plant Starter Kit
+                    upc: ''
+                    sku: ''
+                    product_category: Standard
+                    product_group: ''
+                    product_class: ''
+                    uom: Each
+                    list_price: ''
+                    standard_price: ''
+                    limit_price: ''
+                    margin: ''
+                    is_stocked: true
+                    available_quantity: ''
+                    on_hand_quantity: ''
+                    reserved_quantity: ''
+                    ordered_quantity: ''
+                    unconfirmed_quantity: ''
+                    unconfirmed_move_quantity: ''
+                    vendor: ''
+                    is_instance_attribute: false
+                    description: ''
+                    document_note: ''
+                    is_active: true
+                  - id: 132
+                    uuid: ec6c9064-3dd6-4821-82a0-c872b8b20bc1
+                    display_value: ''
+                    value: Mary
+                    name: Mary Consultant
+                    upc: ''
+                    sku: ''
+                    product_category: Standard
+                    product_group: ''
+                    product_class: ''
+                    uom: Hour
+                    list_price: ''
+                    standard_price: ''
+                    limit_price: ''
+                    margin: ''
+                    is_stocked: false
+                    available_quantity: ''
+                    on_hand_quantity: ''
+                    reserved_quantity: ''
+                    ordered_quantity: ''
+                    unconfirmed_quantity: ''
+                    unconfirmed_move_quantity: ''
+                    vendor: ''
+                    is_instance_attribute: false
+                    description: ''
+                    document_note: ''
+                    is_active: true
+                  - id: 50025
+                    uuid: 0e927ce0-1db1-4766-a631-b713f2ae414c
+                    display_value: ''
+                    value: Mixed Area
+                    name: Mixed Area
+                    upc: ''
+                    sku: ''
+                    product_category: Resources
+                    product_group: ''
+                    product_class: ''
+                    uom: Hour
+                    list_price: ''
+                    standard_price: ''
+                    limit_price: ''
+                    margin: ''
+                    is_stocked: false
+                    available_quantity: ''
+                    on_hand_quantity: ''
+                    reserved_quantity: ''
+                    ordered_quantity: ''
+                    unconfirmed_quantity: ''
+                    unconfirmed_move_quantity: ''
+                    vendor: ''
+                    is_instance_attribute: false
+                    description: ''
+                    document_note: ''
+                    is_active: true
+                  - id: 137
+                    uuid: f846633c-5563-11e9-adb8-00ff97344bad
+                    display_value: ''
+                    value: Mulch
+                    name: Mulch 10#
+                    upc: ''
+                    sku: ''
+                    product_category: Chemicals
+                    product_group: ''
+                    product_class: ''
+                    uom: Each
+                    list_price: ''
+                    standard_price: ''
+                    limit_price: ''
+                    margin: ''
+                    is_stocked: true
+                    available_quantity: ''
+                    on_hand_quantity: ''
+                    reserved_quantity: ''
+                    ordered_quantity: ''
+                    unconfirmed_quantity: ''
+                    unconfirmed_move_quantity: ''
+                    vendor: Seed Farm Inc.
+                    is_instance_attribute: false
+                    description: ''
+                    document_note: ''
+                    is_active: true
+                  - id: 50009
+                    uuid: dc7c8d10-2f16-4898-8fb7-6ca3adac2311
+                    display_value: ''
+                    value: Nitrogen
+                    name: Nitrogen
+                    upc: ''
+                    sku: ''
+                    product_category: Raw Material
+                    product_group: ''
+                    product_class: ''
+                    uom: kilogram
+                    list_price: ''
+                    standard_price: ''
+                    limit_price: ''
+                    margin: ''
+                    is_stocked: true
+                    available_quantity: ''
+                    on_hand_quantity: ''
+                    reserved_quantity: ''
+                    ordered_quantity: ''
+                    unconfirmed_quantity: ''
+                    unconfirmed_move_quantity: ''
+                    vendor: Chemical Product, inc
+                    is_instance_attribute: false
+                    description: ''
+                    document_note: ''
+                    is_active: true
+                  - id: 123
+                    uuid: f34ae774-bce3-490e-a939-d777183e3e4f
+                    display_value: ''
+                    value: Oak
+                    name: Oak Tree
+                    upc: ''
+                    sku: ''
+                    product_category: Trees
+                    product_group: ''
+                    product_class: ''
+                    uom: Each
+                    list_price: ''
+                    standard_price: ''
+                    limit_price: ''
+                    margin: ''
+                    is_stocked: true
+                    available_quantity: ''
+                    on_hand_quantity: ''
+                    reserved_quantity: ''
+                    ordered_quantity: ''
+                    unconfirmed_quantity: ''
+                    unconfirmed_move_quantity: ''
+                    vendor: Tree Farm Inc.
+                    is_instance_attribute: false
+                    description: ''
+                    document_note: ''
+                    is_active: true
+                  - id: 50024
+                    uuid: 5522b52b-8a05-485c-9534-65e34b359594
+                    display_value: ''
+                    value: Packing Production Line
+                    name: Packing Production Line
+                    upc: ''
+                    sku: ''
+                    product_category: Resources
+                    product_group: ''
+                    product_class: ''
+                    uom: Hour
+                    list_price: ''
+                    standard_price: ''
+                    limit_price: ''
+                    margin: ''
+                    is_stocked: false
+                    available_quantity: ''
+                    on_hand_quantity: ''
+                    reserved_quantity: ''
+                    ordered_quantity: ''
+                    unconfirmed_quantity: ''
+                    unconfirmed_move_quantity: ''
+                    vendor: ''
+                    is_instance_attribute: false
+                    description: ''
+                    document_note: ''
+                    is_active: true
+                  - id: 50020
+                    uuid: 2b6c13a1-f8fc-40c7-90ad-4a7b68cc227c
+                    display_value: ''
+                    value: Paint Area
+                    name: Paint Area
+                    upc: ''
+                    sku: ''
+                    product_category: Resources
+                    product_group: ''
+                    product_class: ''
+                    uom: Hour
+                    list_price: ''
+                    standard_price: ''
+                    limit_price: ''
+                    margin: ''
+                    is_stocked: false
+                    available_quantity: ''
+                    on_hand_quantity: ''
+                    reserved_quantity: ''
+                    ordered_quantity: ''
+                    unconfirmed_quantity: ''
+                    unconfirmed_move_quantity: ''
+                    vendor: ''
+                    is_instance_attribute: false
+                    description: ''
+                    document_note: ''
+                    is_active: true
+                  - id: 145
+                    uuid: 4106fe43-f69c-48b6-b838-97656ce5c6df
+                    display_value: ''
+                    value: PatioSet
+                    name: Patio Furniture Set
+                    upc: ''
+                    sku: ''
+                    product_category: 'Patio '
+                    product_group: ''
+                    product_class: ''
+                    uom: Each
+                    list_price: ''
+                    standard_price: ''
+                    limit_price: ''
+                    margin: ''
+                    is_stocked: true
+                    available_quantity: ''
+                    on_hand_quantity: ''
+                    reserved_quantity: ''
+                    ordered_quantity: ''
+                    unconfirmed_quantity: ''
+                    unconfirmed_move_quantity: ''
+                    vendor: Patio Fun, Inc.
+                    is_instance_attribute: false
+                    description: ''
+                    document_note: ''
+                    is_active: true
+                  - id: 50000
+                    uuid: 9b6fa778-6368-11e9-b845-00ff97344bad
+                    display_value: ''
+                    value: PBackLeg
+                    name: Assembly Back Leg
+                    upc: ''
+                    sku: ''
+                    product_category: Assembly
+                    product_group: ''
+                    product_class: ''
+                    uom: Each
+                    list_price: ''
+                    standard_price: ''
+                    limit_price: ''
+                    margin: ''
+                    is_stocked: false
+                    available_quantity: ''
+                    on_hand_quantity: ''
+                    reserved_quantity: ''
+                    ordered_quantity: ''
+                    unconfirmed_quantity: ''
+                    unconfirmed_move_quantity: ''
+                    vendor: ''
+                    is_instance_attribute: false
+                    description: ''
+                    document_note: ''
+                    is_active: true
+                  - id: 133
+                    uuid: 9a22d746-6368-11e9-b839-00ff97344bad
+                    display_value: ''
+                    value: PChair
+                    name: Patio Chair
+                    upc: ''
+                    sku: ''
+                    product_category: 'Patio '
+                    product_group: ''
+                    product_class: ''
+                    uom: Each
+                    list_price: ''
+                    standard_price: ''
+                    limit_price: ''
+                    margin: ''
+                    is_stocked: true
+                    available_quantity: ''
+                    on_hand_quantity: ''
+                    reserved_quantity: ''
+                    ordered_quantity: ''
+                    unconfirmed_quantity: ''
+                    unconfirmed_move_quantity: ''
+                    vendor: Patio Fun, Inc.
+                    is_instance_attribute: true
+                    description: ''
+                    document_note: ''
+                    is_active: true
+                  - id: 50041
+                    uuid: 63eb12b4-5563-11e9-8ca7-00ff97344bad
+                    display_value: ''
+                    value: Peat
+                    name: Peat
+                    upc: ''
+                    sku: ''
+                    product_category: Standard
+                    product_group: ''
+                    product_class: ''
+                    uom: Each
+                    list_price: ''
+                    standard_price: ''
+                    limit_price: ''
+                    margin: ''
+                    is_stocked: true
+                    available_quantity: ''
+                    on_hand_quantity: ''
+                    reserved_quantity: ''
+                    ordered_quantity: ''
+                    unconfirmed_quantity: ''
+                    unconfirmed_move_quantity: ''
+                    vendor: ''
+                    is_instance_attribute: false
+                    description: ''
+                    document_note: ''
+                    is_active: true
+                  - id: 50001
+                    uuid: 9be3a0a6-6368-11e9-b849-00ff97344bad
+                    display_value: ''
+                    value: PFrontLeg
+                    name: Assembly Front Leg
+                    upc: ''
+                    sku: ''
+                    product_category: Assembly
+                    product_group: ''
+                    product_class: ''
+                    uom: Each
+                    list_price: ''
+                    standard_price: ''
+                    limit_price: ''
+                    margin: ''
+                    is_stocked: false
+                    available_quantity: ''
+                    on_hand_quantity: ''
+                    reserved_quantity: ''
+                    ordered_quantity: ''
+                    unconfirmed_quantity: ''
+                    unconfirmed_move_quantity: ''
+                    vendor: ''
+                    is_instance_attribute: false
+                    description: ''
+                    document_note: ''
+                    is_active: true
+                  - id: 50010
+                    uuid: ea94e2ff-0740-43d5-9a51-bddc106ed0af
+                    display_value: ''
+                    value: Phosphorus
+                    name: Phosphorus
+                    upc: ''
+                    sku: ''
+                    product_category: Raw Material
+                    product_group: ''
+                    product_class: ''
+                    uom: kilogram
+                    list_price: ''
+                    standard_price: ''
+                    limit_price: ''
+                    margin: ''
+                    is_stocked: true
+                    available_quantity: ''
+                    on_hand_quantity: ''
+                    reserved_quantity: ''
+                    ordered_quantity: ''
+                    unconfirmed_quantity: ''
+                    unconfirmed_move_quantity: ''
+                    vendor: Chemical Product, inc
+                    is_instance_attribute: false
+                    description: ''
+                    document_note: ''
+                    is_active: true
+                  - id: 126
+                    uuid: c95c39ce-b59c-4dfb-a6c7-61c223a72d83
+                    display_value: ''
+                    value: Planting
+                    name: Planting Service
+                    upc: ''
+                    sku: ''
+                    product_category: Standard
+                    product_group: ''
+                    product_class: ''
+                    uom: Hour
+                    list_price: ''
+                    standard_price: ''
+                    limit_price: ''
+                    margin: ''
+                    is_stocked: false
+                    available_quantity: ''
+                    on_hand_quantity: ''
+                    reserved_quantity: ''
+                    ordered_quantity: ''
+                    unconfirmed_quantity: ''
+                    unconfirmed_move_quantity: ''
+                    vendor: GardenAdmin BP
+                    is_instance_attribute: false
+                    description: ''
+                    document_note: ''
+                    is_active: true
+                  - id: 130
+                    uuid: 15dd14c4-9b97-4b6c-9972-16c413814d1f
+                    display_value: ''
+                    value: Plum Tree
+                    name: Plum Tree
+                    upc: ''
+                    sku: ''
+                    product_category: Trees
+                    product_group: ''
+                    product_class: ''
+                    uom: Each
+                    list_price: ''
+                    standard_price: ''
+                    limit_price: ''
+                    margin: ''
+                    is_stocked: true
+                    available_quantity: ''
+                    on_hand_quantity: ''
+                    reserved_quantity: ''
+                    ordered_quantity: ''
+                    unconfirmed_quantity: ''
+                    unconfirmed_move_quantity: ''
+                    vendor: Tree Farm Inc.
+                    is_instance_attribute: false
+                    description: ''
+                    document_note: ''
+                    is_active: true
+                  - id: 50012
+                    uuid: 2ecbd0d7-8b7a-44fe-b852-e1f12c90a9fe
+                    display_value: ''
+                    value: Potassium
+                    name: Potassium
+                    upc: ''
+                    sku: ''
+                    product_category: Raw Material
+                    product_group: ''
+                    product_class: ''
+                    uom: kilogram
+                    list_price: ''
+                    standard_price: ''
+                    limit_price: ''
+                    margin: ''
+                    is_stocked: true
+                    available_quantity: ''
+                    on_hand_quantity: ''
+                    reserved_quantity: ''
+                    ordered_quantity: ''
+                    unconfirmed_quantity: ''
+                    unconfirmed_move_quantity: ''
+                    vendor: Chemical Product, inc
+                    is_instance_attribute: false
+                    description: ''
+                    document_note: ''
+                    is_active: true
+                  - id: 50042
+                    uuid: 74369b52-5563-11e9-8d83-00ff97344bad
+                    display_value: ''
+                    value: PottingSoil
+                    name: Potting Soil
+                    upc: ''
+                    sku: ''
+                    product_category: Standard
+                    product_group: ''
+                    product_class: ''
+                    uom: Each
+                    list_price: ''
+                    standard_price: ''
+                    limit_price: ''
+                    margin: ''
+                    is_stocked: true
+                    available_quantity: ''
+                    on_hand_quantity: ''
+                    reserved_quantity: ''
+                    ordered_quantity: ''
+                    unconfirmed_quantity: ''
+                    unconfirmed_move_quantity: ''
+                    vendor: ''
+                    is_instance_attribute: false
+                    description: ''
+                    document_note: ''
+                    is_active: true
+                  - id: 134
+                    uuid: 1022fd97-2150-451f-a10e-c8a423e74e66
+                    display_value: ''
+                    value: PTable
+                    name: Patio Table
+                    upc: ''
+                    sku: ''
+                    product_category: 'Patio '
+                    product_group: ''
+                    product_class: ''
+                    uom: Each
+                    list_price: ''
+                    standard_price: ''
+                    limit_price: ''
+                    margin: ''
+                    is_stocked: true
+                    available_quantity: ''
+                    on_hand_quantity: ''
+                    reserved_quantity: ''
+                    ordered_quantity: ''
+                    unconfirmed_quantity: ''
+                    unconfirmed_move_quantity: ''
+                    vendor: Patio Fun, Inc.
+                    is_instance_attribute: false
+                    description: ''
+                    document_note: ''
+                    is_active: true
+                  - id: 139
+                    uuid: 1247f2f1-f60f-4c6e-b163-a60f368fe9af
+                    display_value: ''
+                    value: Rake-Bamboo
+                    name: Rake Bamboo
+                    upc: ''
+                    sku: ''
+                    product_category: Tools
+                    product_group: ''
+                    product_class: ''
+                    uom: Each
+                    list_price: ''
+                    standard_price: ''
+                    limit_price: ''
+                    margin: ''
+                    is_stocked: true
+                    available_quantity: ''
+                    on_hand_quantity: ''
+                    reserved_quantity: ''
+                    ordered_quantity: ''
+                    unconfirmed_quantity: ''
+                    unconfirmed_move_quantity: ''
+                    vendor: Seed Farm Inc.
+                    is_instance_attribute: false
+                    description: ''
+                    document_note: ''
+                    is_active: true
+                  - id: 140
+                    uuid: 26c35891-be21-40ea-a5b5-a5dcdad83933
+                    display_value: ''
+                    value: Rake-Metal
+                    name: Rake Metal
+                    upc: ''
+                    sku: ''
+                    product_category: Tools
+                    product_group: ''
+                    product_class: ''
+                    uom: Each
+                    list_price: ''
+                    standard_price: ''
+                    limit_price: ''
+                    margin: ''
+                    is_stocked: true
+                    available_quantity: ''
+                    on_hand_quantity: ''
+                    reserved_quantity: ''
+                    ordered_quantity: ''
+                    unconfirmed_quantity: ''
+                    unconfirmed_move_quantity: ''
+                    vendor: Seed Farm Inc.
+                    is_instance_attribute: false
+                    description: ''
+                    document_note: ''
+                    is_active: true
+                  - id: 127
+                    uuid: f774c912-eaf9-48e9-9a16-8ff7c19953af
+                    display_value: ''
+                    value: Rose Bush
+                    name: Rose Bush
+                    upc: ''
+                    sku: ''
+                    product_category: Bushes
+                    product_group: ''
+                    product_class: ''
+                    uom: Each
+                    list_price: ''
+                    standard_price: ''
+                    limit_price: ''
+                    margin: ''
+                    is_stocked: true
+                    available_quantity: ''
+                    on_hand_quantity: ''
+                    reserved_quantity: ''
+                    ordered_quantity: ''
+                    unconfirmed_quantity: ''
+                    unconfirmed_move_quantity: ''
+                    vendor: Tree Farm Inc.
+                    is_instance_attribute: false
+                    description: ''
+                    document_note: ''
+                    is_active: true
+                  - id: 135
+                    uuid: 82c3d870-d8a0-4a3e-9775-fffd197d1d7c
+                    display_value: ''
+                    value: Screen
+                    name: Patio Sun Screen
+                    upc: ''
+                    sku: ''
+                    product_category: 'Patio '
+                    product_group: ''
+                    product_class: ''
+                    uom: Each
+                    list_price: ''
+                    standard_price: ''
+                    limit_price: ''
+                    margin: ''
+                    is_stocked: true
+                    available_quantity: ''
+                    on_hand_quantity: ''
+                    reserved_quantity: ''
+                    ordered_quantity: ''
+                    unconfirmed_quantity: ''
+                    unconfirmed_move_quantity: ''
+                    vendor: Patio Fun, Inc.
+                    is_instance_attribute: false
+                    description: ''
+                    document_note: ''
+                    is_active: true
+                  - id: 50002
+                    uuid: 6f009809-ef3b-4fad-b678-76107c590623
+                    display_value: ''
+                    value: Screw
+                    name: '#6-32 x 3/8 Socket Head Cap Screw'
+                    upc: ''
+                    sku: ''
+                    product_category: Raw Material
+                    product_group: ''
+                    product_class: ''
+                    uom: Each
+                    list_price: ''
+                    standard_price: ''
+                    limit_price: ''
+                    margin: ''
+                    is_stocked: true
+                    available_quantity: ''
+                    on_hand_quantity: ''
+                    reserved_quantity: ''
+                    ordered_quantity: ''
+                    unconfirmed_quantity: ''
+                    unconfirmed_move_quantity: ''
+                    vendor: ''
+                    is_instance_attribute: false
+                    description: ''
+                    document_note: ''
+                    is_active: true
+                  - id: 50004
+                    uuid: 9a93c32a-6368-11e9-b83d-00ff97344bad
+                    display_value: ''
+                    value: Seat
+                    name: Seat
+                    upc: ''
+                    sku: ''
+                    product_category: Raw Material
+                    product_group: ''
+                    product_class: ''
+                    uom: Each
+                    list_price: ''
+                    standard_price: ''
+                    limit_price: ''
+                    margin: ''
+                    is_stocked: true
+                    available_quantity: ''
+                    on_hand_quantity: ''
+                    reserved_quantity: ''
+                    ordered_quantity: ''
+                    unconfirmed_quantity: ''
+                    unconfirmed_move_quantity: ''
+                    vendor: Wood, Inc
+                    is_instance_attribute: false
+                    description: ''
+                    document_note: ''
+                    is_active: true
+                  - id: 50046
+                    uuid: a4d9f64e-5fd8-11e9-b9f2-00ff97344bad
+                    display_value: ''
+                    value: Seed-BabyBreath
+                    name: Seed Packet Baby Breath
+                    upc: ''
+                    sku: ''
+                    product_category: Standard
+                    product_group: ''
+                    product_class: ''
+                    uom: Each
+                    list_price: ''
+                    standard_price: ''
+                    limit_price: ''
+                    margin: ''
+                    is_stocked: true
+                    available_quantity: ''
+                    on_hand_quantity: ''
+                    reserved_quantity: ''
+                    ordered_quantity: ''
+                    unconfirmed_quantity: ''
+                    unconfirmed_move_quantity: ''
+                    vendor: ''
+                    is_instance_attribute: false
+                    description: ''
+                    document_note: ''
+                    is_active: true
+                  - id: 50045
+                    uuid: 725bf5d2-5fd8-11e9-b916-00ff97344bad
+                    display_value: ''
+                    value: Seed-Daisy
+                    name: Seed Pack Daisy
+                    upc: ''
+                    sku: ''
+                    product_category: Standard
+                    product_group: ''
+                    product_class: ''
+                    uom: Each
+                    list_price: ''
+                    standard_price: ''
+                    limit_price: ''
+                    margin: ''
+                    is_stocked: true
+                    available_quantity: ''
+                    on_hand_quantity: ''
+                    reserved_quantity: ''
+                    ordered_quantity: ''
+                    unconfirmed_quantity: ''
+                    unconfirmed_move_quantity: ''
+                    vendor: ''
+                    is_instance_attribute: false
+                    description: ''
+                    document_note: ''
+                    is_active: true
+                  - id: 143
+                    uuid: 5cbfe473-81c5-4f60-be82-15e6334ce6db
+                    display_value: ''
+                    value: Seeder
+                    name: Grass Seeder
+                    upc: ''
+                    sku: ''
+                    product_category: Tools
+                    product_group: ''
+                    product_class: ''
+                    uom: Each
+                    list_price: ''
+                    standard_price: ''
+                    limit_price: ''
+                    margin: ''
+                    is_stocked: true
+                    available_quantity: ''
+                    on_hand_quantity: ''
+                    reserved_quantity: ''
+                    ordered_quantity: ''
+                    unconfirmed_quantity: ''
+                    unconfirmed_move_quantity: ''
+                    vendor: Seed Farm Inc.
+                    is_instance_attribute: false
+                    description: ''
+                    document_note: ''
+                    is_active: true
+                next_page_token: a3bf7fc9-21cd-402f-bec6-5bb7de4116a0-2
+  /field/products/column/{column_id}:
+    get:
+      tags:
+        - default
+      summary: Field_products_column_id
+      description: |-
+        ### Request Params
+
+        - column_id (int32, required)
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: column_id
+          in: path
+          schema:
+            type: integer
+          required: true
+          example: '128'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /field/products/field/{field_id}:
+    get:
+      tags:
+        - default
+      summary: Field_products_field_id
+      description: |-
+        ### Request Params
+
+        - field_id (int32, required)
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: field_id
+          in: path
+          schema:
+            type: integer
+          required: true
+          example: '1025'
+      responses:
+        '200':
+          description: OK
+          headers:
+            Server:
+              schema:
+                type: string
+                example: nginx/1.25.2
+            Date:
+              schema:
+                type: string
+                example: Mon, 11 Mar 2024 15:05:12 GMT
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Content-Length:
+              schema:
+                type: integer
+                example: '34870'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            grpc-encoding:
+              schema:
+                type: string
+                example: identity
+            grpc-accept-encoding:
+              schema:
+                type: string
+                example: gzip
+            x-envoy-upstream-service-time:
+              schema:
+                type: integer
+                example: '108'
+            grpc-status:
+              schema:
+                type: integer
+                example: '0'
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Max-Age:
+              schema:
+                type: integer
+                example: '3600'
+            Access-Control-Expose-Headers:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+                example: '*'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                record_count: '62'
+                records:
+                  - id: 50019
+                    uuid: c7b5c942-032b-490c-9ac8-4931f364bb70
+                    display_value: ''
+                    value: Assembly Area
+                    name: Assembly Area
+                    upc: ''
+                    sku: ''
+                    product_category: Resources
+                    product_group: ''
+                    product_class: ''
+                    uom: Hour
+                    list_price: ''
+                    standard_price: ''
+                    limit_price: ''
+                    margin: ''
+                    is_stocked: false
+                    available_quantity: ''
+                    on_hand_quantity: ''
+                    reserved_quantity: ''
+                    ordered_quantity: ''
+                    unconfirmed_quantity: ''
+                    unconfirmed_move_quantity: ''
+                    vendor: ''
+                    is_instance_attribute: false
+                    description: ''
+                    document_note: ''
+                    is_active: true
+                  - id: 128
+                    uuid: eaceec1c-9341-4f28-b2da-1513e8831eda
+                    display_value: ''
+                    value: Azalea Bush
+                    name: Azalea Bush
+                    upc: '81010123450901'
+                    sku: '1234567890'
+                    product_category: Bushes
+                    product_group: ''
+                    product_class: ''
+                    uom: Each
+                    list_price: ''
+                    standard_price: ''
+                    limit_price: ''
+                    margin: ''
+                    is_stocked: true
+                    available_quantity: ''
+                    on_hand_quantity: ''
+                    reserved_quantity: ''
+                    ordered_quantity: ''
+                    unconfirmed_quantity: ''
+                    unconfirmed_move_quantity: ''
+                    vendor: Tree Farm Inc.
+                    is_instance_attribute: false
+                    description: ''
+                    document_note: ''
+                    is_active: true
+                  - id: 50016
+                    uuid: 88b0fec7-e065-4877-ac1b-fe9f6c59f952
+                    display_value: ''
+                    value: BackLeg
+                    name: Back Leg
+                    upc: ''
+                    sku: ''
+                    product_category: Raw Material
+                    product_group: ''
+                    product_class: ''
+                    uom: Each
+                    list_price: ''
+                    standard_price: ''
+                    limit_price: ''
+                    margin: ''
+                    is_stocked: true
+                    available_quantity: ''
+                    on_hand_quantity: ''
+                    reserved_quantity: ''
+                    ordered_quantity: ''
+                    unconfirmed_quantity: ''
+                    unconfirmed_move_quantity: ''
+                    vendor: Wood, Inc
+                    is_instance_attribute: false
+                    description: ''
+                    document_note: ''
+                    is_active: true
+                  - id: 50005
+                    uuid: 9aff57d4-6368-11e9-b841-00ff97344bad
+                    display_value: ''
+                    value: BackSupport
+                    name: Back Support
+                    upc: ''
+                    sku: ''
+                    product_category: Raw Material
+                    product_group: ''
+                    product_class: ''
+                    uom: Each
+                    list_price: ''
+                    standard_price: ''
+                    limit_price: ''
+                    margin: ''
+                    is_stocked: true
+                    available_quantity: ''
+                    on_hand_quantity: ''
+                    reserved_quantity: ''
+                    ordered_quantity: ''
+                    unconfirmed_quantity: ''
+                    unconfirmed_move_quantity: ''
+                    vendor: Wood, Inc
+                    is_instance_attribute: false
+                    description: ''
+                    document_note: ''
+                    is_active: true
+                  - id: 50013
+                    uuid: be935754-4071-4ce9-ac7a-27705498dcf3
+                    display_value: ''
+                    value: Bag50
+                    name: Bag 50 Kg
+                    upc: ''
+                    sku: ''
+                    product_category: Packing
+                    product_group: ''
+                    product_class: ''
+                    uom: Each
+                    list_price: ''
+                    standard_price: ''
+                    limit_price: ''
+                    margin: ''
+                    is_stocked: true
+                    available_quantity: ''
+                    on_hand_quantity: ''
+                    reserved_quantity: ''
+                    ordered_quantity: ''
+                    unconfirmed_quantity: ''
+                    unconfirmed_move_quantity: ''
+                    vendor: ''
+                    is_instance_attribute: false
+                    description: ''
+                    document_note: ''
+                    is_active: true
+                  - id: 50014
+                    uuid: fe18a0a5-4ec1-4199-a83c-9f46ad7cf79c
+                    display_value: ''
+                    value: Bag70
+                    name: Bag 70 Kg
+                    upc: ''
+                    sku: ''
+                    product_category: Packing
+                    product_group: ''
+                    product_class: ''
+                    uom: Each
+                    list_price: ''
+                    standard_price: ''
+                    limit_price: ''
+                    margin: ''
+                    is_stocked: true
+                    available_quantity: ''
+                    on_hand_quantity: ''
+                    reserved_quantity: ''
+                    ordered_quantity: ''
+                    unconfirmed_quantity: ''
+                    unconfirmed_move_quantity: ''
+                    vendor: ''
+                    is_instance_attribute: false
+                    description: ''
+                    document_note: ''
+                    is_active: true
+                  - id: 50021
+                    uuid: 2be41896-1bbb-40e7-9263-d0b3f0882a1b
+                    display_value: ''
+                    value: Chrome Subcontract Area
+                    name: Chrome Subcontract Area
+                    upc: ''
+                    sku: ''
+                    product_category: Resources
+                    product_group: ''
+                    product_class: ''
+                    uom: Hour
+                    list_price: ''
+                    standard_price: ''
+                    limit_price: ''
+                    margin: ''
+                    is_stocked: false
+                    available_quantity: ''
+                    on_hand_quantity: ''
+                    reserved_quantity: ''
+                    ordered_quantity: ''
+                    unconfirmed_quantity: ''
+                    unconfirmed_move_quantity: ''
+                    vendor: ''
+                    is_instance_attribute: false
+                    description: ''
+                    document_note: ''
+                    is_active: true
+                  - id: 146
+                    uuid: 768f56ef-9cab-4cc0-817d-59fe3b0ac085
+                    display_value: ''
+                    value: Doc
+                    name: How To Plant
+                    upc: ''
+                    sku: ''
+                    product_category: Documentation
+                    product_group: ''
+                    product_class: ''
+                    uom: Each
+                    list_price: ''
+                    standard_price: ''
+                    limit_price: ''
+                    margin: ''
+                    is_stocked: false
+                    available_quantity: ''
+                    on_hand_quantity: ''
+                    reserved_quantity: ''
+                    ordered_quantity: ''
+                    unconfirmed_quantity: ''
+                    unconfirmed_move_quantity: ''
+                    vendor: ''
+                    is_instance_attribute: false
+                    description: ''
+                    document_note: ''
+                    is_active: true
+                  - id: 50026
+                    uuid: fb505593-7a0d-41c7-85c3-4f786cb638c7
+                    display_value: ''
+                    value: Dry Area
+                    name: Dry Area
+                    upc: ''
+                    sku: ''
+                    product_category: Resources
+                    product_group: ''
+                    product_class: ''
+                    uom: Hour
+                    list_price: ''
+                    standard_price: ''
+                    limit_price: ''
+                    margin: ''
+                    is_stocked: false
+                    available_quantity: ''
+                    on_hand_quantity: ''
+                    reserved_quantity: ''
+                    ordered_quantity: ''
+                    unconfirmed_quantity: ''
+                    unconfirmed_move_quantity: ''
+                    vendor: ''
+                    is_instance_attribute: false
+                    description: ''
+                    document_note: ''
+                    is_active: true
+                  - id: 124
+                    uuid: 446ec8c3-2aa4-4599-b78e-a37eb93323af
+                    display_value: ''
+                    value: Elm
+                    name: Elm Tree
+                    upc: ''
+                    sku: ''
+                    product_category: Trees
+                    product_group: ''
+                    product_class: ''
+                    uom: Each
+                    list_price: ''
+                    standard_price: ''
+                    limit_price: ''
+                    margin: ''
+                    is_stocked: true
+                    available_quantity: ''
+                    on_hand_quantity: ''
+                    reserved_quantity: ''
+                    ordered_quantity: ''
+                    unconfirmed_quantity: ''
+                    unconfirmed_move_quantity: ''
+                    vendor: Tree Farm Inc.
+                    is_instance_attribute: false
+                    description: ''
+                    document_note: ''
+                    is_active: true
+                  - id: 50008
+                    uuid: 5f28de99-1058-46a4-8429-4be7c1567362
+                    display_value: ''
+                    value: Fertilizer
+                    name: Lawn Fertilizer
+                    upc: ''
+                    sku: ''
+                    product_category: Assembly
+                    product_group: ''
+                    product_class: ''
+                    uom: kilogram
+                    list_price: ''
+                    standard_price: ''
+                    limit_price: ''
+                    margin: ''
+                    is_stocked: true
+                    available_quantity: ''
+                    on_hand_quantity: ''
+                    reserved_quantity: ''
+                    ordered_quantity: ''
+                    unconfirmed_quantity: ''
+                    unconfirmed_move_quantity: ''
+                    vendor: ''
+                    is_instance_attribute: false
+                    description: ''
+                    document_note: ''
+                    is_active: true
+                  - id: 136
+                    uuid: e98f4d23-bdd0-432d-95e6-d394ebd4f50a
+                    display_value: ''
+                    value: Fertilizer#50
+                    name: 'Fertilizer #50'
+                    upc: ''
+                    sku: ''
+                    product_category: Chemicals
+                    product_group: ''
+                    product_class: ''
+                    uom: Each
+                    list_price: ''
+                    standard_price: ''
+                    limit_price: ''
+                    margin: ''
+                    is_stocked: true
+                    available_quantity: ''
+                    on_hand_quantity: ''
+                    reserved_quantity: ''
+                    ordered_quantity: ''
+                    unconfirmed_quantity: ''
+                    unconfirmed_move_quantity: ''
+                    vendor: Seed Farm Inc.
+                    is_instance_attribute: true
+                    description: ''
+                    document_note: ''
+                    is_active: true
+                  - id: 50007
+                    uuid: a4940a4e-90b4-4053-a9bc-9ae0c597e7aa
+                    display_value: ''
+                    value: Fertilizer#70
+                    name: 'Fertilizer #70'
+                    upc: ''
+                    sku: ''
+                    product_category: Chemicals
+                    product_group: ''
+                    product_class: ''
+                    uom: Each
+                    list_price: ''
+                    standard_price: ''
+                    limit_price: ''
+                    margin: ''
+                    is_stocked: true
+                    available_quantity: ''
+                    on_hand_quantity: ''
+                    reserved_quantity: ''
+                    ordered_quantity: ''
+                    unconfirmed_quantity: ''
+                    unconfirmed_move_quantity: ''
+                    vendor: ''
+                    is_instance_attribute: false
+                    description: ''
+                    document_note: ''
+                    is_active: true
+                  - id: 50027
+                    uuid: 9e30e31c-71fa-4cb9-b0b5-143e58b0c551
+                    display_value: ''
+                    value: Fertilizer Inspection Area
+                    name: Fertilizer Inspection Area
+                    upc: ''
+                    sku: ''
+                    product_category: Resources
+                    product_group: ''
+                    product_class: ''
+                    uom: Hour
+                    list_price: ''
+                    standard_price: ''
+                    limit_price: ''
+                    margin: ''
+                    is_stocked: false
+                    available_quantity: ''
+                    on_hand_quantity: ''
+                    reserved_quantity: ''
+                    ordered_quantity: ''
+                    unconfirmed_quantity: ''
+                    unconfirmed_move_quantity: ''
+                    vendor: ''
+                    is_instance_attribute: false
+                    description: ''
+                    document_note: ''
+                    is_active: true
+                  - id: 50018
+                    uuid: 3ed7e39b-e10e-4ef8-9428-d43b7a205609
+                    display_value: ''
+                    value: Fertilizer Plant
+                    name: Fertilizer Plant
+                    upc: ''
+                    sku: ''
+                    product_category: Resources
+                    product_group: ''
+                    product_class: ''
+                    uom: Hour
+                    list_price: ''
+                    standard_price: ''
+                    limit_price: ''
+                    margin: ''
+                    is_stocked: false
+                    available_quantity: ''
+                    on_hand_quantity: ''
+                    reserved_quantity: ''
+                    ordered_quantity: ''
+                    unconfirmed_quantity: ''
+                    unconfirmed_move_quantity: ''
+                    vendor: ''
+                    is_instance_attribute: false
+                    description: ''
+                    document_note: ''
+                    is_active: true
+                  - id: 50015
+                    uuid: 0adfa95f-5fcd-48f4-8929-1318c15d03c2
+                    display_value: ''
+                    value: FrontLeg
+                    name: Front Leg
+                    upc: ''
+                    sku: ''
+                    product_category: Raw Material
+                    product_group: ''
+                    product_class: ''
+                    uom: Each
+                    list_price: ''
+                    standard_price: ''
+                    limit_price: ''
+                    margin: ''
+                    is_stocked: true
+                    available_quantity: ''
+                    on_hand_quantity: ''
+                    reserved_quantity: ''
+                    ordered_quantity: ''
+                    unconfirmed_quantity: ''
+                    unconfirmed_move_quantity: ''
+                    vendor: Wood, Inc
+                    is_instance_attribute: false
+                    description: ''
+                    document_note: ''
+                    is_active: true
+                  - id: 50023
+                    uuid: 7717f5bb-9756-4dda-a575-efd09df73819
+                    display_value: ''
+                    value: Furniture Plant
+                    name: Furniture Plant
+                    upc: ''
+                    sku: ''
+                    product_category: Resources
+                    product_group: ''
+                    product_class: ''
+                    uom: Hour
+                    list_price: ''
+                    standard_price: ''
+                    limit_price: ''
+                    margin: ''
+                    is_stocked: false
+                    available_quantity: ''
+                    on_hand_quantity: ''
+                    reserved_quantity: ''
+                    ordered_quantity: ''
+                    unconfirmed_quantity: ''
+                    unconfirmed_move_quantity: ''
+                    vendor: ''
+                    is_instance_attribute: false
+                    description: ''
+                    document_note: ''
+                    is_active: true
+                  - id: 125
+                    uuid: f9d39130-603d-4931-87d7-f1ac9f69cd10
+                    display_value: ''
+                    value: Grass
+                    name: Grass Seed Container
+                    upc: ''
+                    sku: ''
+                    product_category: Standard
+                    product_group: ''
+                    product_class: ''
+                    uom: Each
+                    list_price: ''
+                    standard_price: ''
+                    limit_price: ''
+                    margin: ''
+                    is_stocked: true
+                    available_quantity: ''
+                    on_hand_quantity: ''
+                    reserved_quantity: ''
+                    ordered_quantity: ''
+                    unconfirmed_quantity: ''
+                    unconfirmed_move_quantity: ''
+                    vendor: Seed Farm Inc.
+                    is_instance_attribute: false
+                    description: ''
+                    document_note: ''
+                    is_active: true
+                  - id: 50044
+                    uuid: e5ac219e-5fd6-11e9-ab47-00ff97344bad
+                    display_value: ''
+                    value: GrowLight
+                    name: Grow Light and Stand
+                    upc: ''
+                    sku: ''
+                    product_category: Standard
+                    product_group: ''
+                    product_class: ''
+                    uom: Each
+                    list_price: ''
+                    standard_price: ''
+                    limit_price: ''
+                    margin: ''
+                    is_stocked: true
+                    available_quantity: ''
+                    on_hand_quantity: ''
+                    reserved_quantity: ''
+                    ordered_quantity: ''
+                    unconfirmed_quantity: ''
+                    unconfirmed_move_quantity: ''
+                    vendor: ''
+                    is_instance_attribute: false
+                    description: ''
+                    document_note: ''
+                    is_active: true
+                  - id: 138
+                    uuid: 59721117-96ff-47e0-b58d-3789f4ca8c98
+                    display_value: ''
+                    value: Hoe
+                    name: Hoe 4 ft
+                    upc: ''
+                    sku: ''
+                    product_category: Tools
+                    product_group: ''
+                    product_class: ''
+                    uom: Each
+                    list_price: ''
+                    standard_price: ''
+                    limit_price: ''
+                    margin: ''
+                    is_stocked: true
+                    available_quantity: ''
+                    on_hand_quantity: ''
+                    reserved_quantity: ''
+                    ordered_quantity: ''
+                    unconfirmed_quantity: ''
+                    unconfirmed_move_quantity: ''
+                    vendor: Seed Farm Inc.
+                    is_instance_attribute: false
+                    description: ''
+                    document_note: ''
+                    is_active: true
+                  - id: 129
+                    uuid: ec0dcb70-11ee-4af1-bc89-71c500096625
+                    display_value: ''
+                    value: Holly Bush
+                    name: Holly Bush
+                    upc: ''
+                    sku: ''
+                    product_category: Bushes
+                    product_group: ''
+                    product_class: ''
+                    uom: Each
+                    list_price: ''
+                    standard_price: ''
+                    limit_price: ''
+                    margin: ''
+                    is_stocked: true
+                    available_quantity: ''
+                    on_hand_quantity: ''
+                    reserved_quantity: ''
+                    ordered_quantity: ''
+                    unconfirmed_quantity: ''
+                    unconfirmed_move_quantity: ''
+                    vendor: Tree Farm Inc.
+                    is_instance_attribute: false
+                    description: ''
+                    document_note: ''
+                    is_active: true
+                  - id: 50022
+                    uuid: 10d900cc-84c7-46b8-8fb5-ad8fd8b8231e
+                    display_value: ''
+                    value: Inspection Area
+                    name: Inspection Area
+                    upc: ''
+                    sku: ''
+                    product_category: Resources
+                    product_group: ''
+                    product_class: ''
+                    uom: Hour
+                    list_price: ''
+                    standard_price: ''
+                    limit_price: ''
+                    margin: ''
+                    is_stocked: false
+                    available_quantity: ''
+                    on_hand_quantity: ''
+                    reserved_quantity: ''
+                    ordered_quantity: ''
+                    unconfirmed_quantity: ''
+                    unconfirmed_move_quantity: ''
+                    vendor: ''
+                    is_instance_attribute: false
+                    description: ''
+                    document_note: ''
+                    is_active: true
+                  - id: 50043
+                    uuid: 8cee7bba-5563-11e9-8e5f-00ff97344bad
+                    display_value: ''
+                    value: Kit-Starter
+                    name: Plant Starter Kit
+                    upc: ''
+                    sku: ''
+                    product_category: Standard
+                    product_group: ''
+                    product_class: ''
+                    uom: Each
+                    list_price: ''
+                    standard_price: ''
+                    limit_price: ''
+                    margin: ''
+                    is_stocked: true
+                    available_quantity: ''
+                    on_hand_quantity: ''
+                    reserved_quantity: ''
+                    ordered_quantity: ''
+                    unconfirmed_quantity: ''
+                    unconfirmed_move_quantity: ''
+                    vendor: ''
+                    is_instance_attribute: false
+                    description: ''
+                    document_note: ''
+                    is_active: true
+                  - id: 132
+                    uuid: ec6c9064-3dd6-4821-82a0-c872b8b20bc1
+                    display_value: ''
+                    value: Mary
+                    name: Mary Consultant
+                    upc: ''
+                    sku: ''
+                    product_category: Standard
+                    product_group: ''
+                    product_class: ''
+                    uom: Hour
+                    list_price: ''
+                    standard_price: ''
+                    limit_price: ''
+                    margin: ''
+                    is_stocked: false
+                    available_quantity: ''
+                    on_hand_quantity: ''
+                    reserved_quantity: ''
+                    ordered_quantity: ''
+                    unconfirmed_quantity: ''
+                    unconfirmed_move_quantity: ''
+                    vendor: ''
+                    is_instance_attribute: false
+                    description: ''
+                    document_note: ''
+                    is_active: true
+                  - id: 50025
+                    uuid: 0e927ce0-1db1-4766-a631-b713f2ae414c
+                    display_value: ''
+                    value: Mixed Area
+                    name: Mixed Area
+                    upc: ''
+                    sku: ''
+                    product_category: Resources
+                    product_group: ''
+                    product_class: ''
+                    uom: Hour
+                    list_price: ''
+                    standard_price: ''
+                    limit_price: ''
+                    margin: ''
+                    is_stocked: false
+                    available_quantity: ''
+                    on_hand_quantity: ''
+                    reserved_quantity: ''
+                    ordered_quantity: ''
+                    unconfirmed_quantity: ''
+                    unconfirmed_move_quantity: ''
+                    vendor: ''
+                    is_instance_attribute: false
+                    description: ''
+                    document_note: ''
+                    is_active: true
+                  - id: 137
+                    uuid: f846633c-5563-11e9-adb8-00ff97344bad
+                    display_value: ''
+                    value: Mulch
+                    name: Mulch 10#
+                    upc: ''
+                    sku: ''
+                    product_category: Chemicals
+                    product_group: ''
+                    product_class: ''
+                    uom: Each
+                    list_price: ''
+                    standard_price: ''
+                    limit_price: ''
+                    margin: ''
+                    is_stocked: true
+                    available_quantity: ''
+                    on_hand_quantity: ''
+                    reserved_quantity: ''
+                    ordered_quantity: ''
+                    unconfirmed_quantity: ''
+                    unconfirmed_move_quantity: ''
+                    vendor: Seed Farm Inc.
+                    is_instance_attribute: false
+                    description: ''
+                    document_note: ''
+                    is_active: true
+                  - id: 50009
+                    uuid: dc7c8d10-2f16-4898-8fb7-6ca3adac2311
+                    display_value: ''
+                    value: Nitrogen
+                    name: Nitrogen
+                    upc: ''
+                    sku: ''
+                    product_category: Raw Material
+                    product_group: ''
+                    product_class: ''
+                    uom: kilogram
+                    list_price: ''
+                    standard_price: ''
+                    limit_price: ''
+                    margin: ''
+                    is_stocked: true
+                    available_quantity: ''
+                    on_hand_quantity: ''
+                    reserved_quantity: ''
+                    ordered_quantity: ''
+                    unconfirmed_quantity: ''
+                    unconfirmed_move_quantity: ''
+                    vendor: Chemical Product, inc
+                    is_instance_attribute: false
+                    description: ''
+                    document_note: ''
+                    is_active: true
+                  - id: 123
+                    uuid: f34ae774-bce3-490e-a939-d777183e3e4f
+                    display_value: ''
+                    value: Oak
+                    name: Oak Tree
+                    upc: ''
+                    sku: ''
+                    product_category: Trees
+                    product_group: ''
+                    product_class: ''
+                    uom: Each
+                    list_price: ''
+                    standard_price: ''
+                    limit_price: ''
+                    margin: ''
+                    is_stocked: true
+                    available_quantity: ''
+                    on_hand_quantity: ''
+                    reserved_quantity: ''
+                    ordered_quantity: ''
+                    unconfirmed_quantity: ''
+                    unconfirmed_move_quantity: ''
+                    vendor: Tree Farm Inc.
+                    is_instance_attribute: false
+                    description: ''
+                    document_note: ''
+                    is_active: true
+                  - id: 50024
+                    uuid: 5522b52b-8a05-485c-9534-65e34b359594
+                    display_value: ''
+                    value: Packing Production Line
+                    name: Packing Production Line
+                    upc: ''
+                    sku: ''
+                    product_category: Resources
+                    product_group: ''
+                    product_class: ''
+                    uom: Hour
+                    list_price: ''
+                    standard_price: ''
+                    limit_price: ''
+                    margin: ''
+                    is_stocked: false
+                    available_quantity: ''
+                    on_hand_quantity: ''
+                    reserved_quantity: ''
+                    ordered_quantity: ''
+                    unconfirmed_quantity: ''
+                    unconfirmed_move_quantity: ''
+                    vendor: ''
+                    is_instance_attribute: false
+                    description: ''
+                    document_note: ''
+                    is_active: true
+                  - id: 50020
+                    uuid: 2b6c13a1-f8fc-40c7-90ad-4a7b68cc227c
+                    display_value: ''
+                    value: Paint Area
+                    name: Paint Area
+                    upc: ''
+                    sku: ''
+                    product_category: Resources
+                    product_group: ''
+                    product_class: ''
+                    uom: Hour
+                    list_price: ''
+                    standard_price: ''
+                    limit_price: ''
+                    margin: ''
+                    is_stocked: false
+                    available_quantity: ''
+                    on_hand_quantity: ''
+                    reserved_quantity: ''
+                    ordered_quantity: ''
+                    unconfirmed_quantity: ''
+                    unconfirmed_move_quantity: ''
+                    vendor: ''
+                    is_instance_attribute: false
+                    description: ''
+                    document_note: ''
+                    is_active: true
+                  - id: 145
+                    uuid: 4106fe43-f69c-48b6-b838-97656ce5c6df
+                    display_value: ''
+                    value: PatioSet
+                    name: Patio Furniture Set
+                    upc: ''
+                    sku: ''
+                    product_category: 'Patio '
+                    product_group: ''
+                    product_class: ''
+                    uom: Each
+                    list_price: ''
+                    standard_price: ''
+                    limit_price: ''
+                    margin: ''
+                    is_stocked: true
+                    available_quantity: ''
+                    on_hand_quantity: ''
+                    reserved_quantity: ''
+                    ordered_quantity: ''
+                    unconfirmed_quantity: ''
+                    unconfirmed_move_quantity: ''
+                    vendor: Patio Fun, Inc.
+                    is_instance_attribute: false
+                    description: ''
+                    document_note: ''
+                    is_active: true
+                  - id: 50000
+                    uuid: 9b6fa778-6368-11e9-b845-00ff97344bad
+                    display_value: ''
+                    value: PBackLeg
+                    name: Assembly Back Leg
+                    upc: ''
+                    sku: ''
+                    product_category: Assembly
+                    product_group: ''
+                    product_class: ''
+                    uom: Each
+                    list_price: ''
+                    standard_price: ''
+                    limit_price: ''
+                    margin: ''
+                    is_stocked: false
+                    available_quantity: ''
+                    on_hand_quantity: ''
+                    reserved_quantity: ''
+                    ordered_quantity: ''
+                    unconfirmed_quantity: ''
+                    unconfirmed_move_quantity: ''
+                    vendor: ''
+                    is_instance_attribute: false
+                    description: ''
+                    document_note: ''
+                    is_active: true
+                  - id: 133
+                    uuid: 9a22d746-6368-11e9-b839-00ff97344bad
+                    display_value: ''
+                    value: PChair
+                    name: Patio Chair
+                    upc: ''
+                    sku: ''
+                    product_category: 'Patio '
+                    product_group: ''
+                    product_class: ''
+                    uom: Each
+                    list_price: ''
+                    standard_price: ''
+                    limit_price: ''
+                    margin: ''
+                    is_stocked: true
+                    available_quantity: ''
+                    on_hand_quantity: ''
+                    reserved_quantity: ''
+                    ordered_quantity: ''
+                    unconfirmed_quantity: ''
+                    unconfirmed_move_quantity: ''
+                    vendor: Patio Fun, Inc.
+                    is_instance_attribute: true
+                    description: ''
+                    document_note: ''
+                    is_active: true
+                  - id: 50041
+                    uuid: 63eb12b4-5563-11e9-8ca7-00ff97344bad
+                    display_value: ''
+                    value: Peat
+                    name: Peat
+                    upc: ''
+                    sku: ''
+                    product_category: Standard
+                    product_group: ''
+                    product_class: ''
+                    uom: Each
+                    list_price: ''
+                    standard_price: ''
+                    limit_price: ''
+                    margin: ''
+                    is_stocked: true
+                    available_quantity: ''
+                    on_hand_quantity: ''
+                    reserved_quantity: ''
+                    ordered_quantity: ''
+                    unconfirmed_quantity: ''
+                    unconfirmed_move_quantity: ''
+                    vendor: ''
+                    is_instance_attribute: false
+                    description: ''
+                    document_note: ''
+                    is_active: true
+                  - id: 50001
+                    uuid: 9be3a0a6-6368-11e9-b849-00ff97344bad
+                    display_value: ''
+                    value: PFrontLeg
+                    name: Assembly Front Leg
+                    upc: ''
+                    sku: ''
+                    product_category: Assembly
+                    product_group: ''
+                    product_class: ''
+                    uom: Each
+                    list_price: ''
+                    standard_price: ''
+                    limit_price: ''
+                    margin: ''
+                    is_stocked: false
+                    available_quantity: ''
+                    on_hand_quantity: ''
+                    reserved_quantity: ''
+                    ordered_quantity: ''
+                    unconfirmed_quantity: ''
+                    unconfirmed_move_quantity: ''
+                    vendor: ''
+                    is_instance_attribute: false
+                    description: ''
+                    document_note: ''
+                    is_active: true
+                  - id: 50010
+                    uuid: ea94e2ff-0740-43d5-9a51-bddc106ed0af
+                    display_value: ''
+                    value: Phosphorus
+                    name: Phosphorus
+                    upc: ''
+                    sku: ''
+                    product_category: Raw Material
+                    product_group: ''
+                    product_class: ''
+                    uom: kilogram
+                    list_price: ''
+                    standard_price: ''
+                    limit_price: ''
+                    margin: ''
+                    is_stocked: true
+                    available_quantity: ''
+                    on_hand_quantity: ''
+                    reserved_quantity: ''
+                    ordered_quantity: ''
+                    unconfirmed_quantity: ''
+                    unconfirmed_move_quantity: ''
+                    vendor: Chemical Product, inc
+                    is_instance_attribute: false
+                    description: ''
+                    document_note: ''
+                    is_active: true
+                  - id: 126
+                    uuid: c95c39ce-b59c-4dfb-a6c7-61c223a72d83
+                    display_value: ''
+                    value: Planting
+                    name: Planting Service
+                    upc: ''
+                    sku: ''
+                    product_category: Standard
+                    product_group: ''
+                    product_class: ''
+                    uom: Hour
+                    list_price: ''
+                    standard_price: ''
+                    limit_price: ''
+                    margin: ''
+                    is_stocked: false
+                    available_quantity: ''
+                    on_hand_quantity: ''
+                    reserved_quantity: ''
+                    ordered_quantity: ''
+                    unconfirmed_quantity: ''
+                    unconfirmed_move_quantity: ''
+                    vendor: GardenAdmin BP
+                    is_instance_attribute: false
+                    description: ''
+                    document_note: ''
+                    is_active: true
+                  - id: 130
+                    uuid: 15dd14c4-9b97-4b6c-9972-16c413814d1f
+                    display_value: ''
+                    value: Plum Tree
+                    name: Plum Tree
+                    upc: ''
+                    sku: ''
+                    product_category: Trees
+                    product_group: ''
+                    product_class: ''
+                    uom: Each
+                    list_price: ''
+                    standard_price: ''
+                    limit_price: ''
+                    margin: ''
+                    is_stocked: true
+                    available_quantity: ''
+                    on_hand_quantity: ''
+                    reserved_quantity: ''
+                    ordered_quantity: ''
+                    unconfirmed_quantity: ''
+                    unconfirmed_move_quantity: ''
+                    vendor: Tree Farm Inc.
+                    is_instance_attribute: false
+                    description: ''
+                    document_note: ''
+                    is_active: true
+                  - id: 50012
+                    uuid: 2ecbd0d7-8b7a-44fe-b852-e1f12c90a9fe
+                    display_value: ''
+                    value: Potassium
+                    name: Potassium
+                    upc: ''
+                    sku: ''
+                    product_category: Raw Material
+                    product_group: ''
+                    product_class: ''
+                    uom: kilogram
+                    list_price: ''
+                    standard_price: ''
+                    limit_price: ''
+                    margin: ''
+                    is_stocked: true
+                    available_quantity: ''
+                    on_hand_quantity: ''
+                    reserved_quantity: ''
+                    ordered_quantity: ''
+                    unconfirmed_quantity: ''
+                    unconfirmed_move_quantity: ''
+                    vendor: Chemical Product, inc
+                    is_instance_attribute: false
+                    description: ''
+                    document_note: ''
+                    is_active: true
+                  - id: 50042
+                    uuid: 74369b52-5563-11e9-8d83-00ff97344bad
+                    display_value: ''
+                    value: PottingSoil
+                    name: Potting Soil
+                    upc: ''
+                    sku: ''
+                    product_category: Standard
+                    product_group: ''
+                    product_class: ''
+                    uom: Each
+                    list_price: ''
+                    standard_price: ''
+                    limit_price: ''
+                    margin: ''
+                    is_stocked: true
+                    available_quantity: ''
+                    on_hand_quantity: ''
+                    reserved_quantity: ''
+                    ordered_quantity: ''
+                    unconfirmed_quantity: ''
+                    unconfirmed_move_quantity: ''
+                    vendor: ''
+                    is_instance_attribute: false
+                    description: ''
+                    document_note: ''
+                    is_active: true
+                  - id: 134
+                    uuid: 1022fd97-2150-451f-a10e-c8a423e74e66
+                    display_value: ''
+                    value: PTable
+                    name: Patio Table
+                    upc: ''
+                    sku: ''
+                    product_category: 'Patio '
+                    product_group: ''
+                    product_class: ''
+                    uom: Each
+                    list_price: ''
+                    standard_price: ''
+                    limit_price: ''
+                    margin: ''
+                    is_stocked: true
+                    available_quantity: ''
+                    on_hand_quantity: ''
+                    reserved_quantity: ''
+                    ordered_quantity: ''
+                    unconfirmed_quantity: ''
+                    unconfirmed_move_quantity: ''
+                    vendor: Patio Fun, Inc.
+                    is_instance_attribute: false
+                    description: ''
+                    document_note: ''
+                    is_active: true
+                  - id: 139
+                    uuid: 1247f2f1-f60f-4c6e-b163-a60f368fe9af
+                    display_value: ''
+                    value: Rake-Bamboo
+                    name: Rake Bamboo
+                    upc: ''
+                    sku: ''
+                    product_category: Tools
+                    product_group: ''
+                    product_class: ''
+                    uom: Each
+                    list_price: ''
+                    standard_price: ''
+                    limit_price: ''
+                    margin: ''
+                    is_stocked: true
+                    available_quantity: ''
+                    on_hand_quantity: ''
+                    reserved_quantity: ''
+                    ordered_quantity: ''
+                    unconfirmed_quantity: ''
+                    unconfirmed_move_quantity: ''
+                    vendor: Seed Farm Inc.
+                    is_instance_attribute: false
+                    description: ''
+                    document_note: ''
+                    is_active: true
+                  - id: 140
+                    uuid: 26c35891-be21-40ea-a5b5-a5dcdad83933
+                    display_value: ''
+                    value: Rake-Metal
+                    name: Rake Metal
+                    upc: ''
+                    sku: ''
+                    product_category: Tools
+                    product_group: ''
+                    product_class: ''
+                    uom: Each
+                    list_price: ''
+                    standard_price: ''
+                    limit_price: ''
+                    margin: ''
+                    is_stocked: true
+                    available_quantity: ''
+                    on_hand_quantity: ''
+                    reserved_quantity: ''
+                    ordered_quantity: ''
+                    unconfirmed_quantity: ''
+                    unconfirmed_move_quantity: ''
+                    vendor: Seed Farm Inc.
+                    is_instance_attribute: false
+                    description: ''
+                    document_note: ''
+                    is_active: true
+                  - id: 127
+                    uuid: f774c912-eaf9-48e9-9a16-8ff7c19953af
+                    display_value: ''
+                    value: Rose Bush
+                    name: Rose Bush
+                    upc: ''
+                    sku: ''
+                    product_category: Bushes
+                    product_group: ''
+                    product_class: ''
+                    uom: Each
+                    list_price: ''
+                    standard_price: ''
+                    limit_price: ''
+                    margin: ''
+                    is_stocked: true
+                    available_quantity: ''
+                    on_hand_quantity: ''
+                    reserved_quantity: ''
+                    ordered_quantity: ''
+                    unconfirmed_quantity: ''
+                    unconfirmed_move_quantity: ''
+                    vendor: Tree Farm Inc.
+                    is_instance_attribute: false
+                    description: ''
+                    document_note: ''
+                    is_active: true
+                  - id: 135
+                    uuid: 82c3d870-d8a0-4a3e-9775-fffd197d1d7c
+                    display_value: ''
+                    value: Screen
+                    name: Patio Sun Screen
+                    upc: ''
+                    sku: ''
+                    product_category: 'Patio '
+                    product_group: ''
+                    product_class: ''
+                    uom: Each
+                    list_price: ''
+                    standard_price: ''
+                    limit_price: ''
+                    margin: ''
+                    is_stocked: true
+                    available_quantity: ''
+                    on_hand_quantity: ''
+                    reserved_quantity: ''
+                    ordered_quantity: ''
+                    unconfirmed_quantity: ''
+                    unconfirmed_move_quantity: ''
+                    vendor: Patio Fun, Inc.
+                    is_instance_attribute: false
+                    description: ''
+                    document_note: ''
+                    is_active: true
+                  - id: 50002
+                    uuid: 6f009809-ef3b-4fad-b678-76107c590623
+                    display_value: ''
+                    value: Screw
+                    name: '#6-32 x 3/8 Socket Head Cap Screw'
+                    upc: ''
+                    sku: ''
+                    product_category: Raw Material
+                    product_group: ''
+                    product_class: ''
+                    uom: Each
+                    list_price: ''
+                    standard_price: ''
+                    limit_price: ''
+                    margin: ''
+                    is_stocked: true
+                    available_quantity: ''
+                    on_hand_quantity: ''
+                    reserved_quantity: ''
+                    ordered_quantity: ''
+                    unconfirmed_quantity: ''
+                    unconfirmed_move_quantity: ''
+                    vendor: ''
+                    is_instance_attribute: false
+                    description: ''
+                    document_note: ''
+                    is_active: true
+                  - id: 50004
+                    uuid: 9a93c32a-6368-11e9-b83d-00ff97344bad
+                    display_value: ''
+                    value: Seat
+                    name: Seat
+                    upc: ''
+                    sku: ''
+                    product_category: Raw Material
+                    product_group: ''
+                    product_class: ''
+                    uom: Each
+                    list_price: ''
+                    standard_price: ''
+                    limit_price: ''
+                    margin: ''
+                    is_stocked: true
+                    available_quantity: ''
+                    on_hand_quantity: ''
+                    reserved_quantity: ''
+                    ordered_quantity: ''
+                    unconfirmed_quantity: ''
+                    unconfirmed_move_quantity: ''
+                    vendor: Wood, Inc
+                    is_instance_attribute: false
+                    description: ''
+                    document_note: ''
+                    is_active: true
+                  - id: 50046
+                    uuid: a4d9f64e-5fd8-11e9-b9f2-00ff97344bad
+                    display_value: ''
+                    value: Seed-BabyBreath
+                    name: Seed Packet Baby Breath
+                    upc: ''
+                    sku: ''
+                    product_category: Standard
+                    product_group: ''
+                    product_class: ''
+                    uom: Each
+                    list_price: ''
+                    standard_price: ''
+                    limit_price: ''
+                    margin: ''
+                    is_stocked: true
+                    available_quantity: ''
+                    on_hand_quantity: ''
+                    reserved_quantity: ''
+                    ordered_quantity: ''
+                    unconfirmed_quantity: ''
+                    unconfirmed_move_quantity: ''
+                    vendor: ''
+                    is_instance_attribute: false
+                    description: ''
+                    document_note: ''
+                    is_active: true
+                  - id: 50045
+                    uuid: 725bf5d2-5fd8-11e9-b916-00ff97344bad
+                    display_value: ''
+                    value: Seed-Daisy
+                    name: Seed Pack Daisy
+                    upc: ''
+                    sku: ''
+                    product_category: Standard
+                    product_group: ''
+                    product_class: ''
+                    uom: Each
+                    list_price: ''
+                    standard_price: ''
+                    limit_price: ''
+                    margin: ''
+                    is_stocked: true
+                    available_quantity: ''
+                    on_hand_quantity: ''
+                    reserved_quantity: ''
+                    ordered_quantity: ''
+                    unconfirmed_quantity: ''
+                    unconfirmed_move_quantity: ''
+                    vendor: ''
+                    is_instance_attribute: false
+                    description: ''
+                    document_note: ''
+                    is_active: true
+                  - id: 143
+                    uuid: 5cbfe473-81c5-4f60-be82-15e6334ce6db
+                    display_value: ''
+                    value: Seeder
+                    name: Grass Seeder
+                    upc: ''
+                    sku: ''
+                    product_category: Tools
+                    product_group: ''
+                    product_class: ''
+                    uom: Each
+                    list_price: ''
+                    standard_price: ''
+                    limit_price: ''
+                    margin: ''
+                    is_stocked: true
+                    available_quantity: ''
+                    on_hand_quantity: ''
+                    reserved_quantity: ''
+                    ordered_quantity: ''
+                    unconfirmed_quantity: ''
+                    unconfirmed_move_quantity: ''
+                    vendor: Seed Farm Inc.
+                    is_instance_attribute: false
+                    description: ''
+                    document_note: ''
+                    is_active: true
+                next_page_token: a3bf7fc9-21cd-402f-bec6-5bb7de4116a0-2
+  /field/products/parameter/{process_parameter_id}:
+    get:
+      tags:
+        - default
+      summary: Field_products_process_parameter_id
+      description: |-
+        ### Request Params
+
+        - process_parameter_id (int32, required)
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: process_parameter_id
+          in: path
+          schema:
+            type: integer
+          required: true
+          example: '1000000'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /field/products/query-criteria/{browse_field_id}:
+    get:
+      tags:
+        - default
+      summary: Field_products_browse_field_id
+      description: |-
+        ### Request Params
+
+        - browse_field_id (int32, required)
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: browse_field_id
+          in: path
+          schema:
+            type: integer
+          required: true
+          example: '1'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /field/products/prices-lists-versions:
+    get:
+      tags:
+        - default
+      summary: ListPricesListVersions
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: OK
+          headers:
+            Server:
+              schema:
+                type: string
+                example: nginx/1.25.2
+            Date:
+              schema:
+                type: string
+                example: Thu, 07 Mar 2024 15:37:38 GMT
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Content-Length:
+              schema:
+                type: integer
+                example: '712'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            grpc-encoding:
+              schema:
+                type: string
+                example: identity
+            grpc-accept-encoding:
+              schema:
+                type: string
+                example: gzip
+            x-envoy-upstream-service-time:
+              schema:
+                type: integer
+                example: '111'
+            grpc-status:
+              schema:
+                type: integer
+                example: '0'
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Max-Age:
+              schema:
+                type: integer
+                example: '3600'
+            Access-Control-Expose-Headers:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+                example: '*'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                record_count: '3'
+                records:
+                  - id: 105
+                    table_name: M_PriceList_Version
+                    values:
+                      KeyColumn: 105
+                      DisplayColumn: Export 2003
+                      UUID: 6667b2d5-8f55-45de-bb85-7b1a32f8de4c
+                    is_active: true
+                  - id: 103
+                    table_name: M_PriceList_Version
+                    values:
+                      KeyColumn: 103
+                      DisplayColumn: Purchase 2003
+                      UUID: 24ed7246-9f05-44c2-acdf-a24a95cc6f71
+                    is_active: true
+                  - id: 104
+                    table_name: M_PriceList_Version
+                    values:
+                      KeyColumn: 104
+                      DisplayColumn: Standard 2003
+                      UUID: 1c4ed0db-1fd3-4293-b837-74c16175601f
+                    is_active: true
+                next_page_token: ''
+  /field/products/attribute-sets:
+    get:
+      tags:
+        - default
+      summary: ListAttributeSets
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: OK
+          headers:
+            Server:
+              schema:
+                type: string
+                example: nginx/1.25.2
+            Date:
+              schema:
+                type: string
+                example: Thu, 07 Mar 2024 15:38:34 GMT
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Content-Length:
+              schema:
+                type: integer
+                example: '692'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            grpc-encoding:
+              schema:
+                type: string
+                example: identity
+            grpc-accept-encoding:
+              schema:
+                type: string
+                example: gzip
+            x-envoy-upstream-service-time:
+              schema:
+                type: integer
+                example: '94'
+            grpc-status:
+              schema:
+                type: integer
+                example: '0'
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Max-Age:
+              schema:
+                type: integer
+                example: '3600'
+            Access-Control-Expose-Headers:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+                example: '*'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                record_count: '3'
+                records:
+                  - id: 101
+                    table_name: M_AttributeSet
+                    values:
+                      KeyColumn: 101
+                      DisplayColumn: Fertilizer Lot
+                      UUID: 1a1f7da8-c787-4a47-bad6-9ffbfce711ce
+                    is_active: true
+                  - id: 102
+                    table_name: M_AttributeSet
+                    values:
+                      KeyColumn: 102
+                      DisplayColumn: Patio Chair
+                      UUID: aa8bebe5-8a22-49ba-b125-73312340c9c4
+                    is_active: true
+                  - id: 100
+                    table_name: M_AttributeSet
+                    values:
+                      KeyColumn: 100
+                      DisplayColumn: T-Shirt
+                      UUID: bea2599d-9e7a-4e3b-bc8e-d77585df60d1
+                    is_active: true
+                next_page_token: ''
+  /field/products/attribute-sets/{attribute_set_id}/instances:
+    get:
+      tags:
+        - default
+      summary: ListAttributeSetInstances
+      description: |-
+        ### Request Params
+
+        - attribute_set_id (int32, required)
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: attribute_set_id
+          in: path
+          schema:
+            type: integer
+          required: true
+          example: '101'
+      responses:
+        '200':
+          description: OK
+          headers:
+            Server:
+              schema:
+                type: string
+                example: nginx/1.25.2
+            Date:
+              schema:
+                type: string
+                example: Thu, 07 Mar 2024 15:39:41 GMT
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Content-Length:
+              schema:
+                type: integer
+                example: '1559'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            grpc-encoding:
+              schema:
+                type: string
+                example: identity
+            grpc-accept-encoding:
+              schema:
+                type: string
+                example: gzip
+            x-envoy-upstream-service-time:
+              schema:
+                type: integer
+                example: '199'
+            grpc-status:
+              schema:
+                type: integer
+                example: '0'
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Max-Age:
+              schema:
+                type: integer
+                example: '3600'
+            Access-Control-Expose-Headers:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+                example: '*'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                record_count: '7'
+                records:
+                  - id: 0
+                    table_name: M_AttributeSetInstance
+                    values:
+                      KeyColumn: 0
+                      DisplayColumn: '0'
+                      UUID: a5db0ce2-fb40-11e8-a479-7a0060f0aa01
+                    is_active: true
+                  - id: 100
+                    table_name: M_AttributeSetInstance
+                    values:
+                      KeyColumn: 100
+                      DisplayColumn: '100'
+                      UUID: 7383bf98-61c9-419c-bde6-1b0f24ab7a07
+                    is_active: true
+                  - id: 101
+                    table_name: M_AttributeSetInstance
+                    values:
+                      KeyColumn: 101
+                      DisplayColumn: '101'
+                      UUID: a688c8b7-4362-4d71-9f91-1e78f8c816ff
+                    is_active: true
+                  - id: 102
+                    table_name: M_AttributeSetInstance
+                    values:
+                      KeyColumn: 102
+                      DisplayColumn: '102'
+                      UUID: 976074be-d5c8-425e-83bb-9d5e8eccd0b8
+                    is_active: true
+                  - id: 1000000
+                    table_name: M_AttributeSetInstance
+                    values:
+                      KeyColumn: 1000000
+                      DisplayColumn: '1000000'
+                      UUID: 1c102437-38b5-4971-a04a-444418420e74
+                    is_active: true
+                  - id: 1000001
+                    table_name: M_AttributeSetInstance
+                    values:
+                      KeyColumn: 1000001
+                      DisplayColumn: '1000001'
+                      UUID: 724c2dd7-238a-4893-8d6c-fe892823060e
+                    is_active: true
+                  - id: 1000002
+                    table_name: M_AttributeSetInstance
+                    values:
+                      KeyColumn: 1000002
+                      DisplayColumn: '1000002'
+                      UUID: 73c94cf6-7345-4783-9694-6c0b2eb3e8ac
+                    is_active: true
+                next_page_token: ''
+  /field/products/categories:
+    get:
+      tags:
+        - default
+      summary: ListProductCategories
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: OK
+          headers:
+            Server:
+              schema:
+                type: string
+                example: nginx/1.25.2
+            Date:
+              schema:
+                type: string
+                example: Thu, 07 Mar 2024 15:40:52 GMT
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Content-Length:
+              schema:
+                type: integer
+                example: '2603'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            grpc-encoding:
+              schema:
+                type: string
+                example: identity
+            grpc-accept-encoding:
+              schema:
+                type: string
+                example: gzip
+            x-envoy-upstream-service-time:
+              schema:
+                type: integer
+                example: '179'
+            grpc-status:
+              schema:
+                type: integer
+                example: '0'
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Max-Age:
+              schema:
+                type: integer
+                example: '3600'
+            Access-Control-Expose-Headers:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+                example: '*'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                record_count: '12'
+                records:
+                  - id: 50000
+                    table_name: M_Product_Category
+                    values:
+                      KeyColumn: 50000
+                      DisplayColumn: Assembly
+                      UUID: f65d2e20-7789-4055-92f4-778a2264cbfd
+                    is_active: true
+                  - id: 107
+                    table_name: M_Product_Category
+                    values:
+                      KeyColumn: 107
+                      DisplayColumn: Bushes
+                      UUID: 4193f7ed-68a5-40cb-aa95-53c743243f5d
+                    is_active: true
+                  - id: 109
+                    table_name: M_Product_Category
+                    values:
+                      KeyColumn: 109
+                      DisplayColumn: Chemicals
+                      UUID: 667b8073-5ac9-442b-b730-6caa0070d60a
+                    is_active: true
+                  - id: 111
+                    table_name: M_Product_Category
+                    values:
+                      KeyColumn: 111
+                      DisplayColumn: Documentation
+                      UUID: 5cd7d70f-9c89-47ab-9270-03e4ae1f7213
+                    is_active: true
+                  - id: 50002
+                    table_name: M_Product_Category
+                    values:
+                      KeyColumn: 50002
+                      DisplayColumn: Packing
+                      UUID: 0dc9c760-11b3-4915-a64f-41327c355246
+                    is_active: true
+                  - id: 110
+                    table_name: M_Product_Category
+                    values:
+                      KeyColumn: 110
+                      DisplayColumn: 'Patio '
+                      UUID: caef69a2-c57e-4e1c-a30a-6c6d4af46010
+                    is_active: true
+                  - id: 50001
+                    table_name: M_Product_Category
+                    values:
+                      KeyColumn: 50001
+                      DisplayColumn: Raw Material
+                      UUID: 4e252c5b-f817-40b5-b9de-a6ea601b0c6f
+                    is_active: true
+                  - id: 50003
+                    table_name: M_Product_Category
+                    values:
+                      KeyColumn: 50003
+                      DisplayColumn: Resources
+                      UUID: 2dd88166-8760-4e83-b3ca-6fdc0b2469a6
+                    is_active: true
+                  - id: 105
+                    table_name: M_Product_Category
+                    values:
+                      KeyColumn: 105
+                      DisplayColumn: Standard
+                      UUID: 6f87398f-2c18-4ca4-b627-05024cc679b8
+                    is_active: true
+                  - id: 108
+                    table_name: M_Product_Category
+                    values:
+                      KeyColumn: 108
+                      DisplayColumn: Tools
+                      UUID: afbbdaf1-2780-4c0a-b213-6cc81cefde4c
+                    is_active: true
+                  - id: 112
+                    table_name: M_Product_Category
+                    values:
+                      KeyColumn: 112
+                      DisplayColumn: Training
+                      UUID: 5d12f938-8e14-4673-9aa8-01919675326a
+                    is_active: true
+                  - id: 106
+                    table_name: M_Product_Category
+                    values:
+                      KeyColumn: 106
+                      DisplayColumn: Trees
+                      UUID: 3491b01f-1612-4813-90b5-f445207b026e
+                    is_active: true
+                next_page_token: ''
+  /field/products/groups:
+    get:
+      tags:
+        - default
+      summary: ListProductGroups
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: OK
+          headers:
+            Server:
+              schema:
+                type: string
+                example: nginx/1.25.2
+            Date:
+              schema:
+                type: string
+                example: Thu, 07 Mar 2024 15:41:38 GMT
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Content-Length:
+              schema:
+                type: integer
+                example: '2603'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            grpc-encoding:
+              schema:
+                type: string
+                example: identity
+            grpc-accept-encoding:
+              schema:
+                type: string
+                example: gzip
+            x-envoy-upstream-service-time:
+              schema:
+                type: integer
+                example: '128'
+            grpc-status:
+              schema:
+                type: integer
+                example: '0'
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Max-Age:
+              schema:
+                type: integer
+                example: '3600'
+            Access-Control-Expose-Headers:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+                example: '*'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                record_count: '12'
+                records:
+                  - id: 50000
+                    table_name: M_Product_Category
+                    values:
+                      KeyColumn: 50000
+                      DisplayColumn: Assembly
+                      UUID: f65d2e20-7789-4055-92f4-778a2264cbfd
+                    is_active: true
+                  - id: 107
+                    table_name: M_Product_Category
+                    values:
+                      KeyColumn: 107
+                      DisplayColumn: Bushes
+                      UUID: 4193f7ed-68a5-40cb-aa95-53c743243f5d
+                    is_active: true
+                  - id: 109
+                    table_name: M_Product_Category
+                    values:
+                      KeyColumn: 109
+                      DisplayColumn: Chemicals
+                      UUID: 667b8073-5ac9-442b-b730-6caa0070d60a
+                    is_active: true
+                  - id: 111
+                    table_name: M_Product_Category
+                    values:
+                      KeyColumn: 111
+                      DisplayColumn: Documentation
+                      UUID: 5cd7d70f-9c89-47ab-9270-03e4ae1f7213
+                    is_active: true
+                  - id: 50002
+                    table_name: M_Product_Category
+                    values:
+                      KeyColumn: 50002
+                      DisplayColumn: Packing
+                      UUID: 0dc9c760-11b3-4915-a64f-41327c355246
+                    is_active: true
+                  - id: 110
+                    table_name: M_Product_Category
+                    values:
+                      KeyColumn: 110
+                      DisplayColumn: 'Patio '
+                      UUID: caef69a2-c57e-4e1c-a30a-6c6d4af46010
+                    is_active: true
+                  - id: 50001
+                    table_name: M_Product_Category
+                    values:
+                      KeyColumn: 50001
+                      DisplayColumn: Raw Material
+                      UUID: 4e252c5b-f817-40b5-b9de-a6ea601b0c6f
+                    is_active: true
+                  - id: 50003
+                    table_name: M_Product_Category
+                    values:
+                      KeyColumn: 50003
+                      DisplayColumn: Resources
+                      UUID: 2dd88166-8760-4e83-b3ca-6fdc0b2469a6
+                    is_active: true
+                  - id: 105
+                    table_name: M_Product_Category
+                    values:
+                      KeyColumn: 105
+                      DisplayColumn: Standard
+                      UUID: 6f87398f-2c18-4ca4-b627-05024cc679b8
+                    is_active: true
+                  - id: 108
+                    table_name: M_Product_Category
+                    values:
+                      KeyColumn: 108
+                      DisplayColumn: Tools
+                      UUID: afbbdaf1-2780-4c0a-b213-6cc81cefde4c
+                    is_active: true
+                  - id: 112
+                    table_name: M_Product_Category
+                    values:
+                      KeyColumn: 112
+                      DisplayColumn: Training
+                      UUID: 5d12f938-8e14-4673-9aa8-01919675326a
+                    is_active: true
+                  - id: 106
+                    table_name: M_Product_Category
+                    values:
+                      KeyColumn: 106
+                      DisplayColumn: Trees
+                      UUID: 3491b01f-1612-4813-90b5-f445207b026e
+                    is_active: true
+                next_page_token: ''
+  /field/products/clasess:
+    get:
+      tags:
+        - default
+      summary: ListProductClasess
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /field/products/vendors:
+    get:
+      tags:
+        - default
+      summary: ListVendors
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: OK
+          headers:
+            Server:
+              schema:
+                type: string
+                example: nginx/1.25.2
+            Date:
+              schema:
+                type: string
+                example: Thu, 07 Mar 2024 15:43:36 GMT
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Content-Length:
+              schema:
+                type: integer
+                example: '3610'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            grpc-encoding:
+              schema:
+                type: string
+                example: identity
+            grpc-accept-encoding:
+              schema:
+                type: string
+                example: gzip
+            x-envoy-upstream-service-time:
+              schema:
+                type: integer
+                example: '118'
+            grpc-status:
+              schema:
+                type: integer
+                example: '0'
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Max-Age:
+              schema:
+                type: integer
+                example: '3600'
+            Access-Control-Expose-Headers:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+                example: '*'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                record_count: '17'
+                records:
+                  - id: 50003
+                    table_name: C_BPartner
+                    values:
+                      KeyColumn: 50003
+                      DisplayColumn: Chemical Product, inc
+                      UUID: b14b6c53-ca82-4dbc-841a-640b04de76bb
+                    is_active: true
+                  - id: 50002
+                    table_name: C_BPartner
+                    values:
+                      KeyColumn: 50002
+                      DisplayColumn: Chrome, Inc
+                      UUID: f472cd49-4f19-4fc3-856a-cb9038cf2924
+                    is_active: true
+                  - id: 50001
+                    table_name: C_BPartner
+                    values:
+                      KeyColumn: 50001
+                      DisplayColumn: Color, Inc
+                      UUID: 5e616d3e-c55b-4ede-9b0e-ac3ae834556b
+                    is_active: true
+                  - id: 117
+                    table_name: C_BPartner
+                    values:
+                      KeyColumn: 117
+                      DisplayColumn: C&W Construction
+                      UUID: b7bafd8e-ae3b-4bbc-9a0d-d47fdbef390f
+                    is_active: true
+                  - id: 113
+                    table_name: C_BPartner
+                    values:
+                      KeyColumn: 113
+                      DisplayColumn: GardenAdmin BP
+                      UUID: d430bdde-e5e4-476b-8dc9-4b0b5d5b02cc
+                    is_active: true
+                  - id: 119
+                    table_name: C_BPartner
+                    values:
+                      KeyColumn: 119
+                      DisplayColumn: GardenUser BP
+                      UUID: 0b870ceb-a34f-4876-8225-0053f11385d2
+                    is_active: true
+                  - id: 118
+                    table_name: C_BPartner
+                    values:
+                      KeyColumn: 118
+                      DisplayColumn: Joe Block
+                      UUID: c3cfeb5f-1b2f-4f4b-a16c-d9cda23f59e1
+                    is_active: true
+                  - id: 121
+                    table_name: C_BPartner
+                    values:
+                      KeyColumn: 121
+                      DisplayColumn: Patio Fun, Inc.
+                      UUID: ca5b584a-c9e8-448f-a388-8ac7c0f02501
+                    is_active: true
+                  - id: 120
+                    table_name: C_BPartner
+                    values:
+                      KeyColumn: 120
+                      DisplayColumn: Seed Farm Inc.
+                      UUID: 2ad2a623-3d1f-47f4-969a-f44f7a05481f
+                    is_active: true
+                  - id: 112
+                    table_name: C_BPartner
+                    values:
+                      KeyColumn: 112
+                      DisplayColumn: Standard
+                      UUID: f5388c95-7424-447d-85de-91424f9da147
+                    is_active: true
+                  - id: 50004
+                    table_name: C_BPartner
+                    values:
+                      KeyColumn: 50004
+                      DisplayColumn: Store Central
+                      UUID: 8b894863-afbe-4384-a8ed-bf0325a5ec25
+                    is_active: true
+                  - id: 50005
+                    table_name: C_BPartner
+                    values:
+                      KeyColumn: 50005
+                      DisplayColumn: Store East
+                      UUID: c6c2de1e-2f0f-4ef8-b7f3-29d80d0cfdb8
+                    is_active: true
+                  - id: 50007
+                    table_name: C_BPartner
+                    values:
+                      KeyColumn: 50007
+                      DisplayColumn: Store North
+                      UUID: 01c65f4b-272c-4fb6-b12a-089d207cadb8
+                    is_active: true
+                  - id: 50008
+                    table_name: C_BPartner
+                    values:
+                      KeyColumn: 50008
+                      DisplayColumn: Store South
+                      UUID: 88f0d79e-bc97-447d-8245-91bd79c0dcf7
+                    is_active: true
+                  - id: 50009
+                    table_name: C_BPartner
+                    values:
+                      KeyColumn: 50009
+                      DisplayColumn: Store West
+                      UUID: b419cad9-bb5b-4a2f-bbdb-1c3c70657408
+                    is_active: true
+                  - id: 114
+                    table_name: C_BPartner
+                    values:
+                      KeyColumn: 114
+                      DisplayColumn: Tree Farm Inc.
+                      UUID: 254e660c-4863-460a-8a69-2b75f6461a33
+                    is_active: true
+                  - id: 50000
+                    table_name: C_BPartner
+                    values:
+                      KeyColumn: 50000
+                      DisplayColumn: Wood, Inc
+                      UUID: 2d96ae84-d50e-447a-bdb7-496242fd846f
+                    is_active: true
+                next_page_token: ''
+  /field/products/{product_id}/warehouse-stocks:
+    get:
+      tags:
+        - default
+      summary: ListWarehouseStocks
+      description: |-
+        ### Request Params
+
+        - product_id (int32, required)
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: product_id
+          in: path
+          schema:
+            type: integer
+          required: true
+          example: '102'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /field/products/{product_id}/substitutes:
+    get:
+      tags:
+        - default
+      summary: ListSubstituteProducts
+      description: |-
+        ### Request Params
+
+        - product_id (int32, required)
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: product_id
+          in: path
+          schema:
+            type: integer
+          required: true
+          example: '50002'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /field/products/{product_id}/relateds:
+    get:
+      tags:
+        - default
+      summary: ListRelatedProducts
+      description: |-
+        ### Request Params
+
+        - product_id (int32, required)
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: product_id
+          in: path
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /field/products/{product_id}/available-to-promises:
+    get:
+      tags:
+        - default
+      summary: ListAvailableToPromises
+      description: |-
+        ### Request Params
+
+        - product_id (int32, required)
+      parameters:
+        - name: product_id
+          in: path
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /field/products/{product_id}/vendor-purchases:
+    get:
+      tags:
+        - default
+      summary: ListVendorPurchases
+      description: |-
+        ### Request Params
+
+        - product_id (int32, required)
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: product_id
+          in: path
+          schema:
+            type: integer
+          required: true
+          example: '111'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}

@@ -1,0 +1,214 @@
+{
+	"info": {
+		"_postman_id": "0a73c28d-2b71-4c9f-a188-bad529635986",
+		"name": "Notice_management",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "28978517"
+	},
+	"item": [
+		{
+			"name": "ListNotices",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{HOST}}/notice-management/notices",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"notice-management",
+						"notices"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "AcknowledgeNotice",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [],
+				"url": {
+					"raw": "{{HOST}}/notice-management/notices/:id/acknowledge",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"notice-management",
+						"notices",
+						":id",
+						"acknowledge"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": ""
+						}
+					]
+				},
+				"description": "### Request Params\n\n- id (int32, required)"
+			},
+			"response": []
+		},
+		{
+			"name": "ListUsers",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{HOST}}/notice-management/notices/users",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"notice-management",
+						"notices",
+						"users"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "ListUsers",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/notice-management/notices/users",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"notice-management",
+								"notices",
+								"users"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.25.2"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 07 Mar 2024 14:24:00 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "441"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "grpc-encoding",
+							"value": "identity"
+						},
+						{
+							"key": "grpc-accept-encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "x-envoy-upstream-service-time",
+							"value": "98"
+						},
+						{
+							"key": "grpc-status",
+							"value": "0"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Max-Age",
+							"value": "3600"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"record_count\": \"2\",\n    \"records\": [\n        {\n            \"id\": 101,\n            \"uuid\": \"bef95ce0-1b93-411f-8eb3-170040f94f96\",\n            \"value\": \"gardenadmin@adempiere.io\",\n            \"name\": \"GardenAdmin\",\n            \"description\": \"GardenAdmin\",\n            \"avatar\": \"\"\n        },\n        {\n            \"id\": 102,\n            \"uuid\": \"7e1a3529-af8d-48c1-b25e-a034f5a47865\",\n            \"value\": \"gardenuser@adempiere.io\",\n            \"name\": \"GardenUser\",\n            \"description\": \"GardenUser\",\n            \"avatar\": \"\"\n        }\n    ],\n    \"next_page_token\": \"\"\n}"
+				}
+			]
+		},
+		{
+			"name": "DeleteNotices",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{HOST}}/notice-management/notices",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"notice-management",
+						"notices"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

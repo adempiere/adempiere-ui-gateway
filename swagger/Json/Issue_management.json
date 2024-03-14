@@ -1,0 +1,1399 @@
+{
+	"info": {
+		"_postman_id": "d3da3249-6d04-4643-bdfb-395111f2d9cf",
+		"name": "Issue_management",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "28978517"
+	},
+	"item": [
+		{
+			"name": "ListRequestTypes",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{HOST}}/issue-management/request-types",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"issue-management",
+						"request-types"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "ListRequestTypes",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/issue-management/request-types",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"issue-management",
+								"request-types"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.25.2"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 07 Mar 2024 13:00:48 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "893"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "grpc-encoding",
+							"value": "identity"
+						},
+						{
+							"key": "grpc-accept-encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "x-envoy-upstream-service-time",
+							"value": "164"
+						},
+						{
+							"key": "grpc-status",
+							"value": "0"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Max-Age",
+							"value": "3600"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"record_count\": \"3\",\n    \"records\": [\n        {\n            \"id\": 100,\n            \"name\": \"Request for Quotation\",\n            \"description\": \"\",\n            \"due_date_tolerance\": 7,\n            \"default_status\": {\n                \"id\": 100,\n                \"value\": \"Open\",\n                \"name\": \"Open\",\n                \"description\": \"\",\n                \"sequence\": 1,\n                \"is_default\": true\n            },\n            \"is_default\": false\n        },\n        {\n            \"id\": 101,\n            \"name\": \"Service Request\",\n            \"description\": \"\",\n            \"due_date_tolerance\": 7,\n            \"default_status\": {\n                \"id\": 100,\n                \"value\": \"Open\",\n                \"name\": \"Open\",\n                \"description\": \"\",\n                \"sequence\": 1,\n                \"is_default\": true\n            },\n            \"is_default\": false\n        },\n        {\n            \"id\": 102,\n            \"name\": \"Warranty\",\n            \"description\": \"\",\n            \"due_date_tolerance\": 7,\n            \"default_status\": {\n                \"id\": 100,\n                \"value\": \"Open\",\n                \"name\": \"Open\",\n                \"description\": \"\",\n                \"sequence\": 1,\n                \"is_default\": true\n            },\n            \"is_default\": false\n        }\n    ],\n    \"next_page_token\": \"\"\n}"
+				}
+			]
+		},
+		{
+			"name": "ListSalesRepresentatives",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{HOST}}/issue-management/sales-representatives",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"issue-management",
+						"sales-representatives"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "ListSalesRepresentatives",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/issue-management/sales-representatives",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"issue-management",
+								"sales-representatives"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.25.2"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 07 Mar 2024 13:01:27 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "260"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "grpc-encoding",
+							"value": "identity"
+						},
+						{
+							"key": "grpc-accept-encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "x-envoy-upstream-service-time",
+							"value": "111"
+						},
+						{
+							"key": "grpc-status",
+							"value": "0"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Max-Age",
+							"value": "3600"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"record_count\": \"2\",\n    \"records\": [\n        {\n            \"id\": 101,\n            \"name\": \"GardenAdmin\",\n            \"description\": \"GardenAdmin\",\n            \"avatar\": \"\"\n        },\n        {\n            \"id\": 102,\n            \"name\": \"GardenUser\",\n            \"description\": \"GardenUser\",\n            \"avatar\": \"\"\n        }\n    ],\n    \"next_page_token\": \"\"\n}"
+				}
+			]
+		},
+		{
+			"name": "ListPriorities",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{HOST}}/issue-management/priorities",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"issue-management",
+						"priorities"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "ListPriorities",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/issue-management/priorities",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"issue-management",
+								"priorities"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.25.2"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 07 Mar 2024 13:04:19 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "519"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "grpc-encoding",
+							"value": "identity"
+						},
+						{
+							"key": "grpc-accept-encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "x-envoy-upstream-service-time",
+							"value": "124"
+						},
+						{
+							"key": "grpc-status",
+							"value": "0"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Max-Age",
+							"value": "3600"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"record_count\": \"5\",\n    \"records\": [\n        {\n            \"id\": 759,\n            \"value\": \"1\",\n            \"name\": \"Urgente\",\n            \"description\": \"\"\n        },\n        {\n            \"id\": 229,\n            \"value\": \"3\",\n            \"name\": \"Alta\",\n            \"description\": \"Prioridad Alta\"\n        },\n        {\n            \"id\": 230,\n            \"value\": \"5\",\n            \"name\": \"Media\",\n            \"description\": \"Prioridad Media\"\n        },\n        {\n            \"id\": 231,\n            \"value\": \"7\",\n            \"name\": \"Baja\",\n            \"description\": \"Prioridad Baja\"\n        },\n        {\n            \"id\": 760,\n            \"value\": \"9\",\n            \"name\": \"Menor\",\n            \"description\": \"Minor\"\n        }\n    ],\n    \"next_page_token\": \"\"\n}"
+				}
+			]
+		},
+		{
+			"name": "ListStatusCategories",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{HOST}}/issue-management/status-categories",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"issue-management",
+						"status-categories"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "ListStatusCategories",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/issue-management/status-categories",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"issue-management",
+								"status-categories"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.25.2"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 08 Mar 2024 14:19:21 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "177"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "grpc-encoding",
+							"value": "identity"
+						},
+						{
+							"key": "grpc-accept-encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "x-envoy-upstream-service-time",
+							"value": "425"
+						},
+						{
+							"key": "grpc-status",
+							"value": "0"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Max-Age",
+							"value": "3600"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"record_count\": \"1\",\n    \"records\": [\n        {\n            \"id\": 100,\n            \"name\": \"Default\",\n            \"description\": \"Default Request Status\",\n            \"is_default\": true\n        }\n    ],\n    \"next_page_token\": \"\"\n}"
+				}
+			]
+		},
+		{
+			"name": "ListCategories",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{HOST}}/issue-management/categories",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"issue-management",
+						"categories"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "ListCategories",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/issue-management/categories",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"issue-management",
+								"categories"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.25.2"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 08 Mar 2024 14:23:25 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "265"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "grpc-encoding",
+							"value": "identity"
+						},
+						{
+							"key": "grpc-accept-encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "x-envoy-upstream-service-time",
+							"value": "147"
+						},
+						{
+							"key": "grpc-status",
+							"value": "0"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Max-Age",
+							"value": "3600"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"record_count\": \"3\",\n    \"records\": [\n        {\n            \"id\": 100,\n            \"name\": \"Seeding\",\n            \"description\": \"\"\n        },\n        {\n            \"id\": 101,\n            \"name\": \"Cutting\",\n            \"description\": \"\"\n        },\n        {\n            \"id\": 102,\n            \"name\": \"Watering\",\n            \"description\": \"\"\n        }\n    ],\n    \"next_page_token\": \"\"\n}"
+				}
+			]
+		},
+		{
+			"name": "ListGroups",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{HOST}}/issue-management/groups",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"issue-management",
+						"groups"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "ListGroups",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/issue-management/groups",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"issue-management",
+								"groups"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.25.2"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 08 Mar 2024 14:23:59 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "196"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "grpc-encoding",
+							"value": "identity"
+						},
+						{
+							"key": "grpc-accept-encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "x-envoy-upstream-service-time",
+							"value": "95"
+						},
+						{
+							"key": "grpc-status",
+							"value": "0"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Max-Age",
+							"value": "3600"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"record_count\": \"2\",\n    \"records\": [\n        {\n            \"id\": 100,\n            \"name\": \"Flowers\",\n            \"description\": \"\"\n        },\n        {\n            \"id\": 101,\n            \"name\": \"Trees\",\n            \"description\": \"\"\n        }\n    ],\n    \"next_page_token\": \"\"\n}"
+				}
+			]
+		},
+		{
+			"name": "ListTaskStatuses",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{HOST}}/issue-management/task-statuses",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"issue-management",
+						"task-statuses"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "ListTaskStatuses",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/issue-management/task-statuses",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"issue-management",
+								"task-statuses"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.25.2"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 08 Mar 2024 14:24:35 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "888"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "grpc-encoding",
+							"value": "identity"
+						},
+						{
+							"key": "grpc-accept-encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "x-envoy-upstream-service-time",
+							"value": "119"
+						},
+						{
+							"key": "grpc-status",
+							"value": "0"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Max-Age",
+							"value": "3600"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"record_count\": \"9\",\n    \"records\": [\n        {\n            \"id\": 815,\n            \"value\": \"0\",\n            \"name\": \" 0% No Iniciado\",\n            \"description\": \"\"\n        },\n        {\n            \"id\": 817,\n            \"value\": \"2\",\n            \"name\": \" 20% Iniciado\",\n            \"description\": \"\"\n        },\n        {\n            \"id\": 819,\n            \"value\": \"4\",\n            \"name\": \" 40% Ocupado\",\n            \"description\": \"\"\n        },\n        {\n            \"id\": 820,\n            \"value\": \"6\",\n            \"name\": \" 60% Buen Progreso\",\n            \"description\": \"\"\n        },\n        {\n            \"id\": 818,\n            \"value\": \"8\",\n            \"name\": \" 80% Cerca de Finalizar\",\n            \"description\": \"\"\n        },\n        {\n            \"id\": 821,\n            \"value\": \"9\",\n            \"name\": \" 90% Finalizando\",\n            \"description\": \"\"\n        },\n        {\n            \"id\": 822,\n            \"value\": \"A\",\n            \"name\": \" 95% Casi Hecho\",\n            \"description\": \"\"\n        },\n        {\n            \"id\": 823,\n            \"value\": \"C\",\n            \"name\": \" 99% Limpieza\",\n            \"description\": \"\"\n        },\n        {\n            \"id\": 816,\n            \"value\": \"D\",\n            \"name\": \"100% Completo\",\n            \"description\": \"\"\n        }\n    ],\n    \"next_page_token\": \"\"\n}"
+				}
+			]
+		},
+		{
+			"name": "ListBusinessPartners",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{HOST}}/issue-management/business-partners",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"issue-management",
+						"business-partners"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "ListBusinessPartners",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/issue-management/business-partners",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"issue-management",
+								"business-partners"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.25.2"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 08 Mar 2024 14:25:09 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "1884"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "grpc-encoding",
+							"value": "identity"
+						},
+						{
+							"key": "grpc-accept-encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "x-envoy-upstream-service-time",
+							"value": "140"
+						},
+						{
+							"key": "grpc-status",
+							"value": "0"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Max-Age",
+							"value": "3600"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"record_count\": \"18\",\n    \"records\": [\n        {\n            \"id\": 113,\n            \"value\": \"GardenAdmin\",\n            \"name\": \"GardenAdmin BP\",\n            \"description\": \"\"\n        },\n        {\n            \"id\": 117,\n            \"value\": \"C&W\",\n            \"name\": \"C&W Construction\",\n            \"description\": \"\"\n        },\n        {\n            \"id\": 118,\n            \"value\": \"JoeBlock\",\n            \"name\": \"Joe Block\",\n            \"description\": \"\"\n        },\n        {\n            \"id\": 119,\n            \"value\": \"GardenUser\",\n            \"name\": \"GardenUser BP\",\n            \"description\": \"\"\n        },\n        {\n            \"id\": 121,\n            \"value\": \"Patio\",\n            \"name\": \"Patio Fun, Inc.\",\n            \"description\": \"\"\n        },\n        {\n            \"id\": 50000,\n            \"value\": \"Wood, Inc\",\n            \"name\": \"Wood, Inc\",\n            \"description\": \"\"\n        },\n        {\n            \"id\": 50001,\n            \"value\": \"Color, Inc\",\n            \"name\": \"Color, Inc\",\n            \"description\": \"\"\n        },\n        {\n            \"id\": 50002,\n            \"value\": \"Chrome, Inc\",\n            \"name\": \"Chrome, Inc\",\n            \"description\": \"\"\n        },\n        {\n            \"id\": 50003,\n            \"value\": \"Chemical Product, inc\",\n            \"name\": \"Chemical Product, inc\",\n            \"description\": \"\"\n        },\n        {\n            \"id\": 50004,\n            \"value\": \"Store Central\",\n            \"name\": \"Store Central\",\n            \"description\": \"\"\n        },\n        {\n            \"id\": 50005,\n            \"value\": \"Store East\",\n            \"name\": \"Store East\",\n            \"description\": \"\"\n        },\n        {\n            \"id\": 50007,\n            \"value\": \"Store North\",\n            \"name\": \"Store North\",\n            \"description\": \"\"\n        },\n        {\n            \"id\": 50008,\n            \"value\": \"Store South\",\n            \"name\": \"Store South\",\n            \"description\": \"\"\n        },\n        {\n            \"id\": 50009,\n            \"value\": \"Store West\",\n            \"name\": \"Store West\",\n            \"description\": \"\"\n        },\n        {\n            \"id\": 120,\n            \"value\": \"SeedFarm\",\n            \"name\": \"Seed Farm Inc.\",\n            \"description\": \"Customer & Vendor\"\n        },\n        {\n            \"id\": 112,\n            \"value\": \"Standard\",\n            \"name\": \"Standard\",\n            \"description\": \"Walk-In Customer\"\n        },\n        {\n            \"id\": 114,\n            \"value\": \"TreeFarm\",\n            \"name\": \"Tree Farm Inc.\",\n            \"description\": \"Vendor\"\n        },\n        {\n            \"id\": 1000000,\n            \"value\": \"10000000\",\n            \"name\": \"Prueba\",\n            \"description\": \"Walk-In Customer\"\n        }\n    ],\n    \"next_page_token\": \"\"\n}"
+				}
+			]
+		},
+		{
+			"name": "ListProjects",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{HOST}}/issue-management/projects",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"issue-management",
+						"projects"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "ListProjects",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/issue-management/projects",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"issue-management",
+								"projects"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.25.2"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 08 Mar 2024 14:26:11 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "296"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "grpc-encoding",
+							"value": "identity"
+						},
+						{
+							"key": "grpc-accept-encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "x-envoy-upstream-service-time",
+							"value": "112"
+						},
+						{
+							"key": "grpc-status",
+							"value": "0"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Max-Age",
+							"value": "3600"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"record_count\": \"2\",\n    \"records\": [\n        {\n            \"id\": 100,\n            \"value\": \"Standard\",\n            \"name\": \"Standard\",\n            \"description\": \"\"\n        },\n        {\n            \"id\": 101,\n            \"value\": \"Landscape\",\n            \"name\": \"Landcape for New Complex\",\n            \"description\": \"New Layout of the front garden.\"\n        }\n    ],\n    \"next_page_token\": \"\"\n}"
+				}
+			]
+		},
+		{
+			"name": "ExistsIssues",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{HOST}}/issue-management/issues/:table_name/:record_id/exists",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"issue-management",
+						"issues",
+						":table_name",
+						":record_id",
+						"exists"
+					],
+					"variable": [
+						{
+							"key": "table_name",
+							"value": "C_DocTypeCounter"
+						},
+						{
+							"key": "record_id",
+							"value": "100"
+						}
+					]
+				},
+				"description": "### Request Params\n\n- table_name (String,required)\n- record_id (int32, required)"
+			},
+			"response": [
+				{
+					"name": "ExistsIssues",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/issue-management/issues/:table_name/:record_id/exists",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"issue-management",
+								"issues",
+								":table_name",
+								":record_id",
+								"exists"
+							],
+							"variable": [
+								{
+									"key": "table_name",
+									"value": "C_DocTypeCounter"
+								},
+								{
+									"key": "record_id",
+									"value": "100"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.25.2"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 08 Mar 2024 16:21:40 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "23"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "grpc-encoding",
+							"value": "identity"
+						},
+						{
+							"key": "grpc-accept-encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "x-envoy-upstream-service-time",
+							"value": "110"
+						},
+						{
+							"key": "grpc-status",
+							"value": "0"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Max-Age",
+							"value": "3600"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"record_count\": 0\n}"
+				}
+			]
+		},
+		{
+			"name": "Issue_management_statusCategoryId",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{HOST}}/issue-management/status-categories/:status_category_id/statuses?request_type_id=100",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"issue-management",
+						"status-categories",
+						":status_category_id",
+						"statuses"
+					],
+					"query": [
+						{
+							"key": "request_type_id",
+							"value": "100"
+						}
+					],
+					"variable": [
+						{
+							"key": "status_category_id",
+							"value": "100"
+						}
+					]
+				},
+				"description": "### Request Params\n\n- status_category_id (int32,required)\n- request_type_id (int32, required)"
+			},
+			"response": [
+				{
+					"name": "Issue_management_statusCategoryId",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/issue-management/status-categories/:status_category_id/statuses?request_type_id=100",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"issue-management",
+								"status-categories",
+								":status_category_id",
+								"statuses"
+							],
+							"query": [
+								{
+									"key": "request_type_id",
+									"value": "100"
+								}
+							],
+							"variable": [
+								{
+									"key": "status_category_id",
+									"value": "100"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.25.2"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 08 Mar 2024 14:42:38 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "595"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "grpc-encoding",
+							"value": "identity"
+						},
+						{
+							"key": "grpc-accept-encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "x-envoy-upstream-service-time",
+							"value": "79"
+						},
+						{
+							"key": "grpc-status",
+							"value": "0"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Max-Age",
+							"value": "3600"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"record_count\": \"4\",\n    \"records\": [\n        {\n            \"id\": 100,\n            \"value\": \"Open\",\n            \"name\": \"Open\",\n            \"description\": \"\",\n            \"sequence\": 1,\n            \"is_default\": true\n        },\n        {\n            \"id\": 101,\n            \"value\": \"Waiting\",\n            \"name\": \"Waiting on customer\",\n            \"description\": \"\",\n            \"sequence\": 2,\n            \"is_default\": false\n        },\n        {\n            \"id\": 102,\n            \"value\": \"Closed\",\n            \"name\": \"Closed\",\n            \"description\": \"\",\n            \"sequence\": 3,\n            \"is_default\": false\n        },\n        {\n            \"id\": 103,\n            \"value\": \"Final\",\n            \"name\": \"Final Close\",\n            \"description\": \"\",\n            \"sequence\": 9,\n            \"is_default\": false\n        }\n    ],\n    \"next_page_token\": \"\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Issue_management_statuses",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{HOST}}/issue-management/statuses?request_type_id=100",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"issue-management",
+						"statuses"
+					],
+					"query": [
+						{
+							"key": "request_type_id",
+							"value": "100"
+						}
+					]
+				},
+				"description": "### Request Params\n\n- request_type_id (int32,required)"
+			},
+			"response": [
+				{
+					"name": "Issue_management_statuses",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/issue-management/statuses?request_type_id=100",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"issue-management",
+								"statuses"
+							],
+							"query": [
+								{
+									"key": "request_type_id",
+									"value": "100"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.25.2"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 08 Mar 2024 14:32:41 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "595"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "grpc-encoding",
+							"value": "identity"
+						},
+						{
+							"key": "grpc-accept-encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "x-envoy-upstream-service-time",
+							"value": "120"
+						},
+						{
+							"key": "grpc-status",
+							"value": "0"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Max-Age",
+							"value": "3600"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"record_count\": \"4\",\n    \"records\": [\n        {\n            \"id\": 100,\n            \"value\": \"Open\",\n            \"name\": \"Open\",\n            \"description\": \"\",\n            \"sequence\": 1,\n            \"is_default\": true\n        },\n        {\n            \"id\": 101,\n            \"value\": \"Waiting\",\n            \"name\": \"Waiting on customer\",\n            \"description\": \"\",\n            \"sequence\": 2,\n            \"is_default\": false\n        },\n        {\n            \"id\": 102,\n            \"value\": \"Closed\",\n            \"name\": \"Closed\",\n            \"description\": \"\",\n            \"sequence\": 3,\n            \"is_default\": false\n        },\n        {\n            \"id\": 103,\n            \"value\": \"Final\",\n            \"name\": \"Final Close\",\n            \"description\": \"\",\n            \"sequence\": 9,\n            \"is_default\": false\n        }\n    ],\n    \"next_page_token\": \"\"\n}"
+				}
+			]
+		}
+	]
+}

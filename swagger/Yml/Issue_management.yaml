@@ -1,0 +1,1202 @@
+openapi: 3.0.0
+info:
+  title: Issue_management
+  version: 1.0.0
+servers:
+  - url: http://{{host}}
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+paths:
+  /issue-management/request-types:
+    get:
+      tags:
+        - default
+      summary: ListRequestTypes
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: OK
+          headers:
+            Server:
+              schema:
+                type: string
+                example: nginx/1.25.2
+            Date:
+              schema:
+                type: string
+                example: Thu, 07 Mar 2024 13:00:48 GMT
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Content-Length:
+              schema:
+                type: integer
+                example: '893'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            grpc-encoding:
+              schema:
+                type: string
+                example: identity
+            grpc-accept-encoding:
+              schema:
+                type: string
+                example: gzip
+            x-envoy-upstream-service-time:
+              schema:
+                type: integer
+                example: '164'
+            grpc-status:
+              schema:
+                type: integer
+                example: '0'
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Max-Age:
+              schema:
+                type: integer
+                example: '3600'
+            Access-Control-Expose-Headers:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+                example: '*'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                record_count: '3'
+                records:
+                  - id: 100
+                    name: Request for Quotation
+                    description: ''
+                    due_date_tolerance: 7
+                    default_status:
+                      id: 100
+                      value: Open
+                      name: Open
+                      description: ''
+                      sequence: 1
+                      is_default: true
+                    is_default: false
+                  - id: 101
+                    name: Service Request
+                    description: ''
+                    due_date_tolerance: 7
+                    default_status:
+                      id: 100
+                      value: Open
+                      name: Open
+                      description: ''
+                      sequence: 1
+                      is_default: true
+                    is_default: false
+                  - id: 102
+                    name: Warranty
+                    description: ''
+                    due_date_tolerance: 7
+                    default_status:
+                      id: 100
+                      value: Open
+                      name: Open
+                      description: ''
+                      sequence: 1
+                      is_default: true
+                    is_default: false
+                next_page_token: ''
+  /issue-management/sales-representatives:
+    get:
+      tags:
+        - default
+      summary: ListSalesRepresentatives
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: OK
+          headers:
+            Server:
+              schema:
+                type: string
+                example: nginx/1.25.2
+            Date:
+              schema:
+                type: string
+                example: Thu, 07 Mar 2024 13:01:27 GMT
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Content-Length:
+              schema:
+                type: integer
+                example: '260'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            grpc-encoding:
+              schema:
+                type: string
+                example: identity
+            grpc-accept-encoding:
+              schema:
+                type: string
+                example: gzip
+            x-envoy-upstream-service-time:
+              schema:
+                type: integer
+                example: '111'
+            grpc-status:
+              schema:
+                type: integer
+                example: '0'
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Max-Age:
+              schema:
+                type: integer
+                example: '3600'
+            Access-Control-Expose-Headers:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+                example: '*'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                record_count: '2'
+                records:
+                  - id: 101
+                    name: GardenAdmin
+                    description: GardenAdmin
+                    avatar: ''
+                  - id: 102
+                    name: GardenUser
+                    description: GardenUser
+                    avatar: ''
+                next_page_token: ''
+  /issue-management/priorities:
+    get:
+      tags:
+        - default
+      summary: ListPriorities
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: OK
+          headers:
+            Server:
+              schema:
+                type: string
+                example: nginx/1.25.2
+            Date:
+              schema:
+                type: string
+                example: Thu, 07 Mar 2024 13:04:19 GMT
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Content-Length:
+              schema:
+                type: integer
+                example: '519'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            grpc-encoding:
+              schema:
+                type: string
+                example: identity
+            grpc-accept-encoding:
+              schema:
+                type: string
+                example: gzip
+            x-envoy-upstream-service-time:
+              schema:
+                type: integer
+                example: '124'
+            grpc-status:
+              schema:
+                type: integer
+                example: '0'
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Max-Age:
+              schema:
+                type: integer
+                example: '3600'
+            Access-Control-Expose-Headers:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+                example: '*'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                record_count: '5'
+                records:
+                  - id: 759
+                    value: '1'
+                    name: Urgente
+                    description: ''
+                  - id: 229
+                    value: '3'
+                    name: Alta
+                    description: Prioridad Alta
+                  - id: 230
+                    value: '5'
+                    name: Media
+                    description: Prioridad Media
+                  - id: 231
+                    value: '7'
+                    name: Baja
+                    description: Prioridad Baja
+                  - id: 760
+                    value: '9'
+                    name: Menor
+                    description: Minor
+                next_page_token: ''
+  /issue-management/status-categories:
+    get:
+      tags:
+        - default
+      summary: ListStatusCategories
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: OK
+          headers:
+            Server:
+              schema:
+                type: string
+                example: nginx/1.25.2
+            Date:
+              schema:
+                type: string
+                example: Fri, 08 Mar 2024 14:19:21 GMT
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Content-Length:
+              schema:
+                type: integer
+                example: '177'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            grpc-encoding:
+              schema:
+                type: string
+                example: identity
+            grpc-accept-encoding:
+              schema:
+                type: string
+                example: gzip
+            x-envoy-upstream-service-time:
+              schema:
+                type: integer
+                example: '425'
+            grpc-status:
+              schema:
+                type: integer
+                example: '0'
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Max-Age:
+              schema:
+                type: integer
+                example: '3600'
+            Access-Control-Expose-Headers:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+                example: '*'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                record_count: '1'
+                records:
+                  - id: 100
+                    name: Default
+                    description: Default Request Status
+                    is_default: true
+                next_page_token: ''
+  /issue-management/categories:
+    get:
+      tags:
+        - default
+      summary: ListCategories
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: OK
+          headers:
+            Server:
+              schema:
+                type: string
+                example: nginx/1.25.2
+            Date:
+              schema:
+                type: string
+                example: Fri, 08 Mar 2024 14:23:25 GMT
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Content-Length:
+              schema:
+                type: integer
+                example: '265'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            grpc-encoding:
+              schema:
+                type: string
+                example: identity
+            grpc-accept-encoding:
+              schema:
+                type: string
+                example: gzip
+            x-envoy-upstream-service-time:
+              schema:
+                type: integer
+                example: '147'
+            grpc-status:
+              schema:
+                type: integer
+                example: '0'
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Max-Age:
+              schema:
+                type: integer
+                example: '3600'
+            Access-Control-Expose-Headers:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+                example: '*'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                record_count: '3'
+                records:
+                  - id: 100
+                    name: Seeding
+                    description: ''
+                  - id: 101
+                    name: Cutting
+                    description: ''
+                  - id: 102
+                    name: Watering
+                    description: ''
+                next_page_token: ''
+  /issue-management/groups:
+    get:
+      tags:
+        - default
+      summary: ListGroups
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: OK
+          headers:
+            Server:
+              schema:
+                type: string
+                example: nginx/1.25.2
+            Date:
+              schema:
+                type: string
+                example: Fri, 08 Mar 2024 14:23:59 GMT
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Content-Length:
+              schema:
+                type: integer
+                example: '196'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            grpc-encoding:
+              schema:
+                type: string
+                example: identity
+            grpc-accept-encoding:
+              schema:
+                type: string
+                example: gzip
+            x-envoy-upstream-service-time:
+              schema:
+                type: integer
+                example: '95'
+            grpc-status:
+              schema:
+                type: integer
+                example: '0'
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Max-Age:
+              schema:
+                type: integer
+                example: '3600'
+            Access-Control-Expose-Headers:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+                example: '*'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                record_count: '2'
+                records:
+                  - id: 100
+                    name: Flowers
+                    description: ''
+                  - id: 101
+                    name: Trees
+                    description: ''
+                next_page_token: ''
+  /issue-management/task-statuses:
+    get:
+      tags:
+        - default
+      summary: ListTaskStatuses
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: OK
+          headers:
+            Server:
+              schema:
+                type: string
+                example: nginx/1.25.2
+            Date:
+              schema:
+                type: string
+                example: Fri, 08 Mar 2024 14:24:35 GMT
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Content-Length:
+              schema:
+                type: integer
+                example: '888'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            grpc-encoding:
+              schema:
+                type: string
+                example: identity
+            grpc-accept-encoding:
+              schema:
+                type: string
+                example: gzip
+            x-envoy-upstream-service-time:
+              schema:
+                type: integer
+                example: '119'
+            grpc-status:
+              schema:
+                type: integer
+                example: '0'
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Max-Age:
+              schema:
+                type: integer
+                example: '3600'
+            Access-Control-Expose-Headers:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+                example: '*'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                record_count: '9'
+                records:
+                  - id: 815
+                    value: '0'
+                    name: ' 0% No Iniciado'
+                    description: ''
+                  - id: 817
+                    value: '2'
+                    name: ' 20% Iniciado'
+                    description: ''
+                  - id: 819
+                    value: '4'
+                    name: ' 40% Ocupado'
+                    description: ''
+                  - id: 820
+                    value: '6'
+                    name: ' 60% Buen Progreso'
+                    description: ''
+                  - id: 818
+                    value: '8'
+                    name: ' 80% Cerca de Finalizar'
+                    description: ''
+                  - id: 821
+                    value: '9'
+                    name: ' 90% Finalizando'
+                    description: ''
+                  - id: 822
+                    value: A
+                    name: ' 95% Casi Hecho'
+                    description: ''
+                  - id: 823
+                    value: C
+                    name: ' 99% Limpieza'
+                    description: ''
+                  - id: 816
+                    value: D
+                    name: 100% Completo
+                    description: ''
+                next_page_token: ''
+  /issue-management/business-partners:
+    get:
+      tags:
+        - default
+      summary: ListBusinessPartners
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: OK
+          headers:
+            Server:
+              schema:
+                type: string
+                example: nginx/1.25.2
+            Date:
+              schema:
+                type: string
+                example: Fri, 08 Mar 2024 14:25:09 GMT
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Content-Length:
+              schema:
+                type: integer
+                example: '1884'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            grpc-encoding:
+              schema:
+                type: string
+                example: identity
+            grpc-accept-encoding:
+              schema:
+                type: string
+                example: gzip
+            x-envoy-upstream-service-time:
+              schema:
+                type: integer
+                example: '140'
+            grpc-status:
+              schema:
+                type: integer
+                example: '0'
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Max-Age:
+              schema:
+                type: integer
+                example: '3600'
+            Access-Control-Expose-Headers:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+                example: '*'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                record_count: '18'
+                records:
+                  - id: 113
+                    value: GardenAdmin
+                    name: GardenAdmin BP
+                    description: ''
+                  - id: 117
+                    value: C&W
+                    name: C&W Construction
+                    description: ''
+                  - id: 118
+                    value: JoeBlock
+                    name: Joe Block
+                    description: ''
+                  - id: 119
+                    value: GardenUser
+                    name: GardenUser BP
+                    description: ''
+                  - id: 121
+                    value: Patio
+                    name: Patio Fun, Inc.
+                    description: ''
+                  - id: 50000
+                    value: Wood, Inc
+                    name: Wood, Inc
+                    description: ''
+                  - id: 50001
+                    value: Color, Inc
+                    name: Color, Inc
+                    description: ''
+                  - id: 50002
+                    value: Chrome, Inc
+                    name: Chrome, Inc
+                    description: ''
+                  - id: 50003
+                    value: Chemical Product, inc
+                    name: Chemical Product, inc
+                    description: ''
+                  - id: 50004
+                    value: Store Central
+                    name: Store Central
+                    description: ''
+                  - id: 50005
+                    value: Store East
+                    name: Store East
+                    description: ''
+                  - id: 50007
+                    value: Store North
+                    name: Store North
+                    description: ''
+                  - id: 50008
+                    value: Store South
+                    name: Store South
+                    description: ''
+                  - id: 50009
+                    value: Store West
+                    name: Store West
+                    description: ''
+                  - id: 120
+                    value: SeedFarm
+                    name: Seed Farm Inc.
+                    description: Customer & Vendor
+                  - id: 112
+                    value: Standard
+                    name: Standard
+                    description: Walk-In Customer
+                  - id: 114
+                    value: TreeFarm
+                    name: Tree Farm Inc.
+                    description: Vendor
+                  - id: 1000000
+                    value: '10000000'
+                    name: Prueba
+                    description: Walk-In Customer
+                next_page_token: ''
+  /issue-management/projects:
+    get:
+      tags:
+        - default
+      summary: ListProjects
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: OK
+          headers:
+            Server:
+              schema:
+                type: string
+                example: nginx/1.25.2
+            Date:
+              schema:
+                type: string
+                example: Fri, 08 Mar 2024 14:26:11 GMT
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Content-Length:
+              schema:
+                type: integer
+                example: '296'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            grpc-encoding:
+              schema:
+                type: string
+                example: identity
+            grpc-accept-encoding:
+              schema:
+                type: string
+                example: gzip
+            x-envoy-upstream-service-time:
+              schema:
+                type: integer
+                example: '112'
+            grpc-status:
+              schema:
+                type: integer
+                example: '0'
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Max-Age:
+              schema:
+                type: integer
+                example: '3600'
+            Access-Control-Expose-Headers:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+                example: '*'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                record_count: '2'
+                records:
+                  - id: 100
+                    value: Standard
+                    name: Standard
+                    description: ''
+                  - id: 101
+                    value: Landscape
+                    name: Landcape for New Complex
+                    description: New Layout of the front garden.
+                next_page_token: ''
+  /issue-management/issues/{table_name}/{record_id}/exists:
+    get:
+      tags:
+        - default
+      summary: ExistsIssues
+      description: |-
+        ### Request Params
+
+        - table_name (String,required)
+        - record_id (int32, required)
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: table_name
+          in: path
+          schema:
+            type: string
+          required: true
+          example: C_DocTypeCounter
+        - name: record_id
+          in: path
+          schema:
+            type: integer
+          required: true
+          example: '100'
+      responses:
+        '200':
+          description: OK
+          headers:
+            Server:
+              schema:
+                type: string
+                example: nginx/1.25.2
+            Date:
+              schema:
+                type: string
+                example: Fri, 08 Mar 2024 16:21:40 GMT
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Content-Length:
+              schema:
+                type: integer
+                example: '23'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            grpc-encoding:
+              schema:
+                type: string
+                example: identity
+            grpc-accept-encoding:
+              schema:
+                type: string
+                example: gzip
+            x-envoy-upstream-service-time:
+              schema:
+                type: integer
+                example: '110'
+            grpc-status:
+              schema:
+                type: integer
+                example: '0'
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Max-Age:
+              schema:
+                type: integer
+                example: '3600'
+            Access-Control-Expose-Headers:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+                example: '*'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                record_count: 0
+  /issue-management/status-categories/{status_category_id}/statuses:
+    get:
+      tags:
+        - default
+      summary: Issue_management_statusCategoryId
+      description: |-
+        ### Request Params
+
+        - status_category_id (int32,required)
+        - request_type_id (int32, required)
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: request_type_id
+          in: query
+          schema:
+            type: integer
+          example: '100'
+        - name: status_category_id
+          in: path
+          schema:
+            type: integer
+          required: true
+          example: '100'
+      responses:
+        '200':
+          description: OK
+          headers:
+            Server:
+              schema:
+                type: string
+                example: nginx/1.25.2
+            Date:
+              schema:
+                type: string
+                example: Fri, 08 Mar 2024 14:42:38 GMT
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Content-Length:
+              schema:
+                type: integer
+                example: '595'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            grpc-encoding:
+              schema:
+                type: string
+                example: identity
+            grpc-accept-encoding:
+              schema:
+                type: string
+                example: gzip
+            x-envoy-upstream-service-time:
+              schema:
+                type: integer
+                example: '79'
+            grpc-status:
+              schema:
+                type: integer
+                example: '0'
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Max-Age:
+              schema:
+                type: integer
+                example: '3600'
+            Access-Control-Expose-Headers:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+                example: '*'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                record_count: '4'
+                records:
+                  - id: 100
+                    value: Open
+                    name: Open
+                    description: ''
+                    sequence: 1
+                    is_default: true
+                  - id: 101
+                    value: Waiting
+                    name: Waiting on customer
+                    description: ''
+                    sequence: 2
+                    is_default: false
+                  - id: 102
+                    value: Closed
+                    name: Closed
+                    description: ''
+                    sequence: 3
+                    is_default: false
+                  - id: 103
+                    value: Final
+                    name: Final Close
+                    description: ''
+                    sequence: 9
+                    is_default: false
+                next_page_token: ''
+  /issue-management/statuses:
+    get:
+      tags:
+        - default
+      summary: Issue_management_statuses
+      description: |-
+        ### Request Params
+
+        - request_type_id (int32,required)
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: request_type_id
+          in: query
+          schema:
+            type: integer
+          example: '100'
+      responses:
+        '200':
+          description: OK
+          headers:
+            Server:
+              schema:
+                type: string
+                example: nginx/1.25.2
+            Date:
+              schema:
+                type: string
+                example: Fri, 08 Mar 2024 14:32:41 GMT
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Content-Length:
+              schema:
+                type: integer
+                example: '595'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            grpc-encoding:
+              schema:
+                type: string
+                example: identity
+            grpc-accept-encoding:
+              schema:
+                type: string
+                example: gzip
+            x-envoy-upstream-service-time:
+              schema:
+                type: integer
+                example: '120'
+            grpc-status:
+              schema:
+                type: integer
+                example: '0'
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Max-Age:
+              schema:
+                type: integer
+                example: '3600'
+            Access-Control-Expose-Headers:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+                example: '*'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                record_count: '4'
+                records:
+                  - id: 100
+                    value: Open
+                    name: Open
+                    description: ''
+                    sequence: 1
+                    is_default: true
+                  - id: 101
+                    value: Waiting
+                    name: Waiting on customer
+                    description: ''
+                    sequence: 2
+                    is_default: false
+                  - id: 102
+                    value: Closed
+                    name: Closed
+                    description: ''
+                    sequence: 3
+                    is_default: false
+                  - id: 103
+                    value: Final
+                    name: Final Close
+                    description: ''
+                    sequence: 9
+                    is_default: false
+                next_page_token: ''

@@ -1,0 +1,1172 @@
+openapi: 3.0.0
+info:
+  title: Express_movement
+  version: 1.0.0
+servers:
+  - url: http://{{host}}
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+paths:
+  /express-movement/warehouses:
+    get:
+      tags:
+        - default
+      summary: ListWarehouses
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: OK
+          headers:
+            Server:
+              schema:
+                type: string
+                example: nginx/1.25.2
+            Date:
+              schema:
+                type: string
+                example: Wed, 06 Mar 2024 19:43:38 GMT
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Content-Length:
+              schema:
+                type: integer
+                example: '1195'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            grpc-encoding:
+              schema:
+                type: string
+                example: identity
+            grpc-accept-encoding:
+              schema:
+                type: string
+                example: gzip
+            x-envoy-upstream-service-time:
+              schema:
+                type: integer
+                example: '105'
+            grpc-status:
+              schema:
+                type: integer
+                example: '0'
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Max-Age:
+              schema:
+                type: integer
+                example: '3600'
+            Access-Control-Expose-Headers:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+                example: '*'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                record_count: '11'
+                records:
+                  - id: 103
+                    value: HQ
+                    name: HQ Warehouse
+                    description: ''
+                  - id: 104
+                    value: Store Central
+                    name: Store Central
+                    description: ''
+                  - id: 50000
+                    value: HQT
+                    name: HQ Transit
+                    description: ''
+                  - id: 50001
+                    value: Furniture
+                    name: Furniture
+                    description: Furniture
+                  - id: 50002
+                    value: Fertilizer
+                    name: Fertilizer
+                    description: Fertilizer
+                  - id: 50003
+                    value: Store North
+                    name: Store North
+                    description: ''
+                  - id: 50004
+                    value: Store South
+                    name: Store South
+                    description: ''
+                  - id: 50005
+                    value: Store East
+                    name: Store East
+                    description: ''
+                  - id: 50006
+                    value: Store West
+                    name: Store West
+                    description: ''
+                  - id: 50007
+                    value: FertilizerT
+                    name: Fertilizer Transit
+                    description: Fertilizer Transit
+                  - id: 50008
+                    value: FurnitureT
+                    name: Furniture Transit
+                    description: Furniture Transit
+                next_page_token: ''
+  /express-movement/products:
+    get:
+      tags:
+        - default
+      summary: ListProducts
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: OK
+          headers:
+            Server:
+              schema:
+                type: string
+                example: nginx/1.25.2
+            Date:
+              schema:
+                type: string
+                example: Wed, 06 Mar 2024 19:44:24 GMT
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Content-Length:
+              schema:
+                type: integer
+                example: '5610'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            grpc-encoding:
+              schema:
+                type: string
+                example: identity
+            grpc-accept-encoding:
+              schema:
+                type: string
+                example: gzip
+            x-envoy-upstream-service-time:
+              schema:
+                type: integer
+                example: '232'
+            grpc-status:
+              schema:
+                type: integer
+                example: '0'
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Max-Age:
+              schema:
+                type: integer
+                example: '3600'
+            Access-Control-Expose-Headers:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+                example: '*'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                record_count: '44'
+                records:
+                  - id: 50004
+                    upc: ''
+                    sku: ''
+                    value: Seat
+                    name: Seat
+                    description: ''
+                  - id: 50005
+                    upc: ''
+                    sku: ''
+                    value: BackSupport
+                    name: Back Support
+                    description: ''
+                  - id: 137
+                    upc: ''
+                    sku: ''
+                    value: Mulch
+                    name: Mulch 10#
+                    description: ''
+                  - id: 50041
+                    upc: ''
+                    sku: ''
+                    value: Peat
+                    name: Peat
+                    description: ''
+                  - id: 50042
+                    upc: ''
+                    sku: ''
+                    value: PottingSoil
+                    name: Potting Soil
+                    description: ''
+                  - id: 50045
+                    upc: ''
+                    sku: ''
+                    value: Seed-Daisy
+                    name: Seed Pack Daisy
+                    description: ''
+                  - id: 50047
+                    upc: ''
+                    sku: ''
+                    value: Seed-ForgetMeNot
+                    name: Seed Packet Forget Me Not
+                    description: ''
+                  - id: 133
+                    upc: ''
+                    sku: ''
+                    value: PChair
+                    name: Patio Chair
+                    description: ''
+                  - id: 50043
+                    upc: ''
+                    sku: ''
+                    value: Kit-Starter
+                    name: Plant Starter Kit
+                    description: ''
+                  - id: 50044
+                    upc: ''
+                    sku: ''
+                    value: GrowLight
+                    name: Grow Light and Stand
+                    description: ''
+                  - id: 50038
+                    upc: ''
+                    sku: ''
+                    value: SeedTray-16
+                    name: Seedling Tray - 16 Bins
+                    description: ''
+                  - id: 50039
+                    upc: ''
+                    sku: ''
+                    value: SeedTray-32
+                    name: Seedling Tray - 32 bins
+                    description: ''
+                  - id: 50046
+                    upc: ''
+                    sku: ''
+                    value: Seed-BabyBreath
+                    name: Seed Packet Baby Breath
+                    description: ''
+                  - id: 134
+                    upc: ''
+                    sku: ''
+                    value: PTable
+                    name: Patio Table
+                    description: ''
+                  - id: 135
+                    upc: ''
+                    sku: ''
+                    value: Screen
+                    name: Patio Sun Screen
+                    description: ''
+                  - id: 136
+                    upc: ''
+                    sku: ''
+                    value: Fertilizer#50
+                    name: 'Fertilizer #50'
+                    description: ''
+                  - id: 138
+                    upc: ''
+                    sku: ''
+                    value: Hoe
+                    name: Hoe 4 ft
+                    description: ''
+                  - id: 139
+                    upc: ''
+                    sku: ''
+                    value: Rake-Bamboo
+                    name: Rake Bamboo
+                    description: ''
+                  - id: 140
+                    upc: ''
+                    sku: ''
+                    value: Rake-Metal
+                    name: Rake Metal
+                    description: ''
+                  - id: 141
+                    upc: ''
+                    sku: ''
+                    value: Weeder
+                    name: Weeder
+                    description: ''
+                  - id: 142
+                    upc: ''
+                    sku: ''
+                    value: Transplanter
+                    name: Transplanter
+                    description: ''
+                  - id: 143
+                    upc: ''
+                    sku: ''
+                    value: Seeder
+                    name: Grass Seeder
+                    description: ''
+                  - id: 144
+                    upc: ''
+                    sku: ''
+                    value: Tiller
+                    name: Lawn Tiller
+                    description: ''
+                  - id: 145
+                    upc: ''
+                    sku: ''
+                    value: PatioSet
+                    name: Patio Furniture Set
+                    description: ''
+                  - id: 127
+                    upc: ''
+                    sku: ''
+                    value: Rose Bush
+                    name: Rose Bush
+                    description: ''
+                  - id: 123
+                    upc: ''
+                    sku: ''
+                    value: Oak
+                    name: Oak Tree
+                    description: ''
+                  - id: 124
+                    upc: ''
+                    sku: ''
+                    value: Elm
+                    name: Elm Tree
+                    description: ''
+                  - id: 125
+                    upc: ''
+                    sku: ''
+                    value: Grass
+                    name: Grass Seed Container
+                    description: ''
+                  - id: 129
+                    upc: ''
+                    sku: ''
+                    value: Holly Bush
+                    name: Holly Bush
+                    description: ''
+                  - id: 130
+                    upc: ''
+                    sku: ''
+                    value: Plum Tree
+                    name: Plum Tree
+                    description: ''
+                  - id: 147
+                    upc: ''
+                    sku: ''
+                    value: TShirt-RL
+                    name: TShirt - Red Large
+                    description: ''
+                  - id: 148
+                    upc: ''
+                    sku: ''
+                    value: TShirt-GL
+                    name: TShirt - Green Large
+                    description: ''
+                  - id: 50002
+                    upc: ''
+                    sku: ''
+                    value: Screw
+                    name: '#6-32 x 3/8 Socket Head Cap Screw'
+                    description: ''
+                  - id: 50007
+                    upc: ''
+                    sku: ''
+                    value: Fertilizer#70
+                    name: 'Fertilizer #70'
+                    description: ''
+                  - id: 50008
+                    upc: ''
+                    sku: ''
+                    value: Fertilizer
+                    name: Lawn Fertilizer
+                    description: ''
+                  - id: 50013
+                    upc: ''
+                    sku: ''
+                    value: Bag50
+                    name: Bag 50 Kg
+                    description: ''
+                  - id: 50014
+                    upc: ''
+                    sku: ''
+                    value: Bag70
+                    name: Bag 70 Kg
+                    description: ''
+                  - id: 50003
+                    upc: ''
+                    sku: ''
+                    value: UltraGlue
+                    name: Ultra Glue
+                    description: ''
+                  - id: 50015
+                    upc: ''
+                    sku: ''
+                    value: FrontLeg
+                    name: Front Leg
+                    description: ''
+                  - id: 50010
+                    upc: ''
+                    sku: ''
+                    value: Phosphorus
+                    name: Phosphorus
+                    description: ''
+                  - id: 50016
+                    upc: ''
+                    sku: ''
+                    value: BackLeg
+                    name: Back Leg
+                    description: ''
+                  - id: 128
+                    upc: '81010123450901'
+                    sku: '1234567890'
+                    value: Azalea Bush
+                    name: Azalea Bush
+                    description: ''
+                  - id: 50009
+                    upc: ''
+                    sku: ''
+                    value: Nitrogen
+                    name: Nitrogen
+                    description: ''
+                  - id: 50012
+                    upc: ''
+                    sku: ''
+                    value: Potassium
+                    name: Potassium
+                    description: ''
+                next_page_token: ''
+  /express-movement/movements:
+    post:
+      tags:
+        - default
+      summary: CreateMovement
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example: ''
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: OK
+          headers:
+            Server:
+              schema:
+                type: string
+                example: nginx/1.25.2
+            Date:
+              schema:
+                type: string
+                example: Wed, 06 Mar 2024 19:45:26 GMT
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Content-Length:
+              schema:
+                type: integer
+                example: '133'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            grpc-encoding:
+              schema:
+                type: string
+                example: identity
+            grpc-accept-encoding:
+              schema:
+                type: string
+                example: gzip
+            x-envoy-upstream-service-time:
+              schema:
+                type: integer
+                example: '84'
+            grpc-status:
+              schema:
+                type: integer
+                example: '0'
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Max-Age:
+              schema:
+                type: integer
+                example: '3600'
+            Access-Control-Expose-Headers:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+                example: '*'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                id: 1000001
+                document_no: '10000001'
+                movement_date: '2024-03-06T04:00:00Z'
+                description: ''
+                is_completed: false
+  /express-movement/movements/{id}:
+    delete:
+      tags:
+        - default
+      summary: DeleteMovement
+      description: |-
+        ### Request Params
+
+        - id (int32, required)
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: integer
+          required: true
+          example: '1000001'
+      responses:
+        '200':
+          description: OK
+          headers:
+            Server:
+              schema:
+                type: string
+                example: nginx/1.25.2
+            Date:
+              schema:
+                type: string
+                example: Wed, 06 Mar 2024 19:46:33 GMT
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Content-Length:
+              schema:
+                type: integer
+                example: '3'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            grpc-encoding:
+              schema:
+                type: string
+                example: identity
+            grpc-accept-encoding:
+              schema:
+                type: string
+                example: gzip
+            x-envoy-upstream-service-time:
+              schema:
+                type: integer
+                example: '151'
+            grpc-status:
+              schema:
+                type: integer
+                example: '0'
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Max-Age:
+              schema:
+                type: integer
+                example: '3600'
+            Access-Control-Expose-Headers:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+                example: '*'
+          content:
+            application/json:
+              schema:
+                type: object
+              example: {}
+  /express-movement/movements/{id}/process:
+    post:
+      tags:
+        - default
+      summary: ProcessMovement
+      description: |-
+        ### Request Params
+
+        - id (int32, required)
+            
+
+        ### Request Body
+
+        - description (String)
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                description: asd
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: integer
+          required: true
+          example: '1000002'
+      responses:
+        '200':
+          description: OK
+          headers:
+            Server:
+              schema:
+                type: string
+                example: nginx/1.25.2
+            Date:
+              schema:
+                type: string
+                example: Wed, 06 Mar 2024 20:21:49 GMT
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Content-Length:
+              schema:
+                type: integer
+                example: '132'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            grpc-encoding:
+              schema:
+                type: string
+                example: identity
+            grpc-accept-encoding:
+              schema:
+                type: string
+                example: gzip
+            x-envoy-upstream-service-time:
+              schema:
+                type: integer
+                example: '4562'
+            grpc-status:
+              schema:
+                type: integer
+                example: '0'
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Max-Age:
+              schema:
+                type: integer
+                example: '3600'
+            Access-Control-Expose-Headers:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+                example: '*'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                id: 1000003
+                document_no: '10000003'
+                movement_date: '2024-03-06T04:00:00Z'
+                description: ''
+                is_completed: true
+  /express-movement/movements/{movement_id}/lines:
+    post:
+      tags:
+        - default
+      summary: CreateMovementLine
+      description: |-
+        ### Request Params
+
+        - movement_id (int32, required)
+            
+
+        ### Request Body
+
+        - warehouse_id (int32, required)
+        - warehouse_to_id (int32, required)
+        - description (String)
+        - product_id (int32, required)
+        - quantity (String)
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                warehouse_id: 103
+                warehouse_to_id: 104
+                description: prueba
+                product_id: 50004
+                quantity: prueba
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: movement_id
+          in: path
+          schema:
+            type: integer
+          required: true
+          example: '1000003'
+      responses:
+        '200':
+          description: OK
+          headers:
+            Server:
+              schema:
+                type: string
+                example: nginx/1.25.2
+            Date:
+              schema:
+                type: string
+                example: Wed, 06 Mar 2024 19:55:43 GMT
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Content-Length:
+              schema:
+                type: integer
+                example: '229'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            grpc-encoding:
+              schema:
+                type: string
+                example: identity
+            grpc-accept-encoding:
+              schema:
+                type: string
+                example: gzip
+            x-envoy-upstream-service-time:
+              schema:
+                type: integer
+                example: '352'
+            grpc-status:
+              schema:
+                type: integer
+                example: '0'
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Max-Age:
+              schema:
+                type: integer
+                example: '3600'
+            Access-Control-Expose-Headers:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+                example: '*'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                id: 1000000
+                warehouse_id: 0
+                warehouse_to_id: 0
+                product:
+                  id: 50004
+                  upc: ''
+                  sku: ''
+                  value: Seat
+                  name: Seat
+                  description: ''
+                description: ''
+                quantity: '1'
+                line: 10
+  /express-movement/movement/{movement_id}/lines/{id}:
+    delete:
+      tags:
+        - default
+      summary: DeleteMovementLine
+      description: |-
+        ### Request Params
+
+        - movement_id (int32, required)
+            
+        - id (int32, required)
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: movement_id
+          in: path
+          schema:
+            type: integer
+          required: true
+          example: '1000003'
+        - name: id
+          in: path
+          schema:
+            type: integer
+          required: true
+          example: '1000001'
+      responses:
+        '200':
+          description: OK
+          headers:
+            Server:
+              schema:
+                type: string
+                example: nginx/1.25.2
+            Date:
+              schema:
+                type: string
+                example: Wed, 06 Mar 2024 20:04:36 GMT
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Content-Length:
+              schema:
+                type: integer
+                example: '3'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            grpc-encoding:
+              schema:
+                type: string
+                example: identity
+            grpc-accept-encoding:
+              schema:
+                type: string
+                example: gzip
+            x-envoy-upstream-service-time:
+              schema:
+                type: integer
+                example: '168'
+            grpc-status:
+              schema:
+                type: integer
+                example: '0'
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Max-Age:
+              schema:
+                type: integer
+                example: '3600'
+            Access-Control-Expose-Headers:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+                example: '*'
+          content:
+            application/json:
+              schema:
+                type: object
+              example: {}
+    patch:
+      tags:
+        - default
+      summary: UpdateMovementLine
+      description: |-
+        ### Request Params
+
+        - movement_id (int32, required)
+        - id (int32, required)
+            
+
+        ### Request Body
+
+        - description (String)
+            
+        - quantity(String)
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                description: prueba
+                quantity: prueba
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: movement_id
+          in: path
+          schema:
+            type: integer
+          required: true
+          example: '10000007'
+        - name: id
+          in: path
+          schema:
+            type: integer
+          required: true
+          example: '1000003'
+      responses:
+        '200':
+          description: OK
+          headers:
+            Server:
+              schema:
+                type: string
+                example: nginx/1.25.2
+            Date:
+              schema:
+                type: string
+                example: Wed, 06 Mar 2024 20:18:35 GMT
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Content-Length:
+              schema:
+                type: integer
+                example: '231'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            grpc-encoding:
+              schema:
+                type: string
+                example: identity
+            grpc-accept-encoding:
+              schema:
+                type: string
+                example: gzip
+            x-envoy-upstream-service-time:
+              schema:
+                type: integer
+                example: '103'
+            grpc-status:
+              schema:
+                type: integer
+                example: '0'
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Max-Age:
+              schema:
+                type: integer
+                example: '3600'
+            Access-Control-Expose-Headers:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+                example: '*'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                id: 1000003
+                warehouse_id: 104
+                warehouse_to_id: 0
+                product:
+                  id: 50004
+                  upc: ''
+                  sku: ''
+                  value: Seat
+                  name: Seat
+                  description: ''
+                description: ''
+                quantity: '1'
+                line: 20
+  /express-movement/{movement_id}/movements/lines:
+    get:
+      tags:
+        - default
+      summary: ListMovementLines
+      description: |-
+        ### Request Params
+
+        - movement_id (int32, required)
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: movement_id
+          in: path
+          schema:
+            type: integer
+          required: true
+          example: '1000003'
+      responses:
+        '200':
+          description: OK
+          headers:
+            Server:
+              schema:
+                type: string
+                example: nginx/1.25.2
+            Date:
+              schema:
+                type: string
+                example: Wed, 06 Mar 2024 20:19:22 GMT
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Content-Length:
+              schema:
+                type: integer
+                example: '594'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            grpc-encoding:
+              schema:
+                type: string
+                example: identity
+            grpc-accept-encoding:
+              schema:
+                type: string
+                example: gzip
+            x-envoy-upstream-service-time:
+              schema:
+                type: integer
+                example: '93'
+            grpc-status:
+              schema:
+                type: integer
+                example: '0'
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Max-Age:
+              schema:
+                type: integer
+                example: '3600'
+            Access-Control-Expose-Headers:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+                example: '*'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                record_count: '2'
+                records:
+                  - id: 1000002
+                    warehouse_id: 104
+                    warehouse_to_id: 0
+                    product:
+                      id: 50004
+                      upc: ''
+                      sku: ''
+                      value: Seat
+                      name: Seat
+                      description: ''
+                    description: ''
+                    quantity: '1'
+                    line: 10
+                  - id: 1000003
+                    warehouse_id: 104
+                    warehouse_to_id: 0
+                    product:
+                      id: 50004
+                      upc: ''
+                      sku: ''
+                      value: Seat
+                      name: Seat
+                      description: ''
+                    description: ''
+                    quantity: '1'
+                    line: 20
+                next_page_token: ''

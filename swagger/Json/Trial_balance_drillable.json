@@ -1,0 +1,757 @@
+{
+	"info": {
+		"_postman_id": "09076a2c-3021-4d58-8daa-d243aa7c05b1",
+		"name": "Trial_balance_drillable",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "28978517"
+	},
+	"item": [
+		{
+			"name": "ListOrganizations",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{HOST}}/trial-balance-drillable/organizations",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"trial-balance-drillable",
+						"organizations"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "ListOrganizations",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/trial-balance-drillable/organizations",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"trial-balance-drillable",
+								"organizations"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.25.2"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 07 Mar 2024 18:53:02 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "1973"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "grpc-encoding",
+							"value": "identity"
+						},
+						{
+							"key": "grpc-accept-encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "x-envoy-upstream-service-time",
+							"value": "112"
+						},
+						{
+							"key": "grpc-status",
+							"value": "0"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Max-Age",
+							"value": "3600"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"record_count\": \"9\",\n    \"records\": [\n        {\n            \"id\": 50001,\n            \"table_name\": \"AD_Org\",\n            \"values\": {\n                \"KeyColumn\": 50001,\n                \"DisplayColumn\": \"Fertilizer-Fertilizer\",\n                \"UUID\": \"5bdf61e6-18d5-491e-8826-ae7a9557e635\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 50000,\n            \"table_name\": \"AD_Org\",\n            \"values\": {\n                \"KeyColumn\": 50000,\n                \"DisplayColumn\": \"Furniture-Furniture\",\n                \"UUID\": \"803a37b7-0cee-4411-99aa-d3b328dec3b1\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 11,\n            \"table_name\": \"AD_Org\",\n            \"values\": {\n                \"KeyColumn\": 11,\n                \"DisplayColumn\": \"HQ-HQ\",\n                \"UUID\": \"08c224db-bb86-4306-9fa5-ba1dfd34b693\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 12,\n            \"table_name\": \"AD_Org\",\n            \"values\": {\n                \"KeyColumn\": 12,\n                \"DisplayColumn\": \"Store Central-Store Central\",\n                \"UUID\": \"6a0e31b1-2ade-4f8e-a907-ed63ab29fc0d\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 50005,\n            \"table_name\": \"AD_Org\",\n            \"values\": {\n                \"KeyColumn\": 50005,\n                \"DisplayColumn\": \"Store East-Store East\",\n                \"UUID\": \"818cfb05-f9db-4a1c-853f-7b3f2b35337a\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 50002,\n            \"table_name\": \"AD_Org\",\n            \"values\": {\n                \"KeyColumn\": 50002,\n                \"DisplayColumn\": \"Store North-Store North\",\n                \"UUID\": \"06e23570-6653-4b3c-a921-6c54732b02a9\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 50004,\n            \"table_name\": \"AD_Org\",\n            \"values\": {\n                \"KeyColumn\": 50004,\n                \"DisplayColumn\": \"Store South-Store South\",\n                \"UUID\": \"cf2ac4a7-0718-4f69-a042-bb8fcb85e9da\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 50007,\n            \"table_name\": \"AD_Org\",\n            \"values\": {\n                \"KeyColumn\": 50007,\n                \"DisplayColumn\": \"Stores-Stores\",\n                \"UUID\": \"bc3ab10e-a9d3-4941-b29f-da0c5f76b7c6\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 50006,\n            \"table_name\": \"AD_Org\",\n            \"values\": {\n                \"KeyColumn\": 50006,\n                \"DisplayColumn\": \"Store West-Store West\",\n                \"UUID\": \"51748134-e4f9-4d19-b568-77fe15b75887\"\n            },\n            \"is_active\": true\n        }\n    ],\n    \"next_page_token\": \"\"\n}"
+				}
+			]
+		},
+		{
+			"name": "ListBudgets",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{HOST}}/trial-balance-drillable/budgets",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"trial-balance-drillable",
+						"budgets"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "ListBudgets",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/trial-balance-drillable/budgets",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"trial-balance-drillable",
+								"budgets"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.25.2"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 07 Mar 2024 18:53:28 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "272"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "grpc-encoding",
+							"value": "identity"
+						},
+						{
+							"key": "grpc-accept-encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "x-envoy-upstream-service-time",
+							"value": "113"
+						},
+						{
+							"key": "grpc-status",
+							"value": "0"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Max-Age",
+							"value": "3600"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"record_count\": \"1\",\n    \"records\": [\n        {\n            \"id\": 100,\n            \"table_name\": \"GL_Budget\",\n            \"values\": {\n                \"KeyColumn\": 100,\n                \"DisplayColumn\": \"Target Budget\",\n                \"UUID\": \"5bbb1369-b26a-4e18-8a1e-e8df04f01c95\"\n            },\n            \"is_active\": true\n        }\n    ],\n    \"next_page_token\": \"\"\n}"
+				}
+			]
+		},
+		{
+			"name": "ListUser1",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{HOST}}/trial-balance-drillable/user-1",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"trial-balance-drillable",
+						"user-1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ListPeriods",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{HOST}}/trial-balance-drillable/periods",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"trial-balance-drillable",
+						"periods"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "ListPeriods",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/trial-balance-drillable/periods",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"trial-balance-drillable",
+								"periods"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.25.2"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 07 Mar 2024 18:55:04 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "10056"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "grpc-encoding",
+							"value": "identity"
+						},
+						{
+							"key": "grpc-accept-encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "x-envoy-upstream-service-time",
+							"value": "103"
+						},
+						{
+							"key": "grpc-status",
+							"value": "0"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Max-Age",
+							"value": "3600"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"record_count\": \"168\",\n    \"records\": [\n        {\n            \"id\": 136,\n            \"table_name\": \"C_Period\",\n            \"values\": {\n                \"KeyColumn\": 136,\n                \"DisplayColumn\": \"2021-01\",\n                \"UUID\": \"5ec0683e-bb83-4a57-a2fa-9e8a37c84f79\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 137,\n            \"table_name\": \"C_Period\",\n            \"values\": {\n                \"KeyColumn\": 137,\n                \"DisplayColumn\": \"2021-02\",\n                \"UUID\": \"d0ed54f0-a2c6-45a3-b0f8-cefbd731bd63\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 138,\n            \"table_name\": \"C_Period\",\n            \"values\": {\n                \"KeyColumn\": 138,\n                \"DisplayColumn\": \"2021-03\",\n                \"UUID\": \"3617154e-c03a-4e5a-b797-fb05c784dab2\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 139,\n            \"table_name\": \"C_Period\",\n            \"values\": {\n                \"KeyColumn\": 139,\n                \"DisplayColumn\": \"2021-04\",\n                \"UUID\": \"81d25121-0b95-4d16-a49b-83086f4964d6\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 140,\n            \"table_name\": \"C_Period\",\n            \"values\": {\n                \"KeyColumn\": 140,\n                \"DisplayColumn\": \"2021-05\",\n                \"UUID\": \"797985e9-dd7d-4e53-ba1e-c2748dc99c2d\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 141,\n            \"table_name\": \"C_Period\",\n            \"values\": {\n                \"KeyColumn\": 141,\n                \"DisplayColumn\": \"2021-06\",\n                \"UUID\": \"3c3bbcf3-c033-49bd-b80c-3c2503983aa2\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 142,\n            \"table_name\": \"C_Period\",\n            \"values\": {\n                \"KeyColumn\": 142,\n                \"DisplayColumn\": \"2021-07\",\n                \"UUID\": \"4f7268fa-9f59-4eba-9884-6c7217cda4ae\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 143,\n            \"table_name\": \"C_Period\",\n            \"values\": {\n                \"KeyColumn\": 143,\n                \"DisplayColumn\": \"2021-08\",\n                \"UUID\": \"5a3ad4e8-a02a-4542-af35-b5c151d586c9\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 144,\n            \"table_name\": \"C_Period\",\n            \"values\": {\n                \"KeyColumn\": 144,\n                \"DisplayColumn\": \"2021-09\",\n                \"UUID\": \"243e9167-8b94-4f22-8608-1795be5a4ee7\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 145,\n            \"table_name\": \"C_Period\",\n            \"values\": {\n                \"KeyColumn\": 145,\n                \"DisplayColumn\": \"2021-10\",\n                \"UUID\": \"90914a98-d7b1-4440-9fc2-42358286d123\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 146,\n            \"table_name\": \"C_Period\",\n            \"values\": {\n                \"KeyColumn\": 146,\n                \"DisplayColumn\": \"2021-11\",\n                \"UUID\": \"9cc7792a-3e0b-4a1f-9360-4b14a4da698c\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 147,\n            \"table_name\": \"C_Period\",\n            \"values\": {\n                \"KeyColumn\": 147,\n                \"DisplayColumn\": \"2021-12\",\n                \"UUID\": \"b82ab782-8e72-4aa3-9177-4d9ac65e3a44\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 148,\n            \"table_name\": \"C_Period\",\n            \"values\": {\n                \"KeyColumn\": 148,\n                \"DisplayColumn\": \"2022-01\",\n                \"UUID\": \"28a4856b-7207-4081-b573-48c718e56d95\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 149,\n            \"table_name\": \"C_Period\",\n            \"values\": {\n                \"KeyColumn\": 149,\n                \"DisplayColumn\": \"2022-02\",\n                \"UUID\": \"dc0ce891-61ba-479b-bbf3-d9646f8b466e\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 150,\n            \"table_name\": \"C_Period\",\n            \"values\": {\n                \"KeyColumn\": 150,\n                \"DisplayColumn\": \"2022-03\",\n                \"UUID\": \"56c6821f-69f4-4eb1-a5dc-8c8a1fe6b507\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 151,\n            \"table_name\": \"C_Period\",\n            \"values\": {\n                \"KeyColumn\": 151,\n                \"DisplayColumn\": \"2022-04\",\n                \"UUID\": \"238049d8-ee4e-4452-8351-9df64873ddfc\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 152,\n            \"table_name\": \"C_Period\",\n            \"values\": {\n                \"KeyColumn\": 152,\n                \"DisplayColumn\": \"2022-05\",\n                \"UUID\": \"3ad3adbd-7a89-4c35-b17c-1a726c0bf1af\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 153,\n            \"table_name\": \"C_Period\",\n            \"values\": {\n                \"KeyColumn\": 153,\n                \"DisplayColumn\": \"2022-06\",\n                \"UUID\": \"2e65e102-56a9-4130-b7f2-0f205ad2793b\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 154,\n            \"table_name\": \"C_Period\",\n            \"values\": {\n                \"KeyColumn\": 154,\n                \"DisplayColumn\": \"2022-07\",\n                \"UUID\": \"de74e7cd-eb4e-4318-bf21-d9432e722df1\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 155,\n            \"table_name\": \"C_Period\",\n            \"values\": {\n                \"KeyColumn\": 155,\n                \"DisplayColumn\": \"2022-08\",\n                \"UUID\": \"9d42da58-fa02-4427-a017-cfd028827ba4\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 156,\n            \"table_name\": \"C_Period\",\n            \"values\": {\n                \"KeyColumn\": 156,\n                \"DisplayColumn\": \"2022-09\",\n                \"UUID\": \"4d1f50fc-7694-431a-8d56-ca305ceb775a\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 157,\n            \"table_name\": \"C_Period\",\n            \"values\": {\n                \"KeyColumn\": 157,\n                \"DisplayColumn\": \"2022-10\",\n                \"UUID\": \"7ed8d1b0-29e2-4e22-a405-c1d39b6b8c00\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 158,\n            \"table_name\": \"C_Period\",\n            \"values\": {\n                \"KeyColumn\": 158,\n                \"DisplayColumn\": \"2022-11\",\n                \"UUID\": \"3548390f-7f6a-4c34-ad3a-1c71f6a5465b\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 159,\n            \"table_name\": \"C_Period\",\n            \"values\": {\n                \"KeyColumn\": 159,\n                \"DisplayColumn\": \"2022-12\",\n                \"UUID\": \"4e1b5334-38b8-48f3-931b-97b6447cca70\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 160,\n            \"table_name\": \"C_Period\",\n            \"values\": {\n                \"KeyColumn\": 160,\n                \"DisplayColumn\": \"2023-01\",\n                \"UUID\": \"43a0594f-2b57-4289-a57f-a98728431132\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 161,\n            \"table_name\": \"C_Period\",\n            \"values\": {\n                \"KeyColumn\": 161,\n                \"DisplayColumn\": \"2023-02\",\n                \"UUID\": \"220b6e66-3ebd-446b-ab9e-7d9f9bf7c228\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 162,\n            \"table_name\": \"C_Period\",\n            \"values\": {\n                \"KeyColumn\": 162,\n                \"DisplayColumn\": \"2023-03\",\n                \"UUID\": \"6c8c4446-93e6-4f88-8048-bd55c2df604d\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 163,\n            \"table_name\": \"C_Period\",\n            \"values\": {\n                \"KeyColumn\": 163,\n                \"DisplayColumn\": \"2023-04\",\n                \"UUID\": \"23215074-6b3a-4dbd-9643-0f4f5f10a89f\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 164,\n            \"table_name\": \"C_Period\",\n            \"values\": {\n                \"KeyColumn\": 164,\n                \"DisplayColumn\": \"2023-05\",\n                \"UUID\": \"ebad9524-8b3a-4da5-9d88-64439df3a7da\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 165,\n            \"table_name\": \"C_Period\",\n            \"values\": {\n                \"KeyColumn\": 165,\n                \"DisplayColumn\": \"2023-06\",\n                \"UUID\": \"eee723af-208e-4b62-85b6-6a36964e6d63\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 166,\n            \"table_name\": \"C_Period\",\n            \"values\": {\n                \"KeyColumn\": 166,\n                \"DisplayColumn\": \"2023-07\",\n                \"UUID\": \"55d8d014-098f-48f7-b7de-d8edf6816e8c\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 167,\n            \"table_name\": \"C_Period\",\n            \"values\": {\n                \"KeyColumn\": 167,\n                \"DisplayColumn\": \"2023-08\",\n                \"UUID\": \"93901a3a-0e94-47e0-835c-296f1de0310e\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 168,\n            \"table_name\": \"C_Period\",\n            \"values\": {\n                \"KeyColumn\": 168,\n                \"DisplayColumn\": \"2023-09\",\n                \"UUID\": \"92db937f-3ab0-4de9-8a64-2ef82b86690f\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 169,\n            \"table_name\": \"C_Period\",\n            \"values\": {\n                \"KeyColumn\": 169,\n                \"DisplayColumn\": \"2023-10\",\n                \"UUID\": \"39da29a1-99a5-47a1-a51a-aa498ce17a55\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 170,\n            \"table_name\": \"C_Period\",\n            \"values\": {\n                \"KeyColumn\": 170,\n                \"DisplayColumn\": \"2023-11\",\n                \"UUID\": \"39499342-87e7-49ca-97c4-c83a56110127\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 171,\n            \"table_name\": \"C_Period\",\n            \"values\": {\n                \"KeyColumn\": 171,\n                \"DisplayColumn\": \"2023-12\",\n                \"UUID\": \"4c19c662-b9d4-45a4-bd52-9a5c310df5fc\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 172,\n            \"table_name\": \"C_Period\",\n            \"values\": {\n                \"KeyColumn\": 172,\n                \"DisplayColumn\": \"2024-01\",\n                \"UUID\": \"d4fceb9b-b449-46ed-9114-bad1e433ba62\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 173,\n            \"table_name\": \"C_Period\",\n            \"values\": {\n                \"KeyColumn\": 173,\n                \"DisplayColumn\": \"2024-02\",\n                \"UUID\": \"537e65bd-e687-4455-87e8-b712b6ee9d8b\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 174,\n            \"table_name\": \"C_Period\",\n            \"values\": {\n                \"KeyColumn\": 174,\n                \"DisplayColumn\": \"2024-03\",\n                \"UUID\": \"9aa26b43-b285-4952-b83f-5ecb4abfad58\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 175,\n            \"table_name\": \"C_Period\",\n            \"values\": {\n                \"KeyColumn\": 175,\n                \"DisplayColumn\": \"2024-04\",\n                \"UUID\": \"1d21d5e7-d2f4-4808-9ff6-708a230c65bf\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 176,\n            \"table_name\": \"C_Period\",\n            \"values\": {\n                \"KeyColumn\": 176,\n                \"DisplayColumn\": \"2024-05\",\n                \"UUID\": \"68d14f3c-22da-4c28-b212-dd40aba76c05\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 177,\n            \"table_name\": \"C_Period\",\n            \"values\": {\n                \"KeyColumn\": 177,\n                \"DisplayColumn\": \"2024-06\",\n                \"UUID\": \"7df078d5-67b2-4dcc-ae41-d5e8a87ce44c\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 178,\n            \"table_name\": \"C_Period\",\n            \"values\": {\n                \"KeyColumn\": 178,\n                \"DisplayColumn\": \"2024-07\",\n                \"UUID\": \"13fe65bb-e178-4eb6-860c-db0466a45b37\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 179,\n            \"table_name\": \"C_Period\",\n            \"values\": {\n                \"KeyColumn\": 179,\n                \"DisplayColumn\": \"2024-08\",\n                \"UUID\": \"c14f6d0c-9cd3-483e-b973-9ce888e5110b\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 180,\n            \"table_name\": \"C_Period\",\n            \"values\": {\n                \"KeyColumn\": 180,\n                \"DisplayColumn\": \"2024-09\",\n                \"UUID\": \"a615fc6a-4d00-4719-ba6d-870b39b097cc\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 181,\n            \"table_name\": \"C_Period\",\n            \"values\": {\n                \"KeyColumn\": 181,\n                \"DisplayColumn\": \"2024-10\",\n                \"UUID\": \"325a63b1-585d-47ff-9034-2684480bf445\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 182,\n            \"table_name\": \"C_Period\",\n            \"values\": {\n                \"KeyColumn\": 182,\n                \"DisplayColumn\": \"2024-11\",\n                \"UUID\": \"d2d6f4c6-0528-4df0-bd1f-44c6f9dffc31\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 183,\n            \"table_name\": \"C_Period\",\n            \"values\": {\n                \"KeyColumn\": 183,\n                \"DisplayColumn\": \"2024-12\",\n                \"UUID\": \"705e788d-7cbb-4e6a-939c-f122e8b5a6db\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 184,\n            \"table_name\": \"C_Period\",\n            \"values\": {\n                \"KeyColumn\": 184,\n                \"DisplayColumn\": \"2025-01\",\n                \"UUID\": \"0d429724-e804-4dd9-ac3b-e1cab71c2bc4\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 185,\n            \"table_name\": \"C_Period\",\n            \"values\": {\n                \"KeyColumn\": 185,\n                \"DisplayColumn\": \"2025-02\",\n                \"UUID\": \"43e76f1c-c43a-4c9d-a21f-6fb05dd40b3d\"\n            },\n            \"is_active\": true\n        }\n    ],\n    \"next_page_token\": \"c2d6e690-b810-4593-bdb7-f3b0f9b7331c-2\"\n}"
+				}
+			]
+		},
+		{
+			"name": "ListAccoutingKeys",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{HOST}}/trial-balance-drillable/accouting-keys",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"trial-balance-drillable",
+						"accouting-keys"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "ListAccoutingKeys",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/trial-balance-drillable/accouting-keys",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"trial-balance-drillable",
+								"accouting-keys"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.25.2"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 07 Mar 2024 18:55:38 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "11385"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "grpc-encoding",
+							"value": "identity"
+						},
+						{
+							"key": "grpc-accept-encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "x-envoy-upstream-service-time",
+							"value": "117"
+						},
+						{
+							"key": "grpc-status",
+							"value": "0"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Max-Age",
+							"value": "3600"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"record_count\": \"382\",\n    \"records\": [\n        {\n            \"id\": 508,\n            \"table_name\": \"C_ElementValue\",\n            \"values\": {\n                \"KeyColumn\": 508,\n                \"DisplayColumn\": \"11100_Checking Account\",\n                \"UUID\": \"104ec46f-0296-45ac-ace7-597b968a7c1e\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 509,\n            \"table_name\": \"C_ElementValue\",\n            \"values\": {\n                \"KeyColumn\": 509,\n                \"DisplayColumn\": \"11110_Checking In-Transfer\",\n                \"UUID\": \"0cf6e4dd-739c-46d7-b444-d3945a41945b\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 510,\n            \"table_name\": \"C_ElementValue\",\n            \"values\": {\n                \"KeyColumn\": 510,\n                \"DisplayColumn\": \"11120_Checking Unidentified Receipts\",\n                \"UUID\": \"34abc879-66dd-42b1-a0e0-6f67a5eff555\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 511,\n            \"table_name\": \"C_ElementValue\",\n            \"values\": {\n                \"KeyColumn\": 511,\n                \"DisplayColumn\": \"11130_Checking Unallocated Receipts\",\n                \"UUID\": \"df119190-0190-42c2-b6a0-256dfffba790\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 512,\n            \"table_name\": \"C_ElementValue\",\n            \"values\": {\n                \"KeyColumn\": 512,\n                \"DisplayColumn\": \"11200_Checking Account 2\",\n                \"UUID\": \"d2b937f6-8543-4305-827a-5ea51232d208\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 513,\n            \"table_name\": \"C_ElementValue\",\n            \"values\": {\n                \"KeyColumn\": 513,\n                \"DisplayColumn\": \"11300_Savings Account\",\n                \"UUID\": \"63f58b3b-c39b-4beb-b4d9-b8f707092264\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 514,\n            \"table_name\": \"C_ElementValue\",\n            \"values\": {\n                \"KeyColumn\": 514,\n                \"DisplayColumn\": \"11800_Cash in Registers\",\n                \"UUID\": \"7f78a131-8736-48df-b759-0408a3e4c259\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 50021,\n            \"table_name\": \"C_ElementValue\",\n            \"values\": {\n                \"KeyColumn\": 50021,\n                \"DisplayColumn\": \"11810_Cash for Store Central\",\n                \"UUID\": \"950b1cd3-6c49-42ac-896e-fcd15c673bad\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 50023,\n            \"table_name\": \"C_ElementValue\",\n            \"values\": {\n                \"KeyColumn\": 50023,\n                \"DisplayColumn\": \"11820_Cash for Store Central In-Transfer\",\n                \"UUID\": \"6c59bf40-6f68-4fa2-a13e-c4428335f860\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 50024,\n            \"table_name\": \"C_ElementValue\",\n            \"values\": {\n                \"KeyColumn\": 50024,\n                \"DisplayColumn\": \"11830_Safe for Store Central\",\n                \"UUID\": \"be318b7c-c7b0-4161-b3a0-10c3e352f254\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 50025,\n            \"table_name\": \"C_ElementValue\",\n            \"values\": {\n                \"KeyColumn\": 50025,\n                \"DisplayColumn\": \"11840_Safe In-Transfer for Store Central\",\n                \"UUID\": \"109a571c-fb4b-4632-9060-6b70dabf954b\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 515,\n            \"table_name\": \"C_ElementValue\",\n            \"values\": {\n                \"KeyColumn\": 515,\n                \"DisplayColumn\": \"11900_Petty Cash\",\n                \"UUID\": \"f9268b28-6beb-4b16-88f1-fc9a87bc8cd6\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 516,\n            \"table_name\": \"C_ElementValue\",\n            \"values\": {\n                \"KeyColumn\": 516,\n                \"DisplayColumn\": \"11910_Petty Cash In-Transfer\",\n                \"UUID\": \"a904e847-2680-4a24-b331-0a5917c0c77e\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 507,\n            \"table_name\": \"C_ElementValue\",\n            \"values\": {\n                \"KeyColumn\": 507,\n                \"DisplayColumn\": \"11_Cash\",\n                \"UUID\": \"e5092b80-8985-4ea6-95c3-bcee287c7000\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 518,\n            \"table_name\": \"C_ElementValue\",\n            \"values\": {\n                \"KeyColumn\": 518,\n                \"DisplayColumn\": \"12110_Accounts Receivable - Trade\",\n                \"UUID\": \"86437100-5a54-4ec2-bc2c-3620cab7773e\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 782,\n            \"table_name\": \"C_ElementValue\",\n            \"values\": {\n                \"KeyColumn\": 782,\n                \"DisplayColumn\": \"12115_Accounts Receivable Services - Trade\",\n                \"UUID\": \"71aa28f1-27ac-44cd-ad9b-9f1d71f7cf87\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 519,\n            \"table_name\": \"C_ElementValue\",\n            \"values\": {\n                \"KeyColumn\": 519,\n                \"DisplayColumn\": \"12120_A/R Non Sufficient Funds Returned Checks\",\n                \"UUID\": \"42b593be-57c3-4084-8de3-018e33797c06\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 520,\n            \"table_name\": \"C_ElementValue\",\n            \"values\": {\n                \"KeyColumn\": 520,\n                \"DisplayColumn\": \"12180_A/R Trade Allowance for Bad Debit\",\n                \"UUID\": \"01cdedaa-c151-4c6b-b717-6160da88f2e5\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 521,\n            \"table_name\": \"C_ElementValue\",\n            \"values\": {\n                \"KeyColumn\": 521,\n                \"DisplayColumn\": \"12190_Not invoiced receivables\",\n                \"UUID\": \"7132d16b-0a15-4123-a1f1-6b5e50bb95a9\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 774,\n            \"table_name\": \"C_ElementValue\",\n            \"values\": {\n                \"KeyColumn\": 774,\n                \"DisplayColumn\": \"121_Accounts Receivable - Trade\",\n                \"UUID\": \"6b8eb6cb-c060-419e-bdba-cca173535c62\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 523,\n            \"table_name\": \"C_ElementValue\",\n            \"values\": {\n                \"KeyColumn\": 523,\n                \"DisplayColumn\": \"12210_In Transit A/R Amex\",\n                \"UUID\": \"4e396a43-2ec6-4b66-8ee8-772bb6bc13b9\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 524,\n            \"table_name\": \"C_ElementValue\",\n            \"values\": {\n                \"KeyColumn\": 524,\n                \"DisplayColumn\": \"12220_In Transit A/R Master Card\",\n                \"UUID\": \"38c2a8f2-9df4-4b85-abec-ec2cecf8ecbd\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 525,\n            \"table_name\": \"C_ElementValue\",\n            \"values\": {\n                \"KeyColumn\": 525,\n                \"DisplayColumn\": \"12230_In Transit A/R Visa\",\n                \"UUID\": \"51710d19-a44b-41b8-8460-f23c96ac375e\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 738,\n            \"table_name\": \"C_ElementValue\",\n            \"values\": {\n                \"KeyColumn\": 738,\n                \"DisplayColumn\": \"12240_In Transit A/R ATM Cards\",\n                \"UUID\": \"0594d379-a67e-42e2-8072-d15ee1850588\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 526,\n            \"table_name\": \"C_ElementValue\",\n            \"values\": {\n                \"KeyColumn\": 526,\n                \"DisplayColumn\": \"12290_A/R Credit Cards Allowance for Bad Debit\",\n                \"UUID\": \"b1d8342e-7e01-4cbb-86d5-2494434791da\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 522,\n            \"table_name\": \"C_ElementValue\",\n            \"values\": {\n                \"KeyColumn\": 522,\n                \"DisplayColumn\": \"122_Credit Card in Transit\",\n                \"UUID\": \"261663aa-350a-4ed6-8fac-55ce9a904777\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 527,\n            \"table_name\": \"C_ElementValue\",\n            \"values\": {\n                \"KeyColumn\": 527,\n                \"DisplayColumn\": \"12300_Vendor Allowances Receivable\",\n                \"UUID\": \"7d04ffd7-895b-48cd-ada5-19820bdf3a32\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 529,\n            \"table_name\": \"C_ElementValue\",\n            \"values\": {\n                \"KeyColumn\": 529,\n                \"DisplayColumn\": \"12410_Loans Receivable Employees\",\n                \"UUID\": \"fd4a8a00-0d48-4514-aac5-37fe90928756\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 739,\n            \"table_name\": \"C_ElementValue\",\n            \"values\": {\n                \"KeyColumn\": 739,\n                \"DisplayColumn\": \"12420_Loans Receivable Owners/Shareholders\",\n                \"UUID\": \"838be2b7-7f8c-40e0-8dfc-29a2c1bb82c7\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 530,\n            \"table_name\": \"C_ElementValue\",\n            \"values\": {\n                \"KeyColumn\": 530,\n                \"DisplayColumn\": \"12440_Loans Receivable Others\",\n                \"UUID\": \"b0adb67c-2d94-4578-8211-917e2d6d8678\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 528,\n            \"table_name\": \"C_ElementValue\",\n            \"values\": {\n                \"KeyColumn\": 528,\n                \"DisplayColumn\": \"124_Loans Receivable\",\n                \"UUID\": \"572e56d1-577f-43fa-9372-5ceb37cd93ba\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 532,\n            \"table_name\": \"C_ElementValue\",\n            \"values\": {\n                \"KeyColumn\": 532,\n                \"DisplayColumn\": \"12510_Vendor prepayment\",\n                \"UUID\": \"2cc7b178-d6cf-47e9-a778-deef39e64917\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 533,\n            \"table_name\": \"C_ElementValue\",\n            \"values\": {\n                \"KeyColumn\": 533,\n                \"DisplayColumn\": \"12520_Employee Expense Prepayment\",\n                \"UUID\": \"d6078650-c2dc-4ee1-98e1-387cac19161e\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 531,\n            \"table_name\": \"C_ElementValue\",\n            \"values\": {\n                \"KeyColumn\": 531,\n                \"DisplayColumn\": \"125_Prepayments\",\n                \"UUID\": \"d7aac693-2340-4644-b471-ce1b8720137d\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 534,\n            \"table_name\": \"C_ElementValue\",\n            \"values\": {\n                \"KeyColumn\": 534,\n                \"DisplayColumn\": \"12610_Tax credit A/R\",\n                \"UUID\": \"82f712a2-c490-42ad-b161-dd1d101cc540\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 535,\n            \"table_name\": \"C_ElementValue\",\n            \"values\": {\n                \"KeyColumn\": 535,\n                \"DisplayColumn\": \"12620_Tax receivables\",\n                \"UUID\": \"4cb06fd0-e711-47d1-b8b3-eb556856eeff\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 740,\n            \"table_name\": \"C_ElementValue\",\n            \"values\": {\n                \"KeyColumn\": 740,\n                \"DisplayColumn\": \"126_Tax receivables\",\n                \"UUID\": \"3b33f6a1-14b0-4c4e-a0d0-dda21a85b068\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 741,\n            \"table_name\": \"C_ElementValue\",\n            \"values\": {\n                \"KeyColumn\": 741,\n                \"DisplayColumn\": \"12800_Intercompany Due From\",\n                \"UUID\": \"dd7bfbf9-a5d8-4433-a252-e2b3a05d7edc\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 536,\n            \"table_name\": \"C_ElementValue\",\n            \"values\": {\n                \"KeyColumn\": 536,\n                \"DisplayColumn\": \"12900_A/R Miscellaneous\",\n                \"UUID\": \"6cc4f641-e3a0-4e5e-b7bf-869b45fca276\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 517,\n            \"table_name\": \"C_ElementValue\",\n            \"values\": {\n                \"KeyColumn\": 517,\n                \"DisplayColumn\": \"12_Accounts Receivable\",\n                \"UUID\": \"cd359baf-ceaa-4a18-8c3d-615c8da967c1\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 538,\n            \"table_name\": \"C_ElementValue\",\n            \"values\": {\n                \"KeyColumn\": 538,\n                \"DisplayColumn\": \"13100_US Government Obligations\",\n                \"UUID\": \"30fa008e-ba17-4af1-9d5c-f9008489697e\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 539,\n            \"table_name\": \"C_ElementValue\",\n            \"values\": {\n                \"KeyColumn\": 539,\n                \"DisplayColumn\": \"13200_Tax-Exempt Securities\",\n                \"UUID\": \"6d779f71-84a0-4c19-97e5-ccc79e1f68eb\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 540,\n            \"table_name\": \"C_ElementValue\",\n            \"values\": {\n                \"KeyColumn\": 540,\n                \"DisplayColumn\": \"13300_Other Investments\",\n                \"UUID\": \"cac5f71f-e3f2-4ce2-8508-7e225b49171f\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 537,\n            \"table_name\": \"C_ElementValue\",\n            \"values\": {\n                \"KeyColumn\": 537,\n                \"DisplayColumn\": \"13_Investments\",\n                \"UUID\": \"eb4cb2e3-ee92-4f77-a962-a7c9110f61e9\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 776,\n            \"table_name\": \"C_ElementValue\",\n            \"values\": {\n                \"KeyColumn\": 776,\n                \"DisplayColumn\": \"14100_General Trade Inventory\",\n                \"UUID\": \"4fd56411-1091-48a6-9bb3-6be9ecf2db9d\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 742,\n            \"table_name\": \"C_ElementValue\",\n            \"values\": {\n                \"KeyColumn\": 742,\n                \"DisplayColumn\": \"14120_Product asset\",\n                \"UUID\": \"8fc780ce-bb2b-441e-8ee4-0ec2a83780bc\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 50005,\n            \"table_name\": \"C_ElementValue\",\n            \"values\": {\n                \"KeyColumn\": 50005,\n                \"DisplayColumn\": \"14130_Work In Process\",\n                \"UUID\": \"e3d90c30-8b98-424d-abb2-9f22e3958a44\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 50006,\n            \"table_name\": \"C_ElementValue\",\n            \"values\": {\n                \"KeyColumn\": 50006,\n                \"DisplayColumn\": \"14140_Floor Stock\",\n                \"UUID\": \"fe875618-5899-4ba8-bff1-a2009b2a1018\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 541,\n            \"table_name\": \"C_ElementValue\",\n            \"values\": {\n                \"KeyColumn\": 541,\n                \"DisplayColumn\": \"14_Inventory\",\n                \"UUID\": \"dc9e0a2b-6099-4aab-aba1-8626b0139212\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 544,\n            \"table_name\": \"C_ElementValue\",\n            \"values\": {\n                \"KeyColumn\": 544,\n                \"DisplayColumn\": \"15110_Prepaid Insurance\",\n                \"UUID\": \"17c56cdd-e80e-4dac-9f31-ab8304e8a32e\"\n            },\n            \"is_active\": true\n        }\n    ],\n    \"next_page_token\": \"c2d6e690-b810-4593-bdb7-f3b0f9b7331c-2\"\n}"
+				}
+			]
+		},
+		{
+			"name": "ListReportCubes",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{HOST}}/trial-balance-drillable/report-cubes",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"trial-balance-drillable",
+						"report-cubes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ListFactAcctSummary",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{HOST}}/trial-balance-drillable/accouting-fact-summary?organization_id=102&period_id=136&report_cube_id=102",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"trial-balance-drillable",
+						"accouting-fact-summary"
+					],
+					"query": [
+						{
+							"key": "organization_id",
+							"value": "102"
+						},
+						{
+							"key": "period_id",
+							"value": "136"
+						},
+						{
+							"key": "report_cube_id",
+							"value": "102"
+						}
+					]
+				},
+				"description": "### Request Params\n\n- organization_id (int32, required)\n    \n- period_id (int32, required)\n    \n- report_cube_id (int32, required)"
+			},
+			"response": [
+				{
+					"name": "ListFactAcctSummary",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/trial-balance-drillable/accouting-fact-summary",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"trial-balance-drillable",
+								"accouting-fact-summary"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.25.2"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 07 Mar 2024 18:58:58 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "393"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "grpc-encoding",
+							"value": "identity"
+						},
+						{
+							"key": "grpc-accept-encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "x-envoy-upstream-service-time",
+							"value": "164"
+						},
+						{
+							"key": "grpc-status",
+							"value": "0"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Max-Age",
+							"value": "3600"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"record_count\": \"1\",\n    \"records\": [\n        {\n            \"id\": 631,\n            \"value\": \"32900_\",\n            \"name\": \">>> Prior Year Earnings\",\n            \"user_list_id\": 0,\n            \"user_list_name\": \"\",\n            \"period_actual_amount\": \"0\",\n            \"period_budget_amount\": \"0\",\n            \"period_variance_amount\": \"0\",\n            \"ytd_actual_amount\": \"0\",\n            \"ytd_budget_amount\": \"0\",\n            \"variance_amount\": \"0\"\n        }\n    ],\n    \"next_page_token\": \"\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Export",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"search_value\":\"\",\n    \"organization_id\":1,\n    \"budget_id\":1,\n    \"period_id\":1,\n    \"accouting_from_id\":1,\n    \"accouting_to_id\":1,\n    \"report_cube_id\":1,\n    \"user1_id\":1\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{HOST}}/trial-balance-drillable/export",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"trial-balance-drillable",
+						"export"
+					]
+				},
+				"description": "### Request Body\n\n- search_value (String)\n- organization_id (int32)\n- budget_id (int32)\n- period_id (int32)\n- accouting_from_id (int32)\n- accouting_to_id (int32)\n- report_cube_id (int32)\n    \n- user1_id (int32)"
+			},
+			"response": [
+				{
+					"name": "Export",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/trial-balance-drillable/export",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"trial-balance-drillable",
+								"export"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.25.2"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 07 Mar 2024 19:00:07 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "3"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "grpc-encoding",
+							"value": "identity"
+						},
+						{
+							"key": "grpc-accept-encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "x-envoy-upstream-service-time",
+							"value": "76"
+						},
+						{
+							"key": "grpc-status",
+							"value": "0"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Max-Age",
+							"value": "3600"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{}"
+				}
+			]
+		}
+	]
+}

@@ -1,0 +1,1149 @@
+{
+	"info": {
+		"_postman_id": "d1ee83b5-2916-42c3-9c19-876b6101406d",
+		"name": "Express_receipt",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "28978517"
+	},
+	"item": [
+		{
+			"name": "ListBusinessPartners",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{HOST}}/express-receipt/business-partners",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"express-receipt",
+						"business-partners"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "ListBusinessPartners",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/express-receipt/business-partners",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"express-receipt",
+								"business-partners"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.25.2"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 06 Mar 2024 20:25:12 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "1139"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "grpc-encoding",
+							"value": "identity"
+						},
+						{
+							"key": "grpc-accept-encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "x-envoy-upstream-service-time",
+							"value": "159"
+						},
+						{
+							"key": "grpc-status",
+							"value": "0"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Max-Age",
+							"value": "3600"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"record_count\": \"9\",\n    \"records\": [\n        {\n            \"id\": 113,\n            \"value\": \"GardenAdmin\",\n            \"tax_id\": \"\",\n            \"name\": \"GardenAdmin BP\",\n            \"description\": \"\"\n        },\n        {\n            \"id\": 119,\n            \"value\": \"GardenUser\",\n            \"tax_id\": \"\",\n            \"name\": \"GardenUser BP\",\n            \"description\": \"\"\n        },\n        {\n            \"id\": 121,\n            \"value\": \"Patio\",\n            \"tax_id\": \"\",\n            \"name\": \"Patio Fun, Inc.\",\n            \"description\": \"\"\n        },\n        {\n            \"id\": 50000,\n            \"value\": \"Wood, Inc\",\n            \"tax_id\": \"\",\n            \"name\": \"Wood, Inc\",\n            \"description\": \"\"\n        },\n        {\n            \"id\": 50001,\n            \"value\": \"Color, Inc\",\n            \"tax_id\": \"\",\n            \"name\": \"Color, Inc\",\n            \"description\": \"\"\n        },\n        {\n            \"id\": 50002,\n            \"value\": \"Chrome, Inc\",\n            \"tax_id\": \"\",\n            \"name\": \"Chrome, Inc\",\n            \"description\": \"\"\n        },\n        {\n            \"id\": 50003,\n            \"value\": \"Chemical Product, inc\",\n            \"tax_id\": \"\",\n            \"name\": \"Chemical Product, inc\",\n            \"description\": \"\"\n        },\n        {\n            \"id\": 120,\n            \"value\": \"SeedFarm\",\n            \"tax_id\": \"\",\n            \"name\": \"Seed Farm Inc.\",\n            \"description\": \"Customer & Vendor\"\n        },\n        {\n            \"id\": 114,\n            \"value\": \"TreeFarm\",\n            \"tax_id\": \"\",\n            \"name\": \"Tree Farm Inc.\",\n            \"description\": \"Vendor\"\n        }\n    ],\n    \"next_page_token\": \"\"\n}"
+				}
+			]
+		},
+		{
+			"name": "ListPurchaseOrders",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{HOST}}/express-receipt/orders?business_partner_id=121",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"express-receipt",
+						"orders"
+					],
+					"query": [
+						{
+							"key": "business_partner_id",
+							"value": "121"
+						}
+					]
+				},
+				"description": "### Request Params\n\n- business_partner_id (int32, required)"
+			},
+			"response": [
+				{
+					"name": "ListPurchaseOrders",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/express-receipt/orders",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"express-receipt",
+								"orders"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.25.2"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 07 Mar 2024 21:01:31 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "159"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "grpc-encoding",
+							"value": "identity"
+						},
+						{
+							"key": "grpc-accept-encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "x-envoy-upstream-service-time",
+							"value": "141"
+						},
+						{
+							"key": "grpc-status",
+							"value": "0"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Max-Age",
+							"value": "3600"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"record_count\": \"1\",\n    \"records\": [\n        {\n            \"id\": 106,\n            \"document_no\": \"800002\",\n            \"date_ordered\": \"2021-12-22T04:00:00Z\"\n        }\n    ],\n    \"next_page_token\": \"\"\n}"
+				}
+			]
+		},
+		{
+			"name": "ListProducts",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{HOST}}/express-receipt/products?order_id=102",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"express-receipt",
+						"products"
+					],
+					"query": [
+						{
+							"key": "order_id",
+							"value": "102"
+						}
+					]
+				},
+				"description": "### Request Params\n\n- order_id (int32, required)"
+			},
+			"response": [
+				{
+					"name": "ListProducts",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/express-receipt/products",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"express-receipt",
+								"products"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.25.2"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 07 Mar 2024 21:03:17 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "428"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "grpc-encoding",
+							"value": "identity"
+						},
+						{
+							"key": "grpc-accept-encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "x-envoy-upstream-service-time",
+							"value": "111"
+						},
+						{
+							"key": "grpc-status",
+							"value": "0"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Max-Age",
+							"value": "3600"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"record_count\": \"3\",\n    \"records\": [\n        {\n            \"id\": 130,\n            \"upc\": \"\",\n            \"sku\": \"\",\n            \"value\": \"Plum Tree\",\n            \"name\": \"Plum Tree\",\n            \"description\": \"\"\n        },\n        {\n            \"id\": 126,\n            \"upc\": \"\",\n            \"sku\": \"\",\n            \"value\": \"Planting\",\n            \"name\": \"Planting Service\",\n            \"description\": \"\"\n        },\n        {\n            \"id\": 123,\n            \"upc\": \"\",\n            \"sku\": \"\",\n            \"value\": \"Oak\",\n            \"name\": \"Oak Tree\",\n            \"description\": \"\"\n        }\n    ],\n    \"next_page_token\": \"\"\n}"
+				}
+			]
+		},
+		{
+			"name": "CreateReceipt",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"order_id\":106,\n    \"is_create_lines_from_order\":true\n\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{HOST}}/express-receipt/receipts",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"express-receipt",
+						"receipts"
+					]
+				},
+				"description": "### Request Body\n\n- order_id (int32, required)\n- is_create_lines_from_order (bool)"
+			},
+			"response": [
+				{
+					"name": "CreateReceipt",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"order_id\":106\n\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HOST}}/express-receipt/receipts",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"express-receipt",
+								"receipts"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.25.2"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 08 Mar 2024 18:37:08 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "172"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "grpc-encoding",
+							"value": "identity"
+						},
+						{
+							"key": "grpc-accept-encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "x-envoy-upstream-service-time",
+							"value": "146"
+						},
+						{
+							"key": "grpc-status",
+							"value": "0"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Max-Age",
+							"value": "3600"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 1000000,\n    \"document_no\": \"10000511\",\n    \"date_ordered\": \"2021-12-22T04:00:00Z\",\n    \"movement_date\": \"2024-03-08T04:00:00Z\",\n    \"order_id\": 106,\n    \"is_completed\": false\n}"
+				}
+			]
+		},
+		{
+			"name": "DeleteReceipt",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{HOST}}/express-receipt/receipts/:id",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"express-receipt",
+						"receipts",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "1000000"
+						}
+					]
+				},
+				"description": "### Request Params\n\n- id (int32, required)"
+			},
+			"response": [
+				{
+					"name": "DeleteReceipt",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/express-receipt/receipts/:id",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"express-receipt",
+								"receipts",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1000000"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.25.2"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 10 Mar 2024 18:23:35 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "3"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "grpc-encoding",
+							"value": "identity"
+						},
+						{
+							"key": "grpc-accept-encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "x-envoy-upstream-service-time",
+							"value": "138"
+						},
+						{
+							"key": "grpc-status",
+							"value": "0"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Max-Age",
+							"value": "3600"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{}"
+				}
+			]
+		},
+		{
+			"name": "ProcessReceipt",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"description\":\"prueba\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{HOST}}/express-receipt/receipts/:id/process",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"express-receipt",
+						"receipts",
+						":id",
+						"process"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "106"
+						}
+					]
+				},
+				"description": "### Request Params\n\n- id (int32, required)\n    \n\n### Request Body\n\n- description (String)"
+			},
+			"response": [
+				{
+					"name": "ProcessReceipt",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/express-receipt/receipts/:id/process",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"express-receipt",
+								"receipts",
+								":id",
+								"process"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "106"
+								}
+							]
+						}
+					},
+					"status": "Internal Server Error",
+					"code": 500,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.25.2"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 08 Mar 2024 18:37:21 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "74"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "x-envoy-upstream-service-time",
+							"value": "69"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"code\": 13,\n    \"message\": \"Entrega / Recibo Procesado\",\n    \"details\": []\n}"
+				}
+			]
+		},
+		{
+			"name": "CreateReceiptLine",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"description\":\"prueba\",\n    \"product_id\":130,\n    \"quantity\":\"qwe\",\n    \"is_quantity_from_order_line\":true\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{HOST}}/express-receipt/receipts/:receipt_id/lines",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"express-receipt",
+						"receipts",
+						":receipt_id",
+						"lines"
+					],
+					"variable": [
+						{
+							"key": "receipt_id",
+							"value": "1000001"
+						}
+					]
+				},
+				"description": "### Request Params\n\n- receipt_id (int32, required)\n    \n\n### Request Body\n\n- description (String)\n- product_id(int32, required)\n- quantity(String)\n    \n- is_quantity_from_order_line(bool)"
+			},
+			"response": [
+				{
+					"name": "CreateReceiptLine",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"description\":\"prueba\",\n    \"product_id\":130,\n    \"quantity\":\"qwe\",\n    \"is_quantity_from_order_line\":true\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HOST}}/express-receipt/receipts/:receipt_id/lines",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"express-receipt",
+								"receipts",
+								":receipt_id",
+								"lines"
+							],
+							"variable": [
+								{
+									"key": "receipt_id",
+									"value": "1000001"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.25.2"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 11 Mar 2024 15:19:25 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "217"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "grpc-encoding",
+							"value": "identity"
+						},
+						{
+							"key": "grpc-accept-encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "x-envoy-upstream-service-time",
+							"value": "181"
+						},
+						{
+							"key": "grpc-status",
+							"value": "0"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Max-Age",
+							"value": "3600"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 1000000,\n    \"order_line_id\": 100,\n    \"product\": {\n        \"id\": 130,\n        \"upc\": \"\",\n        \"sku\": \"\",\n        \"value\": \"Plum Tree\",\n        \"name\": \"Plum Tree\",\n        \"description\": \"\"\n    },\n    \"description\": \"\",\n    \"quantity\": \"0\",\n    \"line\": 10\n}"
+				}
+			]
+		},
+		{
+			"name": "DeleteReceiptLine",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{HOST}}/express-receipt/receipts/:receipt_id/lines/:id",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"express-receipt",
+						"receipts",
+						":receipt_id",
+						"lines",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "receipt_id",
+							"value": "1000001"
+						},
+						{
+							"key": "id",
+							"value": "106"
+						}
+					]
+				},
+				"description": "### Request Params\n\n- receipt_id (int32, required)\n- id (int32, required)"
+			},
+			"response": [
+				{
+					"name": "DeleteReceiptLine",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/express-receipt/receipts/:receipt_id/lines/:id",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"express-receipt",
+								"receipts",
+								":receipt_id",
+								"lines",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "receipt_id",
+									"value": "1000001"
+								},
+								{
+									"key": "id",
+									"value": "106"
+								}
+							]
+						}
+					},
+					"status": "Internal Server Error",
+					"code": 500,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.25.2"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 10 Mar 2024 18:32:09 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "81"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "x-envoy-upstream-service-time",
+							"value": "112"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"code\": 13,\n    \"message\": \"Línea Entrega / Recibo Procesado\",\n    \"details\": []\n}"
+				}
+			]
+		},
+		{
+			"name": "UpdateReceiptLine",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"description\":\"asd\",\n    \"quantity\":\"qwe\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{HOST}}/express-receipt/receipts/:receipt_id/lines/:id",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"express-receipt",
+						"receipts",
+						":receipt_id",
+						"lines",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "receipt_id",
+							"value": "1000002"
+						},
+						{
+							"key": "id",
+							"value": "106"
+						}
+					]
+				},
+				"description": "### Request Params\n\n- receipt_id (int32, required)\n- id (int32, required)\n    \n\n### Request Body\n\n- description (String)\n    \n- quantity(String)"
+			},
+			"response": [
+				{
+					"name": "UpdateReceiptLine",
+					"originalRequest": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"description\":\"asd\",\n    \"quantity\":\"qwe\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HOST}}/express-receipt/receipts/:receipt_id/lines/:id",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"express-receipt",
+								"receipts",
+								":receipt_id",
+								"lines",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "receipt_id",
+									"value": "1000002"
+								},
+								{
+									"key": "id",
+									"value": "106"
+								}
+							]
+						}
+					},
+					"status": "Internal Server Error",
+					"code": 500,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.25.2"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 11 Mar 2024 15:20:22 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "81"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "x-envoy-upstream-service-time",
+							"value": "114"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"code\": 13,\n    \"message\": \"Línea Entrega / Recibo Procesado\",\n    \"details\": []\n}"
+				}
+			]
+		},
+		{
+			"name": "ListReceiptLines",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{HOST}}/express-receipt/receipts/:receipt_id/lines",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"express-receipt",
+						"receipts",
+						":receipt_id",
+						"lines"
+					],
+					"variable": [
+						{
+							"key": "receipt_id",
+							"value": "1000002"
+						}
+					]
+				},
+				"description": "### Request Params\n\n- receipt_id (int32, required)"
+			},
+			"response": []
+		}
+	]
+}
