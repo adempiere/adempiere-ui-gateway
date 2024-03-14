@@ -85,9 +85,11 @@ The application stack as graphic:
 - *README.md*: this very file
 - *env_template.env*: template for definition of all variables. Usually, this file is edited and tested before copied to *.env*.
 - *.env*: definition of all variables used in *docker-compose files*.
-- *docker compose service files*: each these files define a service only. It may exist more than one docker compose service file for every service. This may be the case when a service is used in different confgurations for different purposes.
-The combination of one or more of these docker compose service files implement the services needed for a special purpose (auth, cache, develop, storage, vue, default).
-  The definition of one service in a single file permits reutilization and the combination of existing services to new purposes; for which hitherto a new docker-compose file was needed. Also, as one service is only defined once, possible repetitions and small unwanted different definitions in docker-compose files are avoided.
+- *docker compose service files*: each these files define a service only.  
+It may exist more than one docker compose service file for every service (see below). This may be the case when a service is used in different confgurations for different purposes.  
+
+  The combination of one or more of these docker compose service files implements the services needed for a special purpose (auth, cache, develop, storage, vue, default).  
+  The definition of one service in a single file permits reutilization and the combination of existing services to new purposes; for which hitherto a new docker-compose file was needed. Also, as one service version is only defined once, possible repetitions and small unwanted different definitions in docker-compose files are avoided.  
   See explanation of start-all.sh to understand how these files are used.
   Example of files are:
   - **01a-postgres_service_with_ports.yml**: one implementation of postgres service.
@@ -99,8 +101,8 @@ The combination of one or more of these docker compose service files implement t
   - **04c-s3_gateway_rs_service_storage.yml**: another implementation of s3 gateway rs service.
   - **etc**: see all docker compose service files.
 - *docker-compose files*: the docker compose service files to be used. Here are defined all services.
-  Variables used in these files are taken from file *.env*.
-  These files are now legacy, i.e. they were the first attempt, but the service definition files are now preferred.
+  Variables used in these files are taken from file *.env*.  
+These files are now legacy, i.e. they were the first attempt, but the service definition files are now preferred.
   - **docker-compose-standard.yml**: when no other file is pecified, this file is taken.
   - **docker-compose-auth.yml**: complete Stack with Open-ID authentication
     Includes a keycloak service and allows its usage as SSO service connecting ADempiere by Open-ID
@@ -108,9 +110,11 @@ The combination of one or more of these docker compose service files implement t
   - **docker-compose-develop.yml**: only backend services for for development
   - **docker-compose-storage.yml**
   - **docker-compose-vue.yml**: for vue minimal stack services
-- *start-all.sh*: shell script to automatically execute docker compose.
-  The persistent directory (database) and the backup directory are created when needed, the file *env_template.env* is copied to *.env* and docker compose is started.
-  The script must be called with the docker-compose flag **-d** + one of the following parameters [**auth**, **cache**, **develop**, **storage**, **vue**, **default**]. It can also be called with the legacy flag  **-l** (this is only legacy and not intended to be continued).
+- *start-all.sh*: shell script to automatically execute docker compose.  
+The persistent directory (database) and the backup directory are created when needed, the file *env_template.env* is copied to *.env* and docker compose is started.  
+The script must be called with the docker-compose flag **-d** + one of the following parameters [**auth**, **cache**, **develop**, **storage**, **vue**, **default**].  
+It can also be called with the legacy flag  **-l** (this is only legacy and not intended to be continued).  
+
   Depending on the parameters, Docker Compose is executed for the eventually assembled *docker-compose.yml* file.
 Here, some examples of how the parameters work:
     - **./start-all.sh -d auth**
@@ -130,9 +134,9 @@ Here, some examples of how the parameters work:
     The file **docker-compose.yml** will be used only for the duration of the docker compose cycle. It will be deleted when *stop-all.sh* is executed
 - *stop-all.sh*: shell script to automatically stop all services that were started with the script *start-all.sh*.
   The file *docker-compose.yml* is deleted after stopping all services.
-- *stop-and-delete-all.sh*: shell script to delete all containers, images, networks, cache and volumnes created with *start-all.sh* or by executing *docker-compose.yml*.
-  After executing this shell, no trace of the application will be left over. Only the persistent directory will not be affected.
-    The file *docker-compose.yml* is deleted after stopping and deleting all objects.
+- *stop-and-delete-all.sh*: shell script to delete all containers, images, networks, cache and volumnes created with *start-all.sh* or by executing *docker-compose.yml*.  
+After executing this shell, no trace of the application will be left over. Only the persistent directory will not be affected.  
+The file *docker-compose.yml* is deleted after stopping and deleting all objects.
 - *postgresql/Dockerfile*: the Dockerfile used.
   It mainly copies postgresql/initdb.sh to the container, so it can be executed at start.
 - *postgresql/initdb.sh*: shell script executed when Postgres starts.
