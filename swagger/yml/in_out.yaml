@@ -1,0 +1,1437 @@
+openapi: 3.0.0
+info:
+  title: In_out
+  version: 1.0.0
+servers:
+  - url: http://{{host}}
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+paths:
+  /info/material-management/in-out:
+    get:
+      tags:
+        - default
+      summary: ListInOutInfo
+      description: >-
+        **Endpoint**: GET /In_out
+
+
+        **Description**: Returns data.ListEntities
+
+
+        **Full URL**:
+        [http://api.adempiere.io/](http://api.adempiere.io/api)/info/material-management/in-out
+
+
+        **Method:** GET
+
+
+        **Application Example**
+
+
+        ``` bash
+
+        curl --location
+        'http://api.adempiere.io/info/material-management/in-out' \
+
+        --header 'Authorization: Bearer
+        eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMDAwMTQ5IiwiQURfQ2xpZW50X0lEIjoxMSwiQURfT3JnX0lEIjowLCJBRF9Sb2xlX0lEIjoxMDIsIkFEX1VzZXJfSUQiOjEwMCwiTV9XYXJlaG91c2VfSUQiOjAsIkFEX0xhbmd1YWdlIjoiZW5fVVMiLCJpYXQiOjE3MTA1MTA0MDEsImV4cCI6MTcxMDU5NjgwMX0.nYQbrcT9RyHNRCf-oNM50ZVSO6uJ9gvrQQ7e0fzU9Ik'
+
+         ```
+
+        **Example Answer**
+
+
+        ``` json
+         {
+                    "id": 102,
+                    "table_name": "M_InOut",
+                    "values": {
+                        "M_InOut_ID": 102,
+                        "AD_Client_ID": 11,
+                        "AD_Org_ID": 11,
+                        "IsActive": true,
+                        "Created": {
+                            "type": "date",
+                            "value": "2002-02-22 10:00:59"
+                        },
+                        "CreatedBy": 100,
+                        "Updated": {
+                            "type": "date",
+                            "value": "2002-02-22 10:01:43"
+                        },
+                        "UpdatedBy": 0,
+                        "IsSOTrx": false,
+                        "DocumentNo": "10000000",
+                        "DocAction": "--",
+                        "DocStatus": "CO",
+                        "Posted": "N",
+                        "Processing": "N",
+                        "Processed": true,
+                        "C_DocType_ID": 122,
+                        "Description": "(a)",
+                        "C_Order_ID": null,
+                        "DateOrdered": null,
+                        "IsPrinted": false,
+                        "MovementType": "V+",
+                        "MovementDate": {
+                            "type": "date",
+                            "value": "2021-01-22 12:00:00"
+                        },
+                        "DateAcct": {
+                            "type": "date",
+                            "value": "2021-01-22 12:00:00"
+                        },
+                        "C_BPartner_ID": 114,
+                        "C_BPartner_Location_ID": 109,
+                        "M_Warehouse_ID": 103,
+                        "POReference": null,
+                        "DeliveryRule": "A",
+                        "FreightCostRule": "I",
+                        "FreightAmt": {
+                            "type": "decimal",
+                            "value": "0.00"
+                        },
+                        "DeliveryViaRule": "P",
+                        "M_Shipper_ID": null,
+                        "C_Charge_ID": null,
+                        "ChargeAmt": {
+                            "type": "decimal",
+                            "value": "0.00"
+                        },
+                        "PriorityRule": "5",
+                        "DatePrinted": null,
+                        "C_Invoice_ID": null,
+                        "CreateFrom": "N",
+                        "GenerateTo": "N",
+                        "SendEMail": false,
+                        "AD_User_ID": 103,
+                        "SalesRep_ID": null,
+                        "NoPackages": null,
+                        "PickDate": null,
+                        "ShipDate": null,
+                        "TrackingNo": null,
+                        "AD_OrgTrx_ID": null,
+                        "C_Project_ID": null,
+                        "C_Campaign_ID": null,
+                        "C_Activity_ID": null,
+                        "User1_ID": null,
+                        "User2_ID": null,
+                        "DateReceived": null,
+                        "IsInTransit": false,
+                        "Ref_InOut_ID": null,
+                        "CreateConfirm": null,
+                        "CreatePackage": null,
+                        "IsApproved": false,
+                        "IsInDispute": false,
+                        "Volume": null,
+                        "Weight": null,
+                        "M_RMA_ID": null,
+                        "Reversal_ID": null,
+                        "IsDropShip": false,
+                        "DropShip_BPartner_ID": null,
+                        "DropShip_Location_ID": null,
+                        "DropShip_User_ID": null,
+                        "ProcessedOn": {
+                            "type": "decimal",
+                            "value": "1014415259000.00"
+                        },
+                        "C_POS_ID": null,
+                        "User3_ID": null,
+                        "User4_ID": null,
+                        "BarcodeScanner": null,
+                        "UUID": "7dba295a-567c-46ec-9df6-b34726eb9e8d",
+                        "M_FreightCategory_ID": null,
+                        "DisplayColumn_AD_Client_ID": "GardenWorld",
+                        "DisplayColumn_AD_Org_ID": "HQ",
+                        "DisplayColumn_AD_OrgTrx_ID": null,
+                        "DisplayColumn_AD_User_ID": "Joe Sales",
+                        "DisplayColumn_C_Activity_ID": null,
+                        "DisplayColumn_C_BPartner_ID": "Tree Farm Inc.",
+                        "DisplayColumn_C_BPartner_Location_ID": "Anywhere",
+                        "DisplayColumn_C_Campaign_ID": null,
+                        "DisplayColumn_C_Charge_ID": null,
+                        "DisplayColumn_C_DocType_ID": "MM Receipt",
+                        "DisplayColumn_C_Invoice_ID": null,
+                        "DisplayColumn_C_Order_ID": null,
+                        "DisplayColumn_C_POS_ID": null,
+                        "DisplayColumn_C_Project_ID": null,
+                        "DisplayColumn_CreatedBy": "SuperUser",
+                        "DisplayColumn_DeliveryRule": "Availability",
+                        "DisplayColumn_DeliveryViaRule": "Pickup",
+                        "DisplayColumn_DocAction": "",
+                        "DisplayColumn_DocStatus": "Completed",
+                        "DisplayColumn_DropShip_BPartner_ID": null,
+                        "DisplayColumn_DropShip_Location_ID": null,
+                        "DisplayColumn_DropShip_User_ID": null,
+                        "DisplayColumn_FreightCostRule": "Freight included",
+                        "DisplayColumn_M_FreightCategory_ID": null,
+                        "DisplayColumn_M_InOut_ID": "10000000 - 2021-01-22 00:00:00",
+                        "DisplayColumn_MovementType": "Vendor Receipts",
+                        "DisplayColumn_M_RMA_ID": null,
+                        "DisplayColumn_M_Shipper_ID": null,
+                        "DisplayColumn_M_Warehouse_ID": "HQ Warehouse",
+                        "DisplayColumn_Posted": "Not Posted",
+                        "DisplayColumn_PriorityRule": "Medium",
+                        "DisplayColumn_Reversal_ID": null,
+                        "DisplayColumn_SalesRep_ID": null,
+                        "DisplayColumn_UpdatedBy": "System",
+                        "DisplayColumn_User1_ID": null,
+                        "DisplayColumn_User2_ID": null,
+                        "DisplayColumn_User3_ID": null,
+                        "DisplayColumn_User4_ID": null
+                    }
+                },
+
+         ```
+
+        **Change control**
+
+
+        | **Version** | date | author | Description of Changes |
+
+        | --- | --- | --- | --- |
+
+        | 1.0 | 15/03/2024 | Ricardo | Initial creation of the document. |
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: OK
+          headers:
+            Server:
+              schema:
+                type: string
+                example: nginx/1.25.2
+            Date:
+              schema:
+                type: string
+                example: Thu, 07 Mar 2024 12:50:32 GMT
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Content-Length:
+              schema:
+                type: integer
+                example: '36794'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            grpc-encoding:
+              schema:
+                type: string
+                example: identity
+            grpc-accept-encoding:
+              schema:
+                type: string
+                example: gzip
+            x-envoy-upstream-service-time:
+              schema:
+                type: integer
+                example: '492'
+            grpc-status:
+              schema:
+                type: integer
+                example: '0'
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Max-Age:
+              schema:
+                type: integer
+                example: '3600'
+            Access-Control-Expose-Headers:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+                example: '*'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                record_count: '9'
+                records:
+                  - id: 102
+                    table_name: M_InOut
+                    values:
+                      M_InOut_ID: 102
+                      AD_Client_ID: 11
+                      AD_Org_ID: 11
+                      IsActive: true
+                      Created:
+                        type: date
+                        value: '2002-02-22 10:00:59'
+                      CreatedBy: 100
+                      Updated:
+                        type: date
+                        value: '2002-02-22 10:01:43'
+                      UpdatedBy: 0
+                      IsSOTrx: false
+                      DocumentNo: '10000000'
+                      DocAction: '--'
+                      DocStatus: CO
+                      Posted: 'N'
+                      Processing: 'N'
+                      Processed: true
+                      C_DocType_ID: 122
+                      Description: (a)
+                      C_Order_ID: null
+                      DateOrdered: null
+                      IsPrinted: false
+                      MovementType: V+
+                      MovementDate:
+                        type: date
+                        value: '2021-01-22 12:00:00'
+                      DateAcct:
+                        type: date
+                        value: '2021-01-22 12:00:00'
+                      C_BPartner_ID: 114
+                      C_BPartner_Location_ID: 109
+                      M_Warehouse_ID: 103
+                      POReference: null
+                      DeliveryRule: A
+                      FreightCostRule: I
+                      FreightAmt:
+                        type: decimal
+                        value: '0.00'
+                      DeliveryViaRule: P
+                      M_Shipper_ID: null
+                      C_Charge_ID: null
+                      ChargeAmt:
+                        type: decimal
+                        value: '0.00'
+                      PriorityRule: '5'
+                      DatePrinted: null
+                      C_Invoice_ID: null
+                      CreateFrom: 'N'
+                      GenerateTo: 'N'
+                      SendEMail: false
+                      AD_User_ID: 103
+                      SalesRep_ID: null
+                      NoPackages: null
+                      PickDate: null
+                      ShipDate: null
+                      TrackingNo: null
+                      AD_OrgTrx_ID: null
+                      C_Project_ID: null
+                      C_Campaign_ID: null
+                      C_Activity_ID: null
+                      User1_ID: null
+                      User2_ID: null
+                      DateReceived: null
+                      IsInTransit: false
+                      Ref_InOut_ID: null
+                      CreateConfirm: null
+                      CreatePackage: null
+                      IsApproved: false
+                      IsInDispute: false
+                      Volume: null
+                      Weight: null
+                      M_RMA_ID: null
+                      Reversal_ID: null
+                      IsDropShip: false
+                      DropShip_BPartner_ID: null
+                      DropShip_Location_ID: null
+                      DropShip_User_ID: null
+                      ProcessedOn:
+                        type: decimal
+                        value: '1014415259000.00'
+                      C_POS_ID: null
+                      User3_ID: null
+                      User4_ID: null
+                      BarcodeScanner: null
+                      UUID: 7dba295a-567c-46ec-9df6-b34726eb9e8d
+                      M_FreightCategory_ID: null
+                      DisplayColumn_AD_Client_ID: GardenWorld
+                      DisplayColumn_AD_Org_ID: HQ
+                      DisplayColumn_AD_OrgTrx_ID: null
+                      DisplayColumn_AD_User_ID: Joe Sales
+                      DisplayColumn_C_Activity_ID: null
+                      DisplayColumn_C_BPartner_ID: Tree Farm Inc.
+                      DisplayColumn_C_BPartner_Location_ID: Anywhere
+                      DisplayColumn_C_Campaign_ID: null
+                      DisplayColumn_C_Charge_ID: null
+                      DisplayColumn_C_DocType_ID: Recepción de Productos
+                      DisplayColumn_C_Invoice_ID: null
+                      DisplayColumn_C_Order_ID: null
+                      DisplayColumn_C_POS_ID: null
+                      DisplayColumn_C_Project_ID: null
+                      DisplayColumn_CreatedBy: SuperUser
+                      DisplayColumn_DeliveryRule: Disponibilidad
+                      DisplayColumn_DeliveryViaRule: Recolección
+                      DisplayColumn_DocAction: <Ninguno>
+                      DisplayColumn_DocStatus: Completo
+                      DisplayColumn_DropShip_BPartner_ID: null
+                      DisplayColumn_DropShip_Location_ID: null
+                      DisplayColumn_DropShip_User_ID: null
+                      DisplayColumn_FreightCostRule: Flete Incluido
+                      DisplayColumn_M_FreightCategory_ID: null
+                      DisplayColumn_M_InOut_ID: 10000000 - 2021-01-22 00:00:00
+                      DisplayColumn_MovementType: Recibos del Proveedor
+                      DisplayColumn_M_RMA_ID: null
+                      DisplayColumn_M_Shipper_ID: null
+                      DisplayColumn_M_Warehouse_ID: HQ Warehouse
+                      DisplayColumn_Posted: No Contabilizado
+                      DisplayColumn_PriorityRule: Media
+                      DisplayColumn_Reversal_ID: null
+                      DisplayColumn_SalesRep_ID: null
+                      DisplayColumn_UpdatedBy: System
+                      DisplayColumn_User1_ID: null
+                      DisplayColumn_User2_ID: null
+                      DisplayColumn_User3_ID: null
+                      DisplayColumn_User4_ID: null
+                  - id: 104
+                    table_name: M_InOut
+                    values:
+                      M_InOut_ID: 104
+                      AD_Client_ID: 11
+                      AD_Org_ID: 11
+                      IsActive: true
+                      Created:
+                        type: date
+                        value: '2002-09-07 08:15:34'
+                      CreatedBy: 100
+                      Updated:
+                        type: date
+                        value: '2002-09-07 08:16:25'
+                      UpdatedBy: 0
+                      IsSOTrx: false
+                      DocumentNo: '10000001'
+                      DocAction: '--'
+                      DocStatus: CO
+                      Posted: 'N'
+                      Processing: 'N'
+                      Processed: true
+                      C_DocType_ID: 122
+                      Description: null
+                      C_Order_ID: null
+                      DateOrdered: null
+                      IsPrinted: false
+                      MovementType: V+
+                      MovementDate:
+                        type: date
+                        value: '2021-08-07 12:00:00'
+                      DateAcct:
+                        type: date
+                        value: '2021-08-07 12:00:00'
+                      C_BPartner_ID: 114
+                      C_BPartner_Location_ID: 109
+                      M_Warehouse_ID: 103
+                      POReference: null
+                      DeliveryRule: A
+                      FreightCostRule: I
+                      FreightAmt:
+                        type: decimal
+                        value: '0.00'
+                      DeliveryViaRule: P
+                      M_Shipper_ID: null
+                      C_Charge_ID: null
+                      ChargeAmt:
+                        type: decimal
+                        value: '0.00'
+                      PriorityRule: '5'
+                      DatePrinted: null
+                      C_Invoice_ID: null
+                      CreateFrom: 'N'
+                      GenerateTo: 'N'
+                      SendEMail: false
+                      AD_User_ID: 103
+                      SalesRep_ID: null
+                      NoPackages: null
+                      PickDate: null
+                      ShipDate: null
+                      TrackingNo: null
+                      AD_OrgTrx_ID: null
+                      C_Project_ID: null
+                      C_Campaign_ID: null
+                      C_Activity_ID: null
+                      User1_ID: null
+                      User2_ID: null
+                      DateReceived: null
+                      IsInTransit: false
+                      Ref_InOut_ID: null
+                      CreateConfirm: null
+                      CreatePackage: null
+                      IsApproved: false
+                      IsInDispute: false
+                      Volume: null
+                      Weight: null
+                      M_RMA_ID: null
+                      Reversal_ID: null
+                      IsDropShip: false
+                      DropShip_BPartner_ID: null
+                      DropShip_Location_ID: null
+                      DropShip_User_ID: null
+                      ProcessedOn:
+                        type: decimal
+                        value: '1031429734000.00'
+                      C_POS_ID: null
+                      User3_ID: null
+                      User4_ID: null
+                      BarcodeScanner: null
+                      UUID: 5d85f1d2-85a2-4d1e-9c93-dffe78119689
+                      M_FreightCategory_ID: null
+                      DisplayColumn_AD_Client_ID: GardenWorld
+                      DisplayColumn_AD_Org_ID: HQ
+                      DisplayColumn_AD_OrgTrx_ID: null
+                      DisplayColumn_AD_User_ID: Joe Sales
+                      DisplayColumn_C_Activity_ID: null
+                      DisplayColumn_C_BPartner_ID: Tree Farm Inc.
+                      DisplayColumn_C_BPartner_Location_ID: Anywhere
+                      DisplayColumn_C_Campaign_ID: null
+                      DisplayColumn_C_Charge_ID: null
+                      DisplayColumn_C_DocType_ID: Recepción de Productos
+                      DisplayColumn_C_Invoice_ID: null
+                      DisplayColumn_C_Order_ID: null
+                      DisplayColumn_C_POS_ID: null
+                      DisplayColumn_C_Project_ID: null
+                      DisplayColumn_CreatedBy: SuperUser
+                      DisplayColumn_DeliveryRule: Disponibilidad
+                      DisplayColumn_DeliveryViaRule: Recolección
+                      DisplayColumn_DocAction: <Ninguno>
+                      DisplayColumn_DocStatus: Completo
+                      DisplayColumn_DropShip_BPartner_ID: null
+                      DisplayColumn_DropShip_Location_ID: null
+                      DisplayColumn_DropShip_User_ID: null
+                      DisplayColumn_FreightCostRule: Flete Incluido
+                      DisplayColumn_M_FreightCategory_ID: null
+                      DisplayColumn_M_InOut_ID: 10000001 - 2021-08-07 00:00:00
+                      DisplayColumn_MovementType: Recibos del Proveedor
+                      DisplayColumn_M_RMA_ID: null
+                      DisplayColumn_M_Shipper_ID: null
+                      DisplayColumn_M_Warehouse_ID: HQ Warehouse
+                      DisplayColumn_Posted: No Contabilizado
+                      DisplayColumn_PriorityRule: Media
+                      DisplayColumn_Reversal_ID: null
+                      DisplayColumn_SalesRep_ID: null
+                      DisplayColumn_UpdatedBy: System
+                      DisplayColumn_User1_ID: null
+                      DisplayColumn_User2_ID: null
+                      DisplayColumn_User3_ID: null
+                      DisplayColumn_User4_ID: null
+                  - id: 105
+                    table_name: M_InOut
+                    values:
+                      M_InOut_ID: 105
+                      AD_Client_ID: 11
+                      AD_Org_ID: 11
+                      IsActive: true
+                      Created:
+                        type: date
+                        value: '2003-01-22 06:03:54'
+                      CreatedBy: 100
+                      Updated:
+                        type: date
+                        value: '2003-01-22 06:08:14'
+                      UpdatedBy: 0
+                      IsSOTrx: false
+                      DocumentNo: '10000002'
+                      DocAction: '--'
+                      DocStatus: CO
+                      Posted: 'N'
+                      Processing: 'N'
+                      Processed: true
+                      C_DocType_ID: 122
+                      Description: null
+                      C_Order_ID: 105
+                      DateOrdered: null
+                      IsPrinted: false
+                      MovementType: V+
+                      MovementDate:
+                        type: date
+                        value: '2021-12-22 12:00:00'
+                      DateAcct:
+                        type: date
+                        value: '2021-12-22 12:00:00'
+                      C_BPartner_ID: 120
+                      C_BPartner_Location_ID: 114
+                      M_Warehouse_ID: 103
+                      POReference: null
+                      DeliveryRule: A
+                      FreightCostRule: I
+                      FreightAmt:
+                        type: decimal
+                        value: '0.00'
+                      DeliveryViaRule: P
+                      M_Shipper_ID: null
+                      C_Charge_ID: null
+                      ChargeAmt:
+                        type: decimal
+                        value: '0.00'
+                      PriorityRule: '5'
+                      DatePrinted: null
+                      C_Invoice_ID: null
+                      CreateFrom: 'N'
+                      GenerateTo: 'N'
+                      SendEMail: false
+                      AD_User_ID: null
+                      SalesRep_ID: null
+                      NoPackages: null
+                      PickDate: null
+                      ShipDate: null
+                      TrackingNo: null
+                      AD_OrgTrx_ID: null
+                      C_Project_ID: null
+                      C_Campaign_ID: null
+                      C_Activity_ID: null
+                      User1_ID: null
+                      User2_ID: null
+                      DateReceived: null
+                      IsInTransit: false
+                      Ref_InOut_ID: null
+                      CreateConfirm: null
+                      CreatePackage: null
+                      IsApproved: false
+                      IsInDispute: false
+                      Volume: null
+                      Weight: null
+                      M_RMA_ID: null
+                      Reversal_ID: null
+                      IsDropShip: false
+                      DropShip_BPartner_ID: null
+                      DropShip_Location_ID: null
+                      DropShip_User_ID: null
+                      ProcessedOn:
+                        type: decimal
+                        value: '1043258634000.00'
+                      C_POS_ID: null
+                      User3_ID: null
+                      User4_ID: null
+                      BarcodeScanner: null
+                      UUID: 20f76d65-9098-4bf9-a627-fb7c752da830
+                      M_FreightCategory_ID: null
+                      DisplayColumn_AD_Client_ID: GardenWorld
+                      DisplayColumn_AD_Org_ID: HQ
+                      DisplayColumn_AD_OrgTrx_ID: null
+                      DisplayColumn_AD_User_ID: null
+                      DisplayColumn_C_Activity_ID: null
+                      DisplayColumn_C_BPartner_ID: Seed Farm Inc.
+                      DisplayColumn_C_BPartner_Location_ID: Small Village
+                      DisplayColumn_C_Campaign_ID: null
+                      DisplayColumn_C_Charge_ID: null
+                      DisplayColumn_C_DocType_ID: Recepción de Productos
+                      DisplayColumn_C_Invoice_ID: null
+                      DisplayColumn_C_Order_ID: 800001 - 2021-12-22 00:00:00
+                      DisplayColumn_C_POS_ID: null
+                      DisplayColumn_C_Project_ID: null
+                      DisplayColumn_CreatedBy: SuperUser
+                      DisplayColumn_DeliveryRule: Disponibilidad
+                      DisplayColumn_DeliveryViaRule: Recolección
+                      DisplayColumn_DocAction: <Ninguno>
+                      DisplayColumn_DocStatus: Completo
+                      DisplayColumn_DropShip_BPartner_ID: null
+                      DisplayColumn_DropShip_Location_ID: null
+                      DisplayColumn_DropShip_User_ID: null
+                      DisplayColumn_FreightCostRule: Flete Incluido
+                      DisplayColumn_M_FreightCategory_ID: null
+                      DisplayColumn_M_InOut_ID: 10000002 - 2021-12-22 00:00:00
+                      DisplayColumn_MovementType: Recibos del Proveedor
+                      DisplayColumn_M_RMA_ID: null
+                      DisplayColumn_M_Shipper_ID: null
+                      DisplayColumn_M_Warehouse_ID: HQ Warehouse
+                      DisplayColumn_Posted: No Contabilizado
+                      DisplayColumn_PriorityRule: Media
+                      DisplayColumn_Reversal_ID: null
+                      DisplayColumn_SalesRep_ID: null
+                      DisplayColumn_UpdatedBy: System
+                      DisplayColumn_User1_ID: null
+                      DisplayColumn_User2_ID: null
+                      DisplayColumn_User3_ID: null
+                      DisplayColumn_User4_ID: null
+                  - id: 106
+                    table_name: M_InOut
+                    values:
+                      M_InOut_ID: 106
+                      AD_Client_ID: 11
+                      AD_Org_ID: 11
+                      IsActive: true
+                      Created:
+                        type: date
+                        value: '2003-01-22 06:08:49'
+                      CreatedBy: 100
+                      Updated:
+                        type: date
+                        value: '2003-01-22 06:09:05'
+                      UpdatedBy: 0
+                      IsSOTrx: false
+                      DocumentNo: '10000003'
+                      DocAction: '--'
+                      DocStatus: CO
+                      Posted: 'N'
+                      Processing: 'N'
+                      Processed: true
+                      C_DocType_ID: 122
+                      Description: null
+                      C_Order_ID: 104
+                      DateOrdered: null
+                      IsPrinted: false
+                      MovementType: V+
+                      MovementDate:
+                        type: date
+                        value: '2021-12-22 12:00:00'
+                      DateAcct:
+                        type: date
+                        value: '2021-12-22 12:00:00'
+                      C_BPartner_ID: 114
+                      C_BPartner_Location_ID: 109
+                      M_Warehouse_ID: 103
+                      POReference: null
+                      DeliveryRule: A
+                      FreightCostRule: I
+                      FreightAmt:
+                        type: decimal
+                        value: '0.00'
+                      DeliveryViaRule: P
+                      M_Shipper_ID: null
+                      C_Charge_ID: null
+                      ChargeAmt:
+                        type: decimal
+                        value: '0.00'
+                      PriorityRule: '5'
+                      DatePrinted: null
+                      C_Invoice_ID: null
+                      CreateFrom: 'N'
+                      GenerateTo: 'N'
+                      SendEMail: false
+                      AD_User_ID: 103
+                      SalesRep_ID: null
+                      NoPackages: null
+                      PickDate: null
+                      ShipDate: null
+                      TrackingNo: null
+                      AD_OrgTrx_ID: null
+                      C_Project_ID: null
+                      C_Campaign_ID: null
+                      C_Activity_ID: null
+                      User1_ID: null
+                      User2_ID: null
+                      DateReceived: null
+                      IsInTransit: false
+                      Ref_InOut_ID: null
+                      CreateConfirm: null
+                      CreatePackage: null
+                      IsApproved: false
+                      IsInDispute: false
+                      Volume: null
+                      Weight: null
+                      M_RMA_ID: null
+                      Reversal_ID: null
+                      IsDropShip: false
+                      DropShip_BPartner_ID: null
+                      DropShip_Location_ID: null
+                      DropShip_User_ID: null
+                      ProcessedOn:
+                        type: decimal
+                        value: '1043258929000.00'
+                      C_POS_ID: null
+                      User3_ID: null
+                      User4_ID: null
+                      BarcodeScanner: null
+                      UUID: e4d74bac-c8f9-4a6f-823b-01770a971818
+                      M_FreightCategory_ID: null
+                      DisplayColumn_AD_Client_ID: GardenWorld
+                      DisplayColumn_AD_Org_ID: HQ
+                      DisplayColumn_AD_OrgTrx_ID: null
+                      DisplayColumn_AD_User_ID: Joe Sales
+                      DisplayColumn_C_Activity_ID: null
+                      DisplayColumn_C_BPartner_ID: Tree Farm Inc.
+                      DisplayColumn_C_BPartner_Location_ID: Anywhere
+                      DisplayColumn_C_Campaign_ID: null
+                      DisplayColumn_C_Charge_ID: null
+                      DisplayColumn_C_DocType_ID: Recepción de Productos
+                      DisplayColumn_C_Invoice_ID: null
+                      DisplayColumn_C_Order_ID: 800000 - 2021-12-22 00:00:00
+                      DisplayColumn_C_POS_ID: null
+                      DisplayColumn_C_Project_ID: null
+                      DisplayColumn_CreatedBy: SuperUser
+                      DisplayColumn_DeliveryRule: Disponibilidad
+                      DisplayColumn_DeliveryViaRule: Recolección
+                      DisplayColumn_DocAction: <Ninguno>
+                      DisplayColumn_DocStatus: Completo
+                      DisplayColumn_DropShip_BPartner_ID: null
+                      DisplayColumn_DropShip_Location_ID: null
+                      DisplayColumn_DropShip_User_ID: null
+                      DisplayColumn_FreightCostRule: Flete Incluido
+                      DisplayColumn_M_FreightCategory_ID: null
+                      DisplayColumn_M_InOut_ID: 10000003 - 2021-12-22 00:00:00
+                      DisplayColumn_MovementType: Recibos del Proveedor
+                      DisplayColumn_M_RMA_ID: null
+                      DisplayColumn_M_Shipper_ID: null
+                      DisplayColumn_M_Warehouse_ID: HQ Warehouse
+                      DisplayColumn_Posted: No Contabilizado
+                      DisplayColumn_PriorityRule: Media
+                      DisplayColumn_Reversal_ID: null
+                      DisplayColumn_SalesRep_ID: null
+                      DisplayColumn_UpdatedBy: System
+                      DisplayColumn_User1_ID: null
+                      DisplayColumn_User2_ID: null
+                      DisplayColumn_User3_ID: null
+                      DisplayColumn_User4_ID: null
+                  - id: 107
+                    table_name: M_InOut
+                    values:
+                      M_InOut_ID: 107
+                      AD_Client_ID: 11
+                      AD_Org_ID: 11
+                      IsActive: true
+                      Created:
+                        type: date
+                        value: '2003-01-22 06:09:28'
+                      CreatedBy: 100
+                      Updated:
+                        type: date
+                        value: '2003-01-22 06:09:43'
+                      UpdatedBy: 0
+                      IsSOTrx: false
+                      DocumentNo: '10000004'
+                      DocAction: '--'
+                      DocStatus: CO
+                      Posted: 'N'
+                      Processing: 'N'
+                      Processed: true
+                      C_DocType_ID: 122
+                      Description: null
+                      C_Order_ID: 106
+                      DateOrdered: null
+                      IsPrinted: false
+                      MovementType: V+
+                      MovementDate:
+                        type: date
+                        value: '2021-12-22 12:00:00'
+                      DateAcct:
+                        type: date
+                        value: '2021-12-22 12:00:00'
+                      C_BPartner_ID: 121
+                      C_BPartner_Location_ID: 115
+                      M_Warehouse_ID: 103
+                      POReference: null
+                      DeliveryRule: A
+                      FreightCostRule: I
+                      FreightAmt:
+                        type: decimal
+                        value: '0.00'
+                      DeliveryViaRule: P
+                      M_Shipper_ID: null
+                      C_Charge_ID: null
+                      ChargeAmt:
+                        type: decimal
+                        value: '0.00'
+                      PriorityRule: '5'
+                      DatePrinted: null
+                      C_Invoice_ID: null
+                      CreateFrom: 'N'
+                      GenerateTo: 'N'
+                      SendEMail: false
+                      AD_User_ID: null
+                      SalesRep_ID: null
+                      NoPackages: null
+                      PickDate: null
+                      ShipDate: null
+                      TrackingNo: null
+                      AD_OrgTrx_ID: null
+                      C_Project_ID: null
+                      C_Campaign_ID: null
+                      C_Activity_ID: null
+                      User1_ID: null
+                      User2_ID: null
+                      DateReceived: null
+                      IsInTransit: false
+                      Ref_InOut_ID: null
+                      CreateConfirm: null
+                      CreatePackage: null
+                      IsApproved: false
+                      IsInDispute: false
+                      Volume: null
+                      Weight: null
+                      M_RMA_ID: null
+                      Reversal_ID: null
+                      IsDropShip: false
+                      DropShip_BPartner_ID: null
+                      DropShip_Location_ID: null
+                      DropShip_User_ID: null
+                      ProcessedOn:
+                        type: decimal
+                        value: '1043258968000.00'
+                      C_POS_ID: null
+                      User3_ID: null
+                      User4_ID: null
+                      BarcodeScanner: null
+                      UUID: 30f7720a-027e-4e64-881b-26863a1435d7
+                      M_FreightCategory_ID: null
+                      DisplayColumn_AD_Client_ID: GardenWorld
+                      DisplayColumn_AD_Org_ID: HQ
+                      DisplayColumn_AD_OrgTrx_ID: null
+                      DisplayColumn_AD_User_ID: null
+                      DisplayColumn_C_Activity_ID: null
+                      DisplayColumn_C_BPartner_ID: Patio Fun, Inc.
+                      DisplayColumn_C_BPartner_Location_ID: New York
+                      DisplayColumn_C_Campaign_ID: null
+                      DisplayColumn_C_Charge_ID: null
+                      DisplayColumn_C_DocType_ID: Recepción de Productos
+                      DisplayColumn_C_Invoice_ID: null
+                      DisplayColumn_C_Order_ID: 800002 - 2021-12-22 00:00:00
+                      DisplayColumn_C_POS_ID: null
+                      DisplayColumn_C_Project_ID: null
+                      DisplayColumn_CreatedBy: SuperUser
+                      DisplayColumn_DeliveryRule: Disponibilidad
+                      DisplayColumn_DeliveryViaRule: Recolección
+                      DisplayColumn_DocAction: <Ninguno>
+                      DisplayColumn_DocStatus: Completo
+                      DisplayColumn_DropShip_BPartner_ID: null
+                      DisplayColumn_DropShip_Location_ID: null
+                      DisplayColumn_DropShip_User_ID: null
+                      DisplayColumn_FreightCostRule: Flete Incluido
+                      DisplayColumn_M_FreightCategory_ID: null
+                      DisplayColumn_M_InOut_ID: 10000004 - 2021-12-22 00:00:00
+                      DisplayColumn_MovementType: Recibos del Proveedor
+                      DisplayColumn_M_RMA_ID: null
+                      DisplayColumn_M_Shipper_ID: null
+                      DisplayColumn_M_Warehouse_ID: HQ Warehouse
+                      DisplayColumn_Posted: No Contabilizado
+                      DisplayColumn_PriorityRule: Media
+                      DisplayColumn_Reversal_ID: null
+                      DisplayColumn_SalesRep_ID: null
+                      DisplayColumn_UpdatedBy: System
+                      DisplayColumn_User1_ID: null
+                      DisplayColumn_User2_ID: null
+                      DisplayColumn_User3_ID: null
+                      DisplayColumn_User4_ID: null
+                  - id: 108
+                    table_name: M_InOut
+                    values:
+                      M_InOut_ID: 108
+                      AD_Client_ID: 11
+                      AD_Org_ID: 11
+                      IsActive: true
+                      Created:
+                        type: date
+                        value: '2003-12-30 12:14:27'
+                      CreatedBy: 0
+                      Updated:
+                        type: date
+                        value: '2003-12-30 12:14:28'
+                      UpdatedBy: 0
+                      IsSOTrx: true
+                      DocumentNo: '600003'
+                      DocAction: '--'
+                      DocStatus: CO
+                      Posted: 'N'
+                      Processing: 'N'
+                      Processed: true
+                      C_DocType_ID: 121
+                      Description: Export Order
+                      C_Order_ID: 108
+                      DateOrdered:
+                        type: date
+                        value: '2022-01-25 12:00:00'
+                      IsPrinted: false
+                      MovementType: C-
+                      MovementDate:
+                        type: date
+                        value: '2022-01-25 12:00:00'
+                      DateAcct:
+                        type: date
+                        value: '2022-01-25 12:00:00'
+                      C_BPartner_ID: 118
+                      C_BPartner_Location_ID: 113
+                      M_Warehouse_ID: 103
+                      POReference: null
+                      DeliveryRule: A
+                      FreightCostRule: I
+                      FreightAmt:
+                        type: decimal
+                        value: '0.00'
+                      DeliveryViaRule: P
+                      M_Shipper_ID: null
+                      C_Charge_ID: null
+                      ChargeAmt:
+                        type: decimal
+                        value: '0.00'
+                      PriorityRule: '5'
+                      DatePrinted: null
+                      C_Invoice_ID: null
+                      CreateFrom: null
+                      GenerateTo: null
+                      SendEMail: false
+                      AD_User_ID: null
+                      SalesRep_ID: null
+                      NoPackages: null
+                      PickDate: null
+                      ShipDate: null
+                      TrackingNo: null
+                      AD_OrgTrx_ID: null
+                      C_Project_ID: null
+                      C_Campaign_ID: null
+                      C_Activity_ID: null
+                      User1_ID: null
+                      User2_ID: null
+                      DateReceived: null
+                      IsInTransit: false
+                      Ref_InOut_ID: null
+                      CreateConfirm: null
+                      CreatePackage: null
+                      IsApproved: false
+                      IsInDispute: false
+                      Volume: null
+                      Weight: null
+                      M_RMA_ID: null
+                      Reversal_ID: null
+                      IsDropShip: false
+                      DropShip_BPartner_ID: null
+                      DropShip_Location_ID: null
+                      DropShip_User_ID: null
+                      ProcessedOn:
+                        type: decimal
+                        value: '1072743267000.00'
+                      C_POS_ID: null
+                      User3_ID: null
+                      User4_ID: null
+                      BarcodeScanner: null
+                      UUID: c7bee7fc-fe8b-4a2d-99cc-7ae1dcf8a1b1
+                      M_FreightCategory_ID: null
+                      DisplayColumn_AD_Client_ID: GardenWorld
+                      DisplayColumn_AD_Org_ID: HQ
+                      DisplayColumn_AD_OrgTrx_ID: null
+                      DisplayColumn_AD_User_ID: null
+                      DisplayColumn_C_Activity_ID: null
+                      DisplayColumn_C_BPartner_ID: Joe Block
+                      DisplayColumn_C_BPartner_Location_ID: Hartford
+                      DisplayColumn_C_Campaign_ID: null
+                      DisplayColumn_C_Charge_ID: null
+                      DisplayColumn_C_DocType_ID: Entrega de Productos Indirecto
+                      DisplayColumn_C_Invoice_ID: null
+                      DisplayColumn_C_Order_ID: 60000 - 2022-01-25 00:00:00
+                      DisplayColumn_C_POS_ID: null
+                      DisplayColumn_C_Project_ID: null
+                      DisplayColumn_CreatedBy: System
+                      DisplayColumn_DeliveryRule: Disponibilidad
+                      DisplayColumn_DeliveryViaRule: Recolección
+                      DisplayColumn_DocAction: <Ninguno>
+                      DisplayColumn_DocStatus: Completo
+                      DisplayColumn_DropShip_BPartner_ID: null
+                      DisplayColumn_DropShip_Location_ID: null
+                      DisplayColumn_DropShip_User_ID: null
+                      DisplayColumn_FreightCostRule: Flete Incluido
+                      DisplayColumn_M_FreightCategory_ID: null
+                      DisplayColumn_M_InOut_ID: 600003 - 2022-01-25 00:00:00
+                      DisplayColumn_MovementType: Embarque a Clientes
+                      DisplayColumn_M_RMA_ID: null
+                      DisplayColumn_M_Shipper_ID: null
+                      DisplayColumn_M_Warehouse_ID: HQ Warehouse
+                      DisplayColumn_Posted: No Contabilizado
+                      DisplayColumn_PriorityRule: Media
+                      DisplayColumn_Reversal_ID: null
+                      DisplayColumn_SalesRep_ID: null
+                      DisplayColumn_UpdatedBy: System
+                      DisplayColumn_User1_ID: null
+                      DisplayColumn_User2_ID: null
+                      DisplayColumn_User3_ID: null
+                      DisplayColumn_User4_ID: null
+                  - id: 100
+                    table_name: M_InOut
+                    values:
+                      M_InOut_ID: 100
+                      AD_Client_ID: 11
+                      AD_Org_ID: 11
+                      IsActive: true
+                      Created:
+                        type: date
+                        value: '2002-02-22 09:07:06'
+                      CreatedBy: 0
+                      Updated:
+                        type: date
+                        value: '2002-02-22 09:07:07'
+                      UpdatedBy: 0
+                      IsSOTrx: true
+                      DocumentNo: '600000'
+                      DocAction: '--'
+                      DocStatus: CO
+                      Posted: 'N'
+                      Processing: 'N'
+                      Processed: true
+                      C_DocType_ID: 121
+                      Description: '(1) '
+                      C_Order_ID: 100
+                      DateOrdered:
+                        type: date
+                        value: '2021-01-22 12:00:00'
+                      IsPrinted: false
+                      MovementType: C-
+                      MovementDate:
+                        type: date
+                        value: '2021-01-22 12:00:00'
+                      DateAcct:
+                        type: date
+                        value: '2021-01-22 12:00:00'
+                      C_BPartner_ID: 112
+                      C_BPartner_Location_ID: 108
+                      M_Warehouse_ID: 103
+                      POReference: null
+                      DeliveryRule: A
+                      FreightCostRule: I
+                      FreightAmt:
+                        type: decimal
+                        value: '0.00'
+                      DeliveryViaRule: P
+                      M_Shipper_ID: null
+                      C_Charge_ID: null
+                      ChargeAmt:
+                        type: decimal
+                        value: '0.00'
+                      PriorityRule: '5'
+                      DatePrinted: null
+                      C_Invoice_ID: null
+                      CreateFrom: null
+                      GenerateTo: null
+                      SendEMail: false
+                      AD_User_ID: null
+                      SalesRep_ID: null
+                      NoPackages: null
+                      PickDate: null
+                      ShipDate: null
+                      TrackingNo: null
+                      AD_OrgTrx_ID: null
+                      C_Project_ID: null
+                      C_Campaign_ID: null
+                      C_Activity_ID: null
+                      User1_ID: null
+                      User2_ID: null
+                      DateReceived: null
+                      IsInTransit: false
+                      Ref_InOut_ID: null
+                      CreateConfirm: null
+                      CreatePackage: null
+                      IsApproved: false
+                      IsInDispute: false
+                      Volume: null
+                      Weight: null
+                      M_RMA_ID: null
+                      Reversal_ID: null
+                      IsDropShip: false
+                      DropShip_BPartner_ID: null
+                      DropShip_Location_ID: null
+                      DropShip_User_ID: null
+                      ProcessedOn:
+                        type: decimal
+                        value: '1014412026000.00'
+                      C_POS_ID: null
+                      User3_ID: null
+                      User4_ID: null
+                      BarcodeScanner: null
+                      UUID: b61ea829-79e6-4071-8b2a-7ed0e8e930f6
+                      M_FreightCategory_ID: null
+                      DisplayColumn_AD_Client_ID: GardenWorld
+                      DisplayColumn_AD_Org_ID: HQ
+                      DisplayColumn_AD_OrgTrx_ID: null
+                      DisplayColumn_AD_User_ID: null
+                      DisplayColumn_C_Activity_ID: null
+                      DisplayColumn_C_BPartner_ID: Standard
+                      DisplayColumn_C_BPartner_Location_ID: Monroe
+                      DisplayColumn_C_Campaign_ID: null
+                      DisplayColumn_C_Charge_ID: null
+                      DisplayColumn_C_DocType_ID: Entrega de Productos Indirecto
+                      DisplayColumn_C_Invoice_ID: null
+                      DisplayColumn_C_Order_ID: 80000 - 2021-01-22 00:00:00
+                      DisplayColumn_C_POS_ID: null
+                      DisplayColumn_C_Project_ID: null
+                      DisplayColumn_CreatedBy: System
+                      DisplayColumn_DeliveryRule: Disponibilidad
+                      DisplayColumn_DeliveryViaRule: Recolección
+                      DisplayColumn_DocAction: <Ninguno>
+                      DisplayColumn_DocStatus: Completo
+                      DisplayColumn_DropShip_BPartner_ID: null
+                      DisplayColumn_DropShip_Location_ID: null
+                      DisplayColumn_DropShip_User_ID: null
+                      DisplayColumn_FreightCostRule: Flete Incluido
+                      DisplayColumn_M_FreightCategory_ID: null
+                      DisplayColumn_M_InOut_ID: 600000 - 2021-01-22 00:00:00
+                      DisplayColumn_MovementType: Embarque a Clientes
+                      DisplayColumn_M_RMA_ID: null
+                      DisplayColumn_M_Shipper_ID: null
+                      DisplayColumn_M_Warehouse_ID: HQ Warehouse
+                      DisplayColumn_Posted: No Contabilizado
+                      DisplayColumn_PriorityRule: Media
+                      DisplayColumn_Reversal_ID: null
+                      DisplayColumn_SalesRep_ID: null
+                      DisplayColumn_UpdatedBy: System
+                      DisplayColumn_User1_ID: null
+                      DisplayColumn_User2_ID: null
+                      DisplayColumn_User3_ID: null
+                      DisplayColumn_User4_ID: null
+                  - id: 101
+                    table_name: M_InOut
+                    values:
+                      M_InOut_ID: 101
+                      AD_Client_ID: 11
+                      AD_Org_ID: 11
+                      IsActive: true
+                      Created:
+                        type: date
+                        value: '2002-02-22 09:09:00'
+                      CreatedBy: 0
+                      Updated:
+                        type: date
+                        value: '2002-02-22 09:09:01'
+                      UpdatedBy: 0
+                      IsSOTrx: true
+                      DocumentNo: '600001'
+                      DocAction: '--'
+                      DocStatus: CO
+                      Posted: 'N'
+                      Processing: 'N'
+                      Processed: true
+                      C_DocType_ID: 121
+                      Description: (2)
+                      C_Order_ID: 101
+                      DateOrdered:
+                        type: date
+                        value: '2021-01-22 12:00:00'
+                      IsPrinted: false
+                      MovementType: C-
+                      MovementDate:
+                        type: date
+                        value: '2021-01-22 12:00:00'
+                      DateAcct:
+                        type: date
+                        value: '2021-01-22 12:00:00'
+                      C_BPartner_ID: 112
+                      C_BPartner_Location_ID: 108
+                      M_Warehouse_ID: 103
+                      POReference: null
+                      DeliveryRule: A
+                      FreightCostRule: I
+                      FreightAmt:
+                        type: decimal
+                        value: '0.00'
+                      DeliveryViaRule: P
+                      M_Shipper_ID: null
+                      C_Charge_ID: null
+                      ChargeAmt:
+                        type: decimal
+                        value: '0.00'
+                      PriorityRule: '5'
+                      DatePrinted: null
+                      C_Invoice_ID: null
+                      CreateFrom: null
+                      GenerateTo: null
+                      SendEMail: false
+                      AD_User_ID: null
+                      SalesRep_ID: null
+                      NoPackages: null
+                      PickDate: null
+                      ShipDate: null
+                      TrackingNo: null
+                      AD_OrgTrx_ID: null
+                      C_Project_ID: null
+                      C_Campaign_ID: null
+                      C_Activity_ID: null
+                      User1_ID: null
+                      User2_ID: null
+                      DateReceived: null
+                      IsInTransit: false
+                      Ref_InOut_ID: null
+                      CreateConfirm: null
+                      CreatePackage: null
+                      IsApproved: false
+                      IsInDispute: false
+                      Volume: null
+                      Weight: null
+                      M_RMA_ID: null
+                      Reversal_ID: null
+                      IsDropShip: false
+                      DropShip_BPartner_ID: null
+                      DropShip_Location_ID: null
+                      DropShip_User_ID: null
+                      ProcessedOn:
+                        type: decimal
+                        value: '1014412140000.00'
+                      C_POS_ID: null
+                      User3_ID: null
+                      User4_ID: null
+                      BarcodeScanner: null
+                      UUID: dd18f021-e929-4c64-9d75-84db47698055
+                      M_FreightCategory_ID: null
+                      DisplayColumn_AD_Client_ID: GardenWorld
+                      DisplayColumn_AD_Org_ID: HQ
+                      DisplayColumn_AD_OrgTrx_ID: null
+                      DisplayColumn_AD_User_ID: null
+                      DisplayColumn_C_Activity_ID: null
+                      DisplayColumn_C_BPartner_ID: Standard
+                      DisplayColumn_C_BPartner_Location_ID: Monroe
+                      DisplayColumn_C_Campaign_ID: null
+                      DisplayColumn_C_Charge_ID: null
+                      DisplayColumn_C_DocType_ID: Entrega de Productos Indirecto
+                      DisplayColumn_C_Invoice_ID: null
+                      DisplayColumn_C_Order_ID: 80001 - 2021-01-22 00:00:00
+                      DisplayColumn_C_POS_ID: null
+                      DisplayColumn_C_Project_ID: null
+                      DisplayColumn_CreatedBy: System
+                      DisplayColumn_DeliveryRule: Disponibilidad
+                      DisplayColumn_DeliveryViaRule: Recolección
+                      DisplayColumn_DocAction: <Ninguno>
+                      DisplayColumn_DocStatus: Completo
+                      DisplayColumn_DropShip_BPartner_ID: null
+                      DisplayColumn_DropShip_Location_ID: null
+                      DisplayColumn_DropShip_User_ID: null
+                      DisplayColumn_FreightCostRule: Flete Incluido
+                      DisplayColumn_M_FreightCategory_ID: null
+                      DisplayColumn_M_InOut_ID: 600001 - 2021-01-22 00:00:00
+                      DisplayColumn_MovementType: Embarque a Clientes
+                      DisplayColumn_M_RMA_ID: null
+                      DisplayColumn_M_Shipper_ID: null
+                      DisplayColumn_M_Warehouse_ID: HQ Warehouse
+                      DisplayColumn_Posted: No Contabilizado
+                      DisplayColumn_PriorityRule: Media
+                      DisplayColumn_Reversal_ID: null
+                      DisplayColumn_SalesRep_ID: null
+                      DisplayColumn_UpdatedBy: System
+                      DisplayColumn_User1_ID: null
+                      DisplayColumn_User2_ID: null
+                      DisplayColumn_User3_ID: null
+                      DisplayColumn_User4_ID: null
+                  - id: 103
+                    table_name: M_InOut
+                    values:
+                      M_InOut_ID: 103
+                      AD_Client_ID: 11
+                      AD_Org_ID: 11
+                      IsActive: true
+                      Created:
+                        type: date
+                        value: '2002-08-25 12:36:39'
+                      CreatedBy: 0
+                      Updated:
+                        type: date
+                        value: '2002-08-25 12:36:41'
+                      UpdatedBy: 0
+                      IsSOTrx: true
+                      DocumentNo: '600002'
+                      DocAction: '--'
+                      DocStatus: CO
+                      Posted: 'N'
+                      Processing: 'N'
+                      Processed: true
+                      C_DocType_ID: 121
+                      Description: This is urgent!
+                      C_Order_ID: 102
+                      DateOrdered:
+                        type: date
+                        value: '2021-07-01 12:00:00'
+                      IsPrinted: false
+                      MovementType: C-
+                      MovementDate:
+                        type: date
+                        value: '2021-07-25 12:00:00'
+                      DateAcct:
+                        type: date
+                        value: '2021-07-25 12:00:00'
+                      C_BPartner_ID: 117
+                      C_BPartner_Location_ID: 112
+                      M_Warehouse_ID: 103
+                      POReference: Phone Order
+                      DeliveryRule: A
+                      FreightCostRule: I
+                      FreightAmt:
+                        type: decimal
+                        value: '0.00'
+                      DeliveryViaRule: P
+                      M_Shipper_ID: null
+                      C_Charge_ID: null
+                      ChargeAmt:
+                        type: decimal
+                        value: '0.00'
+                      PriorityRule: '5'
+                      DatePrinted: null
+                      C_Invoice_ID: null
+                      CreateFrom: null
+                      GenerateTo: null
+                      SendEMail: false
+                      AD_User_ID: null
+                      SalesRep_ID: null
+                      NoPackages: null
+                      PickDate: null
+                      ShipDate: null
+                      TrackingNo: null
+                      AD_OrgTrx_ID: null
+                      C_Project_ID: null
+                      C_Campaign_ID: null
+                      C_Activity_ID: null
+                      User1_ID: null
+                      User2_ID: null
+                      DateReceived: null
+                      IsInTransit: false
+                      Ref_InOut_ID: null
+                      CreateConfirm: null
+                      CreatePackage: null
+                      IsApproved: false
+                      IsInDispute: false
+                      Volume: null
+                      Weight: null
+                      M_RMA_ID: null
+                      Reversal_ID: null
+                      IsDropShip: false
+                      DropShip_BPartner_ID: null
+                      DropShip_Location_ID: null
+                      DropShip_User_ID: null
+                      ProcessedOn:
+                        type: decimal
+                        value: '1030235799000.00'
+                      C_POS_ID: null
+                      User3_ID: null
+                      User4_ID: null
+                      BarcodeScanner: null
+                      UUID: 6e880780-86a0-46db-b36c-ce500393c8ac
+                      M_FreightCategory_ID: null
+                      DisplayColumn_AD_Client_ID: GardenWorld
+                      DisplayColumn_AD_Org_ID: HQ
+                      DisplayColumn_AD_OrgTrx_ID: null
+                      DisplayColumn_AD_User_ID: null
+                      DisplayColumn_C_Activity_ID: null
+                      DisplayColumn_C_BPartner_ID: C&W Construction
+                      DisplayColumn_C_BPartner_Location_ID: Stamford
+                      DisplayColumn_C_Campaign_ID: null
+                      DisplayColumn_C_Charge_ID: null
+                      DisplayColumn_C_DocType_ID: Entrega de Productos Indirecto
+                      DisplayColumn_C_Invoice_ID: null
+                      DisplayColumn_C_Order_ID: 80002 - 2021-07-01 00:00:00
+                      DisplayColumn_C_POS_ID: null
+                      DisplayColumn_C_Project_ID: null
+                      DisplayColumn_CreatedBy: System
+                      DisplayColumn_DeliveryRule: Disponibilidad
+                      DisplayColumn_DeliveryViaRule: Recolección
+                      DisplayColumn_DocAction: <Ninguno>
+                      DisplayColumn_DocStatus: Completo
+                      DisplayColumn_DropShip_BPartner_ID: null
+                      DisplayColumn_DropShip_Location_ID: null
+                      DisplayColumn_DropShip_User_ID: null
+                      DisplayColumn_FreightCostRule: Flete Incluido
+                      DisplayColumn_M_FreightCategory_ID: null
+                      DisplayColumn_M_InOut_ID: 600002 - 2021-07-25 00:00:00
+                      DisplayColumn_MovementType: Embarque a Clientes
+                      DisplayColumn_M_RMA_ID: null
+                      DisplayColumn_M_Shipper_ID: null
+                      DisplayColumn_M_Warehouse_ID: HQ Warehouse
+                      DisplayColumn_Posted: No Contabilizado
+                      DisplayColumn_PriorityRule: Media
+                      DisplayColumn_Reversal_ID: null
+                      DisplayColumn_SalesRep_ID: null
+                      DisplayColumn_UpdatedBy: System
+                      DisplayColumn_User1_ID: null
+                      DisplayColumn_User2_ID: null
+                      DisplayColumn_User3_ID: null
+                      DisplayColumn_User4_ID: null
+                next_page_token: ''
