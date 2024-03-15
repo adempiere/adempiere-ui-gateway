@@ -1,0 +1,1475 @@
+openapi: 3.0.0
+info:
+  title: Invoice
+  version: 1.0.0
+servers:
+  - url: http://{{host}}
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+paths:
+  /info/sales/invoices:
+    get:
+      tags:
+        - default
+      summary: ListInvoiceInfo
+      description: >-
+        **Endpoint**: GET /Invoice
+
+
+        **Description**: Returns data.ListEntities
+
+
+        **FULL URL**:
+        [http://api.adempiere.io](http://api.adempiere.io/api)/info/sales/invoices
+
+
+        **Method**: GET
+
+
+        **Application Example**
+
+
+        ``` bash
+
+        curl --location 'http://api.adempiere.io/info/sales/invoices' \
+
+        --header 'Authorization: Bearer
+        eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMDAwMTQ5IiwiQURfQ2xpZW50X0lEIjoxMSwiQURfT3JnX0lEIjowLCJBRF9Sb2xlX0lEIjoxMDIsIkFEX1VzZXJfSUQiOjEwMCwiTV9XYXJlaG91c2VfSUQiOjAsIkFEX0xhbmd1YWdlIjoiZW5fVVMiLCJpYXQiOjE3MTA1MTA0MDEsImV4cCI6MTcxMDU5NjgwMX0.nYQbrcT9RyHNRCf-oNM50ZVSO6uJ9gvrQQ7e0fzU9Ik'
+        \
+
+        --data ''
+
+         ```
+
+        **Example Answer**
+
+
+        ``` json
+
+        {
+                    "id": 50053,
+                    "table_name": "C_Invoice",
+                    "values": {
+                        "C_Invoice_ID": 50053,
+                        "AD_Client_ID": 11,
+                        "AD_Org_ID": 50001,
+                        "IsActive": true,
+                        "Created": {
+                            "type": "date",
+                            "value": "2022-05-10 06:24:42"
+                        },
+                        "CreatedBy": 100,
+                        "Updated": {
+                            "type": "date",
+                            "value": "2023-01-17 07:11:17"
+                        },
+                        "UpdatedBy": 0,
+                        "IsSOTrx": true,
+                        "DocumentNo": "1000",
+                        "DocStatus": "CO",
+                        "DocAction": "CL",
+                        "Processing": "N",
+                        "Processed": true,
+                        "Posted": "N",
+                        "C_DocType_ID": 116,
+                        "C_DocTypeTarget_ID": 116,
+                        "C_Order_ID": null,
+                        "Description": null,
+                        "IsApproved": true,
+                        "IsTransferred": false,
+                        "IsPrinted": false,
+                        "SalesRep_ID": 102,
+                        "DateInvoiced": {
+                            "type": "date",
+                            "value": "2024-08-10 12:00:00"
+                        },
+                        "DatePrinted": null,
+                        "DateAcct": {
+                            "type": "date",
+                            "value": "2024-08-10 12:00:00"
+                        },
+                        "C_BPartner_ID": 113,
+                        "C_BPartner_Location_ID": 117,
+                        "POReference": null,
+                        "IsDiscountPrinted": true,
+                        "DateOrdered": null,
+                        "C_Currency_ID": 100,
+                        "PaymentRule": "P",
+                        "C_PaymentTerm_ID": 105,
+                        "C_Charge_ID": null,
+                        "ChargeAmt": {
+                            "type": "decimal",
+                            "value": "0.00"
+                        },
+                        "TotalLines": {
+                            "type": "decimal",
+                            "value": "0.00"
+                        },
+                        "GrandTotal": {
+                            "type": "decimal",
+                            "value": "0.00"
+                        },
+                        "M_PriceList_ID": 101,
+                        "IsTaxIncluded": false,
+                        "C_Campaign_ID": null,
+                        "C_Project_ID": null,
+                        "C_Activity_ID": null,
+                        "IsPaid": false,
+                        "C_Payment_ID": null,
+                        "C_CashLine_ID": null,
+                        "CreateFrom": "N",
+                        "GenerateTo": "N",
+                        "SendEMail": false,
+                        "AD_User_ID": 101,
+                        "CopyFrom": "N",
+                        "IsSelfService": false,
+                        "AD_OrgTrx_ID": null,
+                        "User1_ID": null,
+                        "User2_ID": null,
+                        "C_ConversionType_ID": 114,
+                        "IsPayScheduleValid": false,
+                        "Ref_Invoice_ID": null,
+                        "IsInDispute": false,
+                        "InvoiceCollectionType": null,
+                        "M_RMA_ID": null,
+                        "DunningGrace": null,
+                        "C_DunningLevel_ID": null,
+                        "Reversal_ID": null,
+                        "ProcessedOn": {
+                            "type": "decimal",
+                            "value": "1674004277424.4248046875"
+                        },
+                        "IsFixedAssetInvoice": false,
+                        "C_POS_ID": null,
+                        "User3_ID": null,
+                        "User4_ID": null,
+                        "UUID": "59f412ee-4f47-44d1-a9e2-5f13fe427e29",
+                        "BOMDrop": "N",
+                        "FM_Account_ID": null,
+                        "C_SalesRegion_ID": null,
+                        "FM_Agreement_ID": null,
+                        "DisplayColumn_AD_Client_ID": "GardenWorld",
+                        "DisplayColumn_AD_Org_ID": "Fertilizer",
+                        "DisplayColumn_AD_OrgTrx_ID": null,
+                        "DisplayColumn_AD_User_ID": "GardenAdmin",
+                        "DisplayColumn_C_Activity_ID": null,
+                        "DisplayColumn_C_BPartner_ID": "GardenAdmin BP",
+                        "DisplayColumn_C_BPartner_Location_ID": "Near Village",
+                        "DisplayColumn_C_Campaign_ID": null,
+                        "DisplayColumn_C_CashLine_ID": null,
+                        "DisplayColumn_C_Charge_ID": null,
+                        "DisplayColumn_C_ConversionType_ID": "Spot",
+                        "DisplayColumn_C_Currency_ID": "USD",
+                        "DisplayColumn_C_DocType_ID": "AR Invoice",
+                        "DisplayColumn_C_DocTypeTarget_ID": "AR Invoice",
+                        "DisplayColumn_C_DunningLevel_ID": null,
+                        "DisplayColumn_C_Invoice_ID": "1000 - 2024-08-10 00:00:00 - 0",
+                        "DisplayColumn_C_Order_ID": null,
+                        "DisplayColumn_C_Payment_ID": null,
+                        "DisplayColumn_C_PaymentTerm_ID": "Immediate",
+                        "DisplayColumn_C_POS_ID": null,
+                        "DisplayColumn_C_Project_ID": null,
+                        "DisplayColumn_CreatedBy": "SuperUser",
+                        "DisplayColumn_C_SalesRegion_ID": null,
+                        "DisplayColumn_DocAction": "Close",
+                        "DisplayColumn_DocStatus": "Completed",
+                        "DisplayColumn_FM_Account_ID": null,
+                        "DisplayColumn_FM_Agreement_ID": null,
+                        "DisplayColumn_InvoiceCollectionType": null,
+                        "DisplayColumn_M_PriceList_ID": "Standard",
+                        "DisplayColumn_M_RMA_ID": null,
+                        "DisplayColumn_PaymentRule": "On Credit",
+                        "DisplayColumn_Posted": "Not Posted",
+                        "DisplayColumn_Reversal_ID": null,
+                        "DisplayColumn_SalesRep_ID": "GardenUser",
+                        "DisplayColumn_UpdatedBy": "System",
+                        "DisplayColumn_User1_ID": null,
+                        "DisplayColumn_User2_ID": null,
+                        "DisplayColumn_User3_ID": null,
+                        "DisplayColumn_User4_ID": null
+                    }
+                },
+
+         ```
+
+        **Change control**
+
+
+        | **Version** | date | author | Description of Changes |
+
+        | --- | --- | --- | --- |
+
+        | 1.0 | 15/03/2024 | Ricardo | Initial creation of the document. |
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: OK
+          headers:
+            Server:
+              schema:
+                type: string
+                example: nginx/1.25.2
+            Date:
+              schema:
+                type: string
+                example: Thu, 07 Mar 2024 12:56:56 GMT
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Content-Length:
+              schema:
+                type: integer
+                example: '38066'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            grpc-encoding:
+              schema:
+                type: string
+                example: identity
+            grpc-accept-encoding:
+              schema:
+                type: string
+                example: gzip
+            x-envoy-upstream-service-time:
+              schema:
+                type: integer
+                example: '295'
+            grpc-status:
+              schema:
+                type: integer
+                example: '0'
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Max-Age:
+              schema:
+                type: integer
+                example: '3600'
+            Access-Control-Expose-Headers:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+                example: '*'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                record_count: '9'
+                records:
+                  - id: 50053
+                    table_name: C_Invoice
+                    values:
+                      C_Invoice_ID: 50053
+                      AD_Client_ID: 11
+                      AD_Org_ID: 50001
+                      IsActive: true
+                      Created:
+                        type: date
+                        value: '2022-05-10 06:24:42'
+                      CreatedBy: 100
+                      Updated:
+                        type: date
+                        value: '2023-01-17 07:11:17'
+                      UpdatedBy: 0
+                      IsSOTrx: true
+                      DocumentNo: '1000'
+                      DocStatus: CO
+                      DocAction: CL
+                      Processing: 'N'
+                      Processed: true
+                      Posted: 'N'
+                      C_DocType_ID: 116
+                      C_DocTypeTarget_ID: 116
+                      C_Order_ID: null
+                      Description: null
+                      IsApproved: true
+                      IsTransferred: false
+                      IsPrinted: false
+                      SalesRep_ID: 102
+                      DateInvoiced:
+                        type: date
+                        value: '2024-08-10 12:00:00'
+                      DatePrinted: null
+                      DateAcct:
+                        type: date
+                        value: '2024-08-10 12:00:00'
+                      C_BPartner_ID: 113
+                      C_BPartner_Location_ID: 117
+                      POReference: null
+                      IsDiscountPrinted: true
+                      DateOrdered: null
+                      C_Currency_ID: 100
+                      PaymentRule: P
+                      C_PaymentTerm_ID: 105
+                      C_Charge_ID: null
+                      ChargeAmt:
+                        type: decimal
+                        value: '0.00'
+                      TotalLines:
+                        type: decimal
+                        value: '0.00'
+                      GrandTotal:
+                        type: decimal
+                        value: '0.00'
+                      M_PriceList_ID: 101
+                      IsTaxIncluded: false
+                      C_Campaign_ID: null
+                      C_Project_ID: null
+                      C_Activity_ID: null
+                      IsPaid: false
+                      C_Payment_ID: null
+                      C_CashLine_ID: null
+                      CreateFrom: 'N'
+                      GenerateTo: 'N'
+                      SendEMail: false
+                      AD_User_ID: 101
+                      CopyFrom: 'N'
+                      IsSelfService: false
+                      AD_OrgTrx_ID: null
+                      User1_ID: null
+                      User2_ID: null
+                      C_ConversionType_ID: 114
+                      IsPayScheduleValid: false
+                      Ref_Invoice_ID: null
+                      IsInDispute: false
+                      InvoiceCollectionType: null
+                      M_RMA_ID: null
+                      DunningGrace: null
+                      C_DunningLevel_ID: null
+                      Reversal_ID: null
+                      ProcessedOn:
+                        type: decimal
+                        value: '1674004277424.4248046875'
+                      IsFixedAssetInvoice: false
+                      C_POS_ID: null
+                      User3_ID: null
+                      User4_ID: null
+                      UUID: 59f412ee-4f47-44d1-a9e2-5f13fe427e29
+                      BOMDrop: 'N'
+                      FM_Account_ID: null
+                      C_SalesRegion_ID: null
+                      FM_Agreement_ID: null
+                      DisplayColumn_AD_Client_ID: GardenWorld
+                      DisplayColumn_AD_Org_ID: Fertilizer
+                      DisplayColumn_AD_OrgTrx_ID: null
+                      DisplayColumn_AD_User_ID: GardenAdmin
+                      DisplayColumn_C_Activity_ID: null
+                      DisplayColumn_C_BPartner_ID: GardenAdmin BP
+                      DisplayColumn_C_BPartner_Location_ID: Near Village
+                      DisplayColumn_C_Campaign_ID: null
+                      DisplayColumn_C_CashLine_ID: null
+                      DisplayColumn_C_Charge_ID: null
+                      DisplayColumn_C_ConversionType_ID: Spot
+                      DisplayColumn_C_Currency_ID: USD
+                      DisplayColumn_C_DocType_ID: Factura de CxC
+                      DisplayColumn_C_DocTypeTarget_ID: Factura de CxC
+                      DisplayColumn_C_DunningLevel_ID: null
+                      DisplayColumn_C_Invoice_ID: 1000 - 2024-08-10 00:00:00 - 0
+                      DisplayColumn_C_Order_ID: null
+                      DisplayColumn_C_Payment_ID: null
+                      DisplayColumn_C_PaymentTerm_ID: Inmediato
+                      DisplayColumn_C_POS_ID: null
+                      DisplayColumn_C_Project_ID: null
+                      DisplayColumn_CreatedBy: SuperUser
+                      DisplayColumn_C_SalesRegion_ID: null
+                      DisplayColumn_DocAction: Cerrar
+                      DisplayColumn_DocStatus: Completo
+                      DisplayColumn_FM_Account_ID: null
+                      DisplayColumn_FM_Agreement_ID: null
+                      DisplayColumn_InvoiceCollectionType: null
+                      DisplayColumn_M_PriceList_ID: Standard
+                      DisplayColumn_M_RMA_ID: null
+                      DisplayColumn_PaymentRule: A Crédito
+                      DisplayColumn_Posted: No Contabilizado
+                      DisplayColumn_Reversal_ID: null
+                      DisplayColumn_SalesRep_ID: GardenUser
+                      DisplayColumn_UpdatedBy: System
+                      DisplayColumn_User1_ID: null
+                      DisplayColumn_User2_ID: null
+                      DisplayColumn_User3_ID: null
+                      DisplayColumn_User4_ID: null
+                  - id: 102
+                    table_name: C_Invoice
+                    values:
+                      C_Invoice_ID: 102
+                      AD_Client_ID: 11
+                      AD_Org_ID: 11
+                      IsActive: true
+                      Created:
+                        type: date
+                        value: '2002-02-22 10:04:26'
+                      CreatedBy: 100
+                      Updated:
+                        type: date
+                        value: '2002-02-22 10:06:09'
+                      UpdatedBy: 0
+                      IsSOTrx: false
+                      DocumentNo: '10000000'
+                      DocStatus: CO
+                      DocAction: '--'
+                      Processing: 'N'
+                      Processed: true
+                      Posted: 'N'
+                      C_DocType_ID: 123
+                      C_DocTypeTarget_ID: 123
+                      C_Order_ID: null
+                      Description: null
+                      IsApproved: true
+                      IsTransferred: false
+                      IsPrinted: false
+                      SalesRep_ID: 101
+                      DateInvoiced:
+                        type: date
+                        value: '2021-01-22 12:00:00'
+                      DatePrinted: null
+                      DateAcct:
+                        type: date
+                        value: '2021-01-22 12:00:00'
+                      C_BPartner_ID: 114
+                      C_BPartner_Location_ID: 109
+                      POReference: null
+                      IsDiscountPrinted: true
+                      DateOrdered: null
+                      C_Currency_ID: 100
+                      PaymentRule: P
+                      C_PaymentTerm_ID: 105
+                      C_Charge_ID: null
+                      ChargeAmt:
+                        type: decimal
+                        value: '0.00'
+                      TotalLines:
+                        type: decimal
+                        value: '200.00'
+                      GrandTotal:
+                        type: decimal
+                        value: '200.00'
+                      M_PriceList_ID: 102
+                      IsTaxIncluded: false
+                      C_Campaign_ID: null
+                      C_Project_ID: null
+                      C_Activity_ID: null
+                      IsPaid: false
+                      C_Payment_ID: null
+                      C_CashLine_ID: null
+                      CreateFrom: 'N'
+                      GenerateTo: 'N'
+                      SendEMail: false
+                      AD_User_ID: 103
+                      CopyFrom: null
+                      IsSelfService: false
+                      AD_OrgTrx_ID: null
+                      User1_ID: null
+                      User2_ID: null
+                      C_ConversionType_ID: null
+                      IsPayScheduleValid: false
+                      Ref_Invoice_ID: null
+                      IsInDispute: false
+                      InvoiceCollectionType: null
+                      M_RMA_ID: null
+                      DunningGrace: null
+                      C_DunningLevel_ID: null
+                      Reversal_ID: null
+                      ProcessedOn:
+                        type: decimal
+                        value: '1014415466000.00'
+                      IsFixedAssetInvoice: null
+                      C_POS_ID: null
+                      User3_ID: null
+                      User4_ID: null
+                      UUID: 21a15aaa-e592-4f76-b706-993f2315295b
+                      BOMDrop: null
+                      FM_Account_ID: null
+                      C_SalesRegion_ID: null
+                      FM_Agreement_ID: null
+                      DisplayColumn_AD_Client_ID: GardenWorld
+                      DisplayColumn_AD_Org_ID: HQ
+                      DisplayColumn_AD_OrgTrx_ID: null
+                      DisplayColumn_AD_User_ID: Joe Sales
+                      DisplayColumn_C_Activity_ID: null
+                      DisplayColumn_C_BPartner_ID: Tree Farm Inc.
+                      DisplayColumn_C_BPartner_Location_ID: Anywhere
+                      DisplayColumn_C_Campaign_ID: null
+                      DisplayColumn_C_CashLine_ID: null
+                      DisplayColumn_C_Charge_ID: null
+                      DisplayColumn_C_ConversionType_ID: null
+                      DisplayColumn_C_Currency_ID: USD
+                      DisplayColumn_C_DocType_ID: Factura de CxP
+                      DisplayColumn_C_DocTypeTarget_ID: Factura de CxP
+                      DisplayColumn_C_DunningLevel_ID: null
+                      DisplayColumn_C_Invoice_ID: 10000000 - 2021-01-22 00:00:00 - 200
+                      DisplayColumn_C_Order_ID: null
+                      DisplayColumn_C_Payment_ID: null
+                      DisplayColumn_C_PaymentTerm_ID: Inmediato
+                      DisplayColumn_C_POS_ID: null
+                      DisplayColumn_C_Project_ID: null
+                      DisplayColumn_CreatedBy: SuperUser
+                      DisplayColumn_C_SalesRegion_ID: null
+                      DisplayColumn_DocAction: <Ninguno>
+                      DisplayColumn_DocStatus: Completo
+                      DisplayColumn_FM_Account_ID: null
+                      DisplayColumn_FM_Agreement_ID: null
+                      DisplayColumn_InvoiceCollectionType: null
+                      DisplayColumn_M_PriceList_ID: Purchase
+                      DisplayColumn_M_RMA_ID: null
+                      DisplayColumn_PaymentRule: A Crédito
+                      DisplayColumn_Posted: No Contabilizado
+                      DisplayColumn_Reversal_ID: null
+                      DisplayColumn_SalesRep_ID: GardenAdmin
+                      DisplayColumn_UpdatedBy: System
+                      DisplayColumn_User1_ID: null
+                      DisplayColumn_User2_ID: null
+                      DisplayColumn_User3_ID: null
+                      DisplayColumn_User4_ID: null
+                  - id: 104
+                    table_name: C_Invoice
+                    values:
+                      C_Invoice_ID: 104
+                      AD_Client_ID: 11
+                      AD_Org_ID: 11
+                      IsActive: true
+                      Created:
+                        type: date
+                        value: '2002-09-07 08:16:59'
+                      CreatedBy: 100
+                      Updated:
+                        type: date
+                        value: '2002-09-07 08:17:44'
+                      UpdatedBy: 0
+                      IsSOTrx: false
+                      DocumentNo: '10000001'
+                      DocStatus: CO
+                      DocAction: '--'
+                      Processing: 'N'
+                      Processed: true
+                      Posted: 'N'
+                      C_DocType_ID: 123
+                      C_DocTypeTarget_ID: 123
+                      C_Order_ID: null
+                      Description: null
+                      IsApproved: true
+                      IsTransferred: false
+                      IsPrinted: false
+                      SalesRep_ID: 101
+                      DateInvoiced:
+                        type: date
+                        value: '2021-08-07 12:00:00'
+                      DatePrinted: null
+                      DateAcct:
+                        type: date
+                        value: '2021-08-07 12:00:00'
+                      C_BPartner_ID: 114
+                      C_BPartner_Location_ID: 109
+                      POReference: null
+                      IsDiscountPrinted: true
+                      DateOrdered: null
+                      C_Currency_ID: 100
+                      PaymentRule: P
+                      C_PaymentTerm_ID: 106
+                      C_Charge_ID: null
+                      ChargeAmt:
+                        type: decimal
+                        value: '0.00'
+                      TotalLines:
+                        type: decimal
+                        value: '360.00'
+                      GrandTotal:
+                        type: decimal
+                        value: '360.00'
+                      M_PriceList_ID: 102
+                      IsTaxIncluded: false
+                      C_Campaign_ID: null
+                      C_Project_ID: null
+                      C_Activity_ID: null
+                      IsPaid: false
+                      C_Payment_ID: null
+                      C_CashLine_ID: null
+                      CreateFrom: 'N'
+                      GenerateTo: 'N'
+                      SendEMail: false
+                      AD_User_ID: 103
+                      CopyFrom: null
+                      IsSelfService: false
+                      AD_OrgTrx_ID: null
+                      User1_ID: null
+                      User2_ID: null
+                      C_ConversionType_ID: null
+                      IsPayScheduleValid: false
+                      Ref_Invoice_ID: null
+                      IsInDispute: false
+                      InvoiceCollectionType: null
+                      M_RMA_ID: null
+                      DunningGrace: null
+                      C_DunningLevel_ID: null
+                      Reversal_ID: null
+                      ProcessedOn:
+                        type: decimal
+                        value: '1031429819000.00'
+                      IsFixedAssetInvoice: null
+                      C_POS_ID: null
+                      User3_ID: null
+                      User4_ID: null
+                      UUID: f1b92818-158a-438c-8a9a-ebb4ea7f71f2
+                      BOMDrop: null
+                      FM_Account_ID: null
+                      C_SalesRegion_ID: null
+                      FM_Agreement_ID: null
+                      DisplayColumn_AD_Client_ID: GardenWorld
+                      DisplayColumn_AD_Org_ID: HQ
+                      DisplayColumn_AD_OrgTrx_ID: null
+                      DisplayColumn_AD_User_ID: Joe Sales
+                      DisplayColumn_C_Activity_ID: null
+                      DisplayColumn_C_BPartner_ID: Tree Farm Inc.
+                      DisplayColumn_C_BPartner_Location_ID: Anywhere
+                      DisplayColumn_C_Campaign_ID: null
+                      DisplayColumn_C_CashLine_ID: null
+                      DisplayColumn_C_Charge_ID: null
+                      DisplayColumn_C_ConversionType_ID: null
+                      DisplayColumn_C_Currency_ID: USD
+                      DisplayColumn_C_DocType_ID: Factura de CxP
+                      DisplayColumn_C_DocTypeTarget_ID: Factura de CxP
+                      DisplayColumn_C_DunningLevel_ID: null
+                      DisplayColumn_C_Invoice_ID: 10000001 - 2021-08-07 00:00:00 - 360
+                      DisplayColumn_C_Order_ID: null
+                      DisplayColumn_C_Payment_ID: null
+                      DisplayColumn_C_PaymentTerm_ID: 2%10 Neto 30
+                      DisplayColumn_C_POS_ID: null
+                      DisplayColumn_C_Project_ID: null
+                      DisplayColumn_CreatedBy: SuperUser
+                      DisplayColumn_C_SalesRegion_ID: null
+                      DisplayColumn_DocAction: <Ninguno>
+                      DisplayColumn_DocStatus: Completo
+                      DisplayColumn_FM_Account_ID: null
+                      DisplayColumn_FM_Agreement_ID: null
+                      DisplayColumn_InvoiceCollectionType: null
+                      DisplayColumn_M_PriceList_ID: Purchase
+                      DisplayColumn_M_RMA_ID: null
+                      DisplayColumn_PaymentRule: A Crédito
+                      DisplayColumn_Posted: No Contabilizado
+                      DisplayColumn_Reversal_ID: null
+                      DisplayColumn_SalesRep_ID: GardenAdmin
+                      DisplayColumn_UpdatedBy: System
+                      DisplayColumn_User1_ID: null
+                      DisplayColumn_User2_ID: null
+                      DisplayColumn_User3_ID: null
+                      DisplayColumn_User4_ID: null
+                  - id: 105
+                    table_name: C_Invoice
+                    values:
+                      C_Invoice_ID: 105
+                      AD_Client_ID: 11
+                      AD_Org_ID: 11
+                      IsActive: true
+                      Created:
+                        type: date
+                        value: '2003-01-22 06:08:37'
+                      CreatedBy: 0
+                      Updated:
+                        type: date
+                        value: '2003-04-18 12:47:32'
+                      UpdatedBy: 0
+                      IsSOTrx: false
+                      DocumentNo: '10000002'
+                      DocStatus: CO
+                      DocAction: '--'
+                      Processing: 'N'
+                      Processed: true
+                      Posted: 'N'
+                      C_DocType_ID: 123
+                      C_DocTypeTarget_ID: 123
+                      C_Order_ID: null
+                      Description: null
+                      IsApproved: true
+                      IsTransferred: false
+                      IsPrinted: false
+                      SalesRep_ID: null
+                      DateInvoiced:
+                        type: date
+                        value: '2021-12-22 12:00:00'
+                      DatePrinted: null
+                      DateAcct:
+                        type: date
+                        value: '2021-12-22 12:00:00'
+                      C_BPartner_ID: 120
+                      C_BPartner_Location_ID: 114
+                      POReference: null
+                      IsDiscountPrinted: true
+                      DateOrdered: null
+                      C_Currency_ID: 100
+                      PaymentRule: P
+                      C_PaymentTerm_ID: 106
+                      C_Charge_ID: null
+                      ChargeAmt:
+                        type: decimal
+                        value: '0.00'
+                      TotalLines:
+                        type: decimal
+                        value: '2731.5'
+                      GrandTotal:
+                        type: decimal
+                        value: '2731.5'
+                      M_PriceList_ID: 102
+                      IsTaxIncluded: false
+                      C_Campaign_ID: null
+                      C_Project_ID: null
+                      C_Activity_ID: null
+                      IsPaid: false
+                      C_Payment_ID: null
+                      C_CashLine_ID: null
+                      CreateFrom: null
+                      GenerateTo: null
+                      SendEMail: false
+                      AD_User_ID: null
+                      CopyFrom: null
+                      IsSelfService: false
+                      AD_OrgTrx_ID: null
+                      User1_ID: null
+                      User2_ID: null
+                      C_ConversionType_ID: null
+                      IsPayScheduleValid: false
+                      Ref_Invoice_ID: null
+                      IsInDispute: false
+                      InvoiceCollectionType: null
+                      M_RMA_ID: null
+                      DunningGrace: null
+                      C_DunningLevel_ID: null
+                      Reversal_ID: null
+                      ProcessedOn:
+                        type: decimal
+                        value: '1043258917000.00'
+                      IsFixedAssetInvoice: null
+                      C_POS_ID: null
+                      User3_ID: null
+                      User4_ID: null
+                      UUID: 4ce4adcb-622d-4b55-ad47-77e509795c3f
+                      BOMDrop: null
+                      FM_Account_ID: null
+                      C_SalesRegion_ID: null
+                      FM_Agreement_ID: null
+                      DisplayColumn_AD_Client_ID: GardenWorld
+                      DisplayColumn_AD_Org_ID: HQ
+                      DisplayColumn_AD_OrgTrx_ID: null
+                      DisplayColumn_AD_User_ID: null
+                      DisplayColumn_C_Activity_ID: null
+                      DisplayColumn_C_BPartner_ID: Seed Farm Inc.
+                      DisplayColumn_C_BPartner_Location_ID: Small Village
+                      DisplayColumn_C_Campaign_ID: null
+                      DisplayColumn_C_CashLine_ID: null
+                      DisplayColumn_C_Charge_ID: null
+                      DisplayColumn_C_ConversionType_ID: null
+                      DisplayColumn_C_Currency_ID: USD
+                      DisplayColumn_C_DocType_ID: Factura de CxP
+                      DisplayColumn_C_DocTypeTarget_ID: Factura de CxP
+                      DisplayColumn_C_DunningLevel_ID: null
+                      DisplayColumn_C_Invoice_ID: 10000002 - 2021-12-22 00:00:00 - 2731.5
+                      DisplayColumn_C_Order_ID: null
+                      DisplayColumn_C_Payment_ID: null
+                      DisplayColumn_C_PaymentTerm_ID: 2%10 Neto 30
+                      DisplayColumn_C_POS_ID: null
+                      DisplayColumn_C_Project_ID: null
+                      DisplayColumn_CreatedBy: System
+                      DisplayColumn_C_SalesRegion_ID: null
+                      DisplayColumn_DocAction: <Ninguno>
+                      DisplayColumn_DocStatus: Completo
+                      DisplayColumn_FM_Account_ID: null
+                      DisplayColumn_FM_Agreement_ID: null
+                      DisplayColumn_InvoiceCollectionType: null
+                      DisplayColumn_M_PriceList_ID: Purchase
+                      DisplayColumn_M_RMA_ID: null
+                      DisplayColumn_PaymentRule: A Crédito
+                      DisplayColumn_Posted: No Contabilizado
+                      DisplayColumn_Reversal_ID: null
+                      DisplayColumn_SalesRep_ID: null
+                      DisplayColumn_UpdatedBy: System
+                      DisplayColumn_User1_ID: null
+                      DisplayColumn_User2_ID: null
+                      DisplayColumn_User3_ID: null
+                      DisplayColumn_User4_ID: null
+                  - id: 106
+                    table_name: C_Invoice
+                    values:
+                      C_Invoice_ID: 106
+                      AD_Client_ID: 11
+                      AD_Org_ID: 11
+                      IsActive: true
+                      Created:
+                        type: date
+                        value: '2003-01-22 06:09:11'
+                      CreatedBy: 0
+                      Updated:
+                        type: date
+                        value: '2003-04-18 12:48:30'
+                      UpdatedBy: 0
+                      IsSOTrx: false
+                      DocumentNo: '10000003'
+                      DocStatus: CO
+                      DocAction: '--'
+                      Processing: 'N'
+                      Processed: true
+                      Posted: 'N'
+                      C_DocType_ID: 123
+                      C_DocTypeTarget_ID: 123
+                      C_Order_ID: null
+                      Description: null
+                      IsApproved: true
+                      IsTransferred: false
+                      IsPrinted: false
+                      SalesRep_ID: null
+                      DateInvoiced:
+                        type: date
+                        value: '2021-12-22 12:00:00'
+                      DatePrinted: null
+                      DateAcct:
+                        type: date
+                        value: '2021-12-22 12:00:00'
+                      C_BPartner_ID: 114
+                      C_BPartner_Location_ID: 109
+                      POReference: null
+                      IsDiscountPrinted: true
+                      DateOrdered: null
+                      C_Currency_ID: 100
+                      PaymentRule: P
+                      C_PaymentTerm_ID: 106
+                      C_Charge_ID: null
+                      ChargeAmt:
+                        type: decimal
+                        value: '0.00'
+                      TotalLines:
+                        type: decimal
+                        value: '3657.5'
+                      GrandTotal:
+                        type: decimal
+                        value: '3657.5'
+                      M_PriceList_ID: 101
+                      IsTaxIncluded: false
+                      C_Campaign_ID: null
+                      C_Project_ID: null
+                      C_Activity_ID: null
+                      IsPaid: false
+                      C_Payment_ID: null
+                      C_CashLine_ID: null
+                      CreateFrom: null
+                      GenerateTo: null
+                      SendEMail: false
+                      AD_User_ID: 103
+                      CopyFrom: null
+                      IsSelfService: false
+                      AD_OrgTrx_ID: null
+                      User1_ID: null
+                      User2_ID: null
+                      C_ConversionType_ID: null
+                      IsPayScheduleValid: false
+                      Ref_Invoice_ID: null
+                      IsInDispute: false
+                      InvoiceCollectionType: null
+                      M_RMA_ID: null
+                      DunningGrace: null
+                      C_DunningLevel_ID: null
+                      Reversal_ID: null
+                      ProcessedOn:
+                        type: decimal
+                        value: '1043258951000.00'
+                      IsFixedAssetInvoice: null
+                      C_POS_ID: null
+                      User3_ID: null
+                      User4_ID: null
+                      UUID: f83bdf87-c4e3-4890-9698-3ad0c2e3e5c9
+                      BOMDrop: null
+                      FM_Account_ID: null
+                      C_SalesRegion_ID: null
+                      FM_Agreement_ID: null
+                      DisplayColumn_AD_Client_ID: GardenWorld
+                      DisplayColumn_AD_Org_ID: HQ
+                      DisplayColumn_AD_OrgTrx_ID: null
+                      DisplayColumn_AD_User_ID: Joe Sales
+                      DisplayColumn_C_Activity_ID: null
+                      DisplayColumn_C_BPartner_ID: Tree Farm Inc.
+                      DisplayColumn_C_BPartner_Location_ID: Anywhere
+                      DisplayColumn_C_Campaign_ID: null
+                      DisplayColumn_C_CashLine_ID: null
+                      DisplayColumn_C_Charge_ID: null
+                      DisplayColumn_C_ConversionType_ID: null
+                      DisplayColumn_C_Currency_ID: USD
+                      DisplayColumn_C_DocType_ID: Factura de CxP
+                      DisplayColumn_C_DocTypeTarget_ID: Factura de CxP
+                      DisplayColumn_C_DunningLevel_ID: null
+                      DisplayColumn_C_Invoice_ID: 10000003 - 2021-12-22 00:00:00 - 3657.5
+                      DisplayColumn_C_Order_ID: null
+                      DisplayColumn_C_Payment_ID: null
+                      DisplayColumn_C_PaymentTerm_ID: 2%10 Neto 30
+                      DisplayColumn_C_POS_ID: null
+                      DisplayColumn_C_Project_ID: null
+                      DisplayColumn_CreatedBy: System
+                      DisplayColumn_C_SalesRegion_ID: null
+                      DisplayColumn_DocAction: <Ninguno>
+                      DisplayColumn_DocStatus: Completo
+                      DisplayColumn_FM_Account_ID: null
+                      DisplayColumn_FM_Agreement_ID: null
+                      DisplayColumn_InvoiceCollectionType: null
+                      DisplayColumn_M_PriceList_ID: Standard
+                      DisplayColumn_M_RMA_ID: null
+                      DisplayColumn_PaymentRule: A Crédito
+                      DisplayColumn_Posted: No Contabilizado
+                      DisplayColumn_Reversal_ID: null
+                      DisplayColumn_SalesRep_ID: null
+                      DisplayColumn_UpdatedBy: System
+                      DisplayColumn_User1_ID: null
+                      DisplayColumn_User2_ID: null
+                      DisplayColumn_User3_ID: null
+                      DisplayColumn_User4_ID: null
+                  - id: 109
+                    table_name: C_Invoice
+                    values:
+                      C_Invoice_ID: 109
+                      AD_Client_ID: 11
+                      AD_Org_ID: 11
+                      IsActive: true
+                      Created:
+                        type: date
+                        value: '2003-12-30 12:14:28'
+                      CreatedBy: 0
+                      Updated:
+                        type: date
+                        value: '2004-01-04 12:37:30'
+                      UpdatedBy: 100
+                      IsSOTrx: true
+                      DocumentNo: '100000'
+                      DocStatus: CO
+                      DocAction: '--'
+                      Processing: 'N'
+                      Processed: true
+                      Posted: 'N'
+                      C_DocType_ID: 116
+                      C_DocTypeTarget_ID: 116
+                      C_Order_ID: 108
+                      Description: Export Order
+                      IsApproved: true
+                      IsTransferred: false
+                      IsPrinted: false
+                      SalesRep_ID: 101
+                      DateInvoiced:
+                        type: date
+                        value: '2022-01-25 12:00:00'
+                      DatePrinted: null
+                      DateAcct:
+                        type: date
+                        value: '2022-01-25 12:00:00'
+                      C_BPartner_ID: 118
+                      C_BPartner_Location_ID: 113
+                      POReference: null
+                      IsDiscountPrinted: true
+                      DateOrdered:
+                        type: date
+                        value: '2022-01-25 12:00:00'
+                      C_Currency_ID: 102
+                      PaymentRule: P
+                      C_PaymentTerm_ID: 108
+                      C_Charge_ID: null
+                      ChargeAmt:
+                        type: decimal
+                        value: '0.00'
+                      TotalLines:
+                        type: decimal
+                        value: '215.9'
+                      GrandTotal:
+                        type: decimal
+                        value: '228.85'
+                      M_PriceList_ID: 103
+                      IsTaxIncluded: false
+                      C_Campaign_ID: null
+                      C_Project_ID: null
+                      C_Activity_ID: null
+                      IsPaid: false
+                      C_Payment_ID: null
+                      C_CashLine_ID: null
+                      CreateFrom: null
+                      GenerateTo: null
+                      SendEMail: false
+                      AD_User_ID: null
+                      CopyFrom: null
+                      IsSelfService: false
+                      AD_OrgTrx_ID: null
+                      User1_ID: null
+                      User2_ID: null
+                      C_ConversionType_ID: null
+                      IsPayScheduleValid: true
+                      Ref_Invoice_ID: null
+                      IsInDispute: false
+                      InvoiceCollectionType: null
+                      M_RMA_ID: null
+                      DunningGrace: null
+                      C_DunningLevel_ID: null
+                      Reversal_ID: null
+                      ProcessedOn:
+                        type: decimal
+                        value: '1072743268000.00'
+                      IsFixedAssetInvoice: null
+                      C_POS_ID: null
+                      User3_ID: null
+                      User4_ID: null
+                      UUID: f1d92361-e2a0-45ba-962e-559d31145447
+                      BOMDrop: null
+                      FM_Account_ID: null
+                      C_SalesRegion_ID: null
+                      FM_Agreement_ID: null
+                      DisplayColumn_AD_Client_ID: GardenWorld
+                      DisplayColumn_AD_Org_ID: HQ
+                      DisplayColumn_AD_OrgTrx_ID: null
+                      DisplayColumn_AD_User_ID: null
+                      DisplayColumn_C_Activity_ID: null
+                      DisplayColumn_C_BPartner_ID: Joe Block
+                      DisplayColumn_C_BPartner_Location_ID: Hartford
+                      DisplayColumn_C_Campaign_ID: null
+                      DisplayColumn_C_CashLine_ID: null
+                      DisplayColumn_C_Charge_ID: null
+                      DisplayColumn_C_ConversionType_ID: null
+                      DisplayColumn_C_Currency_ID: EUR
+                      DisplayColumn_C_DocType_ID: Factura de CxC
+                      DisplayColumn_C_DocTypeTarget_ID: Factura de CxC
+                      DisplayColumn_C_DunningLevel_ID: null
+                      DisplayColumn_C_Invoice_ID: 100000 - 2022-01-25 00:00:00 - 228.85
+                      DisplayColumn_C_Order_ID: 60000 - 2022-01-25 00:00:00
+                      DisplayColumn_C_Payment_ID: null
+                      DisplayColumn_C_PaymentTerm_ID: 50% Inmediato - 50% en 30 días
+                      DisplayColumn_C_POS_ID: null
+                      DisplayColumn_C_Project_ID: null
+                      DisplayColumn_CreatedBy: System
+                      DisplayColumn_C_SalesRegion_ID: null
+                      DisplayColumn_DocAction: <Ninguno>
+                      DisplayColumn_DocStatus: Completo
+                      DisplayColumn_FM_Account_ID: null
+                      DisplayColumn_FM_Agreement_ID: null
+                      DisplayColumn_InvoiceCollectionType: null
+                      DisplayColumn_M_PriceList_ID: Export
+                      DisplayColumn_M_RMA_ID: null
+                      DisplayColumn_PaymentRule: A Crédito
+                      DisplayColumn_Posted: No Contabilizado
+                      DisplayColumn_Reversal_ID: null
+                      DisplayColumn_SalesRep_ID: GardenAdmin
+                      DisplayColumn_UpdatedBy: SuperUser
+                      DisplayColumn_User1_ID: null
+                      DisplayColumn_User2_ID: null
+                      DisplayColumn_User3_ID: null
+                      DisplayColumn_User4_ID: null
+                  - id: 101
+                    table_name: C_Invoice
+                    values:
+                      C_Invoice_ID: 101
+                      AD_Client_ID: 11
+                      AD_Org_ID: 11
+                      IsActive: true
+                      Created:
+                        type: date
+                        value: '2002-02-22 09:09:02'
+                      CreatedBy: 0
+                      Updated:
+                        type: date
+                        value: '2002-02-22 09:09:02'
+                      UpdatedBy: 0
+                      IsSOTrx: true
+                      DocumentNo: '200001'
+                      DocStatus: CO
+                      DocAction: '--'
+                      Processing: 'N'
+                      Processed: true
+                      Posted: 'N'
+                      C_DocType_ID: 117
+                      C_DocTypeTarget_ID: 117
+                      C_Order_ID: 101
+                      Description: (2)
+                      IsApproved: true
+                      IsTransferred: false
+                      IsPrinted: false
+                      SalesRep_ID: 101
+                      DateInvoiced:
+                        type: date
+                        value: '2021-01-22 12:00:00'
+                      DatePrinted: null
+                      DateAcct:
+                        type: date
+                        value: '2021-01-22 12:00:00'
+                      C_BPartner_ID: 112
+                      C_BPartner_Location_ID: 108
+                      POReference: null
+                      IsDiscountPrinted: true
+                      DateOrdered:
+                        type: date
+                        value: '2021-01-22 12:00:00'
+                      C_Currency_ID: 100
+                      PaymentRule: P
+                      C_PaymentTerm_ID: 106
+                      C_Charge_ID: null
+                      ChargeAmt:
+                        type: decimal
+                        value: '0.00'
+                      TotalLines:
+                        type: decimal
+                        value: '95.00'
+                      GrandTotal:
+                        type: decimal
+                        value: '100.7'
+                      M_PriceList_ID: 101
+                      IsTaxIncluded: false
+                      C_Campaign_ID: null
+                      C_Project_ID: null
+                      C_Activity_ID: null
+                      IsPaid: true
+                      C_Payment_ID: 100
+                      C_CashLine_ID: null
+                      CreateFrom: null
+                      GenerateTo: null
+                      SendEMail: false
+                      AD_User_ID: null
+                      CopyFrom: null
+                      IsSelfService: false
+                      AD_OrgTrx_ID: null
+                      User1_ID: null
+                      User2_ID: null
+                      C_ConversionType_ID: null
+                      IsPayScheduleValid: false
+                      Ref_Invoice_ID: null
+                      IsInDispute: false
+                      InvoiceCollectionType: null
+                      M_RMA_ID: null
+                      DunningGrace: null
+                      C_DunningLevel_ID: null
+                      Reversal_ID: null
+                      ProcessedOn:
+                        type: decimal
+                        value: '1014412142000.00'
+                      IsFixedAssetInvoice: null
+                      C_POS_ID: null
+                      User3_ID: null
+                      User4_ID: null
+                      UUID: 128cef0e-62c2-4a64-a265-09a833255e3d
+                      BOMDrop: null
+                      FM_Account_ID: null
+                      C_SalesRegion_ID: null
+                      FM_Agreement_ID: null
+                      DisplayColumn_AD_Client_ID: GardenWorld
+                      DisplayColumn_AD_Org_ID: HQ
+                      DisplayColumn_AD_OrgTrx_ID: null
+                      DisplayColumn_AD_User_ID: null
+                      DisplayColumn_C_Activity_ID: null
+                      DisplayColumn_C_BPartner_ID: Standard
+                      DisplayColumn_C_BPartner_Location_ID: Monroe
+                      DisplayColumn_C_Campaign_ID: null
+                      DisplayColumn_C_CashLine_ID: null
+                      DisplayColumn_C_Charge_ID: null
+                      DisplayColumn_C_ConversionType_ID: null
+                      DisplayColumn_C_Currency_ID: USD
+                      DisplayColumn_C_DocType_ID: Facturas de CxC indirecta
+                      DisplayColumn_C_DocTypeTarget_ID: Facturas de CxC indirecta
+                      DisplayColumn_C_DunningLevel_ID: null
+                      DisplayColumn_C_Invoice_ID: 200001 - 2021-01-22 00:00:00 - 100.7
+                      DisplayColumn_C_Order_ID: 80001 - 2021-01-22 00:00:00
+                      DisplayColumn_C_Payment_ID: '400000 - 2021-01-22 00:00:00 - 98.5 - '
+                      DisplayColumn_C_PaymentTerm_ID: 2%10 Neto 30
+                      DisplayColumn_C_POS_ID: null
+                      DisplayColumn_C_Project_ID: null
+                      DisplayColumn_CreatedBy: System
+                      DisplayColumn_C_SalesRegion_ID: null
+                      DisplayColumn_DocAction: <Ninguno>
+                      DisplayColumn_DocStatus: Completo
+                      DisplayColumn_FM_Account_ID: null
+                      DisplayColumn_FM_Agreement_ID: null
+                      DisplayColumn_InvoiceCollectionType: null
+                      DisplayColumn_M_PriceList_ID: Standard
+                      DisplayColumn_M_RMA_ID: null
+                      DisplayColumn_PaymentRule: A Crédito
+                      DisplayColumn_Posted: No Contabilizado
+                      DisplayColumn_Reversal_ID: null
+                      DisplayColumn_SalesRep_ID: GardenAdmin
+                      DisplayColumn_UpdatedBy: System
+                      DisplayColumn_User1_ID: null
+                      DisplayColumn_User2_ID: null
+                      DisplayColumn_User3_ID: null
+                      DisplayColumn_User4_ID: null
+                  - id: 100
+                    table_name: C_Invoice
+                    values:
+                      C_Invoice_ID: 100
+                      AD_Client_ID: 11
+                      AD_Org_ID: 11
+                      IsActive: true
+                      Created:
+                        type: date
+                        value: '2002-02-22 09:07:08'
+                      CreatedBy: 0
+                      Updated:
+                        type: date
+                        value: '2002-02-22 09:07:10'
+                      UpdatedBy: 0
+                      IsSOTrx: true
+                      DocumentNo: '200000'
+                      DocStatus: CO
+                      DocAction: '--'
+                      Processing: 'N'
+                      Processed: true
+                      Posted: 'N'
+                      C_DocType_ID: 117
+                      C_DocTypeTarget_ID: 117
+                      C_Order_ID: 100
+                      Description: '(1) '
+                      IsApproved: true
+                      IsTransferred: false
+                      IsPrinted: false
+                      SalesRep_ID: 101
+                      DateInvoiced:
+                        type: date
+                        value: '2021-01-22 12:00:00'
+                      DatePrinted: null
+                      DateAcct:
+                        type: date
+                        value: '2021-01-22 12:00:00'
+                      C_BPartner_ID: 112
+                      C_BPartner_Location_ID: 108
+                      POReference: null
+                      IsDiscountPrinted: true
+                      DateOrdered:
+                        type: date
+                        value: '2021-01-22 12:00:00'
+                      C_Currency_ID: 100
+                      PaymentRule: B
+                      C_PaymentTerm_ID: 105
+                      C_Charge_ID: null
+                      ChargeAmt:
+                        type: decimal
+                        value: '0.00'
+                      TotalLines:
+                        type: decimal
+                        value: '47.5'
+                      GrandTotal:
+                        type: decimal
+                        value: '50.35'
+                      M_PriceList_ID: 101
+                      IsTaxIncluded: false
+                      C_Campaign_ID: null
+                      C_Project_ID: null
+                      C_Activity_ID: null
+                      IsPaid: true
+                      C_Payment_ID: null
+                      C_CashLine_ID: 100
+                      CreateFrom: null
+                      GenerateTo: null
+                      SendEMail: false
+                      AD_User_ID: null
+                      CopyFrom: null
+                      IsSelfService: false
+                      AD_OrgTrx_ID: null
+                      User1_ID: null
+                      User2_ID: null
+                      C_ConversionType_ID: null
+                      IsPayScheduleValid: false
+                      Ref_Invoice_ID: null
+                      IsInDispute: false
+                      InvoiceCollectionType: null
+                      M_RMA_ID: null
+                      DunningGrace: null
+                      C_DunningLevel_ID: null
+                      Reversal_ID: null
+                      ProcessedOn:
+                        type: decimal
+                        value: '1014412028000.00'
+                      IsFixedAssetInvoice: null
+                      C_POS_ID: null
+                      User3_ID: null
+                      User4_ID: null
+                      UUID: a5b3d78a-48ed-49ff-89fe-24d1df560334
+                      BOMDrop: null
+                      FM_Account_ID: null
+                      C_SalesRegion_ID: null
+                      FM_Agreement_ID: null
+                      DisplayColumn_AD_Client_ID: GardenWorld
+                      DisplayColumn_AD_Org_ID: HQ
+                      DisplayColumn_AD_OrgTrx_ID: null
+                      DisplayColumn_AD_User_ID: null
+                      DisplayColumn_C_Activity_ID: null
+                      DisplayColumn_C_BPartner_ID: Standard
+                      DisplayColumn_C_BPartner_Location_ID: Monroe
+                      DisplayColumn_C_Campaign_ID: null
+                      DisplayColumn_C_CashLine_ID: 2002-02-22 USD - 10 - 50.35
+                      DisplayColumn_C_Charge_ID: null
+                      DisplayColumn_C_ConversionType_ID: null
+                      DisplayColumn_C_Currency_ID: USD
+                      DisplayColumn_C_DocType_ID: Facturas de CxC indirecta
+                      DisplayColumn_C_DocTypeTarget_ID: Facturas de CxC indirecta
+                      DisplayColumn_C_DunningLevel_ID: null
+                      DisplayColumn_C_Invoice_ID: 200000 - 2021-01-22 00:00:00 - 50.35
+                      DisplayColumn_C_Order_ID: 80000 - 2021-01-22 00:00:00
+                      DisplayColumn_C_Payment_ID: null
+                      DisplayColumn_C_PaymentTerm_ID: Inmediato
+                      DisplayColumn_C_POS_ID: null
+                      DisplayColumn_C_Project_ID: null
+                      DisplayColumn_CreatedBy: System
+                      DisplayColumn_C_SalesRegion_ID: null
+                      DisplayColumn_DocAction: <Ninguno>
+                      DisplayColumn_DocStatus: Completo
+                      DisplayColumn_FM_Account_ID: null
+                      DisplayColumn_FM_Agreement_ID: null
+                      DisplayColumn_InvoiceCollectionType: null
+                      DisplayColumn_M_PriceList_ID: Standard
+                      DisplayColumn_M_RMA_ID: null
+                      DisplayColumn_PaymentRule: Efectivo
+                      DisplayColumn_Posted: No Contabilizado
+                      DisplayColumn_Reversal_ID: null
+                      DisplayColumn_SalesRep_ID: GardenAdmin
+                      DisplayColumn_UpdatedBy: System
+                      DisplayColumn_User1_ID: null
+                      DisplayColumn_User2_ID: null
+                      DisplayColumn_User3_ID: null
+                      DisplayColumn_User4_ID: null
+                  - id: 103
+                    table_name: C_Invoice
+                    values:
+                      C_Invoice_ID: 103
+                      AD_Client_ID: 11
+                      AD_Org_ID: 11
+                      IsActive: true
+                      Created:
+                        type: date
+                        value: '2002-08-25 12:36:42'
+                      CreatedBy: 0
+                      Updated:
+                        type: date
+                        value: '2002-08-25 12:36:45'
+                      UpdatedBy: 0
+                      IsSOTrx: true
+                      DocumentNo: '200002'
+                      DocStatus: CO
+                      DocAction: '--'
+                      Processing: 'N'
+                      Processed: true
+                      Posted: 'N'
+                      C_DocType_ID: 117
+                      C_DocTypeTarget_ID: 117
+                      C_Order_ID: 102
+                      Description: >-
+                        Text is printed in the language of the business partner
+                        (if not entered in English like this). This is also a
+                        text, which will be printed in block format on two lines
+                        on the documents.
+                      IsApproved: true
+                      IsTransferred: false
+                      IsPrinted: false
+                      SalesRep_ID: 101
+                      DateInvoiced:
+                        type: date
+                        value: '2021-07-01 12:00:00'
+                      DatePrinted: null
+                      DateAcct:
+                        type: date
+                        value: '2021-07-01 12:00:00'
+                      C_BPartner_ID: 117
+                      C_BPartner_Location_ID: 112
+                      POReference: Phone Order
+                      IsDiscountPrinted: true
+                      DateOrdered:
+                        type: date
+                        value: '2021-07-01 12:00:00'
+                      C_Currency_ID: 100
+                      PaymentRule: B
+                      C_PaymentTerm_ID: 105
+                      C_Charge_ID: null
+                      ChargeAmt:
+                        type: decimal
+                        value: '0.00'
+                      TotalLines:
+                        type: decimal
+                        value: '152.00'
+                      GrandTotal:
+                        type: decimal
+                        value: '161.12'
+                      M_PriceList_ID: 101
+                      IsTaxIncluded: false
+                      C_Campaign_ID: null
+                      C_Project_ID: null
+                      C_Activity_ID: null
+                      IsPaid: false
+                      C_Payment_ID: null
+                      C_CashLine_ID: 104
+                      CreateFrom: null
+                      GenerateTo: null
+                      SendEMail: false
+                      AD_User_ID: null
+                      CopyFrom: null
+                      IsSelfService: false
+                      AD_OrgTrx_ID: null
+                      User1_ID: null
+                      User2_ID: null
+                      C_ConversionType_ID: null
+                      IsPayScheduleValid: false
+                      Ref_Invoice_ID: null
+                      IsInDispute: false
+                      InvoiceCollectionType: null
+                      M_RMA_ID: null
+                      DunningGrace: null
+                      C_DunningLevel_ID: null
+                      Reversal_ID: null
+                      ProcessedOn:
+                        type: decimal
+                        value: '1030235802000.00'
+                      IsFixedAssetInvoice: null
+                      C_POS_ID: null
+                      User3_ID: null
+                      User4_ID: null
+                      UUID: c2b478d2-d738-4ab4-8a05-80f7e4d2cca8
+                      BOMDrop: null
+                      FM_Account_ID: null
+                      C_SalesRegion_ID: null
+                      FM_Agreement_ID: null
+                      DisplayColumn_AD_Client_ID: GardenWorld
+                      DisplayColumn_AD_Org_ID: HQ
+                      DisplayColumn_AD_OrgTrx_ID: null
+                      DisplayColumn_AD_User_ID: null
+                      DisplayColumn_C_Activity_ID: null
+                      DisplayColumn_C_BPartner_ID: C&W Construction
+                      DisplayColumn_C_BPartner_Location_ID: Stamford
+                      DisplayColumn_C_Campaign_ID: null
+                      DisplayColumn_C_CashLine_ID: 2002-08-01 USD - 10 - 161.12
+                      DisplayColumn_C_Charge_ID: null
+                      DisplayColumn_C_ConversionType_ID: null
+                      DisplayColumn_C_Currency_ID: USD
+                      DisplayColumn_C_DocType_ID: Facturas de CxC indirecta
+                      DisplayColumn_C_DocTypeTarget_ID: Facturas de CxC indirecta
+                      DisplayColumn_C_DunningLevel_ID: null
+                      DisplayColumn_C_Invoice_ID: 200002 - 2021-07-01 00:00:00 - 161.12
+                      DisplayColumn_C_Order_ID: 80002 - 2021-07-01 00:00:00
+                      DisplayColumn_C_Payment_ID: null
+                      DisplayColumn_C_PaymentTerm_ID: Inmediato
+                      DisplayColumn_C_POS_ID: null
+                      DisplayColumn_C_Project_ID: null
+                      DisplayColumn_CreatedBy: System
+                      DisplayColumn_C_SalesRegion_ID: null
+                      DisplayColumn_DocAction: <Ninguno>
+                      DisplayColumn_DocStatus: Completo
+                      DisplayColumn_FM_Account_ID: null
+                      DisplayColumn_FM_Agreement_ID: null
+                      DisplayColumn_InvoiceCollectionType: null
+                      DisplayColumn_M_PriceList_ID: Standard
+                      DisplayColumn_M_RMA_ID: null
+                      DisplayColumn_PaymentRule: Efectivo
+                      DisplayColumn_Posted: No Contabilizado
+                      DisplayColumn_Reversal_ID: null
+                      DisplayColumn_SalesRep_ID: GardenAdmin
+                      DisplayColumn_UpdatedBy: System
+                      DisplayColumn_User1_ID: null
+                      DisplayColumn_User2_ID: null
+                      DisplayColumn_User3_ID: null
+                      DisplayColumn_User4_ID: null
+                next_page_token: ''
