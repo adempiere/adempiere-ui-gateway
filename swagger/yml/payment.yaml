@@ -1,0 +1,827 @@
+openapi: 3.0.0
+info:
+  title: Payment
+  version: 1.0.0
+servers:
+  - url: http://{{host}}
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+paths:
+  /info/open-items/payments:
+    get:
+      tags:
+        - default
+      summary: ListPaymentInfo
+      description: >-
+        **Endpoint**: GET /Payment
+
+
+        **Description**: Returns data.ListEntities
+
+
+        **FULL URL**:
+        [http://api.adempiere.io](http://api.adempiere.io/api)/info/open-items/payments
+
+
+        **Method**: GET
+
+
+        **Application Example**
+
+
+        ``` bash
+
+        curl --location 'http://api.adempiere.io/info/open-items/payments' \
+
+        --header 'Authorization: Bearer
+        eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMDAwMTQ5IiwiQURfQ2xpZW50X0lEIjoxMSwiQURfT3JnX0lEIjowLCJBRF9Sb2xlX0lEIjoxMDIsIkFEX1VzZXJfSUQiOjEwMCwiTV9XYXJlaG91c2VfSUQiOjAsIkFEX0xhbmd1YWdlIjoiZW5fVVMiLCJpYXQiOjE3MTA1MTA0MDEsImV4cCI6MTcxMDU5NjgwMX0.nYQbrcT9RyHNRCf-oNM50ZVSO6uJ9gvrQQ7e0fzU9Ik'
+
+         ```
+
+        **Example Answer**
+
+
+        ``` json
+
+        {
+                    "id": 50008,
+                    "table_name": "C_Payment",
+                    "values": {
+                        "C_Payment_ID": 50008,
+                        "AD_Client_ID": 11,
+                        "AD_Org_ID": 50001,
+                        "IsActive": true,
+                        "Created": {
+                            "type": "date",
+                            "value": "2022-05-10 06:28:18"
+                        },
+                        "CreatedBy": 100,
+                        "Updated": {
+                            "type": "date",
+                            "value": "2023-01-17 07:11:17"
+                        },
+                        "UpdatedBy": 0,
+                        "DocumentNo": "400002",
+                        "DateTrx": {
+                            "type": "date",
+                            "value": "2024-08-10 12:00:00"
+                        },
+                        "IsReceipt": true,
+                        "C_DocType_ID": 119,
+                        "TrxType": "S",
+                        "C_BankAccount_ID": 100,
+                        "C_BPartner_ID": 113,
+                        "C_Invoice_ID": 50053,
+                        "C_BP_BankAccount_ID": null,
+                        "C_PaymentBatch_ID": null,
+                        "TenderType": "K",
+                        "CreditCardType": "M",
+                        "CreditCardNumber": null,
+                        "CreditCardVV": null,
+                        "CreditCardExpMM": 1,
+                        "CreditCardExpYY": 3,
+                        "Micr": null,
+                        "RoutingNo": null,
+                        "AccountNo": null,
+                        "CheckNo": null,
+                        "A_Name": null,
+                        "A_Street": null,
+                        "A_City": null,
+                        "A_State": null,
+                        "A_Zip": null,
+                        "A_Ident_DL": null,
+                        "A_Ident_SSN": null,
+                        "A_EMail": null,
+                        "VoiceAuthCode": null,
+                        "Orig_TrxID": null,
+                        "PONum": null,
+                        "C_Currency_ID": 50003,
+                        "PayAmt": {
+                            "type": "decimal",
+                            "value": "1000.000000000000"
+                        },
+                        "DiscountAmt": {
+                            "type": "decimal",
+                            "value": "0.00"
+                        },
+                        "WriteOffAmt": {
+                            "type": "decimal",
+                            "value": "0.00"
+                        },
+                        "TaxAmt": {
+                            "type": "decimal",
+                            "value": "0.00"
+                        },
+                        "IsApproved": true,
+                        "R_PnRef": null,
+                        "R_Result": null,
+                        "R_RespMsg": null,
+                        "R_AuthCode": null,
+                        "R_AvsAddr": "X",
+                        "R_AvsZip": "X",
+                        "R_Info": null,
+                        "Processing": "N",
+                        "OProcessing": "N",
+                        "DocStatus": "CO",
+                        "DocAction": "CL",
+                        "IsReconciled": false,
+                        "IsAllocated": true,
+                        "IsOnline": false,
+                        "Processed": true,
+                        "Posted": "N",
+                        "IsOverUnderPayment": true,
+                        "OverUnderAmt": {
+                            "type": "decimal",
+                            "value": "1499000.000000000000"
+                        },
+                        "A_Country": null,
+                        "C_Project_ID": null,
+                        "IsSelfService": false,
+                        "ChargeAmt": {
+                            "type": "decimal",
+                            "value": "0.00"
+                        },
+                        "C_Charge_ID": null,
+                        "IsDelayedCapture": false,
+                        "R_AuthCode_DC": null,
+                        "R_CVV2Match": false,
+                        "R_PnRef_DC": null,
+                        "Swipe": null,
+                        "AD_OrgTrx_ID": null,
+                        "C_Campaign_ID": null,
+                        "C_Activity_ID": null,
+                        "User1_ID": null,
+                        "User2_ID": null,
+                        "C_ConversionType_ID": 114,
+                        "Description": null,
+                        "DateAcct": {
+                            "type": "date",
+                            "value": "2024-08-10 12:00:00"
+                        },
+                        "C_Order_ID": null,
+                        "IsPrepayment": false,
+                        "Ref_Payment_ID": null,
+                        "Reversal_ID": null,
+                        "C_CashBook_ID": 101,
+                        "ProcessedOn": {
+                            "type": "decimal",
+                            "value": "1674004277611.612060546875"
+                        },
+                        "C_POS_ID": null,
+                        "User3_ID": null,
+                        "User4_ID": null,
+                        "UUID": "4a953c7e-414a-47ac-8d50-3105a06cb32e",
+                        "RelatedPayment_ID": null,
+                        "IsUnidentifiedPayment": false,
+                        "C_Bank_ID": null,
+                        "CollectingAgent_ID": 100,
+                        "FM_Account_ID": null,
+                        "FM_Agreement_ID": null,
+                        "C_PaymentMethod_ID": null,
+                        "IsPaymentVerified": false,
+                        "IsPaymentVerificationRequired": false,
+                        "POSReferenceBankAccount_ID": null,
+                        "ECA14_Invoice_Reference_ID": null,
+                        "ECA14_Reference_Amount": null,
+                        "DisplayColumn_AD_Client_ID": "GardenWorld",
+                        "DisplayColumn_AD_Org_ID": "Fertilizer",
+                        "DisplayColumn_AD_OrgTrx_ID": null,
+                        "DisplayColumn_C_Activity_ID": null,
+                        "DisplayColumn_C_BankAccount_ID": "MoneyBank - 123456789 - 1234",
+                        "DisplayColumn_C_Bank_ID": null,
+                        "DisplayColumn_C_BPartner_ID": "GardenAdmin BP",
+                        "DisplayColumn_C_BP_BankAccount_ID": null,
+                        "DisplayColumn_C_Campaign_ID": null,
+                        "DisplayColumn_C_CashBook_ID": "HQ CashBook",
+                        "DisplayColumn_C_Charge_ID": null,
+                        "DisplayColumn_C_ConversionType_ID": "Spot",
+                        "DisplayColumn_C_Currency_ID": "VED",
+                        "DisplayColumn_C_DocType_ID": "AR Receipt",
+                        "DisplayColumn_C_Invoice_ID": "1000 - 2024-08-10 00:00:00 - 0",
+                        "DisplayColumn_CollectingAgent_ID": "SuperUser",
+                        "DisplayColumn_C_Order_ID": null,
+                        "DisplayColumn_C_PaymentBatch_ID": null,
+                        "DisplayColumn_C_Payment_ID": "400002 - 2024-08-10 00:00:00 - 1000.000000000000 - ",
+                        "DisplayColumn_C_PaymentMethod_ID": null,
+                        "DisplayColumn_C_POS_ID": null,
+                        "DisplayColumn_C_Project_ID": null,
+                        "DisplayColumn_CreatedBy": "SuperUser",
+                        "DisplayColumn_CreditCardType": "MasterCard",
+                        "DisplayColumn_DocAction": "Close",
+                        "DisplayColumn_DocStatus": "Completed",
+                        "DisplayColumn_ECA14_Invoice_Reference_ID": null,
+                        "DisplayColumn_FM_Account_ID": null,
+                        "DisplayColumn_FM_Agreement_ID": null,
+                        "DisplayColumn_POSReferenceBankAccount_ID": null,
+                        "DisplayColumn_Posted": "Not Posted",
+                        "DisplayColumn_R_AvsAddr": "Unavailable",
+                        "DisplayColumn_R_AvsZip": "Unavailable",
+                        "DisplayColumn_Ref_Payment_ID": null,
+                        "DisplayColumn_RelatedPayment_ID": null,
+                        "DisplayColumn_Reversal_ID": null,
+                        "DisplayColumn_TenderType": "Check",
+                        "DisplayColumn_TrxType": "Sales",
+                        "DisplayColumn_UpdatedBy": "System",
+                        "DisplayColumn_User1_ID": null,
+                        "DisplayColumn_User2_ID": null,
+                        "DisplayColumn_User3_ID": null,
+                        "DisplayColumn_User4_ID": null
+                    }
+                },
+
+         ```
+
+        **Change control**
+
+
+        | **Version** | date | author | Description of Changes |
+
+        | --- | --- | --- | --- |
+
+        | 1.0 | 15/03/2024 | Ricardo | Initial creation of the document. |
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: OK
+          headers:
+            Server:
+              schema:
+                type: string
+                example: nginx/1.25.2
+            Date:
+              schema:
+                type: string
+                example: Thu, 07 Mar 2024 14:28:53 GMT
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Content-Length:
+              schema:
+                type: integer
+                example: '15778'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            grpc-encoding:
+              schema:
+                type: string
+                example: identity
+            grpc-accept-encoding:
+              schema:
+                type: string
+                example: gzip
+            x-envoy-upstream-service-time:
+              schema:
+                type: integer
+                example: '248'
+            grpc-status:
+              schema:
+                type: integer
+                example: '0'
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Max-Age:
+              schema:
+                type: integer
+                example: '3600'
+            Access-Control-Expose-Headers:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+                example: '*'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                record_count: '3'
+                records:
+                  - id: 50008
+                    table_name: C_Payment
+                    values:
+                      C_Payment_ID: 50008
+                      AD_Client_ID: 11
+                      AD_Org_ID: 50001
+                      IsActive: true
+                      Created:
+                        type: date
+                        value: '2022-05-10 06:28:18'
+                      CreatedBy: 100
+                      Updated:
+                        type: date
+                        value: '2023-01-17 07:11:17'
+                      UpdatedBy: 0
+                      DocumentNo: '400002'
+                      DateTrx:
+                        type: date
+                        value: '2024-08-10 12:00:00'
+                      IsReceipt: true
+                      C_DocType_ID: 119
+                      TrxType: S
+                      C_BankAccount_ID: 100
+                      C_BPartner_ID: 113
+                      C_Invoice_ID: 50053
+                      C_BP_BankAccount_ID: null
+                      C_PaymentBatch_ID: null
+                      TenderType: K
+                      CreditCardType: M
+                      CreditCardNumber: null
+                      CreditCardVV: null
+                      CreditCardExpMM: 1
+                      CreditCardExpYY: 3
+                      Micr: null
+                      RoutingNo: null
+                      AccountNo: null
+                      CheckNo: null
+                      A_Name: null
+                      A_Street: null
+                      A_City: null
+                      A_State: null
+                      A_Zip: null
+                      A_Ident_DL: null
+                      A_Ident_SSN: null
+                      A_EMail: null
+                      VoiceAuthCode: null
+                      Orig_TrxID: null
+                      PONum: null
+                      C_Currency_ID: 50003
+                      PayAmt:
+                        type: decimal
+                        value: '1000.000000000000'
+                      DiscountAmt:
+                        type: decimal
+                        value: '0.00'
+                      WriteOffAmt:
+                        type: decimal
+                        value: '0.00'
+                      TaxAmt:
+                        type: decimal
+                        value: '0.00'
+                      IsApproved: true
+                      R_PnRef: null
+                      R_Result: null
+                      R_RespMsg: null
+                      R_AuthCode: null
+                      R_AvsAddr: X
+                      R_AvsZip: X
+                      R_Info: null
+                      Processing: 'N'
+                      OProcessing: 'N'
+                      DocStatus: CO
+                      DocAction: CL
+                      IsReconciled: false
+                      IsAllocated: true
+                      IsOnline: false
+                      Processed: true
+                      Posted: 'N'
+                      IsOverUnderPayment: true
+                      OverUnderAmt:
+                        type: decimal
+                        value: '1499000.000000000000'
+                      A_Country: null
+                      C_Project_ID: null
+                      IsSelfService: false
+                      ChargeAmt:
+                        type: decimal
+                        value: '0.00'
+                      C_Charge_ID: null
+                      IsDelayedCapture: false
+                      R_AuthCode_DC: null
+                      R_CVV2Match: false
+                      R_PnRef_DC: null
+                      Swipe: null
+                      AD_OrgTrx_ID: null
+                      C_Campaign_ID: null
+                      C_Activity_ID: null
+                      User1_ID: null
+                      User2_ID: null
+                      C_ConversionType_ID: 114
+                      Description: null
+                      DateAcct:
+                        type: date
+                        value: '2024-08-10 12:00:00'
+                      C_Order_ID: null
+                      IsPrepayment: false
+                      Ref_Payment_ID: null
+                      Reversal_ID: null
+                      C_CashBook_ID: 101
+                      ProcessedOn:
+                        type: decimal
+                        value: '1674004277611.612060546875'
+                      C_POS_ID: null
+                      User3_ID: null
+                      User4_ID: null
+                      UUID: 4a953c7e-414a-47ac-8d50-3105a06cb32e
+                      RelatedPayment_ID: null
+                      IsUnidentifiedPayment: false
+                      C_Bank_ID: null
+                      CollectingAgent_ID: 100
+                      FM_Account_ID: null
+                      FM_Agreement_ID: null
+                      C_PaymentMethod_ID: null
+                      IsPaymentVerified: false
+                      IsPaymentVerificationRequired: false
+                      POSReferenceBankAccount_ID: null
+                      ECA14_Invoice_Reference_ID: null
+                      ECA14_Reference_Amount: null
+                      DisplayColumn_AD_Client_ID: GardenWorld
+                      DisplayColumn_AD_Org_ID: Fertilizer
+                      DisplayColumn_AD_OrgTrx_ID: null
+                      DisplayColumn_C_Activity_ID: null
+                      DisplayColumn_C_BankAccount_ID: MoneyBank - 123456789 - 1234
+                      DisplayColumn_C_Bank_ID: null
+                      DisplayColumn_C_BPartner_ID: GardenAdmin BP
+                      DisplayColumn_C_BP_BankAccount_ID: null
+                      DisplayColumn_C_Campaign_ID: null
+                      DisplayColumn_C_CashBook_ID: HQ CashBook
+                      DisplayColumn_C_Charge_ID: null
+                      DisplayColumn_C_ConversionType_ID: Spot
+                      DisplayColumn_C_Currency_ID: VED
+                      DisplayColumn_C_DocType_ID: Comprobante de Ingreso
+                      DisplayColumn_C_Invoice_ID: 1000 - 2024-08-10 00:00:00 - 0
+                      DisplayColumn_CollectingAgent_ID: SuperUser
+                      DisplayColumn_C_Order_ID: null
+                      DisplayColumn_C_PaymentBatch_ID: null
+                      DisplayColumn_C_Payment_ID: '400002 - 2024-08-10 00:00:00 - 1000.000000000000 - '
+                      DisplayColumn_C_PaymentMethod_ID: null
+                      DisplayColumn_C_POS_ID: null
+                      DisplayColumn_C_Project_ID: null
+                      DisplayColumn_CreatedBy: SuperUser
+                      DisplayColumn_CreditCardType: MasterCard
+                      DisplayColumn_DocAction: Cerrar
+                      DisplayColumn_DocStatus: Completo
+                      DisplayColumn_ECA14_Invoice_Reference_ID: null
+                      DisplayColumn_FM_Account_ID: null
+                      DisplayColumn_FM_Agreement_ID: null
+                      DisplayColumn_POSReferenceBankAccount_ID: null
+                      DisplayColumn_Posted: No Contabilizado
+                      DisplayColumn_R_AvsAddr: No Disponible
+                      DisplayColumn_R_AvsZip: No Disponible
+                      DisplayColumn_Ref_Payment_ID: null
+                      DisplayColumn_RelatedPayment_ID: null
+                      DisplayColumn_Reversal_ID: null
+                      DisplayColumn_TenderType: Cheque
+                      DisplayColumn_TrxType: Ventas
+                      DisplayColumn_UpdatedBy: System
+                      DisplayColumn_User1_ID: null
+                      DisplayColumn_User2_ID: null
+                      DisplayColumn_User3_ID: null
+                      DisplayColumn_User4_ID: null
+                  - id: 100
+                    table_name: C_Payment
+                    values:
+                      C_Payment_ID: 100
+                      AD_Client_ID: 11
+                      AD_Org_ID: 11
+                      IsActive: true
+                      Created:
+                        type: date
+                        value: '2002-02-22 10:52:25'
+                      CreatedBy: 100
+                      Updated:
+                        type: date
+                        value: '2002-02-22 10:52:28'
+                      UpdatedBy: 0
+                      DocumentNo: '400000'
+                      DateTrx:
+                        type: date
+                        value: '2021-01-22 12:00:00'
+                      IsReceipt: true
+                      C_DocType_ID: 119
+                      TrxType: S
+                      C_BankAccount_ID: 100
+                      C_BPartner_ID: 112
+                      C_Invoice_ID: 101
+                      C_BP_BankAccount_ID: null
+                      C_PaymentBatch_ID: null
+                      TenderType: K
+                      CreditCardType: M
+                      CreditCardNumber: null
+                      CreditCardVV: null
+                      CreditCardExpMM: 1
+                      CreditCardExpYY: 1
+                      Micr: null
+                      RoutingNo: null
+                      AccountNo: null
+                      CheckNo: null
+                      A_Name: null
+                      A_Street: null
+                      A_City: null
+                      A_State: null
+                      A_Zip: null
+                      A_Ident_DL: null
+                      A_Ident_SSN: null
+                      A_EMail: null
+                      VoiceAuthCode: null
+                      Orig_TrxID: null
+                      PONum: null
+                      C_Currency_ID: 100
+                      PayAmt:
+                        type: decimal
+                        value: '98.5'
+                      DiscountAmt:
+                        type: decimal
+                        value: '1.9'
+                      WriteOffAmt:
+                        type: decimal
+                        value: '0.3'
+                      TaxAmt:
+                        type: decimal
+                        value: '0.00'
+                      IsApproved: false
+                      R_PnRef: null
+                      R_Result: null
+                      R_RespMsg: null
+                      R_AuthCode: null
+                      R_AvsAddr: null
+                      R_AvsZip: null
+                      R_Info: null
+                      Processing: 'N'
+                      OProcessing: 'N'
+                      DocStatus: CO
+                      DocAction: '--'
+                      IsReconciled: true
+                      IsAllocated: true
+                      IsOnline: false
+                      Processed: true
+                      Posted: 'N'
+                      IsOverUnderPayment: false
+                      OverUnderAmt:
+                        type: decimal
+                        value: '0.00'
+                      A_Country: null
+                      C_Project_ID: null
+                      IsSelfService: false
+                      ChargeAmt:
+                        type: decimal
+                        value: '0.00'
+                      C_Charge_ID: null
+                      IsDelayedCapture: false
+                      R_AuthCode_DC: null
+                      R_CVV2Match: false
+                      R_PnRef_DC: null
+                      Swipe: null
+                      AD_OrgTrx_ID: null
+                      C_Campaign_ID: null
+                      C_Activity_ID: null
+                      User1_ID: null
+                      User2_ID: null
+                      C_ConversionType_ID: null
+                      Description: null
+                      DateAcct:
+                        type: date
+                        value: '2021-01-22 12:00:00'
+                      C_Order_ID: null
+                      IsPrepayment: false
+                      Ref_Payment_ID: null
+                      Reversal_ID: null
+                      C_CashBook_ID: null
+                      ProcessedOn:
+                        type: decimal
+                        value: '1014418345000.00'
+                      C_POS_ID: null
+                      User3_ID: null
+                      User4_ID: null
+                      UUID: c7043325-c80a-457a-ae5c-d825dfcbe00f
+                      RelatedPayment_ID: null
+                      IsUnidentifiedPayment: false
+                      C_Bank_ID: null
+                      CollectingAgent_ID: null
+                      FM_Account_ID: null
+                      FM_Agreement_ID: null
+                      C_PaymentMethod_ID: null
+                      IsPaymentVerified: false
+                      IsPaymentVerificationRequired: false
+                      POSReferenceBankAccount_ID: null
+                      ECA14_Invoice_Reference_ID: null
+                      ECA14_Reference_Amount: null
+                      DisplayColumn_AD_Client_ID: GardenWorld
+                      DisplayColumn_AD_Org_ID: HQ
+                      DisplayColumn_AD_OrgTrx_ID: null
+                      DisplayColumn_C_Activity_ID: null
+                      DisplayColumn_C_BankAccount_ID: MoneyBank - 123456789 - 1234
+                      DisplayColumn_C_Bank_ID: null
+                      DisplayColumn_C_BPartner_ID: Standard
+                      DisplayColumn_C_BP_BankAccount_ID: null
+                      DisplayColumn_C_Campaign_ID: null
+                      DisplayColumn_C_CashBook_ID: null
+                      DisplayColumn_C_Charge_ID: null
+                      DisplayColumn_C_ConversionType_ID: null
+                      DisplayColumn_C_Currency_ID: USD
+                      DisplayColumn_C_DocType_ID: Comprobante de Ingreso
+                      DisplayColumn_C_Invoice_ID: 200001 - 2021-01-22 00:00:00 - 100.7
+                      DisplayColumn_CollectingAgent_ID: null
+                      DisplayColumn_C_Order_ID: null
+                      DisplayColumn_C_PaymentBatch_ID: null
+                      DisplayColumn_C_Payment_ID: '400000 - 2021-01-22 00:00:00 - 98.5 - '
+                      DisplayColumn_C_PaymentMethod_ID: null
+                      DisplayColumn_C_POS_ID: null
+                      DisplayColumn_C_Project_ID: null
+                      DisplayColumn_CreatedBy: SuperUser
+                      DisplayColumn_CreditCardType: MasterCard
+                      DisplayColumn_DocAction: <Ninguno>
+                      DisplayColumn_DocStatus: Completo
+                      DisplayColumn_ECA14_Invoice_Reference_ID: null
+                      DisplayColumn_FM_Account_ID: null
+                      DisplayColumn_FM_Agreement_ID: null
+                      DisplayColumn_POSReferenceBankAccount_ID: null
+                      DisplayColumn_Posted: No Contabilizado
+                      DisplayColumn_R_AvsAddr: null
+                      DisplayColumn_R_AvsZip: null
+                      DisplayColumn_Ref_Payment_ID: null
+                      DisplayColumn_RelatedPayment_ID: null
+                      DisplayColumn_Reversal_ID: null
+                      DisplayColumn_TenderType: Cheque
+                      DisplayColumn_TrxType: Ventas
+                      DisplayColumn_UpdatedBy: System
+                      DisplayColumn_User1_ID: null
+                      DisplayColumn_User2_ID: null
+                      DisplayColumn_User3_ID: null
+                      DisplayColumn_User4_ID: null
+                  - id: 101
+                    table_name: C_Payment
+                    values:
+                      C_Payment_ID: 101
+                      AD_Client_ID: 11
+                      AD_Org_ID: 11
+                      IsActive: true
+                      Created:
+                        type: date
+                        value: '2002-02-22 10:58:36'
+                      CreatedBy: 100
+                      Updated:
+                        type: date
+                        value: '2002-02-22 10:58:36'
+                      UpdatedBy: 0
+                      DocumentNo: Tr 2002-02-22 - 20
+                      DateTrx:
+                        type: date
+                        value: '2021-01-22 12:00:00'
+                      IsReceipt: true
+                      C_DocType_ID: 119
+                      TrxType: X
+                      C_BankAccount_ID: 100
+                      C_BPartner_ID: null
+                      C_Invoice_ID: null
+                      C_BP_BankAccount_ID: null
+                      C_PaymentBatch_ID: null
+                      TenderType: X
+                      CreditCardType: null
+                      CreditCardNumber: null
+                      CreditCardVV: null
+                      CreditCardExpMM: null
+                      CreditCardExpYY: null
+                      Micr: null
+                      RoutingNo: null
+                      AccountNo: null
+                      CheckNo: null
+                      A_Name: null
+                      A_Street: null
+                      A_City: null
+                      A_State: null
+                      A_Zip: null
+                      A_Ident_DL: null
+                      A_Ident_SSN: null
+                      A_EMail: null
+                      VoiceAuthCode: null
+                      Orig_TrxID: null
+                      PONum: null
+                      C_Currency_ID: 100
+                      PayAmt:
+                        type: decimal
+                        value: '50.00'
+                      DiscountAmt:
+                        type: decimal
+                        value: '0.00'
+                      WriteOffAmt:
+                        type: decimal
+                        value: '0.00'
+                      TaxAmt:
+                        type: decimal
+                        value: '0.00'
+                      IsApproved: false
+                      R_PnRef: null
+                      R_Result: null
+                      R_RespMsg: null
+                      R_AuthCode: null
+                      R_AvsAddr: null
+                      R_AvsZip: null
+                      R_Info: null
+                      Processing: 'N'
+                      OProcessing: null
+                      DocStatus: CO
+                      DocAction: '--'
+                      IsReconciled: true
+                      IsAllocated: true
+                      IsOnline: false
+                      Processed: true
+                      Posted: 'N'
+                      IsOverUnderPayment: false
+                      OverUnderAmt:
+                        type: decimal
+                        value: '0.00'
+                      A_Country: null
+                      C_Project_ID: null
+                      IsSelfService: false
+                      ChargeAmt:
+                        type: decimal
+                        value: '0.00'
+                      C_Charge_ID: null
+                      IsDelayedCapture: false
+                      R_AuthCode_DC: null
+                      R_CVV2Match: false
+                      R_PnRef_DC: null
+                      Swipe: null
+                      AD_OrgTrx_ID: null
+                      C_Campaign_ID: null
+                      C_Activity_ID: null
+                      User1_ID: null
+                      User2_ID: null
+                      C_ConversionType_ID: null
+                      Description: null
+                      DateAcct:
+                        type: date
+                        value: '2021-01-22 12:00:00'
+                      C_Order_ID: null
+                      IsPrepayment: false
+                      Ref_Payment_ID: null
+                      Reversal_ID: null
+                      C_CashBook_ID: null
+                      ProcessedOn:
+                        type: decimal
+                        value: '1014418716000.00'
+                      C_POS_ID: null
+                      User3_ID: null
+                      User4_ID: null
+                      UUID: 8ffb8f9c-0f0c-4948-abb4-d8542faf9488
+                      RelatedPayment_ID: null
+                      IsUnidentifiedPayment: false
+                      C_Bank_ID: null
+                      CollectingAgent_ID: null
+                      FM_Account_ID: null
+                      FM_Agreement_ID: null
+                      C_PaymentMethod_ID: null
+                      IsPaymentVerified: false
+                      IsPaymentVerificationRequired: false
+                      POSReferenceBankAccount_ID: null
+                      ECA14_Invoice_Reference_ID: null
+                      ECA14_Reference_Amount: null
+                      DisplayColumn_AD_Client_ID: GardenWorld
+                      DisplayColumn_AD_Org_ID: HQ
+                      DisplayColumn_AD_OrgTrx_ID: null
+                      DisplayColumn_C_Activity_ID: null
+                      DisplayColumn_C_BankAccount_ID: MoneyBank - 123456789 - 1234
+                      DisplayColumn_C_Bank_ID: null
+                      DisplayColumn_C_BPartner_ID: null
+                      DisplayColumn_C_BP_BankAccount_ID: null
+                      DisplayColumn_C_Campaign_ID: null
+                      DisplayColumn_C_CashBook_ID: null
+                      DisplayColumn_C_Charge_ID: null
+                      DisplayColumn_C_ConversionType_ID: null
+                      DisplayColumn_C_Currency_ID: USD
+                      DisplayColumn_C_DocType_ID: Comprobante de Ingreso
+                      DisplayColumn_C_Invoice_ID: null
+                      DisplayColumn_CollectingAgent_ID: null
+                      DisplayColumn_C_Order_ID: null
+                      DisplayColumn_C_PaymentBatch_ID: null
+                      DisplayColumn_C_Payment_ID: 'Tr 2002-02-22 - 20 - 2021-01-22 00:00:00 - 50 - '
+                      DisplayColumn_C_PaymentMethod_ID: null
+                      DisplayColumn_C_POS_ID: null
+                      DisplayColumn_C_Project_ID: null
+                      DisplayColumn_CreatedBy: SuperUser
+                      DisplayColumn_CreditCardType: null
+                      DisplayColumn_DocAction: <Ninguno>
+                      DisplayColumn_DocStatus: Completo
+                      DisplayColumn_ECA14_Invoice_Reference_ID: null
+                      DisplayColumn_FM_Account_ID: null
+                      DisplayColumn_FM_Agreement_ID: null
+                      DisplayColumn_POSReferenceBankAccount_ID: null
+                      DisplayColumn_Posted: No Contabilizado
+                      DisplayColumn_R_AvsAddr: null
+                      DisplayColumn_R_AvsZip: null
+                      DisplayColumn_Ref_Payment_ID: null
+                      DisplayColumn_RelatedPayment_ID: null
+                      DisplayColumn_Reversal_ID: null
+                      DisplayColumn_TenderType: Efectivo
+                      DisplayColumn_TrxType: null
+                      DisplayColumn_UpdatedBy: System
+                      DisplayColumn_User1_ID: null
+                      DisplayColumn_User2_ID: null
+                      DisplayColumn_User3_ID: null
+                      DisplayColumn_User4_ID: null
+                next_page_token: ''
