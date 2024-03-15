@@ -1,0 +1,1065 @@
+{
+	"info": {
+		"_postman_id": "08d938fd-cc23-4879-a450-6500ec1cae8c",
+		"name": "Express_shipment",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "28978517"
+	},
+	"item": [
+		{
+			"name": "ListBusinessPartners",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{HOST}}/express-shipment/business-partners",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"express-shipment",
+						"business-partners"
+					]
+				},
+				"description": "**Endpoint**: GET /Express_shipment\n\n**Description**: Returns ListBusinessPartners\n\n**FULL URL**: [http://api.adempiere.io](http://api.adempiere.io/api)/express-shipment/business-partners\n\n**Method**: GET\n\n**Application Example**\n\n``` bash\ncurl --location 'http://api.adempiere.io/express-shipment/business-partners' \\\n--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMDAwMTQ5IiwiQURfQ2xpZW50X0lEIjoxMSwiQURfT3JnX0lEIjowLCJBRF9Sb2xlX0lEIjoxMDIsIkFEX1VzZXJfSUQiOjEwMCwiTV9XYXJlaG91c2VfSUQiOjAsIkFEX0xhbmd1YWdlIjoiZW5fVVMiLCJpYXQiOjE3MTA1MTA0MDEsImV4cCI6MTcxMDU5NjgwMX0.nYQbrcT9RyHNRCf-oNM50ZVSO6uJ9gvrQQ7e0fzU9Ik'\n\n ```\n\n**Example Answer**\n\n``` json\n{\n    \"record_count\": \"6\",\n    \"records\": [\n        {\n            \"id\": 117,\n            \"value\": \"C&W\",\n            \"tax_id\": \"\",\n            \"name\": \"C&W Construction\",\n            \"description\": \"\"\n        },\n        {\n            \"id\": 118,\n            \"value\": \"JoeBlock\",\n            \"tax_id\": \"\",\n            \"name\": \"Joe Block\",\n            \"description\": \"\"\n        },\n        {\n            \"id\": 119,\n            \"value\": \"GardenUser\",\n            \"tax_id\": \"\",\n            \"name\": \"GardenUser BP\",\n            \"description\": \"\"\n        },\n        {\n            \"id\": 121,\n            \"value\": \"Patio\",\n            \"tax_id\": \"\",\n            \"name\": \"Patio Fun, Inc.\",\n            \"description\": \"\"\n        },\n        {\n            \"id\": 120,\n            \"value\": \"SeedFarm\",\n            \"tax_id\": \"\",\n            \"name\": \"Seed Farm Inc.\",\n            \"description\": \"Customer & Vendor\"\n        },\n        {\n            \"id\": 112,\n            \"value\": \"Standard\",\n            \"tax_id\": \"\",\n            \"name\": \"Standard\",\n            \"description\": \"Walk-In Customer\"\n        }\n    ],\n    \"next_page_token\": \"\"\n}\n\n ```\n\n**Change control**\n\n| **Version** | date | author | Description of Changes |\n| --- | --- | --- | --- |\n| 1.0 | 15/03/2024 | Ricardo | Initial creation of the document. |"
+			},
+			"response": [
+				{
+					"name": "ListBusinessPartners",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/express-shipment/business-partners",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"express-shipment",
+								"business-partners"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.25.2"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 06 Mar 2024 20:35:33 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "768"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "grpc-encoding",
+							"value": "identity"
+						},
+						{
+							"key": "grpc-accept-encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "x-envoy-upstream-service-time",
+							"value": "144"
+						},
+						{
+							"key": "grpc-status",
+							"value": "0"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Max-Age",
+							"value": "3600"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"record_count\": \"6\",\n    \"records\": [\n        {\n            \"id\": 117,\n            \"value\": \"C&W\",\n            \"tax_id\": \"\",\n            \"name\": \"C&W Construction\",\n            \"description\": \"\"\n        },\n        {\n            \"id\": 118,\n            \"value\": \"JoeBlock\",\n            \"tax_id\": \"\",\n            \"name\": \"Joe Block\",\n            \"description\": \"\"\n        },\n        {\n            \"id\": 119,\n            \"value\": \"GardenUser\",\n            \"tax_id\": \"\",\n            \"name\": \"GardenUser BP\",\n            \"description\": \"\"\n        },\n        {\n            \"id\": 121,\n            \"value\": \"Patio\",\n            \"tax_id\": \"\",\n            \"name\": \"Patio Fun, Inc.\",\n            \"description\": \"\"\n        },\n        {\n            \"id\": 120,\n            \"value\": \"SeedFarm\",\n            \"tax_id\": \"\",\n            \"name\": \"Seed Farm Inc.\",\n            \"description\": \"Customer & Vendor\"\n        },\n        {\n            \"id\": 112,\n            \"value\": \"Standard\",\n            \"tax_id\": \"\",\n            \"name\": \"Standard\",\n            \"description\": \"Walk-In Customer\"\n        }\n    ],\n    \"next_page_token\": \"\"\n}"
+				}
+			]
+		},
+		{
+			"name": "ListProductsRequest",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{HOST}}/express-shipment/products?order_id=100",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"express-shipment",
+						"products"
+					],
+					"query": [
+						{
+							"key": "order_id",
+							"value": "100"
+						}
+					]
+				},
+				"description": "**Endpoint**: GET /Express_shipment\n\n**Description**: Returns ListProducts\n\n**FULL URL**: [http://api.adempiere.io](http://api.adempiere.io/api)/express-shipment/products/{order_id}\n\n**Method**: GET\n\n**Parameters (Params)**\n\norder_id (Int32, Mandatory)\n\n**Application Example**\n\n``` bash\ncurl --location 'http://api.adempiere.io/express-shipment/products?order_id=100' \\\n--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMDAwMTQ5IiwiQURfQ2xpZW50X0lEIjoxMSwiQURfT3JnX0lEIjowLCJBRF9Sb2xlX0lEIjoxMDIsIkFEX1VzZXJfSUQiOjEwMCwiTV9XYXJlaG91c2VfSUQiOjAsIkFEX0xhbmd1YWdlIjoiZW5fVVMiLCJpYXQiOjE3MTA1MTA0MDEsImV4cCI6MTcxMDU5NjgwMX0.nYQbrcT9RyHNRCf-oNM50ZVSO6uJ9gvrQQ7e0fzU9Ik' \\\n--data ''\n\n ```\n\n**Example Answer**\n\n``` json\n{\n    \"record_count\": \"1\",\n    \"records\": [\n        {\n            \"id\": 130,\n            \"upc\": \"\",\n            \"sku\": \"\",\n            \"value\": \"Plum Tree\",\n            \"name\": \"Plum Tree\",\n            \"description\": \"\"\n        }\n    ],\n    \"next_page_token\": \"\"\n}\n\n ```\n\n**Common mistakes**\n\n- order id does not have a valid value\n    \n\n``` json\n{\n    \"code\": 13,\n    \"message\": \"Fill mandatory fields:  Order\",\n    \"details\": []\n}\n\n ```\n\n- The id entered does not match any of the records\n    \n\n``` json\n{\n    \"record_count\": \"0\",\n    \"records\": [],\n    \"next_page_token\": \"\"\n}\n\n ```\n\n**Change control**\n\n| **Version** | date | author | Description of Changes |\n| --- | --- | --- | --- |\n| 1.0 | 15/03/2024 | Ricardo | Initial creation of the document. |"
+			},
+			"response": [
+				{
+					"name": "ListProductsRequest",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/express-shipment/products",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"express-shipment",
+								"products"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.25.2"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 08 Mar 2024 13:58:22 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "187"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "grpc-encoding",
+							"value": "identity"
+						},
+						{
+							"key": "grpc-accept-encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "x-envoy-upstream-service-time",
+							"value": "125"
+						},
+						{
+							"key": "grpc-status",
+							"value": "0"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Max-Age",
+							"value": "3600"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"record_count\": \"1\",\n    \"records\": [\n        {\n            \"id\": 130,\n            \"upc\": \"\",\n            \"sku\": \"\",\n            \"value\": \"Plum Tree\",\n            \"name\": \"Plum Tree\",\n            \"description\": \"\"\n        }\n    ],\n    \"next_page_token\": \"\"\n}"
+				}
+			]
+		},
+		{
+			"name": "CreateShipment",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"order_id\": 100,\n    \"is_create_lines_from_order\":true\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{HOST}}/express-shipment/shipments",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"express-shipment",
+						"shipments"
+					]
+				},
+				"description": "**Endpoint**: POST /Express_shipment\n\n**Description**: Returns Shipment\n\n**FULL URL**: [http://api.adempiere.io](http://api.adempiere.io/api)/express-shipment/shipments\n\n**Method**: POST\n\n**Parameters (Body)**\n\norder_id (Int32, Mandatory)\n\nis_create_lines_from_order (Bool, optional)\n\n**Application Example**\n\n``` bash\ncurl --location 'http://api.adempiere.io/express-shipment/shipments' \\\n--header 'Content-Type: application/json' \\\n--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMDAwMTQ5IiwiQURfQ2xpZW50X0lEIjoxMSwiQURfT3JnX0lEIjowLCJBRF9Sb2xlX0lEIjoxMDIsIkFEX1VzZXJfSUQiOjEwMCwiTV9XYXJlaG91c2VfSUQiOjAsIkFEX0xhbmd1YWdlIjoiZW5fVVMiLCJpYXQiOjE3MTA1MTA0MDEsImV4cCI6MTcxMDU5NjgwMX0.nYQbrcT9RyHNRCf-oNM50ZVSO6uJ9gvrQQ7e0fzU9Ik' \\\n--data '{\n    \"order_id\": 100,\n    \"is_create_lines_from_order\":true\n}'\n\n ```\n\n**Example Answer**\n\n``` json\n{\n    \"id\": 1000000,\n    \"document_no\": \"600004\",\n    \"date_ordered\": \"2021-01-22T04:00:00Z\",\n    \"movement_date\": \"2024-03-15T04:00:00Z\",\n    \"order_id\": 100,\n    \"is_completed\": false\n}\n\n ```\n\n**Common mistakes**\n\n- order id missing\n    \n\n``` json\n{\n    \"code\": 13,\n    \"message\": \"Fill mandatory fields:  Order\",\n    \"details\": []\n}\n\n ```\n\n- order id does not match any record\n    \n\n``` json\n{\n    \"code\": 13,\n    \"message\": \"Order * Not found *\",\n    \"details\": []\n}\n\n ```\n\n**Change control**\n\n| **Version** | date | author | Description of Changes |\n| --- | --- | --- | --- |\n| 1.0 | 15/03/2024 | Ricardo | Initial creation of the document. |"
+			},
+			"response": [
+				{
+					"name": "CreateShipment",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"order_id\": 100\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HOST}}/express-shipment/shipments",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"express-shipment",
+								"shipments"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.25.2"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 08 Mar 2024 13:54:25 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "170"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "grpc-encoding",
+							"value": "identity"
+						},
+						{
+							"key": "grpc-accept-encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "x-envoy-upstream-service-time",
+							"value": "141"
+						},
+						{
+							"key": "grpc-status",
+							"value": "0"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Max-Age",
+							"value": "3600"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 1000000,\n    \"document_no\": \"600004\",\n    \"date_ordered\": \"2021-01-22T04:00:00Z\",\n    \"movement_date\": \"2024-03-08T04:00:00Z\",\n    \"order_id\": 100,\n    \"is_completed\": false\n}"
+				}
+			]
+		},
+		{
+			"name": "DeleteShipment",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{HOST}}/express-shipment/shipments/:id",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"express-shipment",
+						"shipments",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "1000000"
+						}
+					]
+				},
+				"description": "**Endpoint**: DELETE /Express_shipment\n\n**Description**: Returns Empty\n\n**FULL URL**: [http://api.adempiere.io](http://api.adempiere.io/api)/express-shipment/shipments/:id\n\n**Method**: DELETE\n\n**Application Example**\n\n``` bash\ncurl --location --request DELETE 'http://api.adempiere.io/express-shipment/shipments/1000000' \\\n--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMDAwMTQ5IiwiQURfQ2xpZW50X0lEIjoxMSwiQURfT3JnX0lEIjowLCJBRF9Sb2xlX0lEIjoxMDIsIkFEX1VzZXJfSUQiOjEwMCwiTV9XYXJlaG91c2VfSUQiOjAsIkFEX0xhbmd1YWdlIjoiZW5fVVMiLCJpYXQiOjE3MTA1MTA0MDEsImV4cCI6MTcxMDU5NjgwMX0.nYQbrcT9RyHNRCf-oNM50ZVSO6uJ9gvrQQ7e0fzU9Ik'\n\n ```\n\n**Example Answer**\n\n``` json\n{}\n\n ```\n\n**Common mistakes**\n\n- reception id does not match the records\n    \n\n``` json\n{\n    \"code\": 13,\n    \"message\": \"Shipment/Receipt * Not found *\",\n    \"details\": []\n}\n\n ```\n\n**Change control**\n\n| **Version** | date | author | Description of Changes |\n| --- | --- | --- | --- |\n| 1.0 | 15/03/2024 | Ricardo | Initial creation of the document. |"
+			},
+			"response": [
+				{
+					"name": "DeleteShipment",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/express-shipment/shipments/:id",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"express-shipment",
+								"shipments",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1000000"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.25.2"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 08 Mar 2024 13:54:54 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "3"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "grpc-encoding",
+							"value": "identity"
+						},
+						{
+							"key": "grpc-accept-encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "x-envoy-upstream-service-time",
+							"value": "95"
+						},
+						{
+							"key": "grpc-status",
+							"value": "0"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Max-Age",
+							"value": "3600"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{}"
+				}
+			]
+		},
+		{
+			"name": "ProcessShipment",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"description\":\"prueba\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{HOST}}/express-shipment/shipments/:id/process",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"express-shipment",
+						"shipments",
+						":id",
+						"process"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "100"
+						}
+					]
+				},
+				"description": "**Endpoint**: POST /Express_shipment\n\n**Description**: Returns Shipment\n\n**FULL URL**: [http://api.adempiere.io](http://api.adempiere.io/api)/express-shipment/shipments/{id}/process\n\n**Method**: POST\n\n**Parameters (Params)**\n\nid (Int32, Mandatory)\n\n**Parameters (Body)**\n\ndescription (String, optional)\n\n**Application Example**\n\n``` bash\ncurl --location 'http://api.adempiere.io/express-shipment/shipments/100/process' \\\n--header 'Content-Type: application/json' \\\n--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMDAwMTQ5IiwiQURfQ2xpZW50X0lEIjoxMSwiQURfT3JnX0lEIjowLCJBRF9Sb2xlX0lEIjoxMDIsIkFEX1VzZXJfSUQiOjEwMCwiTV9XYXJlaG91c2VfSUQiOjAsIkFEX0xhbmd1YWdlIjoiZW5fVVMiLCJpYXQiOjE3MTA1MTA0MDEsImV4cCI6MTcxMDU5NjgwMX0.nYQbrcT9RyHNRCf-oNM50ZVSO6uJ9gvrQQ7e0fzU9Ik' \\\n--data '{\n    \"description\":\"prueba\"\n}'\n\n ```\n\n**Example Answer**\n\n``` json\n{\n    \"code\": 13,\n    \"message\": \"Entrega / Recibo Procesado\",\n    \"details\": []\n}\n\n ```\n\n**Common mistakes**\n\n- the id does not match any open period\n    \n\n``` json\n{\n    \"code\": 13,\n    \"message\": \"Process failed :Period Closed\",\n    \"details\": []\n}\n\n ```\n\n**Change control**\n\n| **Version** | date | author | Description of Changes |\n| --- | --- | --- | --- |\n| 1.0 | 15/03/2024 | Ricardo | Initial creation of the document. |"
+			},
+			"response": [
+				{
+					"name": "ProcessShipment",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/express-shipment/shipments/:id/process",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"express-shipment",
+								"shipments",
+								":id",
+								"process"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "100"
+								}
+							]
+						}
+					},
+					"status": "Internal Server Error",
+					"code": 500,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.25.2"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 08 Mar 2024 13:57:24 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "74"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "x-envoy-upstream-service-time",
+							"value": "106"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"code\": 13,\n    \"message\": \"Entrega / Recibo Procesado\",\n    \"details\": []\n}"
+				}
+			]
+		},
+		{
+			"name": "CreateShipmentLine",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"description\":\"prueba\",\n    \"product_id\":120,\n    \"quantity\":\"4\",\n    \"is_quantity_from_order_line\":true\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{HOST}}/express-shipment/shipments/:shipment_id/lines",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"express-shipment",
+						"shipments",
+						":shipment_id",
+						"lines"
+					],
+					"variable": [
+						{
+							"key": "shipment_id",
+							"value": "100"
+						}
+					]
+				},
+				"description": "**Endpoint**: POST /Express_shipment\n\n**Description**: Returns ShipmentLine\n\n**FULL URL**: [http://api.adempiere.io](http://api.adempiere.io/api)/express-shipment/shipments/{shipment_id}/lines\n\n**Method**: DELETE\n\n**Parameters (Params)**\n\nshipment_id (Int32, Mandatory)\n\n**Parameters (Body)**\n\ndescription (String, optional)\n\nproduct_id (Int32, Mandatory)\n\nquantity (String, optional)\n\nis_quantity_from_order_line (Bool, optional)\n\n**Application Example**\n\n``` bash\ncurl --location 'http://api.adempiere.io/express-shipment/shipments/100/lines' \\\n--header 'Content-Type: application/json' \\\n--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMDAwMTQ5IiwiQURfQ2xpZW50X0lEIjoxMSwiQURfT3JnX0lEIjowLCJBRF9Sb2xlX0lEIjoxMDIsIkFEX1VzZXJfSUQiOjEwMCwiTV9XYXJlaG91c2VfSUQiOjAsIkFEX0xhbmd1YWdlIjoiZW5fVVMiLCJpYXQiOjE3MTA1MTA0MDEsImV4cCI6MTcxMDU5NjgwMX0.nYQbrcT9RyHNRCf-oNM50ZVSO6uJ9gvrQQ7e0fzU9Ik' \\\n--data '{\n    \"description\":\"prueba\",\n    \"product_id\":120,\n    \"quantity\":\"4\",\n    \"is_quantity_from_order_line\":true\n}'\n\n ```\n\n**Example Answer**\n\n``` json\n{\n    \"code\": 13,\n    \"message\": \"Shipment/Receipt Processed\",\n    \"details\": []\n}\n\n ```\n\n**Common mistakes**\n\n- the product id does not have a valid value\n    \n\n``` json\n{\n    \"code\": 13,\n    \"message\": \"Fill mandatory fields:  Product\",\n    \"details\": []\n}\n\n ```\n\n- the shipment id does not match any of the records\n    \n\n``` json\n{\n    \"code\": 13,\n    \"message\": \"Shipment/Receipt * Not found *\",\n    \"details\": []\n}\n\n ```\n\n**Change control**\n\n| **Version** | date | author | Description of Changes |\n| --- | --- | --- | --- |\n| 1.0 | 15/03/2024 | Ricardo | Initial creation of the document. |"
+			},
+			"response": [
+				{
+					"name": "CreateShipmentLine",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"product_id\":120\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HOST}}/express-shipment/shipments/:shipment_id/lines",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"express-shipment",
+								"shipments",
+								":shipment_id",
+								"lines"
+							],
+							"variable": [
+								{
+									"key": "shipment_id",
+									"value": "100"
+								}
+							]
+						}
+					},
+					"status": "Internal Server Error",
+					"code": 500,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.25.2"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 08 Mar 2024 13:49:04 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "74"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "x-envoy-upstream-service-time",
+							"value": "144"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"code\": 13,\n    \"message\": \"Entrega / Recibo Procesado\",\n    \"details\": []\n}"
+				}
+			]
+		},
+		{
+			"name": "DeleteShipmentLine",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{HOST}}/express-shipment/shipments/:shipment_id/lines/:id",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"express-shipment",
+						"shipments",
+						":shipment_id",
+						"lines",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "shipment_id",
+							"value": "100"
+						},
+						{
+							"key": "id",
+							"value": "100"
+						}
+					]
+				},
+				"description": "**Endpoint**: DELETE /Express_shipment\n\n**Description**: Returns Empty\n\n**FULL URL**: [http://api.adempiere.io](http://api.adempiere.io/api)/express-shipment/shipments/{shipment_id}/lines/{id}\n\n**Method**: DELETE\n\n**Parameters (Params)**\n\nshipment_id (Int32, Mandatory)\n\nid (Int32, Mandatory)\n\n**Application Example**\n\n``` bash\ncurl --location --request DELETE 'http://api.adempiere.io/express-shipment/shipments/100/lines/100' \\\n--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMDAwMTQ5IiwiQURfQ2xpZW50X0lEIjoxMSwiQURfT3JnX0lEIjowLCJBRF9Sb2xlX0lEIjoxMDIsIkFEX1VzZXJfSUQiOjEwMCwiTV9XYXJlaG91c2VfSUQiOjAsIkFEX0xhbmd1YWdlIjoiZW5fVVMiLCJpYXQiOjE3MTA1MTA0MDEsImV4cCI6MTcxMDU5NjgwMX0.nYQbrcT9RyHNRCf-oNM50ZVSO6uJ9gvrQQ7e0fzU9Ik'\n\n ```\n\n**Example Answer**\n\n``` json\n{\n    \"code\": 13,\n    \"message\": \"Línea Entrega / Recibo Procesado\",\n    \"details\": []\n}\n\n ```\n\n**Common mistakes**\n\n- The entered id does not match any registered line\n    \n\n``` json\n{\n    \"code\": 13,\n    \"message\": \"Shipment/Receipt Line * Not found *\",\n    \"details\": []\n}\n\n ```\n\n**Change control**\n\n| **Version** | date | author | Description of Changes |\n| --- | --- | --- | --- |\n| 1.0 | 15/03/2024 | Ricardo | Initial creation of the document. |"
+			},
+			"response": [
+				{
+					"name": "DeleteShipmentLine",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/express-shipment/shipments/:shipment_id/lines/:id",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"express-shipment",
+								"shipments",
+								":shipment_id",
+								"lines",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "shipment_id",
+									"value": "100"
+								},
+								{
+									"key": "id",
+									"value": "100"
+								}
+							]
+						}
+					},
+					"status": "Internal Server Error",
+					"code": 500,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.25.2"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 08 Mar 2024 13:52:51 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "81"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "x-envoy-upstream-service-time",
+							"value": "131"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"code\": 13,\n    \"message\": \"Línea Entrega / Recibo Procesado\",\n    \"details\": []\n}"
+				}
+			]
+		},
+		{
+			"name": "UpdateShipmentLine",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [],
+				"url": {
+					"raw": "{{HOST}}/express-shipment/shipments/:shipment_id/lines/:id",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"express-shipment",
+						"shipments",
+						":shipment_id",
+						"lines",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "shipment_id",
+							"value": "100"
+						},
+						{
+							"key": "id",
+							"value": "100"
+						}
+					]
+				},
+				"description": "**Endpoint**: PATCH /Express_shipment\n\n**Description**: Returns ShipmentLine\n\n**FULL URL**: [http://api.adempiere.io](http://api.adempiere.io/api)/express-shipment/shipments/{shipment_id}/lines/{id}\n\n**Method**: PATCH\n\n**Parameters (Params)**\n\nshipment_id (Int32, Mandatory)\n\nid (Int32, Mandatory)\n\n**Application Example**\n\n``` bash\ncurl --location --request PATCH 'http://api.adempiere.io/express-shipment/shipments/100/lines/100' \\\n--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMDAwMTQ5IiwiQURfQ2xpZW50X0lEIjoxMSwiQURfT3JnX0lEIjowLCJBRF9Sb2xlX0lEIjoxMDIsIkFEX1VzZXJfSUQiOjEwMCwiTV9XYXJlaG91c2VfSUQiOjAsIkFEX0xhbmd1YWdlIjoiZW5fVVMiLCJpYXQiOjE3MTA1MTA0MDEsImV4cCI6MTcxMDU5NjgwMX0.nYQbrcT9RyHNRCf-oNM50ZVSO6uJ9gvrQQ7e0fzU9Ik'\n\n ```\n\n**Example Answer**\n\n``` json\n{\n    \"code\": 13,\n    \"message\": \"Shipment/Receipt Line Processed\",\n    \"details\": []\n}\n\n ```\n\n**Common mistakes**\n\n- The entered id does not match any registered line\n    \n\n``` json\n{\n    \"code\": 13,\n    \"message\": \"Shipment/Receipt Line * Not found *\",\n    \"details\": []\n}\n\n ```\n\n**Change control**\n\n| **Version** | date | author | Description of Changes |\n| --- | --- | --- | --- |\n| 1.0 | 15/03/2024 | Ricardo | Initial creation of the document. |"
+			},
+			"response": [
+				{
+					"name": "UpdateShipmentLine",
+					"originalRequest": {
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/express-shipment/shipments/:shipment_id/lines/:id",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"express-shipment",
+								"shipments",
+								":shipment_id",
+								"lines",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "shipment_id",
+									"value": "100"
+								},
+								{
+									"key": "id",
+									"value": "100"
+								}
+							]
+						}
+					},
+					"status": "Internal Server Error",
+					"code": 500,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.25.2"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 08 Mar 2024 13:53:20 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "81"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "x-envoy-upstream-service-time",
+							"value": "108"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"code\": 13,\n    \"message\": \"Línea Entrega / Recibo Procesado\",\n    \"details\": []\n}"
+				}
+			]
+		},
+		{
+			"name": "ListShipmentLines",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{HOST}}/express-shipment/shipments/:shipment_id/lines",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"express-shipment",
+						"shipments",
+						":shipment_id",
+						"lines"
+					],
+					"variable": [
+						{
+							"key": "shipment_id",
+							"value": "1"
+						}
+					]
+				},
+				"description": "**Endpoint**: GET /Express_shipment\n\n**Description**: Returns ShipmentLine\n\n**FULL URL**: [http://api.adempiere.io](http://api.adempiere.io/api)/express-shipment/shipments/{shipment_id}/lines\n\n**Method**: GET\n\n**Parameters (Params)**\n\nshipment_id (Int32, Mandatory)\n\n**Application Example**\n\n``` bash\ncurl --location 'http://api.adempiere.io/express-shipment/shipments/100/lines' \\\n--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMDAwMTQ5IiwiQURfQ2xpZW50X0lEIjoxMSwiQURfT3JnX0lEIjowLCJBRF9Sb2xlX0lEIjoxMDIsIkFEX1VzZXJfSUQiOjEwMCwiTV9XYXJlaG91c2VfSUQiOjAsIkFEX0xhbmd1YWdlIjoiZW5fVVMiLCJpYXQiOjE3MTA1MTA0MDEsImV4cCI6MTcxMDU5NjgwMX0.nYQbrcT9RyHNRCf-oNM50ZVSO6uJ9gvrQQ7e0fzU9Ik'\n\n ```\n\n**Example Answer**\n\n``` json\n{{\n    \"record_count\": \"1\",\n    \"records\": [\n        {\n            \"id\": 100,\n            \"order_line_id\": 100,\n            \"product\": {\n                \"id\": 130,\n                \"upc\": \"\",\n                \"sku\": \"\",\n                \"value\": \"Plum Tree\",\n                \"name\": \"Plum Tree\",\n                \"description\": \"\"\n            },\n            \"description\": \"\",\n            \"quantity\": \"1\",\n            \"line\": 10\n        }\n    ],\n    \"next_page_token\": \"\"\n}\n\n ```\n\n**Common mistakes**\n\n- The entered id does not match any registered line\n    \n\n``` json\n{\n    \"code\": 13,\n    \"message\": \"Shipment/Receipt Line * Not found *\",\n    \"details\": []\n}\n\n ```\n\n**Change control**\n\n| **Version** | date | author | Description of Changes |\n| --- | --- | --- | --- |\n| 1.0 | 15/03/2024 | Ricardo | Initial creation of the document. |"
+			},
+			"response": [
+				{
+					"name": "ListShipmentLines",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/express-shipment/shipments/:shipment_id/lines",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"express-shipment",
+								"shipments",
+								":shipment_id",
+								"lines"
+							],
+							"variable": [
+								{
+									"key": "shipment_id",
+									"value": "100"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.25.2"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 08 Mar 2024 13:48:21 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "310"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "grpc-encoding",
+							"value": "identity"
+						},
+						{
+							"key": "grpc-accept-encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "x-envoy-upstream-service-time",
+							"value": "142"
+						},
+						{
+							"key": "grpc-status",
+							"value": "0"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Max-Age",
+							"value": "3600"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"record_count\": \"1\",\n    \"records\": [\n        {\n            \"id\": 100,\n            \"order_line_id\": 100,\n            \"product\": {\n                \"id\": 130,\n                \"upc\": \"\",\n                \"sku\": \"\",\n                \"value\": \"Plum Tree\",\n                \"name\": \"Plum Tree\",\n                \"description\": \"\"\n            },\n            \"description\": \"\",\n            \"quantity\": \"1\",\n            \"line\": 10\n        }\n    ],\n    \"next_page_token\": \"\"\n}"
+				}
+			]
+		}
+	]
+}
