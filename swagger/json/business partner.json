@@ -1,0 +1,814 @@
+{
+	"info": {
+		"_postman_id": "bf82dee5-c423-4d7e-90bf-3306604b4fb6",
+		"name": "Business Partner",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23072370",
+		"_collection_link": "https://gold-moon-270692.postman.co/workspace/Team-Workspace~417f6c5b-8eca-4742-88ad-b6830954ef41/collection/23072370-bf82dee5-c423-4d7e-90bf-3306604b4fb6?action=share&source=collection_link&creator=23072370"
+	},
+	"item": [
+		{
+			"name": "businnes-parners_tableName_columnNAme",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{HOST}}/field/business-partners/table/:table_name/:column_name",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"field",
+						"business-partners",
+						"table",
+						":table_name",
+						":column_name"
+					],
+					"variable": [
+						{
+							"key": "table_name",
+							"value": "AD_Window"
+						},
+						{
+							"key": "column_name",
+							"value": "AD_Window_ID"
+						}
+					]
+				},
+				"description": "**Endpoint**: GET /Business Partner\n\n**Description**: Retorna ListBusinessPartnersInfo\n\n**Full URL**: [http://api.adempiere.io](http://api.adempiere.io/api)/field/business-partners/table/{table_name}/{column_name}\n\n**Mehtod**: GET\n\n**Parameters (Params):**\n\n- table_name (String, Mandatory)\n- column_name (String, Mandatory)\n    \n\n**Application Example:**\n\n``` bash\ncurl --location 'http://api.adempiere.io/field/business-partners/table/AD_Window/AD_Window_ID' \\\n--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMDAwMTQ5IiwiQURfQ2xpZW50X0lEIjoxMSwiQURfT3JnX0lEIjowLCJBRF9Sb2xlX0lEIjoxMDIsIkFEX1VzZXJfSUQiOjEwMCwiTV9XYXJlaG91c2VfSUQiOjAsIkFEX0xhbmd1YWdlIjoiZW5fVVMiLCJpYXQiOjE3MTA1MTA0MDEsImV4cCI6MTcxMDU5NjgwMX0.nYQbrcT9RyHNRCf-oNM50ZVSO6uJ9gvrQQ7e0fzU9Ik'\n\n ```\n\n**Answer Example:**\n\n``` json\n{\n    \"record_count\": \"19\",\n    \"records\": [\n        {\n            \"id\": 1000000,\n            \"uuid\": \"d75d2f7f-3af5-4bb7-bba4-1d53fa1e44a9\",\n            \"display_value\": \"Prueba\",\n            \"value\": \"10000000\",\n            \"tax_id\": \"\",\n            \"name\": \"Prueba\",\n            \"name2\": \"\",\n            \"description\": \"Walk-In Customer\",\n            \"business_partner_group\": \"Standard Customers\",\n            \"open_balance_amount\": \"0\",\n            \"credit_available_amount\": \"0\",\n            \"credit_used_amount\": \"0\",\n            \"revenue_amount\": \"0\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 1000001,\n            \"uuid\": \"66dda445-3600-442b-9e08-7824974d9a2e\",\n            \"display_value\": \"Prueba\",\n            \"value\": \"10000001\",\n            \"tax_id\": \"\",\n            \"name\": \"Prueba\",\n            \"name2\": \"\",\n            \"description\": \"Walk-In Customer\",\n            \"business_partner_group\": \"Standard Customers\",\n            \"open_balance_amount\": \"0\",\n            \"credit_available_amount\": \"0\",\n            \"credit_used_amount\": \"0\",\n            \"revenue_amount\": \"0\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 50003,\n            \"uuid\": \"b14b6c53-ca82-4dbc-841a-640b04de76bb\",\n            \"display_value\": \"Chemical Product, inc\",\n            \"value\": \"Chemical Product, inc\",\n            \"tax_id\": \"\",\n            \"name\": \"Chemical Product, inc\",\n            \"name2\": \"\",\n            \"description\": \"\",\n            \"business_partner_group\": \"Vendors\",\n            \"open_balance_amount\": \"0\",\n            \"credit_available_amount\": \"0\",\n            \"credit_used_amount\": \"0\",\n            \"revenue_amount\": \"0\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 50002,\n            \"uuid\": \"f472cd49-4f19-4fc3-856a-cb9038cf2924\",\n            \"display_value\": \"Chrome, Inc\",\n            \"value\": \"Chrome, Inc\",\n            \"tax_id\": \"\",\n            \"name\": \"Chrome, Inc\",\n            \"name2\": \"\",\n            \"description\": \"\",\n            \"business_partner_group\": \"Vendors\",\n            \"open_balance_amount\": \"0\",\n            \"credit_available_amount\": \"0\",\n            \"credit_used_amount\": \"0\",\n            \"revenue_amount\": \"0\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 50001,\n            \"uuid\": \"5e616d3e-c55b-4ede-9b0e-ac3ae834556b\",\n            \"display_value\": \"Color, Inc\",\n            \"value\": \"Color, Inc\",\n            \"tax_id\": \"\",\n            \"name\": \"Color, Inc\",\n            \"name2\": \"\",\n            \"description\": \"\",\n            \"business_partner_group\": \"Vendors\",\n            \"open_balance_amount\": \"0\",\n            \"credit_available_amount\": \"0\",\n            \"credit_used_amount\": \"0\",\n            \"revenue_amount\": \"0\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 117,\n            \"uuid\": \"b7bafd8e-ae3b-4bbc-9a0d-d47fdbef390f\",\n            \"display_value\": \"C&W Construction\",\n            \"value\": \"C&W\",\n            \"tax_id\": \"\",\n            \"name\": \"C&W Construction\",\n            \"name2\": \"Unlimited Projects Corp.\",\n            \"description\": \"\",\n            \"business_partner_group\": \"Standard Customers\",\n            \"open_balance_amount\": \"161.12\",\n            \"credit_available_amount\": \"9838.88\",\n            \"credit_used_amount\": \"161.12\",\n            \"revenue_amount\": \"161.12\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 113,\n            \"uuid\": \"d430bdde-e5e4-476b-8dc9-4b0b5d5b02cc\",\n            \"display_value\": \"GardenAdmin BP\",\n            \"value\": \"GardenAdmin\",\n            \"tax_id\": \"\",\n            \"name\": \"GardenAdmin BP\",\n            \"name2\": \"\",\n            \"description\": \"\",\n            \"business_partner_group\": \"Staff\",\n            \"open_balance_amount\": \"0.00\",\n            \"credit_available_amount\": \"-999.33\",\n            \"credit_used_amount\": \"999.33\",\n            \"revenue_amount\": \"1000.00\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 119,\n            \"uuid\": \"0b870ceb-a34f-4876-8225-0053f11385d2\",\n            \"display_value\": \"GardenUser BP\",\n            \"value\": \"GardenUser\",\n            \"tax_id\": \"\",\n            \"name\": \"GardenUser BP\",\n            \"name2\": \"\",\n            \"description\": \"\",\n            \"business_partner_group\": \"Staff\",\n            \"open_balance_amount\": \"0\",\n            \"credit_available_amount\": \"0\",\n            \"credit_used_amount\": \"0\",\n            \"revenue_amount\": \"0\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 118,\n            \"uuid\": \"c3cfeb5f-1b2f-4f4b-a16c-d9cda23f59e1\",\n            \"display_value\": \"Joe Block\",\n            \"value\": \"JoeBlock\",\n            \"tax_id\": \"\",\n            \"name\": \"Joe Block\",\n            \"name2\": \"\",\n            \"description\": \"\",\n            \"business_partner_group\": \"Standard Customers\",\n            \"open_balance_amount\": \"503.48\",\n            \"credit_available_amount\": \"9748.26\",\n            \"credit_used_amount\": \"251.74\",\n            \"revenue_amount\": \"251.73\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 121,\n            \"uuid\": \"ca5b584a-c9e8-448f-a388-8ac7c0f02501\",\n            \"display_value\": \"Patio Fun, Inc.\",\n            \"value\": \"Patio\",\n            \"tax_id\": \"\",\n            \"name\": \"Patio Fun, Inc.\",\n            \"name2\": \"\",\n            \"description\": \"\",\n            \"business_partner_group\": \"Vendors\",\n            \"open_balance_amount\": \"-2160\",\n            \"credit_available_amount\": \"0\",\n            \"credit_used_amount\": \"0\",\n            \"revenue_amount\": \"0\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 120,\n            \"uuid\": \"2ad2a623-3d1f-47f4-969a-f44f7a05481f\",\n            \"display_value\": \"Seed Farm Inc.\",\n            \"value\": \"SeedFarm\",\n            \"tax_id\": \"\",\n            \"name\": \"Seed Farm Inc.\",\n            \"name2\": \"\",\n            \"description\": \"Customer & Vendor\",\n            \"business_partner_group\": \"Vendors\",\n            \"open_balance_amount\": \"-2731.5\",\n            \"credit_available_amount\": \"0\",\n            \"credit_used_amount\": \"0\",\n            \"revenue_amount\": \"0\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 112,\n            \"uuid\": \"f5388c95-7424-447d-85de-91424f9da147\",\n            \"display_value\": \"Standard\",\n            \"value\": \"Standard\",\n            \"tax_id\": \"\",\n            \"name\": \"Standard\",\n            \"name2\": \"\",\n            \"description\": \"Walk-In Customer\",\n            \"business_partner_group\": \"Standard Customers\",\n            \"open_balance_amount\": \"0\",\n            \"credit_available_amount\": \"0\",\n            \"credit_used_amount\": \"0\",\n            \"revenue_amount\": \"151.05\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 50004,\n            \"uuid\": \"8b894863-afbe-4384-a8ed-bf0325a5ec25\",\n            \"display_value\": \"Store Central\",\n            \"value\": \"Store Central\",\n            \"tax_id\": \"\",\n            \"name\": \"Store Central\",\n            \"name2\": \"\",\n            \"description\": \"\",\n            \"business_partner_group\": \"Staff\",\n            \"open_balance_amount\": \"0\",\n            \"credit_available_amount\": \"0\",\n            \"credit_used_amount\": \"0\",\n            \"revenue_amount\": \"0\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 50005,\n            \"uuid\": \"c6c2de1e-2f0f-4ef8-b7f3-29d80d0cfdb8\",\n            \"display_value\": \"Store East\",\n            \"value\": \"Store East\",\n            \"tax_id\": \"\",\n            \"name\": \"Store East\",\n            \"name2\": \"\",\n            \"description\": \"\",\n            \"business_partner_group\": \"Staff\",\n            \"open_balance_amount\": \"0\",\n            \"credit_available_amount\": \"0\",\n            \"credit_used_amount\": \"0\",\n            \"revenue_amount\": \"0\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 50007,\n            \"uuid\": \"01c65f4b-272c-4fb6-b12a-089d207cadb8\",\n            \"display_value\": \"Store North\",\n            \"value\": \"Store North\",\n            \"tax_id\": \"\",\n            \"name\": \"Store North\",\n            \"name2\": \"\",\n            \"description\": \"\",\n            \"business_partner_group\": \"Staff\",\n            \"open_balance_amount\": \"0\",\n            \"credit_available_amount\": \"0\",\n            \"credit_used_amount\": \"0\",\n            \"revenue_amount\": \"0\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 50008,\n            \"uuid\": \"88f0d79e-bc97-447d-8245-91bd79c0dcf7\",\n            \"display_value\": \"Store South\",\n            \"value\": \"Store South\",\n            \"tax_id\": \"\",\n            \"name\": \"Store South\",\n            \"name2\": \"\",\n            \"description\": \"\",\n            \"business_partner_group\": \"Staff\",\n            \"open_balance_amount\": \"0\",\n            \"credit_available_amount\": \"0\",\n            \"credit_used_amount\": \"0\",\n            \"revenue_amount\": \"0\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 50009,\n            \"uuid\": \"b419cad9-bb5b-4a2f-bbdb-1c3c70657408\",\n            \"display_value\": \"Store West\",\n            \"value\": \"Store West\",\n            \"tax_id\": \"\",\n            \"name\": \"Store West\",\n            \"name2\": \"\",\n            \"description\": \"\",\n            \"business_partner_group\": \"Staff\",\n            \"open_balance_amount\": \"0\",\n            \"credit_available_amount\": \"0\",\n            \"credit_used_amount\": \"0\",\n            \"revenue_amount\": \"0\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 114,\n            \"uuid\": \"254e660c-4863-460a-8a69-2b75f6461a33\",\n            \"display_value\": \"Tree Farm Inc.\",\n            \"value\": \"TreeFarm\",\n            \"tax_id\": \"\",\n            \"name\": \"Tree Farm Inc.\",\n            \"name2\": \"\",\n            \"description\": \"Vendor\",\n            \"business_partner_group\": \"Vendors\",\n            \"open_balance_amount\": \"-4217.5\",\n            \"credit_available_amount\": \"0\",\n            \"credit_used_amount\": \"0\",\n            \"revenue_amount\": \"0\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 50000,\n            \"uuid\": \"2d96ae84-d50e-447a-bdb7-496242fd846f\",\n            \"display_value\": \"Wood, Inc\",\n            \"value\": \"Wood, Inc\",\n            \"tax_id\": \"\",\n            \"name\": \"Wood, Inc\",\n            \"name2\": \"\",\n            \"description\": \"\",\n            \"business_partner_group\": \"Vendors\",\n            \"open_balance_amount\": \"0\",\n            \"credit_available_amount\": \"0\",\n            \"credit_used_amount\": \"0\",\n            \"revenue_amount\": \"0\",\n            \"is_active\": true\n        }\n    ],\n    \"next_page_token\": \"\"\n}\n\n ```\n\n**Commons Erros:**\n\n- Table not found\n    \n\n``` json\n{\n    \"code\": 13,\n    \"message\": \"Table * Not found *\",\n    \"details\": []\n}\n\n ```\n\n- Column not found\n    \n\n``` json\n    \"code\": 13,\n    \"message\": \"DB Column Name * Not found *\",\n    \"details\": []\n}\n\n ```\n\n**Control of Changes**\n\n| **Version** | Date | **Auto** | Description of changes |\n| --- | --- | --- | --- |\n| 1.0 | 15/03/2024 | Ricardo | Initial creation of the document. |"
+			},
+			"response": [
+				{
+					"name": "businnes-parners_tableName_columnNAme",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/field/business-partners/table/:table_name/:column_name",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"field",
+								"business-partners",
+								"table",
+								":table_name",
+								":column_name"
+							],
+							"variable": [
+								{
+									"key": "table_name",
+									"value": "AD_Window"
+								},
+								{
+									"key": "column_name",
+									"value": "AD_Window_ID"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.25.2"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 13 Mar 2024 20:33:37 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "7910"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "grpc-encoding",
+							"value": "identity"
+						},
+						{
+							"key": "grpc-accept-encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "x-envoy-upstream-service-time",
+							"value": "154"
+						},
+						{
+							"key": "grpc-status",
+							"value": "0"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Max-Age",
+							"value": "3600"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"record_count\": \"19\",\n    \"records\": [\n        {\n            \"id\": 1000000,\n            \"uuid\": \"d75d2f7f-3af5-4bb7-bba4-1d53fa1e44a9\",\n            \"display_value\": \"Prueba\",\n            \"value\": \"10000000\",\n            \"tax_id\": \"\",\n            \"name\": \"Prueba\",\n            \"name2\": \"\",\n            \"description\": \"Walk-In Customer\",\n            \"business_partner_group\": \"Standard Customers\",\n            \"open_balance_amount\": \"0\",\n            \"credit_available_amount\": \"0\",\n            \"credit_used_amount\": \"0\",\n            \"revenue_amount\": \"0\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 1000001,\n            \"uuid\": \"66dda445-3600-442b-9e08-7824974d9a2e\",\n            \"display_value\": \"Prueba\",\n            \"value\": \"10000001\",\n            \"tax_id\": \"\",\n            \"name\": \"Prueba\",\n            \"name2\": \"\",\n            \"description\": \"Walk-In Customer\",\n            \"business_partner_group\": \"Standard Customers\",\n            \"open_balance_amount\": \"0\",\n            \"credit_available_amount\": \"0\",\n            \"credit_used_amount\": \"0\",\n            \"revenue_amount\": \"0\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 50003,\n            \"uuid\": \"b14b6c53-ca82-4dbc-841a-640b04de76bb\",\n            \"display_value\": \"Chemical Product, inc\",\n            \"value\": \"Chemical Product, inc\",\n            \"tax_id\": \"\",\n            \"name\": \"Chemical Product, inc\",\n            \"name2\": \"\",\n            \"description\": \"\",\n            \"business_partner_group\": \"Vendors\",\n            \"open_balance_amount\": \"0\",\n            \"credit_available_amount\": \"0\",\n            \"credit_used_amount\": \"0\",\n            \"revenue_amount\": \"0\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 50002,\n            \"uuid\": \"f472cd49-4f19-4fc3-856a-cb9038cf2924\",\n            \"display_value\": \"Chrome, Inc\",\n            \"value\": \"Chrome, Inc\",\n            \"tax_id\": \"\",\n            \"name\": \"Chrome, Inc\",\n            \"name2\": \"\",\n            \"description\": \"\",\n            \"business_partner_group\": \"Vendors\",\n            \"open_balance_amount\": \"0\",\n            \"credit_available_amount\": \"0\",\n            \"credit_used_amount\": \"0\",\n            \"revenue_amount\": \"0\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 50001,\n            \"uuid\": \"5e616d3e-c55b-4ede-9b0e-ac3ae834556b\",\n            \"display_value\": \"Color, Inc\",\n            \"value\": \"Color, Inc\",\n            \"tax_id\": \"\",\n            \"name\": \"Color, Inc\",\n            \"name2\": \"\",\n            \"description\": \"\",\n            \"business_partner_group\": \"Vendors\",\n            \"open_balance_amount\": \"0\",\n            \"credit_available_amount\": \"0\",\n            \"credit_used_amount\": \"0\",\n            \"revenue_amount\": \"0\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 117,\n            \"uuid\": \"b7bafd8e-ae3b-4bbc-9a0d-d47fdbef390f\",\n            \"display_value\": \"C&W Construction\",\n            \"value\": \"C&W\",\n            \"tax_id\": \"\",\n            \"name\": \"C&W Construction\",\n            \"name2\": \"Unlimited Projects Corp.\",\n            \"description\": \"\",\n            \"business_partner_group\": \"Standard Customers\",\n            \"open_balance_amount\": \"161.12\",\n            \"credit_available_amount\": \"9838.88\",\n            \"credit_used_amount\": \"161.12\",\n            \"revenue_amount\": \"161.12\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 113,\n            \"uuid\": \"d430bdde-e5e4-476b-8dc9-4b0b5d5b02cc\",\n            \"display_value\": \"GardenAdmin BP\",\n            \"value\": \"GardenAdmin\",\n            \"tax_id\": \"\",\n            \"name\": \"GardenAdmin BP\",\n            \"name2\": \"\",\n            \"description\": \"\",\n            \"business_partner_group\": \"Staff\",\n            \"open_balance_amount\": \"0.00\",\n            \"credit_available_amount\": \"-999.33\",\n            \"credit_used_amount\": \"999.33\",\n            \"revenue_amount\": \"1000.00\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 119,\n            \"uuid\": \"0b870ceb-a34f-4876-8225-0053f11385d2\",\n            \"display_value\": \"GardenUser BP\",\n            \"value\": \"GardenUser\",\n            \"tax_id\": \"\",\n            \"name\": \"GardenUser BP\",\n            \"name2\": \"\",\n            \"description\": \"\",\n            \"business_partner_group\": \"Staff\",\n            \"open_balance_amount\": \"0\",\n            \"credit_available_amount\": \"0\",\n            \"credit_used_amount\": \"0\",\n            \"revenue_amount\": \"0\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 118,\n            \"uuid\": \"c3cfeb5f-1b2f-4f4b-a16c-d9cda23f59e1\",\n            \"display_value\": \"Joe Block\",\n            \"value\": \"JoeBlock\",\n            \"tax_id\": \"\",\n            \"name\": \"Joe Block\",\n            \"name2\": \"\",\n            \"description\": \"\",\n            \"business_partner_group\": \"Standard Customers\",\n            \"open_balance_amount\": \"503.48\",\n            \"credit_available_amount\": \"9748.26\",\n            \"credit_used_amount\": \"251.74\",\n            \"revenue_amount\": \"251.73\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 121,\n            \"uuid\": \"ca5b584a-c9e8-448f-a388-8ac7c0f02501\",\n            \"display_value\": \"Patio Fun, Inc.\",\n            \"value\": \"Patio\",\n            \"tax_id\": \"\",\n            \"name\": \"Patio Fun, Inc.\",\n            \"name2\": \"\",\n            \"description\": \"\",\n            \"business_partner_group\": \"Vendors\",\n            \"open_balance_amount\": \"-2160\",\n            \"credit_available_amount\": \"0\",\n            \"credit_used_amount\": \"0\",\n            \"revenue_amount\": \"0\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 120,\n            \"uuid\": \"2ad2a623-3d1f-47f4-969a-f44f7a05481f\",\n            \"display_value\": \"Seed Farm Inc.\",\n            \"value\": \"SeedFarm\",\n            \"tax_id\": \"\",\n            \"name\": \"Seed Farm Inc.\",\n            \"name2\": \"\",\n            \"description\": \"Customer & Vendor\",\n            \"business_partner_group\": \"Vendors\",\n            \"open_balance_amount\": \"-2731.5\",\n            \"credit_available_amount\": \"0\",\n            \"credit_used_amount\": \"0\",\n            \"revenue_amount\": \"0\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 112,\n            \"uuid\": \"f5388c95-7424-447d-85de-91424f9da147\",\n            \"display_value\": \"Standard\",\n            \"value\": \"Standard\",\n            \"tax_id\": \"\",\n            \"name\": \"Standard\",\n            \"name2\": \"\",\n            \"description\": \"Walk-In Customer\",\n            \"business_partner_group\": \"Standard Customers\",\n            \"open_balance_amount\": \"0\",\n            \"credit_available_amount\": \"0\",\n            \"credit_used_amount\": \"0\",\n            \"revenue_amount\": \"151.05\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 50004,\n            \"uuid\": \"8b894863-afbe-4384-a8ed-bf0325a5ec25\",\n            \"display_value\": \"Store Central\",\n            \"value\": \"Store Central\",\n            \"tax_id\": \"\",\n            \"name\": \"Store Central\",\n            \"name2\": \"\",\n            \"description\": \"\",\n            \"business_partner_group\": \"Staff\",\n            \"open_balance_amount\": \"0\",\n            \"credit_available_amount\": \"0\",\n            \"credit_used_amount\": \"0\",\n            \"revenue_amount\": \"0\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 50005,\n            \"uuid\": \"c6c2de1e-2f0f-4ef8-b7f3-29d80d0cfdb8\",\n            \"display_value\": \"Store East\",\n            \"value\": \"Store East\",\n            \"tax_id\": \"\",\n            \"name\": \"Store East\",\n            \"name2\": \"\",\n            \"description\": \"\",\n            \"business_partner_group\": \"Staff\",\n            \"open_balance_amount\": \"0\",\n            \"credit_available_amount\": \"0\",\n            \"credit_used_amount\": \"0\",\n            \"revenue_amount\": \"0\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 50007,\n            \"uuid\": \"01c65f4b-272c-4fb6-b12a-089d207cadb8\",\n            \"display_value\": \"Store North\",\n            \"value\": \"Store North\",\n            \"tax_id\": \"\",\n            \"name\": \"Store North\",\n            \"name2\": \"\",\n            \"description\": \"\",\n            \"business_partner_group\": \"Staff\",\n            \"open_balance_amount\": \"0\",\n            \"credit_available_amount\": \"0\",\n            \"credit_used_amount\": \"0\",\n            \"revenue_amount\": \"0\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 50008,\n            \"uuid\": \"88f0d79e-bc97-447d-8245-91bd79c0dcf7\",\n            \"display_value\": \"Store South\",\n            \"value\": \"Store South\",\n            \"tax_id\": \"\",\n            \"name\": \"Store South\",\n            \"name2\": \"\",\n            \"description\": \"\",\n            \"business_partner_group\": \"Staff\",\n            \"open_balance_amount\": \"0\",\n            \"credit_available_amount\": \"0\",\n            \"credit_used_amount\": \"0\",\n            \"revenue_amount\": \"0\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 50009,\n            \"uuid\": \"b419cad9-bb5b-4a2f-bbdb-1c3c70657408\",\n            \"display_value\": \"Store West\",\n            \"value\": \"Store West\",\n            \"tax_id\": \"\",\n            \"name\": \"Store West\",\n            \"name2\": \"\",\n            \"description\": \"\",\n            \"business_partner_group\": \"Staff\",\n            \"open_balance_amount\": \"0\",\n            \"credit_available_amount\": \"0\",\n            \"credit_used_amount\": \"0\",\n            \"revenue_amount\": \"0\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 114,\n            \"uuid\": \"254e660c-4863-460a-8a69-2b75f6461a33\",\n            \"display_value\": \"Tree Farm Inc.\",\n            \"value\": \"TreeFarm\",\n            \"tax_id\": \"\",\n            \"name\": \"Tree Farm Inc.\",\n            \"name2\": \"\",\n            \"description\": \"Vendor\",\n            \"business_partner_group\": \"Vendors\",\n            \"open_balance_amount\": \"-4217.5\",\n            \"credit_available_amount\": \"0\",\n            \"credit_used_amount\": \"0\",\n            \"revenue_amount\": \"0\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 50000,\n            \"uuid\": \"2d96ae84-d50e-447a-bdb7-496242fd846f\",\n            \"display_value\": \"Wood, Inc\",\n            \"value\": \"Wood, Inc\",\n            \"tax_id\": \"\",\n            \"name\": \"Wood, Inc\",\n            \"name2\": \"\",\n            \"description\": \"\",\n            \"business_partner_group\": \"Vendors\",\n            \"open_balance_amount\": \"0\",\n            \"credit_available_amount\": \"0\",\n            \"credit_used_amount\": \"0\",\n            \"revenue_amount\": \"0\",\n            \"is_active\": true\n        }\n    ],\n    \"next_page_token\": \"\"\n}"
+				}
+			]
+		},
+		{
+			"name": "businnes-parners_columnID",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{HOST}}/field/business-partners/column/:column_id",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"field",
+						"business-partners",
+						"column",
+						":column_id"
+					],
+					"variable": [
+						{
+							"key": "column_id",
+							"value": "809"
+						}
+					]
+				},
+				"description": "**Endpoint**: GET /Business Partner\n\n**Description**: Retorna ListBusinessPartnersInfo\n\n**Full URL** : [http://api.adempiere.io](http://api.adempiere.io/api)/field/business-partners/column/{column_id}\n\n**Method**: GET\n\n**Parameters (Params):**\n\n- column_id (Int32, Obligatorio)\n    \n\n**Application Example**\n\n``` bash\ncurl --location 'http://api.adempiere.io/field/business-partners/column/809' \\\n--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMDAwMTQ5IiwiQURfQ2xpZW50X0lEIjoxMSwiQURfT3JnX0lEIjowLCJBRF9Sb2xlX0lEIjoxMDIsIkFEX1VzZXJfSUQiOjEwMCwiTV9XYXJlaG91c2VfSUQiOjAsIkFEX0xhbmd1YWdlIjoiZW5fVVMiLCJpYXQiOjE3MTA1MTA0MDEsImV4cCI6MTcxMDU5NjgwMX0.nYQbrcT9RyHNRCf-oNM50ZVSO6uJ9gvrQQ7e0fzU9Ik'\n\n ```\n\n**Answer Example:**\n\n``` json\n{\n    \"record_count\": \"19\",\n    \"records\": [\n        {\n            \"id\": 1000000,\n            \"uuid\": \"d75d2f7f-3af5-4bb7-bba4-1d53fa1e44a9\",\n            \"display_value\": \"Prueba\",\n            \"value\": \"10000000\",\n            \"tax_id\": \"\",\n            \"name\": \"Prueba\",\n            \"name2\": \"\",\n            \"description\": \"Walk-In Customer\",\n            \"business_partner_group\": \"Standard Customers\",\n            \"open_balance_amount\": \"0\",\n            \"credit_available_amount\": \"0\",\n            \"credit_used_amount\": \"0\",\n            \"revenue_amount\": \"0\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 1000001,\n            \"uuid\": \"66dda445-3600-442b-9e08-7824974d9a2e\",\n            \"display_value\": \"Prueba\",\n            \"value\": \"10000001\",\n            \"tax_id\": \"\",\n            \"name\": \"Prueba\",\n            \"name2\": \"\",\n            \"description\": \"Walk-In Customer\",\n            \"business_partner_group\": \"Standard Customers\",\n            \"open_balance_amount\": \"0\",\n            \"credit_available_amount\": \"0\",\n            \"credit_used_amount\": \"0\",\n            \"revenue_amount\": \"0\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 50003,\n            \"uuid\": \"b14b6c53-ca82-4dbc-841a-640b04de76bb\",\n            \"display_value\": \"Chemical Product, inc\",\n            \"value\": \"Chemical Product, inc\",\n            \"tax_id\": \"\",\n            \"name\": \"Chemical Product, inc\",\n            \"name2\": \"\",\n            \"description\": \"\",\n            \"business_partner_group\": \"Vendors\",\n            \"open_balance_amount\": \"0\",\n            \"credit_available_amount\": \"0\",\n            \"credit_used_amount\": \"0\",\n            \"revenue_amount\": \"0\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 50002,\n            \"uuid\": \"f472cd49-4f19-4fc3-856a-cb9038cf2924\",\n            \"display_value\": \"Chrome, Inc\",\n            \"value\": \"Chrome, Inc\",\n            \"tax_id\": \"\",\n            \"name\": \"Chrome, Inc\",\n            \"name2\": \"\",\n            \"description\": \"\",\n            \"business_partner_group\": \"Vendors\",\n            \"open_balance_amount\": \"0\",\n            \"credit_available_amount\": \"0\",\n            \"credit_used_amount\": \"0\",\n            \"revenue_amount\": \"0\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 50001,\n            \"uuid\": \"5e616d3e-c55b-4ede-9b0e-ac3ae834556b\",\n            \"display_value\": \"Color, Inc\",\n            \"value\": \"Color, Inc\",\n            \"tax_id\": \"\",\n            \"name\": \"Color, Inc\",\n            \"name2\": \"\",\n            \"description\": \"\",\n            \"business_partner_group\": \"Vendors\",\n            \"open_balance_amount\": \"0\",\n            \"credit_available_amount\": \"0\",\n            \"credit_used_amount\": \"0\",\n            \"revenue_amount\": \"0\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 117,\n            \"uuid\": \"b7bafd8e-ae3b-4bbc-9a0d-d47fdbef390f\",\n            \"display_value\": \"C&W Construction\",\n            \"value\": \"C&W\",\n            \"tax_id\": \"\",\n            \"name\": \"C&W Construction\",\n            \"name2\": \"Unlimited Projects Corp.\",\n            \"description\": \"\",\n            \"business_partner_group\": \"Standard Customers\",\n            \"open_balance_amount\": \"161.12\",\n            \"credit_available_amount\": \"9838.88\",\n            \"credit_used_amount\": \"161.12\",\n            \"revenue_amount\": \"161.12\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 113,\n            \"uuid\": \"d430bdde-e5e4-476b-8dc9-4b0b5d5b02cc\",\n            \"display_value\": \"GardenAdmin BP\",\n            \"value\": \"GardenAdmin\",\n            \"tax_id\": \"\",\n            \"name\": \"GardenAdmin BP\",\n            \"name2\": \"\",\n            \"description\": \"\",\n            \"business_partner_group\": \"Staff\",\n            \"open_balance_amount\": \"0.00\",\n            \"credit_available_amount\": \"-999.33\",\n            \"credit_used_amount\": \"999.33\",\n            \"revenue_amount\": \"1000.00\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 119,\n            \"uuid\": \"0b870ceb-a34f-4876-8225-0053f11385d2\",\n            \"display_value\": \"GardenUser BP\",\n            \"value\": \"GardenUser\",\n            \"tax_id\": \"\",\n            \"name\": \"GardenUser BP\",\n            \"name2\": \"\",\n            \"description\": \"\",\n            \"business_partner_group\": \"Staff\",\n            \"open_balance_amount\": \"0\",\n            \"credit_available_amount\": \"0\",\n            \"credit_used_amount\": \"0\",\n            \"revenue_amount\": \"0\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 118,\n            \"uuid\": \"c3cfeb5f-1b2f-4f4b-a16c-d9cda23f59e1\",\n            \"display_value\": \"Joe Block\",\n            \"value\": \"JoeBlock\",\n            \"tax_id\": \"\",\n            \"name\": \"Joe Block\",\n            \"name2\": \"\",\n            \"description\": \"\",\n            \"business_partner_group\": \"Standard Customers\",\n            \"open_balance_amount\": \"503.48\",\n            \"credit_available_amount\": \"9748.26\",\n            \"credit_used_amount\": \"251.74\",\n            \"revenue_amount\": \"251.73\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 121,\n            \"uuid\": \"ca5b584a-c9e8-448f-a388-8ac7c0f02501\",\n            \"display_value\": \"Patio Fun, Inc.\",\n            \"value\": \"Patio\",\n            \"tax_id\": \"\",\n            \"name\": \"Patio Fun, Inc.\",\n            \"name2\": \"\",\n            \"description\": \"\",\n            \"business_partner_group\": \"Vendors\",\n            \"open_balance_amount\": \"-2160\",\n            \"credit_available_amount\": \"0\",\n            \"credit_used_amount\": \"0\",\n            \"revenue_amount\": \"0\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 120,\n            \"uuid\": \"2ad2a623-3d1f-47f4-969a-f44f7a05481f\",\n            \"display_value\": \"Seed Farm Inc.\",\n            \"value\": \"SeedFarm\",\n            \"tax_id\": \"\",\n            \"name\": \"Seed Farm Inc.\",\n            \"name2\": \"\",\n            \"description\": \"Customer & Vendor\",\n            \"business_partner_group\": \"Vendors\",\n            \"open_balance_amount\": \"-2731.5\",\n            \"credit_available_amount\": \"0\",\n            \"credit_used_amount\": \"0\",\n            \"revenue_amount\": \"0\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 112,\n            \"uuid\": \"f5388c95-7424-447d-85de-91424f9da147\",\n            \"display_value\": \"Standard\",\n            \"value\": \"Standard\",\n            \"tax_id\": \"\",\n            \"name\": \"Standard\",\n            \"name2\": \"\",\n            \"description\": \"Walk-In Customer\",\n            \"business_partner_group\": \"Standard Customers\",\n            \"open_balance_amount\": \"0\",\n            \"credit_available_amount\": \"0\",\n            \"credit_used_amount\": \"0\",\n            \"revenue_amount\": \"151.05\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 50004,\n            \"uuid\": \"8b894863-afbe-4384-a8ed-bf0325a5ec25\",\n            \"display_value\": \"Store Central\",\n            \"value\": \"Store Central\",\n            \"tax_id\": \"\",\n            \"name\": \"Store Central\",\n            \"name2\": \"\",\n            \"description\": \"\",\n            \"business_partner_group\": \"Staff\",\n            \"open_balance_amount\": \"0\",\n            \"credit_available_amount\": \"0\",\n            \"credit_used_amount\": \"0\",\n            \"revenue_amount\": \"0\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 50005,\n            \"uuid\": \"c6c2de1e-2f0f-4ef8-b7f3-29d80d0cfdb8\",\n            \"display_value\": \"Store East\",\n            \"value\": \"Store East\",\n            \"tax_id\": \"\",\n            \"name\": \"Store East\",\n            \"name2\": \"\",\n            \"description\": \"\",\n            \"business_partner_group\": \"Staff\",\n            \"open_balance_amount\": \"0\",\n            \"credit_available_amount\": \"0\",\n            \"credit_used_amount\": \"0\",\n            \"revenue_amount\": \"0\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 50007,\n            \"uuid\": \"01c65f4b-272c-4fb6-b12a-089d207cadb8\",\n            \"display_value\": \"Store North\",\n            \"value\": \"Store North\",\n            \"tax_id\": \"\",\n            \"name\": \"Store North\",\n            \"name2\": \"\",\n            \"description\": \"\",\n            \"business_partner_group\": \"Staff\",\n            \"open_balance_amount\": \"0\",\n            \"credit_available_amount\": \"0\",\n            \"credit_used_amount\": \"0\",\n            \"revenue_amount\": \"0\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 50008,\n            \"uuid\": \"88f0d79e-bc97-447d-8245-91bd79c0dcf7\",\n            \"display_value\": \"Store South\",\n            \"value\": \"Store South\",\n            \"tax_id\": \"\",\n            \"name\": \"Store South\",\n            \"name2\": \"\",\n            \"description\": \"\",\n            \"business_partner_group\": \"Staff\",\n            \"open_balance_amount\": \"0\",\n            \"credit_available_amount\": \"0\",\n            \"credit_used_amount\": \"0\",\n            \"revenue_amount\": \"0\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 50009,\n            \"uuid\": \"b419cad9-bb5b-4a2f-bbdb-1c3c70657408\",\n            \"display_value\": \"Store West\",\n            \"value\": \"Store West\",\n            \"tax_id\": \"\",\n            \"name\": \"Store West\",\n            \"name2\": \"\",\n            \"description\": \"\",\n            \"business_partner_group\": \"Staff\",\n            \"open_balance_amount\": \"0\",\n            \"credit_available_amount\": \"0\",\n            \"credit_used_amount\": \"0\",\n            \"revenue_amount\": \"0\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 114,\n            \"uuid\": \"254e660c-4863-460a-8a69-2b75f6461a33\",\n            \"display_value\": \"Tree Farm Inc.\",\n            \"value\": \"TreeFarm\",\n            \"tax_id\": \"\",\n            \"name\": \"Tree Farm Inc.\",\n            \"name2\": \"\",\n            \"description\": \"Vendor\",\n            \"business_partner_group\": \"Vendors\",\n            \"open_balance_amount\": \"-4217.5\",\n            \"credit_available_amount\": \"0\",\n            \"credit_used_amount\": \"0\",\n            \"revenue_amount\": \"0\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 50000,\n            \"uuid\": \"2d96ae84-d50e-447a-bdb7-496242fd846f\",\n            \"display_value\": \"Wood, Inc\",\n            \"value\": \"Wood, Inc\",\n            \"tax_id\": \"\",\n            \"name\": \"Wood, Inc\",\n            \"name2\": \"\",\n            \"description\": \"\",\n            \"business_partner_group\": \"Vendors\",\n            \"open_balance_amount\": \"0\",\n            \"credit_available_amount\": \"0\",\n            \"credit_used_amount\": \"0\",\n            \"revenue_amount\": \"0\",\n            \"is_active\": true\n        }\n    ],\n    \"next_page_token\": \"\"\n}\n\n ```\n\n**Commons Errors:**\n\n- Column not found\n    \n\n``` json\n{\n    \"code\": 13,\n    \"message\": \"Column * Not found *\",\n    \"details\": []\n}\n\n ```\n\n**Control of changes**\n\n| Version | Date | **Auto** | Description of Changes |\n| --- | --- | --- | --- |\n| 1.0 | 15/03/2024 | Ricardo | Initial creation of the document. |"
+			},
+			"response": [
+				{
+					"name": "businnes-parners_columnID",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/field/business-partners/column/:column_id",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"field",
+								"business-partners",
+								"column",
+								":column_id"
+							],
+							"variable": [
+								{
+									"key": "column_id",
+									"value": "809"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.25.2"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 13 Mar 2024 20:46:24 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "7910"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "grpc-encoding",
+							"value": "identity"
+						},
+						{
+							"key": "grpc-accept-encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "x-envoy-upstream-service-time",
+							"value": "156"
+						},
+						{
+							"key": "grpc-status",
+							"value": "0"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Max-Age",
+							"value": "3600"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"record_count\": \"19\",\n    \"records\": [\n        {\n            \"id\": 1000000,\n            \"uuid\": \"d75d2f7f-3af5-4bb7-bba4-1d53fa1e44a9\",\n            \"display_value\": \"Prueba\",\n            \"value\": \"10000000\",\n            \"tax_id\": \"\",\n            \"name\": \"Prueba\",\n            \"name2\": \"\",\n            \"description\": \"Walk-In Customer\",\n            \"business_partner_group\": \"Standard Customers\",\n            \"open_balance_amount\": \"0\",\n            \"credit_available_amount\": \"0\",\n            \"credit_used_amount\": \"0\",\n            \"revenue_amount\": \"0\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 1000001,\n            \"uuid\": \"66dda445-3600-442b-9e08-7824974d9a2e\",\n            \"display_value\": \"Prueba\",\n            \"value\": \"10000001\",\n            \"tax_id\": \"\",\n            \"name\": \"Prueba\",\n            \"name2\": \"\",\n            \"description\": \"Walk-In Customer\",\n            \"business_partner_group\": \"Standard Customers\",\n            \"open_balance_amount\": \"0\",\n            \"credit_available_amount\": \"0\",\n            \"credit_used_amount\": \"0\",\n            \"revenue_amount\": \"0\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 50003,\n            \"uuid\": \"b14b6c53-ca82-4dbc-841a-640b04de76bb\",\n            \"display_value\": \"Chemical Product, inc\",\n            \"value\": \"Chemical Product, inc\",\n            \"tax_id\": \"\",\n            \"name\": \"Chemical Product, inc\",\n            \"name2\": \"\",\n            \"description\": \"\",\n            \"business_partner_group\": \"Vendors\",\n            \"open_balance_amount\": \"0\",\n            \"credit_available_amount\": \"0\",\n            \"credit_used_amount\": \"0\",\n            \"revenue_amount\": \"0\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 50002,\n            \"uuid\": \"f472cd49-4f19-4fc3-856a-cb9038cf2924\",\n            \"display_value\": \"Chrome, Inc\",\n            \"value\": \"Chrome, Inc\",\n            \"tax_id\": \"\",\n            \"name\": \"Chrome, Inc\",\n            \"name2\": \"\",\n            \"description\": \"\",\n            \"business_partner_group\": \"Vendors\",\n            \"open_balance_amount\": \"0\",\n            \"credit_available_amount\": \"0\",\n            \"credit_used_amount\": \"0\",\n            \"revenue_amount\": \"0\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 50001,\n            \"uuid\": \"5e616d3e-c55b-4ede-9b0e-ac3ae834556b\",\n            \"display_value\": \"Color, Inc\",\n            \"value\": \"Color, Inc\",\n            \"tax_id\": \"\",\n            \"name\": \"Color, Inc\",\n            \"name2\": \"\",\n            \"description\": \"\",\n            \"business_partner_group\": \"Vendors\",\n            \"open_balance_amount\": \"0\",\n            \"credit_available_amount\": \"0\",\n            \"credit_used_amount\": \"0\",\n            \"revenue_amount\": \"0\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 117,\n            \"uuid\": \"b7bafd8e-ae3b-4bbc-9a0d-d47fdbef390f\",\n            \"display_value\": \"C&W Construction\",\n            \"value\": \"C&W\",\n            \"tax_id\": \"\",\n            \"name\": \"C&W Construction\",\n            \"name2\": \"Unlimited Projects Corp.\",\n            \"description\": \"\",\n            \"business_partner_group\": \"Standard Customers\",\n            \"open_balance_amount\": \"161.12\",\n            \"credit_available_amount\": \"9838.88\",\n            \"credit_used_amount\": \"161.12\",\n            \"revenue_amount\": \"161.12\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 113,\n            \"uuid\": \"d430bdde-e5e4-476b-8dc9-4b0b5d5b02cc\",\n            \"display_value\": \"GardenAdmin BP\",\n            \"value\": \"GardenAdmin\",\n            \"tax_id\": \"\",\n            \"name\": \"GardenAdmin BP\",\n            \"name2\": \"\",\n            \"description\": \"\",\n            \"business_partner_group\": \"Staff\",\n            \"open_balance_amount\": \"0.00\",\n            \"credit_available_amount\": \"-999.33\",\n            \"credit_used_amount\": \"999.33\",\n            \"revenue_amount\": \"1000.00\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 119,\n            \"uuid\": \"0b870ceb-a34f-4876-8225-0053f11385d2\",\n            \"display_value\": \"GardenUser BP\",\n            \"value\": \"GardenUser\",\n            \"tax_id\": \"\",\n            \"name\": \"GardenUser BP\",\n            \"name2\": \"\",\n            \"description\": \"\",\n            \"business_partner_group\": \"Staff\",\n            \"open_balance_amount\": \"0\",\n            \"credit_available_amount\": \"0\",\n            \"credit_used_amount\": \"0\",\n            \"revenue_amount\": \"0\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 118,\n            \"uuid\": \"c3cfeb5f-1b2f-4f4b-a16c-d9cda23f59e1\",\n            \"display_value\": \"Joe Block\",\n            \"value\": \"JoeBlock\",\n            \"tax_id\": \"\",\n            \"name\": \"Joe Block\",\n            \"name2\": \"\",\n            \"description\": \"\",\n            \"business_partner_group\": \"Standard Customers\",\n            \"open_balance_amount\": \"503.48\",\n            \"credit_available_amount\": \"9748.26\",\n            \"credit_used_amount\": \"251.74\",\n            \"revenue_amount\": \"251.73\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 121,\n            \"uuid\": \"ca5b584a-c9e8-448f-a388-8ac7c0f02501\",\n            \"display_value\": \"Patio Fun, Inc.\",\n            \"value\": \"Patio\",\n            \"tax_id\": \"\",\n            \"name\": \"Patio Fun, Inc.\",\n            \"name2\": \"\",\n            \"description\": \"\",\n            \"business_partner_group\": \"Vendors\",\n            \"open_balance_amount\": \"-2160\",\n            \"credit_available_amount\": \"0\",\n            \"credit_used_amount\": \"0\",\n            \"revenue_amount\": \"0\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 120,\n            \"uuid\": \"2ad2a623-3d1f-47f4-969a-f44f7a05481f\",\n            \"display_value\": \"Seed Farm Inc.\",\n            \"value\": \"SeedFarm\",\n            \"tax_id\": \"\",\n            \"name\": \"Seed Farm Inc.\",\n            \"name2\": \"\",\n            \"description\": \"Customer & Vendor\",\n            \"business_partner_group\": \"Vendors\",\n            \"open_balance_amount\": \"-2731.5\",\n            \"credit_available_amount\": \"0\",\n            \"credit_used_amount\": \"0\",\n            \"revenue_amount\": \"0\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 112,\n            \"uuid\": \"f5388c95-7424-447d-85de-91424f9da147\",\n            \"display_value\": \"Standard\",\n            \"value\": \"Standard\",\n            \"tax_id\": \"\",\n            \"name\": \"Standard\",\n            \"name2\": \"\",\n            \"description\": \"Walk-In Customer\",\n            \"business_partner_group\": \"Standard Customers\",\n            \"open_balance_amount\": \"0\",\n            \"credit_available_amount\": \"0\",\n            \"credit_used_amount\": \"0\",\n            \"revenue_amount\": \"151.05\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 50004,\n            \"uuid\": \"8b894863-afbe-4384-a8ed-bf0325a5ec25\",\n            \"display_value\": \"Store Central\",\n            \"value\": \"Store Central\",\n            \"tax_id\": \"\",\n            \"name\": \"Store Central\",\n            \"name2\": \"\",\n            \"description\": \"\",\n            \"business_partner_group\": \"Staff\",\n            \"open_balance_amount\": \"0\",\n            \"credit_available_amount\": \"0\",\n            \"credit_used_amount\": \"0\",\n            \"revenue_amount\": \"0\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 50005,\n            \"uuid\": \"c6c2de1e-2f0f-4ef8-b7f3-29d80d0cfdb8\",\n            \"display_value\": \"Store East\",\n            \"value\": \"Store East\",\n            \"tax_id\": \"\",\n            \"name\": \"Store East\",\n            \"name2\": \"\",\n            \"description\": \"\",\n            \"business_partner_group\": \"Staff\",\n            \"open_balance_amount\": \"0\",\n            \"credit_available_amount\": \"0\",\n            \"credit_used_amount\": \"0\",\n            \"revenue_amount\": \"0\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 50007,\n            \"uuid\": \"01c65f4b-272c-4fb6-b12a-089d207cadb8\",\n            \"display_value\": \"Store North\",\n            \"value\": \"Store North\",\n            \"tax_id\": \"\",\n            \"name\": \"Store North\",\n            \"name2\": \"\",\n            \"description\": \"\",\n            \"business_partner_group\": \"Staff\",\n            \"open_balance_amount\": \"0\",\n            \"credit_available_amount\": \"0\",\n            \"credit_used_amount\": \"0\",\n            \"revenue_amount\": \"0\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 50008,\n            \"uuid\": \"88f0d79e-bc97-447d-8245-91bd79c0dcf7\",\n            \"display_value\": \"Store South\",\n            \"value\": \"Store South\",\n            \"tax_id\": \"\",\n            \"name\": \"Store South\",\n            \"name2\": \"\",\n            \"description\": \"\",\n            \"business_partner_group\": \"Staff\",\n            \"open_balance_amount\": \"0\",\n            \"credit_available_amount\": \"0\",\n            \"credit_used_amount\": \"0\",\n            \"revenue_amount\": \"0\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 50009,\n            \"uuid\": \"b419cad9-bb5b-4a2f-bbdb-1c3c70657408\",\n            \"display_value\": \"Store West\",\n            \"value\": \"Store West\",\n            \"tax_id\": \"\",\n            \"name\": \"Store West\",\n            \"name2\": \"\",\n            \"description\": \"\",\n            \"business_partner_group\": \"Staff\",\n            \"open_balance_amount\": \"0\",\n            \"credit_available_amount\": \"0\",\n            \"credit_used_amount\": \"0\",\n            \"revenue_amount\": \"0\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 114,\n            \"uuid\": \"254e660c-4863-460a-8a69-2b75f6461a33\",\n            \"display_value\": \"Tree Farm Inc.\",\n            \"value\": \"TreeFarm\",\n            \"tax_id\": \"\",\n            \"name\": \"Tree Farm Inc.\",\n            \"name2\": \"\",\n            \"description\": \"Vendor\",\n            \"business_partner_group\": \"Vendors\",\n            \"open_balance_amount\": \"-4217.5\",\n            \"credit_available_amount\": \"0\",\n            \"credit_used_amount\": \"0\",\n            \"revenue_amount\": \"0\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 50000,\n            \"uuid\": \"2d96ae84-d50e-447a-bdb7-496242fd846f\",\n            \"display_value\": \"Wood, Inc\",\n            \"value\": \"Wood, Inc\",\n            \"tax_id\": \"\",\n            \"name\": \"Wood, Inc\",\n            \"name2\": \"\",\n            \"description\": \"\",\n            \"business_partner_group\": \"Vendors\",\n            \"open_balance_amount\": \"0\",\n            \"credit_available_amount\": \"0\",\n            \"credit_used_amount\": \"0\",\n            \"revenue_amount\": \"0\",\n            \"is_active\": true\n        }\n    ],\n    \"next_page_token\": \"\"\n}"
+				}
+			]
+		},
+		{
+			"name": "business-partners_fieldId",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{HOST}}/field/business-partners/field/:field_id",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"field",
+						"business-partners",
+						"field",
+						":field_id"
+					],
+					"variable": [
+						{
+							"key": "field_id",
+							"value": "102"
+						}
+					]
+				},
+				"description": "**Endpoint**: GET /Business Partner\n\n**Description**: Retorna ListBusinessPartnersInfo\n\n**Full URL**: [http://api.adempiere.io](http://api.adempiere.io/api)/field/business-partners/field/{field_id}\n\n**Method**: GET\n\n**Parameters (Params):**\n\n- field_id (Int32, Mandatory)\n    \n\n**Application Example:**\n\n``` bash\ncurl --location 'http://api.adempiere.io/field/business-partners/field/102' \\\n--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMDAwMTQ5IiwiQURfQ2xpZW50X0lEIjoxMSwiQURfT3JnX0lEIjowLCJBRF9Sb2xlX0lEIjoxMDIsIkFEX1VzZXJfSUQiOjEwMCwiTV9XYXJlaG91c2VfSUQiOjAsIkFEX0xhbmd1YWdlIjoiZW5fVVMiLCJpYXQiOjE3MTA1MTA0MDEsImV4cCI6MTcxMDU5NjgwMX0.nYQbrcT9RyHNRCf-oNM50ZVSO6uJ9gvrQQ7e0fzU9Ik'\n\n ```\n\n**Answer Example:**\n\n``` json\n{\n    \"record_count\": \"19\",\n    \"records\": [\n        {\n            \"id\": 1000000,\n            \"uuid\": \"d75d2f7f-3af5-4bb7-bba4-1d53fa1e44a9\",\n            \"display_value\": \"Prueba\",\n            \"value\": \"10000000\",\n            \"tax_id\": \"\",\n            \"name\": \"Prueba\",\n            \"name2\": \"\",\n            \"description\": \"Walk-In Customer\",\n            \"business_partner_group\": \"Standard Customers\",\n            \"open_balance_amount\": \"0\",\n            \"credit_available_amount\": \"0\",\n            \"credit_used_amount\": \"0\",\n            \"revenue_amount\": \"0\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 1000001,\n            \"uuid\": \"66dda445-3600-442b-9e08-7824974d9a2e\",\n            \"display_value\": \"Prueba\",\n            \"value\": \"10000001\",\n            \"tax_id\": \"\",\n            \"name\": \"Prueba\",\n            \"name2\": \"\",\n            \"description\": \"Walk-In Customer\",\n            \"business_partner_group\": \"Standard Customers\",\n            \"open_balance_amount\": \"0\",\n            \"credit_available_amount\": \"0\",\n            \"credit_used_amount\": \"0\",\n            \"revenue_amount\": \"0\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 50003,\n            \"uuid\": \"b14b6c53-ca82-4dbc-841a-640b04de76bb\",\n            \"display_value\": \"Chemical Product, inc\",\n            \"value\": \"Chemical Product, inc\",\n            \"tax_id\": \"\",\n            \"name\": \"Chemical Product, inc\",\n            \"name2\": \"\",\n            \"description\": \"\",\n            \"business_partner_group\": \"Vendors\",\n            \"open_balance_amount\": \"0\",\n            \"credit_available_amount\": \"0\",\n            \"credit_used_amount\": \"0\",\n            \"revenue_amount\": \"0\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 50002,\n            \"uuid\": \"f472cd49-4f19-4fc3-856a-cb9038cf2924\",\n            \"display_value\": \"Chrome, Inc\",\n            \"value\": \"Chrome, Inc\",\n            \"tax_id\": \"\",\n            \"name\": \"Chrome, Inc\",\n            \"name2\": \"\",\n            \"description\": \"\",\n            \"business_partner_group\": \"Vendors\",\n            \"open_balance_amount\": \"0\",\n            \"credit_available_amount\": \"0\",\n            \"credit_used_amount\": \"0\",\n            \"revenue_amount\": \"0\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 50001,\n            \"uuid\": \"5e616d3e-c55b-4ede-9b0e-ac3ae834556b\",\n            \"display_value\": \"Color, Inc\",\n            \"value\": \"Color, Inc\",\n            \"tax_id\": \"\",\n            \"name\": \"Color, Inc\",\n            \"name2\": \"\",\n            \"description\": \"\",\n            \"business_partner_group\": \"Vendors\",\n            \"open_balance_amount\": \"0\",\n            \"credit_available_amount\": \"0\",\n            \"credit_used_amount\": \"0\",\n            \"revenue_amount\": \"0\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 117,\n            \"uuid\": \"b7bafd8e-ae3b-4bbc-9a0d-d47fdbef390f\",\n            \"display_value\": \"C&W Construction\",\n            \"value\": \"C&W\",\n            \"tax_id\": \"\",\n            \"name\": \"C&W Construction\",\n            \"name2\": \"Unlimited Projects Corp.\",\n            \"description\": \"\",\n            \"business_partner_group\": \"Standard Customers\",\n            \"open_balance_amount\": \"161.12\",\n            \"credit_available_amount\": \"9838.88\",\n            \"credit_used_amount\": \"161.12\",\n            \"revenue_amount\": \"161.12\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 113,\n            \"uuid\": \"d430bdde-e5e4-476b-8dc9-4b0b5d5b02cc\",\n            \"display_value\": \"GardenAdmin BP\",\n            \"value\": \"GardenAdmin\",\n            \"tax_id\": \"\",\n            \"name\": \"GardenAdmin BP\",\n            \"name2\": \"\",\n            \"description\": \"\",\n            \"business_partner_group\": \"Staff\",\n            \"open_balance_amount\": \"0.00\",\n            \"credit_available_amount\": \"-999.33\",\n            \"credit_used_amount\": \"999.33\",\n            \"revenue_amount\": \"1000.00\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 119,\n            \"uuid\": \"0b870ceb-a34f-4876-8225-0053f11385d2\",\n            \"display_value\": \"GardenUser BP\",\n            \"value\": \"GardenUser\",\n            \"tax_id\": \"\",\n            \"name\": \"GardenUser BP\",\n            \"name2\": \"\",\n            \"description\": \"\",\n            \"business_partner_group\": \"Staff\",\n            \"open_balance_amount\": \"0\",\n            \"credit_available_amount\": \"0\",\n            \"credit_used_amount\": \"0\",\n            \"revenue_amount\": \"0\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 118,\n            \"uuid\": \"c3cfeb5f-1b2f-4f4b-a16c-d9cda23f59e1\",\n            \"display_value\": \"Joe Block\",\n            \"value\": \"JoeBlock\",\n            \"tax_id\": \"\",\n            \"name\": \"Joe Block\",\n            \"name2\": \"\",\n            \"description\": \"\",\n            \"business_partner_group\": \"Standard Customers\",\n            \"open_balance_amount\": \"503.48\",\n            \"credit_available_amount\": \"9748.26\",\n            \"credit_used_amount\": \"251.74\",\n            \"revenue_amount\": \"251.73\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 121,\n            \"uuid\": \"ca5b584a-c9e8-448f-a388-8ac7c0f02501\",\n            \"display_value\": \"Patio Fun, Inc.\",\n            \"value\": \"Patio\",\n            \"tax_id\": \"\",\n            \"name\": \"Patio Fun, Inc.\",\n            \"name2\": \"\",\n            \"description\": \"\",\n            \"business_partner_group\": \"Vendors\",\n            \"open_balance_amount\": \"-2160\",\n            \"credit_available_amount\": \"0\",\n            \"credit_used_amount\": \"0\",\n            \"revenue_amount\": \"0\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 120,\n            \"uuid\": \"2ad2a623-3d1f-47f4-969a-f44f7a05481f\",\n            \"display_value\": \"Seed Farm Inc.\",\n            \"value\": \"SeedFarm\",\n            \"tax_id\": \"\",\n            \"name\": \"Seed Farm Inc.\",\n            \"name2\": \"\",\n            \"description\": \"Customer & Vendor\",\n            \"business_partner_group\": \"Vendors\",\n            \"open_balance_amount\": \"-2731.5\",\n            \"credit_available_amount\": \"0\",\n            \"credit_used_amount\": \"0\",\n            \"revenue_amount\": \"0\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 112,\n            \"uuid\": \"f5388c95-7424-447d-85de-91424f9da147\",\n            \"display_value\": \"Standard\",\n            \"value\": \"Standard\",\n            \"tax_id\": \"\",\n            \"name\": \"Standard\",\n            \"name2\": \"\",\n            \"description\": \"Walk-In Customer\",\n            \"business_partner_group\": \"Standard Customers\",\n            \"open_balance_amount\": \"0\",\n            \"credit_available_amount\": \"0\",\n            \"credit_used_amount\": \"0\",\n            \"revenue_amount\": \"151.05\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 50004,\n            \"uuid\": \"8b894863-afbe-4384-a8ed-bf0325a5ec25\",\n            \"display_value\": \"Store Central\",\n            \"value\": \"Store Central\",\n            \"tax_id\": \"\",\n            \"name\": \"Store Central\",\n            \"name2\": \"\",\n            \"description\": \"\",\n            \"business_partner_group\": \"Staff\",\n            \"open_balance_amount\": \"0\",\n            \"credit_available_amount\": \"0\",\n            \"credit_used_amount\": \"0\",\n            \"revenue_amount\": \"0\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 50005,\n            \"uuid\": \"c6c2de1e-2f0f-4ef8-b7f3-29d80d0cfdb8\",\n            \"display_value\": \"Store East\",\n            \"value\": \"Store East\",\n            \"tax_id\": \"\",\n            \"name\": \"Store East\",\n            \"name2\": \"\",\n            \"description\": \"\",\n            \"business_partner_group\": \"Staff\",\n            \"open_balance_amount\": \"0\",\n            \"credit_available_amount\": \"0\",\n            \"credit_used_amount\": \"0\",\n            \"revenue_amount\": \"0\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 50007,\n            \"uuid\": \"01c65f4b-272c-4fb6-b12a-089d207cadb8\",\n            \"display_value\": \"Store North\",\n            \"value\": \"Store North\",\n            \"tax_id\": \"\",\n            \"name\": \"Store North\",\n            \"name2\": \"\",\n            \"description\": \"\",\n            \"business_partner_group\": \"Staff\",\n            \"open_balance_amount\": \"0\",\n            \"credit_available_amount\": \"0\",\n            \"credit_used_amount\": \"0\",\n            \"revenue_amount\": \"0\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 50008,\n            \"uuid\": \"88f0d79e-bc97-447d-8245-91bd79c0dcf7\",\n            \"display_value\": \"Store South\",\n            \"value\": \"Store South\",\n            \"tax_id\": \"\",\n            \"name\": \"Store South\",\n            \"name2\": \"\",\n            \"description\": \"\",\n            \"business_partner_group\": \"Staff\",\n            \"open_balance_amount\": \"0\",\n            \"credit_available_amount\": \"0\",\n            \"credit_used_amount\": \"0\",\n            \"revenue_amount\": \"0\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 50009,\n            \"uuid\": \"b419cad9-bb5b-4a2f-bbdb-1c3c70657408\",\n            \"display_value\": \"Store West\",\n            \"value\": \"Store West\",\n            \"tax_id\": \"\",\n            \"name\": \"Store West\",\n            \"name2\": \"\",\n            \"description\": \"\",\n            \"business_partner_group\": \"Staff\",\n            \"open_balance_amount\": \"0\",\n            \"credit_available_amount\": \"0\",\n            \"credit_used_amount\": \"0\",\n            \"revenue_amount\": \"0\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 114,\n            \"uuid\": \"254e660c-4863-460a-8a69-2b75f6461a33\",\n            \"display_value\": \"Tree Farm Inc.\",\n            \"value\": \"TreeFarm\",\n            \"tax_id\": \"\",\n            \"name\": \"Tree Farm Inc.\",\n            \"name2\": \"\",\n            \"description\": \"Vendor\",\n            \"business_partner_group\": \"Vendors\",\n            \"open_balance_amount\": \"-4217.5\",\n            \"credit_available_amount\": \"0\",\n            \"credit_used_amount\": \"0\",\n            \"revenue_amount\": \"0\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 50000,\n            \"uuid\": \"2d96ae84-d50e-447a-bdb7-496242fd846f\",\n            \"display_value\": \"Wood, Inc\",\n            \"value\": \"Wood, Inc\",\n            \"tax_id\": \"\",\n            \"name\": \"Wood, Inc\",\n            \"name2\": \"\",\n            \"description\": \"\",\n            \"business_partner_group\": \"Vendors\",\n            \"open_balance_amount\": \"0\",\n            \"credit_available_amount\": \"0\",\n            \"credit_used_amount\": \"0\",\n            \"revenue_amount\": \"0\",\n            \"is_active\": true\n        }\n    ],\n    \"next_page_token\": \"\"\n}\n\n ```\n\n**Commons Errors:**\n\n- Field not found\n    \n\n``` json\n{\n    \"code\": 13,\n    \"message\": \"Field * Not found *\",\n    \"details\": []\n}\n\n ```\n\n**Control of Changes**\n\n| **Version** | Fecha | **Auto** | Description of Changes |\n| --- | --- | --- | --- |\n| 1.0 | 15/03/2024 | Ricardo | Initial creation of the document. |"
+			},
+			"response": [
+				{
+					"name": "business-partners_fieldId",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/field/business-partners/field/:field_id",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"field",
+								"business-partners",
+								"field",
+								":field_id"
+							],
+							"variable": [
+								{
+									"key": "field_id",
+									"value": "102"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.25.2"
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 12 Mar 2024 14:55:14 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "7910"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "grpc-encoding",
+							"value": "identity"
+						},
+						{
+							"key": "grpc-accept-encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "x-envoy-upstream-service-time",
+							"value": "773"
+						},
+						{
+							"key": "grpc-status",
+							"value": "0"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Max-Age",
+							"value": "3600"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"record_count\": \"19\",\n    \"records\": [\n        {\n            \"id\": 1000000,\n            \"uuid\": \"d75d2f7f-3af5-4bb7-bba4-1d53fa1e44a9\",\n            \"display_value\": \"Prueba\",\n            \"value\": \"10000000\",\n            \"tax_id\": \"\",\n            \"name\": \"Prueba\",\n            \"name2\": \"\",\n            \"description\": \"Walk-In Customer\",\n            \"business_partner_group\": \"Standard Customers\",\n            \"open_balance_amount\": \"0\",\n            \"credit_available_amount\": \"0\",\n            \"credit_used_amount\": \"0\",\n            \"revenue_amount\": \"0\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 1000001,\n            \"uuid\": \"66dda445-3600-442b-9e08-7824974d9a2e\",\n            \"display_value\": \"Prueba\",\n            \"value\": \"10000001\",\n            \"tax_id\": \"\",\n            \"name\": \"Prueba\",\n            \"name2\": \"\",\n            \"description\": \"Walk-In Customer\",\n            \"business_partner_group\": \"Standard Customers\",\n            \"open_balance_amount\": \"0\",\n            \"credit_available_amount\": \"0\",\n            \"credit_used_amount\": \"0\",\n            \"revenue_amount\": \"0\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 50003,\n            \"uuid\": \"b14b6c53-ca82-4dbc-841a-640b04de76bb\",\n            \"display_value\": \"Chemical Product, inc\",\n            \"value\": \"Chemical Product, inc\",\n            \"tax_id\": \"\",\n            \"name\": \"Chemical Product, inc\",\n            \"name2\": \"\",\n            \"description\": \"\",\n            \"business_partner_group\": \"Vendors\",\n            \"open_balance_amount\": \"0\",\n            \"credit_available_amount\": \"0\",\n            \"credit_used_amount\": \"0\",\n            \"revenue_amount\": \"0\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 50002,\n            \"uuid\": \"f472cd49-4f19-4fc3-856a-cb9038cf2924\",\n            \"display_value\": \"Chrome, Inc\",\n            \"value\": \"Chrome, Inc\",\n            \"tax_id\": \"\",\n            \"name\": \"Chrome, Inc\",\n            \"name2\": \"\",\n            \"description\": \"\",\n            \"business_partner_group\": \"Vendors\",\n            \"open_balance_amount\": \"0\",\n            \"credit_available_amount\": \"0\",\n            \"credit_used_amount\": \"0\",\n            \"revenue_amount\": \"0\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 50001,\n            \"uuid\": \"5e616d3e-c55b-4ede-9b0e-ac3ae834556b\",\n            \"display_value\": \"Color, Inc\",\n            \"value\": \"Color, Inc\",\n            \"tax_id\": \"\",\n            \"name\": \"Color, Inc\",\n            \"name2\": \"\",\n            \"description\": \"\",\n            \"business_partner_group\": \"Vendors\",\n            \"open_balance_amount\": \"0\",\n            \"credit_available_amount\": \"0\",\n            \"credit_used_amount\": \"0\",\n            \"revenue_amount\": \"0\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 117,\n            \"uuid\": \"b7bafd8e-ae3b-4bbc-9a0d-d47fdbef390f\",\n            \"display_value\": \"C&W Construction\",\n            \"value\": \"C&W\",\n            \"tax_id\": \"\",\n            \"name\": \"C&W Construction\",\n            \"name2\": \"Unlimited Projects Corp.\",\n            \"description\": \"\",\n            \"business_partner_group\": \"Standard Customers\",\n            \"open_balance_amount\": \"161.12\",\n            \"credit_available_amount\": \"9838.88\",\n            \"credit_used_amount\": \"161.12\",\n            \"revenue_amount\": \"161.12\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 113,\n            \"uuid\": \"d430bdde-e5e4-476b-8dc9-4b0b5d5b02cc\",\n            \"display_value\": \"GardenAdmin BP\",\n            \"value\": \"GardenAdmin\",\n            \"tax_id\": \"\",\n            \"name\": \"GardenAdmin BP\",\n            \"name2\": \"\",\n            \"description\": \"\",\n            \"business_partner_group\": \"Staff\",\n            \"open_balance_amount\": \"0.00\",\n            \"credit_available_amount\": \"-999.33\",\n            \"credit_used_amount\": \"999.33\",\n            \"revenue_amount\": \"1000.00\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 119,\n            \"uuid\": \"0b870ceb-a34f-4876-8225-0053f11385d2\",\n            \"display_value\": \"GardenUser BP\",\n            \"value\": \"GardenUser\",\n            \"tax_id\": \"\",\n            \"name\": \"GardenUser BP\",\n            \"name2\": \"\",\n            \"description\": \"\",\n            \"business_partner_group\": \"Staff\",\n            \"open_balance_amount\": \"0\",\n            \"credit_available_amount\": \"0\",\n            \"credit_used_amount\": \"0\",\n            \"revenue_amount\": \"0\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 118,\n            \"uuid\": \"c3cfeb5f-1b2f-4f4b-a16c-d9cda23f59e1\",\n            \"display_value\": \"Joe Block\",\n            \"value\": \"JoeBlock\",\n            \"tax_id\": \"\",\n            \"name\": \"Joe Block\",\n            \"name2\": \"\",\n            \"description\": \"\",\n            \"business_partner_group\": \"Standard Customers\",\n            \"open_balance_amount\": \"503.48\",\n            \"credit_available_amount\": \"9748.26\",\n            \"credit_used_amount\": \"251.74\",\n            \"revenue_amount\": \"251.73\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 121,\n            \"uuid\": \"ca5b584a-c9e8-448f-a388-8ac7c0f02501\",\n            \"display_value\": \"Patio Fun, Inc.\",\n            \"value\": \"Patio\",\n            \"tax_id\": \"\",\n            \"name\": \"Patio Fun, Inc.\",\n            \"name2\": \"\",\n            \"description\": \"\",\n            \"business_partner_group\": \"Vendors\",\n            \"open_balance_amount\": \"-2160\",\n            \"credit_available_amount\": \"0\",\n            \"credit_used_amount\": \"0\",\n            \"revenue_amount\": \"0\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 120,\n            \"uuid\": \"2ad2a623-3d1f-47f4-969a-f44f7a05481f\",\n            \"display_value\": \"Seed Farm Inc.\",\n            \"value\": \"SeedFarm\",\n            \"tax_id\": \"\",\n            \"name\": \"Seed Farm Inc.\",\n            \"name2\": \"\",\n            \"description\": \"Customer & Vendor\",\n            \"business_partner_group\": \"Vendors\",\n            \"open_balance_amount\": \"-2731.5\",\n            \"credit_available_amount\": \"0\",\n            \"credit_used_amount\": \"0\",\n            \"revenue_amount\": \"0\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 112,\n            \"uuid\": \"f5388c95-7424-447d-85de-91424f9da147\",\n            \"display_value\": \"Standard\",\n            \"value\": \"Standard\",\n            \"tax_id\": \"\",\n            \"name\": \"Standard\",\n            \"name2\": \"\",\n            \"description\": \"Walk-In Customer\",\n            \"business_partner_group\": \"Standard Customers\",\n            \"open_balance_amount\": \"0\",\n            \"credit_available_amount\": \"0\",\n            \"credit_used_amount\": \"0\",\n            \"revenue_amount\": \"151.05\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 50004,\n            \"uuid\": \"8b894863-afbe-4384-a8ed-bf0325a5ec25\",\n            \"display_value\": \"Store Central\",\n            \"value\": \"Store Central\",\n            \"tax_id\": \"\",\n            \"name\": \"Store Central\",\n            \"name2\": \"\",\n            \"description\": \"\",\n            \"business_partner_group\": \"Staff\",\n            \"open_balance_amount\": \"0\",\n            \"credit_available_amount\": \"0\",\n            \"credit_used_amount\": \"0\",\n            \"revenue_amount\": \"0\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 50005,\n            \"uuid\": \"c6c2de1e-2f0f-4ef8-b7f3-29d80d0cfdb8\",\n            \"display_value\": \"Store East\",\n            \"value\": \"Store East\",\n            \"tax_id\": \"\",\n            \"name\": \"Store East\",\n            \"name2\": \"\",\n            \"description\": \"\",\n            \"business_partner_group\": \"Staff\",\n            \"open_balance_amount\": \"0\",\n            \"credit_available_amount\": \"0\",\n            \"credit_used_amount\": \"0\",\n            \"revenue_amount\": \"0\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 50007,\n            \"uuid\": \"01c65f4b-272c-4fb6-b12a-089d207cadb8\",\n            \"display_value\": \"Store North\",\n            \"value\": \"Store North\",\n            \"tax_id\": \"\",\n            \"name\": \"Store North\",\n            \"name2\": \"\",\n            \"description\": \"\",\n            \"business_partner_group\": \"Staff\",\n            \"open_balance_amount\": \"0\",\n            \"credit_available_amount\": \"0\",\n            \"credit_used_amount\": \"0\",\n            \"revenue_amount\": \"0\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 50008,\n            \"uuid\": \"88f0d79e-bc97-447d-8245-91bd79c0dcf7\",\n            \"display_value\": \"Store South\",\n            \"value\": \"Store South\",\n            \"tax_id\": \"\",\n            \"name\": \"Store South\",\n            \"name2\": \"\",\n            \"description\": \"\",\n            \"business_partner_group\": \"Staff\",\n            \"open_balance_amount\": \"0\",\n            \"credit_available_amount\": \"0\",\n            \"credit_used_amount\": \"0\",\n            \"revenue_amount\": \"0\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 50009,\n            \"uuid\": \"b419cad9-bb5b-4a2f-bbdb-1c3c70657408\",\n            \"display_value\": \"Store West\",\n            \"value\": \"Store West\",\n            \"tax_id\": \"\",\n            \"name\": \"Store West\",\n            \"name2\": \"\",\n            \"description\": \"\",\n            \"business_partner_group\": \"Staff\",\n            \"open_balance_amount\": \"0\",\n            \"credit_available_amount\": \"0\",\n            \"credit_used_amount\": \"0\",\n            \"revenue_amount\": \"0\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 114,\n            \"uuid\": \"254e660c-4863-460a-8a69-2b75f6461a33\",\n            \"display_value\": \"Tree Farm Inc.\",\n            \"value\": \"TreeFarm\",\n            \"tax_id\": \"\",\n            \"name\": \"Tree Farm Inc.\",\n            \"name2\": \"\",\n            \"description\": \"Vendor\",\n            \"business_partner_group\": \"Vendors\",\n            \"open_balance_amount\": \"-4217.5\",\n            \"credit_available_amount\": \"0\",\n            \"credit_used_amount\": \"0\",\n            \"revenue_amount\": \"0\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 50000,\n            \"uuid\": \"2d96ae84-d50e-447a-bdb7-496242fd846f\",\n            \"display_value\": \"Wood, Inc\",\n            \"value\": \"Wood, Inc\",\n            \"tax_id\": \"\",\n            \"name\": \"Wood, Inc\",\n            \"name2\": \"\",\n            \"description\": \"\",\n            \"business_partner_group\": \"Vendors\",\n            \"open_balance_amount\": \"0\",\n            \"credit_available_amount\": \"0\",\n            \"credit_used_amount\": \"0\",\n            \"revenue_amount\": \"0\",\n            \"is_active\": true\n        }\n    ],\n    \"next_page_token\": \"\"\n}"
+				}
+			]
+		},
+		{
+			"name": "business-partners_proceesParameter",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{HOST}}/field/business-partners/parameter/:process_parameter_id",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"field",
+						"business-partners",
+						"parameter",
+						":process_parameter_id"
+					],
+					"variable": [
+						{
+							"key": "process_parameter_id",
+							"value": "50001"
+						}
+					]
+				},
+				"description": "**Endpoint**: GET /Business Partner\n\n**Description**: Returns ListBusinessPartnersInfo\n\n**Full URL**: [http://api.adempiere.io](http://api.adempiere.io/api)/field/business-partners/parameter/{process_parameter_id}\n\n**Method**: GET\n\n**Parameters (Params):**\n\n- process_parameter_id (Int32, Mandatory)\n    \n\n**Application Example:**\n\n```\ncurl --location 'http://api.adempiere.io/field/business-partners/parameter/50001' \\\n--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMDAwMTQ5IiwiQURfQ2xpZW50X0lEIjoxMSwiQURfT3JnX0lEIjowLCJBRF9Sb2xlX0lEIjoxMDIsIkFEX1VzZXJfSUQiOjEwMCwiTV9XYXJlaG91c2VfSUQiOjAsIkFEX0xhbmd1YWdlIjoiZW5fVVMiLCJpYXQiOjE3MTA1MTA0MDEsImV4cCI6MTcxMDU5NjgwMX0.nYQbrcT9RyHNRCf-oNM50ZVSO6uJ9gvrQQ7e0fzU9Ik'\n\n ```\n\n**Answer Example:**\n\n``` json\n{\n    \"record_count\": \"19\",\n    \"records\": [\n        {\n            \"id\": 1000000,\n            \"uuid\": \"d75d2f7f-3af5-4bb7-bba4-1d53fa1e44a9\",\n            \"display_value\": \"Prueba\",\n            \"value\": \"10000000\",\n            \"tax_id\": \"\",\n            \"name\": \"Prueba\",\n            \"name2\": \"\",\n            \"description\": \"Walk-In Customer\",\n            \"business_partner_group\": \"Standard Customers\",\n            \"open_balance_amount\": \"0\",\n            \"credit_available_amount\": \"0\",\n            \"credit_used_amount\": \"0\",\n            \"revenue_amount\": \"0\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 1000001,\n            \"uuid\": \"66dda445-3600-442b-9e08-7824974d9a2e\",\n            \"display_value\": \"Prueba\",\n            \"value\": \"10000001\",\n            \"tax_id\": \"\",\n            \"name\": \"Prueba\",\n            \"name2\": \"\",\n            \"description\": \"Walk-In Customer\",\n            \"business_partner_group\": \"Standard Customers\",\n            \"open_balance_amount\": \"0\",\n            \"credit_available_amount\": \"0\",\n            \"credit_used_amount\": \"0\",\n            \"revenue_amount\": \"0\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 50003,\n            \"uuid\": \"b14b6c53-ca82-4dbc-841a-640b04de76bb\",\n            \"display_value\": \"Chemical Product, inc\",\n            \"value\": \"Chemical Product, inc\",\n            \"tax_id\": \"\",\n            \"name\": \"Chemical Product, inc\",\n            \"name2\": \"\",\n            \"description\": \"\",\n            \"business_partner_group\": \"Vendors\",\n            \"open_balance_amount\": \"0\",\n            \"credit_available_amount\": \"0\",\n            \"credit_used_amount\": \"0\",\n            \"revenue_amount\": \"0\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 50002,\n            \"uuid\": \"f472cd49-4f19-4fc3-856a-cb9038cf2924\",\n            \"display_value\": \"Chrome, Inc\",\n            \"value\": \"Chrome, Inc\",\n            \"tax_id\": \"\",\n            \"name\": \"Chrome, Inc\",\n            \"name2\": \"\",\n            \"description\": \"\",\n            \"business_partner_group\": \"Vendors\",\n            \"open_balance_amount\": \"0\",\n            \"credit_available_amount\": \"0\",\n            \"credit_used_amount\": \"0\",\n            \"revenue_amount\": \"0\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 50001,\n            \"uuid\": \"5e616d3e-c55b-4ede-9b0e-ac3ae834556b\",\n            \"display_value\": \"Color, Inc\",\n            \"value\": \"Color, Inc\",\n            \"tax_id\": \"\",\n            \"name\": \"Color, Inc\",\n            \"name2\": \"\",\n            \"description\": \"\",\n            \"business_partner_group\": \"Vendors\",\n            \"open_balance_amount\": \"0\",\n            \"credit_available_amount\": \"0\",\n            \"credit_used_amount\": \"0\",\n            \"revenue_amount\": \"0\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 117,\n            \"uuid\": \"b7bafd8e-ae3b-4bbc-9a0d-d47fdbef390f\",\n            \"display_value\": \"C&W Construction\",\n            \"value\": \"C&W\",\n            \"tax_id\": \"\",\n            \"name\": \"C&W Construction\",\n            \"name2\": \"Unlimited Projects Corp.\",\n            \"description\": \"\",\n            \"business_partner_group\": \"Standard Customers\",\n            \"open_balance_amount\": \"161.12\",\n            \"credit_available_amount\": \"9838.88\",\n            \"credit_used_amount\": \"161.12\",\n            \"revenue_amount\": \"161.12\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 113,\n            \"uuid\": \"d430bdde-e5e4-476b-8dc9-4b0b5d5b02cc\",\n            \"display_value\": \"GardenAdmin BP\",\n            \"value\": \"GardenAdmin\",\n            \"tax_id\": \"\",\n            \"name\": \"GardenAdmin BP\",\n            \"name2\": \"\",\n            \"description\": \"\",\n            \"business_partner_group\": \"Staff\",\n            \"open_balance_amount\": \"0.00\",\n            \"credit_available_amount\": \"-999.33\",\n            \"credit_used_amount\": \"999.33\",\n            \"revenue_amount\": \"1000.00\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 119,\n            \"uuid\": \"0b870ceb-a34f-4876-8225-0053f11385d2\",\n            \"display_value\": \"GardenUser BP\",\n            \"value\": \"GardenUser\",\n            \"tax_id\": \"\",\n            \"name\": \"GardenUser BP\",\n            \"name2\": \"\",\n            \"description\": \"\",\n            \"business_partner_group\": \"Staff\",\n            \"open_balance_amount\": \"0\",\n            \"credit_available_amount\": \"0\",\n            \"credit_used_amount\": \"0\",\n            \"revenue_amount\": \"0\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 118,\n            \"uuid\": \"c3cfeb5f-1b2f-4f4b-a16c-d9cda23f59e1\",\n            \"display_value\": \"Joe Block\",\n            \"value\": \"JoeBlock\",\n            \"tax_id\": \"\",\n            \"name\": \"Joe Block\",\n            \"name2\": \"\",\n            \"description\": \"\",\n            \"business_partner_group\": \"Standard Customers\",\n            \"open_balance_amount\": \"503.48\",\n            \"credit_available_amount\": \"9748.26\",\n            \"credit_used_amount\": \"251.74\",\n            \"revenue_amount\": \"251.73\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 121,\n            \"uuid\": \"ca5b584a-c9e8-448f-a388-8ac7c0f02501\",\n            \"display_value\": \"Patio Fun, Inc.\",\n            \"value\": \"Patio\",\n            \"tax_id\": \"\",\n            \"name\": \"Patio Fun, Inc.\",\n            \"name2\": \"\",\n            \"description\": \"\",\n            \"business_partner_group\": \"Vendors\",\n            \"open_balance_amount\": \"-2160\",\n            \"credit_available_amount\": \"0\",\n            \"credit_used_amount\": \"0\",\n            \"revenue_amount\": \"0\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 120,\n            \"uuid\": \"2ad2a623-3d1f-47f4-969a-f44f7a05481f\",\n            \"display_value\": \"Seed Farm Inc.\",\n            \"value\": \"SeedFarm\",\n            \"tax_id\": \"\",\n            \"name\": \"Seed Farm Inc.\",\n            \"name2\": \"\",\n            \"description\": \"Customer & Vendor\",\n            \"business_partner_group\": \"Vendors\",\n            \"open_balance_amount\": \"-2731.5\",\n            \"credit_available_amount\": \"0\",\n            \"credit_used_amount\": \"0\",\n            \"revenue_amount\": \"0\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 112,\n            \"uuid\": \"f5388c95-7424-447d-85de-91424f9da147\",\n            \"display_value\": \"Standard\",\n            \"value\": \"Standard\",\n            \"tax_id\": \"\",\n            \"name\": \"Standard\",\n            \"name2\": \"\",\n            \"description\": \"Walk-In Customer\",\n            \"business_partner_group\": \"Standard Customers\",\n            \"open_balance_amount\": \"0\",\n            \"credit_available_amount\": \"0\",\n            \"credit_used_amount\": \"0\",\n            \"revenue_amount\": \"151.05\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 50004,\n            \"uuid\": \"8b894863-afbe-4384-a8ed-bf0325a5ec25\",\n            \"display_value\": \"Store Central\",\n            \"value\": \"Store Central\",\n            \"tax_id\": \"\",\n            \"name\": \"Store Central\",\n            \"name2\": \"\",\n            \"description\": \"\",\n            \"business_partner_group\": \"Staff\",\n            \"open_balance_amount\": \"0\",\n            \"credit_available_amount\": \"0\",\n            \"credit_used_amount\": \"0\",\n            \"revenue_amount\": \"0\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 50005,\n            \"uuid\": \"c6c2de1e-2f0f-4ef8-b7f3-29d80d0cfdb8\",\n            \"display_value\": \"Store East\",\n            \"value\": \"Store East\",\n            \"tax_id\": \"\",\n            \"name\": \"Store East\",\n            \"name2\": \"\",\n            \"description\": \"\",\n            \"business_partner_group\": \"Staff\",\n            \"open_balance_amount\": \"0\",\n            \"credit_available_amount\": \"0\",\n            \"credit_used_amount\": \"0\",\n            \"revenue_amount\": \"0\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 50007,\n            \"uuid\": \"01c65f4b-272c-4fb6-b12a-089d207cadb8\",\n            \"display_value\": \"Store North\",\n            \"value\": \"Store North\",\n            \"tax_id\": \"\",\n            \"name\": \"Store North\",\n            \"name2\": \"\",\n            \"description\": \"\",\n            \"business_partner_group\": \"Staff\",\n            \"open_balance_amount\": \"0\",\n            \"credit_available_amount\": \"0\",\n            \"credit_used_amount\": \"0\",\n            \"revenue_amount\": \"0\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 50008,\n            \"uuid\": \"88f0d79e-bc97-447d-8245-91bd79c0dcf7\",\n            \"display_value\": \"Store South\",\n            \"value\": \"Store South\",\n            \"tax_id\": \"\",\n            \"name\": \"Store South\",\n            \"name2\": \"\",\n            \"description\": \"\",\n            \"business_partner_group\": \"Staff\",\n            \"open_balance_amount\": \"0\",\n            \"credit_available_amount\": \"0\",\n            \"credit_used_amount\": \"0\",\n            \"revenue_amount\": \"0\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 50009,\n            \"uuid\": \"b419cad9-bb5b-4a2f-bbdb-1c3c70657408\",\n            \"display_value\": \"Store West\",\n            \"value\": \"Store West\",\n            \"tax_id\": \"\",\n            \"name\": \"Store West\",\n            \"name2\": \"\",\n            \"description\": \"\",\n            \"business_partner_group\": \"Staff\",\n            \"open_balance_amount\": \"0\",\n            \"credit_available_amount\": \"0\",\n            \"credit_used_amount\": \"0\",\n            \"revenue_amount\": \"0\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 114,\n            \"uuid\": \"254e660c-4863-460a-8a69-2b75f6461a33\",\n            \"display_value\": \"Tree Farm Inc.\",\n            \"value\": \"TreeFarm\",\n            \"tax_id\": \"\",\n            \"name\": \"Tree Farm Inc.\",\n            \"name2\": \"\",\n            \"description\": \"Vendor\",\n            \"business_partner_group\": \"Vendors\",\n            \"open_balance_amount\": \"-4217.5\",\n            \"credit_available_amount\": \"0\",\n            \"credit_used_amount\": \"0\",\n            \"revenue_amount\": \"0\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 50000,\n            \"uuid\": \"2d96ae84-d50e-447a-bdb7-496242fd846f\",\n            \"display_value\": \"Wood, Inc\",\n            \"value\": \"Wood, Inc\",\n            \"tax_id\": \"\",\n            \"name\": \"Wood, Inc\",\n            \"name2\": \"\",\n            \"description\": \"\",\n            \"business_partner_group\": \"Vendors\",\n            \"open_balance_amount\": \"0\",\n            \"credit_available_amount\": \"0\",\n            \"credit_used_amount\": \"0\",\n            \"revenue_amount\": \"0\",\n            \"is_active\": true\n        }\n    ],\n    \"next_page_token\": \"\"\n}\n\n ```\n\n**Common errors:**\n\n- Process not found\n    \n\n``` json\n{\n    \"code\": 13,\n    \"message\": \"Process Parameter * Not found *\",\n    \"details\": []\n}\n\n ```\n\n- ID with wrong value\n    \n\n``` json\n{\n    \"code\": 13,\n    \"message\": \"Reference / Column / Table / Field / Process Parameter / Browse Field / Mandatory\",\n    \"details\": []\n}\n\n ```\n\n**Change control**\n\n| **Version** | date | author | Description of Changes |\n| --- | --- | --- | --- |\n| 1.0 | 15/03/2024 | Ricardo | Initial creation of the document. |"
+			},
+			"response": [
+				{
+					"name": "business-partners_proceesParameter",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/field/business-partners/parameter/:process_parameter_id",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"field",
+								"business-partners",
+								"parameter",
+								":process_parameter_id"
+							],
+							"variable": [
+								{
+									"key": "process_parameter_id",
+									"value": "50001"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.25.2"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 13 Mar 2024 20:52:19 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "7910"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "grpc-encoding",
+							"value": "identity"
+						},
+						{
+							"key": "grpc-accept-encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "x-envoy-upstream-service-time",
+							"value": "228"
+						},
+						{
+							"key": "grpc-status",
+							"value": "0"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Max-Age",
+							"value": "3600"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"record_count\": \"19\",\n    \"records\": [\n        {\n            \"id\": 1000000,\n            \"uuid\": \"d75d2f7f-3af5-4bb7-bba4-1d53fa1e44a9\",\n            \"display_value\": \"Prueba\",\n            \"value\": \"10000000\",\n            \"tax_id\": \"\",\n            \"name\": \"Prueba\",\n            \"name2\": \"\",\n            \"description\": \"Walk-In Customer\",\n            \"business_partner_group\": \"Standard Customers\",\n            \"open_balance_amount\": \"0\",\n            \"credit_available_amount\": \"0\",\n            \"credit_used_amount\": \"0\",\n            \"revenue_amount\": \"0\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 1000001,\n            \"uuid\": \"66dda445-3600-442b-9e08-7824974d9a2e\",\n            \"display_value\": \"Prueba\",\n            \"value\": \"10000001\",\n            \"tax_id\": \"\",\n            \"name\": \"Prueba\",\n            \"name2\": \"\",\n            \"description\": \"Walk-In Customer\",\n            \"business_partner_group\": \"Standard Customers\",\n            \"open_balance_amount\": \"0\",\n            \"credit_available_amount\": \"0\",\n            \"credit_used_amount\": \"0\",\n            \"revenue_amount\": \"0\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 50003,\n            \"uuid\": \"b14b6c53-ca82-4dbc-841a-640b04de76bb\",\n            \"display_value\": \"Chemical Product, inc\",\n            \"value\": \"Chemical Product, inc\",\n            \"tax_id\": \"\",\n            \"name\": \"Chemical Product, inc\",\n            \"name2\": \"\",\n            \"description\": \"\",\n            \"business_partner_group\": \"Vendors\",\n            \"open_balance_amount\": \"0\",\n            \"credit_available_amount\": \"0\",\n            \"credit_used_amount\": \"0\",\n            \"revenue_amount\": \"0\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 50002,\n            \"uuid\": \"f472cd49-4f19-4fc3-856a-cb9038cf2924\",\n            \"display_value\": \"Chrome, Inc\",\n            \"value\": \"Chrome, Inc\",\n            \"tax_id\": \"\",\n            \"name\": \"Chrome, Inc\",\n            \"name2\": \"\",\n            \"description\": \"\",\n            \"business_partner_group\": \"Vendors\",\n            \"open_balance_amount\": \"0\",\n            \"credit_available_amount\": \"0\",\n            \"credit_used_amount\": \"0\",\n            \"revenue_amount\": \"0\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 50001,\n            \"uuid\": \"5e616d3e-c55b-4ede-9b0e-ac3ae834556b\",\n            \"display_value\": \"Color, Inc\",\n            \"value\": \"Color, Inc\",\n            \"tax_id\": \"\",\n            \"name\": \"Color, Inc\",\n            \"name2\": \"\",\n            \"description\": \"\",\n            \"business_partner_group\": \"Vendors\",\n            \"open_balance_amount\": \"0\",\n            \"credit_available_amount\": \"0\",\n            \"credit_used_amount\": \"0\",\n            \"revenue_amount\": \"0\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 117,\n            \"uuid\": \"b7bafd8e-ae3b-4bbc-9a0d-d47fdbef390f\",\n            \"display_value\": \"C&W Construction\",\n            \"value\": \"C&W\",\n            \"tax_id\": \"\",\n            \"name\": \"C&W Construction\",\n            \"name2\": \"Unlimited Projects Corp.\",\n            \"description\": \"\",\n            \"business_partner_group\": \"Standard Customers\",\n            \"open_balance_amount\": \"161.12\",\n            \"credit_available_amount\": \"9838.88\",\n            \"credit_used_amount\": \"161.12\",\n            \"revenue_amount\": \"161.12\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 113,\n            \"uuid\": \"d430bdde-e5e4-476b-8dc9-4b0b5d5b02cc\",\n            \"display_value\": \"GardenAdmin BP\",\n            \"value\": \"GardenAdmin\",\n            \"tax_id\": \"\",\n            \"name\": \"GardenAdmin BP\",\n            \"name2\": \"\",\n            \"description\": \"\",\n            \"business_partner_group\": \"Staff\",\n            \"open_balance_amount\": \"0.00\",\n            \"credit_available_amount\": \"-999.33\",\n            \"credit_used_amount\": \"999.33\",\n            \"revenue_amount\": \"1000.00\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 119,\n            \"uuid\": \"0b870ceb-a34f-4876-8225-0053f11385d2\",\n            \"display_value\": \"GardenUser BP\",\n            \"value\": \"GardenUser\",\n            \"tax_id\": \"\",\n            \"name\": \"GardenUser BP\",\n            \"name2\": \"\",\n            \"description\": \"\",\n            \"business_partner_group\": \"Staff\",\n            \"open_balance_amount\": \"0\",\n            \"credit_available_amount\": \"0\",\n            \"credit_used_amount\": \"0\",\n            \"revenue_amount\": \"0\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 118,\n            \"uuid\": \"c3cfeb5f-1b2f-4f4b-a16c-d9cda23f59e1\",\n            \"display_value\": \"Joe Block\",\n            \"value\": \"JoeBlock\",\n            \"tax_id\": \"\",\n            \"name\": \"Joe Block\",\n            \"name2\": \"\",\n            \"description\": \"\",\n            \"business_partner_group\": \"Standard Customers\",\n            \"open_balance_amount\": \"503.48\",\n            \"credit_available_amount\": \"9748.26\",\n            \"credit_used_amount\": \"251.74\",\n            \"revenue_amount\": \"251.73\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 121,\n            \"uuid\": \"ca5b584a-c9e8-448f-a388-8ac7c0f02501\",\n            \"display_value\": \"Patio Fun, Inc.\",\n            \"value\": \"Patio\",\n            \"tax_id\": \"\",\n            \"name\": \"Patio Fun, Inc.\",\n            \"name2\": \"\",\n            \"description\": \"\",\n            \"business_partner_group\": \"Vendors\",\n            \"open_balance_amount\": \"-2160\",\n            \"credit_available_amount\": \"0\",\n            \"credit_used_amount\": \"0\",\n            \"revenue_amount\": \"0\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 120,\n            \"uuid\": \"2ad2a623-3d1f-47f4-969a-f44f7a05481f\",\n            \"display_value\": \"Seed Farm Inc.\",\n            \"value\": \"SeedFarm\",\n            \"tax_id\": \"\",\n            \"name\": \"Seed Farm Inc.\",\n            \"name2\": \"\",\n            \"description\": \"Customer & Vendor\",\n            \"business_partner_group\": \"Vendors\",\n            \"open_balance_amount\": \"-2731.5\",\n            \"credit_available_amount\": \"0\",\n            \"credit_used_amount\": \"0\",\n            \"revenue_amount\": \"0\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 112,\n            \"uuid\": \"f5388c95-7424-447d-85de-91424f9da147\",\n            \"display_value\": \"Standard\",\n            \"value\": \"Standard\",\n            \"tax_id\": \"\",\n            \"name\": \"Standard\",\n            \"name2\": \"\",\n            \"description\": \"Walk-In Customer\",\n            \"business_partner_group\": \"Standard Customers\",\n            \"open_balance_amount\": \"0\",\n            \"credit_available_amount\": \"0\",\n            \"credit_used_amount\": \"0\",\n            \"revenue_amount\": \"151.05\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 50004,\n            \"uuid\": \"8b894863-afbe-4384-a8ed-bf0325a5ec25\",\n            \"display_value\": \"Store Central\",\n            \"value\": \"Store Central\",\n            \"tax_id\": \"\",\n            \"name\": \"Store Central\",\n            \"name2\": \"\",\n            \"description\": \"\",\n            \"business_partner_group\": \"Staff\",\n            \"open_balance_amount\": \"0\",\n            \"credit_available_amount\": \"0\",\n            \"credit_used_amount\": \"0\",\n            \"revenue_amount\": \"0\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 50005,\n            \"uuid\": \"c6c2de1e-2f0f-4ef8-b7f3-29d80d0cfdb8\",\n            \"display_value\": \"Store East\",\n            \"value\": \"Store East\",\n            \"tax_id\": \"\",\n            \"name\": \"Store East\",\n            \"name2\": \"\",\n            \"description\": \"\",\n            \"business_partner_group\": \"Staff\",\n            \"open_balance_amount\": \"0\",\n            \"credit_available_amount\": \"0\",\n            \"credit_used_amount\": \"0\",\n            \"revenue_amount\": \"0\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 50007,\n            \"uuid\": \"01c65f4b-272c-4fb6-b12a-089d207cadb8\",\n            \"display_value\": \"Store North\",\n            \"value\": \"Store North\",\n            \"tax_id\": \"\",\n            \"name\": \"Store North\",\n            \"name2\": \"\",\n            \"description\": \"\",\n            \"business_partner_group\": \"Staff\",\n            \"open_balance_amount\": \"0\",\n            \"credit_available_amount\": \"0\",\n            \"credit_used_amount\": \"0\",\n            \"revenue_amount\": \"0\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 50008,\n            \"uuid\": \"88f0d79e-bc97-447d-8245-91bd79c0dcf7\",\n            \"display_value\": \"Store South\",\n            \"value\": \"Store South\",\n            \"tax_id\": \"\",\n            \"name\": \"Store South\",\n            \"name2\": \"\",\n            \"description\": \"\",\n            \"business_partner_group\": \"Staff\",\n            \"open_balance_amount\": \"0\",\n            \"credit_available_amount\": \"0\",\n            \"credit_used_amount\": \"0\",\n            \"revenue_amount\": \"0\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 50009,\n            \"uuid\": \"b419cad9-bb5b-4a2f-bbdb-1c3c70657408\",\n            \"display_value\": \"Store West\",\n            \"value\": \"Store West\",\n            \"tax_id\": \"\",\n            \"name\": \"Store West\",\n            \"name2\": \"\",\n            \"description\": \"\",\n            \"business_partner_group\": \"Staff\",\n            \"open_balance_amount\": \"0\",\n            \"credit_available_amount\": \"0\",\n            \"credit_used_amount\": \"0\",\n            \"revenue_amount\": \"0\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 114,\n            \"uuid\": \"254e660c-4863-460a-8a69-2b75f6461a33\",\n            \"display_value\": \"Tree Farm Inc.\",\n            \"value\": \"TreeFarm\",\n            \"tax_id\": \"\",\n            \"name\": \"Tree Farm Inc.\",\n            \"name2\": \"\",\n            \"description\": \"Vendor\",\n            \"business_partner_group\": \"Vendors\",\n            \"open_balance_amount\": \"-4217.5\",\n            \"credit_available_amount\": \"0\",\n            \"credit_used_amount\": \"0\",\n            \"revenue_amount\": \"0\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 50000,\n            \"uuid\": \"2d96ae84-d50e-447a-bdb7-496242fd846f\",\n            \"display_value\": \"Wood, Inc\",\n            \"value\": \"Wood, Inc\",\n            \"tax_id\": \"\",\n            \"name\": \"Wood, Inc\",\n            \"name2\": \"\",\n            \"description\": \"\",\n            \"business_partner_group\": \"Vendors\",\n            \"open_balance_amount\": \"0\",\n            \"credit_available_amount\": \"0\",\n            \"credit_used_amount\": \"0\",\n            \"revenue_amount\": \"0\",\n            \"is_active\": true\n        }\n    ],\n    \"next_page_token\": \"\"\n}"
+				}
+			]
+		},
+		{
+			"name": "business-partners_browseFieldID",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{HOST}}/field/business-partners/query-criteria/:browse_field_id",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"field",
+						"business-partners",
+						"query-criteria",
+						":browse_field_id"
+					],
+					"variable": [
+						{
+							"key": "browse_field_id",
+							"value": "50001"
+						}
+					]
+				},
+				"description": "**Endpoint**: GET /Business Partner\n\n**Description**: Returns ListBusinessPartnersInfo\n\n**Full URL**: [http://api.adempiere.io](http://api.adempiere.io/api)/field/business-partners/query-criteria/{browse_field_id}\n\n**Method**: GET\n\n**Parameters (Params):**\n\n- browse_field_id (Int32, mandatory)\n    \n\n**Application Example:**\n\n``` bash\ncurl --location 'http://api.adempiere.io/field/business-partners/query-criteria/50001' \\\n--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMDAwMTQ5IiwiQURfQ2xpZW50X0lEIjoxMSwiQURfT3JnX0lEIjowLCJBRF9Sb2xlX0lEIjoxMDIsIkFEX1VzZXJfSUQiOjEwMCwiTV9XYXJlaG91c2VfSUQiOjAsIkFEX0xhbmd1YWdlIjoiZW5fVVMiLCJpYXQiOjE3MTA1MTA0MDEsImV4cCI6MTcxMDU5NjgwMX0.nYQbrcT9RyHNRCf-oNM50ZVSO6uJ9gvrQQ7e0fzU9Ik'\n\n ```\n\n**Answer Example:**\n\n``` json\n{\n    \"record_count\": \"19\",\n    \"records\": [\n        {\n            \"id\": 1000000,\n            \"uuid\": \"d75d2f7f-3af5-4bb7-bba4-1d53fa1e44a9\",\n            \"display_value\": \"Prueba\",\n            \"value\": \"10000000\",\n            \"tax_id\": \"\",\n            \"name\": \"Prueba\",\n            \"name2\": \"\",\n            \"description\": \"Walk-In Customer\",\n            \"business_partner_group\": \"Standard Customers\",\n            \"open_balance_amount\": \"0\",\n            \"credit_available_amount\": \"0\",\n            \"credit_used_amount\": \"0\",\n            \"revenue_amount\": \"0\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 1000001,\n            \"uuid\": \"66dda445-3600-442b-9e08-7824974d9a2e\",\n            \"display_value\": \"Prueba\",\n            \"value\": \"10000001\",\n            \"tax_id\": \"\",\n            \"name\": \"Prueba\",\n            \"name2\": \"\",\n            \"description\": \"Walk-In Customer\",\n            \"business_partner_group\": \"Standard Customers\",\n            \"open_balance_amount\": \"0\",\n            \"credit_available_amount\": \"0\",\n            \"credit_used_amount\": \"0\",\n            \"revenue_amount\": \"0\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 50003,\n            \"uuid\": \"b14b6c53-ca82-4dbc-841a-640b04de76bb\",\n            \"display_value\": \"Chemical Product, inc\",\n            \"value\": \"Chemical Product, inc\",\n            \"tax_id\": \"\",\n            \"name\": \"Chemical Product, inc\",\n            \"name2\": \"\",\n            \"description\": \"\",\n            \"business_partner_group\": \"Vendors\",\n            \"open_balance_amount\": \"0\",\n            \"credit_available_amount\": \"0\",\n            \"credit_used_amount\": \"0\",\n            \"revenue_amount\": \"0\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 50002,\n            \"uuid\": \"f472cd49-4f19-4fc3-856a-cb9038cf2924\",\n            \"display_value\": \"Chrome, Inc\",\n            \"value\": \"Chrome, Inc\",\n            \"tax_id\": \"\",\n            \"name\": \"Chrome, Inc\",\n            \"name2\": \"\",\n            \"description\": \"\",\n            \"business_partner_group\": \"Vendors\",\n            \"open_balance_amount\": \"0\",\n            \"credit_available_amount\": \"0\",\n            \"credit_used_amount\": \"0\",\n            \"revenue_amount\": \"0\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 50001,\n            \"uuid\": \"5e616d3e-c55b-4ede-9b0e-ac3ae834556b\",\n            \"display_value\": \"Color, Inc\",\n            \"value\": \"Color, Inc\",\n            \"tax_id\": \"\",\n            \"name\": \"Color, Inc\",\n            \"name2\": \"\",\n            \"description\": \"\",\n            \"business_partner_group\": \"Vendors\",\n            \"open_balance_amount\": \"0\",\n            \"credit_available_amount\": \"0\",\n            \"credit_used_amount\": \"0\",\n            \"revenue_amount\": \"0\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 117,\n            \"uuid\": \"b7bafd8e-ae3b-4bbc-9a0d-d47fdbef390f\",\n            \"display_value\": \"C&W Construction\",\n            \"value\": \"C&W\",\n            \"tax_id\": \"\",\n            \"name\": \"C&W Construction\",\n            \"name2\": \"Unlimited Projects Corp.\",\n            \"description\": \"\",\n            \"business_partner_group\": \"Standard Customers\",\n            \"open_balance_amount\": \"161.12\",\n            \"credit_available_amount\": \"9838.88\",\n            \"credit_used_amount\": \"161.12\",\n            \"revenue_amount\": \"161.12\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 113,\n            \"uuid\": \"d430bdde-e5e4-476b-8dc9-4b0b5d5b02cc\",\n            \"display_value\": \"GardenAdmin BP\",\n            \"value\": \"GardenAdmin\",\n            \"tax_id\": \"\",\n            \"name\": \"GardenAdmin BP\",\n            \"name2\": \"\",\n            \"description\": \"\",\n            \"business_partner_group\": \"Staff\",\n            \"open_balance_amount\": \"0.00\",\n            \"credit_available_amount\": \"-999.33\",\n            \"credit_used_amount\": \"999.33\",\n            \"revenue_amount\": \"1000.00\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 119,\n            \"uuid\": \"0b870ceb-a34f-4876-8225-0053f11385d2\",\n            \"display_value\": \"GardenUser BP\",\n            \"value\": \"GardenUser\",\n            \"tax_id\": \"\",\n            \"name\": \"GardenUser BP\",\n            \"name2\": \"\",\n            \"description\": \"\",\n            \"business_partner_group\": \"Staff\",\n            \"open_balance_amount\": \"0\",\n            \"credit_available_amount\": \"0\",\n            \"credit_used_amount\": \"0\",\n            \"revenue_amount\": \"0\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 118,\n            \"uuid\": \"c3cfeb5f-1b2f-4f4b-a16c-d9cda23f59e1\",\n            \"display_value\": \"Joe Block\",\n            \"value\": \"JoeBlock\",\n            \"tax_id\": \"\",\n            \"name\": \"Joe Block\",\n            \"name2\": \"\",\n            \"description\": \"\",\n            \"business_partner_group\": \"Standard Customers\",\n            \"open_balance_amount\": \"503.48\",\n            \"credit_available_amount\": \"9748.26\",\n            \"credit_used_amount\": \"251.74\",\n            \"revenue_amount\": \"251.73\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 121,\n            \"uuid\": \"ca5b584a-c9e8-448f-a388-8ac7c0f02501\",\n            \"display_value\": \"Patio Fun, Inc.\",\n            \"value\": \"Patio\",\n            \"tax_id\": \"\",\n            \"name\": \"Patio Fun, Inc.\",\n            \"name2\": \"\",\n            \"description\": \"\",\n            \"business_partner_group\": \"Vendors\",\n            \"open_balance_amount\": \"-2160\",\n            \"credit_available_amount\": \"0\",\n            \"credit_used_amount\": \"0\",\n            \"revenue_amount\": \"0\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 120,\n            \"uuid\": \"2ad2a623-3d1f-47f4-969a-f44f7a05481f\",\n            \"display_value\": \"Seed Farm Inc.\",\n            \"value\": \"SeedFarm\",\n            \"tax_id\": \"\",\n            \"name\": \"Seed Farm Inc.\",\n            \"name2\": \"\",\n            \"description\": \"Customer & Vendor\",\n            \"business_partner_group\": \"Vendors\",\n            \"open_balance_amount\": \"-2731.5\",\n            \"credit_available_amount\": \"0\",\n            \"credit_used_amount\": \"0\",\n            \"revenue_amount\": \"0\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 112,\n            \"uuid\": \"f5388c95-7424-447d-85de-91424f9da147\",\n            \"display_value\": \"Standard\",\n            \"value\": \"Standard\",\n            \"tax_id\": \"\",\n            \"name\": \"Standard\",\n            \"name2\": \"\",\n            \"description\": \"Walk-In Customer\",\n            \"business_partner_group\": \"Standard Customers\",\n            \"open_balance_amount\": \"0\",\n            \"credit_available_amount\": \"0\",\n            \"credit_used_amount\": \"0\",\n            \"revenue_amount\": \"151.05\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 50004,\n            \"uuid\": \"8b894863-afbe-4384-a8ed-bf0325a5ec25\",\n            \"display_value\": \"Store Central\",\n            \"value\": \"Store Central\",\n            \"tax_id\": \"\",\n            \"name\": \"Store Central\",\n            \"name2\": \"\",\n            \"description\": \"\",\n            \"business_partner_group\": \"Staff\",\n            \"open_balance_amount\": \"0\",\n            \"credit_available_amount\": \"0\",\n            \"credit_used_amount\": \"0\",\n            \"revenue_amount\": \"0\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 50005,\n            \"uuid\": \"c6c2de1e-2f0f-4ef8-b7f3-29d80d0cfdb8\",\n            \"display_value\": \"Store East\",\n            \"value\": \"Store East\",\n            \"tax_id\": \"\",\n            \"name\": \"Store East\",\n            \"name2\": \"\",\n            \"description\": \"\",\n            \"business_partner_group\": \"Staff\",\n            \"open_balance_amount\": \"0\",\n            \"credit_available_amount\": \"0\",\n            \"credit_used_amount\": \"0\",\n            \"revenue_amount\": \"0\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 50007,\n            \"uuid\": \"01c65f4b-272c-4fb6-b12a-089d207cadb8\",\n            \"display_value\": \"Store North\",\n            \"value\": \"Store North\",\n            \"tax_id\": \"\",\n            \"name\": \"Store North\",\n            \"name2\": \"\",\n            \"description\": \"\",\n            \"business_partner_group\": \"Staff\",\n            \"open_balance_amount\": \"0\",\n            \"credit_available_amount\": \"0\",\n            \"credit_used_amount\": \"0\",\n            \"revenue_amount\": \"0\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 50008,\n            \"uuid\": \"88f0d79e-bc97-447d-8245-91bd79c0dcf7\",\n            \"display_value\": \"Store South\",\n            \"value\": \"Store South\",\n            \"tax_id\": \"\",\n            \"name\": \"Store South\",\n            \"name2\": \"\",\n            \"description\": \"\",\n            \"business_partner_group\": \"Staff\",\n            \"open_balance_amount\": \"0\",\n            \"credit_available_amount\": \"0\",\n            \"credit_used_amount\": \"0\",\n            \"revenue_amount\": \"0\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 50009,\n            \"uuid\": \"b419cad9-bb5b-4a2f-bbdb-1c3c70657408\",\n            \"display_value\": \"Store West\",\n            \"value\": \"Store West\",\n            \"tax_id\": \"\",\n            \"name\": \"Store West\",\n            \"name2\": \"\",\n            \"description\": \"\",\n            \"business_partner_group\": \"Staff\",\n            \"open_balance_amount\": \"0\",\n            \"credit_available_amount\": \"0\",\n            \"credit_used_amount\": \"0\",\n            \"revenue_amount\": \"0\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 114,\n            \"uuid\": \"254e660c-4863-460a-8a69-2b75f6461a33\",\n            \"display_value\": \"Tree Farm Inc.\",\n            \"value\": \"TreeFarm\",\n            \"tax_id\": \"\",\n            \"name\": \"Tree Farm Inc.\",\n            \"name2\": \"\",\n            \"description\": \"Vendor\",\n            \"business_partner_group\": \"Vendors\",\n            \"open_balance_amount\": \"-4217.5\",\n            \"credit_available_amount\": \"0\",\n            \"credit_used_amount\": \"0\",\n            \"revenue_amount\": \"0\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 50000,\n            \"uuid\": \"2d96ae84-d50e-447a-bdb7-496242fd846f\",\n            \"display_value\": \"Wood, Inc\",\n            \"value\": \"Wood, Inc\",\n            \"tax_id\": \"\",\n            \"name\": \"Wood, Inc\",\n            \"name2\": \"\",\n            \"description\": \"\",\n            \"business_partner_group\": \"Vendors\",\n            \"open_balance_amount\": \"0\",\n            \"credit_available_amount\": \"0\",\n            \"credit_used_amount\": \"0\",\n            \"revenue_amount\": \"0\",\n            \"is_active\": true\n        }\n    ],\n    \"next_page_token\": \"\"\n}\n\n ```\n\n**Contorl of Changes**\n\n| **Version** | Date | author | Description of Changes |\n| --- | --- | --- | --- |\n| 1.0 | 15/03/2024 | Ricardo | Initial creation of the document. |"
+			},
+			"response": [
+				{
+					"name": "business-partners_browseFieldID",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/field/business-partners/query-criteria/:browse_field_id",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"field",
+								"business-partners",
+								"query-criteria",
+								":browse_field_id"
+							],
+							"variable": [
+								{
+									"key": "browse_field_id",
+									"value": "50001"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.25.2"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 13 Mar 2024 20:56:06 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "7910"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "grpc-encoding",
+							"value": "identity"
+						},
+						{
+							"key": "grpc-accept-encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "x-envoy-upstream-service-time",
+							"value": "144"
+						},
+						{
+							"key": "grpc-status",
+							"value": "0"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Max-Age",
+							"value": "3600"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"record_count\": \"19\",\n    \"records\": [\n        {\n            \"id\": 1000000,\n            \"uuid\": \"d75d2f7f-3af5-4bb7-bba4-1d53fa1e44a9\",\n            \"display_value\": \"Prueba\",\n            \"value\": \"10000000\",\n            \"tax_id\": \"\",\n            \"name\": \"Prueba\",\n            \"name2\": \"\",\n            \"description\": \"Walk-In Customer\",\n            \"business_partner_group\": \"Standard Customers\",\n            \"open_balance_amount\": \"0\",\n            \"credit_available_amount\": \"0\",\n            \"credit_used_amount\": \"0\",\n            \"revenue_amount\": \"0\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 1000001,\n            \"uuid\": \"66dda445-3600-442b-9e08-7824974d9a2e\",\n            \"display_value\": \"Prueba\",\n            \"value\": \"10000001\",\n            \"tax_id\": \"\",\n            \"name\": \"Prueba\",\n            \"name2\": \"\",\n            \"description\": \"Walk-In Customer\",\n            \"business_partner_group\": \"Standard Customers\",\n            \"open_balance_amount\": \"0\",\n            \"credit_available_amount\": \"0\",\n            \"credit_used_amount\": \"0\",\n            \"revenue_amount\": \"0\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 50003,\n            \"uuid\": \"b14b6c53-ca82-4dbc-841a-640b04de76bb\",\n            \"display_value\": \"Chemical Product, inc\",\n            \"value\": \"Chemical Product, inc\",\n            \"tax_id\": \"\",\n            \"name\": \"Chemical Product, inc\",\n            \"name2\": \"\",\n            \"description\": \"\",\n            \"business_partner_group\": \"Vendors\",\n            \"open_balance_amount\": \"0\",\n            \"credit_available_amount\": \"0\",\n            \"credit_used_amount\": \"0\",\n            \"revenue_amount\": \"0\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 50002,\n            \"uuid\": \"f472cd49-4f19-4fc3-856a-cb9038cf2924\",\n            \"display_value\": \"Chrome, Inc\",\n            \"value\": \"Chrome, Inc\",\n            \"tax_id\": \"\",\n            \"name\": \"Chrome, Inc\",\n            \"name2\": \"\",\n            \"description\": \"\",\n            \"business_partner_group\": \"Vendors\",\n            \"open_balance_amount\": \"0\",\n            \"credit_available_amount\": \"0\",\n            \"credit_used_amount\": \"0\",\n            \"revenue_amount\": \"0\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 50001,\n            \"uuid\": \"5e616d3e-c55b-4ede-9b0e-ac3ae834556b\",\n            \"display_value\": \"Color, Inc\",\n            \"value\": \"Color, Inc\",\n            \"tax_id\": \"\",\n            \"name\": \"Color, Inc\",\n            \"name2\": \"\",\n            \"description\": \"\",\n            \"business_partner_group\": \"Vendors\",\n            \"open_balance_amount\": \"0\",\n            \"credit_available_amount\": \"0\",\n            \"credit_used_amount\": \"0\",\n            \"revenue_amount\": \"0\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 117,\n            \"uuid\": \"b7bafd8e-ae3b-4bbc-9a0d-d47fdbef390f\",\n            \"display_value\": \"C&W Construction\",\n            \"value\": \"C&W\",\n            \"tax_id\": \"\",\n            \"name\": \"C&W Construction\",\n            \"name2\": \"Unlimited Projects Corp.\",\n            \"description\": \"\",\n            \"business_partner_group\": \"Standard Customers\",\n            \"open_balance_amount\": \"161.12\",\n            \"credit_available_amount\": \"9838.88\",\n            \"credit_used_amount\": \"161.12\",\n            \"revenue_amount\": \"161.12\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 113,\n            \"uuid\": \"d430bdde-e5e4-476b-8dc9-4b0b5d5b02cc\",\n            \"display_value\": \"GardenAdmin BP\",\n            \"value\": \"GardenAdmin\",\n            \"tax_id\": \"\",\n            \"name\": \"GardenAdmin BP\",\n            \"name2\": \"\",\n            \"description\": \"\",\n            \"business_partner_group\": \"Staff\",\n            \"open_balance_amount\": \"0.00\",\n            \"credit_available_amount\": \"-999.33\",\n            \"credit_used_amount\": \"999.33\",\n            \"revenue_amount\": \"1000.00\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 119,\n            \"uuid\": \"0b870ceb-a34f-4876-8225-0053f11385d2\",\n            \"display_value\": \"GardenUser BP\",\n            \"value\": \"GardenUser\",\n            \"tax_id\": \"\",\n            \"name\": \"GardenUser BP\",\n            \"name2\": \"\",\n            \"description\": \"\",\n            \"business_partner_group\": \"Staff\",\n            \"open_balance_amount\": \"0\",\n            \"credit_available_amount\": \"0\",\n            \"credit_used_amount\": \"0\",\n            \"revenue_amount\": \"0\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 118,\n            \"uuid\": \"c3cfeb5f-1b2f-4f4b-a16c-d9cda23f59e1\",\n            \"display_value\": \"Joe Block\",\n            \"value\": \"JoeBlock\",\n            \"tax_id\": \"\",\n            \"name\": \"Joe Block\",\n            \"name2\": \"\",\n            \"description\": \"\",\n            \"business_partner_group\": \"Standard Customers\",\n            \"open_balance_amount\": \"503.48\",\n            \"credit_available_amount\": \"9748.26\",\n            \"credit_used_amount\": \"251.74\",\n            \"revenue_amount\": \"251.73\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 121,\n            \"uuid\": \"ca5b584a-c9e8-448f-a388-8ac7c0f02501\",\n            \"display_value\": \"Patio Fun, Inc.\",\n            \"value\": \"Patio\",\n            \"tax_id\": \"\",\n            \"name\": \"Patio Fun, Inc.\",\n            \"name2\": \"\",\n            \"description\": \"\",\n            \"business_partner_group\": \"Vendors\",\n            \"open_balance_amount\": \"-2160\",\n            \"credit_available_amount\": \"0\",\n            \"credit_used_amount\": \"0\",\n            \"revenue_amount\": \"0\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 120,\n            \"uuid\": \"2ad2a623-3d1f-47f4-969a-f44f7a05481f\",\n            \"display_value\": \"Seed Farm Inc.\",\n            \"value\": \"SeedFarm\",\n            \"tax_id\": \"\",\n            \"name\": \"Seed Farm Inc.\",\n            \"name2\": \"\",\n            \"description\": \"Customer & Vendor\",\n            \"business_partner_group\": \"Vendors\",\n            \"open_balance_amount\": \"-2731.5\",\n            \"credit_available_amount\": \"0\",\n            \"credit_used_amount\": \"0\",\n            \"revenue_amount\": \"0\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 112,\n            \"uuid\": \"f5388c95-7424-447d-85de-91424f9da147\",\n            \"display_value\": \"Standard\",\n            \"value\": \"Standard\",\n            \"tax_id\": \"\",\n            \"name\": \"Standard\",\n            \"name2\": \"\",\n            \"description\": \"Walk-In Customer\",\n            \"business_partner_group\": \"Standard Customers\",\n            \"open_balance_amount\": \"0\",\n            \"credit_available_amount\": \"0\",\n            \"credit_used_amount\": \"0\",\n            \"revenue_amount\": \"151.05\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 50004,\n            \"uuid\": \"8b894863-afbe-4384-a8ed-bf0325a5ec25\",\n            \"display_value\": \"Store Central\",\n            \"value\": \"Store Central\",\n            \"tax_id\": \"\",\n            \"name\": \"Store Central\",\n            \"name2\": \"\",\n            \"description\": \"\",\n            \"business_partner_group\": \"Staff\",\n            \"open_balance_amount\": \"0\",\n            \"credit_available_amount\": \"0\",\n            \"credit_used_amount\": \"0\",\n            \"revenue_amount\": \"0\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 50005,\n            \"uuid\": \"c6c2de1e-2f0f-4ef8-b7f3-29d80d0cfdb8\",\n            \"display_value\": \"Store East\",\n            \"value\": \"Store East\",\n            \"tax_id\": \"\",\n            \"name\": \"Store East\",\n            \"name2\": \"\",\n            \"description\": \"\",\n            \"business_partner_group\": \"Staff\",\n            \"open_balance_amount\": \"0\",\n            \"credit_available_amount\": \"0\",\n            \"credit_used_amount\": \"0\",\n            \"revenue_amount\": \"0\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 50007,\n            \"uuid\": \"01c65f4b-272c-4fb6-b12a-089d207cadb8\",\n            \"display_value\": \"Store North\",\n            \"value\": \"Store North\",\n            \"tax_id\": \"\",\n            \"name\": \"Store North\",\n            \"name2\": \"\",\n            \"description\": \"\",\n            \"business_partner_group\": \"Staff\",\n            \"open_balance_amount\": \"0\",\n            \"credit_available_amount\": \"0\",\n            \"credit_used_amount\": \"0\",\n            \"revenue_amount\": \"0\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 50008,\n            \"uuid\": \"88f0d79e-bc97-447d-8245-91bd79c0dcf7\",\n            \"display_value\": \"Store South\",\n            \"value\": \"Store South\",\n            \"tax_id\": \"\",\n            \"name\": \"Store South\",\n            \"name2\": \"\",\n            \"description\": \"\",\n            \"business_partner_group\": \"Staff\",\n            \"open_balance_amount\": \"0\",\n            \"credit_available_amount\": \"0\",\n            \"credit_used_amount\": \"0\",\n            \"revenue_amount\": \"0\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 50009,\n            \"uuid\": \"b419cad9-bb5b-4a2f-bbdb-1c3c70657408\",\n            \"display_value\": \"Store West\",\n            \"value\": \"Store West\",\n            \"tax_id\": \"\",\n            \"name\": \"Store West\",\n            \"name2\": \"\",\n            \"description\": \"\",\n            \"business_partner_group\": \"Staff\",\n            \"open_balance_amount\": \"0\",\n            \"credit_available_amount\": \"0\",\n            \"credit_used_amount\": \"0\",\n            \"revenue_amount\": \"0\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 114,\n            \"uuid\": \"254e660c-4863-460a-8a69-2b75f6461a33\",\n            \"display_value\": \"Tree Farm Inc.\",\n            \"value\": \"TreeFarm\",\n            \"tax_id\": \"\",\n            \"name\": \"Tree Farm Inc.\",\n            \"name2\": \"\",\n            \"description\": \"Vendor\",\n            \"business_partner_group\": \"Vendors\",\n            \"open_balance_amount\": \"-4217.5\",\n            \"credit_available_amount\": \"0\",\n            \"credit_used_amount\": \"0\",\n            \"revenue_amount\": \"0\",\n            \"is_active\": true\n        },\n        {\n            \"id\": 50000,\n            \"uuid\": \"2d96ae84-d50e-447a-bdb7-496242fd846f\",\n            \"display_value\": \"Wood, Inc\",\n            \"value\": \"Wood, Inc\",\n            \"tax_id\": \"\",\n            \"name\": \"Wood, Inc\",\n            \"name2\": \"\",\n            \"description\": \"\",\n            \"business_partner_group\": \"Vendors\",\n            \"open_balance_amount\": \"0\",\n            \"credit_available_amount\": \"0\",\n            \"credit_used_amount\": \"0\",\n            \"revenue_amount\": \"0\",\n            \"is_active\": true\n        }\n    ],\n    \"next_page_token\": \"\"\n}"
+				}
+			]
+		},
+		{
+			"name": "ListBusinessPartnerContacts",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{HOST}}/field/business-partners/:business_partner_id/contacts",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"field",
+						"business-partners",
+						":business_partner_id",
+						"contacts"
+					],
+					"variable": [
+						{
+							"key": "business_partner_id",
+							"value": "50003"
+						}
+					]
+				},
+				"description": "**Endpoint**: GET /Business Partner\n\n**Description**: Returns ListBusinessPartnerContacts\n\n**Full URL**: [http://api.adempiere.io](http://api.adempiere.io/api)/field/business-partners/{business_partner_id}/contacts\n\n**Method**: GET\n\n**Parameters (Params):**\n\n- business_partner_id (Int32, Obligatorio)\n    \n\n**Application Example**\n\n``` bash\ncurl --location 'http://api.adempiere.io/field/business-partners/50003/contacts' \\\n--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMDAwMTQ5IiwiQURfQ2xpZW50X0lEIjoxMSwiQURfT3JnX0lEIjowLCJBRF9Sb2xlX0lEIjoxMDIsIkFEX1VzZXJfSUQiOjEwMCwiTV9XYXJlaG91c2VfSUQiOjAsIkFEX0xhbmd1YWdlIjoiZW5fVVMiLCJpYXQiOjE3MTA1MTA0MDEsImV4cCI6MTcxMDU5NjgwMX0.nYQbrcT9RyHNRCf-oNM50ZVSO6uJ9gvrQQ7e0fzU9Ik'\n\n ```\n\n**Common Errors:**\n\n- Business partner not found\n    \n\n``` json\n{\n    \"code\": 13,\n    \"message\": \"Business Partner * Not found *\",\n    \"details\": []\n}\n\n ```\n\n**Change control**\n\n| **Version** | Date | Author | Description of Changes |\n| --- | --- | --- | --- |\n| 1.0 | 15/03/2024 | Ricardo | Initial creation of the document. |"
+			},
+			"response": []
+		},
+		{
+			"name": "ListBusinessPartnerAddressLocations",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{HOST}}/field/business-partners/:business_partner_id/address-locations",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"field",
+						"business-partners",
+						":business_partner_id",
+						"address-locations"
+					],
+					"variable": [
+						{
+							"key": "business_partner_id",
+							"value": "1000000"
+						}
+					]
+				},
+				"description": "**Endpoint**: GET /Business Partner\n\n**Description**: Returns ListBusinessPartnerAddressLocations\n\n**Full** **URL**: [http://api.adempiere.io](http://api.adempiere.io/api)/field/business-partners/{business_partner_id}/address-locations\n\n**Method**: GET\n\n**Parameters (Params):**\n\n- business_partner_id (Int32, Obligatorio)\n    \n\n**Application Example:**\n\n``` bash\ncurl --location 'http://api.adempiere.io/field/business-partners/1000000/address-locations' \\\n--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMDAwMTQ5IiwiQURfQ2xpZW50X0lEIjoxMSwiQURfT3JnX0lEIjowLCJBRF9Sb2xlX0lEIjoxMDIsIkFEX1VzZXJfSUQiOjEwMCwiTV9XYXJlaG91c2VfSUQiOjAsIkFEX0xhbmd1YWdlIjoiZW5fVVMiLCJpYXQiOjE3MTA1MTA0MDEsImV4cCI6MTcxMDU5NjgwMX0.nYQbrcT9RyHNRCf-oNM50ZVSO6uJ9gvrQQ7e0fzU9Ik'\n\n ```\n\n**Answer Example:**\n\n``` json\n{\n    \"record_count\": \"1\",\n    \"records\": [\n        {\n            \"id\": 1000000,\n            \"uuid\": \"f8a8b3d7-09a3-42ca-a0ce-f44296314f47\",\n            \"phone\": \"\",\n            \"phone2\": \"\",\n            \"fax\": \"\",\n            \"address\": \", ,  \",\n            \"is_ship_to_address\": true,\n            \"is_bill_to_address\": true,\n            \"is_remit_to_address\": true,\n            \"is_pay_form_address\": true,\n            \"is_active\": true\n        }\n    ],\n    \"next_page_token\": \"\"\n}\n\n ```\n\n**Common Errors:**\n\n- Business partner not found\n    \n\n``` json\n{\n    \"code\": 13,\n    \"message\": \"Business Partner * Not found *\",\n    \"details\": []\n}\n\n ```\n\n**Change control**\n\n| **Version** | Date | author | Description of Changes |\n| --- | --- | --- | --- |\n| 1.0 | 15/03/2024 | Ricardo | Initial creation of the document. |"
+			},
+			"response": [
+				{
+					"name": "ListBusinessPartnerAddressLocations",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/field/business-partners/:business_partner_id/address-locations",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"field",
+								"business-partners",
+								":business_partner_id",
+								"address-locations"
+							],
+							"variable": [
+								{
+									"key": "business_partner_id",
+									"value": "1000000"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.25.2"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 13 Mar 2024 20:59:59 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "361"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "grpc-encoding",
+							"value": "identity"
+						},
+						{
+							"key": "grpc-accept-encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "x-envoy-upstream-service-time",
+							"value": "132"
+						},
+						{
+							"key": "grpc-status",
+							"value": "0"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Max-Age",
+							"value": "3600"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"record_count\": \"1\",\n    \"records\": [\n        {\n            \"id\": 1000000,\n            \"uuid\": \"f8a8b3d7-09a3-42ca-a0ce-f44296314f47\",\n            \"phone\": \"\",\n            \"phone2\": \"\",\n            \"fax\": \"\",\n            \"address\": \", ,  \",\n            \"is_ship_to_address\": true,\n            \"is_bill_to_address\": true,\n            \"is_remit_to_address\": true,\n            \"is_pay_form_address\": true,\n            \"is_active\": true\n        }\n    ],\n    \"next_page_token\": \"\"\n}"
+				}
+			]
+		}
+	]
+}
