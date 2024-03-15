@@ -1,0 +1,1124 @@
+openapi: 3.0.0
+info:
+  title: Business
+  version: 1.0.0
+servers:
+  - url: http://{{host}}
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+paths:
+  /business-data/process/{id}:
+    post:
+      tags:
+        - default
+      summary: business-data
+      description: >-
+        **Endpoint**: POST /business-data
+
+
+        **Description**: Returns ProcessLog
+
+
+        **Full URL**:
+        [http://api.adempiere.io/api](http://api.adempiere.io/api)/business-data/process/{id}
+
+
+        **Method:** POST
+
+
+        **Parameters (Params):**
+
+
+        - id (Int32, Mandatory)
+            
+
+        **Parameters (Body):**
+
+
+        - parameters (JSON, mandatory)
+
+        - report_type (String, optional)
+
+        - print_format_id (Int32, optional)
+
+        - report_type (String, optional)
+
+        - print_format_id (Int32, optional)
+
+        - is_summary (Bool, optional)
+
+        - browser_id (Int32, optional)
+
+        - selections (JSON, optional)
+
+        - workflow_id (Int32, optional)
+            
+
+        **Application Example**
+
+
+        ``` bash
+
+        curl --location 'http://api.adempiere.io/business-data/process/0' \
+
+        --header 'Content-Type: application/json' \
+
+        --header 'Authorization: Bearer
+        eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMDAwMTQ5IiwiQURfQ2xpZW50X0lEIjoxMSwiQURfT3JnX0lEIjowLCJBRF9Sb2xlX0lEIjoxMDIsIkFEX1VzZXJfSUQiOjEwMCwiTV9XYXJlaG91c2VfSUQiOjAsIkFEX0xhbmd1YWdlIjoiZW5fVVMiLCJpYXQiOjE3MTA1MTA0MDEsImV4cCI6MTcxMDU5NjgwMX0.nYQbrcT9RyHNRCf-oNM50ZVSO6uJ9gvrQQ7e0fzU9Ik'
+        \
+
+        --data '{
+            "parameters":{
+                "M_Product_Category_ID":50000,
+                "C_AcctSchema_ID":101
+            },
+            "report_type":"png",
+            "print_format_id":0,
+            "report_view_id":0,
+            "is_summary":false,
+            "browser_id":0,
+            "selections":{},
+            "workflow_id":0
+        }'
+
+         ```
+
+        **Example Answer:**
+
+
+        ``` json
+
+        {
+            "id": 140,
+            "name": "",
+            "description": "",
+            "instance_id": 1001242,
+            "is_error": false,
+            "summary": "Creado=0, Actualizado=3",
+            "result_table_name": "",
+            "is_processing": false,
+            "last_run": "2024-03-14T15:19:48Z",
+            "logs": [
+                {
+                    "record_id": 0,
+                    "log": "Actualizado"
+                },
+                {
+                    "record_id": 0,
+                    "log": "Creado"
+                }
+            ],
+            "process_intance_parameters": []
+        }
+
+         ```
+
+        **Common mistakes:**
+
+
+        - The role does not have the necessary permissions
+            
+
+        ``` json
+
+        {
+            "code": 13,
+            "message": "With your current role and settings, you cannot run Process \n\nYou don't have the privileges (your Role does not allow to access the information)",
+            "details": []
+        }
+
+         ```
+
+        - Process not found
+            
+
+        ``` json
+
+        {
+            "code": 13,
+            "message": "Process * Not found *",
+            "details": []
+        }
+
+         ```
+
+        - ID field does not have a valid value
+            
+
+        ``` json
+
+        {
+            "code": 13,
+            "message": "Fill mandatory fields:  Process",
+            "details": []
+        }
+
+         ```
+
+        **Change control**
+
+
+        | **Version** | date | author | Description of Changes |
+
+        | --- | --- | --- | --- |
+
+        | 1.0 | 15/03/2024 | Ricardo | Initial creation of the document. |
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                parameters:
+                  M_Product_Category_ID: 50000
+                  C_AcctSchema_ID: 101
+                report_type: png
+                print_format_id: 0
+                report_view_id: 0
+                is_summary: false
+                browser_id: 0
+                selections: {}
+                workflow_id: 0
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: integer
+          required: true
+          example: '0'
+      responses:
+        '200':
+          description: OK
+          headers:
+            Server:
+              schema:
+                type: string
+                example: nginx/1.25.2
+            Date:
+              schema:
+                type: string
+                example: Thu, 14 Mar 2024 15:19:48 GMT
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Content-Length:
+              schema:
+                type: integer
+                example: '368'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            grpc-encoding:
+              schema:
+                type: string
+                example: identity
+            grpc-accept-encoding:
+              schema:
+                type: string
+                example: gzip
+            x-envoy-upstream-service-time:
+              schema:
+                type: integer
+                example: '172'
+            grpc-status:
+              schema:
+                type: integer
+                example: '0'
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Max-Age:
+              schema:
+                type: integer
+                example: '3600'
+            Access-Control-Expose-Headers:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+                example: '*'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                id: 140
+                name: ''
+                description: ''
+                instance_id: 1001242
+                is_error: false
+                summary: Creado=0, Actualizado=3
+                result_table_name: ''
+                is_processing: false
+                last_run: '2024-03-14T15:19:48Z'
+                logs:
+                  - record_id: 0
+                    log: Actualizado
+                  - record_id: 0
+                    log: Creado
+                process_intance_parameters: []
+  /business-data/report/{id}:
+    post:
+      tags:
+        - default
+      summary: business-data_report
+      description: >-
+        **Endpoint**: POST /business-data
+
+
+        **Description**: Retorna ProcessLog
+
+
+        **Full URL**:
+        [http://api.adempiere.io/api](http://api.adempiere.io/api)/business-data/report/{id}
+
+
+        **Method**: POST
+
+
+        **Parameters (Params):**
+
+
+        - id (Int32, Mandatory)
+            
+
+        **Parametros (Body):**
+
+
+        - parameters (JSON, Mandatory)
+
+        - report_type (String, Optional)
+
+        - print_format_id (Int32, Optional)
+
+        - report_type (String, Optional)
+
+        - print_format_id (Int32, Optional)
+
+        - is_summary (Bool, Optional)
+
+        - browser_id (Int32, Optional)
+
+        - selections (JSON, Optional)
+
+        - workflow_id (Int32, Optional)
+            
+
+        **Application Example**
+
+
+        ``` bash
+
+        curl --location 'http://api.adempiere.io/business-data/report/140' \
+
+        --header 'Content-Type: application/json' \
+
+        --header 'Authorization: Bearer
+        eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMDAwMTQ5IiwiQURfQ2xpZW50X0lEIjoxMSwiQURfT3JnX0lEIjowLCJBRF9Sb2xlX0lEIjoxMDIsIkFEX1VzZXJfSUQiOjEwMCwiTV9XYXJlaG91c2VfSUQiOjAsIkFEX0xhbmd1YWdlIjoiZW5fVVMiLCJpYXQiOjE3MTA1MTA0MDEsImV4cCI6MTcxMDU5NjgwMX0.nYQbrcT9RyHNRCf-oNM50ZVSO6uJ9gvrQQ7e0fzU9Ik'
+        \
+
+        --data '{
+            "parameters":{
+                "M_Product_Category_ID":50000,
+                "C_AcctSchema_ID":101
+            },
+            "report_type":"png",
+            "print_format_id":0,
+            "report_view_id":0,
+            "is_summary":false,
+            "browser_id":0,
+            "selections":{},
+            "workflow_id":0
+        }'
+
+         ```
+
+        **Answer Example:**
+
+
+        ``` json
+
+        {
+            "id": 140,
+            "name": "",
+            "description": "",
+            "instance_id": 1001240,
+            "is_error": false,
+            "summary": "Creado=0, Actualizado=3",
+            "result_table_name": "",
+            "is_processing": false,
+            "last_run": "2024-03-14T15:17:43Z",
+            "logs": [
+                {
+                    "record_id": 0,
+                    "log": "Actualizado"
+                },
+                {
+                    "record_id": 0,
+                    "log": "Creado"
+                }
+            ],
+            "process_intance_parameters": []
+        }
+
+         ```
+
+        **Commons Errors**
+
+
+        - The role does not have the necessary permissions
+            
+
+        ``` json
+
+        {
+            "code": 13,
+            "message": "With your current role and settings, you cannot run Process \n\nYou don't have the privileges (your Role does not allow to access the information)",
+            "details": []
+        }
+
+         ```
+
+        - Lack of product category ID
+            
+
+        ``` json
+
+        {
+            "id": 140,
+            "name": "",
+            "description": "",
+            "instance_id": 1001230,
+            "is_error": true,
+            "summary": "Fill mandatory fields: Product Category",
+            "result_table_name": "",
+            "is_processing": false,
+            "last_run": "2024-03-15T13:47:39Z",
+            "logs": [],
+            "process_intance_parameters": []
+        }
+
+         ```
+
+        - Missing account schema id
+            
+
+        ``` json
+
+        {
+            "id": 140,
+            "name": "",
+            "description": "",
+            "instance_id": 1001232,
+            "is_error": true,
+            "summary": "Fill mandatory fields: Accounting Schema",
+            "result_table_name": "",
+            "is_processing": false,
+            "last_run": "2024-03-15T13:48:59Z",
+            "logs": [],
+            "process_intance_parameters": []
+        }
+
+         ```
+
+        - Account schema ID not found
+            
+
+        ``` json
+
+        {
+            "id": 140,
+            "name": "",
+            "description": "",
+            "instance_id": 1001234,
+            "is_error": true,
+            "summary": "Not Found - C_AcctSchema_ID=1",
+            "result_table_name": "",
+            "is_processing": false,
+            "last_run": "2024-03-15T13:49:45Z",
+            "logs": [],
+            "process_intance_parameters": []
+        }
+
+         ```
+
+        **Change control**
+
+
+        | **Version** | Date | **Auto** | Description of Changes |
+
+        | --- | --- | --- | --- |
+
+        | 1.0 | 15/03/2024 | Ricardo | Initial creation of the document |
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                parameters:
+                  M_Product_Category_ID: 50000
+                  C_AcctSchema_ID: 101
+                report_type: png
+                print_format_id: 0
+                report_view_id: 0
+                is_summary: false
+                browser_id: 0
+                selections: {}
+                workflow_id: 0
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: integer
+          required: true
+          example: '140'
+      responses:
+        '200':
+          description: OK
+          headers:
+            Server:
+              schema:
+                type: string
+                example: nginx/1.25.2
+            Date:
+              schema:
+                type: string
+                example: Thu, 14 Mar 2024 15:17:43 GMT
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Content-Length:
+              schema:
+                type: integer
+                example: '368'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            grpc-encoding:
+              schema:
+                type: string
+                example: identity
+            grpc-accept-encoding:
+              schema:
+                type: string
+                example: gzip
+            x-envoy-upstream-service-time:
+              schema:
+                type: integer
+                example: '167'
+            grpc-status:
+              schema:
+                type: integer
+                example: '0'
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Max-Age:
+              schema:
+                type: integer
+                example: '3600'
+            Access-Control-Expose-Headers:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+                example: '*'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                id: 140
+                name: ''
+                description: ''
+                instance_id: 1001240
+                is_error: false
+                summary: Creado=0, Actualizado=3
+                result_table_name: ''
+                is_processing: false
+                last_run: '2024-03-14T15:17:43Z'
+                logs:
+                  - record_id: 0
+                    log: Actualizado
+                  - record_id: 0
+                    log: Creado
+                process_intance_parameters: []
+  /business-data/process/{id}/workflow/{table_name}/{record_id}/{document_action}:
+    post:
+      tags:
+        - default
+      summary: business-data_recordId_documentAction
+      description: >-
+        **Endpoint**: POST /business-data
+
+
+        **Description**: Retorna ProcessLog
+
+
+        **Full URL**:
+        [http://api.adempiere.io/api](http://api.adempiere.io/api)/business-data/process/{id}/workflow/{table_name}/{record_id}/{document_action}
+
+
+        **Method**: POST
+
+
+        **Parameters (Params):**
+
+
+        - id (Int32, Mandatory)
+
+        - table_name (String, Mandatory)
+
+        - record_id (Int32, Mandatory)
+
+        - document_action (String, Mandatory)
+            
+
+        **Parameters (Body):**
+
+
+        - parameters (JSON, Mandatory)
+
+        - report_type (String, Optional)
+
+        - print_format_id (Int32, Optional)
+
+        - is_summary (Bool, Optional)
+
+        - browser_id (Int32, Optional)
+
+        - selections (JSON, Optional)
+
+        - workflow_id (Int32, Optional)
+            
+
+        **Application example**
+
+
+        ``` bash
+
+        curl --location
+        'http://api.adempiere.io/business-data/process/140/workflow/C_TaxCategory/120/AP'
+        \
+
+        --header 'Content-Type: application/json' \
+
+        --header 'Authorization: Bearer
+        eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMDAwMTQ5IiwiQURfQ2xpZW50X0lEIjoxMSwiQURfT3JnX0lEIjowLCJBRF9Sb2xlX0lEIjoxMDIsIkFEX1VzZXJfSUQiOjEwMCwiTV9XYXJlaG91c2VfSUQiOjAsIkFEX0xhbmd1YWdlIjoiZW5fVVMiLCJpYXQiOjE3MTA1MTA0MDEsImV4cCI6MTcxMDU5NjgwMX0.nYQbrcT9RyHNRCf-oNM50ZVSO6uJ9gvrQQ7e0fzU9Ik'
+        \
+
+        --data '{
+            "parameters":{
+                "M_Product_Category_ID":50000,
+                "C_AcctSchema_ID":101
+            },
+            "report_type":"png",
+            "print_format_id":0,
+            "report_view_id":0,
+            "is_summary":false,
+            "browser_id":0,
+            "selections":{},
+            "workflow_id":0
+        }'
+
+         ```
+
+        **Answer Example :**
+
+
+        ``` json
+
+        {
+            "id": 140,
+            "name": "",
+            "description": "",
+            "instance_id": 1001237,
+            "is_error": false,
+            "summary": "Created=0, Updated=3",
+            "result_table_name": "",
+            "is_processing": false,
+            "last_run": "2024-03-15T13:52:21Z",
+            "logs": [
+                {
+                    "record_id": 0,
+                    "log": "Updated"
+                },
+                {
+                    "record_id": 0,
+                    "log": "Created"
+                }
+            ],
+            "process_intance_parameters": []
+        }
+
+         ```
+
+        **Commons Errors:**
+
+
+        - The role does not have the necessary permissions
+            
+
+        ``` json
+
+        {
+            "code": 13,
+            "message": "With your current role and settings, you cannot run Process \n\nYou don't have the privileges (your Role does not allow to access the information)",
+            "details": []
+        }
+
+         ```
+
+        - Proccess not found
+            
+
+        ``` json
+
+        {
+            "code": 13,
+            "message": "Process * Not found *",
+            "details": []
+        }
+
+         ```
+
+        - ID field does not have a valid value
+            
+
+        ``` json
+
+        {
+            "code": 13,
+            "message": "Fill mandatory fields:  Process",
+            "details": []
+        }
+
+         ```
+
+        **Control de cambios**
+
+
+        | **Version** | Date | **Auto** | Description of changes |
+
+        | --- | --- | --- | --- |
+
+        | 1.0 | 15/03/2024 | Ricardo | Initial creation of the document. |
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                parameters:
+                  M_Product_Category_ID: 50000
+                  C_AcctSchema_ID: 101
+                report_type: png
+                print_format_id: 0
+                report_view_id: 0
+                is_summary: false
+                browser_id: 0
+                selections: {}
+                workflow_id: 0
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: integer
+          required: true
+          example: '140'
+        - name: table_name
+          in: path
+          schema:
+            type: string
+          required: true
+          example: C_TaxCategory
+        - name: record_id
+          in: path
+          schema:
+            type: integer
+          required: true
+          example: '120'
+        - name: document_action
+          in: path
+          schema:
+            type: string
+          required: true
+          example: AP
+      responses:
+        '200':
+          description: OK
+          headers:
+            Server:
+              schema:
+                type: string
+                example: nginx/1.25.2
+            Date:
+              schema:
+                type: string
+                example: Thu, 14 Mar 2024 14:52:01 GMT
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Content-Length:
+              schema:
+                type: integer
+                example: '368'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            grpc-encoding:
+              schema:
+                type: string
+                example: identity
+            grpc-accept-encoding:
+              schema:
+                type: string
+                example: gzip
+            x-envoy-upstream-service-time:
+              schema:
+                type: integer
+                example: '343'
+            grpc-status:
+              schema:
+                type: integer
+                example: '0'
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Max-Age:
+              schema:
+                type: integer
+                example: '3600'
+            Access-Control-Expose-Headers:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+                example: '*'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                id: 140
+                name: ''
+                description: ''
+                instance_id: 1001229
+                is_error: false
+                summary: Creado=0, Actualizado=3
+                result_table_name: ''
+                is_processing: false
+                last_run: '2024-03-14T14:52:01Z'
+                logs:
+                  - record_id: 0
+                    log: Actualizado
+                  - record_id: 0
+                    log: Creado
+                process_intance_parameters: []
+  /business-data/process/{id}/window/{table_name}/{record_id}:
+    post:
+      tags:
+        - default
+      summary: business-data_tableName_recordId
+      description: >-
+        **Endpoint**: POST /business-data
+
+
+        **Description**: Retorna ProcessLog
+
+
+        **Full URL**:
+        [http://api.adempiere.io/api](http://api.adempiere.io/api)/business-data/process/{id}/window/{table_name}/{record_id}
+
+
+        **Method**: POST
+
+
+        **Parameters (Params):**
+
+
+        - id (Int32, Mandatory)
+            
+        - table_name (String, Optional)
+            
+        - record_id (Int32, Optional)
+            
+
+        **Parameters (Body):**
+
+
+        - parameters (JSON, Optional)
+            
+        - report_type (String, Optional)
+            
+        - print_format_id (Int32, Optional)
+            
+        - report_view_id (Int32, Optional)
+            
+        - is_summary (Bool, Optional)
+            
+        - selections (JSON, Mandatory)
+            
+        - table_name (String, Optional)
+            
+        - record_id (Int32, Optional)
+            
+        - workflow_id (Int32, Optional)
+            
+        - document_action (String, Optional)
+            
+
+        **Application example**
+
+
+        ``` bash
+
+        curl --location
+        'http://api.adempiere.io/business-data/process/205/window/""/0' \
+
+        --header 'Content-Type: application/json' \
+
+        --header 'Authorization: Bearer
+        eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMDAwMTQ5IiwiQURfQ2xpZW50X0lEIjoxMSwiQURfT3JnX0lEIjowLCJBRF9Sb2xlX0lEIjoxMDIsIkFEX1VzZXJfSUQiOjEwMCwiTV9XYXJlaG91c2VfSUQiOjAsIkFEX0xhbmd1YWdlIjoiZW5fVVMiLCJpYXQiOjE3MTA1MTA0MDEsImV4cCI6MTcxMDU5NjgwMX0.nYQbrcT9RyHNRCf-oNM50ZVSO6uJ9gvrQQ7e0fzU9Ik'
+        \
+
+        --data '{
+            "parameters":{
+            },
+            "report_type":"png",
+            "print_format_id":0,
+            "report_view_id":0,
+            "is_summary":false,
+            "browser_id":0,
+            "selections":{
+            },
+            "table_name": "",
+            "record_id":0,
+            "workflow_id":0,
+            "document_action":"png"
+        }'
+
+         ```
+
+        **Answer Example:**
+
+
+        ``` json
+
+        {
+            "id": 205,
+            "name": "",
+            "description": "",
+            "instance_id": 1001245,
+            "is_error": false,
+            "summary": "Cache Reset",
+            "result_table_name": "",
+            "is_processing": false,
+            "last_run": "2024-03-15T13:56:02Z",
+            "logs": [],
+            "process_intance_parameters": []
+        }
+
+         ```
+
+        **Errores Comunes:**
+
+
+        - The role does not have the necessary permissions
+            
+
+        ``` json
+
+        {
+            "code": 13,
+            "message": "With your current role and settings, you cannot run Process \n\nYou don't have the privileges (your Role does not allow to access the information)",
+            "details": []
+        }
+
+         ```
+
+        - Proccess not found
+            
+
+        ``` json
+
+        {
+            "code": 13,
+            "message": "Process * Not found *",
+            "details": []
+        }
+
+         ```
+
+        - ID field does not have a valid value
+            
+
+        ``` json
+
+        {
+            "code": 13,
+            "message": "Fill mandatory fields:  Process",
+            "details": []
+        }
+
+         ```
+
+        **Control de cambios**
+
+
+        | **Version** | Date | **Auto** | Description of changes |
+
+        | --- | --- | --- | --- |
+
+        | 1.0 | 15/03/2024 | Ricardo | Initial creation of the document. |
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                parameters: {}
+                report_type: png
+                print_format_id: 0
+                report_view_id: 0
+                is_summary: false
+                browser_id: 0
+                selections: {}
+                table_name: ''
+                record_id: 0
+                workflow_id: 0
+                document_action: png
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: integer
+          required: true
+          example: '205'
+        - name: table_name
+          in: path
+          schema:
+            type: string
+          required: true
+          example: '""'
+        - name: record_id
+          in: path
+          schema:
+            type: integer
+          required: true
+          example: '0'
+      responses:
+        '200':
+          description: OK
+          headers:
+            Server:
+              schema:
+                type: string
+                example: nginx/1.25.2
+            Date:
+              schema:
+                type: string
+                example: Thu, 14 Mar 2024 14:52:18 GMT
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Content-Length:
+              schema:
+                type: integer
+                example: '256'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            grpc-encoding:
+              schema:
+                type: string
+                example: identity
+            grpc-accept-encoding:
+              schema:
+                type: string
+                example: gzip
+            x-envoy-upstream-service-time:
+              schema:
+                type: integer
+                example: '505'
+            grpc-status:
+              schema:
+                type: integer
+                example: '0'
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Max-Age:
+              schema:
+                type: integer
+                example: '3600'
+            Access-Control-Expose-Headers:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+                example: '*'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                id: 205
+                name: ''
+                description: ''
+                instance_id: 1001231
+                is_error: false
+                summary: Cache Reset
+                result_table_name: ''
+                is_processing: false
+                last_run: '2024-03-14T14:52:18Z'
+                logs: []
+                process_intance_parameters: []

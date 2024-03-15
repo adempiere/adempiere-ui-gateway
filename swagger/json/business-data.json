@@ -1,0 +1,633 @@
+{
+	"info": {
+		"_postman_id": "cc4c7499-e195-4fb9-9cc7-3620d6135d36",
+		"name": "Business",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23072370",
+		"_collection_link": "https://gold-moon-270692.postman.co/workspace/Team-Workspace~417f6c5b-8eca-4742-88ad-b6830954ef41/collection/23072370-cc4c7499-e195-4fb9-9cc7-3620d6135d36?action=share&source=collection_link&creator=23072370"
+	},
+	"item": [
+		{
+			"name": "business-data",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"parameters\":{\n        \"M_Product_Category_ID\":50000,\n        \"C_AcctSchema_ID\":101\n    },\n    \"report_type\":\"png\",\n    \"print_format_id\":0,\n    \"report_view_id\":0,\n    \"is_summary\":false,\n    \"browser_id\":0,\n    \"selections\":{},\n    \"workflow_id\":0\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{HOST}}/business-data/process/:id",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"business-data",
+						"process",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "0"
+						}
+					]
+				},
+				"description": "**Endpoint**: POST /business-data\n\n**Description**: Returns ProcessLog\n\n**Full URL**: [http://api.adempiere.io/api](http://api.adempiere.io/api)/business-data/process/{id}\n\n**Method:** POST\n\n**Parameters (Params):**\n\n- id (Int32, Mandatory)\n    \n\n**Parameters (Body):**\n\n- parameters (JSON, mandatory)\n- report_type (String, optional)\n- print_format_id (Int32, optional)\n- report_type (String, optional)\n- print_format_id (Int32, optional)\n- is_summary (Bool, optional)\n- browser_id (Int32, optional)\n- selections (JSON, optional)\n- workflow_id (Int32, optional)\n    \n\n**Application Example**\n\n``` bash\ncurl --location 'http://api.adempiere.io/business-data/process/0' \\\n--header 'Content-Type: application/json' \\\n--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMDAwMTQ5IiwiQURfQ2xpZW50X0lEIjoxMSwiQURfT3JnX0lEIjowLCJBRF9Sb2xlX0lEIjoxMDIsIkFEX1VzZXJfSUQiOjEwMCwiTV9XYXJlaG91c2VfSUQiOjAsIkFEX0xhbmd1YWdlIjoiZW5fVVMiLCJpYXQiOjE3MTA1MTA0MDEsImV4cCI6MTcxMDU5NjgwMX0.nYQbrcT9RyHNRCf-oNM50ZVSO6uJ9gvrQQ7e0fzU9Ik' \\\n--data '{\n    \"parameters\":{\n        \"M_Product_Category_ID\":50000,\n        \"C_AcctSchema_ID\":101\n    },\n    \"report_type\":\"png\",\n    \"print_format_id\":0,\n    \"report_view_id\":0,\n    \"is_summary\":false,\n    \"browser_id\":0,\n    \"selections\":{},\n    \"workflow_id\":0\n}'\n\n ```\n\n**Example Answer:**\n\n``` json\n{\n    \"id\": 140,\n    \"name\": \"\",\n    \"description\": \"\",\n    \"instance_id\": 1001242,\n    \"is_error\": false,\n    \"summary\": \"Creado=0, Actualizado=3\",\n    \"result_table_name\": \"\",\n    \"is_processing\": false,\n    \"last_run\": \"2024-03-14T15:19:48Z\",\n    \"logs\": [\n        {\n            \"record_id\": 0,\n            \"log\": \"Actualizado\"\n        },\n        {\n            \"record_id\": 0,\n            \"log\": \"Creado\"\n        }\n    ],\n    \"process_intance_parameters\": []\n}\n\n ```\n\n**Common mistakes:**\n\n- The role does not have the necessary permissions\n    \n\n``` json\n{\n    \"code\": 13,\n    \"message\": \"With your current role and settings, you cannot run Process \\n\\nYou don't have the privileges (your Role does not allow to access the information)\",\n    \"details\": []\n}\n\n ```\n\n- Process not found\n    \n\n``` json\n{\n    \"code\": 13,\n    \"message\": \"Process * Not found *\",\n    \"details\": []\n}\n\n ```\n\n- ID field does not have a valid value\n    \n\n``` json\n{\n    \"code\": 13,\n    \"message\": \"Fill mandatory fields:  Process\",\n    \"details\": []\n}\n\n ```\n\n**Change control**\n\n| **Version** | date | author | Description of Changes |\n| --- | --- | --- | --- |\n| 1.0 | 15/03/2024 | Ricardo | Initial creation of the document. |"
+			},
+			"response": [
+				{
+					"name": "/business-data/process/{id}",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"parameters\":{\n        \"M_Product_Category_ID\":50000,\n        \"C_AcctSchema_ID\":101\n    },\n    \"report_type\":\"png\",\n    \"print_format_id\":0,\n    \"report_view_id\":0,\n    \"is_summary\":false,\n    \"browser_id\":0,\n    \"selections\":{},\n    \"workflow_id\":0\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HOST}}/business-data/process/:id",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"business-data",
+								"process",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "140"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.25.2"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 14 Mar 2024 15:19:48 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "368"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "grpc-encoding",
+							"value": "identity"
+						},
+						{
+							"key": "grpc-accept-encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "x-envoy-upstream-service-time",
+							"value": "172"
+						},
+						{
+							"key": "grpc-status",
+							"value": "0"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Max-Age",
+							"value": "3600"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 140,\n    \"name\": \"\",\n    \"description\": \"\",\n    \"instance_id\": 1001242,\n    \"is_error\": false,\n    \"summary\": \"Creado=0, Actualizado=3\",\n    \"result_table_name\": \"\",\n    \"is_processing\": false,\n    \"last_run\": \"2024-03-14T15:19:48Z\",\n    \"logs\": [\n        {\n            \"record_id\": 0,\n            \"log\": \"Actualizado\"\n        },\n        {\n            \"record_id\": 0,\n            \"log\": \"Creado\"\n        }\n    ],\n    \"process_intance_parameters\": []\n}"
+				}
+			]
+		},
+		{
+			"name": "business-data_report",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"parameters\":{\n        \"M_Product_Category_ID\":50000,\n        \"C_AcctSchema_ID\":101\n    },\n    \"report_type\":\"png\",\n    \"print_format_id\":0,\n    \"report_view_id\":0,\n    \"is_summary\":false,\n    \"browser_id\":0,\n    \"selections\":{},\n    \"workflow_id\":0\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{HOST}}/business-data/report/:id",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"business-data",
+						"report",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "140"
+						}
+					]
+				},
+				"description": "**Endpoint**: POST /business-data\n\n**Description**: Retorna ProcessLog\n\n**Full URL**: [http://api.adempiere.io/api](http://api.adempiere.io/api)/business-data/report/{id}\n\n**Method**: POST\n\n**Parameters (Params):**\n\n- id (Int32, Mandatory)\n    \n\n**Parametros (Body):**\n\n- parameters (JSON, Mandatory)\n- report_type (String, Optional)\n- print_format_id (Int32, Optional)\n- report_type (String, Optional)\n- print_format_id (Int32, Optional)\n- is_summary (Bool, Optional)\n- browser_id (Int32, Optional)\n- selections (JSON, Optional)\n- workflow_id (Int32, Optional)\n    \n\n**Application Example**\n\n``` bash\ncurl --location 'http://api.adempiere.io/business-data/report/140' \\\n--header 'Content-Type: application/json' \\\n--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMDAwMTQ5IiwiQURfQ2xpZW50X0lEIjoxMSwiQURfT3JnX0lEIjowLCJBRF9Sb2xlX0lEIjoxMDIsIkFEX1VzZXJfSUQiOjEwMCwiTV9XYXJlaG91c2VfSUQiOjAsIkFEX0xhbmd1YWdlIjoiZW5fVVMiLCJpYXQiOjE3MTA1MTA0MDEsImV4cCI6MTcxMDU5NjgwMX0.nYQbrcT9RyHNRCf-oNM50ZVSO6uJ9gvrQQ7e0fzU9Ik' \\\n--data '{\n    \"parameters\":{\n        \"M_Product_Category_ID\":50000,\n        \"C_AcctSchema_ID\":101\n    },\n    \"report_type\":\"png\",\n    \"print_format_id\":0,\n    \"report_view_id\":0,\n    \"is_summary\":false,\n    \"browser_id\":0,\n    \"selections\":{},\n    \"workflow_id\":0\n}'\n\n ```\n\n**Answer Example:**\n\n``` json\n{\n    \"id\": 140,\n    \"name\": \"\",\n    \"description\": \"\",\n    \"instance_id\": 1001240,\n    \"is_error\": false,\n    \"summary\": \"Creado=0, Actualizado=3\",\n    \"result_table_name\": \"\",\n    \"is_processing\": false,\n    \"last_run\": \"2024-03-14T15:17:43Z\",\n    \"logs\": [\n        {\n            \"record_id\": 0,\n            \"log\": \"Actualizado\"\n        },\n        {\n            \"record_id\": 0,\n            \"log\": \"Creado\"\n        }\n    ],\n    \"process_intance_parameters\": []\n}\n\n ```\n\n**Commons Errors**\n\n- The role does not have the necessary permissions\n    \n\n``` json\n{\n    \"code\": 13,\n    \"message\": \"With your current role and settings, you cannot run Process \\n\\nYou don't have the privileges (your Role does not allow to access the information)\",\n    \"details\": []\n}\n\n ```\n\n- Lack of product category ID\n    \n\n``` json\n{\n    \"id\": 140,\n    \"name\": \"\",\n    \"description\": \"\",\n    \"instance_id\": 1001230,\n    \"is_error\": true,\n    \"summary\": \"Fill mandatory fields: Product Category\",\n    \"result_table_name\": \"\",\n    \"is_processing\": false,\n    \"last_run\": \"2024-03-15T13:47:39Z\",\n    \"logs\": [],\n    \"process_intance_parameters\": []\n}\n\n ```\n\n- Missing account schema id\n    \n\n``` json\n{\n    \"id\": 140,\n    \"name\": \"\",\n    \"description\": \"\",\n    \"instance_id\": 1001232,\n    \"is_error\": true,\n    \"summary\": \"Fill mandatory fields: Accounting Schema\",\n    \"result_table_name\": \"\",\n    \"is_processing\": false,\n    \"last_run\": \"2024-03-15T13:48:59Z\",\n    \"logs\": [],\n    \"process_intance_parameters\": []\n}\n\n ```\n\n- Account schema ID not found\n    \n\n``` json\n{\n    \"id\": 140,\n    \"name\": \"\",\n    \"description\": \"\",\n    \"instance_id\": 1001234,\n    \"is_error\": true,\n    \"summary\": \"Not Found - C_AcctSchema_ID=1\",\n    \"result_table_name\": \"\",\n    \"is_processing\": false,\n    \"last_run\": \"2024-03-15T13:49:45Z\",\n    \"logs\": [],\n    \"process_intance_parameters\": []\n}\n\n ```\n\n**Change control**\n\n| **Version** | Date | **Auto** | Description of Changes |\n| --- | --- | --- | --- |\n| 1.0 | 15/03/2024 | Ricardo | Initial creation of the document |"
+			},
+			"response": [
+				{
+					"name": "business-data",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"parameters\":{\n        \"M_Product_Category_ID\":50000,\n        \"C_AcctSchema_ID\":101\n    },\n    \"report_type\":\"png\",\n    \"print_format_id\":0,\n    \"report_view_id\":0,\n    \"is_summary\":false,\n    \"browser_id\":0,\n    \"selections\":{},\n    \"workflow_id\":0\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HOST}}/business-data/report/:id",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"business-data",
+								"report",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "140"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.25.2"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 14 Mar 2024 15:17:43 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "368"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "grpc-encoding",
+							"value": "identity"
+						},
+						{
+							"key": "grpc-accept-encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "x-envoy-upstream-service-time",
+							"value": "167"
+						},
+						{
+							"key": "grpc-status",
+							"value": "0"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Max-Age",
+							"value": "3600"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 140,\n    \"name\": \"\",\n    \"description\": \"\",\n    \"instance_id\": 1001240,\n    \"is_error\": false,\n    \"summary\": \"Creado=0, Actualizado=3\",\n    \"result_table_name\": \"\",\n    \"is_processing\": false,\n    \"last_run\": \"2024-03-14T15:17:43Z\",\n    \"logs\": [\n        {\n            \"record_id\": 0,\n            \"log\": \"Actualizado\"\n        },\n        {\n            \"record_id\": 0,\n            \"log\": \"Creado\"\n        }\n    ],\n    \"process_intance_parameters\": []\n}"
+				}
+			]
+		},
+		{
+			"name": "business-data_recordId_documentAction",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"parameters\":{\n        \"M_Product_Category_ID\":50000,\n        \"C_AcctSchema_ID\":101\n    },\n    \"report_type\":\"png\",\n    \"print_format_id\":0,\n    \"report_view_id\":0,\n    \"is_summary\":false,\n    \"browser_id\":0,\n    \"selections\":{},\n    \"workflow_id\":0\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{HOST}}/business-data/process/:id/workflow/:table_name/:record_id/:document_action",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"business-data",
+						"process",
+						":id",
+						"workflow",
+						":table_name",
+						":record_id",
+						":document_action"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "140"
+						},
+						{
+							"key": "table_name",
+							"value": "C_TaxCategory"
+						},
+						{
+							"key": "record_id",
+							"value": "120"
+						},
+						{
+							"key": "document_action",
+							"value": "AP"
+						}
+					]
+				},
+				"description": "**Endpoint**: POST /business-data\n\n**Description**: Retorna ProcessLog\n\n**Full URL**: [http://api.adempiere.io/api](http://api.adempiere.io/api)/business-data/process/{id}/workflow/{table_name}/{record_id}/{document_action}\n\n**Method**: POST\n\n**Parameters (Params):**\n\n- id (Int32, Mandatory)\n- table_name (String, Mandatory)\n- record_id (Int32, Mandatory)\n- document_action (String, Mandatory)\n    \n\n**Parameters (Body):**\n\n- parameters (JSON, Mandatory)\n- report_type (String, Optional)\n- print_format_id (Int32, Optional)\n- is_summary (Bool, Optional)\n- browser_id (Int32, Optional)\n- selections (JSON, Optional)\n- workflow_id (Int32, Optional)\n    \n\n**Application example**\n\n``` bash\ncurl --location 'http://api.adempiere.io/business-data/process/140/workflow/C_TaxCategory/120/AP' \\\n--header 'Content-Type: application/json' \\\n--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMDAwMTQ5IiwiQURfQ2xpZW50X0lEIjoxMSwiQURfT3JnX0lEIjowLCJBRF9Sb2xlX0lEIjoxMDIsIkFEX1VzZXJfSUQiOjEwMCwiTV9XYXJlaG91c2VfSUQiOjAsIkFEX0xhbmd1YWdlIjoiZW5fVVMiLCJpYXQiOjE3MTA1MTA0MDEsImV4cCI6MTcxMDU5NjgwMX0.nYQbrcT9RyHNRCf-oNM50ZVSO6uJ9gvrQQ7e0fzU9Ik' \\\n--data '{\n    \"parameters\":{\n        \"M_Product_Category_ID\":50000,\n        \"C_AcctSchema_ID\":101\n    },\n    \"report_type\":\"png\",\n    \"print_format_id\":0,\n    \"report_view_id\":0,\n    \"is_summary\":false,\n    \"browser_id\":0,\n    \"selections\":{},\n    \"workflow_id\":0\n}'\n\n ```\n\n**Answer Example :**\n\n``` json\n{\n    \"id\": 140,\n    \"name\": \"\",\n    \"description\": \"\",\n    \"instance_id\": 1001237,\n    \"is_error\": false,\n    \"summary\": \"Created=0, Updated=3\",\n    \"result_table_name\": \"\",\n    \"is_processing\": false,\n    \"last_run\": \"2024-03-15T13:52:21Z\",\n    \"logs\": [\n        {\n            \"record_id\": 0,\n            \"log\": \"Updated\"\n        },\n        {\n            \"record_id\": 0,\n            \"log\": \"Created\"\n        }\n    ],\n    \"process_intance_parameters\": []\n}\n\n ```\n\n**Commons Errors:**\n\n- The role does not have the necessary permissions\n    \n\n``` json\n{\n    \"code\": 13,\n    \"message\": \"With your current role and settings, you cannot run Process \\n\\nYou don't have the privileges (your Role does not allow to access the information)\",\n    \"details\": []\n}\n\n ```\n\n- Proccess not found\n    \n\n``` json\n{\n    \"code\": 13,\n    \"message\": \"Process * Not found *\",\n    \"details\": []\n}\n\n ```\n\n- ID field does not have a valid value\n    \n\n``` json\n{\n    \"code\": 13,\n    \"message\": \"Fill mandatory fields:  Process\",\n    \"details\": []\n}\n\n ```\n\n**Control de cambios**\n\n| **Version** | Date | **Auto** | Description of changes |\n| --- | --- | --- | --- |\n| 1.0 | 15/03/2024 | Ricardo | Initial creation of the document. |"
+			},
+			"response": [
+				{
+					"name": "{{HOST}}/business-data/process/:id/workflow/:table_name/:record_id/:document_action",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"parameters\":{\n        \"M_Product_Category_ID\":50000,\n        \"C_AcctSchema_ID\":101\n    },\n    \"report_type\":\"png\",\n    \"print_format_id\":0,\n    \"report_view_id\":0,\n    \"is_summary\":false,\n    \"browser_id\":0,\n    \"selections\":{},\n    \"workflow_id\":0\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HOST}}/business-data/process/:id/workflow/:table_name/:record_id/:document_action",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"business-data",
+								"process",
+								":id",
+								"workflow",
+								":table_name",
+								":record_id",
+								":document_action"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "140"
+								},
+								{
+									"key": "table_name",
+									"value": "C_TaxCategory"
+								},
+								{
+									"key": "record_id",
+									"value": "120"
+								},
+								{
+									"key": "document_action",
+									"value": "AP"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.25.2"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 14 Mar 2024 14:52:01 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "368"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "grpc-encoding",
+							"value": "identity"
+						},
+						{
+							"key": "grpc-accept-encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "x-envoy-upstream-service-time",
+							"value": "343"
+						},
+						{
+							"key": "grpc-status",
+							"value": "0"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Max-Age",
+							"value": "3600"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 140,\n    \"name\": \"\",\n    \"description\": \"\",\n    \"instance_id\": 1001229,\n    \"is_error\": false,\n    \"summary\": \"Creado=0, Actualizado=3\",\n    \"result_table_name\": \"\",\n    \"is_processing\": false,\n    \"last_run\": \"2024-03-14T14:52:01Z\",\n    \"logs\": [\n        {\n            \"record_id\": 0,\n            \"log\": \"Actualizado\"\n        },\n        {\n            \"record_id\": 0,\n            \"log\": \"Creado\"\n        }\n    ],\n    \"process_intance_parameters\": []\n}"
+				}
+			]
+		},
+		{
+			"name": "business-data_tableName_recordId",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"parameters\":{\n        \n    },\n    \"report_type\":\"png\",\n    \"print_format_id\":0,\n    \"report_view_id\":0,\n    \"is_summary\":false,\n    \"browser_id\":0,\n    \"selections\":{\n        \n    },\n    \"table_name\": \"\",\n    \"record_id\":0,\n    \"workflow_id\":0,\n    \"document_action\":\"png\"\n        \n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{HOST}}/business-data/process/:id/window/:table_name/:record_id",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"business-data",
+						"process",
+						":id",
+						"window",
+						":table_name",
+						":record_id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "205"
+						},
+						{
+							"key": "table_name",
+							"value": "\"\""
+						},
+						{
+							"key": "record_id",
+							"value": "0"
+						}
+					]
+				},
+				"description": "**Endpoint**: POST /business-data\n\n**Description**: Retorna ProcessLog\n\n**Full URL**: [http://api.adempiere.io/api](http://api.adempiere.io/api)/business-data/process/{id}/window/{table_name}/{record_id}\n\n**Method**: POST\n\n**Parameters (Params):**\n\n- id (Int32, Mandatory)\n    \n- table_name (String, Optional)\n    \n- record_id (Int32, Optional)\n    \n\n**Parameters (Body):**\n\n- parameters (JSON, Optional)\n    \n- report_type (String, Optional)\n    \n- print_format_id (Int32, Optional)\n    \n- report_view_id (Int32, Optional)\n    \n- is_summary (Bool, Optional)\n    \n- selections (JSON, Mandatory)\n    \n- table_name (String, Optional)\n    \n- record_id (Int32, Optional)\n    \n- workflow_id (Int32, Optional)\n    \n- document_action (String, Optional)\n    \n\n**Application example**\n\n``` bash\ncurl --location 'http://api.adempiere.io/business-data/process/205/window/\"\"/0' \\\n--header 'Content-Type: application/json' \\\n--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMDAwMTQ5IiwiQURfQ2xpZW50X0lEIjoxMSwiQURfT3JnX0lEIjowLCJBRF9Sb2xlX0lEIjoxMDIsIkFEX1VzZXJfSUQiOjEwMCwiTV9XYXJlaG91c2VfSUQiOjAsIkFEX0xhbmd1YWdlIjoiZW5fVVMiLCJpYXQiOjE3MTA1MTA0MDEsImV4cCI6MTcxMDU5NjgwMX0.nYQbrcT9RyHNRCf-oNM50ZVSO6uJ9gvrQQ7e0fzU9Ik' \\\n--data '{\n    \"parameters\":{\n    },\n    \"report_type\":\"png\",\n    \"print_format_id\":0,\n    \"report_view_id\":0,\n    \"is_summary\":false,\n    \"browser_id\":0,\n    \"selections\":{\n    },\n    \"table_name\": \"\",\n    \"record_id\":0,\n    \"workflow_id\":0,\n    \"document_action\":\"png\"\n}'\n\n ```\n\n**Answer Example:**\n\n``` json\n{\n    \"id\": 205,\n    \"name\": \"\",\n    \"description\": \"\",\n    \"instance_id\": 1001245,\n    \"is_error\": false,\n    \"summary\": \"Cache Reset\",\n    \"result_table_name\": \"\",\n    \"is_processing\": false,\n    \"last_run\": \"2024-03-15T13:56:02Z\",\n    \"logs\": [],\n    \"process_intance_parameters\": []\n}\n\n ```\n\n**Errores Comunes:**\n\n- The role does not have the necessary permissions\n    \n\n``` json\n{\n    \"code\": 13,\n    \"message\": \"With your current role and settings, you cannot run Process \\n\\nYou don't have the privileges (your Role does not allow to access the information)\",\n    \"details\": []\n}\n\n ```\n\n- Proccess not found\n    \n\n``` json\n{\n    \"code\": 13,\n    \"message\": \"Process * Not found *\",\n    \"details\": []\n}\n\n ```\n\n- ID field does not have a valid value\n    \n\n``` json\n{\n    \"code\": 13,\n    \"message\": \"Fill mandatory fields:  Process\",\n    \"details\": []\n}\n\n ```\n\n**Control de cambios**\n\n| **Version** | Date | **Auto** | Description of changes |\n| --- | --- | --- | --- |\n| 1.0 | 15/03/2024 | Ricardo | Initial creation of the document. |"
+			},
+			"response": [
+				{
+					"name": "{{HOST}}/business-data/process/:id/window/:table_name/:record_id",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"parameters\":{\n        \n    },\n    \"report_type\":\"png\",\n    \"print_format_id\":0,\n    \"report_view_id\":0,\n    \"is_summary\":false,\n    \"browser_id\":0,\n    \"selections\":{\n        \n    },\n    \"table_name\": \"\",\n    \"record_id\":0,\n    \"workflow_id\":0,\n    \"document_action\":\"png\"\n        \n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HOST}}/business-data/process/:id/window/:table_name/:record_id",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"business-data",
+								"process",
+								":id",
+								"window",
+								":table_name",
+								":record_id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "205"
+								},
+								{
+									"key": "table_name",
+									"value": "\"\""
+								},
+								{
+									"key": "record_id",
+									"value": "0"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.25.2"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 14 Mar 2024 14:52:18 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "256"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "grpc-encoding",
+							"value": "identity"
+						},
+						{
+							"key": "grpc-accept-encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "x-envoy-upstream-service-time",
+							"value": "505"
+						},
+						{
+							"key": "grpc-status",
+							"value": "0"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Max-Age",
+							"value": "3600"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 205,\n    \"name\": \"\",\n    \"description\": \"\",\n    \"instance_id\": 1001231,\n    \"is_error\": false,\n    \"summary\": \"Cache Reset\",\n    \"result_table_name\": \"\",\n    \"is_processing\": false,\n    \"last_run\": \"2024-03-14T14:52:18Z\",\n    \"logs\": [],\n    \"process_intance_parameters\": []\n}"
+				}
+			]
+		}
+	]
+}
