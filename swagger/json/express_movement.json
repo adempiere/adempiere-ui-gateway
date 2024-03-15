@@ -1,0 +1,1168 @@
+{
+	"info": {
+		"_postman_id": "a4e5510f-7cff-4025-b1d3-8e0930ef31ee",
+		"name": "Express_movement",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "28978517"
+	},
+	"item": [
+		{
+			"name": "ListWarehouses",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{HOST}}/express-movement/warehouses",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"express-movement",
+						"warehouses"
+					]
+				},
+				"description": "**Endpoint**: GET /Express_movement\n\n**Description**: Returns ListWarehouses\n\n**FULL URL**: [http://api.adempiere.io](http://api.adempiere.io/api)/express-movement/warehouses\n\n**Method**: GET\n\n**Application Example**\n\n``` bash\ncurl --location 'http://api.adempiere.io/express-movement/warehouses' \\\n--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMDAwMTQ5IiwiQURfQ2xpZW50X0lEIjoxMSwiQURfT3JnX0lEIjowLCJBRF9Sb2xlX0lEIjoxMDIsIkFEX1VzZXJfSUQiOjEwMCwiTV9XYXJlaG91c2VfSUQiOjAsIkFEX0xhbmd1YWdlIjoiZW5fVVMiLCJpYXQiOjE3MTA1MTA0MDEsImV4cCI6MTcxMDU5NjgwMX0.nYQbrcT9RyHNRCf-oNM50ZVSO6uJ9gvrQQ7e0fzU9Ik'\n\n ```\n\n**Example Answer**\n\n``` json\n{\n    \"record_count\": \"11\",\n    \"records\": [\n        {\n            \"id\": 103,\n            \"value\": \"HQ\",\n            \"name\": \"HQ Warehouse\",\n            \"description\": \"\"\n        },\n        {\n            \"id\": 104,\n            \"value\": \"Store Central\",\n            \"name\": \"Store Central\",\n            \"description\": \"\"\n        },\n        {\n            \"id\": 50000,\n            \"value\": \"HQT\",\n            \"name\": \"HQ Transit\",\n            \"description\": \"\"\n        },\n        {\n            \"id\": 50001,\n            \"value\": \"Furniture\",\n            \"name\": \"Furniture\",\n            \"description\": \"Furniture\"\n        },\n        {\n            \"id\": 50002,\n            \"value\": \"Fertilizer\",\n            \"name\": \"Fertilizer\",\n            \"description\": \"Fertilizer\"\n        },\n        {\n            \"id\": 50003,\n            \"value\": \"Store North\",\n            \"name\": \"Store North\",\n            \"description\": \"\"\n        },\n        {\n            \"id\": 50004,\n            \"value\": \"Store South\",\n            \"name\": \"Store South\",\n            \"description\": \"\"\n        },\n        {\n            \"id\": 50005,\n            \"value\": \"Store East\",\n            \"name\": \"Store East\",\n            \"description\": \"\"\n        },\n        {\n            \"id\": 50006,\n            \"value\": \"Store West\",\n            \"name\": \"Store West\",\n            \"description\": \"\"\n        },\n        {\n            \"id\": 50007,\n            \"value\": \"FertilizerT\",\n            \"name\": \"Fertilizer Transit\",\n            \"description\": \"Fertilizer Transit\"\n        },\n        {\n            \"id\": 50008,\n            \"value\": \"FurnitureT\",\n            \"name\": \"Furniture Transit\",\n            \"description\": \"Furniture Transit\"\n        }\n    ],\n    \"next_page_token\": \"\"\n}\n\n ```\n\n**Change control**\n\n| **Version** | date | author | Description of Changes |\n| --- | --- | --- | --- |\n| 1.0 | 15/03/2024 | Ricardo | Initial creation of the document. |"
+			},
+			"response": [
+				{
+					"name": "ListWarehouses",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/express-movement/warehouses",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"express-movement",
+								"warehouses"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.25.2"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 06 Mar 2024 19:43:38 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "1195"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "grpc-encoding",
+							"value": "identity"
+						},
+						{
+							"key": "grpc-accept-encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "x-envoy-upstream-service-time",
+							"value": "105"
+						},
+						{
+							"key": "grpc-status",
+							"value": "0"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Max-Age",
+							"value": "3600"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"record_count\": \"11\",\n    \"records\": [\n        {\n            \"id\": 103,\n            \"value\": \"HQ\",\n            \"name\": \"HQ Warehouse\",\n            \"description\": \"\"\n        },\n        {\n            \"id\": 104,\n            \"value\": \"Store Central\",\n            \"name\": \"Store Central\",\n            \"description\": \"\"\n        },\n        {\n            \"id\": 50000,\n            \"value\": \"HQT\",\n            \"name\": \"HQ Transit\",\n            \"description\": \"\"\n        },\n        {\n            \"id\": 50001,\n            \"value\": \"Furniture\",\n            \"name\": \"Furniture\",\n            \"description\": \"Furniture\"\n        },\n        {\n            \"id\": 50002,\n            \"value\": \"Fertilizer\",\n            \"name\": \"Fertilizer\",\n            \"description\": \"Fertilizer\"\n        },\n        {\n            \"id\": 50003,\n            \"value\": \"Store North\",\n            \"name\": \"Store North\",\n            \"description\": \"\"\n        },\n        {\n            \"id\": 50004,\n            \"value\": \"Store South\",\n            \"name\": \"Store South\",\n            \"description\": \"\"\n        },\n        {\n            \"id\": 50005,\n            \"value\": \"Store East\",\n            \"name\": \"Store East\",\n            \"description\": \"\"\n        },\n        {\n            \"id\": 50006,\n            \"value\": \"Store West\",\n            \"name\": \"Store West\",\n            \"description\": \"\"\n        },\n        {\n            \"id\": 50007,\n            \"value\": \"FertilizerT\",\n            \"name\": \"Fertilizer Transit\",\n            \"description\": \"Fertilizer Transit\"\n        },\n        {\n            \"id\": 50008,\n            \"value\": \"FurnitureT\",\n            \"name\": \"Furniture Transit\",\n            \"description\": \"Furniture Transit\"\n        }\n    ],\n    \"next_page_token\": \"\"\n}"
+				}
+			]
+		},
+		{
+			"name": "ListProducts",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{HOST}}/express-movement/products",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"express-movement",
+						"products"
+					]
+				},
+				"description": "**Endpoint**: GET /Express_movement\n\n**Description**: Returns ListProducts\n\n**FULL URL**: [http://api.adempiere.io/](http://api.adempiere.io/api)express-movement/products\n\n**Method**: GET\n\n**Application Example**\n\n``` bash\ncurl --location 'http://api.adempiere.io/express-movement/products' \\\n--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMDAwMTQ5IiwiQURfQ2xpZW50X0lEIjoxMSwiQURfT3JnX0lEIjowLCJBRF9Sb2xlX0lEIjoxMDIsIkFEX1VzZXJfSUQiOjEwMCwiTV9XYXJlaG91c2VfSUQiOjAsIkFEX0xhbmd1YWdlIjoiZW5fVVMiLCJpYXQiOjE3MTA1MTA0MDEsImV4cCI6MTcxMDU5NjgwMX0.nYQbrcT9RyHNRCf-oNM50ZVSO6uJ9gvrQQ7e0fzU9Ik'\n\n ```\n\n**Example Answer**\n\n``` json\n{\n    \"record_count\": \"1\",\n    \"records\": [\n        {\n            \"id\": 50004,\n            \"upc\": \"\",\n            \"sku\": \"\",\n            \"value\": \"Seat\",\n            \"name\": \"Seat\",\n            \"description\": \"\"\n        },\n    ]\n}\n\n ```\n\n**Change control**\n\n| **Version** | date | author | Description of Changes |\n| --- | --- | --- | --- |\n| 1.0 | 15/03/2024 | Ricardo | Initial creation of the document. |"
+			},
+			"response": [
+				{
+					"name": "ListProducts",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/express-movement/products",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"express-movement",
+								"products"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.25.2"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 06 Mar 2024 19:44:24 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "5610"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "grpc-encoding",
+							"value": "identity"
+						},
+						{
+							"key": "grpc-accept-encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "x-envoy-upstream-service-time",
+							"value": "232"
+						},
+						{
+							"key": "grpc-status",
+							"value": "0"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Max-Age",
+							"value": "3600"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"record_count\": \"44\",\n    \"records\": [\n        {\n            \"id\": 50004,\n            \"upc\": \"\",\n            \"sku\": \"\",\n            \"value\": \"Seat\",\n            \"name\": \"Seat\",\n            \"description\": \"\"\n        },\n        {\n            \"id\": 50005,\n            \"upc\": \"\",\n            \"sku\": \"\",\n            \"value\": \"BackSupport\",\n            \"name\": \"Back Support\",\n            \"description\": \"\"\n        },\n        {\n            \"id\": 137,\n            \"upc\": \"\",\n            \"sku\": \"\",\n            \"value\": \"Mulch\",\n            \"name\": \"Mulch 10#\",\n            \"description\": \"\"\n        },\n        {\n            \"id\": 50041,\n            \"upc\": \"\",\n            \"sku\": \"\",\n            \"value\": \"Peat\",\n            \"name\": \"Peat\",\n            \"description\": \"\"\n        },\n        {\n            \"id\": 50042,\n            \"upc\": \"\",\n            \"sku\": \"\",\n            \"value\": \"PottingSoil\",\n            \"name\": \"Potting Soil\",\n            \"description\": \"\"\n        },\n        {\n            \"id\": 50045,\n            \"upc\": \"\",\n            \"sku\": \"\",\n            \"value\": \"Seed-Daisy\",\n            \"name\": \"Seed Pack Daisy\",\n            \"description\": \"\"\n        },\n        {\n            \"id\": 50047,\n            \"upc\": \"\",\n            \"sku\": \"\",\n            \"value\": \"Seed-ForgetMeNot\",\n            \"name\": \"Seed Packet Forget Me Not\",\n            \"description\": \"\"\n        },\n        {\n            \"id\": 133,\n            \"upc\": \"\",\n            \"sku\": \"\",\n            \"value\": \"PChair\",\n            \"name\": \"Patio Chair\",\n            \"description\": \"\"\n        },\n        {\n            \"id\": 50043,\n            \"upc\": \"\",\n            \"sku\": \"\",\n            \"value\": \"Kit-Starter\",\n            \"name\": \"Plant Starter Kit\",\n            \"description\": \"\"\n        },\n        {\n            \"id\": 50044,\n            \"upc\": \"\",\n            \"sku\": \"\",\n            \"value\": \"GrowLight\",\n            \"name\": \"Grow Light and Stand\",\n            \"description\": \"\"\n        },\n        {\n            \"id\": 50038,\n            \"upc\": \"\",\n            \"sku\": \"\",\n            \"value\": \"SeedTray-16\",\n            \"name\": \"Seedling Tray - 16 Bins\",\n            \"description\": \"\"\n        },\n        {\n            \"id\": 50039,\n            \"upc\": \"\",\n            \"sku\": \"\",\n            \"value\": \"SeedTray-32\",\n            \"name\": \"Seedling Tray - 32 bins\",\n            \"description\": \"\"\n        },\n        {\n            \"id\": 50046,\n            \"upc\": \"\",\n            \"sku\": \"\",\n            \"value\": \"Seed-BabyBreath\",\n            \"name\": \"Seed Packet Baby Breath\",\n            \"description\": \"\"\n        },\n        {\n            \"id\": 134,\n            \"upc\": \"\",\n            \"sku\": \"\",\n            \"value\": \"PTable\",\n            \"name\": \"Patio Table\",\n            \"description\": \"\"\n        },\n        {\n            \"id\": 135,\n            \"upc\": \"\",\n            \"sku\": \"\",\n            \"value\": \"Screen\",\n            \"name\": \"Patio Sun Screen\",\n            \"description\": \"\"\n        },\n        {\n            \"id\": 136,\n            \"upc\": \"\",\n            \"sku\": \"\",\n            \"value\": \"Fertilizer#50\",\n            \"name\": \"Fertilizer #50\",\n            \"description\": \"\"\n        },\n        {\n            \"id\": 138,\n            \"upc\": \"\",\n            \"sku\": \"\",\n            \"value\": \"Hoe\",\n            \"name\": \"Hoe 4 ft\",\n            \"description\": \"\"\n        },\n        {\n            \"id\": 139,\n            \"upc\": \"\",\n            \"sku\": \"\",\n            \"value\": \"Rake-Bamboo\",\n            \"name\": \"Rake Bamboo\",\n            \"description\": \"\"\n        },\n        {\n            \"id\": 140,\n            \"upc\": \"\",\n            \"sku\": \"\",\n            \"value\": \"Rake-Metal\",\n            \"name\": \"Rake Metal\",\n            \"description\": \"\"\n        },\n        {\n            \"id\": 141,\n            \"upc\": \"\",\n            \"sku\": \"\",\n            \"value\": \"Weeder\",\n            \"name\": \"Weeder\",\n            \"description\": \"\"\n        },\n        {\n            \"id\": 142,\n            \"upc\": \"\",\n            \"sku\": \"\",\n            \"value\": \"Transplanter\",\n            \"name\": \"Transplanter\",\n            \"description\": \"\"\n        },\n        {\n            \"id\": 143,\n            \"upc\": \"\",\n            \"sku\": \"\",\n            \"value\": \"Seeder\",\n            \"name\": \"Grass Seeder\",\n            \"description\": \"\"\n        },\n        {\n            \"id\": 144,\n            \"upc\": \"\",\n            \"sku\": \"\",\n            \"value\": \"Tiller\",\n            \"name\": \"Lawn Tiller\",\n            \"description\": \"\"\n        },\n        {\n            \"id\": 145,\n            \"upc\": \"\",\n            \"sku\": \"\",\n            \"value\": \"PatioSet\",\n            \"name\": \"Patio Furniture Set\",\n            \"description\": \"\"\n        },\n        {\n            \"id\": 127,\n            \"upc\": \"\",\n            \"sku\": \"\",\n            \"value\": \"Rose Bush\",\n            \"name\": \"Rose Bush\",\n            \"description\": \"\"\n        },\n        {\n            \"id\": 123,\n            \"upc\": \"\",\n            \"sku\": \"\",\n            \"value\": \"Oak\",\n            \"name\": \"Oak Tree\",\n            \"description\": \"\"\n        },\n        {\n            \"id\": 124,\n            \"upc\": \"\",\n            \"sku\": \"\",\n            \"value\": \"Elm\",\n            \"name\": \"Elm Tree\",\n            \"description\": \"\"\n        },\n        {\n            \"id\": 125,\n            \"upc\": \"\",\n            \"sku\": \"\",\n            \"value\": \"Grass\",\n            \"name\": \"Grass Seed Container\",\n            \"description\": \"\"\n        },\n        {\n            \"id\": 129,\n            \"upc\": \"\",\n            \"sku\": \"\",\n            \"value\": \"Holly Bush\",\n            \"name\": \"Holly Bush\",\n            \"description\": \"\"\n        },\n        {\n            \"id\": 130,\n            \"upc\": \"\",\n            \"sku\": \"\",\n            \"value\": \"Plum Tree\",\n            \"name\": \"Plum Tree\",\n            \"description\": \"\"\n        },\n        {\n            \"id\": 147,\n            \"upc\": \"\",\n            \"sku\": \"\",\n            \"value\": \"TShirt-RL\",\n            \"name\": \"TShirt - Red Large\",\n            \"description\": \"\"\n        },\n        {\n            \"id\": 148,\n            \"upc\": \"\",\n            \"sku\": \"\",\n            \"value\": \"TShirt-GL\",\n            \"name\": \"TShirt - Green Large\",\n            \"description\": \"\"\n        },\n        {\n            \"id\": 50002,\n            \"upc\": \"\",\n            \"sku\": \"\",\n            \"value\": \"Screw\",\n            \"name\": \"#6-32 x 3/8 Socket Head Cap Screw\",\n            \"description\": \"\"\n        },\n        {\n            \"id\": 50007,\n            \"upc\": \"\",\n            \"sku\": \"\",\n            \"value\": \"Fertilizer#70\",\n            \"name\": \"Fertilizer #70\",\n            \"description\": \"\"\n        },\n        {\n            \"id\": 50008,\n            \"upc\": \"\",\n            \"sku\": \"\",\n            \"value\": \"Fertilizer\",\n            \"name\": \"Lawn Fertilizer\",\n            \"description\": \"\"\n        },\n        {\n            \"id\": 50013,\n            \"upc\": \"\",\n            \"sku\": \"\",\n            \"value\": \"Bag50\",\n            \"name\": \"Bag 50 Kg\",\n            \"description\": \"\"\n        },\n        {\n            \"id\": 50014,\n            \"upc\": \"\",\n            \"sku\": \"\",\n            \"value\": \"Bag70\",\n            \"name\": \"Bag 70 Kg\",\n            \"description\": \"\"\n        },\n        {\n            \"id\": 50003,\n            \"upc\": \"\",\n            \"sku\": \"\",\n            \"value\": \"UltraGlue\",\n            \"name\": \"Ultra Glue\",\n            \"description\": \"\"\n        },\n        {\n            \"id\": 50015,\n            \"upc\": \"\",\n            \"sku\": \"\",\n            \"value\": \"FrontLeg\",\n            \"name\": \"Front Leg\",\n            \"description\": \"\"\n        },\n        {\n            \"id\": 50010,\n            \"upc\": \"\",\n            \"sku\": \"\",\n            \"value\": \"Phosphorus\",\n            \"name\": \"Phosphorus\",\n            \"description\": \"\"\n        },\n        {\n            \"id\": 50016,\n            \"upc\": \"\",\n            \"sku\": \"\",\n            \"value\": \"BackLeg\",\n            \"name\": \"Back Leg\",\n            \"description\": \"\"\n        },\n        {\n            \"id\": 128,\n            \"upc\": \"81010123450901\",\n            \"sku\": \"1234567890\",\n            \"value\": \"Azalea Bush\",\n            \"name\": \"Azalea Bush\",\n            \"description\": \"\"\n        },\n        {\n            \"id\": 50009,\n            \"upc\": \"\",\n            \"sku\": \"\",\n            \"value\": \"Nitrogen\",\n            \"name\": \"Nitrogen\",\n            \"description\": \"\"\n        },\n        {\n            \"id\": 50012,\n            \"upc\": \"\",\n            \"sku\": \"\",\n            \"value\": \"Potassium\",\n            \"name\": \"Potassium\",\n            \"description\": \"\"\n        }\n    ],\n    \"next_page_token\": \"\"\n}"
+				}
+			]
+		},
+		{
+			"name": "CreateMovement",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{HOST}}/express-movement/movements",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"express-movement",
+						"movements"
+					]
+				},
+				"description": "**Endpoint**: POST /Express_movement\n\n**Description**: Returns Movement\n\n**FULL URL**: [http://api.adempiere.io](http://api.adempiere.io/api)/express-movement/movements\n\n**Parameters**: POST\n\n**Application Example**\n\n``` bash\ncurl --location --request POST 'http://api.adempiere.io/express-movement/movements' \\\n--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMDAwMTQ5IiwiQURfQ2xpZW50X0lEIjoxMSwiQURfT3JnX0lEIjowLCJBRF9Sb2xlX0lEIjoxMDIsIkFEX1VzZXJfSUQiOjEwMCwiTV9XYXJlaG91c2VfSUQiOjAsIkFEX0xhbmd1YWdlIjoiZW5fVVMiLCJpYXQiOjE3MTA1MTA0MDEsImV4cCI6MTcxMDU5NjgwMX0.nYQbrcT9RyHNRCf-oNM50ZVSO6uJ9gvrQQ7e0fzU9Ik'\n\n ```\n\n**Example Answer**\n\n``` json\n{\n    \"id\": 1000001,\n    \"document_no\": \"10000001\",\n    \"movement_date\": \"2024-03-06T04:00:00Z\",\n    \"description\": \"\",\n    \"is_completed\": false\n}\n\n ```\n\n**Common mistakes**\n\n- no moves made\n    \n\n``` json\n{\n    \"code\": 13,\n    \"message\": \"Organization\",\n    \"details\": []\n}\n\n ```\n\n**Change control**\n\n| **Version** | date | author | Description of Changes |\n| --- | --- | --- | --- |\n| 1.0 | 15/03/2024 | Ricardo | Initial creation of the document. |"
+			},
+			"response": [
+				{
+					"name": "CreateMovement",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/express-movement/movements",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"express-movement",
+								"movements"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.25.2"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 06 Mar 2024 19:45:26 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "133"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "grpc-encoding",
+							"value": "identity"
+						},
+						{
+							"key": "grpc-accept-encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "x-envoy-upstream-service-time",
+							"value": "84"
+						},
+						{
+							"key": "grpc-status",
+							"value": "0"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Max-Age",
+							"value": "3600"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 1000001,\n    \"document_no\": \"10000001\",\n    \"movement_date\": \"2024-03-06T04:00:00Z\",\n    \"description\": \"\",\n    \"is_completed\": false\n}"
+				}
+			]
+		},
+		{
+			"name": "DeleteMovement",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{HOST}}/express-movement/movements/:id",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"express-movement",
+						"movements",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "1000001"
+						}
+					]
+				},
+				"description": "**Endpoint**: DELETE /Express_movement\n\n**Description**: Returns Empty\n\n**FULL URL**: [http://api.adempiere.io](http://api.adempiere.io/api)/express-movement/movements\n\n**Method**: DELETE\n\n**Parameters (Params):**\n\n- id (Int32, Mandatory)\n    \n\n**Application Example**\n\n``` bash\ncurl --location --request DELETE 'http://api.adempiere.io/express-movement/movements/1000001' \\\n--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMDAwMTQ5IiwiQURfQ2xpZW50X0lEIjoxMSwiQURfT3JnX0lEIjowLCJBRF9Sb2xlX0lEIjoxMDIsIkFEX1VzZXJfSUQiOjEwMCwiTV9XYXJlaG91c2VfSUQiOjAsIkFEX0xhbmd1YWdlIjoiZW5fVVMiLCJpYXQiOjE3MTA1MTA0MDEsImV4cCI6MTcxMDU5NjgwMX0.nYQbrcT9RyHNRCf-oNM50ZVSO6uJ9gvrQQ7e0fzU9Ik'\n\n ```\n\n**Example Answer**\n\n``` json\n{}\n\n ```\n\n**Common mistakes**\n\n- the id does not match a movement\n    \n\n``` json\n{\n    \"code\": 13,\n    \"message\": \"Inventory Move * Not found *\",\n    \"details\": []\n}\n\n ```\n\n**Change control**\n\n| **Version** | date | author | Description of Changes |\n| --- | --- | --- | --- |\n| 1.0 | 15/03/2024 | Ricardo | Initial creation of the document. |"
+			},
+			"response": [
+				{
+					"name": "DeleteMovement",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/express-movement/movements/:id",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"express-movement",
+								"movements",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1000001"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.25.2"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 06 Mar 2024 19:46:33 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "3"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "grpc-encoding",
+							"value": "identity"
+						},
+						{
+							"key": "grpc-accept-encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "x-envoy-upstream-service-time",
+							"value": "151"
+						},
+						{
+							"key": "grpc-status",
+							"value": "0"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Max-Age",
+							"value": "3600"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{}"
+				}
+			]
+		},
+		{
+			"name": "ProcessMovement",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"description\":\"asd\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{HOST}}/express-movement/movements/:id/process",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"express-movement",
+						"movements",
+						":id",
+						"process"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "1000002"
+						}
+					]
+				},
+				"description": "**Endpoint**: POST /Express_movement\n\n**Description**: Returns Movement\n\n**FULL URL**: [http://api.adempiere.io/](http://api.adempiere.io/api)express-movement/movements/{id}/process\n\n**Method**: POST\n\n**Parameters (Params):**\n\n- id (Int32, Mandatory)\n    \n\n**Parameters (Body):**\n\n- description (String, optional)\n    \n\n**Application Example**\n\n``` bash\ncurl --location 'http://api.adempiere.io/express-movement/movements/1000002/process' \\\n--header 'Content-Type: application/json' \\\n--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMDAwMTQ5IiwiQURfQ2xpZW50X0lEIjoxMSwiQURfT3JnX0lEIjowLCJBRF9Sb2xlX0lEIjoxMDIsIkFEX1VzZXJfSUQiOjEwMCwiTV9XYXJlaG91c2VfSUQiOjAsIkFEX0xhbmd1YWdlIjoiZW5fVVMiLCJpYXQiOjE3MTA1MTA0MDEsImV4cCI6MTcxMDU5NjgwMX0.nYQbrcT9RyHNRCf-oNM50ZVSO6uJ9gvrQQ7e0fzU9Ik' \\\n--data '{\n    \"description\":\"asd\"\n}'\n\n ```\n\n**Example Answer**\n\n``` json\n{\n    \"id\": 1000003,\n    \"document_no\": \"10000003\",\n    \"movement_date\": \"2024-03-06T04:00:00Z\",\n    \"description\": \"\",\n    \"is_completed\": true\n}\n\n ```\n\n**Common mistakes**\n\n- the id does not match an inventory movement\n    \n\n``` json\n{\n    \"code\": 13,\n    \"message\": \"Inventory Move * Not found *\",\n    \"details\": []\n}\n\n ```\n\n**Change control**\n\n| **Version** | date | author | Description of Changes |\n| --- | --- | --- | --- |\n| 1.0 | 15/03/2024 | Ricardo | Initial creation of the document. |"
+			},
+			"response": [
+				{
+					"name": "ProcessMovement",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"description\":\"\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HOST}}/express-movement/movements/:id/process",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"express-movement",
+								"movements",
+								":id",
+								"process"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1000003"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.25.2"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 06 Mar 2024 20:21:49 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "132"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "grpc-encoding",
+							"value": "identity"
+						},
+						{
+							"key": "grpc-accept-encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "x-envoy-upstream-service-time",
+							"value": "4562"
+						},
+						{
+							"key": "grpc-status",
+							"value": "0"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Max-Age",
+							"value": "3600"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 1000003,\n    \"document_no\": \"10000003\",\n    \"movement_date\": \"2024-03-06T04:00:00Z\",\n    \"description\": \"\",\n    \"is_completed\": true\n}"
+				}
+			]
+		},
+		{
+			"name": "CreateMovementLine",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"warehouse_id\":103,\n    \"warehouse_to_id\":104,\n    \"description\":\"prueba\",\n    \"product_id\":50004,\n    \"quantity\":\"prueba\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{HOST}}/express-movement/movements/:movement_id/lines",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"express-movement",
+						"movements",
+						":movement_id",
+						"lines"
+					],
+					"variable": [
+						{
+							"key": "movement_id",
+							"value": "1000003"
+						}
+					]
+				},
+				"description": "**Endpoint**: POST /Express_movement\n\n**Description**: Returns MovementLine\n\n**FULL URL**: [http://api.adempiere.io/](http://api.adempiere.io/api)express-movement/movements/{movement_id}/lines\n\n**Method**: POST\n\n**Parameters (Params):**\n\n- movement_id (Int32, Mandatory)\n    \n\n**Parametros (Body):**\n\n- warehouse_id (Int32, optional)\n- warehouse_to_id (Int32, optional)\n- description (String, optional)\n- product_id (Int32, optional)\n- quantity (String, optional)\n    \n\n**Application Example**\n\n``` bash\ncurl --location 'http://api.adempiere.io/express-movement/movements/1000003/lines' \\\n--header 'Content-Type: application/json' \\\n--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMDAwMTQ5IiwiQURfQ2xpZW50X0lEIjoxMSwiQURfT3JnX0lEIjowLCJBRF9Sb2xlX0lEIjoxMDIsIkFEX1VzZXJfSUQiOjEwMCwiTV9XYXJlaG91c2VfSUQiOjAsIkFEX0xhbmd1YWdlIjoiZW5fVVMiLCJpYXQiOjE3MTA1MTA0MDEsImV4cCI6MTcxMDU5NjgwMX0.nYQbrcT9RyHNRCf-oNM50ZVSO6uJ9gvrQQ7e0fzU9Ik' \\\n--data '{\n    \"warehouse_id\":103,\n    \"warehouse_to_id\":104,\n    \"description\":\"prueba\",\n    \"product_id\":50004,\n    \"quantity\":\"prueba\"\n}'\n\n ```\n\n**Example Answer**\n\n``` json\n{\n    \"id\": 1000000,\n    \"warehouse_id\": 0,\n    \"warehouse_to_id\": 0,\n    \"product\": {\n        \"id\": 50004,\n        \"upc\": \"\",\n        \"sku\": \"\",\n        \"value\": \"Seat\",\n        \"name\": \"Seat\",\n        \"description\": \"\"\n    },\n    \"description\": \"\",\n    \"quantity\": \"1\",\n    \"line\": 10\n}\n\n ```\n\n**Common mistakes**\n\n- M_WarehouseTo_ID id missing\n    \n\n``` json\n{\n    \"code\": 13,\n    \"message\": \"Fill mandatory fields:  M_WarehouseTo_ID\",\n    \"details\": []\n}\n\n ```\n\n- warehouse id missing\n    \n\n``` json\n{\n    \"code\": 13,\n    \"message\": \"Fill mandatory fields:  Warehouse\",\n    \"details\": []\n}\n\n ```\n\n- product id missing\n    \n\n``` json\n{\n    \"code\": 13,\n    \"message\": \"Fill mandatory fields:  Product\",\n    \"details\": []\n}\n\n ```\n\n- the id does not match any inventory movement\n    \n\n``` json\n{\n    \"code\": 13,\n    \"message\": \"Inventory Move * Not found *\",\n    \"details\": []\n}\n\n ```\n\n**Change control**\n\n| **Version** | date | author | Description of Changes |\n| --- | --- | --- | --- |\n| 1.0 | 15/03/2024 | Ricardo | Initial creation of the document. |"
+			},
+			"response": [
+				{
+					"name": "CreateMovementLine",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"product_id\":50004,\n    \"warehouse_id\":103,\n    \"warehouse_to_id\":102\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HOST}}/express-movement/movements/:movement_id/lines",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"express-movement",
+								"movements",
+								":movement_id",
+								"lines"
+							],
+							"variable": [
+								{
+									"key": "movement_id",
+									"value": "1000003"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.25.2"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 06 Mar 2024 19:55:43 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "229"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "grpc-encoding",
+							"value": "identity"
+						},
+						{
+							"key": "grpc-accept-encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "x-envoy-upstream-service-time",
+							"value": "352"
+						},
+						{
+							"key": "grpc-status",
+							"value": "0"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Max-Age",
+							"value": "3600"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 1000000,\n    \"warehouse_id\": 0,\n    \"warehouse_to_id\": 0,\n    \"product\": {\n        \"id\": 50004,\n        \"upc\": \"\",\n        \"sku\": \"\",\n        \"value\": \"Seat\",\n        \"name\": \"Seat\",\n        \"description\": \"\"\n    },\n    \"description\": \"\",\n    \"quantity\": \"1\",\n    \"line\": 10\n}"
+				}
+			]
+		},
+		{
+			"name": "DeleteMovementLine",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{HOST}}/express-movement/movement/:movement_id/lines/:id",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"express-movement",
+						"movement",
+						":movement_id",
+						"lines",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "movement_id",
+							"value": "1000003"
+						},
+						{
+							"key": "id",
+							"value": "1000001"
+						}
+					]
+				},
+				"description": "**Endpoint**: DELETE /Express_movement\n\n**Description**: Returns Empty\n\n**FULL URL**: [http://api.adempiere.io/](http://api.adempiere.io/api)express-movement/movements/{movement_id}/lines\n\n**Method**: DELETE\n\n**Parameters (Params):**\n\n- movement_id (Int32, Mandatory)\n- id (Int32, Mandatory)\n    \n\n**Application Example**\n\n``` bash\ncurl --location --request DELETE 'http://api.adempiere.io/express-movement/movement/1000003/lines/1000001' \\\n--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMDAwMTQ5IiwiQURfQ2xpZW50X0lEIjoxMSwiQURfT3JnX0lEIjowLCJBRF9Sb2xlX0lEIjoxMDIsIkFEX1VzZXJfSUQiOjEwMCwiTV9XYXJlaG91c2VfSUQiOjAsIkFEX0xhbmd1YWdlIjoiZW5fVVMiLCJpYXQiOjE3MTA1MTA0MDEsImV4cCI6MTcxMDU5NjgwMX0.nYQbrcT9RyHNRCf-oNM50ZVSO6uJ9gvrQQ7e0fzU9Ik'\n\n ```\n\n**Example Answer**\n\n``` json\n{}\n\n ```\n\n**Common mistakes**\n\n- the id field has an invalid value\n    \n\n``` json\n{\n    \"code\": 13,\n    \"message\": \"Fill mandatory fields:  Move Line\",\n    \"details\": []\n}\n\n ```\n\n- the movement id does not exist\n    \n\n``` json\n{\n    \"code\": 13,\n    \"message\": \"Move Line * Not found *\",\n    \"details\": []\n}\n\n ```\n\n**Change control**\n\n| **Version** | date | author | Description of Changes |\n| --- | --- | --- | --- |\n| 1.0 | 15/03/2024 | Ricardo | Initial creation of the document. |"
+			},
+			"response": [
+				{
+					"name": "DeleteMovementLine",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/express-movement/movement/:movement_id/lines/:id",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"express-movement",
+								"movement",
+								":movement_id",
+								"lines",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "movement_id",
+									"value": "1000005"
+								},
+								{
+									"key": "id",
+									"value": "1000000"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.25.2"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 06 Mar 2024 20:04:36 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "3"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "grpc-encoding",
+							"value": "identity"
+						},
+						{
+							"key": "grpc-accept-encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "x-envoy-upstream-service-time",
+							"value": "168"
+						},
+						{
+							"key": "grpc-status",
+							"value": "0"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Max-Age",
+							"value": "3600"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{}"
+				}
+			]
+		},
+		{
+			"name": "UpdateMovementLine",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"description\":\"prueba\",\n    \"quantity\":\"prueba\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{HOST}}/express-movement/movement/:movement_id/lines/:id",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"express-movement",
+						"movement",
+						":movement_id",
+						"lines",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "movement_id",
+							"value": "10000007"
+						},
+						{
+							"key": "id",
+							"value": "1000003"
+						}
+					]
+				},
+				"description": "**Endpoint**: PATCH /Express_movement\n\n**Description**: Returns MovementLine\n\n**FULL URL**: [http://api.adempiere.io/](http://api.adempiere.io/api)express-movement/movement/{movement_id}/lines/{id}\n\n**Method**: PATCH\n\n**Parameters (Params):**\n\n- movement_id (Int32, Mandatory)\n- id (Int32, Mandatory)\n    \n\n**Parametros (Body):**\n\n- description (String, optional)\n- quantity (String, optional)\n    \n\n**Application Example**\n\n``` bash\ncurl --location --request PATCH 'http://api.adempiere.io/express-movement/movement/10000007/lines/1000003' \\\n--header 'Content-Type: application/json' \\\n--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMDAwMTQ5IiwiQURfQ2xpZW50X0lEIjoxMSwiQURfT3JnX0lEIjowLCJBRF9Sb2xlX0lEIjoxMDIsIkFEX1VzZXJfSUQiOjEwMCwiTV9XYXJlaG91c2VfSUQiOjAsIkFEX0xhbmd1YWdlIjoiZW5fVVMiLCJpYXQiOjE3MTA1MTA0MDEsImV4cCI6MTcxMDU5NjgwMX0.nYQbrcT9RyHNRCf-oNM50ZVSO6uJ9gvrQQ7e0fzU9Ik' \\\n--data '{\n    \"description\":\"prueba\",\n    \"quantity\":\"prueba\"\n}'\n\n ```\n\n**Example Answer**\n\n``` json\n{\n    \"id\": 1000003,\n    \"warehouse_id\": 104,\n    \"warehouse_to_id\": 0,\n    \"product\": {\n        \"id\": 50004,\n        \"upc\": \"\",\n        \"sku\": \"\",\n        \"value\": \"Seat\",\n        \"name\": \"Seat\",\n        \"description\": \"\"\n    },\n    \"description\": \"\",\n    \"quantity\": \"1\",\n    \"line\": 20\n}\n\n ```\n\n**Common mistakes**\n\n- the id field has an invalid value\n    \n\n``` json\n{\n    \"code\": 13,\n    \"message\": \"Fill mandatory fields:  Move Line\",\n    \"details\": []\n}\n\n ```\n\n- the movement id does not exist\n    \n\n``` json\n{\n    \"code\": 13,\n    \"message\": \"Move Line * Not found *\",\n    \"details\": []\n}\n\n ```\n\n**Change control**\n\n| **Version** | date | author | Description of Changes |\n| --- | --- | --- | --- |\n| 1.0 | 15/03/2024 | Ricardo | Initial creation of the document. |"
+			},
+			"response": [
+				{
+					"name": "UpdateMovementLine",
+					"originalRequest": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HOST}}/express-movement/movement/:movement_id/lines/:id",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"express-movement",
+								"movement",
+								":movement_id",
+								"lines",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "movement_id",
+									"value": "10000007"
+								},
+								{
+									"key": "id",
+									"value": "1000003"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.25.2"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 06 Mar 2024 20:18:35 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "231"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "grpc-encoding",
+							"value": "identity"
+						},
+						{
+							"key": "grpc-accept-encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "x-envoy-upstream-service-time",
+							"value": "103"
+						},
+						{
+							"key": "grpc-status",
+							"value": "0"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Max-Age",
+							"value": "3600"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 1000003,\n    \"warehouse_id\": 104,\n    \"warehouse_to_id\": 0,\n    \"product\": {\n        \"id\": 50004,\n        \"upc\": \"\",\n        \"sku\": \"\",\n        \"value\": \"Seat\",\n        \"name\": \"Seat\",\n        \"description\": \"\"\n    },\n    \"description\": \"\",\n    \"quantity\": \"1\",\n    \"line\": 20\n}"
+				}
+			]
+		},
+		{
+			"name": "ListMovementLines",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{HOST}}/express-movement/:movement_id/movements/lines",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"express-movement",
+						":movement_id",
+						"movements",
+						"lines"
+					],
+					"variable": [
+						{
+							"key": "movement_id",
+							"value": "1000003"
+						}
+					]
+				},
+				"description": "**Endpoint**: GET /Express_movement\n\n**Description**: Returns ListMovementLines\n\n**FULL URL**: [http://api.adempiere.io](http://api.adempiere.io/api)/express-movement/{movement_id}/movements/lines\n\n**Method**: GET\n\n**Parameters (Params):**\n\n- movement_id (Int32, Mandatory)\n    \n\n**Application Example**\n\n``` bash\ncurl --location 'http://api.adempiere.io/express-movement/1000003/movements/lines' \\\n--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMDAwMTQ5IiwiQURfQ2xpZW50X0lEIjoxMSwiQURfT3JnX0lEIjowLCJBRF9Sb2xlX0lEIjoxMDIsIkFEX1VzZXJfSUQiOjEwMCwiTV9XYXJlaG91c2VfSUQiOjAsIkFEX0xhbmd1YWdlIjoiZW5fVVMiLCJpYXQiOjE3MTA1MTA0MDEsImV4cCI6MTcxMDU5NjgwMX0.nYQbrcT9RyHNRCf-oNM50ZVSO6uJ9gvrQQ7e0fzU9Ik'\n\n ```\n\n**Example Answer**\n\n``` json\n{\n    \"record_count\": \"2\",\n    \"records\": [\n        {\n            \"id\": 1000002,\n            \"warehouse_id\": 104,\n            \"warehouse_to_id\": 0,\n            \"product\": {\n                \"id\": 50004,\n                \"upc\": \"\",\n                \"sku\": \"\",\n                \"value\": \"Seat\",\n                \"name\": \"Seat\",\n                \"description\": \"\"\n            },\n            \"description\": \"\",\n            \"quantity\": \"1\",\n            \"line\": 10\n        },\n        {\n            \"id\": 1000003,\n            \"warehouse_id\": 104,\n            \"warehouse_to_id\": 0,\n            \"product\": {\n                \"id\": 50004,\n                \"upc\": \"\",\n                \"sku\": \"\",\n                \"value\": \"Seat\",\n                \"name\": \"Seat\",\n                \"description\": \"\"\n            },\n            \"description\": \"\",\n            \"quantity\": \"1\",\n            \"line\": 20\n        }\n    ],\n    \"next_page_token\": \"\"\n}\n\n ```\n\n**Common mistakes**\n\n- there is no movement\n    \n\n``` json\n{\n    \"record_count\": \"0\",\n    \"records\": [],\n    \"next_page_token\": \"\"\n}\n\n ```\n\n**Change control**\n\n| **Version** | date | author | Description of Changes |\n| --- | --- | --- | --- |\n| 1.0 | 15/03/2024 | Ricardo | Initial creation of the document. |"
+			},
+			"response": [
+				{
+					"name": "ListMovementLines",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/express-movement/:movement_id/movements/lines",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"express-movement",
+								":movement_id",
+								"movements",
+								"lines"
+							],
+							"variable": [
+								{
+									"key": "movement_id",
+									"value": "1000003"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.25.2"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 06 Mar 2024 20:19:22 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "594"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "grpc-encoding",
+							"value": "identity"
+						},
+						{
+							"key": "grpc-accept-encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "x-envoy-upstream-service-time",
+							"value": "93"
+						},
+						{
+							"key": "grpc-status",
+							"value": "0"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Max-Age",
+							"value": "3600"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"record_count\": \"2\",\n    \"records\": [\n        {\n            \"id\": 1000002,\n            \"warehouse_id\": 104,\n            \"warehouse_to_id\": 0,\n            \"product\": {\n                \"id\": 50004,\n                \"upc\": \"\",\n                \"sku\": \"\",\n                \"value\": \"Seat\",\n                \"name\": \"Seat\",\n                \"description\": \"\"\n            },\n            \"description\": \"\",\n            \"quantity\": \"1\",\n            \"line\": 10\n        },\n        {\n            \"id\": 1000003,\n            \"warehouse_id\": 104,\n            \"warehouse_to_id\": 0,\n            \"product\": {\n                \"id\": 50004,\n                \"upc\": \"\",\n                \"sku\": \"\",\n                \"value\": \"Seat\",\n                \"name\": \"Seat\",\n                \"description\": \"\"\n            },\n            \"description\": \"\",\n            \"quantity\": \"1\",\n            \"line\": 20\n        }\n    ],\n    \"next_page_token\": \"\"\n}"
+				}
+			]
+		}
+	]
+}
