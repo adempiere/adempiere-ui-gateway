@@ -1,0 +1,628 @@
+{
+	"info": {
+		"_postman_id": "cb5083e2-e659-4608-ac6f-7026d5cf22d7",
+		"name": "core_functionality",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "28978517"
+	},
+	"item": [
+		{
+			"name": "GetSystemInfo",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{HOST}}/core-functionality/system-info",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"core-functionality",
+						"system-info"
+					]
+				},
+				"description": "**Endpoint**: GET /core-functionality\n\n**Descripcion**: Retorna SystemInfo\n\n**URL Completa**: [http://api.adempiere.io/api](http://api.adempiere.io/api)/core-functionality/system-info\n\n**Metodo**: GET\n\n**Application Example**\n\n``` bash\ncurl --location 'http://api.adempiere.io/core-functionality/system-info' \\\n--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMDAwMTQ5IiwiQURfQ2xpZW50X0lEIjoxMSwiQURfT3JnX0lEIjowLCJBRF9Sb2xlX0lEIjoxMDIsIkFEX1VzZXJfSUQiOjEwMCwiTV9XYXJlaG91c2VfSUQiOjAsIkFEX0xhbmd1YWdlIjoiZW5fVVMiLCJpYXQiOjE3MTA1MTA0MDEsImV4cCI6MTcxMDU5NjgwMX0.nYQbrcT9RyHNRCf-oNM50ZVSO6uJ9gvrQQ7e0fzU9Ik'\n\n ```\n\n**Example Answer**\n\n``` json\n{\n    \"name\": \"\",\n    \"release_no\": \"3.9.4\",\n    \"version\": \"2023-01-24\",\n    \"last_build_info\": \"ADempiere Foundation Release 3.9.4 20230117-1854\",\n    \"logo_url\": \"\",\n    \"backend_date_version\": \"2024-03-01T04:00:00Z\",\n    \"backend_main_version\": \"3.0.2\",\n    \"backend_implementation_version\": \"3.0.2\"\n}\n\n ```\n\n**Change control**\n\n| **Version** | date | author | Description of Changes |\n| --- | --- | --- | --- |\n| 1.0 | 15/03/2024 | Ricardo | Initial creation of the document. |"
+			},
+			"response": [
+				{
+					"name": "GetSystemInfo",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/core-functionality/system-info",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"core-functionality",
+								"system-info"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.25.2"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 06 Mar 2024 15:03:17 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "282"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "grpc-encoding",
+							"value": "identity"
+						},
+						{
+							"key": "grpc-accept-encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "x-envoy-upstream-service-time",
+							"value": "2"
+						},
+						{
+							"key": "grpc-status",
+							"value": "0"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Max-Age",
+							"value": "3600"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"name\": \"\",\n    \"release_no\": \"3.9.4\",\n    \"version\": \"2023-01-24\",\n    \"last_build_info\": \"ADempiere Foundation Release 3.9.4 20230117-1854\",\n    \"logo_url\": \"\",\n    \"backend_date_version\": \"2024-03-01T04:00:00Z\",\n    \"backend_main_version\": \"3.0.2\",\n    \"backend_implementation_version\": \"3.0.2\"\n}"
+				}
+			]
+		},
+		{
+			"name": "GetCountry",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{HOST}}/core-functionality/countries/:id",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"core-functionality",
+						"countries",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "0"
+						}
+					]
+				},
+				"description": "**Endpoint**: GET /core-functionality\n\n**Description**: Returns Country\n\n**FULL URL** : [http://api.adempiere.io/api](http://api.adempiere.io/api)/core-functionality/countries/{id}\n\n**Method**: GET\n\n**Parameters (Params):**\n\n- id (Int32, Obligatorio)\n    \n\n**Application Example**\n\n``` bash\ncurl --location 'http://api.adempiere.io/core-functionality/countries/114' \\\n--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMDAwMTQ5IiwiQURfQ2xpZW50X0lEIjoxMSwiQURfT3JnX0lEIjowLCJBRF9Sb2xlX0lEIjoxMDIsIkFEX1VzZXJfSUQiOjEwMCwiTV9XYXJlaG91c2VfSUQiOjAsIkFEX0xhbmd1YWdlIjoiZW5fVVMiLCJpYXQiOjE3MTA1MTA0MDEsImV4cCI6MTcxMDU5NjgwMX0.nYQbrcT9RyHNRCf-oNM50ZVSO6uJ9gvrQQ7e0fzU9Ik'\n\n ```\n\n**Example Answer**\n\n``` json\n{\n    \"id\": 114,\n    \"country_code\": \"AD\",\n    \"name\": \"Andorra\",\n    \"description\": \"Andorra\",\n    \"has_region\": false,\n    \"region_name\": \"\",\n    \"display_sequence\": \"@C@,  @P@\",\n    \"is_address_lines_reverse\": false,\n    \"capture_sequence\": \"@A1@ @A2@ @A3@ @A4@ @C@,  @P@ @CO@\",\n    \"display_sequence_local\": \"@C@,  @P@\",\n    \"is_address_lines_local_reverse\": false,\n    \"expression_postal\": \"\",\n    \"has_postal_add\": false,\n    \"expression_phone\": \"\",\n    \"media_size\": \"\",\n    \"expression_bank_routing_no\": \"\",\n    \"expression_bank_account_no\": \"\",\n    \"language\": \"\",\n    \"allow_cities_out_of_list\": true,\n    \"is_postcode_lookup\": false,\n    \"currency\": {\n        \"id\": 102,\n        \"iso_code\": \"EUR\",\n        \"cur_symbol\": \"€\",\n        \"description\": \"Euro\",\n        \"standard_precision\": 2,\n        \"costing_precision\": 4\n    }\n}\n\n ```\n\n**Common mistakes**\n\n- id not found\n    \n\n``` json\n{\n    \"id\": 0,\n    \"country_code\": \"\",\n    \"name\": \"\",\n    \"description\": \"\",\n    \"has_region\": false,\n    \"region_name\": \"\",\n    \"display_sequence\": \"\",\n    \"is_address_lines_reverse\": false,\n    \"capture_sequence\": \"\",\n    \"display_sequence_local\": \"\",\n    \"is_address_lines_local_reverse\": false,\n    \"expression_postal\": \"\",\n    \"has_postal_add\": false,\n    \"expression_phone\": \"\",\n    \"media_size\": \"\",\n    \"expression_bank_routing_no\": \"\",\n    \"expression_bank_account_no\": \"\",\n    \"language\": \"\",\n    \"allow_cities_out_of_list\": false,\n    \"is_postcode_lookup\": false\n}\n\n ```\n\n**Change control**\n\n| **Version** | date | author | Description of Changes |\n| --- | --- | --- | --- |\n| 1.0 | 15/03/2024 | Ricardo | Initial creation of the document. |"
+			},
+			"response": [
+				{
+					"name": "GetCountry",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/core-functionality/countries/:id",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"core-functionality",
+								"countries",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "114"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.25.2"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 06 Mar 2024 17:27:27 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "739"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "grpc-encoding",
+							"value": "identity"
+						},
+						{
+							"key": "grpc-accept-encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "x-envoy-upstream-service-time",
+							"value": "122"
+						},
+						{
+							"key": "grpc-status",
+							"value": "0"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Max-Age",
+							"value": "3600"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 114,\n    \"country_code\": \"AD\",\n    \"name\": \"Andorra\",\n    \"description\": \"Andorra\",\n    \"has_region\": false,\n    \"region_name\": \"\",\n    \"display_sequence\": \"@C@,  @P@\",\n    \"is_address_lines_reverse\": false,\n    \"capture_sequence\": \"@A1@ @A2@ @A3@ @A4@ @C@,  @P@ @CO@\",\n    \"display_sequence_local\": \"@C@,  @P@\",\n    \"is_address_lines_local_reverse\": false,\n    \"expression_postal\": \"\",\n    \"has_postal_add\": false,\n    \"expression_phone\": \"\",\n    \"media_size\": \"\",\n    \"expression_bank_routing_no\": \"\",\n    \"expression_bank_account_no\": \"\",\n    \"language\": \"\",\n    \"allow_cities_out_of_list\": true,\n    \"is_postcode_lookup\": false,\n    \"currency\": {\n        \"id\": 102,\n        \"iso_code\": \"EUR\",\n        \"cur_symbol\": \"€\",\n        \"description\": \"Euro\",\n        \"standard_precision\": 2,\n        \"costing_precision\": 4\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "ListLanguages",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{HOST}}/core-functionality/languages",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"core-functionality",
+						"languages"
+					]
+				},
+				"description": "**Endpoint**: GET /core-functionality\n\n**Description**: Returns ListLanguages\n\n**FULL URL**: [http://api.adempiere.io/api](http://api.adempiere.io/api)/core-functionality/languages\n\n**Method**: GET\n\n**Application Example**\n\n``` bash\ncurl --location 'http://api.adempiere.io/core-functionality/languages'\n\n ```\n\n**Example Answer:**\n\n``` json\n{\n    \"record_count\": \"2\",\n    \"languages\": [\n        {\n            \"language\": \"es_MX\",\n            \"language_name\": \"Spanish (Mexico)\",\n            \"language_iso\": \"es\",\n            \"country_code\": \"MX\",\n            \"is_base_language\": false,\n            \"is_system_language\": true,\n            \"is_decimal_point\": true,\n            \"date_pattern\": \"dd/MM/yyyy\",\n            \"time_pattern\": \"H:mm:ss z\"\n        },\n        {\n            \"language\": \"en_US\",\n            \"language_name\": \"English (USA)\",\n            \"language_iso\": \"en\",\n            \"country_code\": \"US\",\n            \"is_base_language\": true,\n            \"is_system_language\": false,\n            \"is_decimal_point\": true,\n            \"date_pattern\": \"MM/dd/yyyy\",\n            \"time_pattern\": \"h:mm:ss a z\"\n        }\n    ],\n    \"next_page_token\": \"\"\n}\n\n ```\n\n**Change control**\n\n| **Version** | date | author | Description of Changes |\n| --- | --- | --- | --- |\n| 1.0 | 15/03/2024 | Ricardo | Initial creation of the document. |"
+			},
+			"response": [
+				{
+					"name": "ListLanguages",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/core-functionality/languages",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"core-functionality",
+								"languages"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.25.2"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 06 Mar 2024 15:10:52 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "621"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "grpc-encoding",
+							"value": "identity"
+						},
+						{
+							"key": "grpc-accept-encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "x-envoy-upstream-service-time",
+							"value": "10"
+						},
+						{
+							"key": "grpc-status",
+							"value": "0"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Max-Age",
+							"value": "3600"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"record_count\": \"2\",\n    \"languages\": [\n        {\n            \"language\": \"es_MX\",\n            \"language_name\": \"Spanish (Mexico)\",\n            \"language_iso\": \"es\",\n            \"country_code\": \"MX\",\n            \"is_base_language\": false,\n            \"is_system_language\": true,\n            \"is_decimal_point\": true,\n            \"date_pattern\": \"dd/MM/yyyy\",\n            \"time_pattern\": \"H:mm:ss z\"\n        },\n        {\n            \"language\": \"en_US\",\n            \"language_name\": \"English (USA)\",\n            \"language_iso\": \"en\",\n            \"country_code\": \"US\",\n            \"is_base_language\": true,\n            \"is_system_language\": false,\n            \"is_decimal_point\": true,\n            \"date_pattern\": \"MM/dd/yyyy\",\n            \"time_pattern\": \"h:mm:ss a z\"\n        }\n    ],\n    \"next_page_token\": \"\"\n}"
+				}
+			]
+		},
+		{
+			"name": "ListBusinessPartners",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{HOST}}/core-functionality/business-partners",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"core-functionality",
+						"business-partners"
+					]
+				},
+				"description": "**Endpoint**: GET /core-functionality\n\n**Description**: Retorna ListBusinessPartners\n\n**Full URL**: [http://api.adempiere.io/api](http://api.adempiere.io/api)/core-functionality/business-partners\n\n**Method**: GET\n\n**Application Example**\n\n``` bash\ncurl --location 'http://api.adempiere.io/core-functionality/business-partners' \\\n--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMDAwMTQ5IiwiQURfQ2xpZW50X0lEIjoxMSwiQURfT3JnX0lEIjowLCJBRF9Sb2xlX0lEIjoxMDIsIkFEX1VzZXJfSUQiOjEwMCwiTV9XYXJlaG91c2VfSUQiOjAsIkFEX0xhbmd1YWdlIjoiZW5fVVMiLCJpYXQiOjE3MTA1MTA0MDEsImV4cCI6MTcxMDU5NjgwMX0.nYQbrcT9RyHNRCf-oNM50ZVSO6uJ9gvrQQ7e0fzU9Ik'\n\n ```\n\n**Example Answer:**\n\n``` json\n{\n    \"record_count\": \"17\",\n    \"business_partners\": [\n        {\n            \"id\": 113,\n            \"value\": \"GardenAdmin\",\n            \"tax_id\": \"\",\n            \"duns\": \"\",\n            \"naics\": \"\",\n            \"name\": \"GardenAdmin BP\",\n            \"last_name\": \"\",\n            \"description\": \"\"\n        },\n        {\n            \"id\": 117,\n            \"value\": \"C&W\",\n            \"tax_id\": \"\",\n            \"duns\": \"\",\n            \"naics\": \"\",\n            \"name\": \"C&W Construction\",\n            \"last_name\": \"Unlimited Projects Corp.\",\n            \"description\": \"\"\n        },\n        {\n            \"id\": 118,\n            \"value\": \"JoeBlock\",\n            \"tax_id\": \"\",\n            \"duns\": \"\",\n            \"naics\": \"\",\n            \"name\": \"Joe Block\",\n            \"last_name\": \"\",\n            \"description\": \"\"\n        },\n        {\n            \"id\": 119,\n            \"value\": \"GardenUser\",\n            \"tax_id\": \"\",\n            \"duns\": \"\",\n            \"naics\": \"\",\n            \"name\": \"GardenUser BP\",\n            \"last_name\": \"\",\n            \"description\": \"\"\n        },\n        {\n            \"id\": 121,\n            \"value\": \"Patio\",\n            \"tax_id\": \"\",\n            \"duns\": \"\",\n            \"naics\": \"\",\n            \"name\": \"Patio Fun, Inc.\",\n            \"last_name\": \"\",\n            \"description\": \"\"\n        },\n        {\n            \"id\": 50000,\n            \"value\": \"Wood, Inc\",\n            \"tax_id\": \"\",\n            \"duns\": \"\",\n            \"naics\": \"\",\n            \"name\": \"Wood, Inc\",\n            \"last_name\": \"\",\n            \"description\": \"\"\n        },\n        {\n            \"id\": 50001,\n            \"value\": \"Color, Inc\",\n            \"tax_id\": \"\",\n            \"duns\": \"\",\n            \"naics\": \"\",\n            \"name\": \"Color, Inc\",\n            \"last_name\": \"\",\n            \"description\": \"\"\n        },\n        {\n            \"id\": 50002,\n            \"value\": \"Chrome, Inc\",\n            \"tax_id\": \"\",\n            \"duns\": \"\",\n            \"naics\": \"\",\n            \"name\": \"Chrome, Inc\",\n            \"last_name\": \"\",\n            \"description\": \"\"\n        },\n        {\n            \"id\": 50003,\n            \"value\": \"Chemical Product, inc\",\n            \"tax_id\": \"\",\n            \"duns\": \"\",\n            \"naics\": \"\",\n            \"name\": \"Chemical Product, inc\",\n            \"last_name\": \"\",\n            \"description\": \"\"\n        },\n        {\n            \"id\": 50004,\n            \"value\": \"Store Central\",\n            \"tax_id\": \"\",\n            \"duns\": \"\",\n            \"naics\": \"\",\n            \"name\": \"Store Central\",\n            \"last_name\": \"\",\n            \"description\": \"\"\n        },\n        {\n            \"id\": 50005,\n            \"value\": \"Store East\",\n            \"tax_id\": \"\",\n            \"duns\": \"\",\n            \"naics\": \"\",\n            \"name\": \"Store East\",\n            \"last_name\": \"\",\n            \"description\": \"\"\n        },\n        {\n            \"id\": 50007,\n            \"value\": \"Store North\",\n            \"tax_id\": \"\",\n            \"duns\": \"\",\n            \"naics\": \"\",\n            \"name\": \"Store North\",\n            \"last_name\": \"\",\n            \"description\": \"\"\n        },\n        {\n            \"id\": 50008,\n            \"value\": \"Store South\",\n            \"tax_id\": \"\",\n            \"duns\": \"\",\n            \"naics\": \"\",\n            \"name\": \"Store South\",\n            \"last_name\": \"\",\n            \"description\": \"\"\n        },\n        {\n            \"id\": 50009,\n            \"value\": \"Store West\",\n            \"tax_id\": \"\",\n            \"duns\": \"\",\n            \"naics\": \"\",\n            \"name\": \"Store West\",\n            \"last_name\": \"\",\n            \"description\": \"\"\n        },\n        {\n            \"id\": 120,\n            \"value\": \"SeedFarm\",\n            \"tax_id\": \"\",\n            \"duns\": \"\",\n            \"naics\": \"\",\n            \"name\": \"Seed Farm Inc.\",\n            \"last_name\": \"\",\n            \"description\": \"Customer & Vendor\"\n        },\n        {\n            \"id\": 112,\n            \"value\": \"Standard\",\n            \"tax_id\": \"\",\n            \"duns\": \"\",\n            \"naics\": \"\",\n            \"name\": \"Standard\",\n            \"last_name\": \"\",\n            \"description\": \"Walk-In Customer\"\n        },\n        {\n            \"id\": 114,\n            \"value\": \"TreeFarm\",\n            \"tax_id\": \"\",\n            \"duns\": \"\",\n            \"naics\": \"\",\n            \"name\": \"Tree Farm Inc.\",\n            \"last_name\": \"\",\n            \"description\": \"Vendor\"\n        }\n    ],\n    \"next_page_token\": \"\"\n}\n\n ```\n\n**Change control**\n\n| **Version** | date | author | Description of Changes |\n| --- | --- | --- | --- |\n| 1.0 | 15/03/2024 | Ricardo | Initial creation of the document. |"
+			},
+			"response": [
+				{
+					"name": "ListBusinessPartners",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/core-functionality/business-partners",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"core-functionality",
+								"business-partners"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.25.2"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 15 Mar 2024 05:17:04 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "2965"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "grpc-encoding",
+							"value": "identity"
+						},
+						{
+							"key": "grpc-accept-encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "x-envoy-upstream-service-time",
+							"value": "68"
+						},
+						{
+							"key": "grpc-status",
+							"value": "0"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Max-Age",
+							"value": "3600"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"record_count\": \"17\",\n    \"business_partners\": [\n        {\n            \"id\": 113,\n            \"value\": \"GardenAdmin\",\n            \"tax_id\": \"\",\n            \"duns\": \"\",\n            \"naics\": \"\",\n            \"name\": \"GardenAdmin BP\",\n            \"last_name\": \"\",\n            \"description\": \"\"\n        },\n        {\n            \"id\": 117,\n            \"value\": \"C&W\",\n            \"tax_id\": \"\",\n            \"duns\": \"\",\n            \"naics\": \"\",\n            \"name\": \"C&W Construction\",\n            \"last_name\": \"Unlimited Projects Corp.\",\n            \"description\": \"\"\n        },\n        {\n            \"id\": 118,\n            \"value\": \"JoeBlock\",\n            \"tax_id\": \"\",\n            \"duns\": \"\",\n            \"naics\": \"\",\n            \"name\": \"Joe Block\",\n            \"last_name\": \"\",\n            \"description\": \"\"\n        },\n        {\n            \"id\": 119,\n            \"value\": \"GardenUser\",\n            \"tax_id\": \"\",\n            \"duns\": \"\",\n            \"naics\": \"\",\n            \"name\": \"GardenUser BP\",\n            \"last_name\": \"\",\n            \"description\": \"\"\n        },\n        {\n            \"id\": 121,\n            \"value\": \"Patio\",\n            \"tax_id\": \"\",\n            \"duns\": \"\",\n            \"naics\": \"\",\n            \"name\": \"Patio Fun, Inc.\",\n            \"last_name\": \"\",\n            \"description\": \"\"\n        },\n        {\n            \"id\": 50000,\n            \"value\": \"Wood, Inc\",\n            \"tax_id\": \"\",\n            \"duns\": \"\",\n            \"naics\": \"\",\n            \"name\": \"Wood, Inc\",\n            \"last_name\": \"\",\n            \"description\": \"\"\n        },\n        {\n            \"id\": 50001,\n            \"value\": \"Color, Inc\",\n            \"tax_id\": \"\",\n            \"duns\": \"\",\n            \"naics\": \"\",\n            \"name\": \"Color, Inc\",\n            \"last_name\": \"\",\n            \"description\": \"\"\n        },\n        {\n            \"id\": 50002,\n            \"value\": \"Chrome, Inc\",\n            \"tax_id\": \"\",\n            \"duns\": \"\",\n            \"naics\": \"\",\n            \"name\": \"Chrome, Inc\",\n            \"last_name\": \"\",\n            \"description\": \"\"\n        },\n        {\n            \"id\": 50003,\n            \"value\": \"Chemical Product, inc\",\n            \"tax_id\": \"\",\n            \"duns\": \"\",\n            \"naics\": \"\",\n            \"name\": \"Chemical Product, inc\",\n            \"last_name\": \"\",\n            \"description\": \"\"\n        },\n        {\n            \"id\": 50004,\n            \"value\": \"Store Central\",\n            \"tax_id\": \"\",\n            \"duns\": \"\",\n            \"naics\": \"\",\n            \"name\": \"Store Central\",\n            \"last_name\": \"\",\n            \"description\": \"\"\n        },\n        {\n            \"id\": 50005,\n            \"value\": \"Store East\",\n            \"tax_id\": \"\",\n            \"duns\": \"\",\n            \"naics\": \"\",\n            \"name\": \"Store East\",\n            \"last_name\": \"\",\n            \"description\": \"\"\n        },\n        {\n            \"id\": 50007,\n            \"value\": \"Store North\",\n            \"tax_id\": \"\",\n            \"duns\": \"\",\n            \"naics\": \"\",\n            \"name\": \"Store North\",\n            \"last_name\": \"\",\n            \"description\": \"\"\n        },\n        {\n            \"id\": 50008,\n            \"value\": \"Store South\",\n            \"tax_id\": \"\",\n            \"duns\": \"\",\n            \"naics\": \"\",\n            \"name\": \"Store South\",\n            \"last_name\": \"\",\n            \"description\": \"\"\n        },\n        {\n            \"id\": 50009,\n            \"value\": \"Store West\",\n            \"tax_id\": \"\",\n            \"duns\": \"\",\n            \"naics\": \"\",\n            \"name\": \"Store West\",\n            \"last_name\": \"\",\n            \"description\": \"\"\n        },\n        {\n            \"id\": 120,\n            \"value\": \"SeedFarm\",\n            \"tax_id\": \"\",\n            \"duns\": \"\",\n            \"naics\": \"\",\n            \"name\": \"Seed Farm Inc.\",\n            \"last_name\": \"\",\n            \"description\": \"Customer & Vendor\"\n        },\n        {\n            \"id\": 112,\n            \"value\": \"Standard\",\n            \"tax_id\": \"\",\n            \"duns\": \"\",\n            \"naics\": \"\",\n            \"name\": \"Standard\",\n            \"last_name\": \"\",\n            \"description\": \"Walk-In Customer\"\n        },\n        {\n            \"id\": 114,\n            \"value\": \"TreeFarm\",\n            \"tax_id\": \"\",\n            \"duns\": \"\",\n            \"naics\": \"\",\n            \"name\": \"Tree Farm Inc.\",\n            \"last_name\": \"\",\n            \"description\": \"Vendor\"\n        }\n    ],\n    \"next_page_token\": \"\"\n}"
+				}
+			]
+		},
+		{
+			"name": "GetConversionRate",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{HOST}}/core-functionality/conversion-rates",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"core-functionality",
+						"conversion-rates"
+					]
+				},
+				"description": "**Endpoint**: GET /core-functionality\n\n**Description**: Returns ConversionRate\n\n**FULL URL**: [http://api.adempiere.io/api](http://api.adempiere.io/api)/core-functionality/conversion-rates\n\n**Method**: GET\n\n**Application Example**\n\n``` bash\ncurl --location 'http://api.adempiere.io/core-functionality/conversion-rates' \\\n--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMDAwMTQ5IiwiQURfQ2xpZW50X0lEIjoxMSwiQURfT3JnX0lEIjowLCJBRF9Sb2xlX0lEIjoxMDIsIkFEX1VzZXJfSUQiOjEwMCwiTV9XYXJlaG91c2VfSUQiOjAsIkFEX0xhbmd1YWdlIjoiZW5fVVMiLCJpYXQiOjE3MTA1MTA0MDEsImV4cCI6MTcxMDU5NjgwMX0.nYQbrcT9RyHNRCf-oNM50ZVSO6uJ9gvrQQ7e0fzU9Ik'\n\n ```\n\n**Change control**\n\n| **Version** | date | author | Description of Changes |\n| --- | --- | --- | --- |\n| 1.0 | 15/03/2024 | Ricardo | Initial creation of the document. |"
+			},
+			"response": []
+		},
+		{
+			"name": "ListProductConversion",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{HOST}}/core-functionality/product-conversions/:id",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"core-functionality",
+						"product-conversions",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "123"
+						}
+					]
+				},
+				"description": "**Endpoint**: GET /core-functionality\n\n**Description**: Returns ListProductConversion\n\n**FULL URL**: [http://api.adempiere.io/api](http://api.adempiere.io/api)/core-functionality/product-conversions/{id}\n\n**Method**: GET\n\n**Parameters (Params):**\n\n- id (Int32, Mandatory)\n    \n\n**Application Example**\n\n**Example Answer**\n\n``` json\n{\n    \"record_count\": \"0\",\n    \"product_conversion\": [\n        {\n            \"id\": 0,\n            \"uom\": {\n                \"id\": 100,\n                \"code\": \"EA\",\n                \"symbol\": \"Ea \",\n                \"name\": \"Each\",\n                \"description\": \"\",\n                \"standard_precision\": 0,\n                \"costing_precision\": 4\n            },\n            \"product_uom\": {\n                \"id\": 100,\n                \"code\": \"EA\",\n                \"symbol\": \"Ea \",\n                \"name\": \"Each\",\n                \"description\": \"\",\n                \"standard_precision\": 0,\n                \"costing_precision\": 4\n            },\n            \"multiply_rate\": \"1\",\n            \"divide_rate\": \"1\"\n        }\n    ],\n    \"next_page_token\": \"\"\n}\n\n ```\n\n**Common mistakes:**\n\n- invalid id\n    \n\n``` json\n{\n    \"code\": 13,\n    \"message\": \"C_UOM_ID is mandatory.\",\n    \"details\": []\n}\n\n ```\n\n- **Product not found**\n    \n\n``` json\n{\n    \"code\": 13,\n    \"message\": \"Product * Not found *\",\n    \"details\": []\n}\n\n ```\n\n**Change control**\n\n| **Version** | date | author | Description of Changes |\n| --- | --- | --- | --- |\n| 1.0 | 15/03/2024 | Ricardo | Initial creation of the document. |"
+			},
+			"response": [
+				{
+					"name": "ListProductConversion",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HOST}}/core-functionality/product-conversions/:id",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"core-functionality",
+								"product-conversions",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "123"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.25.2"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 15 Mar 2024 05:18:34 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "499"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "grpc-encoding",
+							"value": "identity"
+						},
+						{
+							"key": "grpc-accept-encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "x-envoy-upstream-service-time",
+							"value": "51"
+						},
+						{
+							"key": "grpc-status",
+							"value": "0"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Max-Age",
+							"value": "3600"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"record_count\": \"0\",\n    \"product_conversion\": [\n        {\n            \"id\": 0,\n            \"uom\": {\n                \"id\": 100,\n                \"code\": \"EA\",\n                \"symbol\": \"Un \",\n                \"name\": \"Unidad\",\n                \"description\": \"\",\n                \"standard_precision\": 0,\n                \"costing_precision\": 4\n            },\n            \"product_uom\": {\n                \"id\": 100,\n                \"code\": \"EA\",\n                \"symbol\": \"Un \",\n                \"name\": \"Unidad\",\n                \"description\": \"\",\n                \"standard_precision\": 0,\n                \"costing_precision\": 4\n            },\n            \"multiply_rate\": \"1\",\n            \"divide_rate\": \"1\"\n        }\n    ],\n    \"next_page_token\": \"\"\n}"
+				}
+			]
+		}
+	]
+}

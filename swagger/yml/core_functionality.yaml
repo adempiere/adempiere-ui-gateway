@@ -1,0 +1,1196 @@
+openapi: 3.0.0
+info:
+  title: core_functionality
+  version: 1.0.0
+servers:
+  - url: http://{{host}}
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+paths:
+  /core-functionality/system-info:
+    get:
+      tags:
+        - default
+      summary: GetSystemInfo
+      description: >-
+        **Endpoint**: GET /core-functionality
+
+
+        **Descripcion**: Retorna SystemInfo
+
+
+        **URL Completa**:
+        [http://api.adempiere.io/api](http://api.adempiere.io/api)/core-functionality/system-info
+
+
+        **Metodo**: GET
+
+
+        **Application Example**
+
+
+        ``` bash
+
+        curl --location 'http://api.adempiere.io/core-functionality/system-info'
+        \
+
+        --header 'Authorization: Bearer
+        eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMDAwMTQ5IiwiQURfQ2xpZW50X0lEIjoxMSwiQURfT3JnX0lEIjowLCJBRF9Sb2xlX0lEIjoxMDIsIkFEX1VzZXJfSUQiOjEwMCwiTV9XYXJlaG91c2VfSUQiOjAsIkFEX0xhbmd1YWdlIjoiZW5fVVMiLCJpYXQiOjE3MTA1MTA0MDEsImV4cCI6MTcxMDU5NjgwMX0.nYQbrcT9RyHNRCf-oNM50ZVSO6uJ9gvrQQ7e0fzU9Ik'
+
+         ```
+
+        **Example Answer**
+
+
+        ``` json
+
+        {
+            "name": "",
+            "release_no": "3.9.4",
+            "version": "2023-01-24",
+            "last_build_info": "ADempiere Foundation Release 3.9.4 20230117-1854",
+            "logo_url": "",
+            "backend_date_version": "2024-03-01T04:00:00Z",
+            "backend_main_version": "3.0.2",
+            "backend_implementation_version": "3.0.2"
+        }
+
+         ```
+
+        **Change control**
+
+
+        | **Version** | date | author | Description of Changes |
+
+        | --- | --- | --- | --- |
+
+        | 1.0 | 15/03/2024 | Ricardo | Initial creation of the document. |
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: OK
+          headers:
+            Server:
+              schema:
+                type: string
+                example: nginx/1.25.2
+            Date:
+              schema:
+                type: string
+                example: Wed, 06 Mar 2024 15:03:17 GMT
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Content-Length:
+              schema:
+                type: integer
+                example: '282'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            grpc-encoding:
+              schema:
+                type: string
+                example: identity
+            grpc-accept-encoding:
+              schema:
+                type: string
+                example: gzip
+            x-envoy-upstream-service-time:
+              schema:
+                type: integer
+                example: '2'
+            grpc-status:
+              schema:
+                type: integer
+                example: '0'
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Max-Age:
+              schema:
+                type: integer
+                example: '3600'
+            Access-Control-Expose-Headers:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+                example: '*'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                name: ''
+                release_no: 3.9.4
+                version: '2023-01-24'
+                last_build_info: ADempiere Foundation Release 3.9.4 20230117-1854
+                logo_url: ''
+                backend_date_version: '2024-03-01T04:00:00Z'
+                backend_main_version: 3.0.2
+                backend_implementation_version: 3.0.2
+  /core-functionality/countries/{id}:
+    get:
+      tags:
+        - default
+      summary: GetCountry
+      description: >-
+        **Endpoint**: GET /core-functionality
+
+
+        **Description**: Returns Country
+
+
+        **FULL URL** :
+        [http://api.adempiere.io/api](http://api.adempiere.io/api)/core-functionality/countries/{id}
+
+
+        **Method**: GET
+
+
+        **Parameters (Params):**
+
+
+        - id (Int32, Obligatorio)
+            
+
+        **Application Example**
+
+
+        ``` bash
+
+        curl --location
+        'http://api.adempiere.io/core-functionality/countries/114' \
+
+        --header 'Authorization: Bearer
+        eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMDAwMTQ5IiwiQURfQ2xpZW50X0lEIjoxMSwiQURfT3JnX0lEIjowLCJBRF9Sb2xlX0lEIjoxMDIsIkFEX1VzZXJfSUQiOjEwMCwiTV9XYXJlaG91c2VfSUQiOjAsIkFEX0xhbmd1YWdlIjoiZW5fVVMiLCJpYXQiOjE3MTA1MTA0MDEsImV4cCI6MTcxMDU5NjgwMX0.nYQbrcT9RyHNRCf-oNM50ZVSO6uJ9gvrQQ7e0fzU9Ik'
+
+         ```
+
+        **Example Answer**
+
+
+        ``` json
+
+        {
+            "id": 114,
+            "country_code": "AD",
+            "name": "Andorra",
+            "description": "Andorra",
+            "has_region": false,
+            "region_name": "",
+            "display_sequence": "@C@,  @P@",
+            "is_address_lines_reverse": false,
+            "capture_sequence": "@A1@ @A2@ @A3@ @A4@ @C@,  @P@ @CO@",
+            "display_sequence_local": "@C@,  @P@",
+            "is_address_lines_local_reverse": false,
+            "expression_postal": "",
+            "has_postal_add": false,
+            "expression_phone": "",
+            "media_size": "",
+            "expression_bank_routing_no": "",
+            "expression_bank_account_no": "",
+            "language": "",
+            "allow_cities_out_of_list": true,
+            "is_postcode_lookup": false,
+            "currency": {
+                "id": 102,
+                "iso_code": "EUR",
+                "cur_symbol": "€",
+                "description": "Euro",
+                "standard_precision": 2,
+                "costing_precision": 4
+            }
+        }
+
+         ```
+
+        **Common mistakes**
+
+
+        - id not found
+            
+
+        ``` json
+
+        {
+            "id": 0,
+            "country_code": "",
+            "name": "",
+            "description": "",
+            "has_region": false,
+            "region_name": "",
+            "display_sequence": "",
+            "is_address_lines_reverse": false,
+            "capture_sequence": "",
+            "display_sequence_local": "",
+            "is_address_lines_local_reverse": false,
+            "expression_postal": "",
+            "has_postal_add": false,
+            "expression_phone": "",
+            "media_size": "",
+            "expression_bank_routing_no": "",
+            "expression_bank_account_no": "",
+            "language": "",
+            "allow_cities_out_of_list": false,
+            "is_postcode_lookup": false
+        }
+
+         ```
+
+        **Change control**
+
+
+        | **Version** | date | author | Description of Changes |
+
+        | --- | --- | --- | --- |
+
+        | 1.0 | 15/03/2024 | Ricardo | Initial creation of the document. |
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: integer
+          required: true
+          example: '0'
+      responses:
+        '200':
+          description: OK
+          headers:
+            Server:
+              schema:
+                type: string
+                example: nginx/1.25.2
+            Date:
+              schema:
+                type: string
+                example: Wed, 06 Mar 2024 17:27:27 GMT
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Content-Length:
+              schema:
+                type: integer
+                example: '739'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            grpc-encoding:
+              schema:
+                type: string
+                example: identity
+            grpc-accept-encoding:
+              schema:
+                type: string
+                example: gzip
+            x-envoy-upstream-service-time:
+              schema:
+                type: integer
+                example: '122'
+            grpc-status:
+              schema:
+                type: integer
+                example: '0'
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Max-Age:
+              schema:
+                type: integer
+                example: '3600'
+            Access-Control-Expose-Headers:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+                example: '*'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                id: 114
+                country_code: AD
+                name: Andorra
+                description: Andorra
+                has_region: false
+                region_name: ''
+                display_sequence: '@C@,  @P@'
+                is_address_lines_reverse: false
+                capture_sequence: '@A1@ @A2@ @A3@ @A4@ @C@,  @P@ @CO@'
+                display_sequence_local: '@C@,  @P@'
+                is_address_lines_local_reverse: false
+                expression_postal: ''
+                has_postal_add: false
+                expression_phone: ''
+                media_size: ''
+                expression_bank_routing_no: ''
+                expression_bank_account_no: ''
+                language: ''
+                allow_cities_out_of_list: true
+                is_postcode_lookup: false
+                currency:
+                  id: 102
+                  iso_code: EUR
+                  cur_symbol: €
+                  description: Euro
+                  standard_precision: 2
+                  costing_precision: 4
+  /core-functionality/languages:
+    get:
+      tags:
+        - default
+      summary: ListLanguages
+      description: >-
+        **Endpoint**: GET /core-functionality
+
+
+        **Description**: Returns ListLanguages
+
+
+        **FULL URL**:
+        [http://api.adempiere.io/api](http://api.adempiere.io/api)/core-functionality/languages
+
+
+        **Method**: GET
+
+
+        **Application Example**
+
+
+        ``` bash
+
+        curl --location 'http://api.adempiere.io/core-functionality/languages'
+
+         ```
+
+        **Example Answer:**
+
+
+        ``` json
+
+        {
+            "record_count": "2",
+            "languages": [
+                {
+                    "language": "es_MX",
+                    "language_name": "Spanish (Mexico)",
+                    "language_iso": "es",
+                    "country_code": "MX",
+                    "is_base_language": false,
+                    "is_system_language": true,
+                    "is_decimal_point": true,
+                    "date_pattern": "dd/MM/yyyy",
+                    "time_pattern": "H:mm:ss z"
+                },
+                {
+                    "language": "en_US",
+                    "language_name": "English (USA)",
+                    "language_iso": "en",
+                    "country_code": "US",
+                    "is_base_language": true,
+                    "is_system_language": false,
+                    "is_decimal_point": true,
+                    "date_pattern": "MM/dd/yyyy",
+                    "time_pattern": "h:mm:ss a z"
+                }
+            ],
+            "next_page_token": ""
+        }
+
+         ```
+
+        **Change control**
+
+
+        | **Version** | date | author | Description of Changes |
+
+        | --- | --- | --- | --- |
+
+        | 1.0 | 15/03/2024 | Ricardo | Initial creation of the document. |
+      responses:
+        '200':
+          description: OK
+          headers:
+            Server:
+              schema:
+                type: string
+                example: nginx/1.25.2
+            Date:
+              schema:
+                type: string
+                example: Wed, 06 Mar 2024 15:10:52 GMT
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Content-Length:
+              schema:
+                type: integer
+                example: '621'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            grpc-encoding:
+              schema:
+                type: string
+                example: identity
+            grpc-accept-encoding:
+              schema:
+                type: string
+                example: gzip
+            x-envoy-upstream-service-time:
+              schema:
+                type: integer
+                example: '10'
+            grpc-status:
+              schema:
+                type: integer
+                example: '0'
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Max-Age:
+              schema:
+                type: integer
+                example: '3600'
+            Access-Control-Expose-Headers:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+                example: '*'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                record_count: '2'
+                languages:
+                  - language: es_MX
+                    language_name: Spanish (Mexico)
+                    language_iso: es
+                    country_code: MX
+                    is_base_language: false
+                    is_system_language: true
+                    is_decimal_point: true
+                    date_pattern: dd/MM/yyyy
+                    time_pattern: H:mm:ss z
+                  - language: en_US
+                    language_name: English (USA)
+                    language_iso: en
+                    country_code: US
+                    is_base_language: true
+                    is_system_language: false
+                    is_decimal_point: true
+                    date_pattern: MM/dd/yyyy
+                    time_pattern: h:mm:ss a z
+                next_page_token: ''
+  /core-functionality/business-partners:
+    get:
+      tags:
+        - default
+      summary: ListBusinessPartners
+      description: >-
+        **Endpoint**: GET /core-functionality
+
+
+        **Description**: Retorna ListBusinessPartners
+
+
+        **Full URL**:
+        [http://api.adempiere.io/api](http://api.adempiere.io/api)/core-functionality/business-partners
+
+
+        **Method**: GET
+
+
+        **Application Example**
+
+
+        ``` bash
+
+        curl --location
+        'http://api.adempiere.io/core-functionality/business-partners' \
+
+        --header 'Authorization: Bearer
+        eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMDAwMTQ5IiwiQURfQ2xpZW50X0lEIjoxMSwiQURfT3JnX0lEIjowLCJBRF9Sb2xlX0lEIjoxMDIsIkFEX1VzZXJfSUQiOjEwMCwiTV9XYXJlaG91c2VfSUQiOjAsIkFEX0xhbmd1YWdlIjoiZW5fVVMiLCJpYXQiOjE3MTA1MTA0MDEsImV4cCI6MTcxMDU5NjgwMX0.nYQbrcT9RyHNRCf-oNM50ZVSO6uJ9gvrQQ7e0fzU9Ik'
+
+         ```
+
+        **Example Answer:**
+
+
+        ``` json
+
+        {
+            "record_count": "17",
+            "business_partners": [
+                {
+                    "id": 113,
+                    "value": "GardenAdmin",
+                    "tax_id": "",
+                    "duns": "",
+                    "naics": "",
+                    "name": "GardenAdmin BP",
+                    "last_name": "",
+                    "description": ""
+                },
+                {
+                    "id": 117,
+                    "value": "C&W",
+                    "tax_id": "",
+                    "duns": "",
+                    "naics": "",
+                    "name": "C&W Construction",
+                    "last_name": "Unlimited Projects Corp.",
+                    "description": ""
+                },
+                {
+                    "id": 118,
+                    "value": "JoeBlock",
+                    "tax_id": "",
+                    "duns": "",
+                    "naics": "",
+                    "name": "Joe Block",
+                    "last_name": "",
+                    "description": ""
+                },
+                {
+                    "id": 119,
+                    "value": "GardenUser",
+                    "tax_id": "",
+                    "duns": "",
+                    "naics": "",
+                    "name": "GardenUser BP",
+                    "last_name": "",
+                    "description": ""
+                },
+                {
+                    "id": 121,
+                    "value": "Patio",
+                    "tax_id": "",
+                    "duns": "",
+                    "naics": "",
+                    "name": "Patio Fun, Inc.",
+                    "last_name": "",
+                    "description": ""
+                },
+                {
+                    "id": 50000,
+                    "value": "Wood, Inc",
+                    "tax_id": "",
+                    "duns": "",
+                    "naics": "",
+                    "name": "Wood, Inc",
+                    "last_name": "",
+                    "description": ""
+                },
+                {
+                    "id": 50001,
+                    "value": "Color, Inc",
+                    "tax_id": "",
+                    "duns": "",
+                    "naics": "",
+                    "name": "Color, Inc",
+                    "last_name": "",
+                    "description": ""
+                },
+                {
+                    "id": 50002,
+                    "value": "Chrome, Inc",
+                    "tax_id": "",
+                    "duns": "",
+                    "naics": "",
+                    "name": "Chrome, Inc",
+                    "last_name": "",
+                    "description": ""
+                },
+                {
+                    "id": 50003,
+                    "value": "Chemical Product, inc",
+                    "tax_id": "",
+                    "duns": "",
+                    "naics": "",
+                    "name": "Chemical Product, inc",
+                    "last_name": "",
+                    "description": ""
+                },
+                {
+                    "id": 50004,
+                    "value": "Store Central",
+                    "tax_id": "",
+                    "duns": "",
+                    "naics": "",
+                    "name": "Store Central",
+                    "last_name": "",
+                    "description": ""
+                },
+                {
+                    "id": 50005,
+                    "value": "Store East",
+                    "tax_id": "",
+                    "duns": "",
+                    "naics": "",
+                    "name": "Store East",
+                    "last_name": "",
+                    "description": ""
+                },
+                {
+                    "id": 50007,
+                    "value": "Store North",
+                    "tax_id": "",
+                    "duns": "",
+                    "naics": "",
+                    "name": "Store North",
+                    "last_name": "",
+                    "description": ""
+                },
+                {
+                    "id": 50008,
+                    "value": "Store South",
+                    "tax_id": "",
+                    "duns": "",
+                    "naics": "",
+                    "name": "Store South",
+                    "last_name": "",
+                    "description": ""
+                },
+                {
+                    "id": 50009,
+                    "value": "Store West",
+                    "tax_id": "",
+                    "duns": "",
+                    "naics": "",
+                    "name": "Store West",
+                    "last_name": "",
+                    "description": ""
+                },
+                {
+                    "id": 120,
+                    "value": "SeedFarm",
+                    "tax_id": "",
+                    "duns": "",
+                    "naics": "",
+                    "name": "Seed Farm Inc.",
+                    "last_name": "",
+                    "description": "Customer & Vendor"
+                },
+                {
+                    "id": 112,
+                    "value": "Standard",
+                    "tax_id": "",
+                    "duns": "",
+                    "naics": "",
+                    "name": "Standard",
+                    "last_name": "",
+                    "description": "Walk-In Customer"
+                },
+                {
+                    "id": 114,
+                    "value": "TreeFarm",
+                    "tax_id": "",
+                    "duns": "",
+                    "naics": "",
+                    "name": "Tree Farm Inc.",
+                    "last_name": "",
+                    "description": "Vendor"
+                }
+            ],
+            "next_page_token": ""
+        }
+
+         ```
+
+        **Change control**
+
+
+        | **Version** | date | author | Description of Changes |
+
+        | --- | --- | --- | --- |
+
+        | 1.0 | 15/03/2024 | Ricardo | Initial creation of the document. |
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: OK
+          headers:
+            Server:
+              schema:
+                type: string
+                example: nginx/1.25.2
+            Date:
+              schema:
+                type: string
+                example: Fri, 15 Mar 2024 05:17:04 GMT
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Content-Length:
+              schema:
+                type: integer
+                example: '2965'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            grpc-encoding:
+              schema:
+                type: string
+                example: identity
+            grpc-accept-encoding:
+              schema:
+                type: string
+                example: gzip
+            x-envoy-upstream-service-time:
+              schema:
+                type: integer
+                example: '68'
+            grpc-status:
+              schema:
+                type: integer
+                example: '0'
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Max-Age:
+              schema:
+                type: integer
+                example: '3600'
+            Access-Control-Expose-Headers:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+                example: '*'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                record_count: '17'
+                business_partners:
+                  - id: 113
+                    value: GardenAdmin
+                    tax_id: ''
+                    duns: ''
+                    naics: ''
+                    name: GardenAdmin BP
+                    last_name: ''
+                    description: ''
+                  - id: 117
+                    value: C&W
+                    tax_id: ''
+                    duns: ''
+                    naics: ''
+                    name: C&W Construction
+                    last_name: Unlimited Projects Corp.
+                    description: ''
+                  - id: 118
+                    value: JoeBlock
+                    tax_id: ''
+                    duns: ''
+                    naics: ''
+                    name: Joe Block
+                    last_name: ''
+                    description: ''
+                  - id: 119
+                    value: GardenUser
+                    tax_id: ''
+                    duns: ''
+                    naics: ''
+                    name: GardenUser BP
+                    last_name: ''
+                    description: ''
+                  - id: 121
+                    value: Patio
+                    tax_id: ''
+                    duns: ''
+                    naics: ''
+                    name: Patio Fun, Inc.
+                    last_name: ''
+                    description: ''
+                  - id: 50000
+                    value: Wood, Inc
+                    tax_id: ''
+                    duns: ''
+                    naics: ''
+                    name: Wood, Inc
+                    last_name: ''
+                    description: ''
+                  - id: 50001
+                    value: Color, Inc
+                    tax_id: ''
+                    duns: ''
+                    naics: ''
+                    name: Color, Inc
+                    last_name: ''
+                    description: ''
+                  - id: 50002
+                    value: Chrome, Inc
+                    tax_id: ''
+                    duns: ''
+                    naics: ''
+                    name: Chrome, Inc
+                    last_name: ''
+                    description: ''
+                  - id: 50003
+                    value: Chemical Product, inc
+                    tax_id: ''
+                    duns: ''
+                    naics: ''
+                    name: Chemical Product, inc
+                    last_name: ''
+                    description: ''
+                  - id: 50004
+                    value: Store Central
+                    tax_id: ''
+                    duns: ''
+                    naics: ''
+                    name: Store Central
+                    last_name: ''
+                    description: ''
+                  - id: 50005
+                    value: Store East
+                    tax_id: ''
+                    duns: ''
+                    naics: ''
+                    name: Store East
+                    last_name: ''
+                    description: ''
+                  - id: 50007
+                    value: Store North
+                    tax_id: ''
+                    duns: ''
+                    naics: ''
+                    name: Store North
+                    last_name: ''
+                    description: ''
+                  - id: 50008
+                    value: Store South
+                    tax_id: ''
+                    duns: ''
+                    naics: ''
+                    name: Store South
+                    last_name: ''
+                    description: ''
+                  - id: 50009
+                    value: Store West
+                    tax_id: ''
+                    duns: ''
+                    naics: ''
+                    name: Store West
+                    last_name: ''
+                    description: ''
+                  - id: 120
+                    value: SeedFarm
+                    tax_id: ''
+                    duns: ''
+                    naics: ''
+                    name: Seed Farm Inc.
+                    last_name: ''
+                    description: Customer & Vendor
+                  - id: 112
+                    value: Standard
+                    tax_id: ''
+                    duns: ''
+                    naics: ''
+                    name: Standard
+                    last_name: ''
+                    description: Walk-In Customer
+                  - id: 114
+                    value: TreeFarm
+                    tax_id: ''
+                    duns: ''
+                    naics: ''
+                    name: Tree Farm Inc.
+                    last_name: ''
+                    description: Vendor
+                next_page_token: ''
+  /core-functionality/conversion-rates:
+    get:
+      tags:
+        - default
+      summary: GetConversionRate
+      description: >-
+        **Endpoint**: GET /core-functionality
+
+
+        **Description**: Returns ConversionRate
+
+
+        **FULL URL**:
+        [http://api.adempiere.io/api](http://api.adempiere.io/api)/core-functionality/conversion-rates
+
+
+        **Method**: GET
+
+
+        **Application Example**
+
+
+        ``` bash
+
+        curl --location
+        'http://api.adempiere.io/core-functionality/conversion-rates' \
+
+        --header 'Authorization: Bearer
+        eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMDAwMTQ5IiwiQURfQ2xpZW50X0lEIjoxMSwiQURfT3JnX0lEIjowLCJBRF9Sb2xlX0lEIjoxMDIsIkFEX1VzZXJfSUQiOjEwMCwiTV9XYXJlaG91c2VfSUQiOjAsIkFEX0xhbmd1YWdlIjoiZW5fVVMiLCJpYXQiOjE3MTA1MTA0MDEsImV4cCI6MTcxMDU5NjgwMX0.nYQbrcT9RyHNRCf-oNM50ZVSO6uJ9gvrQQ7e0fzU9Ik'
+
+         ```
+
+        **Change control**
+
+
+        | **Version** | date | author | Description of Changes |
+
+        | --- | --- | --- | --- |
+
+        | 1.0 | 15/03/2024 | Ricardo | Initial creation of the document. |
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /core-functionality/product-conversions/{id}:
+    get:
+      tags:
+        - default
+      summary: ListProductConversion
+      description: >-
+        **Endpoint**: GET /core-functionality
+
+
+        **Description**: Returns ListProductConversion
+
+
+        **FULL URL**:
+        [http://api.adempiere.io/api](http://api.adempiere.io/api)/core-functionality/product-conversions/{id}
+
+
+        **Method**: GET
+
+
+        **Parameters (Params):**
+
+
+        - id (Int32, Mandatory)
+            
+
+        **Application Example**
+
+
+        **Example Answer**
+
+
+        ``` json
+
+        {
+            "record_count": "0",
+            "product_conversion": [
+                {
+                    "id": 0,
+                    "uom": {
+                        "id": 100,
+                        "code": "EA",
+                        "symbol": "Ea ",
+                        "name": "Each",
+                        "description": "",
+                        "standard_precision": 0,
+                        "costing_precision": 4
+                    },
+                    "product_uom": {
+                        "id": 100,
+                        "code": "EA",
+                        "symbol": "Ea ",
+                        "name": "Each",
+                        "description": "",
+                        "standard_precision": 0,
+                        "costing_precision": 4
+                    },
+                    "multiply_rate": "1",
+                    "divide_rate": "1"
+                }
+            ],
+            "next_page_token": ""
+        }
+
+         ```
+
+        **Common mistakes:**
+
+
+        - invalid id
+            
+
+        ``` json
+
+        {
+            "code": 13,
+            "message": "C_UOM_ID is mandatory.",
+            "details": []
+        }
+
+         ```
+
+        - **Product not found**
+            
+
+        ``` json
+
+        {
+            "code": 13,
+            "message": "Product * Not found *",
+            "details": []
+        }
+
+         ```
+
+        **Change control**
+
+
+        | **Version** | date | author | Description of Changes |
+
+        | --- | --- | --- | --- |
+
+        | 1.0 | 15/03/2024 | Ricardo | Initial creation of the document. |
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: integer
+          required: true
+          example: '123'
+      responses:
+        '200':
+          description: OK
+          headers:
+            Server:
+              schema:
+                type: string
+                example: nginx/1.25.2
+            Date:
+              schema:
+                type: string
+                example: Fri, 15 Mar 2024 05:18:34 GMT
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Content-Length:
+              schema:
+                type: integer
+                example: '499'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            grpc-encoding:
+              schema:
+                type: string
+                example: identity
+            grpc-accept-encoding:
+              schema:
+                type: string
+                example: gzip
+            x-envoy-upstream-service-time:
+              schema:
+                type: integer
+                example: '51'
+            grpc-status:
+              schema:
+                type: integer
+                example: '0'
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Max-Age:
+              schema:
+                type: integer
+                example: '3600'
+            Access-Control-Expose-Headers:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+                example: '*'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                record_count: '0'
+                product_conversion:
+                  - id: 0
+                    uom:
+                      id: 100
+                      code: EA
+                      symbol: 'Un '
+                      name: Unidad
+                      description: ''
+                      standard_precision: 0
+                      costing_precision: 4
+                    product_uom:
+                      id: 100
+                      code: EA
+                      symbol: 'Un '
+                      name: Unidad
+                      description: ''
+                      standard_precision: 0
+                      costing_precision: 4
+                    multiply_rate: '1'
+                    divide_rate: '1'
+                next_page_token: ''
