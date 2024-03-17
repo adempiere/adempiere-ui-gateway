@@ -1,0 +1,680 @@
+{
+	"info": {
+		"_postman_id": "1e9fc819-7f95-4dbc-aa13-060dfcebebb2",
+		"name": "User_customization",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "28978517"
+	},
+	"item": [
+		{
+			"name": "ListUsers",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{HOST}}/user-customization/users",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"user-customization",
+						"users"
+					]
+				},
+				"description": "**Endpoint**: GET /User_customization\n\n**Description**: Returns ListUsers\n\n**FULL URL**: [http://api.adempiere.io](http://api.adempiere.io/api)/user-customization/users\n\n**Method**: GET\n\n**Application Example**\n\n``` bash\ncurl --location 'http://api.adempiere.io/user-customization/users' \\\n--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMDAwMTQ2IiwiQURfQ2xpZW50X0lEIjoxMSwiQURfT3JnX0lEIjowLCJBRF9Sb2xlX0lEIjoxMDIsIkFEX1VzZXJfSUQiOjEwMCwiTV9XYXJlaG91c2VfSUQiOjAsIkFEX0xhbmd1YWdlIjoiZXNfTVgiLCJpYXQiOjE3MTA2Mjg3ODAsImV4cCI6MTcxMDcxNTE4MH0.8Sg48hnxmTbqs7nG_JoafC7AwXbHX3jWAPLPJ0Qo7VU'\n\n ```\n\n**Example Answer**\n\n``` json\n{\n    \"record_count\": \"9\",\n    \"records\": [\n        {\n            \"id\": 100,\n            \"value\": \"SuperUser\",\n            \"name\": \"SuperUser\",\n            \"description\": \"Super User with Access to all levels\"\n        },\n        {\n            \"id\": 0,\n            \"value\": \"System\",\n            \"name\": \"System\",\n            \"description\": \"** Do not change **\"\n        },\n        {\n            \"id\": 50004,\n            \"value\": \"50000\",\n            \"name\": \"Contact of Joe Block\",\n            \"description\": \"\"\n        },\n        {\n            \"id\": 104,\n            \"value\": \"\",\n            \"name\": \"Carl Boss\",\n            \"description\": \"\"\n        },\n        {\n            \"id\": 105,\n            \"value\": \"\",\n            \"name\": \"Henry Seed\",\n            \"description\": \"\"\n        },\n        {\n            \"id\": 50001,\n            \"value\": \"WebService\",\n            \"name\": \"WebService\",\n            \"description\": \"\"\n        },\n        {\n            \"id\": 103,\n            \"value\": \"joesales\",\n            \"name\": \"Joe Sales\",\n            \"description\": \"\"\n        },\n        {\n            \"id\": 101,\n            \"value\": \"gardenadmin@adempiere.io\",\n            \"name\": \"GardenAdmin\",\n            \"description\": \"GardenAdmin\"\n        },\n        {\n            \"id\": 102,\n            \"value\": \"gardenuser@adempiere.io\",\n            \"name\": \"GardenUser\",\n            \"description\": \"GardenUser\"\n        }\n    ],\n    \"next_page_token\": \"\"\n}\n\n ```\n\n**Change control**\n\n| **Version** | date | author | Description of Changes |\n| --- | --- | --- | --- |\n| 1.0 | 15/03/2024 | Ricardo | Initial creation of the document. |"
+			},
+			"response": [
+				{
+					"name": "ListUsers",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/user-customization/users",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"user-customization",
+								"users"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.25.2"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 07 Mar 2024 19:06:16 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "998"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "grpc-encoding",
+							"value": "identity"
+						},
+						{
+							"key": "grpc-accept-encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "x-envoy-upstream-service-time",
+							"value": "106"
+						},
+						{
+							"key": "grpc-status",
+							"value": "0"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Max-Age",
+							"value": "3600"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"record_count\": \"9\",\n    \"records\": [\n        {\n            \"id\": 100,\n            \"value\": \"SuperUser\",\n            \"name\": \"SuperUser\",\n            \"description\": \"Super User with Access to all levels\"\n        },\n        {\n            \"id\": 0,\n            \"value\": \"System\",\n            \"name\": \"System\",\n            \"description\": \"** Do not change **\"\n        },\n        {\n            \"id\": 50004,\n            \"value\": \"50000\",\n            \"name\": \"Contact of Joe Block\",\n            \"description\": \"\"\n        },\n        {\n            \"id\": 104,\n            \"value\": \"\",\n            \"name\": \"Carl Boss\",\n            \"description\": \"\"\n        },\n        {\n            \"id\": 105,\n            \"value\": \"\",\n            \"name\": \"Henry Seed\",\n            \"description\": \"\"\n        },\n        {\n            \"id\": 50001,\n            \"value\": \"WebService\",\n            \"name\": \"WebService\",\n            \"description\": \"\"\n        },\n        {\n            \"id\": 103,\n            \"value\": \"joesales\",\n            \"name\": \"Joe Sales\",\n            \"description\": \"\"\n        },\n        {\n            \"id\": 101,\n            \"value\": \"gardenadmin@adempiere.io\",\n            \"name\": \"GardenAdmin\",\n            \"description\": \"GardenAdmin\"\n        },\n        {\n            \"id\": 102,\n            \"value\": \"gardenuser@adempiere.io\",\n            \"name\": \"GardenUser\",\n            \"description\": \"GardenUser\"\n        }\n    ],\n    \"next_page_token\": \"\"\n}"
+				}
+			]
+		},
+		{
+			"name": "ListRoles",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{HOST}}/user-customization/roles",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"user-customization",
+						"roles"
+					]
+				},
+				"description": "**Endpoint**: GET /user-customization\n\n**Description**: Returns ListRoles\n\n**FULL URL**: [http://api.adempiere.io](http://api.adempiere.io/api)/user-customization/roles\n\n**Method**: GET\n\n**Application Example**\n\n``` bash\ncurl --location 'http://api.adempiere.io/user-customization/roles' \\\n--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMDAwMTQ2IiwiQURfQ2xpZW50X0lEIjoxMSwiQURfT3JnX0lEIjowLCJBRF9Sb2xlX0lEIjoxMDIsIkFEX1VzZXJfSUQiOjEwMCwiTV9XYXJlaG91c2VfSUQiOjAsIkFEX0xhbmd1YWdlIjoiZXNfTVgiLCJpYXQiOjE3MTA2Mjg3ODAsImV4cCI6MTcxMDcxNTE4MH0.8Sg48hnxmTbqs7nG_JoafC7AwXbHX3jWAPLPJ0Qo7VU'\n\n ```\n\n**Example Answer**\n\n``` json\n{\n    \"record_count\": \"5\",\n    \"records\": [\n        {\n            \"id\": 0,\n            \"value\": \"\",\n            \"name\": \"System Administrator\",\n            \"description\": \"System Administrator Role (cannot be changed)\"\n        },\n        {\n            \"id\": 50008,\n            \"value\": \"\",\n            \"name\": \"Role Template\",\n            \"description\": \"\"\n        },\n        {\n            \"id\": 102,\n            \"value\": \"\",\n            \"name\": \"GardenWorld Admin\",\n            \"description\": \"GardenWorld Admin\"\n        },\n        {\n            \"id\": 103,\n            \"value\": \"\",\n            \"name\": \"GardenWorld User\",\n            \"description\": \"GardenWorld User\"\n        },\n        {\n            \"id\": 50004,\n            \"value\": \"\",\n            \"name\": \"Web Service Execution\",\n            \"description\": \"\"\n        }\n    ],\n    \"next_page_token\": \"\"\n}\n\n ```\n\n**Change control**\n\n| **Version** | date | author | Description of Changes |\n| --- | --- | --- | --- |\n| 1.0 | 15/03/2024 | Ricardo | Initial creation of the document. |"
+			},
+			"response": [
+				{
+					"name": "ListRoles",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/user-customization/roles",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"user-customization",
+								"roles"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.25.2"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 07 Mar 2024 19:07:13 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "608"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "grpc-encoding",
+							"value": "identity"
+						},
+						{
+							"key": "grpc-accept-encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "x-envoy-upstream-service-time",
+							"value": "92"
+						},
+						{
+							"key": "grpc-status",
+							"value": "0"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Max-Age",
+							"value": "3600"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"record_count\": \"5\",\n    \"records\": [\n        {\n            \"id\": 0,\n            \"value\": \"\",\n            \"name\": \"System Administrator\",\n            \"description\": \"System Administrator Role (cannot be changed)\"\n        },\n        {\n            \"id\": 50008,\n            \"value\": \"\",\n            \"name\": \"Role Template\",\n            \"description\": \"\"\n        },\n        {\n            \"id\": 102,\n            \"value\": \"\",\n            \"name\": \"GardenWorld Admin\",\n            \"description\": \"GardenWorld Admin\"\n        },\n        {\n            \"id\": 103,\n            \"value\": \"\",\n            \"name\": \"GardenWorld User\",\n            \"description\": \"GardenWorld User\"\n        },\n        {\n            \"id\": 50004,\n            \"value\": \"\",\n            \"name\": \"Web Service Execution\",\n            \"description\": \"\"\n        }\n    ],\n    \"next_page_token\": \"\"\n}"
+				}
+			]
+		},
+		{
+			"name": "SaveWindowCustomization",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{HOST}}/user-customization/windows/:tab_id/:level_type/:level_value",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"user-customization",
+						"windows",
+						":tab_id",
+						":level_type",
+						":level_value"
+					],
+					"variable": [
+						{
+							"key": "tab_id",
+							"value": "394"
+						},
+						{
+							"key": "level_type",
+							"value": "1"
+						},
+						{
+							"key": "level_value",
+							"value": "102"
+						}
+					]
+				},
+				"description": "**Endpoint**: POST /user-customization\n\n**Description**: Returns Empty\n\n**FULL URL**: [http://api.adempiere.io](http://api.adempiere.io/api)/user-customization/windows/{tab_id}/{level_type}/{level_value}\n\n**Method**: POST\n\n**Parameters (Params)**\n\ntab_id (int32, Mandatory)\n\nlevel_type (int32, Mandatory)\n\nlevel_value (int32, Mandatory)\n\n**Application Example**\n\n``` bash\ncurl --location --request POST 'http://api.adempiere.io/user-customization/windows/394/1/102' \\\n--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMDAwMTQ2IiwiQURfQ2xpZW50X0lEIjoxMSwiQURfT3JnX0lEIjowLCJBRF9Sb2xlX0lEIjoxMDIsIkFEX1VzZXJfSUQiOjEwMCwiTV9XYXJlaG91c2VfSUQiOjAsIkFEX0xhbmd1YWdlIjoiZXNfTVgiLCJpYXQiOjE3MTA2Mjg3ODAsImV4cCI6MTcxMDcxNTE4MH0.8Sg48hnxmTbqs7nG_JoafC7AwXbHX3jWAPLPJ0Qo7VU'\n\n ```\n\n**Example Answer**\n\n``` json\n{}\n\n ```\n\n**Common mistakes**\n\n- the level value does not correspond to any of the records\n    \n\n``` json\n{\n    \"code\": 13,\n    \"message\": \"Usuario * No encontrado *\",\n    \"details\": []\n}\n ```\n\n- the level type does not correspond to any of the records\n    \n\n``` json\n{\n    \"code\": 13,\n    \"message\": \"Nivel SaaS * No encontrado *\",\n    \"details\": []\n}\n\n ```\n\n- the tab id does not correspond to any of the records\n    \n\n``` json\n{\n    \"code\": 13,\n    \"message\": \"Pestaña * No encontrado *\",\n    \"details\": []\n}\n\n ```\n\n**Change control**\n\n| **Version** | date | author | Description of Changes |\n| --- | --- | --- | --- |\n| 1.0 | 15/03/2024 | Ricardo | Initial creation of the document. |"
+			},
+			"response": [
+				{
+					"name": "SaveWindowCustomization",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/user-customization/windows/:tab_id/:level_type/:level_value",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"user-customization",
+								"windows",
+								":tab_id",
+								":level_type",
+								":level_value"
+							],
+							"variable": [
+								{
+									"key": "tab_id",
+									"value": "394"
+								},
+								{
+									"key": "level_type",
+									"value": "1"
+								},
+								{
+									"key": "level_value",
+									"value": "102"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.25.2"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 14 Mar 2024 19:25:17 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "3"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "grpc-encoding",
+							"value": "identity"
+						},
+						{
+							"key": "grpc-accept-encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "x-envoy-upstream-service-time",
+							"value": "2874"
+						},
+						{
+							"key": "grpc-status",
+							"value": "0"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Max-Age",
+							"value": "3600"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{}"
+				}
+			]
+		},
+		{
+			"name": "SaveBrowseCustomization",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"field_attributes\":{}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{HOST}}/user-customization/browsers/:browse_id/:level_type/:level_value",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"user-customization",
+						"browsers",
+						":browse_id",
+						":level_type",
+						":level_value"
+					],
+					"variable": [
+						{
+							"key": "browse_id",
+							"value": "50110"
+						},
+						{
+							"key": "level_type",
+							"value": "1"
+						},
+						{
+							"key": "level_value",
+							"value": "100"
+						}
+					]
+				},
+				"description": "**Endpoint**: POST /user-customization\n\n**Description**: Returns Empty\n\n**FULL URL**: [http://api.adempiere.io](http://api.adempiere.io/api)/user-customization/browsers/{browse_id}/{level_type}/{level_value}\n\n**Method**: POST\n\n**Parameters (Params)**\n\nbrowse_id (int32, Mandatory)\n\nlevel_type (int32, Mandatory)\n\nlevel_value (int32, Mandatory)\n\n**Parameters (Body)**\n\nfield_attributes (JSON, Optional)\n\n**Application Example**\n\n``` bash\ncurl --location 'http://api.adempiere.io/user-customization/browsers/50110/1/100' \\\n--header 'Content-Type: application/json' \\\n--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMDAwMTQ2IiwiQURfQ2xpZW50X0lEIjoxMSwiQURfT3JnX0lEIjowLCJBRF9Sb2xlX0lEIjoxMDIsIkFEX1VzZXJfSUQiOjEwMCwiTV9XYXJlaG91c2VfSUQiOjAsIkFEX0xhbmd1YWdlIjoiZXNfTVgiLCJpYXQiOjE3MTA2Mjg3ODAsImV4cCI6MTcxMDcxNTE4MH0.8Sg48hnxmTbqs7nG_JoafC7AwXbHX3jWAPLPJ0Qo7VU' \\\n--data '{\n    \"field_attributes\":{}\n}'\n\n ```\n\n**Example Answer**\n\n``` json\n{}\n\n ```\n\n**Common mistakes**\n\n- the level value does not correspond to any of the records\n    \n\n``` json\n{\n    \"code\": 13,\n    \"message\": \"Usuario * No encontrado *\",\n    \"details\": []\n}\n\n ```\n\n- the level type does not correspond to any of the records\n    \n\n``` json\n{\n    \"code\": 13,\n    \"message\": \"Nivel SaaS * No encontrado *\",\n    \"details\": []\n}\n\n ```\n\n- the browse id does not correspond to any of the records\n    \n\n``` json\n{\n    \"code\": 13,\n    \"message\": \"Smart Browse * No encontrado *\",\n    \"details\": []\n}\n\n ```\n\n**Change control**\n\n| **Version** | date | author | Description of Changes |\n| --- | --- | --- | --- |\n| 1.0 | 15/03/2024 | Ricardo | Initial creation of the document. |"
+			},
+			"response": [
+				{
+					"name": "SaveBrowseCustomization",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"field_attributes\":{}\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HOST}}/user-customization/browsers/:browse_id/:level_type/:level_value",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"user-customization",
+								"browsers",
+								":browse_id",
+								":level_type",
+								":level_value"
+							],
+							"variable": [
+								{
+									"key": "browse_id",
+									"value": "50110"
+								},
+								{
+									"key": "level_type",
+									"value": "1"
+								},
+								{
+									"key": "level_value",
+									"value": "100"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.25.2"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 14 Mar 2024 19:29:03 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "3"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "grpc-encoding",
+							"value": "identity"
+						},
+						{
+							"key": "grpc-accept-encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "x-envoy-upstream-service-time",
+							"value": "4839"
+						},
+						{
+							"key": "grpc-status",
+							"value": "0"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Max-Age",
+							"value": "3600"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{}"
+				}
+			]
+		},
+		{
+			"name": "SaveProcessCustomization",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{HOST}}/user-customization/processes/:process_id/:level_type/:level_value",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"user-customization",
+						"processes",
+						":process_id",
+						":level_type",
+						":level_value"
+					],
+					"variable": [
+						{
+							"key": "process_id",
+							"value": "205"
+						},
+						{
+							"key": "level_type",
+							"value": "1"
+						},
+						{
+							"key": "level_value",
+							"value": "100"
+						}
+					]
+				},
+				"description": "**Endpoint**: POST /user-customization\n\n**Description**: Returns Empty\n\n**FULL URL**: [http://api.adempiere.io](http://api.adempiere.io/api)/user-customization/processes/{process_id}/{level_type/{level_value}\n\n**Method**: POST\n\n**Parameters (Params)**\n\nprocess_id (int32, Mandatory)\n\nlevel_type (int32, Mandatory)\n\nlevel_value (int32, Mandatory)\n\n**Application Example**\n\n``` bash\ncurl --location --request POST 'http://api.adempiere.io/user-customization/processes/205/1/100' \\\n--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMDAwMTQ2IiwiQURfQ2xpZW50X0lEIjoxMSwiQURfT3JnX0lEIjowLCJBRF9Sb2xlX0lEIjoxMDIsIkFEX1VzZXJfSUQiOjEwMCwiTV9XYXJlaG91c2VfSUQiOjAsIkFEX0xhbmd1YWdlIjoiZXNfTVgiLCJpYXQiOjE3MTA2Mjg3ODAsImV4cCI6MTcxMDcxNTE4MH0.8Sg48hnxmTbqs7nG_JoafC7AwXbHX3jWAPLPJ0Qo7VU'\n\n ```\n\n**Example Answer**\n\n``` json\n{}\n\n ```\n\n**Common mistakes**\n\n- the level value does not correspond to any of the records\n    \n\n``` json\n{\n    \"code\": 13,\n    \"message\": \"Usuario * No encontrado *\",\n    \"details\": []\n}\n\n ```\n\n- the level type does not correspond to any of the records\n    \n\n``` json\n{\n    \"code\": 13,\n    \"message\": \"Nivel SaaS * No encontrado *\",\n    \"details\": []\n}\n\n ```\n\n- the process id does not correspond to any of the records\n    \n\n``` json\n{\n    \"code\": 13,\n    \"message\": \"Proceso * No encontrado *\",\n    \"details\": []\n}\n\n ```\n\n**Change control**\n\n| **Version** | date | author | Description of Changes |\n| --- | --- | --- | --- |\n| 1.0 | 15/03/2024 | Ricardo | Initial creation of the document. |"
+			},
+			"response": [
+				{
+					"name": "SaveProcessCustomization",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/user-customization/processes/:process_id/:level_type/:level_value",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"user-customization",
+								"processes",
+								":process_id",
+								":level_type",
+								":level_value"
+							],
+							"variable": [
+								{
+									"key": "process_id",
+									"value": "205"
+								},
+								{
+									"key": "level_type",
+									"value": "1"
+								},
+								{
+									"key": "level_value",
+									"value": "100"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.25.2"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 14 Mar 2024 19:38:15 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "3"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "grpc-encoding",
+							"value": "identity"
+						},
+						{
+							"key": "grpc-accept-encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "x-envoy-upstream-service-time",
+							"value": "387"
+						},
+						{
+							"key": "grpc-status",
+							"value": "0"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Max-Age",
+							"value": "3600"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{}"
+				}
+			]
+		}
+	]
+}
