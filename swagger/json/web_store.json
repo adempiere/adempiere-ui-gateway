@@ -1,0 +1,1409 @@
+{
+	"info": {
+		"_postman_id": "af384c02-bdf7-48fc-b36d-fe142ca96208",
+		"name": "Web_store",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "28978517"
+	},
+	"item": [
+		{
+			"name": "CreateCustomer",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\":\"prueba5\",\n    \"first_name\":\"prueba7\",\n    \"last_name\":\"prueba5\",\n    \"password\":\"1234\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{HOST}}/store/web-store/user",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"store",
+						"web-store",
+						"user"
+					]
+				},
+				"description": "**Endpoint**: POST /Web_store\n\n**Description**: Returns Customer\n\n**FULL URL**: [http://api.adempiere.io](http://api.adempiere.io/api)/store/web-store/user\n\n**Method**: POST\n\n**Parameters (Body)**\n\nemail (String, Mandatory)\n\nfirst_name (String, Mandatory)\n\nlast_name (String, optional)\n\npassword (Int32, optional)\n\n**Application Example**\n\n``` bash\ncurl --location 'http://api.adempiere.io/store/web-store/user' \\\n--header 'Content-Type: application/json' \\\n--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMDAwMTQ5IiwiQURfQ2xpZW50X0lEIjoxMSwiQURfT3JnX0lEIjowLCJBRF9Sb2xlX0lEIjoxMDIsIkFEX1VzZXJfSUQiOjEwMCwiTV9XYXJlaG91c2VfSUQiOjAsIkFEX0xhbmd1YWdlIjoiZW5fVVMiLCJpYXQiOjE3MTA1MTA0MDEsImV4cCI6MTcxMDU5NjgwMX0.nYQbrcT9RyHNRCf-oNM50ZVSO6uJ9gvrQQ7e0fzU9Ik' \\\n--data '{\n    \"email\":\"prueba5\",\n    \"first_name\":\"prueba7\",\n    \"last_name\":\"prueba5\",\n    \"password\":\"1234\"\n}'\n\n ```\n\n**Example Answer**\n\n``` json\n{\n    \"id\": 1000000,\n    \"business_partner_group_id\": 0,\n    \"created\": \"2024-03-15T23:26:05Z\",\n    \"updated\": \"2024-03-15T23:26:05.225Z\",\n    \"organization_name\": \"\",\n    \"email\": \"prueba5\",\n    \"first_name\": \"prueba7\",\n    \"last_name\": \"prueba5\",\n    \"web_store_id\": 0,\n    \"website_id\": 0,\n    \"addresses\": []\n}\n\n ```\n\n**Common mistakes**\n\n- email is already registered\n    \n\n``` json\n{\n    \"code\": 13,\n    \"message\": \"Registered EMail / EMail A record already exists\",\n    \"details\": []\n}\n\n ```\n\n- name does not have a valid value\n    \n\n``` json\n{\n    \"code\": 13,\n    \"message\": \"&Name Mandatory\",\n    \"details\": []\n}\n\n ```\n\n- email does not have a valid value\n    \n\n``` json\n{\n    \"code\": 13,\n    \"message\": \"EMail Mandatory\",\n    \"details\": []\n}\n\n ```\n\n**Change control**\n\n| **Version** | date | author | Description of Changes |\n| --- | --- | --- | --- |\n| 1.0 | 15/03/2024 | Ricardo | Initial creation of the document. |"
+			},
+			"response": [
+				{
+					"name": "CreateCustomer",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\":\"prueba\",\n    \"first_name\":\"prueba\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HOST}}/store/web-store/user",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"store",
+								"web-store",
+								"user"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.25.2"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 07 Mar 2024 19:22:25 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "279"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "grpc-encoding",
+							"value": "identity"
+						},
+						{
+							"key": "grpc-accept-encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "x-envoy-upstream-service-time",
+							"value": "112"
+						},
+						{
+							"key": "grpc-status",
+							"value": "0"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Max-Age",
+							"value": "3600"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 1000000,\n    \"business_partner_group_id\": 0,\n    \"created\": \"2024-03-07T19:22:25Z\",\n    \"updated\": \"2024-03-07T19:22:25Z\",\n    \"organization_name\": \"Store West\",\n    \"email\": \"prueba\",\n    \"first_name\": \"prueba\",\n    \"last_name\": \"\",\n    \"web_store_id\": 0,\n    \"website_id\": 0,\n    \"addresses\": []\n}"
+				}
+			]
+		},
+		{
+			"name": "GetCustomer",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{HOST}}/store/web-store/user/me",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"store",
+						"web-store",
+						"user",
+						"me"
+					]
+				},
+				"description": "**Endpoint**: GET /Web_store\n\n**Description**: Returns Customer\n\n**FULL URL**: [http://api.adempiere.io](http://api.adempiere.io/api)/store/web-store/user/me\n\n**Method**: GET\n\n**Application Example**\n\n``` bash\ncurl --location 'http://api.adempiere.io/store/web-store/user/me' \\\n--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMDAwMTQ2IiwiQURfQ2xpZW50X0lEIjoxMSwiQURfT3JnX0lEIjowLCJBRF9Sb2xlX0lEIjoxMDIsIkFEX1VzZXJfSUQiOjEwMCwiTV9XYXJlaG91c2VfSUQiOjAsIkFEX0xhbmd1YWdlIjoiZXNfTVgiLCJpYXQiOjE3MTA2Mjg3ODAsImV4cCI6MTcxMDcxNTE4MH0.8Sg48hnxmTbqs7nG_JoafC7AwXbHX3jWAPLPJ0Qo7VU'\n\n ```\n\n**Example Answer**\n\n``` json\n{\n    \"id\": 100,\n    \"business_partner_group_id\": 0,\n    \"created\": \"1999-12-09T22:15:00Z\",\n    \"updated\": \"2005-10-18T11:58:59Z\",\n    \"organization_name\": \"\",\n    \"email\": \"\",\n    \"first_name\": \"SuperUser\",\n    \"last_name\": \"\",\n    \"web_store_id\": 0,\n    \"website_id\": 0,\n    \"addresses\": []\n}\n\n ```\n\n**Change control**\n\n| **Version** | date | author | Description of Changes |\n| --- | --- | --- | --- |\n| 1.0 | 15/03/2024 | Ricardo | Initial creation of the document. |"
+			},
+			"response": [
+				{
+					"name": "GetCustomer",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/store/web-store/user/me",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"store",
+								"web-store",
+								"user",
+								"me"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.25.2"
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 16 Mar 2024 22:40:24 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "262"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "grpc-encoding",
+							"value": "identity"
+						},
+						{
+							"key": "grpc-accept-encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "x-envoy-upstream-service-time",
+							"value": "61"
+						},
+						{
+							"key": "grpc-status",
+							"value": "0"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Max-Age",
+							"value": "3600"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 100,\n    \"business_partner_group_id\": 0,\n    \"created\": \"1999-12-09T22:15:00Z\",\n    \"updated\": \"2005-10-18T11:58:59Z\",\n    \"organization_name\": \"\",\n    \"email\": \"\",\n    \"first_name\": \"SuperUser\",\n    \"last_name\": \"\",\n    \"web_store_id\": 0,\n    \"website_id\": 0,\n    \"addresses\": []\n}"
+				}
+			]
+		},
+		{
+			"name": "UpdateCustomer",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\":1000000,\n    \"business_partner_group_id\":0,\n    \"organization_name\":\"Store West\",\n    \"email\":\"asd\",\n    \"first_name\":\"asd\",\n    \"last_name\":\"asd\",\n    \"web_store_id\":0,\n    \"website_id\":0\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{HOST}}/store/web-store/user/me",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"store",
+						"web-store",
+						"user",
+						"me"
+					]
+				},
+				"description": "**Endpoint**: POST /Web_store\n\n**Description**: Returns Customer\n\n**FULL URL**: [http://api.adempiere.io](http://api.adempiere.io/api)/store/web-store/user/me\n\n**Mehtod**: POST\n\n**Parameters (Body):**\n\n- id (Int32,Optional)\n- business_partner_group_id (Int32, Optional)\n- organization_name (String, Optional)\n- email (String,Mandatory)\n- first_name (String, Mandatory)\n- last_name (String, Optional)\n- web_store_id (Int32, Optional)\n- website_id (Int32, Optional)\n    \n\n**Application Example**\n\n``` bash\ncurl --location 'http://api.adempiere.io/store/web-store/user/me' \\\n--header 'Content-Type: application/json' \\\n--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMDAwMTQ2IiwiQURfQ2xpZW50X0lEIjoxMSwiQURfT3JnX0lEIjowLCJBRF9Sb2xlX0lEIjoxMDIsIkFEX1VzZXJfSUQiOjEwMCwiTV9XYXJlaG91c2VfSUQiOjAsIkFEX0xhbmd1YWdlIjoiZXNfTVgiLCJpYXQiOjE3MTA2Mjg3ODAsImV4cCI6MTcxMDcxNTE4MH0.8Sg48hnxmTbqs7nG_JoafC7AwXbHX3jWAPLPJ0Qo7VU' \\\n--data '{\n    \"id\":1000000,\n    \"business_partner_group_id\":0,\n    \"organization_name\":\"Store West\",\n    \"email\":\"asd\",\n    \"first_name\":\"asd\",\n    \"last_name\":\"asd\",\n    \"web_store_id\":0,\n    \"website_id\":0\n}'\n\n ```\n\n**Example Answer**\n\n``` json\n{\n    \"id\": 1000000,\n    \"business_partner_group_id\": 0,\n    \"created\": \"2024-03-09T16:37:04Z\",\n    \"updated\": \"2024-03-09T16:48:51.472Z\",\n    \"organization_name\": \"\",\n    \"email\": \"asd\",\n    \"first_name\": \"asd\",\n    \"last_name\": \"asd\",\n    \"web_store_id\": 0,\n    \"website_id\": 0,\n    \"addresses\": []\n}\n\n ```\n\n**Common mistakes**\n\n- The user and email entered do not correspond to any of the records\n    \n\n``` json\n{\n    \"code\": 13,\n    \"message\": \"Usuario / Email * No encontrado *\",\n    \"details\": []\n}\n\n ```\n\n| **Version** | date | author | Description of Changes |\n| --- | --- | --- | --- |\n| 1.0 | 15/03/2024 | Ricardo | Initial creation of the document. |"
+			},
+			"response": [
+				{
+					"name": "UpdateCustomer",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\":1000000,\n    \"business_partner_group_id\":0,\n    \"organization_name\":\"Store West\",\n    \"email\":\"asd\",\n    \"first_name\":\"asd\",\n    \"last_name\":\"asd\",\n    \"web_store_id\":0,\n    \"website_id\":0\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HOST}}/store/web-store/user/me",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"store",
+								"web-store",
+								"user",
+								"me"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.25.2"
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 09 Mar 2024 16:48:51 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "270"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "grpc-encoding",
+							"value": "identity"
+						},
+						{
+							"key": "grpc-accept-encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "x-envoy-upstream-service-time",
+							"value": "62"
+						},
+						{
+							"key": "grpc-status",
+							"value": "0"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Max-Age",
+							"value": "3600"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 1000000,\n    \"business_partner_group_id\": 0,\n    \"created\": \"2024-03-09T16:37:04Z\",\n    \"updated\": \"2024-03-09T16:48:51.472Z\",\n    \"organization_name\": \"\",\n    \"email\": \"asd\",\n    \"first_name\": \"asd\",\n    \"last_name\": \"asd\",\n    \"web_store_id\": 0,\n    \"website_id\": 0,\n    \"addresses\": []\n}"
+				}
+			]
+		},
+		{
+			"name": "GetStock",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{HOST}}/store/web-store/stock/:sku",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"store",
+						"web-store",
+						"stock",
+						":sku"
+					],
+					"variable": [
+						{
+							"key": "sku",
+							"value": "12345"
+						}
+					]
+				},
+				"description": "**Endpoint**: GET /Web_store\n\n**Description**: Returns Stock\n\n**FULL URL**: [http://api.adempiere.io](http://api.adempiere.io/api)/store/web-store/stock/{sku}\n\n**Method**: GET\n\n**Parameters (Params)**\n\nsku (int32, Mandatory)\n\n**Application Example**\n\n``` bash\ncurl --location 'http://api.adempiere.io/store/web-store/stock/12345' \\\n--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMDAwMTQ2IiwiQURfQ2xpZW50X0lEIjoxMSwiQURfT3JnX0lEIjowLCJBRF9Sb2xlX0lEIjoxMDIsIkFEX1VzZXJfSUQiOjEwMCwiTV9XYXJlaG91c2VfSUQiOjAsIkFEX0xhbmd1YWdlIjoiZXNfTVgiLCJpYXQiOjE3MTA2Mjg3ODAsImV4cCI6MTcxMDcxNTE4MH0.8Sg48hnxmTbqs7nG_JoafC7AwXbHX3jWAPLPJ0Qo7VU'\n\n ```\n\n**Example Answer**\n\n``` json\n{\n    \"product_id\": 0,\n    \"store_id\": 0,\n    \"quantity\": 0,\n    \"is_in_stock\": false,\n    \"is_decimal_quantity\": false,\n    \"is_show_default_notification_message\": false,\n    \"is_use_config_minimum_quantity\": false,\n    \"minimum_quantity\": 0,\n    \"is_use_config_minimum_sale_quantity\": false,\n    \"minimum_sale_quantity\": 0,\n    \"is_use_config_maximum_sale_quantity\": false,\n    \"maximum_sale_quantity\": 0,\n    \"is_use_config_backorders\": false,\n    \"backorders\": 0,\n    \"is_use_config_notify_stock_quantity\": false,\n    \"notify_stock_quantity\": 0,\n    \"is_use_config_quantity_increments\": false,\n    \"quantity_increments\": 0,\n    \"is_use_config_enable_quantity_increments\": false,\n    \"is_enable_quantity_increments\": false,\n    \"is_use_config_manage_stock\": false,\n    \"is_manage_stock\": false,\n    \"is_decimal_divided\": false,\n    \"stock_status_changed_auto\": 0\n}\n\n ```\n\n**Common mistakes**\n\n- the sku does not correspond to any record\n    \n\n``` json\n{\n    \"code\": 13,\n    \"message\": \"Producto * No encontrado *\",\n    \"details\": []\n}\n\n ```\n\n**Change control**\n\n| **Version** | date | author | Description of Changes |\n| --- | --- | --- | --- |\n| 1.0 | 15/03/2024 | Ricardo | Initial creation of the document. |"
+			},
+			"response": [
+				{
+					"name": "GetStock",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HOST}}/store/web-store/stock/:sku",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"store",
+								"web-store",
+								"stock",
+								":sku"
+							],
+							"variable": [
+								{
+									"key": "sku",
+									"value": "12345"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.25.2"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 14 Mar 2024 17:16:00 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "796"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "grpc-encoding",
+							"value": "identity"
+						},
+						{
+							"key": "grpc-accept-encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "x-envoy-upstream-service-time",
+							"value": "81"
+						},
+						{
+							"key": "grpc-status",
+							"value": "0"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Max-Age",
+							"value": "3600"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"product_id\": 0,\n    \"store_id\": 0,\n    \"quantity\": 0,\n    \"is_in_stock\": false,\n    \"is_decimal_quantity\": false,\n    \"is_show_default_notification_message\": false,\n    \"is_use_config_minimum_quantity\": false,\n    \"minimum_quantity\": 0,\n    \"is_use_config_minimum_sale_quantity\": false,\n    \"minimum_sale_quantity\": 0,\n    \"is_use_config_maximum_sale_quantity\": false,\n    \"maximum_sale_quantity\": 0,\n    \"is_use_config_backorders\": false,\n    \"backorders\": 0,\n    \"is_use_config_notify_stock_quantity\": false,\n    \"notify_stock_quantity\": 0,\n    \"is_use_config_quantity_increments\": false,\n    \"quantity_increments\": 0,\n    \"is_use_config_enable_quantity_increments\": false,\n    \"is_enable_quantity_increments\": false,\n    \"is_use_config_manage_stock\": false,\n    \"is_manage_stock\": false,\n    \"is_decimal_divided\": false,\n    \"stock_status_changed_auto\": 0\n}"
+				}
+			]
+		},
+		{
+			"name": "ListRenderProducts",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{HOST}}/store/web-store/product/render-list?skus=12345",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"store",
+						"web-store",
+						"product",
+						"render-list"
+					],
+					"query": [
+						{
+							"key": "skus",
+							"value": "12345"
+						}
+					]
+				},
+				"description": "**Endpoint**: GET /Web_store\n\n**Description**: Returns ListRenderProducts\n\n**FULL URL**: [http://api.adempiere.io](http://api.adempiere.io/api)/store/web-store/product/render-list/{skus}\n\n**Method**: GET\n\n**Parameters (Params)**\n\nskus (int32, Mandatory)\n\n**Application Example**\n\n``` bash\ncurl --location 'http://api.adempiere.io/store/web-store/product/render-list?skus=12345' \\\n--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMDAwMTQ2IiwiQURfQ2xpZW50X0lEIjoxMSwiQURfT3JnX0lEIjowLCJBRF9Sb2xlX0lEIjoxMDIsIkFEX1VzZXJfSUQiOjEwMCwiTV9XYXJlaG91c2VfSUQiOjAsIkFEX0xhbmd1YWdlIjoiZXNfTVgiLCJpYXQiOjE3MTA2Mjg3ODAsImV4cCI6MTcxMDcxNTE4MH0.8Sg48hnxmTbqs7nG_JoafC7AwXbHX3jWAPLPJ0Qo7VU'\n\n ```\n\n**Example Answer**\n\n``` json\n{\n    \"record_count\": \"1\",\n    \"render_products\": [\n        {\n            \"id\": 1000003,\n            \"name\": \"prueba\",\n            \"type\": \"\",\n            \"store_id\": 50006,\n            \"url\": \"\",\n            \"product_type\": \"CONFIGURABLE\",\n            \"price_info\": {\n                \"final_price\": 0,\n                \"max_price\": 0,\n                \"max_regular_price\": 0,\n                \"minimal_regular_price\": 0,\n                \"special_price\": 0,\n                \"minimal_price\": 0,\n                \"regular_price\": 0,\n                \"formatted_price\": {\n                    \"final_price\": \"<span class=\\\"price\\\">$0.00</span>\",\n                    \"max_price\": \"<span class=\\\"price\\\">$0.00</span>\",\n                    \"minimal_price\": \"<span class=\\\"price\\\">$0.00</span>\",\n                    \"max_regular_price\": \"<span class=\\\"price\\\">$0.00</span>\",\n                    \"minimal_regular_price\": \"<span class=\\\"price\\\">$0.00</span>\",\n                    \"special_price\": \"<span class=\\\"price\\\">$0.00</span>\",\n                    \"regular_price\": \"<span class=\\\"price\\\">$0.00</span>\"\n                },\n                \"tax_adjustment\": {\n                    \"final_price\": 0,\n                    \"max_price\": 0,\n                    \"max_regular_price\": 0,\n                    \"minimal_regular_price\": 0,\n                    \"special_price\": 0,\n                    \"minimal_price\": 0,\n                    \"regular_price\": 0,\n                    \"weee_adjustment\": \"<span class=\\\"price\\\">$0.00</span>\",\n                    \"formatted_price\": {\n                        \"final_price\": \"<span class=\\\"price\\\">$0.00</span>\",\n                        \"max_price\": \"<span class=\\\"price\\\">$0.00</span>\",\n                        \"minimal_price\": \"<span class=\\\"price\\\">$0.00</span>\",\n                        \"max_regular_price\": \"<span class=\\\"price\\\">$0.00</span>\",\n                        \"minimal_regular_price\": \"<span class=\\\"price\\\">$0.00</span>\",\n                        \"special_price\": \"<span class=\\\"price\\\">$0.00</span>\",\n                        \"regular_price\": \"<span class=\\\"price\\\">$0.00</span>\"\n                    }\n                },\n                \"currency_code\": \"USD\"\n            }\n        }\n    ],\n    \"next_page_token\": \"\"\n}\n\n ```\n\n**Change control**\n\n| **Version** | date | author | Description of Changes |\n| --- | --- | --- | --- |\n| 1.0 | 15/03/2024 | Ricardo | Initial creation of the document. |"
+			},
+			"response": [
+				{
+					"name": "ListRenderProducts",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/store/web-store/product/render-list?skus=12345",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"store",
+								"web-store",
+								"product",
+								"render-list"
+							],
+							"query": [
+								{
+									"key": "skus",
+									"value": "12345"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.25.2"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 14 Mar 2024 17:24:09 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "1929"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "grpc-encoding",
+							"value": "identity"
+						},
+						{
+							"key": "grpc-accept-encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "x-envoy-upstream-service-time",
+							"value": "221"
+						},
+						{
+							"key": "grpc-status",
+							"value": "0"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Max-Age",
+							"value": "3600"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"record_count\": \"1\",\n    \"render_products\": [\n        {\n            \"id\": 1000003,\n            \"name\": \"prueba\",\n            \"type\": \"\",\n            \"store_id\": 50006,\n            \"url\": \"\",\n            \"product_type\": \"CONFIGURABLE\",\n            \"price_info\": {\n                \"final_price\": 0,\n                \"max_price\": 0,\n                \"max_regular_price\": 0,\n                \"minimal_regular_price\": 0,\n                \"special_price\": 0,\n                \"minimal_price\": 0,\n                \"regular_price\": 0,\n                \"formatted_price\": {\n                    \"final_price\": \"<span class=\\\"price\\\">$0.00</span>\",\n                    \"max_price\": \"<span class=\\\"price\\\">$0.00</span>\",\n                    \"minimal_price\": \"<span class=\\\"price\\\">$0.00</span>\",\n                    \"max_regular_price\": \"<span class=\\\"price\\\">$0.00</span>\",\n                    \"minimal_regular_price\": \"<span class=\\\"price\\\">$0.00</span>\",\n                    \"special_price\": \"<span class=\\\"price\\\">$0.00</span>\",\n                    \"regular_price\": \"<span class=\\\"price\\\">$0.00</span>\"\n                },\n                \"tax_adjustment\": {\n                    \"final_price\": 0,\n                    \"max_price\": 0,\n                    \"max_regular_price\": 0,\n                    \"minimal_regular_price\": 0,\n                    \"special_price\": 0,\n                    \"minimal_price\": 0,\n                    \"regular_price\": 0,\n                    \"weee_adjustment\": \"<span class=\\\"price\\\">$0.00</span>\",\n                    \"formatted_price\": {\n                        \"final_price\": \"<span class=\\\"price\\\">$0.00</span>\",\n                        \"max_price\": \"<span class=\\\"price\\\">$0.00</span>\",\n                        \"minimal_price\": \"<span class=\\\"price\\\">$0.00</span>\",\n                        \"max_regular_price\": \"<span class=\\\"price\\\">$0.00</span>\",\n                        \"minimal_regular_price\": \"<span class=\\\"price\\\">$0.00</span>\",\n                        \"special_price\": \"<span class=\\\"price\\\">$0.00</span>\",\n                        \"regular_price\": \"<span class=\\\"price\\\">$0.00</span>\"\n                    }\n                },\n                \"currency_code\": \"USD\"\n            }\n        }\n    ],\n    \"next_page_token\": \"\"\n}"
+				}
+			]
+		},
+		{
+			"name": "CreateCart",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"cart_id\":12345,\n    \"customer_id\":102,\n    \"user_id\":50000,\n    \"shipping_address\":{},\n    \"billing_address\":{},\n    \"method_code\":\"\",\n    \"carrier_code\":\"\",\n    \"payment_method_code\":\"\",\n    \"products\":{},\n    \"payments\":{}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{HOST}}/store/web-store/cart/create",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"store",
+						"web-store",
+						"cart",
+						"create"
+					]
+				},
+				"description": "**Endpoint**: POST /Web_store\n\n**Description**: Returns Cart\n\n**FULL URL**: [http://api.adempiere.io](http://api.adempiere.io/api)/store/web-store/cart/create\n\n**Method**: POST\n\n**Parameters (Body)**\n\n- cart_id (int32, Optional)\n    \n- customer_id (int32, Optional)\n    \n- user_id (Int32, Optional)\n    \n- shipping_address (JSON, Optional)\n    \n- billing_address (JSON, Optional)\n    \n- method_code (String, Optional)\n    \n- carrier_code (String, Optional)\n    \n- payment_method_code (String, Optional)\n    \n- products (JSON, Optional)\n    \n- payments (JSON, Optional)\n    \n\n**Application Example**\n\n``` bash\ncurl --location 'http://api.adempiere.io/store/web-store/cart/create' \\\n--header 'Content-Type: application/json' \\\n--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMDAwMTQ2IiwiQURfQ2xpZW50X0lEIjoxMSwiQURfT3JnX0lEIjowLCJBRF9Sb2xlX0lEIjoxMDIsIkFEX1VzZXJfSUQiOjEwMCwiTV9XYXJlaG91c2VfSUQiOjAsIkFEX0xhbmd1YWdlIjoiZXNfTVgiLCJpYXQiOjE3MTA2Mjg3ODAsImV4cCI6MTcxMDcxNTE4MH0.8Sg48hnxmTbqs7nG_JoafC7AwXbHX3jWAPLPJ0Qo7VU' \\\n--data '{\n    \"cart_id\":12345,\n    \"customer_id\":102,\n    \"user_id\":50000,\n    \"shipping_address\":{},\n    \"billing_address\":{},\n    \"method_code\":\"\",\n    \"carrier_code\":\"\",\n    \"payment_method_code\":\"\",\n    \"products\":{},\n    \"payments\":{}\n}'\n\n ```\n\n**Example Answer**\n\n``` json\n{\n    \"id\": 1000000,\n    \"grand_total\": 0,\n    \"subtotal\": 0,\n    \"discount_amount\": 0,\n    \"subtotal_with_discount\": 0,\n    \"tax_amount\": 0,\n    \"shipping_amount\": 0,\n    \"shipping_discount_amount\": 0,\n    \"shipping_tax_amount\": 0,\n    \"base_shipping_tax_amount\": 0,\n    \"subtotal_incl_tax\": 0,\n    \"shipping_incl_tax\": 0,\n    \"base_currency_code\": \"\",\n    \"quote_currency_code\": \"\",\n    \"items_quantity\": 0,\n    \"items\": []\n}\n\n ```\n\n**Change control**\n\n| **Version** | date | author | Description of Changes |\n| --- | --- | --- | --- |\n| 1.0 | 15/03/2024 | Ricardo | Initial creation of the document. |"
+			},
+			"response": [
+				{
+					"name": "CreateCart",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"cart_id\":12345,\n    \"customer_id\":102,\n    \"user_id\":50000,\n    \"shipping_address\":{},\n    \"billing_address\":{},\n    \"method_code\":\"\",\n    \"carrier_code\":\"\",\n    \"payment_method_code\":\"\",\n    \"products\":{},\n    \"payments\":{}\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HOST}}/store/web-store/cart/create",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"store",
+								"web-store",
+								"cart",
+								"create"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.25.2"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 14 Mar 2024 17:35:50 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "380"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "grpc-encoding",
+							"value": "identity"
+						},
+						{
+							"key": "grpc-accept-encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "x-envoy-upstream-service-time",
+							"value": "164"
+						},
+						{
+							"key": "grpc-status",
+							"value": "0"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Max-Age",
+							"value": "3600"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 1000000,\n    \"grand_total\": 0,\n    \"subtotal\": 0,\n    \"discount_amount\": 0,\n    \"subtotal_with_discount\": 0,\n    \"tax_amount\": 0,\n    \"shipping_amount\": 0,\n    \"shipping_discount_amount\": 0,\n    \"shipping_tax_amount\": 0,\n    \"base_shipping_tax_amount\": 0,\n    \"subtotal_incl_tax\": 0,\n    \"shipping_incl_tax\": 0,\n    \"base_currency_code\": \"\",\n    \"quote_currency_code\": \"\",\n    \"items_quantity\": 0,\n    \"items\": []\n}"
+				}
+			]
+		},
+		{
+			"name": "GetCart",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{HOST}}/store/web-store/cart/pull",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"store",
+						"web-store",
+						"cart",
+						"pull"
+					]
+				},
+				"description": "**Endpoint**: GET /Web_store\n\n**Description**: Returns Cart\n\n**FULL URL**: [http://api.adempiere.io](http://api.adempiere.io/api)/store/web-store/cart/pull\n\n**Method**: GET\n\n**Application Example**\n\n``` bash\ncurl --location 'http://api.adempiere.io/store/web-store/cart/pull' \\\n--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMDAwMTQ2IiwiQURfQ2xpZW50X0lEIjoxMSwiQURfT3JnX0lEIjowLCJBRF9Sb2xlX0lEIjoxMDIsIkFEX1VzZXJfSUQiOjEwMCwiTV9XYXJlaG91c2VfSUQiOjAsIkFEX0xhbmd1YWdlIjoiZXNfTVgiLCJpYXQiOjE3MTA2Mjg3ODAsImV4cCI6MTcxMDcxNTE4MH0.8Sg48hnxmTbqs7nG_JoafC7AwXbHX3jWAPLPJ0Qo7VU'\n\n ```\n\n**Example Answer**\n\n``` json\n{\n    \"id\": 0,\n    \"grand_total\": 0,\n    \"subtotal\": 0,\n    \"discount_amount\": 0,\n    \"subtotal_with_discount\": 0,\n    \"tax_amount\": 0,\n    \"shipping_amount\": 0,\n    \"shipping_discount_amount\": 0,\n    \"shipping_tax_amount\": 0,\n    \"base_shipping_tax_amount\": 0,\n    \"subtotal_incl_tax\": 0,\n    \"shipping_incl_tax\": 0,\n    \"base_currency_code\": \"\",\n    \"quote_currency_code\": \"\",\n    \"items_quantity\": 0,\n    \"items\": []\n}\n\n ```\n\n**Change control**\n\n| **Version** | date | author | Description of Changes |\n| --- | --- | --- | --- |\n| 1.0 | 15/03/2024 | Ricardo | Initial creation of the document. |"
+			},
+			"response": [
+				{
+					"name": "GetCart",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/store/web-store/cart/pull",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"store",
+								"web-store",
+								"cart",
+								"pull"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.25.2"
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 12 Mar 2024 13:31:10 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "374"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "grpc-encoding",
+							"value": "identity"
+						},
+						{
+							"key": "grpc-accept-encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "x-envoy-upstream-service-time",
+							"value": "156"
+						},
+						{
+							"key": "grpc-status",
+							"value": "0"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Max-Age",
+							"value": "3600"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 0,\n    \"grand_total\": 0,\n    \"subtotal\": 0,\n    \"discount_amount\": 0,\n    \"subtotal_with_discount\": 0,\n    \"tax_amount\": 0,\n    \"shipping_amount\": 0,\n    \"shipping_discount_amount\": 0,\n    \"shipping_tax_amount\": 0,\n    \"base_shipping_tax_amount\": 0,\n    \"subtotal_incl_tax\": 0,\n    \"shipping_incl_tax\": 0,\n    \"base_currency_code\": \"\",\n    \"quote_currency_code\": \"\",\n    \"items_quantity\": 0,\n    \"items\": []\n}"
+				}
+			]
+		},
+		{
+			"name": "UpdateCart",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"cart_id\":1000000,\n    \"is_guest\":true,\n    \"sku\":\"12345\",\n    \"quantity\":1\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{HOST}}/store/web-store/cart/update",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"store",
+						"web-store",
+						"cart",
+						"update"
+					]
+				},
+				"description": "**Endpoint**: POST /Web_store\n\n**Description**: Returns Cart\n\n**FULL URL**: [http://api.adempiere.io](http://api.adempiere.io/api)/store/web-store/cart/update\n\n**Method**: POST\n\n**Parameters (Body)**\n\n- cart_id (Int32, Optional)\n- is_quest (Bool, Optional)\n- sku (String, Mandatory)\n- quantity (Int32, Optional)\n    \n\n**Application Example**\n\n``` bash\ncurl --location 'http://api.adempiere.io/store/web-store/cart/update' \\\n--header 'Content-Type: application/json' \\\n--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMDAwMTQ2IiwiQURfQ2xpZW50X0lEIjoxMSwiQURfT3JnX0lEIjowLCJBRF9Sb2xlX0lEIjoxMDIsIkFEX1VzZXJfSUQiOjEwMCwiTV9XYXJlaG91c2VfSUQiOjAsIkFEX0xhbmd1YWdlIjoiZXNfTVgiLCJpYXQiOjE3MTA2Mjg3ODAsImV4cCI6MTcxMDcxNTE4MH0.8Sg48hnxmTbqs7nG_JoafC7AwXbHX3jWAPLPJ0Qo7VU' \\\n--data '{\n    \"cart_id\":1000000,\n    \"is_guest\":true,\n    \"sku\":\"12345\",\n    \"quantity\":1\n}'\n\n ```\n\n**Example Answer**\n\n``` json\n{\n    \"product_id\": 1000003,\n    \"sku\": \"12345\",\n    \"quantity\": 1,\n    \"name\": \"prueba\",\n    \"price\": 0,\n    \"product_type\": \"CONFIGURABLE\",\n    \"row_total\": 0,\n    \"row_total_with_discount\": 0,\n    \"tax_amount\": 0,\n    \"tax_percent\": 0,\n    \"discount_amount\": 0,\n    \"discount_percent\": 0,\n    \"price_incl_tax\": 0,\n    \"row_total_incl_tax\": 0,\n    \"base_row_total_incl_tax\": 0,\n    \"configurable_item_options\": []\n}\n\n ```\n\n**Commons Erros**\n\n- The sku entered does not correspond to any of the records\n    \n\n``` json\n{\n    \"code\": 13,\n    \"message\": \"Producto * No encontrado *\",\n    \"details\": []\n}\n\n ```\n\n- the sku does not contain a valid value\n    \n\n``` json\n{\n    \"code\": 13,\n    \"message\": \"UM Almacenamiento Entrada Obligatoria\",\n    \"details\": []\n}\n\n ```\n\n**Change control**\n\n| **Version** | date | author | Description of Changes |\n| --- | --- | --- | --- |\n| 1.0 | 15/03/2024 | Ricardo | Initial creation of the document. |"
+			},
+			"response": [
+				{
+					"name": "UpdateCart",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"cart_id\":1000000,\n    \"is_guest\":true,\n    \"sku\":\"12345\",\n    \"quantity\":1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HOST}}/store/web-store/cart/update",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"store",
+								"web-store",
+								"cart",
+								"update"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.25.2"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 14 Mar 2024 17:36:48 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "370"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "grpc-encoding",
+							"value": "identity"
+						},
+						{
+							"key": "grpc-accept-encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "x-envoy-upstream-service-time",
+							"value": "149"
+						},
+						{
+							"key": "grpc-status",
+							"value": "0"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Max-Age",
+							"value": "3600"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"product_id\": 1000003,\n    \"sku\": \"12345\",\n    \"quantity\": 1,\n    \"name\": \"prueba\",\n    \"price\": 0,\n    \"product_type\": \"CONFIGURABLE\",\n    \"row_total\": 0,\n    \"row_total_with_discount\": 0,\n    \"tax_amount\": 0,\n    \"tax_percent\": 0,\n    \"discount_amount\": 0,\n    \"discount_percent\": 0,\n    \"price_incl_tax\": 0,\n    \"row_total_incl_tax\": 0,\n    \"base_row_total_incl_tax\": 0,\n    \"configurable_item_options\": []\n}"
+				}
+			]
+		},
+		{
+			"name": "GetShippingInformation",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{HOST}}/store/web-store/cart/shipping-information?cart_id=1000000",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"store",
+						"web-store",
+						"cart",
+						"shipping-information"
+					],
+					"query": [
+						{
+							"key": "cart_id",
+							"value": "1000000"
+						}
+					]
+				},
+				"description": "**Endpoint**: GET /Web_store\n\n**Description**: Returns Cart\n\n**FULL URL**: [http://api.adempiere.io](http://api.adempiere.io/api)/store/web-store/cart/shipping-information/{cart_id}\n\n**Method**: GET\n\n**Parameters (Params)**\n\n- cart_id (Int32, Mandatory)\n    \n\n**Application Example**\n\n``` bash\ncurl --location 'http://api.adempiere.io/store/web-store/cart/shipping-information?cart_id=1000000' \\\n--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMDAwMTQ2IiwiQURfQ2xpZW50X0lEIjoxMSwiQURfT3JnX0lEIjowLCJBRF9Sb2xlX0lEIjoxMDIsIkFEX1VzZXJfSUQiOjEwMCwiTV9XYXJlaG91c2VfSUQiOjAsIkFEX0xhbmd1YWdlIjoiZXNfTVgiLCJpYXQiOjE3MTA2Mjg3ODAsImV4cCI6MTcxMDcxNTE4MH0.8Sg48hnxmTbqs7nG_JoafC7AwXbHX3jWAPLPJ0Qo7VU'\n\n ```\n\n**Example Answer**\n\n``` json\n{\n    \"cart\": {\n        \"id\": 1000000,\n        \"grand_total\": 0,\n        \"subtotal\": 0,\n        \"discount_amount\": 0,\n        \"subtotal_with_discount\": 0,\n        \"tax_amount\": 0,\n        \"shipping_amount\": 0,\n        \"shipping_discount_amount\": 0,\n        \"shipping_tax_amount\": 0,\n        \"base_shipping_tax_amount\": 0,\n        \"subtotal_incl_tax\": 0,\n        \"shipping_incl_tax\": 0,\n        \"base_currency_code\": \"\",\n        \"quote_currency_code\": \"\",\n        \"items_quantity\": 0,\n        \"items\": []\n    },\n    \"payment_methods\": [],\n    \"total_segments\": [\n        {\n            \"code\": \"subtotal\",\n            \"name\": \"Sub-Total\",\n            \"value\": 0,\n            \"area\": \"\",\n            \"taxes\": []\n        },\n        {\n            \"code\": \"shipping\",\n            \"name\": \"Envío y Manejo (Tarifa plana - Fija)\",\n            \"value\": 0,\n            \"area\": \"\",\n            \"taxes\": []\n        },\n        {\n            \"code\": \"discount\",\n            \"name\": \"Descuentos\",\n            \"value\": 0,\n            \"area\": \"\",\n            \"taxes\": []\n        },\n        {\n            \"code\": \"tax\",\n            \"name\": \"Impuestos\",\n            \"value\": 0,\n            \"area\": \"taxes\",\n            \"taxes\": []\n        },\n        {\n            \"code\": \"grand_total\",\n            \"name\": \"Total a Pagar\",\n            \"value\": 0,\n            \"area\": \"footer\",\n            \"taxes\": []\n        }\n    ]\n}\n\n ```\n\n**Commons Erros**\n\n- The sku entered does not correspond to any of the records\n    \n\n``` json\n{\n    \"code\": 13,\n    \"message\": \"Producto * No encontrado *\",\n    \"details\": []\n}\n\n ```\n\n- the sku does not contain a valid value\n    \n\n``` json\n{\n    \"code\": 13,\n    \"message\": \"UM Almacenamiento Entrada Obligatoria\",\n    \"details\": []\n}\n\n ```\n\n**Change control**\n\n| **Version** | date | author | Description of Changes |\n| --- | --- | --- | --- |\n| 1.0 | 15/03/2024 | Ricardo | Initial creation of the document. |"
+			},
+			"response": [
+				{
+					"name": "GetShippingInformation",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/store/web-store/cart/shipping-information?cart_id=1000000",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"store",
+								"web-store",
+								"cart",
+								"shipping-information"
+							],
+							"query": [
+								{
+									"key": "cart_id",
+									"value": "1000000"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.25.2"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 14 Mar 2024 20:31:57 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "1005"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "grpc-encoding",
+							"value": "identity"
+						},
+						{
+							"key": "grpc-accept-encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "x-envoy-upstream-service-time",
+							"value": "87"
+						},
+						{
+							"key": "grpc-status",
+							"value": "0"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Max-Age",
+							"value": "3600"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"cart\": {\n        \"id\": 1000000,\n        \"grand_total\": 0,\n        \"subtotal\": 0,\n        \"discount_amount\": 0,\n        \"subtotal_with_discount\": 0,\n        \"tax_amount\": 0,\n        \"shipping_amount\": 0,\n        \"shipping_discount_amount\": 0,\n        \"shipping_tax_amount\": 0,\n        \"base_shipping_tax_amount\": 0,\n        \"subtotal_incl_tax\": 0,\n        \"shipping_incl_tax\": 0,\n        \"base_currency_code\": \"\",\n        \"quote_currency_code\": \"\",\n        \"items_quantity\": 0,\n        \"items\": []\n    },\n    \"payment_methods\": [],\n    \"total_segments\": [\n        {\n            \"code\": \"subtotal\",\n            \"name\": \"Sub-Total\",\n            \"value\": 0,\n            \"area\": \"\",\n            \"taxes\": []\n        },\n        {\n            \"code\": \"shipping\",\n            \"name\": \"Envío y Manejo (Tarifa plana - Fija)\",\n            \"value\": 0,\n            \"area\": \"\",\n            \"taxes\": []\n        },\n        {\n            \"code\": \"discount\",\n            \"name\": \"Descuentos\",\n            \"value\": 0,\n            \"area\": \"\",\n            \"taxes\": []\n        },\n        {\n            \"code\": \"tax\",\n            \"name\": \"Impuestos\",\n            \"value\": 0,\n            \"area\": \"taxes\",\n            \"taxes\": []\n        },\n        {\n            \"code\": \"grand_total\",\n            \"name\": \"Total a Pagar\",\n            \"value\": 0,\n            \"area\": \"footer\",\n            \"taxes\": []\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "GetCartTotals",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{HOST}}/store/web-store/cart/totals?cart_id=100000",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"store",
+						"web-store",
+						"cart",
+						"totals"
+					],
+					"query": [
+						{
+							"key": "cart_id",
+							"value": "100000"
+						}
+					]
+				},
+				"description": "**Endpoint**: GET /Web_store\n\n**Description**: Returns CartTotals\n\n**FULL URL**: [http://api.adempiere.io](http://api.adempiere.io/api)/store/web-store/cart/totals/{cart_id}\n\n**Method**: GET\n\n**Parameters (Params)**\n\n- cart_id (Int32, Mandatory)\n    \n\n**Application Example**\n\n``` bash\ncurl --location 'http://api.adempiere.io/store/web-store/cart/totals?cart_id=1000000' \\\n--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMDAwMTQ2IiwiQURfQ2xpZW50X0lEIjoxMSwiQURfT3JnX0lEIjowLCJBRF9Sb2xlX0lEIjoxMDIsIkFEX1VzZXJfSUQiOjEwMCwiTV9XYXJlaG91c2VfSUQiOjAsIkFEX0xhbmd1YWdlIjoiZXNfTVgiLCJpYXQiOjE3MTA2Mjg3ODAsImV4cCI6MTcxMDcxNTE4MH0.8Sg48hnxmTbqs7nG_JoafC7AwXbHX3jWAPLPJ0Qo7VU'\n\n ```\n\n**Example Answer**\n\n``` json\n{\n    \"cart\": {\n        \"id\": 1000000,\n        \"grand_total\": 0,\n        \"subtotal\": 0,\n        \"discount_amount\": 0,\n        \"subtotal_with_discount\": 0,\n        \"tax_amount\": 0,\n        \"shipping_amount\": 0,\n        \"shipping_discount_amount\": 0,\n        \"shipping_tax_amount\": 0,\n        \"base_shipping_tax_amount\": 0,\n        \"subtotal_incl_tax\": 0,\n        \"shipping_incl_tax\": 0,\n        \"base_currency_code\": \"\",\n        \"quote_currency_code\": \"\",\n        \"items_quantity\": 0,\n        \"items\": []\n    },\n    \"total_segments\": [\n        {\n            \"code\": \"subtotal\",\n            \"name\": \"Sub-Total\",\n            \"value\": 0,\n            \"area\": \"\",\n            \"taxes\": []\n        },\n        {\n            \"code\": \"shipping\",\n            \"name\": \"Envío y Manejo (Tarifa plana - Fija)\",\n            \"value\": 0,\n            \"area\": \"\",\n            \"taxes\": []\n        },\n        {\n            \"code\": \"discount\",\n            \"name\": \"Descuentos\",\n            \"value\": 0,\n            \"area\": \"\",\n            \"taxes\": []\n        },\n        {\n            \"code\": \"tax\",\n            \"name\": \"Impuestos\",\n            \"value\": 0,\n            \"area\": \"taxes\",\n            \"taxes\": []\n        },\n        {\n            \"code\": \"grand_total\",\n            \"name\": \"Total a Pagar\",\n            \"value\": 0,\n            \"area\": \"footer\",\n            \"taxes\": []\n        }\n    ]\n}\n\n ```\n\n**Commons Erros**\n\n- The entered car id does not correspond to any of the records\n    \n\n``` json\n{\n    \"code\": 13,\n    \"message\": \"Carrito * No encontrado *\",\n    \"details\": []\n}\n\n ```\n\n**Change control**\n\n| **Version** | date | author | Description of Changes |\n| --- | --- | --- | --- |\n| 1.0 | 15/03/2024 | Ricardo | Initial creation of the document. |"
+			},
+			"response": [
+				{
+					"name": "GetCartTotals",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/store/web-store/cart/totals?cart_id=1000000",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"store",
+								"web-store",
+								"cart",
+								"totals"
+							],
+							"query": [
+								{
+									"key": "cart_id",
+									"value": "1000000"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.25.2"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 14 Mar 2024 20:32:07 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "981"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "grpc-encoding",
+							"value": "identity"
+						},
+						{
+							"key": "grpc-accept-encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "x-envoy-upstream-service-time",
+							"value": "99"
+						},
+						{
+							"key": "grpc-status",
+							"value": "0"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Max-Age",
+							"value": "3600"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"cart\": {\n        \"id\": 1000000,\n        \"grand_total\": 0,\n        \"subtotal\": 0,\n        \"discount_amount\": 0,\n        \"subtotal_with_discount\": 0,\n        \"tax_amount\": 0,\n        \"shipping_amount\": 0,\n        \"shipping_discount_amount\": 0,\n        \"shipping_tax_amount\": 0,\n        \"base_shipping_tax_amount\": 0,\n        \"subtotal_incl_tax\": 0,\n        \"shipping_incl_tax\": 0,\n        \"base_currency_code\": \"\",\n        \"quote_currency_code\": \"\",\n        \"items_quantity\": 0,\n        \"items\": []\n    },\n    \"total_segments\": [\n        {\n            \"code\": \"subtotal\",\n            \"name\": \"Sub-Total\",\n            \"value\": 0,\n            \"area\": \"\",\n            \"taxes\": []\n        },\n        {\n            \"code\": \"shipping\",\n            \"name\": \"Envío y Manejo (Tarifa plana - Fija)\",\n            \"value\": 0,\n            \"area\": \"\",\n            \"taxes\": []\n        },\n        {\n            \"code\": \"discount\",\n            \"name\": \"Descuentos\",\n            \"value\": 0,\n            \"area\": \"\",\n            \"taxes\": []\n        },\n        {\n            \"code\": \"tax\",\n            \"name\": \"Impuestos\",\n            \"value\": 0,\n            \"area\": \"taxes\",\n            \"taxes\": []\n        },\n        {\n            \"code\": \"grand_total\",\n            \"name\": \"Total a Pagar\",\n            \"value\": 0,\n            \"area\": \"footer\",\n            \"taxes\": []\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "DeleteCartItem",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"cart_id\":1000000,\n    \"sku\":\"12345\",\n    \"product_id\":10000002\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{HOST}}/store/web-store/cart/delete",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"store",
+						"web-store",
+						"cart",
+						"delete"
+					]
+				},
+				"description": "**Endpoint**: POST /Web_store\n\n**Description**: Returns Empty\n\n**FULL URL**: [http://api.adempiere.io](http://api.adempiere.io/api)/store/web-store/cart/delete\n\n**Method**: POST\n\n**Parameters (Body)**\n\n- cart_id (Int32, Optional)\n- sku (String, Mandatory)\n- product_id (Int32, Optional)\n    \n\n**Application Example**\n\n``` bash\ncurl --location 'http://api.adempiere.io/store/web-store/cart/delete' \\\n--header 'Content-Type: application/json' \\\n--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMDAwMTQ2IiwiQURfQ2xpZW50X0lEIjoxMSwiQURfT3JnX0lEIjowLCJBRF9Sb2xlX0lEIjoxMDIsIkFEX1VzZXJfSUQiOjEwMCwiTV9XYXJlaG91c2VfSUQiOjAsIkFEX0xhbmd1YWdlIjoiZXNfTVgiLCJpYXQiOjE3MTA2Mjg3ODAsImV4cCI6MTcxMDcxNTE4MH0.8Sg48hnxmTbqs7nG_JoafC7AwXbHX3jWAPLPJ0Qo7VU' \\\n--data '{\n    \"cart_id\":1000000,\n    \"sku\":\"12345\",\n    \"product_id\":10000002\n}'\n\n ```\n\n**Example Answer**\n\n``` json\n{}\n\n ```\n\n**Commons Erros**\n\n- The sku does not contain a valid value\n    \n\n``` json\n{\n    \"code\": 13,\n    \"message\": \"UM Almacenamiento Entrada Obligatoria\",\n    \"details\": []\n}\n\n ```\n\n- The data entered does not correspond to any of the records\n    \n\n``` json\n{\n    \"code\": 13,\n    \"message\": \"Producto * No encontrado *\",\n    \"details\": []\n}\n\n ```\n\n**Change control**\n\n| **Version** | date | author | Description of Changes |\n| --- | --- | --- | --- |\n| 1.0 | 15/03/2024 | Ricardo | Initial creation of the document. |"
+			},
+			"response": [
+				{
+					"name": "DeleteCartItem",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"cart_id\":1000000,\n    \"sku\":\"12345\",\n    \"product_id\":10000002\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HOST}}/store/web-store/cart/delete",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"store",
+								"web-store",
+								"cart",
+								"delete"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.25.2"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 14 Mar 2024 17:43:57 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "3"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "grpc-encoding",
+							"value": "identity"
+						},
+						{
+							"key": "grpc-accept-encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "x-envoy-upstream-service-time",
+							"value": "125"
+						},
+						{
+							"key": "grpc-status",
+							"value": "0"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Max-Age",
+							"value": "3600"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{}"
+				}
+			]
+		}
+	]
+}
