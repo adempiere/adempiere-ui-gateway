@@ -1,0 +1,672 @@
+{
+	"info": {
+		"_postman_id": "af945fcd-62fc-4656-8c5a-0877b1eac7a0",
+		"name": "Payment_allocation",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "28978517"
+	},
+	"item": [
+		{
+			"name": "ListBusinessPartners",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{HOST}}/payment-allocation/business-partners",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"payment-allocation",
+						"business-partners"
+					]
+				},
+				"description": "**Endpoint**: GET /payment_allocation\n\n**Description**: Returns ListLookupItems\n\n**FULL URL**: [http://api.adempiere.io](http://api.adempiere.io/api)/payment-allocation/business-partners\n\n**Method**: GET\n\n**Application Example**\n\n``` bash\ncurl --location 'http://api.adempiere.io/payment-allocation/business-partners' \\\n--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMDAwMTU0IiwiQURfQ2xpZW50X0lEIjoxMSwiQURfT3JnX0lEIjo1MDAwNiwiQURfUm9sZV9JRCI6MTAyLCJBRF9Vc2VyX0lEIjoxMDAsIk1fV2FyZWhvdXNlX0lEIjowLCJBRF9MYW5ndWFnZSI6ImVzX01YIiwiaWF0IjoxNzEwNzE1NzAxLCJleHAiOjE3MTA4MDIxMDF9.sdizIymo1Yd8P8w4D4ORu2EfavUfgxsPPfQIJMNJQQ8'\n\n ```\n\n**Example Answer**\n\n``` json\n{\n            \"id\": 50003,\n            \"table_name\": \"C_BPartner\",\n            \"values\": {\n                \"KeyColumn\": 50003,\n                \"DisplayColumn\": \"Chemical Product, inc\",\n                \"UUID\": \"b14b6c53-ca82-4dbc-841a-640b04de76bb\"\n            },\n            \"is_active\": true\n        },\n\n ```\n\n**Change control**\n\n| **Version** | date | author | Description of Changes |\n| --- | --- | --- | --- |\n| 1.0 | 15/03/2024 | Ricardo | Initial creation of the document. |"
+			},
+			"response": [
+				{
+					"name": "ListBusinessPartners",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/payment-allocation/business-partners",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"payment-allocation",
+								"business-partners"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.25.2"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 07 Mar 2024 14:30:17 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "3610"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "grpc-encoding",
+							"value": "identity"
+						},
+						{
+							"key": "grpc-accept-encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "x-envoy-upstream-service-time",
+							"value": "91"
+						},
+						{
+							"key": "grpc-status",
+							"value": "0"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Max-Age",
+							"value": "3600"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"record_count\": \"17\",\n    \"records\": [\n        {\n            \"id\": 50003,\n            \"table_name\": \"C_BPartner\",\n            \"values\": {\n                \"KeyColumn\": 50003,\n                \"DisplayColumn\": \"Chemical Product, inc\",\n                \"UUID\": \"b14b6c53-ca82-4dbc-841a-640b04de76bb\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 50002,\n            \"table_name\": \"C_BPartner\",\n            \"values\": {\n                \"KeyColumn\": 50002,\n                \"DisplayColumn\": \"Chrome, Inc\",\n                \"UUID\": \"f472cd49-4f19-4fc3-856a-cb9038cf2924\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 50001,\n            \"table_name\": \"C_BPartner\",\n            \"values\": {\n                \"KeyColumn\": 50001,\n                \"DisplayColumn\": \"Color, Inc\",\n                \"UUID\": \"5e616d3e-c55b-4ede-9b0e-ac3ae834556b\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 117,\n            \"table_name\": \"C_BPartner\",\n            \"values\": {\n                \"KeyColumn\": 117,\n                \"DisplayColumn\": \"C&W Construction\",\n                \"UUID\": \"b7bafd8e-ae3b-4bbc-9a0d-d47fdbef390f\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 113,\n            \"table_name\": \"C_BPartner\",\n            \"values\": {\n                \"KeyColumn\": 113,\n                \"DisplayColumn\": \"GardenAdmin BP\",\n                \"UUID\": \"d430bdde-e5e4-476b-8dc9-4b0b5d5b02cc\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 119,\n            \"table_name\": \"C_BPartner\",\n            \"values\": {\n                \"KeyColumn\": 119,\n                \"DisplayColumn\": \"GardenUser BP\",\n                \"UUID\": \"0b870ceb-a34f-4876-8225-0053f11385d2\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 118,\n            \"table_name\": \"C_BPartner\",\n            \"values\": {\n                \"KeyColumn\": 118,\n                \"DisplayColumn\": \"Joe Block\",\n                \"UUID\": \"c3cfeb5f-1b2f-4f4b-a16c-d9cda23f59e1\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 121,\n            \"table_name\": \"C_BPartner\",\n            \"values\": {\n                \"KeyColumn\": 121,\n                \"DisplayColumn\": \"Patio Fun, Inc.\",\n                \"UUID\": \"ca5b584a-c9e8-448f-a388-8ac7c0f02501\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 120,\n            \"table_name\": \"C_BPartner\",\n            \"values\": {\n                \"KeyColumn\": 120,\n                \"DisplayColumn\": \"Seed Farm Inc.\",\n                \"UUID\": \"2ad2a623-3d1f-47f4-969a-f44f7a05481f\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 112,\n            \"table_name\": \"C_BPartner\",\n            \"values\": {\n                \"KeyColumn\": 112,\n                \"DisplayColumn\": \"Standard\",\n                \"UUID\": \"f5388c95-7424-447d-85de-91424f9da147\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 50004,\n            \"table_name\": \"C_BPartner\",\n            \"values\": {\n                \"KeyColumn\": 50004,\n                \"DisplayColumn\": \"Store Central\",\n                \"UUID\": \"8b894863-afbe-4384-a8ed-bf0325a5ec25\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 50005,\n            \"table_name\": \"C_BPartner\",\n            \"values\": {\n                \"KeyColumn\": 50005,\n                \"DisplayColumn\": \"Store East\",\n                \"UUID\": \"c6c2de1e-2f0f-4ef8-b7f3-29d80d0cfdb8\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 50007,\n            \"table_name\": \"C_BPartner\",\n            \"values\": {\n                \"KeyColumn\": 50007,\n                \"DisplayColumn\": \"Store North\",\n                \"UUID\": \"01c65f4b-272c-4fb6-b12a-089d207cadb8\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 50008,\n            \"table_name\": \"C_BPartner\",\n            \"values\": {\n                \"KeyColumn\": 50008,\n                \"DisplayColumn\": \"Store South\",\n                \"UUID\": \"88f0d79e-bc97-447d-8245-91bd79c0dcf7\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 50009,\n            \"table_name\": \"C_BPartner\",\n            \"values\": {\n                \"KeyColumn\": 50009,\n                \"DisplayColumn\": \"Store West\",\n                \"UUID\": \"b419cad9-bb5b-4a2f-bbdb-1c3c70657408\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 114,\n            \"table_name\": \"C_BPartner\",\n            \"values\": {\n                \"KeyColumn\": 114,\n                \"DisplayColumn\": \"Tree Farm Inc.\",\n                \"UUID\": \"254e660c-4863-460a-8a69-2b75f6461a33\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 50000,\n            \"table_name\": \"C_BPartner\",\n            \"values\": {\n                \"KeyColumn\": 50000,\n                \"DisplayColumn\": \"Wood, Inc\",\n                \"UUID\": \"2d96ae84-d50e-447a-bdb7-496242fd846f\"\n            },\n            \"is_active\": true\n        }\n    ],\n    \"next_page_token\": \"\"\n}"
+				}
+			]
+		},
+		{
+			"name": "ListOrganizations",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{HOST}}/payment-allocation/organizations",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"payment-allocation",
+						"organizations"
+					]
+				},
+				"description": "**Endpoint**: GET /payment_allocation\n\n**Description**: Returns ListLookupItems\n\n**FULL URL**: [http://api.adempiere.io](http://api.adempiere.io/api)/payment-allocation/organizations\n\n**Method**: GET\n\n**Application Example**\n\n``` bash\ncurl --location 'http://api.adempiere.io/payment-allocation/organizations' \\\n--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMDAwMTU0IiwiQURfQ2xpZW50X0lEIjoxMSwiQURfT3JnX0lEIjo1MDAwNiwiQURfUm9sZV9JRCI6MTAyLCJBRF9Vc2VyX0lEIjoxMDAsIk1fV2FyZWhvdXNlX0lEIjowLCJBRF9MYW5ndWFnZSI6ImVzX01YIiwiaWF0IjoxNzEwNzE1NzAxLCJleHAiOjE3MTA4MDIxMDF9.sdizIymo1Yd8P8w4D4ORu2EfavUfgxsPPfQIJMNJQQ8'\n\n ```\n\n**Example Answer**\n\n``` json\n{\n            \"id\": 0,\n            \"table_name\": \"AD_Org\",\n            \"values\": {\n                \"KeyColumn\": 0,\n                \"DisplayColumn\": \"*\",\n                \"UUID\": \"a3e5c878-fb40-11e8-a479-7a0060f0aa01\"\n            },\n            \"is_active\": true\n        },\n\n ```\n\n**Change control**\n\n| **Version** | date | author | Description of Changes |\n| --- | --- | --- | --- |\n| 1.0 | 15/03/2024 | Ricardo | Initial creation of the document. |"
+			},
+			"response": [
+				{
+					"name": "ListOrganizations",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/payment-allocation/organizations",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"payment-allocation",
+								"organizations"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.25.2"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 07 Mar 2024 14:30:57 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "1869"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "grpc-encoding",
+							"value": "identity"
+						},
+						{
+							"key": "grpc-accept-encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "x-envoy-upstream-service-time",
+							"value": "95"
+						},
+						{
+							"key": "grpc-status",
+							"value": "0"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Max-Age",
+							"value": "3600"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"record_count\": \"9\",\n    \"records\": [\n        {\n            \"id\": 0,\n            \"table_name\": \"AD_Org\",\n            \"values\": {\n                \"KeyColumn\": 0,\n                \"DisplayColumn\": \"*\",\n                \"UUID\": \"a3e5c878-fb40-11e8-a479-7a0060f0aa01\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 50001,\n            \"table_name\": \"AD_Org\",\n            \"values\": {\n                \"KeyColumn\": 50001,\n                \"DisplayColumn\": \"Fertilizer\",\n                \"UUID\": \"5bdf61e6-18d5-491e-8826-ae7a9557e635\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 50000,\n            \"table_name\": \"AD_Org\",\n            \"values\": {\n                \"KeyColumn\": 50000,\n                \"DisplayColumn\": \"Furniture\",\n                \"UUID\": \"803a37b7-0cee-4411-99aa-d3b328dec3b1\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 11,\n            \"table_name\": \"AD_Org\",\n            \"values\": {\n                \"KeyColumn\": 11,\n                \"DisplayColumn\": \"HQ\",\n                \"UUID\": \"08c224db-bb86-4306-9fa5-ba1dfd34b693\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 12,\n            \"table_name\": \"AD_Org\",\n            \"values\": {\n                \"KeyColumn\": 12,\n                \"DisplayColumn\": \"Store Central\",\n                \"UUID\": \"6a0e31b1-2ade-4f8e-a907-ed63ab29fc0d\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 50005,\n            \"table_name\": \"AD_Org\",\n            \"values\": {\n                \"KeyColumn\": 50005,\n                \"DisplayColumn\": \"Store East\",\n                \"UUID\": \"818cfb05-f9db-4a1c-853f-7b3f2b35337a\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 50002,\n            \"table_name\": \"AD_Org\",\n            \"values\": {\n                \"KeyColumn\": 50002,\n                \"DisplayColumn\": \"Store North\",\n                \"UUID\": \"06e23570-6653-4b3c-a921-6c54732b02a9\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 50004,\n            \"table_name\": \"AD_Org\",\n            \"values\": {\n                \"KeyColumn\": 50004,\n                \"DisplayColumn\": \"Store South\",\n                \"UUID\": \"cf2ac4a7-0718-4f69-a042-bb8fcb85e9da\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 50006,\n            \"table_name\": \"AD_Org\",\n            \"values\": {\n                \"KeyColumn\": 50006,\n                \"DisplayColumn\": \"Store West\",\n                \"UUID\": \"51748134-e4f9-4d19-b568-77fe15b75887\"\n            },\n            \"is_active\": true\n        }\n    ],\n    \"next_page_token\": \"\"\n}"
+				}
+			]
+		},
+		{
+			"name": "ListCurrencies",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{HOST}}/payment-allocation/currencies",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"payment-allocation",
+						"currencies"
+					]
+				},
+				"description": "**Endpoint**: GET /payment_allocation\n\n**Description**: Returns ListLookupItems\n\n**FULL URL**: [http://api.adempiere.io](http://api.adempiere.io/api)/payment-allocation/currencies\n\n**Method**: GET\n\n**Application Example**\n\n``` bash\ncurl --location 'http://api.adempiere.io/payment-allocation/currencies' \\\n--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMDAwMTU0IiwiQURfQ2xpZW50X0lEIjoxMSwiQURfT3JnX0lEIjo1MDAwNiwiQURfUm9sZV9JRCI6MTAyLCJBRF9Vc2VyX0lEIjoxMDAsIk1fV2FyZWhvdXNlX0lEIjowLCJBRF9MYW5ndWFnZSI6ImVzX01YIiwiaWF0IjoxNzEwNzE1NzAxLCJleHAiOjE3MTA4MDIxMDF9.sdizIymo1Yd8P8w4D4ORu2EfavUfgxsPPfQIJMNJQQ8'\n\n ```\n\n**Example Answer**\n\n``` json\n {\n            \"id\": 238,\n            \"table_name\": \"C_Currency\",\n            \"values\": {\n                \"KeyColumn\": 238,\n                \"DisplayColumn\": \"AED\",\n                \"UUID\": \"a5678cc2-fb40-11e8-a479-7a0060f0aa01\"\n            },\n            \"is_active\": true\n        },\n\n ```\n\n**Change control**\n\n| **Version** | date | author | Description of Changes |\n| --- | --- | --- | --- |\n| 1.0 | 15/03/2024 | Ricardo | Initial creation of the document. |"
+			},
+			"response": [
+				{
+					"name": "ListCurrencies",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/payment-allocation/currencies",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"payment-allocation",
+								"currencies"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.25.2"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 07 Mar 2024 14:31:31 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "9961"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "grpc-encoding",
+							"value": "identity"
+						},
+						{
+							"key": "grpc-accept-encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "x-envoy-upstream-service-time",
+							"value": "74"
+						},
+						{
+							"key": "grpc-status",
+							"value": "0"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Max-Age",
+							"value": "3600"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"record_count\": \"177\",\n    \"records\": [\n        {\n            \"id\": 238,\n            \"table_name\": \"C_Currency\",\n            \"values\": {\n                \"KeyColumn\": 238,\n                \"DisplayColumn\": \"AED\",\n                \"UUID\": \"a5678cc2-fb40-11e8-a479-7a0060f0aa01\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 195,\n            \"table_name\": \"C_Currency\",\n            \"values\": {\n                \"KeyColumn\": 195,\n                \"DisplayColumn\": \"AFA\",\n                \"UUID\": \"a5675e28-fb40-11e8-a479-7a0060f0aa01\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 271,\n            \"table_name\": \"C_Currency\",\n            \"values\": {\n                \"KeyColumn\": 271,\n                \"DisplayColumn\": \"ALL\",\n                \"UUID\": \"a567a4aa-fb40-11e8-a479-7a0060f0aa01\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 143,\n            \"table_name\": \"C_Currency\",\n            \"values\": {\n                \"KeyColumn\": 143,\n                \"DisplayColumn\": \"AMD\",\n                \"UUID\": \"a567442e-fb40-11e8-a479-7a0060f0aa01\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 284,\n            \"table_name\": \"C_Currency\",\n            \"values\": {\n                \"KeyColumn\": 284,\n                \"DisplayColumn\": \"ANG\",\n                \"UUID\": \"a567b454-fb40-11e8-a479-7a0060f0aa01\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 144,\n            \"table_name\": \"C_Currency\",\n            \"values\": {\n                \"KeyColumn\": 144,\n                \"DisplayColumn\": \"AOA\",\n                \"UUID\": \"a5674500-fb40-11e8-a479-7a0060f0aa01\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 118,\n            \"table_name\": \"C_Currency\",\n            \"values\": {\n                \"KeyColumn\": 118,\n                \"DisplayColumn\": \"ARS\",\n                \"UUID\": \"a56734fc-fb40-11e8-a479-7a0060f0aa01\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 104,\n            \"table_name\": \"C_Currency\",\n            \"values\": {\n                \"KeyColumn\": 104,\n                \"DisplayColumn\": \"ATS\",\n                \"UUID\": \"a5671f30-fb40-11e8-a479-7a0060f0aa01\"\n            },\n            \"is_active\": false\n        },\n        {\n            \"id\": 120,\n            \"table_name\": \"C_Currency\",\n            \"values\": {\n                \"KeyColumn\": 120,\n                \"DisplayColumn\": \"AUD\",\n                \"UUID\": \"a56735a6-fb40-11e8-a479-7a0060f0aa01\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 196,\n            \"table_name\": \"C_Currency\",\n            \"values\": {\n                \"KeyColumn\": 196,\n                \"DisplayColumn\": \"AWG\",\n                \"UUID\": \"a5676882-fb40-11e8-a479-7a0060f0aa01\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 145,\n            \"table_name\": \"C_Currency\",\n            \"values\": {\n                \"KeyColumn\": 145,\n                \"DisplayColumn\": \"AZN\",\n                \"UUID\": \"a56745aa-fb40-11e8-a479-7a0060f0aa01\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 268,\n            \"table_name\": \"C_Currency\",\n            \"values\": {\n                \"KeyColumn\": 268,\n                \"DisplayColumn\": \"BAM\",\n                \"UUID\": \"a567a2e8-fb40-11e8-a479-7a0060f0aa01\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 202,\n            \"table_name\": \"C_Currency\",\n            \"values\": {\n                \"KeyColumn\": 202,\n                \"DisplayColumn\": \"BBD\",\n                \"UUID\": \"a5676f8a-fb40-11e8-a479-7a0060f0aa01\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 322,\n            \"table_name\": \"C_Currency\",\n            \"values\": {\n                \"KeyColumn\": 322,\n                \"DisplayColumn\": \"BDT\",\n                \"UUID\": \"a56707de-fb40-11e8-a479-7a0060f0aa01\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 105,\n            \"table_name\": \"C_Currency\",\n            \"values\": {\n                \"KeyColumn\": 105,\n                \"DisplayColumn\": \"BEF\",\n                \"UUID\": \"a5671fd0-fb40-11e8-a479-7a0060f0aa01\"\n            },\n            \"is_active\": false\n        },\n        {\n            \"id\": 279,\n            \"table_name\": \"C_Currency\",\n            \"values\": {\n                \"KeyColumn\": 279,\n                \"DisplayColumn\": \"BGL\",\n                \"UUID\": \"a567a95a-fb40-11e8-a479-7a0060f0aa01\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 200,\n            \"table_name\": \"C_Currency\",\n            \"values\": {\n                \"KeyColumn\": 200,\n                \"DisplayColumn\": \"BHD\",\n                \"UUID\": \"a5676da0-fb40-11e8-a479-7a0060f0aa01\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 253,\n            \"table_name\": \"C_Currency\",\n            \"values\": {\n                \"KeyColumn\": 253,\n                \"DisplayColumn\": \"BIF\",\n                \"UUID\": \"a56791ea-fb40-11e8-a479-7a0060f0aa01\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 201,\n            \"table_name\": \"C_Currency\",\n            \"values\": {\n                \"KeyColumn\": 201,\n                \"DisplayColumn\": \"BMD\",\n                \"UUID\": \"a5676ed6-fb40-11e8-a479-7a0060f0aa01\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 198,\n            \"table_name\": \"C_Currency\",\n            \"values\": {\n                \"KeyColumn\": 198,\n                \"DisplayColumn\": \"BND\",\n                \"UUID\": \"a5676ba2-fb40-11e8-a479-7a0060f0aa01\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 146,\n            \"table_name\": \"C_Currency\",\n            \"values\": {\n                \"KeyColumn\": 146,\n                \"DisplayColumn\": \"BOB\",\n                \"UUID\": \"a567464a-fb40-11e8-a479-7a0060f0aa01\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 297,\n            \"table_name\": \"C_Currency\",\n            \"values\": {\n                \"KeyColumn\": 297,\n                \"DisplayColumn\": \"BRL\",\n                \"UUID\": \"a567bbfc-fb40-11e8-a479-7a0060f0aa01\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 199,\n            \"table_name\": \"C_Currency\",\n            \"values\": {\n                \"KeyColumn\": 199,\n                \"DisplayColumn\": \"BSD\",\n                \"UUID\": \"a5676d00-fb40-11e8-a479-7a0060f0aa01\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 290,\n            \"table_name\": \"C_Currency\",\n            \"values\": {\n                \"KeyColumn\": 290,\n                \"DisplayColumn\": \"BWP\",\n                \"UUID\": \"a567b882-fb40-11e8-a479-7a0060f0aa01\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 203,\n            \"table_name\": \"C_Currency\",\n            \"values\": {\n                \"KeyColumn\": 203,\n                \"DisplayColumn\": \"BYR\",\n                \"UUID\": \"a567719c-fb40-11e8-a479-7a0060f0aa01\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 207,\n            \"table_name\": \"C_Currency\",\n            \"values\": {\n                \"KeyColumn\": 207,\n                \"DisplayColumn\": \"BZD\",\n                \"UUID\": \"a56777aa-fb40-11e8-a479-7a0060f0aa01\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 116,\n            \"table_name\": \"C_Currency\",\n            \"values\": {\n                \"KeyColumn\": 116,\n                \"DisplayColumn\": \"CAD\",\n                \"UUID\": \"a5673164-fb40-11e8-a479-7a0060f0aa01\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 147,\n            \"table_name\": \"C_Currency\",\n            \"values\": {\n                \"KeyColumn\": 147,\n                \"DisplayColumn\": \"CDF\",\n                \"UUID\": \"a56746e0-fb40-11e8-a479-7a0060f0aa01\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 318,\n            \"table_name\": \"C_Currency\",\n            \"values\": {\n                \"KeyColumn\": 318,\n                \"DisplayColumn\": \"CHF\",\n                \"UUID\": \"a567031a-fb40-11e8-a479-7a0060f0aa01\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 228,\n            \"table_name\": \"C_Currency\",\n            \"values\": {\n                \"KeyColumn\": 228,\n                \"DisplayColumn\": \"CLP\",\n                \"UUID\": \"a5677cfa-fb40-11e8-a479-7a0060f0aa01\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 332,\n            \"table_name\": \"C_Currency\",\n            \"values\": {\n                \"KeyColumn\": 332,\n                \"DisplayColumn\": \"CNY\",\n                \"UUID\": \"a5670e00-fb40-11e8-a479-7a0060f0aa01\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 230,\n            \"table_name\": \"C_Currency\",\n            \"values\": {\n                \"KeyColumn\": 230,\n                \"DisplayColumn\": \"COP\",\n                \"UUID\": \"a5677e26-fb40-11e8-a479-7a0060f0aa01\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 336,\n            \"table_name\": \"C_Currency\",\n            \"values\": {\n                \"KeyColumn\": 336,\n                \"DisplayColumn\": \"CRC\",\n                \"UUID\": \"a5671878-fb40-11e8-a479-7a0060f0aa01\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 232,\n            \"table_name\": \"C_Currency\",\n            \"values\": {\n                \"KeyColumn\": 232,\n                \"DisplayColumn\": \"CUP\",\n                \"UUID\": \"a56788da-fb40-11e8-a479-7a0060f0aa01\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 210,\n            \"table_name\": \"C_Currency\",\n            \"values\": {\n                \"KeyColumn\": 210,\n                \"DisplayColumn\": \"CVE\",\n                \"UUID\": \"a5677a02-fb40-11e8-a479-7a0060f0aa01\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 163,\n            \"table_name\": \"C_Currency\",\n            \"values\": {\n                \"KeyColumn\": 163,\n                \"DisplayColumn\": \"CYP\",\n                \"UUID\": \"a5675978-fb40-11e8-a479-7a0060f0aa01\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 148,\n            \"table_name\": \"C_Currency\",\n            \"values\": {\n                \"KeyColumn\": 148,\n                \"DisplayColumn\": \"CZK\",\n                \"UUID\": \"a56748d4-fb40-11e8-a479-7a0060f0aa01\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 103,\n            \"table_name\": \"C_Currency\",\n            \"values\": {\n                \"KeyColumn\": 103,\n                \"DisplayColumn\": \"DEM\",\n                \"UUID\": \"a5671e90-fb40-11e8-a479-7a0060f0aa01\"\n            },\n            \"is_active\": false\n        },\n        {\n            \"id\": 237,\n            \"table_name\": \"C_Currency\",\n            \"values\": {\n                \"KeyColumn\": 237,\n                \"DisplayColumn\": \"DJF\",\n                \"UUID\": \"a5678c2c-fb40-11e8-a479-7a0060f0aa01\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 241,\n            \"table_name\": \"C_Currency\",\n            \"values\": {\n                \"KeyColumn\": 241,\n                \"DisplayColumn\": \"DKK\",\n                \"UUID\": \"a567901e-fb40-11e8-a479-7a0060f0aa01\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 298,\n            \"table_name\": \"C_Currency\",\n            \"values\": {\n                \"KeyColumn\": 298,\n                \"DisplayColumn\": \"DOP\",\n                \"UUID\": \"a567bc9c-fb40-11e8-a479-7a0060f0aa01\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 235,\n            \"table_name\": \"C_Currency\",\n            \"values\": {\n                \"KeyColumn\": 235,\n                \"DisplayColumn\": \"DZD\",\n                \"UUID\": \"a5678af6-fb40-11e8-a479-7a0060f0aa01\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 285,\n            \"table_name\": \"C_Currency\",\n            \"values\": {\n                \"KeyColumn\": 285,\n                \"DisplayColumn\": \"EEK\",\n                \"UUID\": \"a567b4fe-fb40-11e8-a479-7a0060f0aa01\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 164,\n            \"table_name\": \"C_Currency\",\n            \"values\": {\n                \"KeyColumn\": 164,\n                \"DisplayColumn\": \"EGP\",\n                \"UUID\": \"a5675a0e-fb40-11e8-a479-7a0060f0aa01\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 270,\n            \"table_name\": \"C_Currency\",\n            \"values\": {\n                \"KeyColumn\": 270,\n                \"DisplayColumn\": \"ERN\",\n                \"UUID\": \"a567a414-fb40-11e8-a479-7a0060f0aa01\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 111,\n            \"table_name\": \"C_Currency\",\n            \"values\": {\n                \"KeyColumn\": 111,\n                \"DisplayColumn\": \"ESP\",\n                \"UUID\": \"a5672bd8-fb40-11e8-a479-7a0060f0aa01\"\n            },\n            \"is_active\": false\n        },\n        {\n            \"id\": 204,\n            \"table_name\": \"C_Currency\",\n            \"values\": {\n                \"KeyColumn\": 204,\n                \"DisplayColumn\": \"ETB\",\n                \"UUID\": \"a567748a-fb40-11e8-a479-7a0060f0aa01\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 102,\n            \"table_name\": \"C_Currency\",\n            \"values\": {\n                \"KeyColumn\": 102,\n                \"DisplayColumn\": \"EUR\",\n                \"UUID\": \"a5673830-fb40-11e8-a479-7a0060f0aa01\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 106,\n            \"table_name\": \"C_Currency\",\n            \"values\": {\n                \"KeyColumn\": 106,\n                \"DisplayColumn\": \"FIM\",\n                \"UUID\": \"a5672066-fb40-11e8-a479-7a0060f0aa01\"\n            },\n            \"is_active\": false\n        },\n        {\n            \"id\": 252,\n            \"table_name\": \"C_Currency\",\n            \"values\": {\n                \"KeyColumn\": 252,\n                \"DisplayColumn\": \"FJD\",\n                \"UUID\": \"a5679154-fb40-11e8-a479-7a0060f0aa01\"\n            },\n            \"is_active\": true\n        }\n    ],\n    \"next_page_token\": \"9d1ffadb-c355-420c-9514-bdd5b60b5b27-2\"\n}"
+				}
+			]
+		},
+		{
+			"name": "ListTransactionTypes",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{HOST}}/payment-allocation/transaction-types",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"payment-allocation",
+						"transaction-types"
+					]
+				},
+				"description": "**Endpoint**: GET /payment_allocation\n\n**Description**: Returns ListLookupItems\n\n**FULL URL**: [http://api.adempiere.io](http://api.adempiere.io/api)/payment-allocation/transaction-types\n\n**Method**: GET\n\n**Application Example**\n\n``` bash\ncurl --location 'http://api.adempiere.io/payment-allocation/transaction-types' \\\n--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMDAwMTU0IiwiQURfQ2xpZW50X0lEIjoxMSwiQURfT3JnX0lEIjo1MDAwNiwiQURfUm9sZV9JRCI6MTAyLCJBRF9Vc2VyX0lEIjoxMDAsIk1fV2FyZWhvdXNlX0lEIjowLCJBRF9MYW5ndWFnZSI6ImVzX01YIiwiaWF0IjoxNzEwNzE1NzAxLCJleHAiOjE3MTA4MDIxMDF9.sdizIymo1Yd8P8w4D4ORu2EfavUfgxsPPfQIJMNJQQ8'\n\n ```\n\n**Example Answer**\n\n``` json\n{\n            \"id\": 0,\n            \"table_name\": \"AD_Ref_List\",\n            \"values\": {\n                \"KeyColumn\": \"A\",\n                \"ValueColumn\": \"A\",\n                \"DisplayColumn\": \"CxC & CxP\",\n                \"UUID\": \"a456efb2-fb40-11e8-a479-7a0060f0aa01\"\n            },\n            \"is_active\": true\n        },\n\n ```\n\n**Change control**\n\n| **Version** | date | author | Description of Changes |\n| --- | --- | --- | --- |\n| 1.0 | 15/03/2024 | Ricardo | Initial creation of the document. |"
+			},
+			"response": [
+				{
+					"name": "ListTransactionTypes",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/payment-allocation/transaction-types",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"payment-allocation",
+								"transaction-types"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.25.2"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 08 Mar 2024 16:32:06 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "744"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "grpc-encoding",
+							"value": "identity"
+						},
+						{
+							"key": "grpc-accept-encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "x-envoy-upstream-service-time",
+							"value": "133"
+						},
+						{
+							"key": "grpc-status",
+							"value": "0"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Max-Age",
+							"value": "3600"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"record_count\": \"3\",\n    \"records\": [\n        {\n            \"id\": 0,\n            \"table_name\": \"AD_Ref_List\",\n            \"values\": {\n                \"KeyColumn\": \"A\",\n                \"ValueColumn\": \"A\",\n                \"DisplayColumn\": \"CxC & CxP\",\n                \"UUID\": \"a456efb2-fb40-11e8-a479-7a0060f0aa01\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 0,\n            \"table_name\": \"AD_Ref_List\",\n            \"values\": {\n                \"KeyColumn\": \"R\",\n                \"ValueColumn\": \"R\",\n                \"DisplayColumn\": \"Sólo CxC\",\n                \"UUID\": \"a456f016-fb40-11e8-a479-7a0060f0aa01\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 0,\n            \"table_name\": \"AD_Ref_List\",\n            \"values\": {\n                \"KeyColumn\": \"P\",\n                \"ValueColumn\": \"P\",\n                \"DisplayColumn\": \"Sólo CxP\",\n                \"UUID\": \"a456f07a-fb40-11e8-a479-7a0060f0aa01\"\n            },\n            \"is_active\": true\n        }\n    ],\n    \"next_page_token\": \"\"\n}"
+				}
+			]
+		},
+		{
+			"name": "ListCharges",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{HOST}}/payment-allocation/charges",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"payment-allocation",
+						"charges"
+					]
+				},
+				"description": "**Endpoint**: GET /payment_allocation\n\n**Description**: Returns ListLookupItems\n\n**FULL URL**: [http://api.adempiere.io](http://api.adempiere.io/api)/payment-allocation/charges\n\n**Method**: GET\n\n**Application Example**\n\n``` bash\ncurl --location 'http://api.adempiere.io/payment-allocation/charges' \\\n--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMDAwMTU0IiwiQURfQ2xpZW50X0lEIjoxMSwiQURfT3JnX0lEIjo1MDAwNiwiQURfUm9sZV9JRCI6MTAyLCJBRF9Vc2VyX0lEIjoxMDAsIk1fV2FyZWhvdXNlX0lEIjowLCJBRF9MYW5ndWFnZSI6ImVzX01YIiwiaWF0IjoxNzEwNzE1NzAxLCJleHAiOjE3MTA4MDIxMDF9.sdizIymo1Yd8P8w4D4ORu2EfavUfgxsPPfQIJMNJQQ8'\n\n ```\n\n**Example Answer**\n\n``` json\n{\n            \"id\": 100,\n            \"table_name\": \"C_Charge\",\n            \"values\": {\n                \"KeyColumn\": 100,\n                \"DisplayColumn\": \"Cargo Bancario\",\n                \"UUID\": \"f238dfd0-9d73-4eaa-b043-64914c45f59d\"\n            },\n            \"is_active\": true\n        },\n\n ```\n\n**Change control**\n\n| **Version** | date | author | Description of Changes |\n| --- | --- | --- | --- |\n| 1.0 | 15/03/2024 | Ricardo | Initial creation of the document. |"
+			},
+			"response": [
+				{
+					"name": "ListCharges",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/payment-allocation/charges",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"payment-allocation",
+								"charges"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.25.2"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 07 Mar 2024 14:42:52 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "712"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "grpc-encoding",
+							"value": "identity"
+						},
+						{
+							"key": "grpc-accept-encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "x-envoy-upstream-service-time",
+							"value": "92"
+						},
+						{
+							"key": "grpc-status",
+							"value": "0"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Max-Age",
+							"value": "3600"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"record_count\": \"3\",\n    \"records\": [\n        {\n            \"id\": 100,\n            \"table_name\": \"C_Charge\",\n            \"values\": {\n                \"KeyColumn\": 100,\n                \"DisplayColumn\": \"Cargo Bancario\",\n                \"UUID\": \"f238dfd0-9d73-4eaa-b043-64914c45f59d\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 50007,\n            \"table_name\": \"C_Charge\",\n            \"values\": {\n                \"KeyColumn\": 50007,\n                \"DisplayColumn\": \"Cash for Store Central In-Transfer\",\n                \"UUID\": \"6cda9209-98e8-4545-b020-b5e722e711f0\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 101,\n            \"table_name\": \"C_Charge\",\n            \"values\": {\n                \"KeyColumn\": 101,\n                \"DisplayColumn\": \"Comisiones Pagadas\",\n                \"UUID\": \"49af021f-a5bf-459f-aa4b-acec62e80b6a\"\n            },\n            \"is_active\": true\n        }\n    ],\n    \"next_page_token\": \"\"\n}"
+				}
+			]
+		},
+		{
+			"name": "ListTransactionOrganizations",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{HOST}}/payment-allocation/organizations/transactions",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"payment-allocation",
+						"organizations",
+						"transactions"
+					]
+				},
+				"description": "**Endpoint**: GET /payment_allocation\n\n**Description**: Returns ListLookupItems\n\n**FULL URL**: [http://api.adempiere.io](http://api.adempiere.io/api)/payment-allocation/organizations/transactions\n\n**Method**: GET\n\n**Application Example**\n\n``` bash\ncurl --location 'http://api.adempiere.io/payment-allocation/organizations/transactions' \\\n--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMDAwMTU0IiwiQURfQ2xpZW50X0lEIjoxMSwiQURfT3JnX0lEIjo1MDAwNiwiQURfUm9sZV9JRCI6MTAyLCJBRF9Vc2VyX0lEIjoxMDAsIk1fV2FyZWhvdXNlX0lEIjowLCJBRF9MYW5ndWFnZSI6ImVzX01YIiwiaWF0IjoxNzEwNzE1NzAxLCJleHAiOjE3MTA4MDIxMDF9.sdizIymo1Yd8P8w4D4ORu2EfavUfgxsPPfQIJMNJQQ8'\n\n ```\n\n**Example Answer**\n\n``` json\n{\n            \"id\": 50001,\n            \"table_name\": \"AD_Org\",\n            \"values\": {\n                \"KeyColumn\": 50001,\n                \"DisplayColumn\": \"Fertilizer\",\n                \"UUID\": \"5bdf61e6-18d5-491e-8826-ae7a9557e635\"\n            },\n            \"is_active\": true\n        },\n\n ```\n\n**Change control**\n\n| **Version** | date | author | Description of Changes |\n| --- | --- | --- | --- |\n| 1.0 | 15/03/2024 | Ricardo | Initial creation of the document. |"
+			},
+			"response": [
+				{
+					"name": "ListTransactionOrganizations",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/payment-allocation/organizations/transactions",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"payment-allocation",
+								"organizations",
+								"transactions"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.25.2"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 07 Mar 2024 14:43:35 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "1682"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "grpc-encoding",
+							"value": "identity"
+						},
+						{
+							"key": "grpc-accept-encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "x-envoy-upstream-service-time",
+							"value": "87"
+						},
+						{
+							"key": "grpc-status",
+							"value": "0"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Max-Age",
+							"value": "3600"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"record_count\": \"8\",\n    \"records\": [\n        {\n            \"id\": 50001,\n            \"table_name\": \"AD_Org\",\n            \"values\": {\n                \"KeyColumn\": 50001,\n                \"DisplayColumn\": \"Fertilizer\",\n                \"UUID\": \"5bdf61e6-18d5-491e-8826-ae7a9557e635\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 50000,\n            \"table_name\": \"AD_Org\",\n            \"values\": {\n                \"KeyColumn\": 50000,\n                \"DisplayColumn\": \"Furniture\",\n                \"UUID\": \"803a37b7-0cee-4411-99aa-d3b328dec3b1\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 11,\n            \"table_name\": \"AD_Org\",\n            \"values\": {\n                \"KeyColumn\": 11,\n                \"DisplayColumn\": \"HQ\",\n                \"UUID\": \"08c224db-bb86-4306-9fa5-ba1dfd34b693\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 12,\n            \"table_name\": \"AD_Org\",\n            \"values\": {\n                \"KeyColumn\": 12,\n                \"DisplayColumn\": \"Store Central\",\n                \"UUID\": \"6a0e31b1-2ade-4f8e-a907-ed63ab29fc0d\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 50005,\n            \"table_name\": \"AD_Org\",\n            \"values\": {\n                \"KeyColumn\": 50005,\n                \"DisplayColumn\": \"Store East\",\n                \"UUID\": \"818cfb05-f9db-4a1c-853f-7b3f2b35337a\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 50002,\n            \"table_name\": \"AD_Org\",\n            \"values\": {\n                \"KeyColumn\": 50002,\n                \"DisplayColumn\": \"Store North\",\n                \"UUID\": \"06e23570-6653-4b3c-a921-6c54732b02a9\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 50004,\n            \"table_name\": \"AD_Org\",\n            \"values\": {\n                \"KeyColumn\": 50004,\n                \"DisplayColumn\": \"Store South\",\n                \"UUID\": \"cf2ac4a7-0718-4f69-a042-bb8fcb85e9da\"\n            },\n            \"is_active\": true\n        },\n        {\n            \"id\": 50006,\n            \"table_name\": \"AD_Org\",\n            \"values\": {\n                \"KeyColumn\": 50006,\n                \"DisplayColumn\": \"Store West\",\n                \"UUID\": \"51748134-e4f9-4d19-b568-77fe15b75887\"\n            },\n            \"is_active\": true\n        }\n    ],\n    \"next_page_token\": \"\"\n}"
+				}
+			]
+		}
+	]
+}
