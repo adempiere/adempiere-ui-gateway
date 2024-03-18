@@ -1,0 +1,728 @@
+{
+	"info": {
+		"_postman_id": "6f3d37a2-4b32-47e1-8d2c-21a5cbad1675",
+		"name": "Material_management",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "28978517"
+	},
+	"item": [
+		{
+			"name": "ListProductStorage",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{HOST}}/material-management/products-storage",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"material-management",
+						"products-storage"
+					]
+				},
+				"description": "**Endpoint**: GET /Material_management\n\n**Description**: Returns ListEntities\n\n**FULL URL**: [http://api.adempiere.io](http://api.adempiere.io/api)/material-management/products-storage\n\n**Method**: GET\n\n**Application Example**\n\n``` bash\ncurl --location 'http://api.adempiere.io/material-management/products-storage' \\\n--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMDAwMTU0IiwiQURfQ2xpZW50X0lEIjoxMSwiQURfT3JnX0lEIjo1MDAwNiwiQURfUm9sZV9JRCI6MTAyLCJBRF9Vc2VyX0lEIjoxMDAsIk1fV2FyZWhvdXNlX0lEIjowLCJBRF9MYW5ndWFnZSI6ImVzX01YIiwiaWF0IjoxNzEwNzE1NzAxLCJleHAiOjE3MTA4MDIxMDF9.sdizIymo1Yd8P8w4D4ORu2EfavUfgxsPPfQIJMNJQQ8'\n\n ```\n\n**Example Answer**\n\n``` json\n\"id\": 0,\n            \"table_name\": \"RV_Storage\",\n            \"values\": {\n                \"AD_Client_ID\": 11,\n                \"AD_Org_ID\": 11,\n                \"M_Product_ID\": 50004,\n                \"Value\": \"Seat\",\n                \"Name\": \"Seat\",\n                \"Description\": null,\n                \"UPC\": null,\n                \"SKU\": null,\n                \"C_UOM_ID\": 100,\n                \"M_Product_Category_ID\": 50001,\n                \"Classification\": null,\n                \"Weight\": 0,\n                \"Volume\": 0,\n                \"VersionNo\": null,\n                \"GuaranteeDays\": 0,\n                \"GuaranteeDaysMin\": 0,\n                \"M_Locator_ID\": 101,\n                \"M_Warehouse_ID\": 103,\n                \"X\": \"0\",\n                \"Y\": \"0\",\n                \"Z\": \"0\",\n                \"QtyOnHand\": {\n                    \"type\": \"decimal\",\n                    \"value\": \"-1.00\"\n                },\n                \"QtyReserved\": {\n                    \"type\": \"decimal\",\n                    \"value\": \"0.00\"\n                },\n                \"QtyAvailable\": {\n                    \"type\": \"decimal\",\n                    \"value\": \"-1.00\"\n                },\n                \"QtyOrdered\": {\n                    \"type\": \"decimal\",\n                    \"value\": \"0.00\"\n                },\n                \"DateLastInventory\": null,\n                \"M_AttributeSetInstance_ID\": 1000002,\n                \"M_AttributeSet_ID\": 0,\n                \"SerNo\": null,\n                \"Lot\": null,\n                \"M_Lot_ID\": null,\n                \"GuaranteeDate\": null,\n                \"ShelfLifeDays\": null,\n                \"GoodForDays\": null,\n                \"ShelfLifeRemainingPct\": null,\n                \"M_Product_Class_ID\": null,\n                \"M_Product_Classification_ID\": null,\n                \"M_Product_Group_ID\": null,\n                \"DisplayColumn_AD_Client_ID\": \"GardenWorld\",\n                \"DisplayColumn_AD_Org_ID\": \"HQ\",\n                \"DisplayColumn_C_UOM_ID\": \"Unidad\",\n                \"DisplayColumn_M_AttributeSet_ID\": \"** Do not Change/Use **\",\n                \"DisplayColumn_M_AttributeSetInstance_ID\": \"1000002\",\n                \"DisplayColumn_M_Locator_ID\": \"Default HQ Locator\",\n                \"DisplayColumn_M_Lot_ID\": null,\n                \"DisplayColumn_M_Product_Category_ID\": \"Raw Material\",\n                \"DisplayColumn_M_Product_Class_ID\": null,\n                \"DisplayColumn_M_Product_Classification_ID\": null,\n                \"DisplayColumn_M_Product_Group_ID\": null,\n                \"DisplayColumn_M_Product_ID\": \"Seat - Seat\",\n                \"DisplayColumn_M_Warehouse_ID\": \"HQ Warehouse\"\n            }\n\n ```\n\n**Change control**\n\n| **Version** | date | author | Description of Changes |\n| --- | --- | --- | --- |\n| 1.0 | 15/03/2024 | Ricardo | Initial creation of the document. |"
+			},
+			"response": [
+				{
+					"name": "ListProductStorage",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/material-management/products-storage",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"material-management",
+								"products-storage"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.25.2"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 07 Mar 2024 14:05:09 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "52421"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "grpc-encoding",
+							"value": "identity"
+						},
+						{
+							"key": "grpc-accept-encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "x-envoy-upstream-service-time",
+							"value": "145"
+						},
+						{
+							"key": "grpc-status",
+							"value": "0"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Max-Age",
+							"value": "3600"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"record_count\": \"28\",\n    \"records\": [\n        {\n            \"id\": 0,\n            \"table_name\": \"RV_Storage\",\n            \"values\": {\n                \"AD_Client_ID\": 11,\n                \"AD_Org_ID\": 11,\n                \"M_Product_ID\": 50004,\n                \"Value\": \"Seat\",\n                \"Name\": \"Seat\",\n                \"Description\": null,\n                \"UPC\": null,\n                \"SKU\": null,\n                \"C_UOM_ID\": 100,\n                \"M_Product_Category_ID\": 50001,\n                \"Classification\": null,\n                \"Weight\": 0,\n                \"Volume\": 0,\n                \"VersionNo\": null,\n                \"GuaranteeDays\": 0,\n                \"GuaranteeDaysMin\": 0,\n                \"M_Locator_ID\": 101,\n                \"M_Warehouse_ID\": 103,\n                \"X\": \"0\",\n                \"Y\": \"0\",\n                \"Z\": \"0\",\n                \"QtyOnHand\": {\n                    \"type\": \"decimal\",\n                    \"value\": \"-1.00\"\n                },\n                \"QtyReserved\": {\n                    \"type\": \"decimal\",\n                    \"value\": \"0.00\"\n                },\n                \"QtyAvailable\": {\n                    \"type\": \"decimal\",\n                    \"value\": \"-1.00\"\n                },\n                \"QtyOrdered\": {\n                    \"type\": \"decimal\",\n                    \"value\": \"0.00\"\n                },\n                \"DateLastInventory\": null,\n                \"M_AttributeSetInstance_ID\": 1000002,\n                \"M_AttributeSet_ID\": 0,\n                \"SerNo\": null,\n                \"Lot\": null,\n                \"M_Lot_ID\": null,\n                \"GuaranteeDate\": null,\n                \"ShelfLifeDays\": null,\n                \"GoodForDays\": null,\n                \"ShelfLifeRemainingPct\": null,\n                \"M_Product_Class_ID\": null,\n                \"M_Product_Classification_ID\": null,\n                \"M_Product_Group_ID\": null,\n                \"DisplayColumn_AD_Client_ID\": \"GardenWorld\",\n                \"DisplayColumn_AD_Org_ID\": \"HQ\",\n                \"DisplayColumn_C_UOM_ID\": \"Unidad\",\n                \"DisplayColumn_M_AttributeSet_ID\": \"** Do not Change/Use **\",\n                \"DisplayColumn_M_AttributeSetInstance_ID\": \"1000002\",\n                \"DisplayColumn_M_Locator_ID\": \"Default HQ Locator\",\n                \"DisplayColumn_M_Lot_ID\": null,\n                \"DisplayColumn_M_Product_Category_ID\": \"Raw Material\",\n                \"DisplayColumn_M_Product_Class_ID\": null,\n                \"DisplayColumn_M_Product_Classification_ID\": null,\n                \"DisplayColumn_M_Product_Group_ID\": null,\n                \"DisplayColumn_M_Product_ID\": \"Seat - Seat\",\n                \"DisplayColumn_M_Warehouse_ID\": \"HQ Warehouse\"\n            }\n        },\n        {\n            \"id\": 0,\n            \"table_name\": \"RV_Storage\",\n            \"values\": {\n                \"AD_Client_ID\": 11,\n                \"AD_Org_ID\": 11,\n                \"M_Product_ID\": 50004,\n                \"Value\": \"Seat\",\n                \"Name\": \"Seat\",\n                \"Description\": null,\n                \"UPC\": null,\n                \"SKU\": null,\n                \"C_UOM_ID\": 100,\n                \"M_Product_Category_ID\": 50001,\n                \"Classification\": null,\n                \"Weight\": 0,\n                \"Volume\": 0,\n                \"VersionNo\": null,\n                \"GuaranteeDays\": 0,\n                \"GuaranteeDaysMin\": 0,\n                \"M_Locator_ID\": 101,\n                \"M_Warehouse_ID\": 103,\n                \"X\": \"0\",\n                \"Y\": \"0\",\n                \"Z\": \"0\",\n                \"QtyOnHand\": {\n                    \"type\": \"decimal\",\n                    \"value\": \"-1.00\"\n                },\n                \"QtyReserved\": {\n                    \"type\": \"decimal\",\n                    \"value\": \"0.00\"\n                },\n                \"QtyAvailable\": {\n                    \"type\": \"decimal\",\n                    \"value\": \"-1.00\"\n                },\n                \"QtyOrdered\": {\n                    \"type\": \"decimal\",\n                    \"value\": \"0.00\"\n                },\n                \"DateLastInventory\": null,\n                \"M_AttributeSetInstance_ID\": 1000001,\n                \"M_AttributeSet_ID\": 0,\n                \"SerNo\": null,\n                \"Lot\": null,\n                \"M_Lot_ID\": null,\n                \"GuaranteeDate\": null,\n                \"ShelfLifeDays\": null,\n                \"GoodForDays\": null,\n                \"ShelfLifeRemainingPct\": null,\n                \"M_Product_Class_ID\": null,\n                \"M_Product_Classification_ID\": null,\n                \"M_Product_Group_ID\": null,\n                \"DisplayColumn_AD_Client_ID\": \"GardenWorld\",\n                \"DisplayColumn_AD_Org_ID\": \"HQ\",\n                \"DisplayColumn_C_UOM_ID\": \"Unidad\",\n                \"DisplayColumn_M_AttributeSet_ID\": \"** Do not Change/Use **\",\n                \"DisplayColumn_M_AttributeSetInstance_ID\": \"1000001\",\n                \"DisplayColumn_M_Locator_ID\": \"Default HQ Locator\",\n                \"DisplayColumn_M_Lot_ID\": null,\n                \"DisplayColumn_M_Product_Category_ID\": \"Raw Material\",\n                \"DisplayColumn_M_Product_Class_ID\": null,\n                \"DisplayColumn_M_Product_Classification_ID\": null,\n                \"DisplayColumn_M_Product_Group_ID\": null,\n                \"DisplayColumn_M_Product_ID\": \"Seat - Seat\",\n                \"DisplayColumn_M_Warehouse_ID\": \"HQ Warehouse\"\n            }\n        },\n        {\n            \"id\": 0,\n            \"table_name\": \"RV_Storage\",\n            \"values\": {\n                \"AD_Client_ID\": 11,\n                \"AD_Org_ID\": 11,\n                \"M_Product_ID\": 50004,\n                \"Value\": \"Seat\",\n                \"Name\": \"Seat\",\n                \"Description\": null,\n                \"UPC\": null,\n                \"SKU\": null,\n                \"C_UOM_ID\": 100,\n                \"M_Product_Category_ID\": 50001,\n                \"Classification\": null,\n                \"Weight\": 0,\n                \"Volume\": 0,\n                \"VersionNo\": null,\n                \"GuaranteeDays\": 0,\n                \"GuaranteeDaysMin\": 0,\n                \"M_Locator_ID\": 101,\n                \"M_Warehouse_ID\": 103,\n                \"X\": \"0\",\n                \"Y\": \"0\",\n                \"Z\": \"0\",\n                \"QtyOnHand\": {\n                    \"type\": \"decimal\",\n                    \"value\": \"-1.00\"\n                },\n                \"QtyReserved\": {\n                    \"type\": \"decimal\",\n                    \"value\": \"0.00\"\n                },\n                \"QtyAvailable\": {\n                    \"type\": \"decimal\",\n                    \"value\": \"-1.00\"\n                },\n                \"QtyOrdered\": {\n                    \"type\": \"decimal\",\n                    \"value\": \"0.00\"\n                },\n                \"DateLastInventory\": null,\n                \"M_AttributeSetInstance_ID\": 1000000,\n                \"M_AttributeSet_ID\": 0,\n                \"SerNo\": null,\n                \"Lot\": null,\n                \"M_Lot_ID\": null,\n                \"GuaranteeDate\": null,\n                \"ShelfLifeDays\": null,\n                \"GoodForDays\": null,\n                \"ShelfLifeRemainingPct\": null,\n                \"M_Product_Class_ID\": null,\n                \"M_Product_Classification_ID\": null,\n                \"M_Product_Group_ID\": null,\n                \"DisplayColumn_AD_Client_ID\": \"GardenWorld\",\n                \"DisplayColumn_AD_Org_ID\": \"HQ\",\n                \"DisplayColumn_C_UOM_ID\": \"Unidad\",\n                \"DisplayColumn_M_AttributeSet_ID\": \"** Do not Change/Use **\",\n                \"DisplayColumn_M_AttributeSetInstance_ID\": \"1000000\",\n                \"DisplayColumn_M_Locator_ID\": \"Default HQ Locator\",\n                \"DisplayColumn_M_Lot_ID\": null,\n                \"DisplayColumn_M_Product_Category_ID\": \"Raw Material\",\n                \"DisplayColumn_M_Product_Class_ID\": null,\n                \"DisplayColumn_M_Product_Classification_ID\": null,\n                \"DisplayColumn_M_Product_Group_ID\": null,\n                \"DisplayColumn_M_Product_ID\": \"Seat - Seat\",\n                \"DisplayColumn_M_Warehouse_ID\": \"HQ Warehouse\"\n            }\n        },\n        {\n            \"id\": 0,\n            \"table_name\": \"RV_Storage\",\n            \"values\": {\n                \"AD_Client_ID\": 11,\n                \"AD_Org_ID\": 11,\n                \"M_Product_ID\": 50004,\n                \"Value\": \"Seat\",\n                \"Name\": \"Seat\",\n                \"Description\": null,\n                \"UPC\": null,\n                \"SKU\": null,\n                \"C_UOM_ID\": 100,\n                \"M_Product_Category_ID\": 50001,\n                \"Classification\": null,\n                \"Weight\": 0,\n                \"Volume\": 0,\n                \"VersionNo\": null,\n                \"GuaranteeDays\": 0,\n                \"GuaranteeDaysMin\": 0,\n                \"M_Locator_ID\": 101,\n                \"M_Warehouse_ID\": 103,\n                \"X\": \"0\",\n                \"Y\": \"0\",\n                \"Z\": \"0\",\n                \"QtyOnHand\": {\n                    \"type\": \"decimal\",\n                    \"value\": \"0.00\"\n                },\n                \"QtyReserved\": {\n                    \"type\": \"decimal\",\n                    \"value\": \"0.00\"\n                },\n                \"QtyAvailable\": {\n                    \"type\": \"decimal\",\n                    \"value\": \"0.00\"\n                },\n                \"QtyOrdered\": {\n                    \"type\": \"decimal\",\n                    \"value\": \"0.00\"\n                },\n                \"DateLastInventory\": null,\n                \"M_AttributeSetInstance_ID\": 0,\n                \"M_AttributeSet_ID\": 0,\n                \"SerNo\": null,\n                \"Lot\": null,\n                \"M_Lot_ID\": null,\n                \"GuaranteeDate\": null,\n                \"ShelfLifeDays\": null,\n                \"GoodForDays\": null,\n                \"ShelfLifeRemainingPct\": null,\n                \"M_Product_Class_ID\": null,\n                \"M_Product_Classification_ID\": null,\n                \"M_Product_Group_ID\": null,\n                \"DisplayColumn_AD_Client_ID\": \"GardenWorld\",\n                \"DisplayColumn_AD_Org_ID\": \"HQ\",\n                \"DisplayColumn_C_UOM_ID\": \"Unidad\",\n                \"DisplayColumn_M_AttributeSet_ID\": \"** Do not Change/Use **\",\n                \"DisplayColumn_M_AttributeSetInstance_ID\": \"---\",\n                \"DisplayColumn_M_Locator_ID\": \"Default HQ Locator\",\n                \"DisplayColumn_M_Lot_ID\": null,\n                \"DisplayColumn_M_Product_Category_ID\": \"Raw Material\",\n                \"DisplayColumn_M_Product_Class_ID\": null,\n                \"DisplayColumn_M_Product_Classification_ID\": null,\n                \"DisplayColumn_M_Product_Group_ID\": null,\n                \"DisplayColumn_M_Product_ID\": \"Seat - Seat\",\n                \"DisplayColumn_M_Warehouse_ID\": \"HQ Warehouse\"\n            }\n        },\n        {\n            \"id\": 0,\n            \"table_name\": \"RV_Storage\",\n            \"values\": {\n                \"AD_Client_ID\": 11,\n                \"AD_Org_ID\": 11,\n                \"M_Product_ID\": 135,\n                \"Value\": \"Screen\",\n                \"Name\": \"Patio Sun Screen\",\n                \"Description\": \"Protect from UV\",\n                \"UPC\": null,\n                \"SKU\": null,\n                \"C_UOM_ID\": 100,\n                \"M_Product_Category_ID\": 110,\n                \"Classification\": null,\n                \"Weight\": 0,\n                \"Volume\": 0,\n                \"VersionNo\": null,\n                \"GuaranteeDays\": null,\n                \"GuaranteeDaysMin\": null,\n                \"M_Locator_ID\": 101,\n                \"M_Warehouse_ID\": 103,\n                \"X\": \"0\",\n                \"Y\": \"0\",\n                \"Z\": \"0\",\n                \"QtyOnHand\": {\n                    \"type\": \"decimal\",\n                    \"value\": \"15.00\"\n                },\n                \"QtyReserved\": {\n                    \"type\": \"decimal\",\n                    \"value\": \"0.00\"\n                },\n                \"QtyAvailable\": {\n                    \"type\": \"decimal\",\n                    \"value\": \"15.00\"\n                },\n                \"QtyOrdered\": {\n                    \"type\": \"decimal\",\n                    \"value\": \"0.00\"\n                },\n                \"DateLastInventory\": null,\n                \"M_AttributeSetInstance_ID\": 0,\n                \"M_AttributeSet_ID\": 0,\n                \"SerNo\": null,\n                \"Lot\": null,\n                \"M_Lot_ID\": null,\n                \"GuaranteeDate\": null,\n                \"ShelfLifeDays\": null,\n                \"GoodForDays\": null,\n                \"ShelfLifeRemainingPct\": null,\n                \"M_Product_Class_ID\": null,\n                \"M_Product_Classification_ID\": null,\n                \"M_Product_Group_ID\": null,\n                \"DisplayColumn_AD_Client_ID\": \"GardenWorld\",\n                \"DisplayColumn_AD_Org_ID\": \"HQ\",\n                \"DisplayColumn_C_UOM_ID\": \"Unidad\",\n                \"DisplayColumn_M_AttributeSet_ID\": \"** Do not Change/Use **\",\n                \"DisplayColumn_M_AttributeSetInstance_ID\": \"---\",\n                \"DisplayColumn_M_Locator_ID\": \"Default HQ Locator\",\n                \"DisplayColumn_M_Lot_ID\": null,\n                \"DisplayColumn_M_Product_Category_ID\": \"Patio \",\n                \"DisplayColumn_M_Product_Class_ID\": null,\n                \"DisplayColumn_M_Product_Classification_ID\": null,\n                \"DisplayColumn_M_Product_Group_ID\": null,\n                \"DisplayColumn_M_Product_ID\": \"Screen - Patio Sun Screen\",\n                \"DisplayColumn_M_Warehouse_ID\": \"HQ Warehouse\"\n            }\n        },\n        {\n            \"id\": 0,\n            \"table_name\": \"RV_Storage\",\n            \"values\": {\n                \"AD_Client_ID\": 11,\n                \"AD_Org_ID\": 11,\n                \"M_Product_ID\": 134,\n                \"Value\": \"PTable\",\n                \"Name\": \"Patio Table\",\n                \"Description\": \"Nice Table for outdoors\",\n                \"UPC\": null,\n                \"SKU\": null,\n                \"C_UOM_ID\": 100,\n                \"M_Product_Category_ID\": 110,\n                \"Classification\": null,\n                \"Weight\": 0,\n                \"Volume\": 0,\n                \"VersionNo\": null,\n                \"GuaranteeDays\": null,\n                \"GuaranteeDaysMin\": null,\n                \"M_Locator_ID\": 101,\n                \"M_Warehouse_ID\": 103,\n                \"X\": \"0\",\n                \"Y\": \"0\",\n                \"Z\": \"0\",\n                \"QtyOnHand\": {\n                    \"type\": \"decimal\",\n                    \"value\": \"12.00\"\n                },\n                \"QtyReserved\": {\n                    \"type\": \"decimal\",\n                    \"value\": \"0.00\"\n                },\n                \"QtyAvailable\": {\n                    \"type\": \"decimal\",\n                    \"value\": \"12.00\"\n                },\n                \"QtyOrdered\": {\n                    \"type\": \"decimal\",\n                    \"value\": \"0.00\"\n                },\n                \"DateLastInventory\": null,\n                \"M_AttributeSetInstance_ID\": 0,\n                \"M_AttributeSet_ID\": 0,\n                \"SerNo\": null,\n                \"Lot\": null,\n                \"M_Lot_ID\": null,\n                \"GuaranteeDate\": null,\n                \"ShelfLifeDays\": null,\n                \"GoodForDays\": null,\n                \"ShelfLifeRemainingPct\": null,\n                \"M_Product_Class_ID\": null,\n                \"M_Product_Classification_ID\": null,\n                \"M_Product_Group_ID\": null,\n                \"DisplayColumn_AD_Client_ID\": \"GardenWorld\",\n                \"DisplayColumn_AD_Org_ID\": \"HQ\",\n                \"DisplayColumn_C_UOM_ID\": \"Unidad\",\n                \"DisplayColumn_M_AttributeSet_ID\": \"** Do not Change/Use **\",\n                \"DisplayColumn_M_AttributeSetInstance_ID\": \"---\",\n                \"DisplayColumn_M_Locator_ID\": \"Default HQ Locator\",\n                \"DisplayColumn_M_Lot_ID\": null,\n                \"DisplayColumn_M_Product_Category_ID\": \"Patio \",\n                \"DisplayColumn_M_Product_Class_ID\": null,\n                \"DisplayColumn_M_Product_Classification_ID\": null,\n                \"DisplayColumn_M_Product_Group_ID\": null,\n                \"DisplayColumn_M_Product_ID\": \"PTable - Patio Table\",\n                \"DisplayColumn_M_Warehouse_ID\": \"HQ Warehouse\"\n            }\n        },\n        {\n            \"id\": 0,\n            \"table_name\": \"RV_Storage\",\n            \"values\": {\n                \"AD_Client_ID\": 11,\n                \"AD_Org_ID\": 11,\n                \"M_Product_ID\": 133,\n                \"Value\": \"PChair\",\n                \"Name\": \"Patio Chair\",\n                \"Description\": \"Nice Chair for outdoors\",\n                \"UPC\": null,\n                \"SKU\": null,\n                \"C_UOM_ID\": 100,\n                \"M_Product_Category_ID\": 110,\n                \"Classification\": null,\n                \"Weight\": 0,\n                \"Volume\": 0,\n                \"VersionNo\": null,\n                \"GuaranteeDays\": null,\n                \"GuaranteeDaysMin\": null,\n                \"M_Locator_ID\": 101,\n                \"M_Warehouse_ID\": 103,\n                \"X\": \"0\",\n                \"Y\": \"0\",\n                \"Z\": \"0\",\n                \"QtyOnHand\": {\n                    \"type\": \"decimal\",\n                    \"value\": \"30.00\"\n                },\n                \"QtyReserved\": {\n                    \"type\": \"decimal\",\n                    \"value\": \"0.00\"\n                },\n                \"QtyAvailable\": {\n                    \"type\": \"decimal\",\n                    \"value\": \"30.00\"\n                },\n                \"QtyOrdered\": {\n                    \"type\": \"decimal\",\n                    \"value\": \"0.00\"\n                },\n                \"DateLastInventory\": null,\n                \"M_AttributeSetInstance_ID\": 0,\n                \"M_AttributeSet_ID\": 0,\n                \"SerNo\": null,\n                \"Lot\": null,\n                \"M_Lot_ID\": null,\n                \"GuaranteeDate\": null,\n                \"ShelfLifeDays\": null,\n                \"GoodForDays\": null,\n                \"ShelfLifeRemainingPct\": null,\n                \"M_Product_Class_ID\": null,\n                \"M_Product_Classification_ID\": null,\n                \"M_Product_Group_ID\": null,\n                \"DisplayColumn_AD_Client_ID\": \"GardenWorld\",\n                \"DisplayColumn_AD_Org_ID\": \"HQ\",\n                \"DisplayColumn_C_UOM_ID\": \"Unidad\",\n                \"DisplayColumn_M_AttributeSet_ID\": \"** Do not Change/Use **\",\n                \"DisplayColumn_M_AttributeSetInstance_ID\": \"---\",\n                \"DisplayColumn_M_Locator_ID\": \"Default HQ Locator\",\n                \"DisplayColumn_M_Lot_ID\": null,\n                \"DisplayColumn_M_Product_Category_ID\": \"Patio \",\n                \"DisplayColumn_M_Product_Class_ID\": null,\n                \"DisplayColumn_M_Product_Classification_ID\": null,\n                \"DisplayColumn_M_Product_Group_ID\": null,\n                \"DisplayColumn_M_Product_ID\": \"PChair - Patio Chair\",\n                \"DisplayColumn_M_Warehouse_ID\": \"HQ Warehouse\"\n            }\n        },\n        {\n            \"id\": 0,\n            \"table_name\": \"RV_Storage\",\n            \"values\": {\n                \"AD_Client_ID\": 11,\n                \"AD_Org_ID\": 11,\n                \"M_Product_ID\": 141,\n                \"Value\": \"Weeder\",\n                \"Name\": \"Weeder\",\n                \"Description\": \"Hand Weeder\",\n                \"UPC\": null,\n                \"SKU\": null,\n                \"C_UOM_ID\": 100,\n                \"M_Product_Category_ID\": 108,\n                \"Classification\": null,\n                \"Weight\": 0,\n                \"Volume\": 0,\n                \"VersionNo\": null,\n                \"GuaranteeDays\": null,\n                \"GuaranteeDaysMin\": null,\n                \"M_Locator_ID\": 101,\n                \"M_Warehouse_ID\": 103,\n                \"X\": \"0\",\n                \"Y\": \"0\",\n                \"Z\": \"0\",\n                \"QtyOnHand\": {\n                    \"type\": \"decimal\",\n                    \"value\": \"30.00\"\n                },\n                \"QtyReserved\": {\n                    \"type\": \"decimal\",\n                    \"value\": \"0.00\"\n                },\n                \"QtyAvailable\": {\n                    \"type\": \"decimal\",\n                    \"value\": \"30.00\"\n                },\n                \"QtyOrdered\": {\n                    \"type\": \"decimal\",\n                    \"value\": \"0.00\"\n                },\n                \"DateLastInventory\": null,\n                \"M_AttributeSetInstance_ID\": 0,\n                \"M_AttributeSet_ID\": 0,\n                \"SerNo\": null,\n                \"Lot\": null,\n                \"M_Lot_ID\": null,\n                \"GuaranteeDate\": null,\n                \"ShelfLifeDays\": null,\n                \"GoodForDays\": null,\n                \"ShelfLifeRemainingPct\": null,\n                \"M_Product_Class_ID\": null,\n                \"M_Product_Classification_ID\": null,\n                \"M_Product_Group_ID\": null,\n                \"DisplayColumn_AD_Client_ID\": \"GardenWorld\",\n                \"DisplayColumn_AD_Org_ID\": \"HQ\",\n                \"DisplayColumn_C_UOM_ID\": \"Unidad\",\n                \"DisplayColumn_M_AttributeSet_ID\": \"** Do not Change/Use **\",\n                \"DisplayColumn_M_AttributeSetInstance_ID\": \"---\",\n                \"DisplayColumn_M_Locator_ID\": \"Default HQ Locator\",\n                \"DisplayColumn_M_Lot_ID\": null,\n                \"DisplayColumn_M_Product_Category_ID\": \"Tools\",\n                \"DisplayColumn_M_Product_Class_ID\": null,\n                \"DisplayColumn_M_Product_Classification_ID\": null,\n                \"DisplayColumn_M_Product_Group_ID\": null,\n                \"DisplayColumn_M_Product_ID\": \"Weeder - Weeder\",\n                \"DisplayColumn_M_Warehouse_ID\": \"HQ Warehouse\"\n            }\n        },\n        {\n            \"id\": 0,\n            \"table_name\": \"RV_Storage\",\n            \"values\": {\n                \"AD_Client_ID\": 11,\n                \"AD_Org_ID\": 11,\n                \"M_Product_ID\": 142,\n                \"Value\": \"Transplanter\",\n                \"Name\": \"Transplanter\",\n                \"Description\": \"Hand Transplanter\",\n                \"UPC\": null,\n                \"SKU\": null,\n                \"C_UOM_ID\": 100,\n                \"M_Product_Category_ID\": 108,\n                \"Classification\": null,\n                \"Weight\": 0,\n                \"Volume\": 0,\n                \"VersionNo\": null,\n                \"GuaranteeDays\": null,\n                \"GuaranteeDaysMin\": null,\n                \"M_Locator_ID\": 101,\n                \"M_Warehouse_ID\": 103,\n                \"X\": \"0\",\n                \"Y\": \"0\",\n                \"Z\": \"0\",\n                \"QtyOnHand\": {\n                    \"type\": \"decimal\",\n                    \"value\": \"30.00\"\n                },\n                \"QtyReserved\": {\n                    \"type\": \"decimal\",\n                    \"value\": \"0.00\"\n                },\n                \"QtyAvailable\": {\n                    \"type\": \"decimal\",\n                    \"value\": \"30.00\"\n                },\n                \"QtyOrdered\": {\n                    \"type\": \"decimal\",\n                    \"value\": \"0.00\"\n                },\n                \"DateLastInventory\": null,\n                \"M_AttributeSetInstance_ID\": 0,\n                \"M_AttributeSet_ID\": 0,\n                \"SerNo\": null,\n                \"Lot\": null,\n                \"M_Lot_ID\": null,\n                \"GuaranteeDate\": null,\n                \"ShelfLifeDays\": null,\n                \"GoodForDays\": null,\n                \"ShelfLifeRemainingPct\": null,\n                \"M_Product_Class_ID\": null,\n                \"M_Product_Classification_ID\": null,\n                \"M_Product_Group_ID\": null,\n                \"DisplayColumn_AD_Client_ID\": \"GardenWorld\",\n                \"DisplayColumn_AD_Org_ID\": \"HQ\",\n                \"DisplayColumn_C_UOM_ID\": \"Unidad\",\n                \"DisplayColumn_M_AttributeSet_ID\": \"** Do not Change/Use **\",\n                \"DisplayColumn_M_AttributeSetInstance_ID\": \"---\",\n                \"DisplayColumn_M_Locator_ID\": \"Default HQ Locator\",\n                \"DisplayColumn_M_Lot_ID\": null,\n                \"DisplayColumn_M_Product_Category_ID\": \"Tools\",\n                \"DisplayColumn_M_Product_Class_ID\": null,\n                \"DisplayColumn_M_Product_Classification_ID\": null,\n                \"DisplayColumn_M_Product_Group_ID\": null,\n                \"DisplayColumn_M_Product_ID\": \"Transplanter - Transplanter\",\n                \"DisplayColumn_M_Warehouse_ID\": \"HQ Warehouse\"\n            }\n        },\n        {\n            \"id\": 0,\n            \"table_name\": \"RV_Storage\",\n            \"values\": {\n                \"AD_Client_ID\": 11,\n                \"AD_Org_ID\": 11,\n                \"M_Product_ID\": 144,\n                \"Value\": \"Tiller\",\n                \"Name\": \"Lawn Tiller\",\n                \"Description\": \"Manual Lawn Tiller\",\n                \"UPC\": null,\n                \"SKU\": null,\n                \"C_UOM_ID\": 100,\n                \"M_Product_Category_ID\": 108,\n                \"Classification\": null,\n                \"Weight\": 0,\n                \"Volume\": 0,\n                \"VersionNo\": null,\n                \"GuaranteeDays\": null,\n                \"GuaranteeDaysMin\": null,\n                \"M_Locator_ID\": 101,\n                \"M_Warehouse_ID\": 103,\n                \"X\": \"0\",\n                \"Y\": \"0\",\n                \"Z\": \"0\",\n                \"QtyOnHand\": {\n                    \"type\": \"decimal\",\n                    \"value\": \"12.00\"\n                },\n                \"QtyReserved\": {\n                    \"type\": \"decimal\",\n                    \"value\": \"0.00\"\n                },\n                \"QtyAvailable\": {\n                    \"type\": \"decimal\",\n                    \"value\": \"12.00\"\n                },\n                \"QtyOrdered\": {\n                    \"type\": \"decimal\",\n                    \"value\": \"0.00\"\n                },\n                \"DateLastInventory\": null,\n                \"M_AttributeSetInstance_ID\": 0,\n                \"M_AttributeSet_ID\": 0,\n                \"SerNo\": null,\n                \"Lot\": null,\n                \"M_Lot_ID\": null,\n                \"GuaranteeDate\": null,\n                \"ShelfLifeDays\": null,\n                \"GoodForDays\": null,\n                \"ShelfLifeRemainingPct\": null,\n                \"M_Product_Class_ID\": null,\n                \"M_Product_Classification_ID\": null,\n                \"M_Product_Group_ID\": null,\n                \"DisplayColumn_AD_Client_ID\": \"GardenWorld\",\n                \"DisplayColumn_AD_Org_ID\": \"HQ\",\n                \"DisplayColumn_C_UOM_ID\": \"Unidad\",\n                \"DisplayColumn_M_AttributeSet_ID\": \"** Do not Change/Use **\",\n                \"DisplayColumn_M_AttributeSetInstance_ID\": \"---\",\n                \"DisplayColumn_M_Locator_ID\": \"Default HQ Locator\",\n                \"DisplayColumn_M_Lot_ID\": null,\n                \"DisplayColumn_M_Product_Category_ID\": \"Tools\",\n                \"DisplayColumn_M_Product_Class_ID\": null,\n                \"DisplayColumn_M_Product_Classification_ID\": null,\n                \"DisplayColumn_M_Product_Group_ID\": null,\n                \"DisplayColumn_M_Product_ID\": \"Tiller - Lawn Tiller\",\n                \"DisplayColumn_M_Warehouse_ID\": \"HQ Warehouse\"\n            }\n        },\n        {\n            \"id\": 0,\n            \"table_name\": \"RV_Storage\",\n            \"values\": {\n                \"AD_Client_ID\": 11,\n                \"AD_Org_ID\": 11,\n                \"M_Product_ID\": 143,\n                \"Value\": \"Seeder\",\n                \"Name\": \"Grass Seeder\",\n                \"Description\": \"Manual Grass Seeder\",\n                \"UPC\": null,\n                \"SKU\": null,\n                \"C_UOM_ID\": 100,\n                \"M_Product_Category_ID\": 108,\n                \"Classification\": null,\n                \"Weight\": 0,\n                \"Volume\": 0,\n                \"VersionNo\": null,\n                \"GuaranteeDays\": null,\n                \"GuaranteeDaysMin\": null,\n                \"M_Locator_ID\": 101,\n                \"M_Warehouse_ID\": 103,\n                \"X\": \"0\",\n                \"Y\": \"0\",\n                \"Z\": \"0\",\n                \"QtyOnHand\": {\n                    \"type\": \"decimal\",\n                    \"value\": \"8.00\"\n                },\n                \"QtyReserved\": {\n                    \"type\": \"decimal\",\n                    \"value\": \"0.00\"\n                },\n                \"QtyAvailable\": {\n                    \"type\": \"decimal\",\n                    \"value\": \"8.00\"\n                },\n                \"QtyOrdered\": {\n                    \"type\": \"decimal\",\n                    \"value\": \"0.00\"\n                },\n                \"DateLastInventory\": null,\n                \"M_AttributeSetInstance_ID\": 0,\n                \"M_AttributeSet_ID\": 0,\n                \"SerNo\": null,\n                \"Lot\": null,\n                \"M_Lot_ID\": null,\n                \"GuaranteeDate\": null,\n                \"ShelfLifeDays\": null,\n                \"GoodForDays\": null,\n                \"ShelfLifeRemainingPct\": null,\n                \"M_Product_Class_ID\": null,\n                \"M_Product_Classification_ID\": null,\n                \"M_Product_Group_ID\": null,\n                \"DisplayColumn_AD_Client_ID\": \"GardenWorld\",\n                \"DisplayColumn_AD_Org_ID\": \"HQ\",\n                \"DisplayColumn_C_UOM_ID\": \"Unidad\",\n                \"DisplayColumn_M_AttributeSet_ID\": \"** Do not Change/Use **\",\n                \"DisplayColumn_M_AttributeSetInstance_ID\": \"---\",\n                \"DisplayColumn_M_Locator_ID\": \"Default HQ Locator\",\n                \"DisplayColumn_M_Lot_ID\": null,\n                \"DisplayColumn_M_Product_Category_ID\": \"Tools\",\n                \"DisplayColumn_M_Product_Class_ID\": null,\n                \"DisplayColumn_M_Product_Classification_ID\": null,\n                \"DisplayColumn_M_Product_Group_ID\": null,\n                \"DisplayColumn_M_Product_ID\": \"Seeder - Grass Seeder\",\n                \"DisplayColumn_M_Warehouse_ID\": \"HQ Warehouse\"\n            }\n        },\n        {\n            \"id\": 0,\n            \"table_name\": \"RV_Storage\",\n            \"values\": {\n                \"AD_Client_ID\": 11,\n                \"AD_Org_ID\": 11,\n                \"M_Product_ID\": 140,\n                \"Value\": \"Rake-Metal\",\n                \"Name\": \"Rake Metal\",\n                \"Description\": \"4 Foot Metal Rake\",\n                \"UPC\": null,\n                \"SKU\": null,\n                \"C_UOM_ID\": 100,\n                \"M_Product_Category_ID\": 108,\n                \"Classification\": null,\n                \"Weight\": 0,\n                \"Volume\": 0,\n                \"VersionNo\": null,\n                \"GuaranteeDays\": null,\n                \"GuaranteeDaysMin\": null,\n                \"M_Locator_ID\": 101,\n                \"M_Warehouse_ID\": 103,\n                \"X\": \"0\",\n                \"Y\": \"0\",\n                \"Z\": \"0\",\n                \"QtyOnHand\": {\n                    \"type\": \"decimal\",\n                    \"value\": \"20.00\"\n                },\n                \"QtyReserved\": {\n                    \"type\": \"decimal\",\n                    \"value\": \"0.00\"\n                },\n                \"QtyAvailable\": {\n                    \"type\": \"decimal\",\n                    \"value\": \"20.00\"\n                },\n                \"QtyOrdered\": {\n                    \"type\": \"decimal\",\n                    \"value\": \"0.00\"\n                },\n                \"DateLastInventory\": null,\n                \"M_AttributeSetInstance_ID\": 0,\n                \"M_AttributeSet_ID\": 0,\n                \"SerNo\": null,\n                \"Lot\": null,\n                \"M_Lot_ID\": null,\n                \"GuaranteeDate\": null,\n                \"ShelfLifeDays\": null,\n                \"GoodForDays\": null,\n                \"ShelfLifeRemainingPct\": null,\n                \"M_Product_Class_ID\": null,\n                \"M_Product_Classification_ID\": null,\n                \"M_Product_Group_ID\": null,\n                \"DisplayColumn_AD_Client_ID\": \"GardenWorld\",\n                \"DisplayColumn_AD_Org_ID\": \"HQ\",\n                \"DisplayColumn_C_UOM_ID\": \"Unidad\",\n                \"DisplayColumn_M_AttributeSet_ID\": \"** Do not Change/Use **\",\n                \"DisplayColumn_M_AttributeSetInstance_ID\": \"---\",\n                \"DisplayColumn_M_Locator_ID\": \"Default HQ Locator\",\n                \"DisplayColumn_M_Lot_ID\": null,\n                \"DisplayColumn_M_Product_Category_ID\": \"Tools\",\n                \"DisplayColumn_M_Product_Class_ID\": null,\n                \"DisplayColumn_M_Product_Classification_ID\": null,\n                \"DisplayColumn_M_Product_Group_ID\": null,\n                \"DisplayColumn_M_Product_ID\": \"Rake-Metal - Rake Metal\",\n                \"DisplayColumn_M_Warehouse_ID\": \"HQ Warehouse\"\n            }\n        },\n        {\n            \"id\": 0,\n            \"table_name\": \"RV_Storage\",\n            \"values\": {\n                \"AD_Client_ID\": 11,\n                \"AD_Org_ID\": 11,\n                \"M_Product_ID\": 139,\n                \"Value\": \"Rake-Bamboo\",\n                \"Name\": \"Rake Bamboo\",\n                \"Description\": \"4 Foot Bamboo Rake\",\n                \"UPC\": null,\n                \"SKU\": null,\n                \"C_UOM_ID\": 100,\n                \"M_Product_Category_ID\": 108,\n                \"Classification\": null,\n                \"Weight\": 0,\n                \"Volume\": 0,\n                \"VersionNo\": null,\n                \"GuaranteeDays\": null,\n                \"GuaranteeDaysMin\": null,\n                \"M_Locator_ID\": 101,\n                \"M_Warehouse_ID\": 103,\n                \"X\": \"0\",\n                \"Y\": \"0\",\n                \"Z\": \"0\",\n                \"QtyOnHand\": {\n                    \"type\": \"decimal\",\n                    \"value\": \"15.00\"\n                },\n                \"QtyReserved\": {\n                    \"type\": \"decimal\",\n                    \"value\": \"0.00\"\n                },\n                \"QtyAvailable\": {\n                    \"type\": \"decimal\",\n                    \"value\": \"15.00\"\n                },\n                \"QtyOrdered\": {\n                    \"type\": \"decimal\",\n                    \"value\": \"0.00\"\n                },\n                \"DateLastInventory\": null,\n                \"M_AttributeSetInstance_ID\": 0,\n                \"M_AttributeSet_ID\": 0,\n                \"SerNo\": null,\n                \"Lot\": null,\n                \"M_Lot_ID\": null,\n                \"GuaranteeDate\": null,\n                \"ShelfLifeDays\": null,\n                \"GoodForDays\": null,\n                \"ShelfLifeRemainingPct\": null,\n                \"M_Product_Class_ID\": null,\n                \"M_Product_Classification_ID\": null,\n                \"M_Product_Group_ID\": null,\n                \"DisplayColumn_AD_Client_ID\": \"GardenWorld\",\n                \"DisplayColumn_AD_Org_ID\": \"HQ\",\n                \"DisplayColumn_C_UOM_ID\": \"Unidad\",\n                \"DisplayColumn_M_AttributeSet_ID\": \"** Do not Change/Use **\",\n                \"DisplayColumn_M_AttributeSetInstance_ID\": \"---\",\n                \"DisplayColumn_M_Locator_ID\": \"Default HQ Locator\",\n                \"DisplayColumn_M_Lot_ID\": null,\n                \"DisplayColumn_M_Product_Category_ID\": \"Tools\",\n                \"DisplayColumn_M_Product_Class_ID\": null,\n                \"DisplayColumn_M_Product_Classification_ID\": null,\n                \"DisplayColumn_M_Product_Group_ID\": null,\n                \"DisplayColumn_M_Product_ID\": \"Rake-Bamboo - Rake Bamboo\",\n                \"DisplayColumn_M_Warehouse_ID\": \"HQ Warehouse\"\n            }\n        },\n        {\n            \"id\": 0,\n            \"table_name\": \"RV_Storage\",\n            \"values\": {\n                \"AD_Client_ID\": 11,\n                \"AD_Org_ID\": 11,\n                \"M_Product_ID\": 137,\n                \"Value\": \"Mulch\",\n                \"Name\": \"Mulch 10#\",\n                \"Description\": \"10# Bag of Mulch\",\n                \"UPC\": null,\n                \"SKU\": null,\n                \"C_UOM_ID\": 100,\n                \"M_Product_Category_ID\": 109,\n                \"Classification\": null,\n                \"Weight\": 0,\n                \"Volume\": 0,\n                \"VersionNo\": null,\n                \"GuaranteeDays\": null,\n                \"GuaranteeDaysMin\": null,\n                \"M_Locator_ID\": 101,\n                \"M_Warehouse_ID\": 103,\n                \"X\": \"0\",\n                \"Y\": \"0\",\n                \"Z\": \"0\",\n                \"QtyOnHand\": {\n                    \"type\": \"decimal\",\n                    \"value\": \"50.00\"\n                },\n                \"QtyReserved\": {\n                    \"type\": \"decimal\",\n                    \"value\": \"0.00\"\n                },\n                \"QtyAvailable\": {\n                    \"type\": \"decimal\",\n                    \"value\": \"50.00\"\n                },\n                \"QtyOrdered\": {\n                    \"type\": \"decimal\",\n                    \"value\": \"0.00\"\n                },\n                \"DateLastInventory\": null,\n                \"M_AttributeSetInstance_ID\": 0,\n                \"M_AttributeSet_ID\": 0,\n                \"SerNo\": null,\n                \"Lot\": null,\n                \"M_Lot_ID\": null,\n                \"GuaranteeDate\": null,\n                \"ShelfLifeDays\": null,\n                \"GoodForDays\": null,\n                \"ShelfLifeRemainingPct\": null,\n                \"M_Product_Class_ID\": null,\n                \"M_Product_Classification_ID\": null,\n                \"M_Product_Group_ID\": null,\n                \"DisplayColumn_AD_Client_ID\": \"GardenWorld\",\n                \"DisplayColumn_AD_Org_ID\": \"HQ\",\n                \"DisplayColumn_C_UOM_ID\": \"Unidad\",\n                \"DisplayColumn_M_AttributeSet_ID\": \"** Do not Change/Use **\",\n                \"DisplayColumn_M_AttributeSetInstance_ID\": \"---\",\n                \"DisplayColumn_M_Locator_ID\": \"Default HQ Locator\",\n                \"DisplayColumn_M_Lot_ID\": null,\n                \"DisplayColumn_M_Product_Category_ID\": \"Chemicals\",\n                \"DisplayColumn_M_Product_Class_ID\": null,\n                \"DisplayColumn_M_Product_Classification_ID\": null,\n                \"DisplayColumn_M_Product_Group_ID\": null,\n                \"DisplayColumn_M_Product_ID\": \"Mulch - Mulch 10#\",\n                \"DisplayColumn_M_Warehouse_ID\": \"HQ Warehouse\"\n            }\n        },\n        {\n            \"id\": 0,\n            \"table_name\": \"RV_Storage\",\n            \"values\": {\n                \"AD_Client_ID\": 11,\n                \"AD_Org_ID\": 11,\n                \"M_Product_ID\": 138,\n                \"Value\": \"Hoe\",\n                \"Name\": \"Hoe 4 ft\",\n                \"Description\": \"4 Foot Metal Hoe\",\n                \"UPC\": null,\n                \"SKU\": null,\n                \"C_UOM_ID\": 100,\n                \"M_Product_Category_ID\": 108,\n                \"Classification\": null,\n                \"Weight\": 0,\n                \"Volume\": 0,\n                \"VersionNo\": null,\n                \"GuaranteeDays\": null,\n                \"GuaranteeDaysMin\": null,\n                \"M_Locator_ID\": 101,\n                \"M_Warehouse_ID\": 103,\n                \"X\": \"0\",\n                \"Y\": \"0\",\n                \"Z\": \"0\",\n                \"QtyOnHand\": {\n                    \"type\": \"decimal\",\n                    \"value\": \"20.00\"\n                },\n                \"QtyReserved\": {\n                    \"type\": \"decimal\",\n                    \"value\": \"0.00\"\n                },\n                \"QtyAvailable\": {\n                    \"type\": \"decimal\",\n                    \"value\": \"20.00\"\n                },\n                \"QtyOrdered\": {\n                    \"type\": \"decimal\",\n                    \"value\": \"0.00\"\n                },\n                \"DateLastInventory\": null,\n                \"M_AttributeSetInstance_ID\": 0,\n                \"M_AttributeSet_ID\": 0,\n                \"SerNo\": null,\n                \"Lot\": null,\n                \"M_Lot_ID\": null,\n                \"GuaranteeDate\": null,\n                \"ShelfLifeDays\": null,\n                \"GoodForDays\": null,\n                \"ShelfLifeRemainingPct\": null,\n                \"M_Product_Class_ID\": null,\n                \"M_Product_Classification_ID\": null,\n                \"M_Product_Group_ID\": null,\n                \"DisplayColumn_AD_Client_ID\": \"GardenWorld\",\n                \"DisplayColumn_AD_Org_ID\": \"HQ\",\n                \"DisplayColumn_C_UOM_ID\": \"Unidad\",\n                \"DisplayColumn_M_AttributeSet_ID\": \"** Do not Change/Use **\",\n                \"DisplayColumn_M_AttributeSetInstance_ID\": \"---\",\n                \"DisplayColumn_M_Locator_ID\": \"Default HQ Locator\",\n                \"DisplayColumn_M_Lot_ID\": null,\n                \"DisplayColumn_M_Product_Category_ID\": \"Tools\",\n                \"DisplayColumn_M_Product_Class_ID\": null,\n                \"DisplayColumn_M_Product_Classification_ID\": null,\n                \"DisplayColumn_M_Product_Group_ID\": null,\n                \"DisplayColumn_M_Product_ID\": \"Hoe - Hoe 4 ft\",\n                \"DisplayColumn_M_Warehouse_ID\": \"HQ Warehouse\"\n            }\n        },\n        {\n            \"id\": 0,\n            \"table_name\": \"RV_Storage\",\n            \"values\": {\n                \"AD_Client_ID\": 11,\n                \"AD_Org_ID\": 11,\n                \"M_Product_ID\": 125,\n                \"Value\": \"Grass\",\n                \"Name\": \"Grass Seed Container\",\n                \"Description\": null,\n                \"UPC\": null,\n                \"SKU\": null,\n                \"C_UOM_ID\": 100,\n                \"M_Product_Category_ID\": 105,\n                \"Classification\": null,\n                \"Weight\": 0,\n                \"Volume\": 0,\n                \"VersionNo\": null,\n                \"GuaranteeDays\": null,\n                \"GuaranteeDaysMin\": null,\n                \"M_Locator_ID\": 101,\n                \"M_Warehouse_ID\": 103,\n                \"X\": \"0\",\n                \"Y\": \"0\",\n                \"Z\": \"0\",\n                \"QtyOnHand\": {\n                    \"type\": \"decimal\",\n                    \"value\": \"12.00\"\n                },\n                \"QtyReserved\": {\n                    \"type\": \"decimal\",\n                    \"value\": \"0.00\"\n                },\n                \"QtyAvailable\": {\n                    \"type\": \"decimal\",\n                    \"value\": \"12.00\"\n                },\n                \"QtyOrdered\": {\n                    \"type\": \"decimal\",\n                    \"value\": \"0.00\"\n                },\n                \"DateLastInventory\": null,\n                \"M_AttributeSetInstance_ID\": 0,\n                \"M_AttributeSet_ID\": 0,\n                \"SerNo\": null,\n                \"Lot\": null,\n                \"M_Lot_ID\": null,\n                \"GuaranteeDate\": null,\n                \"ShelfLifeDays\": null,\n                \"GoodForDays\": null,\n                \"ShelfLifeRemainingPct\": null,\n                \"M_Product_Class_ID\": null,\n                \"M_Product_Classification_ID\": null,\n                \"M_Product_Group_ID\": null,\n                \"DisplayColumn_AD_Client_ID\": \"GardenWorld\",\n                \"DisplayColumn_AD_Org_ID\": \"HQ\",\n                \"DisplayColumn_C_UOM_ID\": \"Unidad\",\n                \"DisplayColumn_M_AttributeSet_ID\": \"** Do not Change/Use **\",\n                \"DisplayColumn_M_AttributeSetInstance_ID\": \"---\",\n                \"DisplayColumn_M_Locator_ID\": \"Default HQ Locator\",\n                \"DisplayColumn_M_Lot_ID\": null,\n                \"DisplayColumn_M_Product_Category_ID\": \"Standard\",\n                \"DisplayColumn_M_Product_Class_ID\": null,\n                \"DisplayColumn_M_Product_Classification_ID\": null,\n                \"DisplayColumn_M_Product_Group_ID\": null,\n                \"DisplayColumn_M_Product_ID\": \"Grass - Grass Seed Container\",\n                \"DisplayColumn_M_Warehouse_ID\": \"HQ Warehouse\"\n            }\n        },\n        {\n            \"id\": 0,\n            \"table_name\": \"RV_Storage\",\n            \"values\": {\n                \"AD_Client_ID\": 11,\n                \"AD_Org_ID\": 11,\n                \"M_Product_ID\": 136,\n                \"Value\": \"Fertilizer#50\",\n                \"Name\": \"Fertilizer #50\",\n                \"Description\": \"50 # Bag of Lawn Fertilizer\",\n                \"UPC\": null,\n                \"SKU\": null,\n                \"C_UOM_ID\": 100,\n                \"M_Product_Category_ID\": 109,\n                \"Classification\": null,\n                \"Weight\": 0,\n                \"Volume\": 0,\n                \"VersionNo\": null,\n                \"GuaranteeDays\": 180,\n                \"GuaranteeDaysMin\": 30,\n                \"M_Locator_ID\": 101,\n                \"M_Warehouse_ID\": 103,\n                \"X\": \"0\",\n                \"Y\": \"0\",\n                \"Z\": \"0\",\n                \"QtyOnHand\": {\n                    \"type\": \"decimal\",\n                    \"value\": \"40.00\"\n                },\n                \"QtyReserved\": {\n                    \"type\": \"decimal\",\n                    \"value\": \"0.00\"\n                },\n                \"QtyAvailable\": {\n                    \"type\": \"decimal\",\n                    \"value\": \"40.00\"\n                },\n                \"QtyOrdered\": {\n                    \"type\": \"decimal\",\n                    \"value\": \"0.00\"\n                },\n                \"DateLastInventory\": null,\n                \"M_AttributeSetInstance_ID\": 0,\n                \"M_AttributeSet_ID\": 0,\n                \"SerNo\": null,\n                \"Lot\": null,\n                \"M_Lot_ID\": null,\n                \"GuaranteeDate\": null,\n                \"ShelfLifeDays\": null,\n                \"GoodForDays\": null,\n                \"ShelfLifeRemainingPct\": null,\n                \"M_Product_Class_ID\": null,\n                \"M_Product_Classification_ID\": null,\n                \"M_Product_Group_ID\": null,\n                \"DisplayColumn_AD_Client_ID\": \"GardenWorld\",\n                \"DisplayColumn_AD_Org_ID\": \"HQ\",\n                \"DisplayColumn_C_UOM_ID\": \"Unidad\",\n                \"DisplayColumn_M_AttributeSet_ID\": \"** Do not Change/Use **\",\n                \"DisplayColumn_M_AttributeSetInstance_ID\": \"---\",\n                \"DisplayColumn_M_Locator_ID\": \"Default HQ Locator\",\n                \"DisplayColumn_M_Lot_ID\": null,\n                \"DisplayColumn_M_Product_Category_ID\": \"Chemicals\",\n                \"DisplayColumn_M_Product_Class_ID\": null,\n                \"DisplayColumn_M_Product_Classification_ID\": null,\n                \"DisplayColumn_M_Product_Group_ID\": null,\n                \"DisplayColumn_M_Product_ID\": \"Fertilizer#50 - Fertilizer #50\",\n                \"DisplayColumn_M_Warehouse_ID\": \"HQ Warehouse\"\n            }\n        },\n        {\n            \"id\": 0,\n            \"table_name\": \"RV_Storage\",\n            \"values\": {\n                \"AD_Client_ID\": 11,\n                \"AD_Org_ID\": 11,\n                \"M_Product_ID\": 127,\n                \"Value\": \"Rose Bush\",\n                \"Name\": \"Rose Bush\",\n                \"Description\": null,\n                \"UPC\": null,\n                \"SKU\": null,\n                \"C_UOM_ID\": 100,\n                \"M_Product_Category_ID\": 107,\n                \"Classification\": null,\n                \"Weight\": 0,\n                \"Volume\": 0,\n                \"VersionNo\": null,\n                \"GuaranteeDays\": null,\n                \"GuaranteeDaysMin\": null,\n                \"M_Locator_ID\": 101,\n                \"M_Warehouse_ID\": 103,\n                \"X\": \"0\",\n                \"Y\": \"0\",\n                \"Z\": \"0\",\n                \"QtyOnHand\": {\n                    \"type\": \"decimal\",\n                    \"value\": \"20.00\"\n                },\n                \"QtyReserved\": {\n                    \"type\": \"decimal\",\n                    \"value\": \"0.00\"\n                },\n                \"QtyAvailable\": {\n                    \"type\": \"decimal\",\n                    \"value\": \"20.00\"\n                },\n                \"QtyOrdered\": {\n                    \"type\": \"decimal\",\n                    \"value\": \"0.00\"\n                },\n                \"DateLastInventory\": null,\n                \"M_AttributeSetInstance_ID\": 0,\n                \"M_AttributeSet_ID\": 0,\n                \"SerNo\": null,\n                \"Lot\": null,\n                \"M_Lot_ID\": null,\n                \"GuaranteeDate\": null,\n                \"ShelfLifeDays\": null,\n                \"GoodForDays\": null,\n                \"ShelfLifeRemainingPct\": null,\n                \"M_Product_Class_ID\": null,\n                \"M_Product_Classification_ID\": null,\n                \"M_Product_Group_ID\": null,\n                \"DisplayColumn_AD_Client_ID\": \"GardenWorld\",\n                \"DisplayColumn_AD_Org_ID\": \"HQ\",\n                \"DisplayColumn_C_UOM_ID\": \"Unidad\",\n                \"DisplayColumn_M_AttributeSet_ID\": \"** Do not Change/Use **\",\n                \"DisplayColumn_M_AttributeSetInstance_ID\": \"---\",\n                \"DisplayColumn_M_Locator_ID\": \"Default HQ Locator\",\n                \"DisplayColumn_M_Lot_ID\": null,\n                \"DisplayColumn_M_Product_Category_ID\": \"Bushes\",\n                \"DisplayColumn_M_Product_Class_ID\": null,\n                \"DisplayColumn_M_Product_Classification_ID\": null,\n                \"DisplayColumn_M_Product_Group_ID\": null,\n                \"DisplayColumn_M_Product_ID\": \"Rose Bush - Rose Bush\",\n                \"DisplayColumn_M_Warehouse_ID\": \"HQ Warehouse\"\n            }\n        },\n        {\n            \"id\": 0,\n            \"table_name\": \"RV_Storage\",\n            \"values\": {\n                \"AD_Client_ID\": 11,\n                \"AD_Org_ID\": 11,\n                \"M_Product_ID\": 129,\n                \"Value\": \"Holly Bush\",\n                \"Name\": \"Holly Bush\",\n                \"Description\": null,\n                \"UPC\": null,\n                \"SKU\": null,\n                \"C_UOM_ID\": 100,\n                \"M_Product_Category_ID\": 107,\n                \"Classification\": null,\n                \"Weight\": 0,\n                \"Volume\": 0,\n                \"VersionNo\": null,\n                \"GuaranteeDays\": null,\n                \"GuaranteeDaysMin\": null,\n                \"M_Locator_ID\": 101,\n                \"M_Warehouse_ID\": 103,\n                \"X\": \"0\",\n                \"Y\": \"0\",\n                \"Z\": \"0\",\n                \"QtyOnHand\": {\n                    \"type\": \"decimal\",\n                    \"value\": \"10.00\"\n                },\n                \"QtyReserved\": {\n                    \"type\": \"decimal\",\n                    \"value\": \"0.00\"\n                },\n                \"QtyAvailable\": {\n                    \"type\": \"decimal\",\n                    \"value\": \"10.00\"\n                },\n                \"QtyOrdered\": {\n                    \"type\": \"decimal\",\n                    \"value\": \"0.00\"\n                },\n                \"DateLastInventory\": null,\n                \"M_AttributeSetInstance_ID\": 0,\n                \"M_AttributeSet_ID\": 0,\n                \"SerNo\": null,\n                \"Lot\": null,\n                \"M_Lot_ID\": null,\n                \"GuaranteeDate\": null,\n                \"ShelfLifeDays\": null,\n                \"GoodForDays\": null,\n                \"ShelfLifeRemainingPct\": null,\n                \"M_Product_Class_ID\": null,\n                \"M_Product_Classification_ID\": null,\n                \"M_Product_Group_ID\": null,\n                \"DisplayColumn_AD_Client_ID\": \"GardenWorld\",\n                \"DisplayColumn_AD_Org_ID\": \"HQ\",\n                \"DisplayColumn_C_UOM_ID\": \"Unidad\",\n                \"DisplayColumn_M_AttributeSet_ID\": \"** Do not Change/Use **\",\n                \"DisplayColumn_M_AttributeSetInstance_ID\": \"---\",\n                \"DisplayColumn_M_Locator_ID\": \"Default HQ Locator\",\n                \"DisplayColumn_M_Lot_ID\": null,\n                \"DisplayColumn_M_Product_Category_ID\": \"Bushes\",\n                \"DisplayColumn_M_Product_Class_ID\": null,\n                \"DisplayColumn_M_Product_Classification_ID\": null,\n                \"DisplayColumn_M_Product_Group_ID\": null,\n                \"DisplayColumn_M_Product_ID\": \"Holly Bush - Holly Bush\",\n                \"DisplayColumn_M_Warehouse_ID\": \"HQ Warehouse\"\n            }\n        },\n        {\n            \"id\": 0,\n            \"table_name\": \"RV_Storage\",\n            \"values\": {\n                \"AD_Client_ID\": 11,\n                \"AD_Org_ID\": 11,\n                \"M_Product_ID\": 124,\n                \"Value\": \"Elm\",\n                \"Name\": \"Elm Tree\",\n                \"Description\": null,\n                \"UPC\": null,\n                \"SKU\": null,\n                \"C_UOM_ID\": 100,\n                \"M_Product_Category_ID\": 106,\n                \"Classification\": null,\n                \"Weight\": 0,\n                \"Volume\": 0,\n                \"VersionNo\": null,\n                \"GuaranteeDays\": null,\n                \"GuaranteeDaysMin\": null,\n                \"M_Locator_ID\": 101,\n                \"M_Warehouse_ID\": 103,\n                \"X\": \"0\",\n                \"Y\": \"0\",\n                \"Z\": \"0\",\n                \"QtyOnHand\": {\n                    \"type\": \"decimal\",\n                    \"value\": \"15.00\"\n                },\n                \"QtyReserved\": {\n                    \"type\": \"decimal\",\n                    \"value\": \"0.00\"\n                },\n                \"QtyAvailable\": {\n                    \"type\": \"decimal\",\n                    \"value\": \"15.00\"\n                },\n                \"QtyOrdered\": {\n                    \"type\": \"decimal\",\n                    \"value\": \"0.00\"\n                },\n                \"DateLastInventory\": null,\n                \"M_AttributeSetInstance_ID\": 0,\n                \"M_AttributeSet_ID\": 0,\n                \"SerNo\": null,\n                \"Lot\": null,\n                \"M_Lot_ID\": null,\n                \"GuaranteeDate\": null,\n                \"ShelfLifeDays\": null,\n                \"GoodForDays\": null,\n                \"ShelfLifeRemainingPct\": null,\n                \"M_Product_Class_ID\": null,\n                \"M_Product_Classification_ID\": null,\n                \"M_Product_Group_ID\": null,\n                \"DisplayColumn_AD_Client_ID\": \"GardenWorld\",\n                \"DisplayColumn_AD_Org_ID\": \"HQ\",\n                \"DisplayColumn_C_UOM_ID\": \"Unidad\",\n                \"DisplayColumn_M_AttributeSet_ID\": \"** Do not Change/Use **\",\n                \"DisplayColumn_M_AttributeSetInstance_ID\": \"---\",\n                \"DisplayColumn_M_Locator_ID\": \"Default HQ Locator\",\n                \"DisplayColumn_M_Lot_ID\": null,\n                \"DisplayColumn_M_Product_Category_ID\": \"Trees\",\n                \"DisplayColumn_M_Product_Class_ID\": null,\n                \"DisplayColumn_M_Product_Classification_ID\": null,\n                \"DisplayColumn_M_Product_Group_ID\": null,\n                \"DisplayColumn_M_Product_ID\": \"Elm - Elm Tree\",\n                \"DisplayColumn_M_Warehouse_ID\": \"HQ Warehouse\"\n            }\n        },\n        {\n            \"id\": 0,\n            \"table_name\": \"RV_Storage\",\n            \"values\": {\n                \"AD_Client_ID\": 11,\n                \"AD_Org_ID\": 11,\n                \"M_Product_ID\": 128,\n                \"Value\": \"Azalea Bush\",\n                \"Name\": \"Azalea Bush\",\n                \"Description\": \"Azaleas are flowering shrubs. Azaleas bloom in spring in the Northern hemisphere and in winter in the Southern hemisphere, their flowers often lasting several weeks. Shade tolerant, they prefer living near or under trees.\",\n                \"UPC\": \"81010123450901\",\n                \"SKU\": \"1234567890\",\n                \"C_UOM_ID\": 100,\n                \"M_Product_Category_ID\": 107,\n                \"Classification\": null,\n                \"Weight\": 0,\n                \"Volume\": 0,\n                \"VersionNo\": null,\n                \"GuaranteeDays\": null,\n                \"GuaranteeDaysMin\": null,\n                \"M_Locator_ID\": 101,\n                \"M_Warehouse_ID\": 103,\n                \"X\": \"0\",\n                \"Y\": \"0\",\n                \"Z\": \"0\",\n                \"QtyOnHand\": {\n                    \"type\": \"decimal\",\n                    \"value\": \"5.00\"\n                },\n                \"QtyReserved\": {\n                    \"type\": \"decimal\",\n                    \"value\": \"0.00\"\n                },\n                \"QtyAvailable\": {\n                    \"type\": \"decimal\",\n                    \"value\": \"5.00\"\n                },\n                \"QtyOrdered\": {\n                    \"type\": \"decimal\",\n                    \"value\": \"0.00\"\n                },\n                \"DateLastInventory\": null,\n                \"M_AttributeSetInstance_ID\": 0,\n                \"M_AttributeSet_ID\": 0,\n                \"SerNo\": null,\n                \"Lot\": null,\n                \"M_Lot_ID\": null,\n                \"GuaranteeDate\": null,\n                \"ShelfLifeDays\": null,\n                \"GoodForDays\": null,\n                \"ShelfLifeRemainingPct\": null,\n                \"M_Product_Class_ID\": null,\n                \"M_Product_Classification_ID\": null,\n                \"M_Product_Group_ID\": null,\n                \"DisplayColumn_AD_Client_ID\": \"GardenWorld\",\n                \"DisplayColumn_AD_Org_ID\": \"HQ\",\n                \"DisplayColumn_C_UOM_ID\": \"Unidad\",\n                \"DisplayColumn_M_AttributeSet_ID\": \"** Do not Change/Use **\",\n                \"DisplayColumn_M_AttributeSetInstance_ID\": \"---\",\n                \"DisplayColumn_M_Locator_ID\": \"Default HQ Locator\",\n                \"DisplayColumn_M_Lot_ID\": null,\n                \"DisplayColumn_M_Product_Category_ID\": \"Bushes\",\n                \"DisplayColumn_M_Product_Class_ID\": null,\n                \"DisplayColumn_M_Product_Classification_ID\": null,\n                \"DisplayColumn_M_Product_Group_ID\": null,\n                \"DisplayColumn_M_Product_ID\": \"Azalea Bush - Azalea Bush\",\n                \"DisplayColumn_M_Warehouse_ID\": \"HQ Warehouse\"\n            }\n        },\n        {\n            \"id\": 0,\n            \"table_name\": \"RV_Storage\",\n            \"values\": {\n                \"AD_Client_ID\": 11,\n                \"AD_Org_ID\": 11,\n                \"M_Product_ID\": 123,\n                \"Value\": \"Oak\",\n                \"Name\": \"Oak Tree\",\n                \"Description\": null,\n                \"UPC\": null,\n                \"SKU\": null,\n                \"C_UOM_ID\": 100,\n                \"M_Product_Category_ID\": 106,\n                \"Classification\": null,\n                \"Weight\": 0,\n                \"Volume\": 0,\n                \"VersionNo\": null,\n                \"GuaranteeDays\": null,\n                \"GuaranteeDaysMin\": null,\n                \"M_Locator_ID\": 101,\n                \"M_Warehouse_ID\": 103,\n                \"X\": \"0\",\n                \"Y\": \"0\",\n                \"Z\": \"0\",\n                \"QtyOnHand\": {\n                    \"type\": \"decimal\",\n                    \"value\": \"20.00\"\n                },\n                \"QtyReserved\": {\n                    \"type\": \"decimal\",\n                    \"value\": \"0.00\"\n                },\n                \"QtyAvailable\": {\n                    \"type\": \"decimal\",\n                    \"value\": \"20.00\"\n                },\n                \"QtyOrdered\": {\n                    \"type\": \"decimal\",\n                    \"value\": \"0.00\"\n                },\n                \"DateLastInventory\": null,\n                \"M_AttributeSetInstance_ID\": 0,\n                \"M_AttributeSet_ID\": 0,\n                \"SerNo\": null,\n                \"Lot\": null,\n                \"M_Lot_ID\": null,\n                \"GuaranteeDate\": null,\n                \"ShelfLifeDays\": null,\n                \"GoodForDays\": null,\n                \"ShelfLifeRemainingPct\": null,\n                \"M_Product_Class_ID\": null,\n                \"M_Product_Classification_ID\": null,\n                \"M_Product_Group_ID\": null,\n                \"DisplayColumn_AD_Client_ID\": \"GardenWorld\",\n                \"DisplayColumn_AD_Org_ID\": \"HQ\",\n                \"DisplayColumn_C_UOM_ID\": \"Unidad\",\n                \"DisplayColumn_M_AttributeSet_ID\": \"** Do not Change/Use **\",\n                \"DisplayColumn_M_AttributeSetInstance_ID\": \"---\",\n                \"DisplayColumn_M_Locator_ID\": \"Default HQ Locator\",\n                \"DisplayColumn_M_Lot_ID\": null,\n                \"DisplayColumn_M_Product_Category_ID\": \"Trees\",\n                \"DisplayColumn_M_Product_Class_ID\": null,\n                \"DisplayColumn_M_Product_Classification_ID\": null,\n                \"DisplayColumn_M_Product_Group_ID\": null,\n                \"DisplayColumn_M_Product_ID\": \"Oak - Oak Tree\",\n                \"DisplayColumn_M_Warehouse_ID\": \"HQ Warehouse\"\n            }\n        },\n        {\n            \"id\": 0,\n            \"table_name\": \"RV_Storage\",\n            \"values\": {\n                \"AD_Client_ID\": 11,\n                \"AD_Org_ID\": 11,\n                \"M_Product_ID\": 130,\n                \"Value\": \"Plum Tree\",\n                \"Name\": \"Plum Tree\",\n                \"Description\": null,\n                \"UPC\": null,\n                \"SKU\": null,\n                \"C_UOM_ID\": 100,\n                \"M_Product_Category_ID\": 106,\n                \"Classification\": null,\n                \"Weight\": 0,\n                \"Volume\": 0,\n                \"VersionNo\": null,\n                \"GuaranteeDays\": null,\n                \"GuaranteeDaysMin\": null,\n                \"M_Locator_ID\": 101,\n                \"M_Warehouse_ID\": 103,\n                \"X\": \"0\",\n                \"Y\": \"0\",\n                \"Z\": \"0\",\n                \"QtyOnHand\": {\n                    \"type\": \"decimal\",\n                    \"value\": \"18.00\"\n                },\n                \"QtyReserved\": {\n                    \"type\": \"decimal\",\n                    \"value\": \"0.00\"\n                },\n                \"QtyAvailable\": {\n                    \"type\": \"decimal\",\n                    \"value\": \"18.00\"\n                },\n                \"QtyOrdered\": {\n                    \"type\": \"decimal\",\n                    \"value\": \"0.00\"\n                },\n                \"DateLastInventory\": null,\n                \"M_AttributeSetInstance_ID\": 0,\n                \"M_AttributeSet_ID\": 0,\n                \"SerNo\": null,\n                \"Lot\": null,\n                \"M_Lot_ID\": null,\n                \"GuaranteeDate\": null,\n                \"ShelfLifeDays\": null,\n                \"GoodForDays\": null,\n                \"ShelfLifeRemainingPct\": null,\n                \"M_Product_Class_ID\": null,\n                \"M_Product_Classification_ID\": null,\n                \"M_Product_Group_ID\": null,\n                \"DisplayColumn_AD_Client_ID\": \"GardenWorld\",\n                \"DisplayColumn_AD_Org_ID\": \"HQ\",\n                \"DisplayColumn_C_UOM_ID\": \"Unidad\",\n                \"DisplayColumn_M_AttributeSet_ID\": \"** Do not Change/Use **\",\n                \"DisplayColumn_M_AttributeSetInstance_ID\": \"---\",\n                \"DisplayColumn_M_Locator_ID\": \"Default HQ Locator\",\n                \"DisplayColumn_M_Lot_ID\": null,\n                \"DisplayColumn_M_Product_Category_ID\": \"Trees\",\n                \"DisplayColumn_M_Product_Class_ID\": null,\n                \"DisplayColumn_M_Product_Classification_ID\": null,\n                \"DisplayColumn_M_Product_Group_ID\": null,\n                \"DisplayColumn_M_Product_ID\": \"Plum Tree - Plum Tree\",\n                \"DisplayColumn_M_Warehouse_ID\": \"HQ Warehouse\"\n            }\n        },\n        {\n            \"id\": 0,\n            \"table_name\": \"RV_Storage\",\n            \"values\": {\n                \"AD_Client_ID\": 11,\n                \"AD_Org_ID\": 12,\n                \"M_Product_ID\": 50004,\n                \"Value\": \"Seat\",\n                \"Name\": \"Seat\",\n                \"Description\": null,\n                \"UPC\": null,\n                \"SKU\": null,\n                \"C_UOM_ID\": 100,\n                \"M_Product_Category_ID\": 50001,\n                \"Classification\": null,\n                \"Weight\": 0,\n                \"Volume\": 0,\n                \"VersionNo\": null,\n                \"GuaranteeDays\": 0,\n                \"GuaranteeDaysMin\": 0,\n                \"M_Locator_ID\": 102,\n                \"M_Warehouse_ID\": 104,\n                \"X\": \"0\",\n                \"Y\": \"0\",\n                \"Z\": \"0\",\n                \"QtyOnHand\": {\n                    \"type\": \"decimal\",\n                    \"value\": \"1.00\"\n                },\n                \"QtyReserved\": {\n                    \"type\": \"decimal\",\n                    \"value\": \"0.00\"\n                },\n                \"QtyAvailable\": {\n                    \"type\": \"decimal\",\n                    \"value\": \"1.00\"\n                },\n                \"QtyOrdered\": {\n                    \"type\": \"decimal\",\n                    \"value\": \"0.00\"\n                },\n                \"DateLastInventory\": null,\n                \"M_AttributeSetInstance_ID\": 1000002,\n                \"M_AttributeSet_ID\": 0,\n                \"SerNo\": null,\n                \"Lot\": null,\n                \"M_Lot_ID\": null,\n                \"GuaranteeDate\": null,\n                \"ShelfLifeDays\": null,\n                \"GoodForDays\": null,\n                \"ShelfLifeRemainingPct\": null,\n                \"M_Product_Class_ID\": null,\n                \"M_Product_Classification_ID\": null,\n                \"M_Product_Group_ID\": null,\n                \"DisplayColumn_AD_Client_ID\": \"GardenWorld\",\n                \"DisplayColumn_AD_Org_ID\": \"Store Central\",\n                \"DisplayColumn_C_UOM_ID\": \"Unidad\",\n                \"DisplayColumn_M_AttributeSet_ID\": \"** Do not Change/Use **\",\n                \"DisplayColumn_M_AttributeSetInstance_ID\": \"1000002\",\n                \"DisplayColumn_M_Locator_ID\": \"Default Store Locator\",\n                \"DisplayColumn_M_Lot_ID\": null,\n                \"DisplayColumn_M_Product_Category_ID\": \"Raw Material\",\n                \"DisplayColumn_M_Product_Class_ID\": null,\n                \"DisplayColumn_M_Product_Classification_ID\": null,\n                \"DisplayColumn_M_Product_Group_ID\": null,\n                \"DisplayColumn_M_Product_ID\": \"Seat - Seat\",\n                \"DisplayColumn_M_Warehouse_ID\": \"Store Central\"\n            }\n        },\n        {\n            \"id\": 0,\n            \"table_name\": \"RV_Storage\",\n            \"values\": {\n                \"AD_Client_ID\": 11,\n                \"AD_Org_ID\": 12,\n                \"M_Product_ID\": 50004,\n                \"Value\": \"Seat\",\n                \"Name\": \"Seat\",\n                \"Description\": null,\n                \"UPC\": null,\n                \"SKU\": null,\n                \"C_UOM_ID\": 100,\n                \"M_Product_Category_ID\": 50001,\n                \"Classification\": null,\n                \"Weight\": 0,\n                \"Volume\": 0,\n                \"VersionNo\": null,\n                \"GuaranteeDays\": 0,\n                \"GuaranteeDaysMin\": 0,\n                \"M_Locator_ID\": 102,\n                \"M_Warehouse_ID\": 104,\n                \"X\": \"0\",\n                \"Y\": \"0\",\n                \"Z\": \"0\",\n                \"QtyOnHand\": {\n                    \"type\": \"decimal\",\n                    \"value\": \"1.00\"\n                },\n                \"QtyReserved\": {\n                    \"type\": \"decimal\",\n                    \"value\": \"0.00\"\n                },\n                \"QtyAvailable\": {\n                    \"type\": \"decimal\",\n                    \"value\": \"1.00\"\n                },\n                \"QtyOrdered\": {\n                    \"type\": \"decimal\",\n                    \"value\": \"0.00\"\n                },\n                \"DateLastInventory\": null,\n                \"M_AttributeSetInstance_ID\": 1000001,\n                \"M_AttributeSet_ID\": 0,\n                \"SerNo\": null,\n                \"Lot\": null,\n                \"M_Lot_ID\": null,\n                \"GuaranteeDate\": null,\n                \"ShelfLifeDays\": null,\n                \"GoodForDays\": null,\n                \"ShelfLifeRemainingPct\": null,\n                \"M_Product_Class_ID\": null,\n                \"M_Product_Classification_ID\": null,\n                \"M_Product_Group_ID\": null,\n                \"DisplayColumn_AD_Client_ID\": \"GardenWorld\",\n                \"DisplayColumn_AD_Org_ID\": \"Store Central\",\n                \"DisplayColumn_C_UOM_ID\": \"Unidad\",\n                \"DisplayColumn_M_AttributeSet_ID\": \"** Do not Change/Use **\",\n                \"DisplayColumn_M_AttributeSetInstance_ID\": \"1000001\",\n                \"DisplayColumn_M_Locator_ID\": \"Default Store Locator\",\n                \"DisplayColumn_M_Lot_ID\": null,\n                \"DisplayColumn_M_Product_Category_ID\": \"Raw Material\",\n                \"DisplayColumn_M_Product_Class_ID\": null,\n                \"DisplayColumn_M_Product_Classification_ID\": null,\n                \"DisplayColumn_M_Product_Group_ID\": null,\n                \"DisplayColumn_M_Product_ID\": \"Seat - Seat\",\n                \"DisplayColumn_M_Warehouse_ID\": \"Store Central\"\n            }\n        },\n        {\n            \"id\": 0,\n            \"table_name\": \"RV_Storage\",\n            \"values\": {\n                \"AD_Client_ID\": 11,\n                \"AD_Org_ID\": 12,\n                \"M_Product_ID\": 50004,\n                \"Value\": \"Seat\",\n                \"Name\": \"Seat\",\n                \"Description\": null,\n                \"UPC\": null,\n                \"SKU\": null,\n                \"C_UOM_ID\": 100,\n                \"M_Product_Category_ID\": 50001,\n                \"Classification\": null,\n                \"Weight\": 0,\n                \"Volume\": 0,\n                \"VersionNo\": null,\n                \"GuaranteeDays\": 0,\n                \"GuaranteeDaysMin\": 0,\n                \"M_Locator_ID\": 102,\n                \"M_Warehouse_ID\": 104,\n                \"X\": \"0\",\n                \"Y\": \"0\",\n                \"Z\": \"0\",\n                \"QtyOnHand\": {\n                    \"type\": \"decimal\",\n                    \"value\": \"1.00\"\n                },\n                \"QtyReserved\": {\n                    \"type\": \"decimal\",\n                    \"value\": \"0.00\"\n                },\n                \"QtyAvailable\": {\n                    \"type\": \"decimal\",\n                    \"value\": \"1.00\"\n                },\n                \"QtyOrdered\": {\n                    \"type\": \"decimal\",\n                    \"value\": \"0.00\"\n                },\n                \"DateLastInventory\": null,\n                \"M_AttributeSetInstance_ID\": 1000000,\n                \"M_AttributeSet_ID\": 0,\n                \"SerNo\": null,\n                \"Lot\": null,\n                \"M_Lot_ID\": null,\n                \"GuaranteeDate\": null,\n                \"ShelfLifeDays\": null,\n                \"GoodForDays\": null,\n                \"ShelfLifeRemainingPct\": null,\n                \"M_Product_Class_ID\": null,\n                \"M_Product_Classification_ID\": null,\n                \"M_Product_Group_ID\": null,\n                \"DisplayColumn_AD_Client_ID\": \"GardenWorld\",\n                \"DisplayColumn_AD_Org_ID\": \"Store Central\",\n                \"DisplayColumn_C_UOM_ID\": \"Unidad\",\n                \"DisplayColumn_M_AttributeSet_ID\": \"** Do not Change/Use **\",\n                \"DisplayColumn_M_AttributeSetInstance_ID\": \"1000000\",\n                \"DisplayColumn_M_Locator_ID\": \"Default Store Locator\",\n                \"DisplayColumn_M_Lot_ID\": null,\n                \"DisplayColumn_M_Product_Category_ID\": \"Raw Material\",\n                \"DisplayColumn_M_Product_Class_ID\": null,\n                \"DisplayColumn_M_Product_Classification_ID\": null,\n                \"DisplayColumn_M_Product_Group_ID\": null,\n                \"DisplayColumn_M_Product_ID\": \"Seat - Seat\",\n                \"DisplayColumn_M_Warehouse_ID\": \"Store Central\"\n            }\n        },\n        {\n            \"id\": 0,\n            \"table_name\": \"RV_Storage\",\n            \"values\": {\n                \"AD_Client_ID\": 11,\n                \"AD_Org_ID\": 12,\n                \"M_Product_ID\": 50004,\n                \"Value\": \"Seat\",\n                \"Name\": \"Seat\",\n                \"Description\": null,\n                \"UPC\": null,\n                \"SKU\": null,\n                \"C_UOM_ID\": 100,\n                \"M_Product_Category_ID\": 50001,\n                \"Classification\": null,\n                \"Weight\": 0,\n                \"Volume\": 0,\n                \"VersionNo\": null,\n                \"GuaranteeDays\": 0,\n                \"GuaranteeDaysMin\": 0,\n                \"M_Locator_ID\": 102,\n                \"M_Warehouse_ID\": 104,\n                \"X\": \"0\",\n                \"Y\": \"0\",\n                \"Z\": \"0\",\n                \"QtyOnHand\": {\n                    \"type\": \"decimal\",\n                    \"value\": \"0.00\"\n                },\n                \"QtyReserved\": {\n                    \"type\": \"decimal\",\n                    \"value\": \"0.00\"\n                },\n                \"QtyAvailable\": {\n                    \"type\": \"decimal\",\n                    \"value\": \"0.00\"\n                },\n                \"QtyOrdered\": {\n                    \"type\": \"decimal\",\n                    \"value\": \"0.00\"\n                },\n                \"DateLastInventory\": null,\n                \"M_AttributeSetInstance_ID\": 0,\n                \"M_AttributeSet_ID\": 0,\n                \"SerNo\": null,\n                \"Lot\": null,\n                \"M_Lot_ID\": null,\n                \"GuaranteeDate\": null,\n                \"ShelfLifeDays\": null,\n                \"GoodForDays\": null,\n                \"ShelfLifeRemainingPct\": null,\n                \"M_Product_Class_ID\": null,\n                \"M_Product_Classification_ID\": null,\n                \"M_Product_Group_ID\": null,\n                \"DisplayColumn_AD_Client_ID\": \"GardenWorld\",\n                \"DisplayColumn_AD_Org_ID\": \"Store Central\",\n                \"DisplayColumn_C_UOM_ID\": \"Unidad\",\n                \"DisplayColumn_M_AttributeSet_ID\": \"** Do not Change/Use **\",\n                \"DisplayColumn_M_AttributeSetInstance_ID\": \"---\",\n                \"DisplayColumn_M_Locator_ID\": \"Default Store Locator\",\n                \"DisplayColumn_M_Lot_ID\": null,\n                \"DisplayColumn_M_Product_Category_ID\": \"Raw Material\",\n                \"DisplayColumn_M_Product_Class_ID\": null,\n                \"DisplayColumn_M_Product_Classification_ID\": null,\n                \"DisplayColumn_M_Product_Group_ID\": null,\n                \"DisplayColumn_M_Product_ID\": \"Seat - Seat\",\n                \"DisplayColumn_M_Warehouse_ID\": \"Store Central\"\n            }\n        },\n        {\n            \"id\": 0,\n            \"table_name\": \"RV_Storage\",\n            \"values\": {\n                \"AD_Client_ID\": 11,\n                \"AD_Org_ID\": 12,\n                \"M_Product_ID\": 123,\n                \"Value\": \"Oak\",\n                \"Name\": \"Oak Tree\",\n                \"Description\": null,\n                \"UPC\": null,\n                \"SKU\": null,\n                \"C_UOM_ID\": 100,\n                \"M_Product_Category_ID\": 106,\n                \"Classification\": null,\n                \"Weight\": 0,\n                \"Volume\": 0,\n                \"VersionNo\": null,\n                \"GuaranteeDays\": null,\n                \"GuaranteeDaysMin\": null,\n                \"M_Locator_ID\": 102,\n                \"M_Warehouse_ID\": 104,\n                \"X\": \"0\",\n                \"Y\": \"0\",\n                \"Z\": \"0\",\n                \"QtyOnHand\": {\n                    \"type\": \"decimal\",\n                    \"value\": \"4.00\"\n                },\n                \"QtyReserved\": {\n                    \"type\": \"decimal\",\n                    \"value\": \"0.00\"\n                },\n                \"QtyAvailable\": {\n                    \"type\": \"decimal\",\n                    \"value\": \"4.00\"\n                },\n                \"QtyOrdered\": {\n                    \"type\": \"decimal\",\n                    \"value\": \"0.00\"\n                },\n                \"DateLastInventory\": null,\n                \"M_AttributeSetInstance_ID\": 0,\n                \"M_AttributeSet_ID\": 0,\n                \"SerNo\": null,\n                \"Lot\": null,\n                \"M_Lot_ID\": null,\n                \"GuaranteeDate\": null,\n                \"ShelfLifeDays\": null,\n                \"GoodForDays\": null,\n                \"ShelfLifeRemainingPct\": null,\n                \"M_Product_Class_ID\": null,\n                \"M_Product_Classification_ID\": null,\n                \"M_Product_Group_ID\": null,\n                \"DisplayColumn_AD_Client_ID\": \"GardenWorld\",\n                \"DisplayColumn_AD_Org_ID\": \"Store Central\",\n                \"DisplayColumn_C_UOM_ID\": \"Unidad\",\n                \"DisplayColumn_M_AttributeSet_ID\": \"** Do not Change/Use **\",\n                \"DisplayColumn_M_AttributeSetInstance_ID\": \"---\",\n                \"DisplayColumn_M_Locator_ID\": \"Default Store Locator\",\n                \"DisplayColumn_M_Lot_ID\": null,\n                \"DisplayColumn_M_Product_Category_ID\": \"Trees\",\n                \"DisplayColumn_M_Product_Class_ID\": null,\n                \"DisplayColumn_M_Product_Classification_ID\": null,\n                \"DisplayColumn_M_Product_Group_ID\": null,\n                \"DisplayColumn_M_Product_ID\": \"Oak - Oak Tree\",\n                \"DisplayColumn_M_Warehouse_ID\": \"Store Central\"\n            }\n        }\n    ],\n    \"next_page_token\": \"\"\n}"
+				}
+			]
+		},
+		{
+			"name": "GetProductAttributeSet",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{HOST}}/material-management/products/:id/attribute-values",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"material-management",
+						"products",
+						":id",
+						"attribute-values"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "102"
+						}
+					]
+				},
+				"description": "**Endpoint**: GET /Material_management\n\n**Description**: Returns ListEntities\n\n**FULL URL**: [http://api.adempiere.io](http://api.adempiere.io/api)/material-management/products/{id}/attribute-values\n\n**Method**: GET\n\n**Application Example**\n\n``` bash\ncurl --location 'http://api.adempiere.io/material-management/products/102/attribute-values' \\\n--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMDAwMTU0IiwiQURfQ2xpZW50X0lEIjoxMSwiQURfT3JnX0lEIjo1MDAwNiwiQURfUm9sZV9JRCI6MTAyLCJBRF9Vc2VyX0lEIjoxMDAsIk1fV2FyZWhvdXNlX0lEIjowLCJBRF9MYW5ndWFnZSI6ImVzX01YIiwiaWF0IjoxNzEwNzE1NzAxLCJleHAiOjE3MTA4MDIxMDF9.sdizIymo1Yd8P8w4D4ORu2EfavUfgxsPPfQIJMNJQQ8'\n\n ```\n\n**Example Answer**\n\n``` json\n{\n    \"id\": 102,\n    \"name\": \"Patio Chair\",\n    \"description\": \"Product: Size - Instance: Use Factor/Description, SerialNo, Guarantee Date\",\n    \"is_instance_attribute\": true,\n    \"is_lot\": false,\n    \"is_lot_mandatory\": false,\n    \"lot_control_id\": 0,\n    \"lot_char_start_overwrite\": \"\",\n    \"lot_char_end_overwrite\": \"\",\n    \"is_serial\": true,\n    \"is_serial_mandatory\": false,\n    \"serial_control_id\": 0,\n    \"serial_char_start_overwrite\": \"\",\n    \"serial_char_end_overwrite\": \"\",\n    \"is_guarantee_date\": true,\n    \"is_guarantee_date_mandatory\": false,\n    \"guarantee_days\": 60,\n    \"mandatory_type\": \"N\",\n    \"product_attributes\": [\n        {\n            \"id\": 100,\n            \"name\": \"Size (S-M-L)\",\n            \"description\": \"\",\n            \"value_type\": \"L\",\n            \"is_mandatory\": false,\n            \"is_instance_attribute\": false,\n            \"sequence\": 10,\n            \"product_attribute_values\": [\n                {\n                    \"id\": 100,\n                    \"value\": \"S\",\n                    \"name\": \"Small\",\n                    \"description\": \"\"\n                },\n                {\n                    \"id\": 101,\n                    \"value\": \"M\",\n                    \"name\": \"Medium\",\n                    \"description\": \"\"\n                },\n                {\n                    \"id\": 102,\n                    \"value\": \"L\",\n                    \"name\": \"Large\",\n                    \"description\": \"\"\n                }\n            ]\n        },\n        {\n            \"id\": 102,\n            \"name\": \"Use Factor\",\n            \"description\": \"\",\n            \"value_type\": \"L\",\n            \"is_mandatory\": false,\n            \"is_instance_attribute\": true,\n            \"sequence\": 20,\n            \"product_attribute_values\": [\n                {\n                    \"id\": 106,\n                    \"value\": \"New\",\n                    \"name\": \"New\",\n                    \"description\": \"\"\n                },\n                {\n                    \"id\": 107,\n                    \"value\": \"Used\",\n                    \"name\": \"Used\",\n                    \"description\": \"\"\n                },\n                {\n                    \"id\": 108,\n                    \"value\": \"Slightly\",\n                    \"name\": \"Slightly Used\",\n                    \"description\": \"\"\n                }\n            ]\n        },\n        {\n            \"id\": 103,\n            \"name\": \"Use Description\",\n            \"description\": \"\",\n            \"value_type\": \"S\",\n            \"is_mandatory\": false,\n            \"is_instance_attribute\": true,\n            \"sequence\": 30,\n            \"product_attribute_values\": []\n        }\n    ]\n}\n\n ```\n\n**Change control**\n\n| **Version** | date | author | Description of Changes |\n| --- | --- | --- | --- |\n| 1.0 | 15/03/2024 | Ricardo | Initial creation of the document |"
+			},
+			"response": [
+				{
+					"name": "GetProductAttributeSet",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/material-management/products/:id/attribute-values",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"material-management",
+								"products",
+								":id",
+								"attribute-values"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "102"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.25.2"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 07 Mar 2024 14:11:41 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "1790"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "grpc-encoding",
+							"value": "identity"
+						},
+						{
+							"key": "grpc-accept-encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "x-envoy-upstream-service-time",
+							"value": "184"
+						},
+						{
+							"key": "grpc-status",
+							"value": "0"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Max-Age",
+							"value": "3600"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 102,\n    \"name\": \"Patio Chair\",\n    \"description\": \"Product: Size - Instance: Use Factor/Description, SerialNo, Guarantee Date\",\n    \"is_instance_attribute\": true,\n    \"is_lot\": false,\n    \"is_lot_mandatory\": false,\n    \"lot_control_id\": 0,\n    \"lot_char_start_overwrite\": \"\",\n    \"lot_char_end_overwrite\": \"\",\n    \"is_serial\": true,\n    \"is_serial_mandatory\": false,\n    \"serial_control_id\": 0,\n    \"serial_char_start_overwrite\": \"\",\n    \"serial_char_end_overwrite\": \"\",\n    \"is_guarantee_date\": true,\n    \"is_guarantee_date_mandatory\": false,\n    \"guarantee_days\": 60,\n    \"mandatory_type\": \"N\",\n    \"product_attributes\": [\n        {\n            \"id\": 100,\n            \"name\": \"Size (S-M-L)\",\n            \"description\": \"\",\n            \"value_type\": \"L\",\n            \"is_mandatory\": false,\n            \"is_instance_attribute\": false,\n            \"sequence\": 10,\n            \"product_attribute_values\": [\n                {\n                    \"id\": 100,\n                    \"value\": \"S\",\n                    \"name\": \"Small\",\n                    \"description\": \"\"\n                },\n                {\n                    \"id\": 101,\n                    \"value\": \"M\",\n                    \"name\": \"Medium\",\n                    \"description\": \"\"\n                },\n                {\n                    \"id\": 102,\n                    \"value\": \"L\",\n                    \"name\": \"Large\",\n                    \"description\": \"\"\n                }\n            ]\n        },\n        {\n            \"id\": 102,\n            \"name\": \"Use Factor\",\n            \"description\": \"\",\n            \"value_type\": \"L\",\n            \"is_mandatory\": false,\n            \"is_instance_attribute\": true,\n            \"sequence\": 20,\n            \"product_attribute_values\": [\n                {\n                    \"id\": 106,\n                    \"value\": \"New\",\n                    \"name\": \"New\",\n                    \"description\": \"\"\n                },\n                {\n                    \"id\": 107,\n                    \"value\": \"Used\",\n                    \"name\": \"Used\",\n                    \"description\": \"\"\n                },\n                {\n                    \"id\": 108,\n                    \"value\": \"Slightly\",\n                    \"name\": \"Slightly Used\",\n                    \"description\": \"\"\n                }\n            ]\n        },\n        {\n            \"id\": 103,\n            \"name\": \"Use Description\",\n            \"description\": \"\",\n            \"value_type\": \"S\",\n            \"is_mandatory\": false,\n            \"is_instance_attribute\": true,\n            \"sequence\": 30,\n            \"product_attribute_values\": []\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "GetProductAttributeSetInstance",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{HOST}}/material-management/products/:product_id/instances/:id",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"material-management",
+						"products",
+						":product_id",
+						"instances",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "product_id",
+							"value": "100"
+						},
+						{
+							"key": "id",
+							"value": "102"
+						}
+					]
+				},
+				"description": "**Endpoint**: GET /Material_management\n\n**Description**: Returns ListEntities\n\n**FULL URL**: [http://api.adempiere.io](http://api.adempiere.io/api)/material-management/products/{product_id}/instances/{id}\n\n**Method**: GET\n\n**Application Example**\n\n``` bash\ncurl --location 'http://api.adempiere.io/material-management/products/100/instances/102' \\\n--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMDAwMTU0IiwiQURfQ2xpZW50X0lEIjoxMSwiQURfT3JnX0lEIjo1MDAwNiwiQURfUm9sZV9JRCI6MTAyLCJBRF9Vc2VyX0lEIjoxMDAsIk1fV2FyZWhvdXNlX0lEIjowLCJBRF9MYW5ndWFnZSI6ImVzX01YIiwiaWF0IjoxNzEwNzE1NzAxLCJleHAiOjE3MTA4MDIxMDF9.sdizIymo1Yd8P8w4D4ORu2EfavUfgxsPPfQIJMNJQQ8'\n\n ```\n\n**Example Answer**\n\n``` json\n{\n    \"id\": 102,\n    \"description\": \"Green-Large\",\n    \"lot\": \"\",\n    \"lot_id\": 0,\n    \"serial\": \"\",\n    \"product_attribute_set\": {\n        \"id\": 100,\n        \"name\": \"T-Shirt\",\n        \"description\": \"Product: Size, Color - No Instance\",\n        \"is_instance_attribute\": false,\n        \"is_lot\": false,\n        \"is_lot_mandatory\": false,\n        \"lot_control_id\": 0,\n        \"lot_char_start_overwrite\": \"\",\n        \"lot_char_end_overwrite\": \"\",\n        \"is_serial\": false,\n        \"is_serial_mandatory\": false,\n        \"serial_control_id\": 0,\n        \"serial_char_start_overwrite\": \"\",\n        \"serial_char_end_overwrite\": \"\",\n        \"is_guarantee_date\": false,\n        \"is_guarantee_date_mandatory\": false,\n        \"guarantee_days\": 0,\n        \"mandatory_type\": \"N\",\n        \"product_attributes\": [\n            {\n                \"id\": 101,\n                \"name\": \"Color (R-G-B)\",\n                \"description\": \"\",\n                \"value_type\": \"L\",\n                \"is_mandatory\": false,\n                \"is_instance_attribute\": false,\n                \"sequence\": 10,\n                \"product_attribute_values\": [\n                    {\n                        \"id\": 103,\n                        \"value\": \"R\",\n                        \"name\": \"Red\",\n                        \"description\": \"\"\n                    },\n                    {\n                        \"id\": 104,\n                        \"value\": \"G\",\n                        \"name\": \"Green\",\n                        \"description\": \"\"\n                    },\n                    {\n                        \"id\": 105,\n                        \"value\": \"B\",\n                        \"name\": \"Blue\",\n                        \"description\": \"\"\n                    }\n                ]\n            },\n            {\n                \"id\": 100,\n                \"name\": \"Size (S-M-L)\",\n                \"description\": \"\",\n                \"value_type\": \"L\",\n                \"is_mandatory\": false,\n                \"is_instance_attribute\": false,\n                \"sequence\": 20,\n                \"product_attribute_values\": [\n                    {\n                        \"id\": 100,\n                        \"value\": \"S\",\n                        \"name\": \"Small\",\n                        \"description\": \"\"\n                    },\n                    {\n                        \"id\": 101,\n                        \"value\": \"M\",\n                        \"name\": \"Medium\",\n                        \"description\": \"\"\n                    },\n                    {\n                        \"id\": 102,\n                        \"value\": \"L\",\n                        \"name\": \"Large\",\n                        \"description\": \"\"\n                    }\n                ]\n            }\n        ]\n    },\n    \"product_attribute_instances\": [\n        {\n            \"id\": 0,\n            \"value\": \"Green\",\n            \"value_number\": \"0.0\",\n            \"product_attribute_set_instance_id\": 102,\n            \"product_attribute_id\": 101,\n            \"product_attribute_value_id\": 104\n        },\n        {\n            \"id\": 0,\n            \"value\": \"Large\",\n            \"value_number\": \"0.0\",\n            \"product_attribute_set_instance_id\": 102,\n            \"product_attribute_id\": 100,\n            \"product_attribute_value_id\": 102\n        }\n    ]\n}\n\n ```\n\n**Change control**\n\n| **Version** | date | author | Description of Changes |\n| --- | --- | --- | --- |\n| 1.0 | 15/03/2024 | Ricardo | Initial creation of the document |"
+			},
+			"response": [
+				{
+					"name": "GetProductAttributeSetInstance",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/material-management/products/:product_id/instances/:id",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"material-management",
+								"products",
+								":product_id",
+								"instances",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "product_id",
+									"value": "100"
+								},
+								{
+									"key": "id",
+									"value": "102"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.25.2"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 07 Mar 2024 14:13:00 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "2116"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "grpc-encoding",
+							"value": "identity"
+						},
+						{
+							"key": "grpc-accept-encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "x-envoy-upstream-service-time",
+							"value": "120"
+						},
+						{
+							"key": "grpc-status",
+							"value": "0"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Max-Age",
+							"value": "3600"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 102,\n    \"description\": \"Green-Large\",\n    \"lot\": \"\",\n    \"lot_id\": 0,\n    \"serial\": \"\",\n    \"product_attribute_set\": {\n        \"id\": 100,\n        \"name\": \"T-Shirt\",\n        \"description\": \"Product: Size, Color - No Instance\",\n        \"is_instance_attribute\": false,\n        \"is_lot\": false,\n        \"is_lot_mandatory\": false,\n        \"lot_control_id\": 0,\n        \"lot_char_start_overwrite\": \"\",\n        \"lot_char_end_overwrite\": \"\",\n        \"is_serial\": false,\n        \"is_serial_mandatory\": false,\n        \"serial_control_id\": 0,\n        \"serial_char_start_overwrite\": \"\",\n        \"serial_char_end_overwrite\": \"\",\n        \"is_guarantee_date\": false,\n        \"is_guarantee_date_mandatory\": false,\n        \"guarantee_days\": 0,\n        \"mandatory_type\": \"N\",\n        \"product_attributes\": [\n            {\n                \"id\": 101,\n                \"name\": \"Color (R-G-B)\",\n                \"description\": \"\",\n                \"value_type\": \"L\",\n                \"is_mandatory\": false,\n                \"is_instance_attribute\": false,\n                \"sequence\": 10,\n                \"product_attribute_values\": [\n                    {\n                        \"id\": 103,\n                        \"value\": \"R\",\n                        \"name\": \"Red\",\n                        \"description\": \"\"\n                    },\n                    {\n                        \"id\": 104,\n                        \"value\": \"G\",\n                        \"name\": \"Green\",\n                        \"description\": \"\"\n                    },\n                    {\n                        \"id\": 105,\n                        \"value\": \"B\",\n                        \"name\": \"Blue\",\n                        \"description\": \"\"\n                    }\n                ]\n            },\n            {\n                \"id\": 100,\n                \"name\": \"Size (S-M-L)\",\n                \"description\": \"\",\n                \"value_type\": \"L\",\n                \"is_mandatory\": false,\n                \"is_instance_attribute\": false,\n                \"sequence\": 20,\n                \"product_attribute_values\": [\n                    {\n                        \"id\": 100,\n                        \"value\": \"S\",\n                        \"name\": \"Small\",\n                        \"description\": \"\"\n                    },\n                    {\n                        \"id\": 101,\n                        \"value\": \"M\",\n                        \"name\": \"Medium\",\n                        \"description\": \"\"\n                    },\n                    {\n                        \"id\": 102,\n                        \"value\": \"L\",\n                        \"name\": \"Large\",\n                        \"description\": \"\"\n                    }\n                ]\n            }\n        ]\n    },\n    \"product_attribute_instances\": [\n        {\n            \"id\": 0,\n            \"value\": \"Green\",\n            \"value_number\": \"0.0\",\n            \"product_attribute_set_instance_id\": 102,\n            \"product_attribute_id\": 101,\n            \"product_attribute_value_id\": 104\n        },\n        {\n            \"id\": 0,\n            \"value\": \"Large\",\n            \"value_number\": \"0.0\",\n            \"product_attribute_set_instance_id\": 102,\n            \"product_attribute_id\": 100,\n            \"product_attribute_value_id\": 102\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "ListProductAttributeSetInstances",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{HOST}}/material-management/products/:product_id/instances",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"material-management",
+						"products",
+						":product_id",
+						"instances"
+					],
+					"variable": [
+						{
+							"key": "product_id",
+							"value": "1000000"
+						}
+					]
+				},
+				"description": "**Endpoint**: GET /Material_management\n\n**Description**: Returns ListEntities\n\n**FULL URL**: [http://api.adempiere.io](http://api.adempiere.io/api)/material-management/products/{product_id}/instances\n\n**Method**: GET\n\n**Application Example**\n\n``` bash\ncurl --location 'http://api.adempiere.io/material-management/products/1000000/instances' \\\n--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMDAwMTU0IiwiQURfQ2xpZW50X0lEIjoxMSwiQURfT3JnX0lEIjo1MDAwNiwiQURfUm9sZV9JRCI6MTAyLCJBRF9Vc2VyX0lEIjoxMDAsIk1fV2FyZWhvdXNlX0lEIjowLCJBRF9MYW5ndWFnZSI6ImVzX01YIiwiaWF0IjoxNzEwNzE1NzAxLCJleHAiOjE3MTA4MDIxMDF9.sdizIymo1Yd8P8w4D4ORu2EfavUfgxsPPfQIJMNJQQ8'\n\n ```\n\n**Example Answer**\n\n``` json\n  {\n            \"id\": 102,\n            \"description\": \"Green-Large\",\n            \"lot\": \"\",\n            \"lot_id\": 0,\n            \"serial\": \"\",\n            \"product_attribute_set\": {\n                \"id\": 100,\n                \"name\": \"T-Shirt\",\n                \"description\": \"Product: Size, Color - No Instance\",\n                \"is_instance_attribute\": false,\n                \"is_lot\": false,\n                \"is_lot_mandatory\": false,\n                \"lot_control_id\": 0,\n                \"lot_char_start_overwrite\": \"\",\n                \"lot_char_end_overwrite\": \"\",\n                \"is_serial\": false,\n                \"is_serial_mandatory\": false,\n                \"serial_control_id\": 0,\n                \"serial_char_start_overwrite\": \"\",\n                \"serial_char_end_overwrite\": \"\",\n                \"is_guarantee_date\": false,\n                \"is_guarantee_date_mandatory\": false,\n                \"guarantee_days\": 0,\n                \"mandatory_type\": \"N\",\n                \"product_attributes\": [\n                    {\n                        \"id\": 101,\n                        \"name\": \"Color (R-G-B)\",\n                        \"description\": \"\",\n                        \"value_type\": \"L\",\n                        \"is_mandatory\": false,\n                        \"is_instance_attribute\": false,\n                        \"sequence\": 10,\n                        \"product_attribute_values\": [\n                            {\n                                \"id\": 103,\n                                \"value\": \"R\",\n                                \"name\": \"Red\",\n                                \"description\": \"\"\n                            },\n                            {\n                                \"id\": 104,\n                                \"value\": \"G\",\n                                \"name\": \"Green\",\n                                \"description\": \"\"\n                            },\n                            {\n                                \"id\": 105,\n                                \"value\": \"B\",\n                                \"name\": \"Blue\",\n                                \"description\": \"\"\n                            }\n                        ]\n                    },\n                    {\n                        \"id\": 100,\n                        \"name\": \"Size (S-M-L)\",\n                        \"description\": \"\",\n                        \"value_type\": \"L\",\n                        \"is_mandatory\": false,\n                        \"is_instance_attribute\": false,\n                        \"sequence\": 20,\n                        \"product_attribute_values\": [\n                            {\n                                \"id\": 100,\n                                \"value\": \"S\",\n                                \"name\": \"Small\",\n                                \"description\": \"\"\n                            },\n                            {\n                                \"id\": 101,\n                                \"value\": \"M\",\n                                \"name\": \"Medium\",\n                                \"description\": \"\"\n                            },\n                            {\n                                \"id\": 102,\n                                \"value\": \"L\",\n                                \"name\": \"Large\",\n                                \"description\": \"\"\n                            }\n                        ]\n                    }\n                ]\n            },\n            \"product_attribute_instances\": [\n                {\n                    \"id\": 0,\n                    \"value\": \"Green\",\n                    \"value_number\": \"0.0\",\n                    \"product_attribute_set_instance_id\": 102,\n                    \"product_attribute_id\": 101,\n                    \"product_attribute_value_id\": 104\n                },\n                {\n                    \"id\": 0,\n                    \"value\": \"Large\",\n                    \"value_number\": \"0.0\",\n                    \"product_attribute_set_instance_id\": 102,\n                    \"product_attribute_id\": 100,\n                    \"product_attribute_value_id\": 102\n                }\n            ]\n        },      \n\n ```\n\n**Common mistakes**\n\n- the product id does not match any of the records\n    \n\n``` json\n{\n    \"code\": 13,\n    \"message\": \"Producto * No encontrado *\",\n    \"details\": []\n}\n\n ```\n\n**Change control**\n\n| **Version** | date | author | Description of Changes |\n| --- | --- | --- | --- |\n| 1.0 | 15/03/2024 | Ricardo | Initial creation of the document |"
+			},
+			"response": [
+				{
+					"name": "ListProductAttributeSetInstances",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/material-management/products/:product_id/instances",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"material-management",
+								"products",
+								":product_id",
+								"instances"
+							],
+							"variable": [
+								{
+									"key": "product_id",
+									"value": "1000000"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.25.2"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 11 Mar 2024 19:15:46 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "4716"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "grpc-encoding",
+							"value": "identity"
+						},
+						{
+							"key": "grpc-accept-encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "x-envoy-upstream-service-time",
+							"value": "222"
+						},
+						{
+							"key": "grpc-status",
+							"value": "0"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Max-Age",
+							"value": "3600"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"record_count\": \"2\",\n    \"records\": [\n        {\n            \"id\": 102,\n            \"description\": \"Green-Large\",\n            \"lot\": \"\",\n            \"lot_id\": 0,\n            \"serial\": \"\",\n            \"product_attribute_set\": {\n                \"id\": 100,\n                \"name\": \"T-Shirt\",\n                \"description\": \"Product: Size, Color - No Instance\",\n                \"is_instance_attribute\": false,\n                \"is_lot\": false,\n                \"is_lot_mandatory\": false,\n                \"lot_control_id\": 0,\n                \"lot_char_start_overwrite\": \"\",\n                \"lot_char_end_overwrite\": \"\",\n                \"is_serial\": false,\n                \"is_serial_mandatory\": false,\n                \"serial_control_id\": 0,\n                \"serial_char_start_overwrite\": \"\",\n                \"serial_char_end_overwrite\": \"\",\n                \"is_guarantee_date\": false,\n                \"is_guarantee_date_mandatory\": false,\n                \"guarantee_days\": 0,\n                \"mandatory_type\": \"N\",\n                \"product_attributes\": [\n                    {\n                        \"id\": 101,\n                        \"name\": \"Color (R-G-B)\",\n                        \"description\": \"\",\n                        \"value_type\": \"L\",\n                        \"is_mandatory\": false,\n                        \"is_instance_attribute\": false,\n                        \"sequence\": 10,\n                        \"product_attribute_values\": [\n                            {\n                                \"id\": 103,\n                                \"value\": \"R\",\n                                \"name\": \"Red\",\n                                \"description\": \"\"\n                            },\n                            {\n                                \"id\": 104,\n                                \"value\": \"G\",\n                                \"name\": \"Green\",\n                                \"description\": \"\"\n                            },\n                            {\n                                \"id\": 105,\n                                \"value\": \"B\",\n                                \"name\": \"Blue\",\n                                \"description\": \"\"\n                            }\n                        ]\n                    },\n                    {\n                        \"id\": 100,\n                        \"name\": \"Size (S-M-L)\",\n                        \"description\": \"\",\n                        \"value_type\": \"L\",\n                        \"is_mandatory\": false,\n                        \"is_instance_attribute\": false,\n                        \"sequence\": 20,\n                        \"product_attribute_values\": [\n                            {\n                                \"id\": 100,\n                                \"value\": \"S\",\n                                \"name\": \"Small\",\n                                \"description\": \"\"\n                            },\n                            {\n                                \"id\": 101,\n                                \"value\": \"M\",\n                                \"name\": \"Medium\",\n                                \"description\": \"\"\n                            },\n                            {\n                                \"id\": 102,\n                                \"value\": \"L\",\n                                \"name\": \"Large\",\n                                \"description\": \"\"\n                            }\n                        ]\n                    }\n                ]\n            },\n            \"product_attribute_instances\": [\n                {\n                    \"id\": 0,\n                    \"value\": \"Green\",\n                    \"value_number\": \"0.0\",\n                    \"product_attribute_set_instance_id\": 102,\n                    \"product_attribute_id\": 101,\n                    \"product_attribute_value_id\": 104\n                },\n                {\n                    \"id\": 0,\n                    \"value\": \"Large\",\n                    \"value_number\": \"0.0\",\n                    \"product_attribute_set_instance_id\": 102,\n                    \"product_attribute_id\": 100,\n                    \"product_attribute_value_id\": 102\n                }\n            ]\n        },\n        {\n            \"id\": 101,\n            \"description\": \"Red-Large\",\n            \"lot\": \"\",\n            \"lot_id\": 0,\n            \"serial\": \"\",\n            \"product_attribute_set\": {\n                \"id\": 100,\n                \"name\": \"T-Shirt\",\n                \"description\": \"Product: Size, Color - No Instance\",\n                \"is_instance_attribute\": false,\n                \"is_lot\": false,\n                \"is_lot_mandatory\": false,\n                \"lot_control_id\": 0,\n                \"lot_char_start_overwrite\": \"\",\n                \"lot_char_end_overwrite\": \"\",\n                \"is_serial\": false,\n                \"is_serial_mandatory\": false,\n                \"serial_control_id\": 0,\n                \"serial_char_start_overwrite\": \"\",\n                \"serial_char_end_overwrite\": \"\",\n                \"is_guarantee_date\": false,\n                \"is_guarantee_date_mandatory\": false,\n                \"guarantee_days\": 0,\n                \"mandatory_type\": \"N\",\n                \"product_attributes\": [\n                    {\n                        \"id\": 101,\n                        \"name\": \"Color (R-G-B)\",\n                        \"description\": \"\",\n                        \"value_type\": \"L\",\n                        \"is_mandatory\": false,\n                        \"is_instance_attribute\": false,\n                        \"sequence\": 10,\n                        \"product_attribute_values\": [\n                            {\n                                \"id\": 103,\n                                \"value\": \"R\",\n                                \"name\": \"Red\",\n                                \"description\": \"\"\n                            },\n                            {\n                                \"id\": 104,\n                                \"value\": \"G\",\n                                \"name\": \"Green\",\n                                \"description\": \"\"\n                            },\n                            {\n                                \"id\": 105,\n                                \"value\": \"B\",\n                                \"name\": \"Blue\",\n                                \"description\": \"\"\n                            }\n                        ]\n                    },\n                    {\n                        \"id\": 100,\n                        \"name\": \"Size (S-M-L)\",\n                        \"description\": \"\",\n                        \"value_type\": \"L\",\n                        \"is_mandatory\": false,\n                        \"is_instance_attribute\": false,\n                        \"sequence\": 20,\n                        \"product_attribute_values\": [\n                            {\n                                \"id\": 100,\n                                \"value\": \"S\",\n                                \"name\": \"Small\",\n                                \"description\": \"\"\n                            },\n                            {\n                                \"id\": 101,\n                                \"value\": \"M\",\n                                \"name\": \"Medium\",\n                                \"description\": \"\"\n                            },\n                            {\n                                \"id\": 102,\n                                \"value\": \"L\",\n                                \"name\": \"Large\",\n                                \"description\": \"\"\n                            }\n                        ]\n                    }\n                ]\n            },\n            \"product_attribute_instances\": [\n                {\n                    \"id\": 0,\n                    \"value\": \"Red\",\n                    \"value_number\": \"0.0\",\n                    \"product_attribute_set_instance_id\": 101,\n                    \"product_attribute_id\": 101,\n                    \"product_attribute_value_id\": 103\n                },\n                {\n                    \"id\": 0,\n                    \"value\": \"Large\",\n                    \"value_number\": \"0.0\",\n                    \"product_attribute_set_instance_id\": 101,\n                    \"product_attribute_id\": 100,\n                    \"product_attribute_value_id\": 102\n                }\n            ]\n        }\n    ],\n    \"next_page_token\": \"\"\n}"
+				}
+			]
+		},
+		{
+			"name": "ListAvailableWarehouses",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{HOST}}/material-management/warehouses",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"material-management",
+						"warehouses"
+					]
+				},
+				"description": "**Endpoint**: GET /Material_management\n\n**Description**: Returns ListEntities\n\n**FULL URL**: [http://api.adempiere.io](http://api.adempiere.io/api)/material-management/warehouses\n\n**Method**: GET\n\n**Application Example**\n\n``` bash\ncurl --location 'http://api.adempiere.io/material-management/warehouses' \\\n--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMDAwMTU0IiwiQURfQ2xpZW50X0lEIjoxMSwiQURfT3JnX0lEIjo1MDAwNiwiQURfUm9sZV9JRCI6MTAyLCJBRF9Vc2VyX0lEIjoxMDAsIk1fV2FyZWhvdXNlX0lEIjowLCJBRF9MYW5ndWFnZSI6ImVzX01YIiwiaWF0IjoxNzEwNzE1NzAxLCJleHAiOjE3MTA4MDIxMDF9.sdizIymo1Yd8P8w4D4ORu2EfavUfgxsPPfQIJMNJQQ8'\n\n ```\n\n**Example Answer**\n\n``` json\n{\n            \"id\": 0,\n            \"value\": \"0\",\n            \"name\": \"*\",\n            \"description\": \"ALL WAREHOUSE\",\n            \"is_in_transit\": false\n        },\n\n ```\n\n**Change control**\n\n| **Version** | date | author | Description of Changes |\n| --- | --- | --- | --- |\n| 1.0 | 15/03/2024 | Ricardo | Initial creation of the document |"
+			},
+			"response": [
+				{
+					"name": "ListAvailableWarehouses",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/material-management/warehouses",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"material-management",
+								"warehouses"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.25.2"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 07 Mar 2024 14:16:51 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "1604"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "grpc-encoding",
+							"value": "identity"
+						},
+						{
+							"key": "grpc-accept-encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "x-envoy-upstream-service-time",
+							"value": "100"
+						},
+						{
+							"key": "grpc-status",
+							"value": "0"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Max-Age",
+							"value": "3600"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"record_count\": \"12\",\n    \"records\": [\n        {\n            \"id\": 0,\n            \"value\": \"0\",\n            \"name\": \"*\",\n            \"description\": \"ALL WAREHOUSE\",\n            \"is_in_transit\": false\n        },\n        {\n            \"id\": 103,\n            \"value\": \"HQ\",\n            \"name\": \"HQ Warehouse\",\n            \"description\": \"\",\n            \"is_in_transit\": false\n        },\n        {\n            \"id\": 104,\n            \"value\": \"Store Central\",\n            \"name\": \"Store Central\",\n            \"description\": \"\",\n            \"is_in_transit\": false\n        },\n        {\n            \"id\": 50000,\n            \"value\": \"HQT\",\n            \"name\": \"HQ Transit\",\n            \"description\": \"\",\n            \"is_in_transit\": true\n        },\n        {\n            \"id\": 50001,\n            \"value\": \"Furniture\",\n            \"name\": \"Furniture\",\n            \"description\": \"Furniture\",\n            \"is_in_transit\": false\n        },\n        {\n            \"id\": 50002,\n            \"value\": \"Fertilizer\",\n            \"name\": \"Fertilizer\",\n            \"description\": \"Fertilizer\",\n            \"is_in_transit\": false\n        },\n        {\n            \"id\": 50003,\n            \"value\": \"Store North\",\n            \"name\": \"Store North\",\n            \"description\": \"\",\n            \"is_in_transit\": false\n        },\n        {\n            \"id\": 50004,\n            \"value\": \"Store South\",\n            \"name\": \"Store South\",\n            \"description\": \"\",\n            \"is_in_transit\": false\n        },\n        {\n            \"id\": 50005,\n            \"value\": \"Store East\",\n            \"name\": \"Store East\",\n            \"description\": \"\",\n            \"is_in_transit\": false\n        },\n        {\n            \"id\": 50006,\n            \"value\": \"Store West\",\n            \"name\": \"Store West\",\n            \"description\": \"\",\n            \"is_in_transit\": false\n        },\n        {\n            \"id\": 50007,\n            \"value\": \"FertilizerT\",\n            \"name\": \"Fertilizer Transit\",\n            \"description\": \"Fertilizer Transit\",\n            \"is_in_transit\": true\n        },\n        {\n            \"id\": 50008,\n            \"value\": \"FurnitureT\",\n            \"name\": \"Furniture Transit\",\n            \"description\": \"Furniture Transit\",\n            \"is_in_transit\": true\n        }\n    ],\n    \"next_page_token\": \"\"\n}"
+				}
+			]
+		},
+		{
+			"name": "ListLocators",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{HOST}}/material-management/locatos",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"material-management",
+						"locatos"
+					]
+				},
+				"description": "**Endpoint**: GET /Material_management\n\n**Description**: Returns ListLocators\n\n**FULL URL**: [http://api.adempiere.io](http://api.adempiere.io/api)/material-management/locatos\n\n**Method**: GET\n\n**Application Example**\n\n``` bash\ncurl --location 'http://api.adempiere.io/material-management/locatos' \\\n--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMDAwMTU0IiwiQURfQ2xpZW50X0lEIjoxMSwiQURfT3JnX0lEIjo1MDAwNiwiQURfUm9sZV9JRCI6MTAyLCJBRF9Vc2VyX0lEIjoxMDAsIk1fV2FyZWhvdXNlX0lEIjowLCJBRF9MYW5ndWFnZSI6ImVzX01YIiwiaWF0IjoxNzEwNzE1NzAxLCJleHAiOjE3MTA4MDIxMDF9.sdizIymo1Yd8P8w4D4ORu2EfavUfgxsPPfQIJMNJQQ8'\n\n ```\n\n**Example Answer**\n\n``` json\n{\n            \"id\": 1000000,\n            \"value\": \"Standard\",\n            \"is_default\": true,\n            \"aisle\": \"0\",\n            \"bin\": \"0\",\n            \"level\": \"0\"\n        },\n\n ```\n\n**Change control**\n\n| **Version** | date | author | Description of Changes |\n| --- | --- | --- | --- |\n| 1.0 | 15/03/2024 | Ricardo | Initial creation of the document |"
+			},
+			"response": [
+				{
+					"name": "ListLocators",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/material-management/locatos",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"material-management",
+								"locatos"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.25.2"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 07 Mar 2024 14:17:20 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "3495"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "grpc-encoding",
+							"value": "identity"
+						},
+						{
+							"key": "grpc-accept-encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "x-envoy-upstream-service-time",
+							"value": "114"
+						},
+						{
+							"key": "grpc-status",
+							"value": "0"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Max-Age",
+							"value": "3600"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"record_count\": \"12\",\n    \"records\": [\n        {\n            \"id\": 1000000,\n            \"value\": \"Standard\",\n            \"is_default\": true,\n            \"aisle\": \"0\",\n            \"bin\": \"0\",\n            \"level\": \"0\"\n        },\n        {\n            \"id\": 101,\n            \"value\": \"Default HQ Locator\",\n            \"is_default\": true,\n            \"aisle\": \"0\",\n            \"bin\": \"0\",\n            \"level\": \"0\",\n            \"warehouse\": {\n                \"id\": 103,\n                \"value\": \"HQ\",\n                \"name\": \"HQ Warehouse\",\n                \"description\": \"\",\n                \"is_in_transit\": false\n            }\n        },\n        {\n            \"id\": 102,\n            \"value\": \"Default Store Locator\",\n            \"is_default\": true,\n            \"aisle\": \"0\",\n            \"bin\": \"0\",\n            \"level\": \"0\",\n            \"warehouse\": {\n                \"id\": 104,\n                \"value\": \"Store Central\",\n                \"name\": \"Store Central\",\n                \"description\": \"\",\n                \"is_in_transit\": false\n            }\n        },\n        {\n            \"id\": 50000,\n            \"value\": \"HQ Transit\",\n            \"is_default\": true,\n            \"aisle\": \"HQ Transit\",\n            \"bin\": \"HQ Transit\",\n            \"level\": \"HQ Transit\",\n            \"warehouse\": {\n                \"id\": 50000,\n                \"value\": \"HQT\",\n                \"name\": \"HQ Transit\",\n                \"description\": \"\",\n                \"is_in_transit\": true\n            }\n        },\n        {\n            \"id\": 50004,\n            \"value\": \"Furniture\",\n            \"is_default\": true,\n            \"aisle\": \"Furniture\",\n            \"bin\": \"Furniture\",\n            \"level\": \"Furniture\",\n            \"warehouse\": {\n                \"id\": 50001,\n                \"value\": \"Furniture\",\n                \"name\": \"Furniture\",\n                \"description\": \"Furniture\",\n                \"is_in_transit\": false\n            }\n        },\n        {\n            \"id\": 50001,\n            \"value\": \"Fertilizer\",\n            \"is_default\": true,\n            \"aisle\": \"Fertilizer\",\n            \"bin\": \"Fertilizer\",\n            \"level\": \"Fertilizer\",\n            \"warehouse\": {\n                \"id\": 50002,\n                \"value\": \"Fertilizer\",\n                \"name\": \"Fertilizer\",\n                \"description\": \"Fertilizer\",\n                \"is_in_transit\": false\n            }\n        },\n        {\n            \"id\": 50002,\n            \"value\": \"Store North\",\n            \"is_default\": true,\n            \"aisle\": \"Store North\",\n            \"bin\": \"Store North\",\n            \"level\": \"Store North\",\n            \"warehouse\": {\n                \"id\": 50003,\n                \"value\": \"Store North\",\n                \"name\": \"Store North\",\n                \"description\": \"\",\n                \"is_in_transit\": false\n            }\n        },\n        {\n            \"id\": 50003,\n            \"value\": \"Store South\",\n            \"is_default\": true,\n            \"aisle\": \"Store South\",\n            \"bin\": \"Store South\",\n            \"level\": \"Store South\",\n            \"warehouse\": {\n                \"id\": 50004,\n                \"value\": \"Store South\",\n                \"name\": \"Store South\",\n                \"description\": \"\",\n                \"is_in_transit\": false\n            }\n        },\n        {\n            \"id\": 50005,\n            \"value\": \"Store East\",\n            \"is_default\": true,\n            \"aisle\": \"Store East\",\n            \"bin\": \"Store East\",\n            \"level\": \"Store East\",\n            \"warehouse\": {\n                \"id\": 50005,\n                \"value\": \"Store East\",\n                \"name\": \"Store East\",\n                \"description\": \"\",\n                \"is_in_transit\": false\n            }\n        },\n        {\n            \"id\": 50006,\n            \"value\": \"Store West\",\n            \"is_default\": true,\n            \"aisle\": \"Store West\",\n            \"bin\": \"Store West\",\n            \"level\": \"Store West\",\n            \"warehouse\": {\n                \"id\": 50006,\n                \"value\": \"Store West\",\n                \"name\": \"Store West\",\n                \"description\": \"\",\n                \"is_in_transit\": false\n            }\n        },\n        {\n            \"id\": 50007,\n            \"value\": \"Fertilizer Transit\",\n            \"is_default\": true,\n            \"aisle\": \"Fertilizer Transit\",\n            \"bin\": \"Fertilizer Transit\",\n            \"level\": \"Fertilizer Transit\",\n            \"warehouse\": {\n                \"id\": 50007,\n                \"value\": \"FertilizerT\",\n                \"name\": \"Fertilizer Transit\",\n                \"description\": \"Fertilizer Transit\",\n                \"is_in_transit\": true\n            }\n        },\n        {\n            \"id\": 50008,\n            \"value\": \"Furniture Transit\",\n            \"is_default\": true,\n            \"aisle\": \"Furniture Transit\",\n            \"bin\": \"Furniture Transit\",\n            \"level\": \"Furniture Transit\",\n            \"warehouse\": {\n                \"id\": 50008,\n                \"value\": \"FurnitureT\",\n                \"name\": \"Furniture Transit\",\n                \"description\": \"Furniture Transit\",\n                \"is_in_transit\": true\n            }\n        }\n    ],\n    \"next_page_token\": \"\"\n}"
+				}
+			]
+		}
+	]
+}
