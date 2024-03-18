@@ -1,0 +1,1016 @@
+{
+	"info": {
+		"_postman_id": "9296740d-3b50-45e4-a87c-6df1b753d4d0",
+		"name": "Location_address",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "28978517"
+	},
+	"item": [
+		{
+			"name": "location_address_country_id",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{HOST}}/location-address/countries/:country_id/cities",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"location-address",
+						"countries",
+						":country_id",
+						"cities"
+					],
+					"variable": [
+						{
+							"key": "country_id",
+							"value": "1"
+						}
+					]
+				},
+				"description": "**Endpoint**: GET /Location_address\n\n**Description**: Returns ListCities\n\n**FULL URL**: [http://api.adempiere.io](http://api.adempiere.io/api)/location-address/countries/{country_id}/cities\n\n**Method**: GET\n\n**Parameters (Params)**\n\ncountry_id (Int32, Mandatory)\n\n**Application Example**\n\n``` bash\ncurl --location 'http://api.adempiere.io/location-address/countries/100/cities' \\\n--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMDAwMTU0IiwiQURfQ2xpZW50X0lEIjoxMSwiQURfT3JnX0lEIjo1MDAwNiwiQURfUm9sZV9JRCI6MTAyLCJBRF9Vc2VyX0lEIjoxMDAsIk1fV2FyZWhvdXNlX0lEIjowLCJBRF9MYW5ndWFnZSI6ImVzX01YIiwiaWF0IjoxNzEwNzE1NzAxLCJleHAiOjE3MTA4MDIxMDF9.sdizIymo1Yd8P8w4D4ORu2EfavUfgxsPPfQIJMNJQQ8'\n\n ```\n\n**Example Answer**\n\n``` json\n{\n    \"record_count\": \"1\",\n    \"cities\": [\n        {\n            \"id\": 100,\n            \"name\": \"Monroe\"\n        }\n    ],\n    \"next_page_token\": \"\"\n}\n\n ```\n\n**Common mistakes**\n\n- the country id is not registered\n    \n\n``` json\n{\n    \"code\": 13,\n    \"message\": \"País * No encontrado *\",\n    \"details\": []\n}\n\n ```\n\n**Change control**\n\n| **Version** | date | author | Description of Changes |\n| --- | --- | --- | --- |\n| 1.0 | 15/03/2024 | Ricardo | Initial creation of the document |"
+			},
+			"response": [
+				{
+					"name": "location_address_country_id",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/location-address/countries/:country_id/cities",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"location-address",
+								"countries",
+								":country_id",
+								"cities"
+							],
+							"variable": [
+								{
+									"key": "country_id",
+									"value": "100"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.25.2"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 07 Mar 2024 13:24:20 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "108"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "grpc-encoding",
+							"value": "identity"
+						},
+						{
+							"key": "grpc-accept-encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "x-envoy-upstream-service-time",
+							"value": "134"
+						},
+						{
+							"key": "grpc-status",
+							"value": "0"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Max-Age",
+							"value": "3600"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"record_count\": \"1\",\n    \"cities\": [\n        {\n            \"id\": 100,\n            \"name\": \"Monroe\"\n        }\n    ],\n    \"next_page_token\": \"\"\n}"
+				}
+			]
+		},
+		{
+			"name": "ListCountries",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{HOST}}/location-address/countries",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"location-address",
+						"countries"
+					]
+				},
+				"description": "**Endpoint**: GET /Location_address\n\n**Description**: Returns ListCountries\n\n**FULL URL**: [http://api.adempiere.io](http://api.adempiere.io/api)/location-address/countries\n\n**Method**: GET\n\n**Application Example**\n\n``` bash\ncurl --location 'http://api.adempiere.io/location-address/countries' \\\n--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMDAwMTU0IiwiQURfQ2xpZW50X0lEIjoxMSwiQURfT3JnX0lEIjo1MDAwNiwiQURfUm9sZV9JRCI6MTAyLCJBRF9Vc2VyX0lEIjoxMDAsIk1fV2FyZWhvdXNlX0lEIjowLCJBRF9MYW5ndWFnZSI6ImVzX01YIiwiaWF0IjoxNzEwNzE1NzAxLCJleHAiOjE3MTA4MDIxMDF9.sdizIymo1Yd8P8w4D4ORu2EfavUfgxsPPfQIJMNJQQ8'\n\n ```\n\n**Example Answer**\n\n``` json\n {\n            \"id\": 110,\n            \"name\": \"Afganistán\"\n        },\n\n ```\n\n**Change control**\n\n| **Version** | date | author | Description of Changes |\n| --- | --- | --- | --- |\n| 1.0 | 15/03/2024 | Ricardo | Initial creation of the document |"
+			},
+			"response": [
+				{
+					"name": "ListCountries",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/location-address/countries",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"location-address",
+								"countries"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.25.2"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 07 Mar 2024 13:14:51 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "11871"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "grpc-encoding",
+							"value": "identity"
+						},
+						{
+							"key": "grpc-accept-encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "x-envoy-upstream-service-time",
+							"value": "114"
+						},
+						{
+							"key": "grpc-status",
+							"value": "0"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Max-Age",
+							"value": "3600"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"record_count\": \"246\",\n    \"countries\": [\n        {\n            \"id\": 110,\n            \"name\": \"Afghanistan\"\n        },\n        {\n            \"id\": 50000,\n            \"name\": \"Åland Islands\"\n        },\n        {\n            \"id\": 111,\n            \"name\": \"Albania\"\n        },\n        {\n            \"id\": 112,\n            \"name\": \"Algeria\"\n        },\n        {\n            \"id\": 113,\n            \"name\": \"American Samoa\"\n        },\n        {\n            \"id\": 114,\n            \"name\": \"Andorra\"\n        },\n        {\n            \"id\": 115,\n            \"name\": \"Angola\"\n        },\n        {\n            \"id\": 116,\n            \"name\": \"Anguilla\"\n        },\n        {\n            \"id\": 117,\n            \"name\": \"Antarctica\"\n        },\n        {\n            \"id\": 118,\n            \"name\": \"Antigua And Barbuda\"\n        },\n        {\n            \"id\": 119,\n            \"name\": \"Argentina\"\n        },\n        {\n            \"id\": 120,\n            \"name\": \"Armenia\"\n        },\n        {\n            \"id\": 121,\n            \"name\": \"Aruba\"\n        },\n        {\n            \"id\": 122,\n            \"name\": \"Australia\"\n        },\n        {\n            \"id\": 108,\n            \"name\": \"Austria\"\n        },\n        {\n            \"id\": 124,\n            \"name\": \"Azerbaijan\"\n        },\n        {\n            \"id\": 125,\n            \"name\": \"Bahamas\"\n        },\n        {\n            \"id\": 126,\n            \"name\": \"Bahrain\"\n        },\n        {\n            \"id\": 127,\n            \"name\": \"Bangladesh\"\n        },\n        {\n            \"id\": 128,\n            \"name\": \"Barbados\"\n        },\n        {\n            \"id\": 129,\n            \"name\": \"Belarus\"\n        },\n        {\n            \"id\": 103,\n            \"name\": \"Belgium\"\n        },\n        {\n            \"id\": 131,\n            \"name\": \"Belize\"\n        },\n        {\n            \"id\": 132,\n            \"name\": \"Benin\"\n        },\n        {\n            \"id\": 133,\n            \"name\": \"Bermuda\"\n        },\n        {\n            \"id\": 134,\n            \"name\": \"Bhutan\"\n        },\n        {\n            \"id\": 135,\n            \"name\": \"Bolivia\"\n        },\n        {\n            \"id\": 136,\n            \"name\": \"Bosnia And Herzegovina\"\n        },\n        {\n            \"id\": 137,\n            \"name\": \"Botswana\"\n        },\n        {\n            \"id\": 138,\n            \"name\": \"Bouvet Island\"\n        },\n        {\n            \"id\": 139,\n            \"name\": \"Brazil\"\n        },\n        {\n            \"id\": 140,\n            \"name\": \"British Indian Ocean Territory\"\n        },\n        {\n            \"id\": 141,\n            \"name\": \"Brunei Darussalam\"\n        },\n        {\n            \"id\": 142,\n            \"name\": \"Bulgaria\"\n        },\n        {\n            \"id\": 143,\n            \"name\": \"Burkina Faso\"\n        },\n        {\n            \"id\": 144,\n            \"name\": \"Burundi\"\n        },\n        {\n            \"id\": 145,\n            \"name\": \"Cambodia\"\n        },\n        {\n            \"id\": 146,\n            \"name\": \"Cameroon\"\n        },\n        {\n            \"id\": 109,\n            \"name\": \"Canada\"\n        },\n        {\n            \"id\": 148,\n            \"name\": \"Cape Verde\"\n        },\n        {\n            \"id\": 149,\n            \"name\": \"Cayman Islands\"\n        },\n        {\n            \"id\": 150,\n            \"name\": \"Central African Republic\"\n        },\n        {\n            \"id\": 151,\n            \"name\": \"Chad\"\n        },\n        {\n            \"id\": 152,\n            \"name\": \"Chile\"\n        },\n        {\n            \"id\": 153,\n            \"name\": \"China\"\n        },\n        {\n            \"id\": 154,\n            \"name\": \"Christmas Island\"\n        },\n        {\n            \"id\": 155,\n            \"name\": \"Cocos (keeling) Islands\"\n        },\n        {\n            \"id\": 156,\n            \"name\": \"Colombia\"\n        },\n        {\n            \"id\": 157,\n            \"name\": \"Comoros\"\n        },\n        {\n            \"id\": 158,\n            \"name\": \"Congo\"\n        },\n        {\n            \"id\": 159,\n            \"name\": \"Congo The Democratic Republic Of The\"\n        },\n        {\n            \"id\": 160,\n            \"name\": \"Cook Islands\"\n        },\n        {\n            \"id\": 161,\n            \"name\": \"Costa Rica\"\n        },\n        {\n            \"id\": 162,\n            \"name\": \"Cote D'ivoire\"\n        },\n        {\n            \"id\": 163,\n            \"name\": \"Croatia\"\n        },\n        {\n            \"id\": 164,\n            \"name\": \"Cuba\"\n        },\n        {\n            \"id\": 165,\n            \"name\": \"Cyprus\"\n        },\n        {\n            \"id\": 166,\n            \"name\": \"Czech Republic\"\n        },\n        {\n            \"id\": 167,\n            \"name\": \"Denmark\"\n        },\n        {\n            \"id\": 168,\n            \"name\": \"Djibouti\"\n        },\n        {\n            \"id\": 169,\n            \"name\": \"Dominica\"\n        },\n        {\n            \"id\": 170,\n            \"name\": \"Dominican Republic\"\n        },\n        {\n            \"id\": 171,\n            \"name\": \"Ecuador\"\n        },\n        {\n            \"id\": 172,\n            \"name\": \"Egypt\"\n        },\n        {\n            \"id\": 173,\n            \"name\": \"El Salvador\"\n        },\n        {\n            \"id\": 174,\n            \"name\": \"Equatorial Guinea\"\n        },\n        {\n            \"id\": 175,\n            \"name\": \"Eritrea\"\n        },\n        {\n            \"id\": 176,\n            \"name\": \"Estonia\"\n        },\n        {\n            \"id\": 177,\n            \"name\": \"Ethiopia\"\n        },\n        {\n            \"id\": 178,\n            \"name\": \"Falkland Islands (malvinas)\"\n        },\n        {\n            \"id\": 179,\n            \"name\": \"Faroe Islands\"\n        },\n        {\n            \"id\": 180,\n            \"name\": \"Fiji\"\n        },\n        {\n            \"id\": 181,\n            \"name\": \"Finland\"\n        },\n        {\n            \"id\": 102,\n            \"name\": \"France\"\n        },\n        {\n            \"id\": 183,\n            \"name\": \"French Guiana\"\n        },\n        {\n            \"id\": 184,\n            \"name\": \"French Polynesia\"\n        },\n        {\n            \"id\": 185,\n            \"name\": \"French Southern Territories\"\n        },\n        {\n            \"id\": 186,\n            \"name\": \"Gabon\"\n        },\n        {\n            \"id\": 187,\n            \"name\": \"Gambia\"\n        },\n        {\n            \"id\": 188,\n            \"name\": \"Georgia\"\n        },\n        {\n            \"id\": 101,\n            \"name\": \"Germany - Deutschland\"\n        },\n        {\n            \"id\": 190,\n            \"name\": \"Ghana\"\n        },\n        {\n            \"id\": 191,\n            \"name\": \"Gibraltar\"\n        },\n        {\n            \"id\": 192,\n            \"name\": \"Greece\"\n        },\n        {\n            \"id\": 193,\n            \"name\": \"Greenland\"\n        },\n        {\n            \"id\": 194,\n            \"name\": \"Grenada\"\n        },\n        {\n            \"id\": 195,\n            \"name\": \"Guadeloupe\"\n        },\n        {\n            \"id\": 196,\n            \"name\": \"Guam\"\n        },\n        {\n            \"id\": 197,\n            \"name\": \"Guatemala\"\n        },\n        {\n            \"id\": 50002,\n            \"name\": \"Guernsey\"\n        },\n        {\n            \"id\": 198,\n            \"name\": \"Guinea\"\n        },\n        {\n            \"id\": 199,\n            \"name\": \"Guinea-bissau\"\n        },\n        {\n            \"id\": 200,\n            \"name\": \"Guyana\"\n        },\n        {\n            \"id\": 201,\n            \"name\": \"Haiti\"\n        },\n        {\n            \"id\": 202,\n            \"name\": \"Heard Island And Mcdonald Islands\"\n        },\n        {\n            \"id\": 203,\n            \"name\": \"Holy See (vatican City State)\"\n        },\n        {\n            \"id\": 204,\n            \"name\": \"Honduras\"\n        },\n        {\n            \"id\": 205,\n            \"name\": \"Hong Kong\"\n        },\n        {\n            \"id\": 206,\n            \"name\": \"Hungary\"\n        },\n        {\n            \"id\": 207,\n            \"name\": \"Iceland\"\n        },\n        {\n            \"id\": 208,\n            \"name\": \"India\"\n        },\n        {\n            \"id\": 209,\n            \"name\": \"Indonesia\"\n        },\n        {\n            \"id\": 210,\n            \"name\": \"Iran Islamic Republic Of\"\n        },\n        {\n            \"id\": 211,\n            \"name\": \"Iraq\"\n        },\n        {\n            \"id\": 212,\n            \"name\": \"Ireland\"\n        },\n        {\n            \"id\": 50003,\n            \"name\": \"Isle of Man\"\n        },\n        {\n            \"id\": 213,\n            \"name\": \"Israel\"\n        },\n        {\n            \"id\": 214,\n            \"name\": \"Italy\"\n        },\n        {\n            \"id\": 215,\n            \"name\": \"Jamaica\"\n        },\n        {\n            \"id\": 216,\n            \"name\": \"Japan\"\n        },\n        {\n            \"id\": 50004,\n            \"name\": \"Jersey\"\n        },\n        {\n            \"id\": 217,\n            \"name\": \"Jordan\"\n        },\n        {\n            \"id\": 218,\n            \"name\": \"Kazakhstan\"\n        },\n        {\n            \"id\": 219,\n            \"name\": \"Kenya\"\n        },\n        {\n            \"id\": 220,\n            \"name\": \"Kiribati\"\n        },\n        {\n            \"id\": 221,\n            \"name\": \"Korea Democratic People's Republic Of\"\n        },\n        {\n            \"id\": 222,\n            \"name\": \"Korea Republic Of\"\n        },\n        {\n            \"id\": 223,\n            \"name\": \"Kuwait\"\n        },\n        {\n            \"id\": 224,\n            \"name\": \"Kyrgyzstan\"\n        },\n        {\n            \"id\": 225,\n            \"name\": \"Lao People's Democratic Republic\"\n        },\n        {\n            \"id\": 226,\n            \"name\": \"Latvia\"\n        },\n        {\n            \"id\": 227,\n            \"name\": \"Lebanon\"\n        },\n        {\n            \"id\": 228,\n            \"name\": \"Lesotho\"\n        },\n        {\n            \"id\": 229,\n            \"name\": \"Liberia\"\n        },\n        {\n            \"id\": 230,\n            \"name\": \"Libyan Arab Jamahiriya\"\n        },\n        {\n            \"id\": 231,\n            \"name\": \"Liechtenstein\"\n        },\n        {\n            \"id\": 232,\n            \"name\": \"Lithuania\"\n        },\n        {\n            \"id\": 233,\n            \"name\": \"Luxembourg\"\n        },\n        {\n            \"id\": 234,\n            \"name\": \"Macao\"\n        },\n        {\n            \"id\": 235,\n            \"name\": \"Macedonia Former Yugoslav Republic Of\"\n        },\n        {\n            \"id\": 236,\n            \"name\": \"Madagascar\"\n        },\n        {\n            \"id\": 237,\n            \"name\": \"Malawi\"\n        },\n        {\n            \"id\": 238,\n            \"name\": \"Malaysia\"\n        },\n        {\n            \"id\": 239,\n            \"name\": \"Maldives\"\n        },\n        {\n            \"id\": 240,\n            \"name\": \"Mali\"\n        },\n        {\n            \"id\": 241,\n            \"name\": \"Malta\"\n        },\n        {\n            \"id\": 242,\n            \"name\": \"Marshall Islands\"\n        },\n        {\n            \"id\": 243,\n            \"name\": \"Martinique\"\n        },\n        {\n            \"id\": 244,\n            \"name\": \"Mauritania\"\n        },\n        {\n            \"id\": 245,\n            \"name\": \"Mauritius\"\n        },\n        {\n            \"id\": 246,\n            \"name\": \"Mayotte\"\n        },\n        {\n            \"id\": 247,\n            \"name\": \"Mexico\"\n        },\n        {\n            \"id\": 248,\n            \"name\": \"Micronesia Federated States Of\"\n        },\n        {\n            \"id\": 249,\n            \"name\": \"Moldova Republic Of\"\n        },\n        {\n            \"id\": 250,\n            \"name\": \"Monaco\"\n        },\n        {\n            \"id\": 251,\n            \"name\": \"Mongolia\"\n        },\n        {\n            \"id\": 350,\n            \"name\": \"Montenegro\"\n        },\n        {\n            \"id\": 252,\n            \"name\": \"Montserrat\"\n        },\n        {\n            \"id\": 253,\n            \"name\": \"Morocco\"\n        },\n        {\n            \"id\": 254,\n            \"name\": \"Mozambique\"\n        },\n        {\n            \"id\": 255,\n            \"name\": \"Myanmar\"\n        },\n        {\n            \"id\": 256,\n            \"name\": \"Namibia\"\n        },\n        {\n            \"id\": 257,\n            \"name\": \"Nauru\"\n        },\n        {\n            \"id\": 105,\n            \"name\": \"Nederland\"\n        },\n        {\n            \"id\": 258,\n            \"name\": \"Nepal\"\n        },\n        {\n            \"id\": 260,\n            \"name\": \"Netherlands Antilles\"\n        },\n        {\n            \"id\": 261,\n            \"name\": \"New Caledonia\"\n        },\n        {\n            \"id\": 262,\n            \"name\": \"New Zealand\"\n        },\n        {\n            \"id\": 263,\n            \"name\": \"Nicaragua\"\n        },\n        {\n            \"id\": 264,\n            \"name\": \"Niger\"\n        },\n        {\n            \"id\": 265,\n            \"name\": \"Nigeria\"\n        },\n        {\n            \"id\": 266,\n            \"name\": \"Niue\"\n        },\n        {\n            \"id\": 267,\n            \"name\": \"Norfolk Island\"\n        },\n        {\n            \"id\": 268,\n            \"name\": \"Northern Mariana Islands\"\n        },\n        {\n            \"id\": 269,\n            \"name\": \"Norway\"\n        },\n        {\n            \"id\": 270,\n            \"name\": \"Oman\"\n        },\n        {\n            \"id\": 271,\n            \"name\": \"Pakistan\"\n        },\n        {\n            \"id\": 272,\n            \"name\": \"Palau\"\n        },\n        {\n            \"id\": 273,\n            \"name\": \"Palestinian Territory Occupied\"\n        },\n        {\n            \"id\": 274,\n            \"name\": \"Panama\"\n        },\n        {\n            \"id\": 275,\n            \"name\": \"Papua New Guinea\"\n        },\n        {\n            \"id\": 276,\n            \"name\": \"Paraguay\"\n        },\n        {\n            \"id\": 277,\n            \"name\": \"Peru\"\n        },\n        {\n            \"id\": 278,\n            \"name\": \"Philippines\"\n        },\n        {\n            \"id\": 279,\n            \"name\": \"Pitcairn\"\n        },\n        {\n            \"id\": 280,\n            \"name\": \"Poland\"\n        },\n        {\n            \"id\": 281,\n            \"name\": \"Portugal\"\n        },\n        {\n            \"id\": 282,\n            \"name\": \"Puerto Rico\"\n        },\n        {\n            \"id\": 283,\n            \"name\": \"Qatar\"\n        },\n        {\n            \"id\": 284,\n            \"name\": \"Reunion\"\n        },\n        {\n            \"id\": 285,\n            \"name\": \"Romania\"\n        },\n        {\n            \"id\": 286,\n            \"name\": \"Russian Federation\"\n        },\n        {\n            \"id\": 287,\n            \"name\": \"Rwanda\"\n        },\n        {\n            \"id\": 50001,\n            \"name\": \"Saint Barthélemy\"\n        },\n        {\n            \"id\": 288,\n            \"name\": \"Saint Helena\"\n        },\n        {\n            \"id\": 289,\n            \"name\": \"Saint Kitts And Nevis\"\n        },\n        {\n            \"id\": 290,\n            \"name\": \"Saint Lucia\"\n        },\n        {\n            \"id\": 50005,\n            \"name\": \"Saint Martin\"\n        },\n        {\n            \"id\": 291,\n            \"name\": \"Saint Pierre And Miquelon\"\n        },\n        {\n            \"id\": 292,\n            \"name\": \"Saint Vincent And The Grenadines\"\n        },\n        {\n            \"id\": 293,\n            \"name\": \"Samoa\"\n        },\n        {\n            \"id\": 294,\n            \"name\": \"San Marino\"\n        },\n        {\n            \"id\": 295,\n            \"name\": \"Sao Tome And Principe\"\n        },\n        {\n            \"id\": 296,\n            \"name\": \"Saudi Arabia\"\n        },\n        {\n            \"id\": 297,\n            \"name\": \"Senegal\"\n        },\n        {\n            \"id\": 349,\n            \"name\": \"Serbia\"\n        },\n        {\n            \"id\": 298,\n            \"name\": \"Seychelles\"\n        },\n        {\n            \"id\": 299,\n            \"name\": \"Sierra Leone\"\n        },\n        {\n            \"id\": 300,\n            \"name\": \"Singapore\"\n        },\n        {\n            \"id\": 301,\n            \"name\": \"Slovakia\"\n        },\n        {\n            \"id\": 302,\n            \"name\": \"Slovenia\"\n        },\n        {\n            \"id\": 303,\n            \"name\": \"Solomon Islands\"\n        },\n        {\n            \"id\": 304,\n            \"name\": \"Somalia\"\n        },\n        {\n            \"id\": 305,\n            \"name\": \"South Africa\"\n        },\n        {\n            \"id\": 306,\n            \"name\": \"South Georgia And The South Sandwich Islands\"\n        },\n        {\n            \"id\": 106,\n            \"name\": \"Spain\"\n        },\n        {\n            \"id\": 308,\n            \"name\": \"Sri Lanka\"\n        },\n        {\n            \"id\": 309,\n            \"name\": \"Sudan\"\n        },\n        {\n            \"id\": 310,\n            \"name\": \"Suriname\"\n        },\n        {\n            \"id\": 311,\n            \"name\": \"Svalbard And Jan Mayen\"\n        },\n        {\n            \"id\": 312,\n            \"name\": \"Swaziland\"\n        },\n        {\n            \"id\": 313,\n            \"name\": \"Sweden\"\n        },\n        {\n            \"id\": 107,\n            \"name\": \"Switzerland\"\n        },\n        {\n            \"id\": 315,\n            \"name\": \"Syrian Arab Republic\"\n        },\n        {\n            \"id\": 316,\n            \"name\": \"Taiwan\"\n        },\n        {\n            \"id\": 317,\n            \"name\": \"Tajikistan\"\n        },\n        {\n            \"id\": 318,\n            \"name\": \"Tanzania United Republic Of\"\n        },\n        {\n            \"id\": 319,\n            \"name\": \"Thailand\"\n        },\n        {\n            \"id\": 320,\n            \"name\": \"Timor-leste\"\n        },\n        {\n            \"id\": 321,\n            \"name\": \"Togo\"\n        },\n        {\n            \"id\": 322,\n            \"name\": \"Tokelau\"\n        },\n        {\n            \"id\": 323,\n            \"name\": \"Tonga\"\n        },\n        {\n            \"id\": 324,\n            \"name\": \"Trinidad And Tobago\"\n        },\n        {\n            \"id\": 325,\n            \"name\": \"Tunisia\"\n        },\n        {\n            \"id\": 326,\n            \"name\": \"Turkey\"\n        },\n        {\n            \"id\": 327,\n            \"name\": \"Turkmenistan\"\n        },\n        {\n            \"id\": 328,\n            \"name\": \"Turks And Caicos Islands\"\n        },\n        {\n            \"id\": 329,\n            \"name\": \"Tuvalu\"\n        },\n        {\n            \"id\": 330,\n            \"name\": \"Uganda\"\n        },\n        {\n            \"id\": 331,\n            \"name\": \"Ukraine\"\n        },\n        {\n            \"id\": 332,\n            \"name\": \"United Arab Emirates\"\n        },\n        {\n            \"id\": 333,\n            \"name\": \"United Kingdom\"\n        },\n        {\n            \"id\": 100,\n            \"name\": \"United States\"\n        },\n        {\n            \"id\": 335,\n            \"name\": \"United States Minor Outlying Islands\"\n        },\n        {\n            \"id\": 336,\n            \"name\": \"Uruguay\"\n        },\n        {\n            \"id\": 337,\n            \"name\": \"Uzbekistan\"\n        },\n        {\n            \"id\": 338,\n            \"name\": \"Vanuatu\"\n        },\n        {\n            \"id\": 339,\n            \"name\": \"Venezuela\"\n        },\n        {\n            \"id\": 340,\n            \"name\": \"Viet Nam\"\n        },\n        {\n            \"id\": 341,\n            \"name\": \"Virgin Islands British\"\n        },\n        {\n            \"id\": 342,\n            \"name\": \"Virgin Islands U.s.\"\n        },\n        {\n            \"id\": 343,\n            \"name\": \"Wallis And Futuna\"\n        },\n        {\n            \"id\": 344,\n            \"name\": \"Western Sahara\"\n        },\n        {\n            \"id\": 345,\n            \"name\": \"Yemen\"\n        },\n        {\n            \"id\": 347,\n            \"name\": \"Zambia\"\n        },\n        {\n            \"id\": 348,\n            \"name\": \"Zimbabwe\"\n        }\n    ],\n    \"next_page_token\": \"\"\n}"
+				}
+			]
+		},
+		{
+			"name": "ListRegions",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{HOST}}/location-address/countries/:country_id/regions",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"location-address",
+						"countries",
+						":country_id",
+						"regions"
+					],
+					"variable": [
+						{
+							"key": "country_id",
+							"value": "100"
+						}
+					]
+				},
+				"description": "**Endpoint**: GET /Location_address\n\n**Description**: Returns ListRegions\n\n**FULL URL**: [http://api.adempiere.io](http://api.adempiere.io/api)/location-address/countries/{country_id}/regions\n\n**Method**: GET\n\n**Parameters (Params)**\n\ncountry_id (Int32, Mandatory)\n\n**Application Example**\n\n``` bash\ncurl --location 'http://api.adempiere.io/location-address/countries/100/regions' \\\n--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMDAwMTU0IiwiQURfQ2xpZW50X0lEIjoxMSwiQURfT3JnX0lEIjo1MDAwNiwiQURfUm9sZV9JRCI6MTAyLCJBRF9Vc2VyX0lEIjoxMDAsIk1fV2FyZWhvdXNlX0lEIjowLCJBRF9MYW5ndWFnZSI6ImVzX01YIiwiaWF0IjoxNzEwNzE1NzAxLCJleHAiOjE3MTA4MDIxMDF9.sdizIymo1Yd8P8w4D4ORu2EfavUfgxsPPfQIJMNJQQ8'\n\n ```\n\n**Example Answer**\n\n``` json\n {\n            \"id\": 118,\n            \"name\": \"AK\"\n        }\n\n ```\n\n**Common mistakes**\n\n- the country id is not registered\n    \n\n``` json\n{\n    \"code\": 13,\n    \"message\": \"País * No encontrado *\",\n    \"details\": []\n}\n\n ```\n\n**Change control**\n\n| **Version** | date | author | Description of Changes |\n| --- | --- | --- | --- |\n| 1.0 | 15/03/2024 | Ricardo | Initial creation of the document |"
+			},
+			"response": [
+				{
+					"name": "ListRegions",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/location-address/countries/:country_id/regions",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"location-address",
+								"countries",
+								":country_id",
+								"regions"
+							],
+							"variable": [
+								{
+									"key": "country_id",
+									"value": "100"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.25.2"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 07 Mar 2024 13:20:16 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "2056"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "grpc-encoding",
+							"value": "identity"
+						},
+						{
+							"key": "grpc-accept-encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "x-envoy-upstream-service-time",
+							"value": "141"
+						},
+						{
+							"key": "grpc-status",
+							"value": "0"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Max-Age",
+							"value": "3600"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"record_count\": \"51\",\n    \"regions\": [\n        {\n            \"id\": 118,\n            \"name\": \"AK\"\n        },\n        {\n            \"id\": 114,\n            \"name\": \"AL\"\n        },\n        {\n            \"id\": 144,\n            \"name\": \"AR\"\n        },\n        {\n            \"id\": 145,\n            \"name\": \"AZ\"\n        },\n        {\n            \"id\": 103,\n            \"name\": \"CA\"\n        },\n        {\n            \"id\": 149,\n            \"name\": \"CO\"\n        },\n        {\n            \"id\": 102,\n            \"name\": \"CT\"\n        },\n        {\n            \"id\": 286,\n            \"name\": \"DC\"\n        },\n        {\n            \"id\": 115,\n            \"name\": \"DE\"\n        },\n        {\n            \"id\": 113,\n            \"name\": \"FL\"\n        },\n        {\n            \"id\": 120,\n            \"name\": \"GA\"\n        },\n        {\n            \"id\": 150,\n            \"name\": \"HI\"\n        },\n        {\n            \"id\": 124,\n            \"name\": \"IA\"\n        },\n        {\n            \"id\": 147,\n            \"name\": \"ID\"\n        },\n        {\n            \"id\": 127,\n            \"name\": \"IL\"\n        },\n        {\n            \"id\": 125,\n            \"name\": \"IN\"\n        },\n        {\n            \"id\": 138,\n            \"name\": \"KS\"\n        },\n        {\n            \"id\": 130,\n            \"name\": \"KY\"\n        },\n        {\n            \"id\": 131,\n            \"name\": \"LA\"\n        },\n        {\n            \"id\": 104,\n            \"name\": \"MA\"\n        },\n        {\n            \"id\": 154,\n            \"name\": \"MD\"\n        },\n        {\n            \"id\": 105,\n            \"name\": \"ME\"\n        },\n        {\n            \"id\": 152,\n            \"name\": \"MI\"\n        },\n        {\n            \"id\": 123,\n            \"name\": \"MN\"\n        },\n        {\n            \"id\": 137,\n            \"name\": \"MO\"\n        },\n        {\n            \"id\": 135,\n            \"name\": \"MS\"\n        },\n        {\n            \"id\": 136,\n            \"name\": \"MT\"\n        },\n        {\n            \"id\": 129,\n            \"name\": \"NC\"\n        },\n        {\n            \"id\": 121,\n            \"name\": \"ND\"\n        },\n        {\n            \"id\": 139,\n            \"name\": \"NE\"\n        },\n        {\n            \"id\": 106,\n            \"name\": \"NH\"\n        },\n        {\n            \"id\": 109,\n            \"name\": \"NJ\"\n        },\n        {\n            \"id\": 141,\n            \"name\": \"NM\"\n        },\n        {\n            \"id\": 148,\n            \"name\": \"NV\"\n        },\n        {\n            \"id\": 108,\n            \"name\": \"NY\"\n        },\n        {\n            \"id\": 126,\n            \"name\": \"OH\"\n        },\n        {\n            \"id\": 133,\n            \"name\": \"OK\"\n        },\n        {\n            \"id\": 142,\n            \"name\": \"OR\"\n        },\n        {\n            \"id\": 110,\n            \"name\": \"PA\"\n        },\n        {\n            \"id\": 107,\n            \"name\": \"RI\"\n        },\n        {\n            \"id\": 128,\n            \"name\": \"SC\"\n        },\n        {\n            \"id\": 122,\n            \"name\": \"SD\"\n        },\n        {\n            \"id\": 119,\n            \"name\": \"TN\"\n        },\n        {\n            \"id\": 132,\n            \"name\": \"TX\"\n        },\n        {\n            \"id\": 146,\n            \"name\": \"UT\"\n        },\n        {\n            \"id\": 111,\n            \"name\": \"VA\"\n        },\n        {\n            \"id\": 155,\n            \"name\": \"VT\"\n        },\n        {\n            \"id\": 116,\n            \"name\": \"WA\"\n        },\n        {\n            \"id\": 153,\n            \"name\": \"WI\"\n        },\n        {\n            \"id\": 112,\n            \"name\": \"WV\"\n        },\n        {\n            \"id\": 140,\n            \"name\": \"WY\"\n        }\n    ],\n    \"next_page_token\": \"\"\n}"
+				}
+			]
+		},
+		{
+			"name": "GetAddress",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{HOST}}/location-address/addresses/:id",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"location-address",
+						"addresses",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "1"
+						}
+					]
+				},
+				"description": "**Endpoint**: GET /Location_address\n\n**Description**: Returns Address\n\n**FULL URL**: [http://api.adempiere.io](http://api.adempiere.io/api)/location-address/addresses/{id}\n\n**Method**: GET\n\n**Parameters (Params)**\n\nid (Int32, Mandatory)\n\n**Application Example**\n\n``` bash\ncurl --location 'http://api.adempiere.io/location-address/addresses/120' \\\n--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMDAwMTU0IiwiQURfQ2xpZW50X0lEIjoxMSwiQURfT3JnX0lEIjo1MDAwNiwiQURfUm9sZV9JRCI6MTAyLCJBRF9Vc2VyX0lEIjoxMDAsIk1fV2FyZWhvdXNlX0lEIjowLCJBRF9MYW5ndWFnZSI6ImVzX01YIiwiaWF0IjoxNzEwNzE1NzAxLCJleHAiOjE3MTA4MDIxMDF9.sdizIymo1Yd8P8w4D4ORu2EfavUfgxsPPfQIJMNJQQ8'\n\n ```\n\n**Example Answer**\n\n``` json\n{\n    \"id\": 120,\n    \"uuid\": \"aa33c84c-cafe-4cb3-b4bc-5d67d27e2965\",\n    \"display_value\": \"123 Oak St, Hartford, CT 04460\",\n    \"country_id\": 100,\n    \"country_name\": \"United States\",\n    \"region_id\": 102,\n    \"region_name\": \"CT\",\n    \"city_id\": 0,\n    \"city_name\": \"\",\n    \"city\": \"Hartford\",\n    \"address1\": \"123 Oak St\",\n    \"address2\": \"\",\n    \"address3\": \"\",\n    \"address4\": \"\",\n    \"postal_code\": \"04460\",\n    \"postal_code_additional\": \"\",\n    \"latitude\": \"\",\n    \"longitude\": \"\",\n    \"altitude\": \"\",\n    \"reference\": \"\"\n}\n\n ```\n\n**Common mistakes**\n\n- the id does not correspond to any of the records\n    \n\n``` json\n{\n    \"code\": 13,\n    \"message\": \"Localización / Dirección * No encontrado *\",\n    \"details\": []\n}\n\n ```\n\n**Change control**\n\n| **Version** | date | author | Description of Changes |\n| --- | --- | --- | --- |\n| 1.0 | 15/03/2024 | Ricardo | Initial creation of the document |"
+			},
+			"response": [
+				{
+					"name": "GetAddress",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/location-address/addresses/:id",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"location-address",
+								"addresses",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "120"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.25.2"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 07 Mar 2024 13:44:19 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "469"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "grpc-encoding",
+							"value": "identity"
+						},
+						{
+							"key": "grpc-accept-encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "x-envoy-upstream-service-time",
+							"value": "113"
+						},
+						{
+							"key": "grpc-status",
+							"value": "0"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Max-Age",
+							"value": "3600"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 120,\n    \"uuid\": \"aa33c84c-cafe-4cb3-b4bc-5d67d27e2965\",\n    \"display_value\": \"123 Oak St, Hartford, CT 04460\",\n    \"country_id\": 100,\n    \"country_name\": \"United States\",\n    \"region_id\": 102,\n    \"region_name\": \"CT\",\n    \"city_id\": 0,\n    \"city_name\": \"\",\n    \"city\": \"Hartford\",\n    \"address1\": \"123 Oak St\",\n    \"address2\": \"\",\n    \"address3\": \"\",\n    \"address4\": \"\",\n    \"postal_code\": \"04460\",\n    \"postal_code_additional\": \"\",\n    \"latitude\": \"\",\n    \"longitude\": \"\",\n    \"altitude\": \"\",\n    \"reference\": \"\"\n}"
+				}
+			]
+		},
+		{
+			"name": "CreateAddress",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"country_id\" : 1,\n\t\"region_id\" : 2,\n\t\"city_id\" : 100,\n\t\"city\" : \"Monroe\",\n\t\"address1\" : \"valencia\",\n\t\"address2\" : \"paez\",\n\t\"address3\" : \"ciudad\",\n\t\"address4\" : \"acarigua\",\n\t\"postal_code\" : \"3301\",\n\t\"posal_code_additional\" : \"3301\",\n\t\"latitude\" : \"21\",\n\t\"longitude\" : \"21\",\n\t\"altitude\" : \"20\",\n\t\"reference\" : \"1234\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{HOST}}/location-address/addresses",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"location-address",
+						"addresses"
+					]
+				},
+				"description": "**Endpoint**: POST /Location_address\n\n**Description**: Returns Address\n\n**FULL URL**: [http://api.adempiere.io](http://api.adempiere.io/api)/location-address/addresses\n\n**Method**: POST\n\n**Parameters (Body)**\n\ncountry_id (Int32, Mandatory)\n\nregion_id (Int32, optional)\n\ncity_id (Int32, optional)\n\ncity (String, optional)\n\naddress1 (String, optional)\n\naddress2 (String, optional)\n\naddress3 (String, optional)\n\naddress4 (String, optional)\n\npostal_code (String, optional)\n\nposal_code_additional (String, optional)\n\nlatitude (String,optional)\n\nlongitude (String,optional)\n\naltitude (String,optional)\n\nreference (String,optional)\n\n**Application Example**\n\n``` bash\ncurl --location 'http://api.adempiere.io/location-address/addresses' \\\n--header 'Content-Type: application/json' \\\n--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMDAwMTU0IiwiQURfQ2xpZW50X0lEIjoxMSwiQURfT3JnX0lEIjo1MDAwNiwiQURfUm9sZV9JRCI6MTAyLCJBRF9Vc2VyX0lEIjoxMDAsIk1fV2FyZWhvdXNlX0lEIjowLCJBRF9MYW5ndWFnZSI6ImVzX01YIiwiaWF0IjoxNzEwNzE1NzAxLCJleHAiOjE3MTA4MDIxMDF9.sdizIymo1Yd8P8w4D4ORu2EfavUfgxsPPfQIJMNJQQ8' \\\n--data '{\n    \"country_id\" : 1,\n    \"region_id\" : 2,\n    \"city_id\" : 100,\n    \"city\" : \"Monroe\",\n    \"address1\" : \"valencia\",\n    \"address2\" : \"paez\",\n    \"address3\" : \"ciudad\",\n    \"address4\" : \"acarigua\",\n    \"postal_code\" : \"3301\",\n    \"posal_code_additional\" : \"3301\",\n    \"latitude\" : \"21\",\n    \"longitude\" : \"21\",\n    \"altitude\" : \"20\",\n    \"reference\" : \"1234\"\n}'\n\n ```\n\n**Example Answer**\n\n``` json\n{\n    \"id\": 1000002,\n    \"uuid\": \"779c9a7c-55fd-4084-830f-436bc704a18d\",\n    \"display_value\": \", , OR \",\n    \"country_id\": 100,\n    \"country_name\": \"United States\",\n    \"region_id\": 0,\n    \"region_name\": \"\",\n    \"city_id\": 0,\n    \"city_name\": \"\",\n    \"city\": \"\",\n    \"address1\": \"\",\n    \"address2\": \"\",\n    \"address3\": \"\",\n    \"address4\": \"\",\n    \"postal_code\": \"\",\n    \"postal_code_additional\": \"\",\n    \"latitude\": \"\",\n    \"longitude\": \"\",\n    \"altitude\": \"\",\n    \"reference\": \"\"\n}\n\n ```\n\n**Change control**\n\n| **Version** | date | author | Description of Changes |\n| --- | --- | --- | --- |\n| 1.0 | 15/03/2024 | Ricardo | Initial creation of the document |"
+			},
+			"response": [
+				{
+					"name": "CreateAddress",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"country_id\" : 1,\n\t\"region_id\" : 2,\n\t\"city_id\" : 100,\n\t\"city\" : \"Monroe\",\n\t\"address1\" : \"valencia\",\n\t\"address2\" : \"paez\",\n\t\"address3\" : \"ciudad\",\n\t\"address4\" : \"acarigua\",\n\t\"postal_code\" : \"3301\",\n\t\"posal_code_additional\" : \"3301\",\n\t\"latitude\" : \"21\",\n\t\"longitude\" : \"21\",\n\t\"altitude\" : \"20\",\n\t\"reference\" : \"1234\"\n\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HOST}}/location-address/addresses",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"location-address",
+								"addresses"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.25.2"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 11 Mar 2024 15:29:03 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "513"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "grpc-encoding",
+							"value": "identity"
+						},
+						{
+							"key": "grpc-accept-encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "x-envoy-upstream-service-time",
+							"value": "115"
+						},
+						{
+							"key": "grpc-status",
+							"value": "0"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Max-Age",
+							"value": "3600"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 1000004,\n    \"uuid\": \"d3fbd85a-f7ac-4020-b1f3-af59e3dbebd3\",\n    \"display_value\": \"valencia, paez, ciudad, valencia, Monroe, OR 3301\",\n    \"country_id\": 100,\n    \"country_name\": \"United States\",\n    \"region_id\": 0,\n    \"region_name\": \"\",\n    \"city_id\": 100,\n    \"city_name\": \"Monroe\",\n    \"city\": \"Monroe\",\n    \"address1\": \"valencia\",\n    \"address2\": \"paez\",\n    \"address3\": \"ciudad\",\n    \"address4\": \"valencia\",\n    \"postal_code\": \"3301\",\n    \"postal_code_additional\": \"3301\",\n    \"latitude\": \"\",\n    \"longitude\": \"\",\n    \"altitude\": \"\",\n    \"reference\": \"\"\n}"
+				}
+			]
+		},
+		{
+			"name": "UpdateAddress",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"country_id\" : 1,\n\t\"region_id\" : 2,\n\t\"city_id\" : 100,\n\t\"city\" : \"Monroe\",\n\t\"address1\" : \"valencia\",\n\t\"address2\" : \"paez\",\n\t\"address3\" : \"ciudad\",\n\t\"address4\" : \"acarigua\",\n\t\"postal_code\" : \"3301\",\n\t\"posal_code_additional\" : \"3301\",\n\t\"latitude\" : \"21\",\n\t\"longitude\" : \"21\",\n\t\"altitude\" : \"20\",\n\t\"reference\" : \"12345\"\n\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{HOST}}/location-address/addresses/:id",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"location-address",
+						"addresses",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "1000004"
+						}
+					]
+				},
+				"description": "**Endpoint**: PATCH /Location_address\n\n**Description**: Returns Address\n\n**FULL URL**: [http://api.adempiere.io](http://api.adempiere.io/api)/location-address/addresses/{id}\n\n**Method**: PATCH\n\n**Parameters (Params)**\n\nid (Int32, Mandatory)\n\n**Parameters (Body)**\n\ncountry_id (Int32, optional)\n\nregion_id (Int32, optional)\n\ncity_id (Int32, optional)\n\ncity (String, optional)\n\naddress1 (String, optional)\n\naddress2 (String, optional)\n\naddress3 (String, optional)\n\naddress4 (String, optional)\n\npostal_code (String, optional)\n\nposal_code_additional (String, optional)\n\nlatitude (String,optional)\n\nlongitude (String,optional)\n\naltitude (String,optional)\n\nreference (String,optional)\n\n**Application Example**\n\n``` bash\ncurl --location --request PATCH 'http://api.adempiere.io/location-address/addresses/1000004' \\\n--header 'Content-Type: application/json' \\\n--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMDAwMTU0IiwiQURfQ2xpZW50X0lEIjoxMSwiQURfT3JnX0lEIjo1MDAwNiwiQURfUm9sZV9JRCI6MTAyLCJBRF9Vc2VyX0lEIjoxMDAsIk1fV2FyZWhvdXNlX0lEIjowLCJBRF9MYW5ndWFnZSI6ImVzX01YIiwiaWF0IjoxNzEwNzE1NzAxLCJleHAiOjE3MTA4MDIxMDF9.sdizIymo1Yd8P8w4D4ORu2EfavUfgxsPPfQIJMNJQQ8' \\\n--data '{\n    \"country_id\" : 1,\n    \"region_id\" : 2,\n    \"city_id\" : 100,\n    \"city\" : \"Monroe\",\n    \"address1\" : \"valencia\",\n    \"address2\" : \"paez\",\n    \"address3\" : \"ciudad\",\n    \"address4\" : \"acarigua\",\n    \"postal_code\" : \"3301\",\n    \"posal_code_additional\" : \"3301\",\n    \"latitude\" : \"21\",\n    \"longitude\" : \"21\",\n    \"altitude\" : \"20\",\n    \"reference\" : \"12345\"\n}'\n\n ```\n\n**Example Answer**\n\n``` json\n{\n    \"id\": 1000004,\n    \"uuid\": \"d3fbd85a-f7ac-4020-b1f3-af59e3dbebd3\",\n    \"display_value\": \"valencia, paez, ciudad, valencia, Monroe, OR 3301\",\n    \"country_id\": 100,\n    \"country_name\": \"United States\",\n    \"region_id\": 0,\n    \"region_name\": \"\",\n    \"city_id\": 100,\n    \"city_name\": \"Monroe\",\n    \"city\": \"Monroe\",\n    \"address1\": \"valencia\",\n    \"address2\": \"paez\",\n    \"address3\": \"ciudad\",\n    \"address4\": \"valencia\",\n    \"postal_code\": \"3301\",\n    \"postal_code_additional\": \"3301\",\n    \"latitude\": \"\",\n    \"longitude\": \"\",\n    \"altitude\": \"\",\n    \"reference\": \"\"\n}\n\n ```\n\n**Change control**\n\n| **Version** | date | author | Description of Changes |\n| --- | --- | --- | --- |\n| 1.0 | 15/03/2024 | Ricardo | Initial creation of the document |"
+			},
+			"response": [
+				{
+					"name": "UpdateAddress",
+					"originalRequest": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"country_id\" : 1,\n\t\"region_id\" : 2,\n\t\"city_id\" : 100,\n\t\"city\" : \"Monroe\",\n\t\"address1\" : \"valencia\",\n\t\"address2\" : \"paez\",\n\t\"address3\" : \"ciudad\",\n\t\"address4\" : \"acarigua\",\n\t\"postal_code\" : \"3301\",\n\t\"posal_code_additional\" : \"3301\",\n\t\"latitude\" : \"21\",\n\t\"longitude\" : \"21\",\n\t\"altitude\" : \"20\",\n\t\"reference\" : \"12345\"\n\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HOST}}/location-address/addresses/:id",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"location-address",
+								"addresses",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1000004"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.25.2"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 11 Mar 2024 15:31:12 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "513"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "grpc-encoding",
+							"value": "identity"
+						},
+						{
+							"key": "grpc-accept-encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "x-envoy-upstream-service-time",
+							"value": "95"
+						},
+						{
+							"key": "grpc-status",
+							"value": "0"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Max-Age",
+							"value": "3600"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 1000004,\n    \"uuid\": \"d3fbd85a-f7ac-4020-b1f3-af59e3dbebd3\",\n    \"display_value\": \"valencia, paez, ciudad, valencia, Monroe, OR 3301\",\n    \"country_id\": 100,\n    \"country_name\": \"United States\",\n    \"region_id\": 0,\n    \"region_name\": \"\",\n    \"city_id\": 100,\n    \"city_name\": \"Monroe\",\n    \"city\": \"Monroe\",\n    \"address1\": \"valencia\",\n    \"address2\": \"paez\",\n    \"address3\": \"ciudad\",\n    \"address4\": \"valencia\",\n    \"postal_code\": \"3301\",\n    \"postal_code_additional\": \"3301\",\n    \"latitude\": \"\",\n    \"longitude\": \"\",\n    \"altitude\": \"\",\n    \"reference\": \"\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Location_address_id",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{HOST}}/location-address/countries/:id",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"location-address",
+						"countries",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "110"
+						}
+					]
+				},
+				"description": "**Endpoint**: GET /Location_address\n\n**Description**: Returns Address\n\n**FULL URL**: [http://api.adempiere.io](http://api.adempiere.io/api)/location-address/countries/{id}\n\n**Method**: GET\n\n**Parameters (Params)**\n\ncountry_id (Int32, Mandatory)\n\n**Application Example**\n\n``` bash\ncurl --location 'http://api.adempiere.io/location-address/countries/110' \\\n--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMDAwMTU0IiwiQURfQ2xpZW50X0lEIjoxMSwiQURfT3JnX0lEIjo1MDAwNiwiQURfUm9sZV9JRCI6MTAyLCJBRF9Vc2VyX0lEIjoxMDAsIk1fV2FyZWhvdXNlX0lEIjowLCJBRF9MYW5ndWFnZSI6ImVzX01YIiwiaWF0IjoxNzEwNzE1NzAxLCJleHAiOjE3MTA4MDIxMDF9.sdizIymo1Yd8P8w4D4ORu2EfavUfgxsPPfQIJMNJQQ8'\n\n ```\n\n**Example Answer**\n\n``` json\n{\n    \"id\": 110,\n    \"uuid\": \"a5654476-fb40-11e8-a479-7a0060f0aa01\",\n    \"country_code\": \"AF\",\n    \"name\": \"Afghanistan\",\n    \"is_has_region\": false,\n    \"region_name\": \"\",\n    \"display_sequence\": \"@C@,  @P@\",\n    \"is_address_lines_reverse\": false,\n    \"capture_sequence\": \"@A1@ @A2@ @A3@ @A4@ @C@,  @P@ @CO@\",\n    \"display_sequence_local\": \"@C@,  @P@\",\n    \"is_address_lines_local_reverse\": false,\n    \"expression_postal_code\": \"\",\n    \"is_has_postal_code_additional\": false,\n    \"expression_postal_code_additional\": \"\",\n    \"is_allow_cities_out_of_list\": true\n}\n\n ```\n\n**Change control**\n\n| **Version** | date | author | Description of Changes |\n| --- | --- | --- | --- |\n| 1.0 | 15/03/2024 | Ricardo | Initial creation of the document |"
+			},
+			"response": [
+				{
+					"name": "Location_address_id",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/location-address/countries/:id",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"location-address",
+								"countries",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "110"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.25.2"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 07 Mar 2024 13:17:44 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "519"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "grpc-encoding",
+							"value": "identity"
+						},
+						{
+							"key": "grpc-accept-encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "x-envoy-upstream-service-time",
+							"value": "174"
+						},
+						{
+							"key": "grpc-status",
+							"value": "0"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Max-Age",
+							"value": "3600"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 110,\n    \"uuid\": \"a5654476-fb40-11e8-a479-7a0060f0aa01\",\n    \"country_code\": \"AF\",\n    \"name\": \"Afghanistan\",\n    \"is_has_region\": false,\n    \"region_name\": \"\",\n    \"display_sequence\": \"@C@,  @P@\",\n    \"is_address_lines_reverse\": false,\n    \"capture_sequence\": \"@A1@ @A2@ @A3@ @A4@ @C@,  @P@ @CO@\",\n    \"display_sequence_local\": \"@C@,  @P@\",\n    \"is_address_lines_local_reverse\": false,\n    \"expression_postal_code\": \"\",\n    \"is_has_postal_code_additional\": false,\n    \"expression_postal_code_additional\": \"\",\n    \"is_allow_cities_out_of_list\": true\n}"
+				}
+			]
+		},
+		{
+			"name": "Location_address_code",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{HOST}}/location-address/countries/code/:country_code",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"location-address",
+						"countries",
+						"code",
+						":country_code"
+					],
+					"variable": [
+						{
+							"key": "country_code",
+							"value": "AF"
+						}
+					]
+				},
+				"description": "**Endpoint**: GET /Location_address\n\n**Description**: Returns Country\n\n**FULL URL**: [http://api.adempiere.io](http://api.adempiere.io/api)/location-address/countries/code/{country_code}\n\n**Method**: GET\n\n**Parameters (Params)**\n\ncountry_code (String, Mandatory)\n\n**Application Example**\n\n``` bash\ncurl --location 'http://api.adempiere.io/location-address/countries/code/AF' \\\n--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMDAwMTU0IiwiQURfQ2xpZW50X0lEIjoxMSwiQURfT3JnX0lEIjo1MDAwNiwiQURfUm9sZV9JRCI6MTAyLCJBRF9Vc2VyX0lEIjoxMDAsIk1fV2FyZWhvdXNlX0lEIjowLCJBRF9MYW5ndWFnZSI6ImVzX01YIiwiaWF0IjoxNzEwNzE1NzAxLCJleHAiOjE3MTA4MDIxMDF9.sdizIymo1Yd8P8w4D4ORu2EfavUfgxsPPfQIJMNJQQ8'\n\n ```\n\n**Example Answer**\n\n``` json\n{\n    \"id\": 110,\n    \"uuid\": \"a5654476-fb40-11e8-a479-7a0060f0aa01\",\n    \"country_code\": \"AF\",\n    \"name\": \"Afganistán\",\n    \"is_has_region\": false,\n    \"region_name\": \"\",\n    \"display_sequence\": \"@C@,  @P@\",\n    \"is_address_lines_reverse\": false,\n    \"capture_sequence\": \"@A1@ @A2@ @A3@ @A4@ @C@,  @P@ @CO@\",\n    \"display_sequence_local\": \"@C@,  @P@\",\n    \"is_address_lines_local_reverse\": false,\n    \"expression_postal_code\": \"\",\n    \"is_has_postal_code_additional\": false,\n    \"expression_postal_code_additional\": \"\",\n    \"is_allow_cities_out_of_list\": true\n}\n\n ```\n\n**Change control**\n\n| **Version** | date | author | Description of Changes |\n| --- | --- | --- | --- |\n| 1.0 | 15/03/2024 | Ricardo | Initial creation of the document |"
+			},
+			"response": [
+				{
+					"name": "Location_address_code",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/location-address/countries/code/:country_code",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"location-address",
+								"countries",
+								"code",
+								":country_code"
+							],
+							"variable": [
+								{
+									"key": "country_code",
+									"value": "AF"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.25.2"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 07 Mar 2024 13:18:30 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "519"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "grpc-encoding",
+							"value": "identity"
+						},
+						{
+							"key": "grpc-accept-encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "x-envoy-upstream-service-time",
+							"value": "142"
+						},
+						{
+							"key": "grpc-status",
+							"value": "0"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Max-Age",
+							"value": "3600"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 110,\n    \"uuid\": \"a5654476-fb40-11e8-a479-7a0060f0aa01\",\n    \"country_code\": \"AF\",\n    \"name\": \"Afganistán\",\n    \"is_has_region\": false,\n    \"region_name\": \"\",\n    \"display_sequence\": \"@C@,  @P@\",\n    \"is_address_lines_reverse\": false,\n    \"capture_sequence\": \"@A1@ @A2@ @A3@ @A4@ @C@,  @P@ @CO@\",\n    \"display_sequence_local\": \"@C@,  @P@\",\n    \"is_address_lines_local_reverse\": false,\n    \"expression_postal_code\": \"\",\n    \"is_has_postal_code_additional\": false,\n    \"expression_postal_code_additional\": \"\",\n    \"is_allow_cities_out_of_list\": true\n}"
+				}
+			]
+		}
+	]
+}

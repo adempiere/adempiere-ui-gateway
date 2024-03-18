@@ -1,0 +1,2036 @@
+openapi: 3.0.0
+info:
+  title: Location_address
+  version: 1.0.0
+servers:
+  - url: http://{{host}}
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+paths:
+  /location-address/countries/{country_id}/cities:
+    get:
+      tags:
+        - default
+      summary: location_address_country_id
+      description: >-
+        **Endpoint**: GET /Location_address
+
+
+        **Description**: Returns ListCities
+
+
+        **FULL URL**:
+        [http://api.adempiere.io](http://api.adempiere.io/api)/location-address/countries/{country_id}/cities
+
+
+        **Method**: GET
+
+
+        **Parameters (Params)**
+
+
+        country_id (Int32, Mandatory)
+
+
+        **Application Example**
+
+
+        ``` bash
+
+        curl --location
+        'http://api.adempiere.io/location-address/countries/100/cities' \
+
+        --header 'Authorization: Bearer
+        eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMDAwMTU0IiwiQURfQ2xpZW50X0lEIjoxMSwiQURfT3JnX0lEIjo1MDAwNiwiQURfUm9sZV9JRCI6MTAyLCJBRF9Vc2VyX0lEIjoxMDAsIk1fV2FyZWhvdXNlX0lEIjowLCJBRF9MYW5ndWFnZSI6ImVzX01YIiwiaWF0IjoxNzEwNzE1NzAxLCJleHAiOjE3MTA4MDIxMDF9.sdizIymo1Yd8P8w4D4ORu2EfavUfgxsPPfQIJMNJQQ8'
+
+         ```
+
+        **Example Answer**
+
+
+        ``` json
+
+        {
+            "record_count": "1",
+            "cities": [
+                {
+                    "id": 100,
+                    "name": "Monroe"
+                }
+            ],
+            "next_page_token": ""
+        }
+
+         ```
+
+        **Common mistakes**
+
+
+        - the country id is not registered
+            
+
+        ``` json
+
+        {
+            "code": 13,
+            "message": "País * No encontrado *",
+            "details": []
+        }
+
+         ```
+
+        **Change control**
+
+
+        | **Version** | date | author | Description of Changes |
+
+        | --- | --- | --- | --- |
+
+        | 1.0 | 15/03/2024 | Ricardo | Initial creation of the document |
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: country_id
+          in: path
+          schema:
+            type: integer
+          required: true
+          example: '1'
+      responses:
+        '200':
+          description: OK
+          headers:
+            Server:
+              schema:
+                type: string
+                example: nginx/1.25.2
+            Date:
+              schema:
+                type: string
+                example: Thu, 07 Mar 2024 13:24:20 GMT
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Content-Length:
+              schema:
+                type: integer
+                example: '108'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            grpc-encoding:
+              schema:
+                type: string
+                example: identity
+            grpc-accept-encoding:
+              schema:
+                type: string
+                example: gzip
+            x-envoy-upstream-service-time:
+              schema:
+                type: integer
+                example: '134'
+            grpc-status:
+              schema:
+                type: integer
+                example: '0'
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Max-Age:
+              schema:
+                type: integer
+                example: '3600'
+            Access-Control-Expose-Headers:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+                example: '*'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                record_count: '1'
+                cities:
+                  - id: 100
+                    name: Monroe
+                next_page_token: ''
+  /location-address/countries:
+    get:
+      tags:
+        - default
+      summary: ListCountries
+      description: >-
+        **Endpoint**: GET /Location_address
+
+
+        **Description**: Returns ListCountries
+
+
+        **FULL URL**:
+        [http://api.adempiere.io](http://api.adempiere.io/api)/location-address/countries
+
+
+        **Method**: GET
+
+
+        **Application Example**
+
+
+        ``` bash
+
+        curl --location 'http://api.adempiere.io/location-address/countries' \
+
+        --header 'Authorization: Bearer
+        eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMDAwMTU0IiwiQURfQ2xpZW50X0lEIjoxMSwiQURfT3JnX0lEIjo1MDAwNiwiQURfUm9sZV9JRCI6MTAyLCJBRF9Vc2VyX0lEIjoxMDAsIk1fV2FyZWhvdXNlX0lEIjowLCJBRF9MYW5ndWFnZSI6ImVzX01YIiwiaWF0IjoxNzEwNzE1NzAxLCJleHAiOjE3MTA4MDIxMDF9.sdizIymo1Yd8P8w4D4ORu2EfavUfgxsPPfQIJMNJQQ8'
+
+         ```
+
+        **Example Answer**
+
+
+        ``` json
+         {
+                    "id": 110,
+                    "name": "Afganistán"
+                },
+
+         ```
+
+        **Change control**
+
+
+        | **Version** | date | author | Description of Changes |
+
+        | --- | --- | --- | --- |
+
+        | 1.0 | 15/03/2024 | Ricardo | Initial creation of the document |
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: OK
+          headers:
+            Server:
+              schema:
+                type: string
+                example: nginx/1.25.2
+            Date:
+              schema:
+                type: string
+                example: Thu, 07 Mar 2024 13:14:51 GMT
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Content-Length:
+              schema:
+                type: integer
+                example: '11871'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            grpc-encoding:
+              schema:
+                type: string
+                example: identity
+            grpc-accept-encoding:
+              schema:
+                type: string
+                example: gzip
+            x-envoy-upstream-service-time:
+              schema:
+                type: integer
+                example: '114'
+            grpc-status:
+              schema:
+                type: integer
+                example: '0'
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Max-Age:
+              schema:
+                type: integer
+                example: '3600'
+            Access-Control-Expose-Headers:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+                example: '*'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                record_count: '246'
+                countries:
+                  - id: 110
+                    name: Afghanistan
+                  - id: 50000
+                    name: Åland Islands
+                  - id: 111
+                    name: Albania
+                  - id: 112
+                    name: Algeria
+                  - id: 113
+                    name: American Samoa
+                  - id: 114
+                    name: Andorra
+                  - id: 115
+                    name: Angola
+                  - id: 116
+                    name: Anguilla
+                  - id: 117
+                    name: Antarctica
+                  - id: 118
+                    name: Antigua And Barbuda
+                  - id: 119
+                    name: Argentina
+                  - id: 120
+                    name: Armenia
+                  - id: 121
+                    name: Aruba
+                  - id: 122
+                    name: Australia
+                  - id: 108
+                    name: Austria
+                  - id: 124
+                    name: Azerbaijan
+                  - id: 125
+                    name: Bahamas
+                  - id: 126
+                    name: Bahrain
+                  - id: 127
+                    name: Bangladesh
+                  - id: 128
+                    name: Barbados
+                  - id: 129
+                    name: Belarus
+                  - id: 103
+                    name: Belgium
+                  - id: 131
+                    name: Belize
+                  - id: 132
+                    name: Benin
+                  - id: 133
+                    name: Bermuda
+                  - id: 134
+                    name: Bhutan
+                  - id: 135
+                    name: Bolivia
+                  - id: 136
+                    name: Bosnia And Herzegovina
+                  - id: 137
+                    name: Botswana
+                  - id: 138
+                    name: Bouvet Island
+                  - id: 139
+                    name: Brazil
+                  - id: 140
+                    name: British Indian Ocean Territory
+                  - id: 141
+                    name: Brunei Darussalam
+                  - id: 142
+                    name: Bulgaria
+                  - id: 143
+                    name: Burkina Faso
+                  - id: 144
+                    name: Burundi
+                  - id: 145
+                    name: Cambodia
+                  - id: 146
+                    name: Cameroon
+                  - id: 109
+                    name: Canada
+                  - id: 148
+                    name: Cape Verde
+                  - id: 149
+                    name: Cayman Islands
+                  - id: 150
+                    name: Central African Republic
+                  - id: 151
+                    name: Chad
+                  - id: 152
+                    name: Chile
+                  - id: 153
+                    name: China
+                  - id: 154
+                    name: Christmas Island
+                  - id: 155
+                    name: Cocos (keeling) Islands
+                  - id: 156
+                    name: Colombia
+                  - id: 157
+                    name: Comoros
+                  - id: 158
+                    name: Congo
+                  - id: 159
+                    name: Congo The Democratic Republic Of The
+                  - id: 160
+                    name: Cook Islands
+                  - id: 161
+                    name: Costa Rica
+                  - id: 162
+                    name: Cote D'ivoire
+                  - id: 163
+                    name: Croatia
+                  - id: 164
+                    name: Cuba
+                  - id: 165
+                    name: Cyprus
+                  - id: 166
+                    name: Czech Republic
+                  - id: 167
+                    name: Denmark
+                  - id: 168
+                    name: Djibouti
+                  - id: 169
+                    name: Dominica
+                  - id: 170
+                    name: Dominican Republic
+                  - id: 171
+                    name: Ecuador
+                  - id: 172
+                    name: Egypt
+                  - id: 173
+                    name: El Salvador
+                  - id: 174
+                    name: Equatorial Guinea
+                  - id: 175
+                    name: Eritrea
+                  - id: 176
+                    name: Estonia
+                  - id: 177
+                    name: Ethiopia
+                  - id: 178
+                    name: Falkland Islands (malvinas)
+                  - id: 179
+                    name: Faroe Islands
+                  - id: 180
+                    name: Fiji
+                  - id: 181
+                    name: Finland
+                  - id: 102
+                    name: France
+                  - id: 183
+                    name: French Guiana
+                  - id: 184
+                    name: French Polynesia
+                  - id: 185
+                    name: French Southern Territories
+                  - id: 186
+                    name: Gabon
+                  - id: 187
+                    name: Gambia
+                  - id: 188
+                    name: Georgia
+                  - id: 101
+                    name: Germany - Deutschland
+                  - id: 190
+                    name: Ghana
+                  - id: 191
+                    name: Gibraltar
+                  - id: 192
+                    name: Greece
+                  - id: 193
+                    name: Greenland
+                  - id: 194
+                    name: Grenada
+                  - id: 195
+                    name: Guadeloupe
+                  - id: 196
+                    name: Guam
+                  - id: 197
+                    name: Guatemala
+                  - id: 50002
+                    name: Guernsey
+                  - id: 198
+                    name: Guinea
+                  - id: 199
+                    name: Guinea-bissau
+                  - id: 200
+                    name: Guyana
+                  - id: 201
+                    name: Haiti
+                  - id: 202
+                    name: Heard Island And Mcdonald Islands
+                  - id: 203
+                    name: Holy See (vatican City State)
+                  - id: 204
+                    name: Honduras
+                  - id: 205
+                    name: Hong Kong
+                  - id: 206
+                    name: Hungary
+                  - id: 207
+                    name: Iceland
+                  - id: 208
+                    name: India
+                  - id: 209
+                    name: Indonesia
+                  - id: 210
+                    name: Iran Islamic Republic Of
+                  - id: 211
+                    name: Iraq
+                  - id: 212
+                    name: Ireland
+                  - id: 50003
+                    name: Isle of Man
+                  - id: 213
+                    name: Israel
+                  - id: 214
+                    name: Italy
+                  - id: 215
+                    name: Jamaica
+                  - id: 216
+                    name: Japan
+                  - id: 50004
+                    name: Jersey
+                  - id: 217
+                    name: Jordan
+                  - id: 218
+                    name: Kazakhstan
+                  - id: 219
+                    name: Kenya
+                  - id: 220
+                    name: Kiribati
+                  - id: 221
+                    name: Korea Democratic People's Republic Of
+                  - id: 222
+                    name: Korea Republic Of
+                  - id: 223
+                    name: Kuwait
+                  - id: 224
+                    name: Kyrgyzstan
+                  - id: 225
+                    name: Lao People's Democratic Republic
+                  - id: 226
+                    name: Latvia
+                  - id: 227
+                    name: Lebanon
+                  - id: 228
+                    name: Lesotho
+                  - id: 229
+                    name: Liberia
+                  - id: 230
+                    name: Libyan Arab Jamahiriya
+                  - id: 231
+                    name: Liechtenstein
+                  - id: 232
+                    name: Lithuania
+                  - id: 233
+                    name: Luxembourg
+                  - id: 234
+                    name: Macao
+                  - id: 235
+                    name: Macedonia Former Yugoslav Republic Of
+                  - id: 236
+                    name: Madagascar
+                  - id: 237
+                    name: Malawi
+                  - id: 238
+                    name: Malaysia
+                  - id: 239
+                    name: Maldives
+                  - id: 240
+                    name: Mali
+                  - id: 241
+                    name: Malta
+                  - id: 242
+                    name: Marshall Islands
+                  - id: 243
+                    name: Martinique
+                  - id: 244
+                    name: Mauritania
+                  - id: 245
+                    name: Mauritius
+                  - id: 246
+                    name: Mayotte
+                  - id: 247
+                    name: Mexico
+                  - id: 248
+                    name: Micronesia Federated States Of
+                  - id: 249
+                    name: Moldova Republic Of
+                  - id: 250
+                    name: Monaco
+                  - id: 251
+                    name: Mongolia
+                  - id: 350
+                    name: Montenegro
+                  - id: 252
+                    name: Montserrat
+                  - id: 253
+                    name: Morocco
+                  - id: 254
+                    name: Mozambique
+                  - id: 255
+                    name: Myanmar
+                  - id: 256
+                    name: Namibia
+                  - id: 257
+                    name: Nauru
+                  - id: 105
+                    name: Nederland
+                  - id: 258
+                    name: Nepal
+                  - id: 260
+                    name: Netherlands Antilles
+                  - id: 261
+                    name: New Caledonia
+                  - id: 262
+                    name: New Zealand
+                  - id: 263
+                    name: Nicaragua
+                  - id: 264
+                    name: Niger
+                  - id: 265
+                    name: Nigeria
+                  - id: 266
+                    name: Niue
+                  - id: 267
+                    name: Norfolk Island
+                  - id: 268
+                    name: Northern Mariana Islands
+                  - id: 269
+                    name: Norway
+                  - id: 270
+                    name: Oman
+                  - id: 271
+                    name: Pakistan
+                  - id: 272
+                    name: Palau
+                  - id: 273
+                    name: Palestinian Territory Occupied
+                  - id: 274
+                    name: Panama
+                  - id: 275
+                    name: Papua New Guinea
+                  - id: 276
+                    name: Paraguay
+                  - id: 277
+                    name: Peru
+                  - id: 278
+                    name: Philippines
+                  - id: 279
+                    name: Pitcairn
+                  - id: 280
+                    name: Poland
+                  - id: 281
+                    name: Portugal
+                  - id: 282
+                    name: Puerto Rico
+                  - id: 283
+                    name: Qatar
+                  - id: 284
+                    name: Reunion
+                  - id: 285
+                    name: Romania
+                  - id: 286
+                    name: Russian Federation
+                  - id: 287
+                    name: Rwanda
+                  - id: 50001
+                    name: Saint Barthélemy
+                  - id: 288
+                    name: Saint Helena
+                  - id: 289
+                    name: Saint Kitts And Nevis
+                  - id: 290
+                    name: Saint Lucia
+                  - id: 50005
+                    name: Saint Martin
+                  - id: 291
+                    name: Saint Pierre And Miquelon
+                  - id: 292
+                    name: Saint Vincent And The Grenadines
+                  - id: 293
+                    name: Samoa
+                  - id: 294
+                    name: San Marino
+                  - id: 295
+                    name: Sao Tome And Principe
+                  - id: 296
+                    name: Saudi Arabia
+                  - id: 297
+                    name: Senegal
+                  - id: 349
+                    name: Serbia
+                  - id: 298
+                    name: Seychelles
+                  - id: 299
+                    name: Sierra Leone
+                  - id: 300
+                    name: Singapore
+                  - id: 301
+                    name: Slovakia
+                  - id: 302
+                    name: Slovenia
+                  - id: 303
+                    name: Solomon Islands
+                  - id: 304
+                    name: Somalia
+                  - id: 305
+                    name: South Africa
+                  - id: 306
+                    name: South Georgia And The South Sandwich Islands
+                  - id: 106
+                    name: Spain
+                  - id: 308
+                    name: Sri Lanka
+                  - id: 309
+                    name: Sudan
+                  - id: 310
+                    name: Suriname
+                  - id: 311
+                    name: Svalbard And Jan Mayen
+                  - id: 312
+                    name: Swaziland
+                  - id: 313
+                    name: Sweden
+                  - id: 107
+                    name: Switzerland
+                  - id: 315
+                    name: Syrian Arab Republic
+                  - id: 316
+                    name: Taiwan
+                  - id: 317
+                    name: Tajikistan
+                  - id: 318
+                    name: Tanzania United Republic Of
+                  - id: 319
+                    name: Thailand
+                  - id: 320
+                    name: Timor-leste
+                  - id: 321
+                    name: Togo
+                  - id: 322
+                    name: Tokelau
+                  - id: 323
+                    name: Tonga
+                  - id: 324
+                    name: Trinidad And Tobago
+                  - id: 325
+                    name: Tunisia
+                  - id: 326
+                    name: Turkey
+                  - id: 327
+                    name: Turkmenistan
+                  - id: 328
+                    name: Turks And Caicos Islands
+                  - id: 329
+                    name: Tuvalu
+                  - id: 330
+                    name: Uganda
+                  - id: 331
+                    name: Ukraine
+                  - id: 332
+                    name: United Arab Emirates
+                  - id: 333
+                    name: United Kingdom
+                  - id: 100
+                    name: United States
+                  - id: 335
+                    name: United States Minor Outlying Islands
+                  - id: 336
+                    name: Uruguay
+                  - id: 337
+                    name: Uzbekistan
+                  - id: 338
+                    name: Vanuatu
+                  - id: 339
+                    name: Venezuela
+                  - id: 340
+                    name: Viet Nam
+                  - id: 341
+                    name: Virgin Islands British
+                  - id: 342
+                    name: Virgin Islands U.s.
+                  - id: 343
+                    name: Wallis And Futuna
+                  - id: 344
+                    name: Western Sahara
+                  - id: 345
+                    name: Yemen
+                  - id: 347
+                    name: Zambia
+                  - id: 348
+                    name: Zimbabwe
+                next_page_token: ''
+  /location-address/countries/{country_id}/regions:
+    get:
+      tags:
+        - default
+      summary: ListRegions
+      description: >-
+        **Endpoint**: GET /Location_address
+
+
+        **Description**: Returns ListRegions
+
+
+        **FULL URL**:
+        [http://api.adempiere.io](http://api.adempiere.io/api)/location-address/countries/{country_id}/regions
+
+
+        **Method**: GET
+
+
+        **Parameters (Params)**
+
+
+        country_id (Int32, Mandatory)
+
+
+        **Application Example**
+
+
+        ``` bash
+
+        curl --location
+        'http://api.adempiere.io/location-address/countries/100/regions' \
+
+        --header 'Authorization: Bearer
+        eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMDAwMTU0IiwiQURfQ2xpZW50X0lEIjoxMSwiQURfT3JnX0lEIjo1MDAwNiwiQURfUm9sZV9JRCI6MTAyLCJBRF9Vc2VyX0lEIjoxMDAsIk1fV2FyZWhvdXNlX0lEIjowLCJBRF9MYW5ndWFnZSI6ImVzX01YIiwiaWF0IjoxNzEwNzE1NzAxLCJleHAiOjE3MTA4MDIxMDF9.sdizIymo1Yd8P8w4D4ORu2EfavUfgxsPPfQIJMNJQQ8'
+
+         ```
+
+        **Example Answer**
+
+
+        ``` json
+         {
+                    "id": 118,
+                    "name": "AK"
+                }
+
+         ```
+
+        **Common mistakes**
+
+
+        - the country id is not registered
+            
+
+        ``` json
+
+        {
+            "code": 13,
+            "message": "País * No encontrado *",
+            "details": []
+        }
+
+         ```
+
+        **Change control**
+
+
+        | **Version** | date | author | Description of Changes |
+
+        | --- | --- | --- | --- |
+
+        | 1.0 | 15/03/2024 | Ricardo | Initial creation of the document |
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: country_id
+          in: path
+          schema:
+            type: integer
+          required: true
+          example: '100'
+      responses:
+        '200':
+          description: OK
+          headers:
+            Server:
+              schema:
+                type: string
+                example: nginx/1.25.2
+            Date:
+              schema:
+                type: string
+                example: Thu, 07 Mar 2024 13:20:16 GMT
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Content-Length:
+              schema:
+                type: integer
+                example: '2056'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            grpc-encoding:
+              schema:
+                type: string
+                example: identity
+            grpc-accept-encoding:
+              schema:
+                type: string
+                example: gzip
+            x-envoy-upstream-service-time:
+              schema:
+                type: integer
+                example: '141'
+            grpc-status:
+              schema:
+                type: integer
+                example: '0'
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Max-Age:
+              schema:
+                type: integer
+                example: '3600'
+            Access-Control-Expose-Headers:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+                example: '*'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                record_count: '51'
+                regions:
+                  - id: 118
+                    name: AK
+                  - id: 114
+                    name: AL
+                  - id: 144
+                    name: AR
+                  - id: 145
+                    name: AZ
+                  - id: 103
+                    name: CA
+                  - id: 149
+                    name: CO
+                  - id: 102
+                    name: CT
+                  - id: 286
+                    name: DC
+                  - id: 115
+                    name: DE
+                  - id: 113
+                    name: FL
+                  - id: 120
+                    name: GA
+                  - id: 150
+                    name: HI
+                  - id: 124
+                    name: IA
+                  - id: 147
+                    name: ID
+                  - id: 127
+                    name: IL
+                  - id: 125
+                    name: IN
+                  - id: 138
+                    name: KS
+                  - id: 130
+                    name: KY
+                  - id: 131
+                    name: LA
+                  - id: 104
+                    name: MA
+                  - id: 154
+                    name: MD
+                  - id: 105
+                    name: ME
+                  - id: 152
+                    name: MI
+                  - id: 123
+                    name: MN
+                  - id: 137
+                    name: MO
+                  - id: 135
+                    name: MS
+                  - id: 136
+                    name: MT
+                  - id: 129
+                    name: NC
+                  - id: 121
+                    name: ND
+                  - id: 139
+                    name: NE
+                  - id: 106
+                    name: NH
+                  - id: 109
+                    name: NJ
+                  - id: 141
+                    name: NM
+                  - id: 148
+                    name: NV
+                  - id: 108
+                    name: NY
+                  - id: 126
+                    name: OH
+                  - id: 133
+                    name: OK
+                  - id: 142
+                    name: OR
+                  - id: 110
+                    name: PA
+                  - id: 107
+                    name: RI
+                  - id: 128
+                    name: SC
+                  - id: 122
+                    name: SD
+                  - id: 119
+                    name: TN
+                  - id: 132
+                    name: TX
+                  - id: 146
+                    name: UT
+                  - id: 111
+                    name: VA
+                  - id: 155
+                    name: VT
+                  - id: 116
+                    name: WA
+                  - id: 153
+                    name: WI
+                  - id: 112
+                    name: WV
+                  - id: 140
+                    name: WY
+                next_page_token: ''
+  /location-address/addresses/{id}:
+    get:
+      tags:
+        - default
+      summary: GetAddress
+      description: >-
+        **Endpoint**: GET /Location_address
+
+
+        **Description**: Returns Address
+
+
+        **FULL URL**:
+        [http://api.adempiere.io](http://api.adempiere.io/api)/location-address/addresses/{id}
+
+
+        **Method**: GET
+
+
+        **Parameters (Params)**
+
+
+        id (Int32, Mandatory)
+
+
+        **Application Example**
+
+
+        ``` bash
+
+        curl --location 'http://api.adempiere.io/location-address/addresses/120'
+        \
+
+        --header 'Authorization: Bearer
+        eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMDAwMTU0IiwiQURfQ2xpZW50X0lEIjoxMSwiQURfT3JnX0lEIjo1MDAwNiwiQURfUm9sZV9JRCI6MTAyLCJBRF9Vc2VyX0lEIjoxMDAsIk1fV2FyZWhvdXNlX0lEIjowLCJBRF9MYW5ndWFnZSI6ImVzX01YIiwiaWF0IjoxNzEwNzE1NzAxLCJleHAiOjE3MTA4MDIxMDF9.sdizIymo1Yd8P8w4D4ORu2EfavUfgxsPPfQIJMNJQQ8'
+
+         ```
+
+        **Example Answer**
+
+
+        ``` json
+
+        {
+            "id": 120,
+            "uuid": "aa33c84c-cafe-4cb3-b4bc-5d67d27e2965",
+            "display_value": "123 Oak St, Hartford, CT 04460",
+            "country_id": 100,
+            "country_name": "United States",
+            "region_id": 102,
+            "region_name": "CT",
+            "city_id": 0,
+            "city_name": "",
+            "city": "Hartford",
+            "address1": "123 Oak St",
+            "address2": "",
+            "address3": "",
+            "address4": "",
+            "postal_code": "04460",
+            "postal_code_additional": "",
+            "latitude": "",
+            "longitude": "",
+            "altitude": "",
+            "reference": ""
+        }
+
+         ```
+
+        **Common mistakes**
+
+
+        - the id does not correspond to any of the records
+            
+
+        ``` json
+
+        {
+            "code": 13,
+            "message": "Localización / Dirección * No encontrado *",
+            "details": []
+        }
+
+         ```
+
+        **Change control**
+
+
+        | **Version** | date | author | Description of Changes |
+
+        | --- | --- | --- | --- |
+
+        | 1.0 | 15/03/2024 | Ricardo | Initial creation of the document |
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: integer
+          required: true
+          example: '1'
+      responses:
+        '200':
+          description: OK
+          headers:
+            Server:
+              schema:
+                type: string
+                example: nginx/1.25.2
+            Date:
+              schema:
+                type: string
+                example: Thu, 07 Mar 2024 13:44:19 GMT
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Content-Length:
+              schema:
+                type: integer
+                example: '469'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            grpc-encoding:
+              schema:
+                type: string
+                example: identity
+            grpc-accept-encoding:
+              schema:
+                type: string
+                example: gzip
+            x-envoy-upstream-service-time:
+              schema:
+                type: integer
+                example: '113'
+            grpc-status:
+              schema:
+                type: integer
+                example: '0'
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Max-Age:
+              schema:
+                type: integer
+                example: '3600'
+            Access-Control-Expose-Headers:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+                example: '*'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                id: 120
+                uuid: aa33c84c-cafe-4cb3-b4bc-5d67d27e2965
+                display_value: 123 Oak St, Hartford, CT 04460
+                country_id: 100
+                country_name: United States
+                region_id: 102
+                region_name: CT
+                city_id: 0
+                city_name: ''
+                city: Hartford
+                address1: 123 Oak St
+                address2: ''
+                address3: ''
+                address4: ''
+                postal_code: '04460'
+                postal_code_additional: ''
+                latitude: ''
+                longitude: ''
+                altitude: ''
+                reference: ''
+    patch:
+      tags:
+        - default
+      summary: UpdateAddress
+      description: >-
+        **Endpoint**: PATCH /Location_address
+
+
+        **Description**: Returns Address
+
+
+        **FULL URL**:
+        [http://api.adempiere.io](http://api.adempiere.io/api)/location-address/addresses/{id}
+
+
+        **Method**: PATCH
+
+
+        **Parameters (Params)**
+
+
+        id (Int32, Mandatory)
+
+
+        **Parameters (Body)**
+
+
+        country_id (Int32, optional)
+
+
+        region_id (Int32, optional)
+
+
+        city_id (Int32, optional)
+
+
+        city (String, optional)
+
+
+        address1 (String, optional)
+
+
+        address2 (String, optional)
+
+
+        address3 (String, optional)
+
+
+        address4 (String, optional)
+
+
+        postal_code (String, optional)
+
+
+        posal_code_additional (String, optional)
+
+
+        latitude (String,optional)
+
+
+        longitude (String,optional)
+
+
+        altitude (String,optional)
+
+
+        reference (String,optional)
+
+
+        **Application Example**
+
+
+        ``` bash
+
+        curl --location --request PATCH
+        'http://api.adempiere.io/location-address/addresses/1000004' \
+
+        --header 'Content-Type: application/json' \
+
+        --header 'Authorization: Bearer
+        eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMDAwMTU0IiwiQURfQ2xpZW50X0lEIjoxMSwiQURfT3JnX0lEIjo1MDAwNiwiQURfUm9sZV9JRCI6MTAyLCJBRF9Vc2VyX0lEIjoxMDAsIk1fV2FyZWhvdXNlX0lEIjowLCJBRF9MYW5ndWFnZSI6ImVzX01YIiwiaWF0IjoxNzEwNzE1NzAxLCJleHAiOjE3MTA4MDIxMDF9.sdizIymo1Yd8P8w4D4ORu2EfavUfgxsPPfQIJMNJQQ8'
+        \
+
+        --data '{
+            "country_id" : 1,
+            "region_id" : 2,
+            "city_id" : 100,
+            "city" : "Monroe",
+            "address1" : "valencia",
+            "address2" : "paez",
+            "address3" : "ciudad",
+            "address4" : "acarigua",
+            "postal_code" : "3301",
+            "posal_code_additional" : "3301",
+            "latitude" : "21",
+            "longitude" : "21",
+            "altitude" : "20",
+            "reference" : "12345"
+        }'
+
+         ```
+
+        **Example Answer**
+
+
+        ``` json
+
+        {
+            "id": 1000004,
+            "uuid": "d3fbd85a-f7ac-4020-b1f3-af59e3dbebd3",
+            "display_value": "valencia, paez, ciudad, valencia, Monroe, OR 3301",
+            "country_id": 100,
+            "country_name": "United States",
+            "region_id": 0,
+            "region_name": "",
+            "city_id": 100,
+            "city_name": "Monroe",
+            "city": "Monroe",
+            "address1": "valencia",
+            "address2": "paez",
+            "address3": "ciudad",
+            "address4": "valencia",
+            "postal_code": "3301",
+            "postal_code_additional": "3301",
+            "latitude": "",
+            "longitude": "",
+            "altitude": "",
+            "reference": ""
+        }
+
+         ```
+
+        **Change control**
+
+
+        | **Version** | date | author | Description of Changes |
+
+        | --- | --- | --- | --- |
+
+        | 1.0 | 15/03/2024 | Ricardo | Initial creation of the document |
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                country_id: 1
+                region_id: 2
+                city_id: 100
+                city: Monroe
+                address1: valencia
+                address2: paez
+                address3: ciudad
+                address4: acarigua
+                postal_code: '3301'
+                posal_code_additional: '3301'
+                latitude: '21'
+                longitude: '21'
+                altitude: '20'
+                reference: '12345'
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: integer
+          required: true
+          example: '1000004'
+      responses:
+        '200':
+          description: OK
+          headers:
+            Server:
+              schema:
+                type: string
+                example: nginx/1.25.2
+            Date:
+              schema:
+                type: string
+                example: Mon, 11 Mar 2024 15:31:12 GMT
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Content-Length:
+              schema:
+                type: integer
+                example: '513'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            grpc-encoding:
+              schema:
+                type: string
+                example: identity
+            grpc-accept-encoding:
+              schema:
+                type: string
+                example: gzip
+            x-envoy-upstream-service-time:
+              schema:
+                type: integer
+                example: '95'
+            grpc-status:
+              schema:
+                type: integer
+                example: '0'
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Max-Age:
+              schema:
+                type: integer
+                example: '3600'
+            Access-Control-Expose-Headers:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+                example: '*'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                id: 1000004
+                uuid: d3fbd85a-f7ac-4020-b1f3-af59e3dbebd3
+                display_value: valencia, paez, ciudad, valencia, Monroe, OR 3301
+                country_id: 100
+                country_name: United States
+                region_id: 0
+                region_name: ''
+                city_id: 100
+                city_name: Monroe
+                city: Monroe
+                address1: valencia
+                address2: paez
+                address3: ciudad
+                address4: valencia
+                postal_code: '3301'
+                postal_code_additional: '3301'
+                latitude: ''
+                longitude: ''
+                altitude: ''
+                reference: ''
+  /location-address/addresses:
+    post:
+      tags:
+        - default
+      summary: CreateAddress
+      description: >-
+        **Endpoint**: POST /Location_address
+
+
+        **Description**: Returns Address
+
+
+        **FULL URL**:
+        [http://api.adempiere.io](http://api.adempiere.io/api)/location-address/addresses
+
+
+        **Method**: POST
+
+
+        **Parameters (Body)**
+
+
+        country_id (Int32, Mandatory)
+
+
+        region_id (Int32, optional)
+
+
+        city_id (Int32, optional)
+
+
+        city (String, optional)
+
+
+        address1 (String, optional)
+
+
+        address2 (String, optional)
+
+
+        address3 (String, optional)
+
+
+        address4 (String, optional)
+
+
+        postal_code (String, optional)
+
+
+        posal_code_additional (String, optional)
+
+
+        latitude (String,optional)
+
+
+        longitude (String,optional)
+
+
+        altitude (String,optional)
+
+
+        reference (String,optional)
+
+
+        **Application Example**
+
+
+        ``` bash
+
+        curl --location 'http://api.adempiere.io/location-address/addresses' \
+
+        --header 'Content-Type: application/json' \
+
+        --header 'Authorization: Bearer
+        eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMDAwMTU0IiwiQURfQ2xpZW50X0lEIjoxMSwiQURfT3JnX0lEIjo1MDAwNiwiQURfUm9sZV9JRCI6MTAyLCJBRF9Vc2VyX0lEIjoxMDAsIk1fV2FyZWhvdXNlX0lEIjowLCJBRF9MYW5ndWFnZSI6ImVzX01YIiwiaWF0IjoxNzEwNzE1NzAxLCJleHAiOjE3MTA4MDIxMDF9.sdizIymo1Yd8P8w4D4ORu2EfavUfgxsPPfQIJMNJQQ8'
+        \
+
+        --data '{
+            "country_id" : 1,
+            "region_id" : 2,
+            "city_id" : 100,
+            "city" : "Monroe",
+            "address1" : "valencia",
+            "address2" : "paez",
+            "address3" : "ciudad",
+            "address4" : "acarigua",
+            "postal_code" : "3301",
+            "posal_code_additional" : "3301",
+            "latitude" : "21",
+            "longitude" : "21",
+            "altitude" : "20",
+            "reference" : "1234"
+        }'
+
+         ```
+
+        **Example Answer**
+
+
+        ``` json
+
+        {
+            "id": 1000002,
+            "uuid": "779c9a7c-55fd-4084-830f-436bc704a18d",
+            "display_value": ", , OR ",
+            "country_id": 100,
+            "country_name": "United States",
+            "region_id": 0,
+            "region_name": "",
+            "city_id": 0,
+            "city_name": "",
+            "city": "",
+            "address1": "",
+            "address2": "",
+            "address3": "",
+            "address4": "",
+            "postal_code": "",
+            "postal_code_additional": "",
+            "latitude": "",
+            "longitude": "",
+            "altitude": "",
+            "reference": ""
+        }
+
+         ```
+
+        **Change control**
+
+
+        | **Version** | date | author | Description of Changes |
+
+        | --- | --- | --- | --- |
+
+        | 1.0 | 15/03/2024 | Ricardo | Initial creation of the document |
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                country_id: 1
+                region_id: 2
+                city_id: 100
+                city: Monroe
+                address1: valencia
+                address2: paez
+                address3: ciudad
+                address4: acarigua
+                postal_code: '3301'
+                posal_code_additional: '3301'
+                latitude: '21'
+                longitude: '21'
+                altitude: '20'
+                reference: '1234'
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: OK
+          headers:
+            Server:
+              schema:
+                type: string
+                example: nginx/1.25.2
+            Date:
+              schema:
+                type: string
+                example: Mon, 11 Mar 2024 15:29:03 GMT
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Content-Length:
+              schema:
+                type: integer
+                example: '513'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            grpc-encoding:
+              schema:
+                type: string
+                example: identity
+            grpc-accept-encoding:
+              schema:
+                type: string
+                example: gzip
+            x-envoy-upstream-service-time:
+              schema:
+                type: integer
+                example: '115'
+            grpc-status:
+              schema:
+                type: integer
+                example: '0'
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Max-Age:
+              schema:
+                type: integer
+                example: '3600'
+            Access-Control-Expose-Headers:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+                example: '*'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                id: 1000004
+                uuid: d3fbd85a-f7ac-4020-b1f3-af59e3dbebd3
+                display_value: valencia, paez, ciudad, valencia, Monroe, OR 3301
+                country_id: 100
+                country_name: United States
+                region_id: 0
+                region_name: ''
+                city_id: 100
+                city_name: Monroe
+                city: Monroe
+                address1: valencia
+                address2: paez
+                address3: ciudad
+                address4: valencia
+                postal_code: '3301'
+                postal_code_additional: '3301'
+                latitude: ''
+                longitude: ''
+                altitude: ''
+                reference: ''
+  /location-address/countries/{id}:
+    get:
+      tags:
+        - default
+      summary: Location_address_id
+      description: >-
+        **Endpoint**: GET /Location_address
+
+
+        **Description**: Returns Address
+
+
+        **FULL URL**:
+        [http://api.adempiere.io](http://api.adempiere.io/api)/location-address/countries/{id}
+
+
+        **Method**: GET
+
+
+        **Parameters (Params)**
+
+
+        country_id (Int32, Mandatory)
+
+
+        **Application Example**
+
+
+        ``` bash
+
+        curl --location 'http://api.adempiere.io/location-address/countries/110'
+        \
+
+        --header 'Authorization: Bearer
+        eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMDAwMTU0IiwiQURfQ2xpZW50X0lEIjoxMSwiQURfT3JnX0lEIjo1MDAwNiwiQURfUm9sZV9JRCI6MTAyLCJBRF9Vc2VyX0lEIjoxMDAsIk1fV2FyZWhvdXNlX0lEIjowLCJBRF9MYW5ndWFnZSI6ImVzX01YIiwiaWF0IjoxNzEwNzE1NzAxLCJleHAiOjE3MTA4MDIxMDF9.sdizIymo1Yd8P8w4D4ORu2EfavUfgxsPPfQIJMNJQQ8'
+
+         ```
+
+        **Example Answer**
+
+
+        ``` json
+
+        {
+            "id": 110,
+            "uuid": "a5654476-fb40-11e8-a479-7a0060f0aa01",
+            "country_code": "AF",
+            "name": "Afghanistan",
+            "is_has_region": false,
+            "region_name": "",
+            "display_sequence": "@C@,  @P@",
+            "is_address_lines_reverse": false,
+            "capture_sequence": "@A1@ @A2@ @A3@ @A4@ @C@,  @P@ @CO@",
+            "display_sequence_local": "@C@,  @P@",
+            "is_address_lines_local_reverse": false,
+            "expression_postal_code": "",
+            "is_has_postal_code_additional": false,
+            "expression_postal_code_additional": "",
+            "is_allow_cities_out_of_list": true
+        }
+
+         ```
+
+        **Change control**
+
+
+        | **Version** | date | author | Description of Changes |
+
+        | --- | --- | --- | --- |
+
+        | 1.0 | 15/03/2024 | Ricardo | Initial creation of the document |
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: integer
+          required: true
+          example: '110'
+      responses:
+        '200':
+          description: OK
+          headers:
+            Server:
+              schema:
+                type: string
+                example: nginx/1.25.2
+            Date:
+              schema:
+                type: string
+                example: Thu, 07 Mar 2024 13:17:44 GMT
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Content-Length:
+              schema:
+                type: integer
+                example: '519'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            grpc-encoding:
+              schema:
+                type: string
+                example: identity
+            grpc-accept-encoding:
+              schema:
+                type: string
+                example: gzip
+            x-envoy-upstream-service-time:
+              schema:
+                type: integer
+                example: '174'
+            grpc-status:
+              schema:
+                type: integer
+                example: '0'
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Max-Age:
+              schema:
+                type: integer
+                example: '3600'
+            Access-Control-Expose-Headers:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+                example: '*'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                id: 110
+                uuid: a5654476-fb40-11e8-a479-7a0060f0aa01
+                country_code: AF
+                name: Afghanistan
+                is_has_region: false
+                region_name: ''
+                display_sequence: '@C@,  @P@'
+                is_address_lines_reverse: false
+                capture_sequence: '@A1@ @A2@ @A3@ @A4@ @C@,  @P@ @CO@'
+                display_sequence_local: '@C@,  @P@'
+                is_address_lines_local_reverse: false
+                expression_postal_code: ''
+                is_has_postal_code_additional: false
+                expression_postal_code_additional: ''
+                is_allow_cities_out_of_list: true
+  /location-address/countries/code/{country_code}:
+    get:
+      tags:
+        - default
+      summary: Location_address_code
+      description: >-
+        **Endpoint**: GET /Location_address
+
+
+        **Description**: Returns Country
+
+
+        **FULL URL**:
+        [http://api.adempiere.io](http://api.adempiere.io/api)/location-address/countries/code/{country_code}
+
+
+        **Method**: GET
+
+
+        **Parameters (Params)**
+
+
+        country_code (String, Mandatory)
+
+
+        **Application Example**
+
+
+        ``` bash
+
+        curl --location
+        'http://api.adempiere.io/location-address/countries/code/AF' \
+
+        --header 'Authorization: Bearer
+        eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMDAwMTU0IiwiQURfQ2xpZW50X0lEIjoxMSwiQURfT3JnX0lEIjo1MDAwNiwiQURfUm9sZV9JRCI6MTAyLCJBRF9Vc2VyX0lEIjoxMDAsIk1fV2FyZWhvdXNlX0lEIjowLCJBRF9MYW5ndWFnZSI6ImVzX01YIiwiaWF0IjoxNzEwNzE1NzAxLCJleHAiOjE3MTA4MDIxMDF9.sdizIymo1Yd8P8w4D4ORu2EfavUfgxsPPfQIJMNJQQ8'
+
+         ```
+
+        **Example Answer**
+
+
+        ``` json
+
+        {
+            "id": 110,
+            "uuid": "a5654476-fb40-11e8-a479-7a0060f0aa01",
+            "country_code": "AF",
+            "name": "Afganistán",
+            "is_has_region": false,
+            "region_name": "",
+            "display_sequence": "@C@,  @P@",
+            "is_address_lines_reverse": false,
+            "capture_sequence": "@A1@ @A2@ @A3@ @A4@ @C@,  @P@ @CO@",
+            "display_sequence_local": "@C@,  @P@",
+            "is_address_lines_local_reverse": false,
+            "expression_postal_code": "",
+            "is_has_postal_code_additional": false,
+            "expression_postal_code_additional": "",
+            "is_allow_cities_out_of_list": true
+        }
+
+         ```
+
+        **Change control**
+
+
+        | **Version** | date | author | Description of Changes |
+
+        | --- | --- | --- | --- |
+
+        | 1.0 | 15/03/2024 | Ricardo | Initial creation of the document |
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: country_code
+          in: path
+          schema:
+            type: string
+          required: true
+          example: AF
+      responses:
+        '200':
+          description: OK
+          headers:
+            Server:
+              schema:
+                type: string
+                example: nginx/1.25.2
+            Date:
+              schema:
+                type: string
+                example: Thu, 07 Mar 2024 13:18:30 GMT
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Content-Length:
+              schema:
+                type: integer
+                example: '519'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            grpc-encoding:
+              schema:
+                type: string
+                example: identity
+            grpc-accept-encoding:
+              schema:
+                type: string
+                example: gzip
+            x-envoy-upstream-service-time:
+              schema:
+                type: integer
+                example: '142'
+            grpc-status:
+              schema:
+                type: integer
+                example: '0'
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Max-Age:
+              schema:
+                type: integer
+                example: '3600'
+            Access-Control-Expose-Headers:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+                example: '*'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                id: 110
+                uuid: a5654476-fb40-11e8-a479-7a0060f0aa01
+                country_code: AF
+                name: Afganistán
+                is_has_region: false
+                region_name: ''
+                display_sequence: '@C@,  @P@'
+                is_address_lines_reverse: false
+                capture_sequence: '@A1@ @A2@ @A3@ @A4@ @C@,  @P@ @CO@'
+                display_sequence_local: '@C@,  @P@'
+                is_address_lines_local_reverse: false
+                expression_postal_code: ''
+                is_has_postal_code_additional: false
+                expression_postal_code_additional: ''
+                is_allow_cities_out_of_list: true
