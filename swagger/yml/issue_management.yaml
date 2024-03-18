@@ -1,0 +1,2138 @@
+openapi: 3.0.0
+info:
+  title: Issue_management
+  version: 1.0.0
+servers:
+  - url: http://{{host}}
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+paths:
+  /issue-management/request-types:
+    get:
+      tags:
+        - default
+      summary: ListRequestTypes
+      description: >-
+        **Endpoint**: GET /Issue_management
+
+
+        **Description**: Returns ListRequestTypes
+
+
+        **FULL URL**:
+        [http://api.adempiere.io](http://api.adempiere.io/api)/issue-management/request-types
+
+
+        **Method**: GET
+
+
+        **Application Example**
+
+
+        ``` bash
+
+        curl --location 'http://api.adempiere.io/issue-management/request-types'
+        \
+
+        --header 'Authorization: Bearer
+        eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMDAwMTQ2IiwiQURfQ2xpZW50X0lEIjoxMSwiQURfT3JnX0lEIjowLCJBRF9Sb2xlX0lEIjoxMDIsIkFEX1VzZXJfSUQiOjEwMCwiTV9XYXJlaG91c2VfSUQiOjAsIkFEX0xhbmd1YWdlIjoiZXNfTVgiLCJpYXQiOjE3MTA2Mjg3ODAsImV4cCI6MTcxMDcxNTE4MH0.8Sg48hnxmTbqs7nG_JoafC7AwXbHX3jWAPLPJ0Qo7VU'
+
+         ```
+
+        **Example Answer**
+
+
+        ``` json
+          {
+                    "id": 100,
+                    "name": "Request for Quotation",
+                    "description": "",
+                    "due_date_tolerance": 7,
+                    "default_status": {
+                        "id": 100,
+                        "value": "Open",
+                        "name": "Open",
+                        "description": "",
+                        "sequence": 1,
+                        "is_default": true
+                    },
+                    "is_default": false
+                },
+
+         ```
+
+        **Change control**
+
+
+        | **Version** | date | author | Description of Changes |
+
+        | --- | --- | --- | --- |
+
+        | 1.0 | 15/03/2024 | Ricardo | Initial creation of the document. |
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: OK
+          headers:
+            Server:
+              schema:
+                type: string
+                example: nginx/1.25.2
+            Date:
+              schema:
+                type: string
+                example: Thu, 07 Mar 2024 13:00:48 GMT
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Content-Length:
+              schema:
+                type: integer
+                example: '893'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            grpc-encoding:
+              schema:
+                type: string
+                example: identity
+            grpc-accept-encoding:
+              schema:
+                type: string
+                example: gzip
+            x-envoy-upstream-service-time:
+              schema:
+                type: integer
+                example: '164'
+            grpc-status:
+              schema:
+                type: integer
+                example: '0'
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Max-Age:
+              schema:
+                type: integer
+                example: '3600'
+            Access-Control-Expose-Headers:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+                example: '*'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                record_count: '3'
+                records:
+                  - id: 100
+                    name: Request for Quotation
+                    description: ''
+                    due_date_tolerance: 7
+                    default_status:
+                      id: 100
+                      value: Open
+                      name: Open
+                      description: ''
+                      sequence: 1
+                      is_default: true
+                    is_default: false
+                  - id: 101
+                    name: Service Request
+                    description: ''
+                    due_date_tolerance: 7
+                    default_status:
+                      id: 100
+                      value: Open
+                      name: Open
+                      description: ''
+                      sequence: 1
+                      is_default: true
+                    is_default: false
+                  - id: 102
+                    name: Warranty
+                    description: ''
+                    due_date_tolerance: 7
+                    default_status:
+                      id: 100
+                      value: Open
+                      name: Open
+                      description: ''
+                      sequence: 1
+                      is_default: true
+                    is_default: false
+                next_page_token: ''
+  /issue-management/sales-representatives:
+    get:
+      tags:
+        - default
+      summary: ListSalesRepresentatives
+      description: >-
+        **Endpoint**: GET /Issue_management
+
+
+        **Description**: Returns ListSalesRepresentatives
+
+
+        **FULL URL**:
+        [http://api.adempiere.io](http://api.adempiere.io/api)/issue-management/sales-representatives
+
+
+        **Method**: GET
+
+
+        **Application Example**
+
+
+        ``` bash
+
+        curl --location
+        'http://api.adempiere.io/issue-management/sales-representatives' \
+
+        --header 'Authorization: Bearer
+        eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMDAwMTQ2IiwiQURfQ2xpZW50X0lEIjoxMSwiQURfT3JnX0lEIjowLCJBRF9Sb2xlX0lEIjoxMDIsIkFEX1VzZXJfSUQiOjEwMCwiTV9XYXJlaG91c2VfSUQiOjAsIkFEX0xhbmd1YWdlIjoiZXNfTVgiLCJpYXQiOjE3MTA2Mjg3ODAsImV4cCI6MTcxMDcxNTE4MH0.8Sg48hnxmTbqs7nG_JoafC7AwXbHX3jWAPLPJ0Qo7VU'
+
+         ```
+
+        **Example Answer**
+
+
+        ``` json
+          {
+                    "id": 101,
+                    "name": "GardenAdmin",
+                    "description": "GardenAdmin",
+                    "avatar": ""
+                },
+
+         ```
+
+        **Change control**
+
+
+        | **Version** | date | author | Description of Changes |
+
+        | --- | --- | --- | --- |
+
+        | 1.0 | 15/03/2024 | Ricardo | Initial creation of the document. |
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: OK
+          headers:
+            Server:
+              schema:
+                type: string
+                example: nginx/1.25.2
+            Date:
+              schema:
+                type: string
+                example: Thu, 07 Mar 2024 13:01:27 GMT
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Content-Length:
+              schema:
+                type: integer
+                example: '260'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            grpc-encoding:
+              schema:
+                type: string
+                example: identity
+            grpc-accept-encoding:
+              schema:
+                type: string
+                example: gzip
+            x-envoy-upstream-service-time:
+              schema:
+                type: integer
+                example: '111'
+            grpc-status:
+              schema:
+                type: integer
+                example: '0'
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Max-Age:
+              schema:
+                type: integer
+                example: '3600'
+            Access-Control-Expose-Headers:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+                example: '*'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                record_count: '2'
+                records:
+                  - id: 101
+                    name: GardenAdmin
+                    description: GardenAdmin
+                    avatar: ''
+                  - id: 102
+                    name: GardenUser
+                    description: GardenUser
+                    avatar: ''
+                next_page_token: ''
+  /issue-management/priorities:
+    get:
+      tags:
+        - default
+      summary: ListPriorities
+      description: >-
+        **Endpoint**: GET /Issue_management
+
+
+        **Description**: Returns ListPriorities
+
+
+        **FULL URL**:
+        [http://api.adempiere.io](http://api.adempiere.io/api)/issue-management/priorities
+
+
+        **Method**: GET
+
+
+        **Application Example**
+
+
+        ``` bash
+
+        curl --location 'http://api.adempiere.io/issue-management/priorities' \
+
+        --header 'Authorization: Bearer
+        eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMDAwMTQ2IiwiQURfQ2xpZW50X0lEIjoxMSwiQURfT3JnX0lEIjowLCJBRF9Sb2xlX0lEIjoxMDIsIkFEX1VzZXJfSUQiOjEwMCwiTV9XYXJlaG91c2VfSUQiOjAsIkFEX0xhbmd1YWdlIjoiZXNfTVgiLCJpYXQiOjE3MTA2Mjg3ODAsImV4cCI6MTcxMDcxNTE4MH0.8Sg48hnxmTbqs7nG_JoafC7AwXbHX3jWAPLPJ0Qo7VU'
+
+         ```
+
+        **Example Answer**
+
+
+        ``` json
+         {
+                    "id": 759,
+                    "value": "1",
+                    "name": "Urgente",
+                    "description": ""
+                }
+
+         ```
+
+        **Change control**
+
+
+        | **Version** | date | author | Description of Changes |
+
+        | --- | --- | --- | --- |
+
+        | 1.0 | 15/03/2024 | Ricardo | Initial creation of the document. |
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: OK
+          headers:
+            Server:
+              schema:
+                type: string
+                example: nginx/1.25.2
+            Date:
+              schema:
+                type: string
+                example: Thu, 07 Mar 2024 13:04:19 GMT
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Content-Length:
+              schema:
+                type: integer
+                example: '519'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            grpc-encoding:
+              schema:
+                type: string
+                example: identity
+            grpc-accept-encoding:
+              schema:
+                type: string
+                example: gzip
+            x-envoy-upstream-service-time:
+              schema:
+                type: integer
+                example: '124'
+            grpc-status:
+              schema:
+                type: integer
+                example: '0'
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Max-Age:
+              schema:
+                type: integer
+                example: '3600'
+            Access-Control-Expose-Headers:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+                example: '*'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                record_count: '5'
+                records:
+                  - id: 759
+                    value: '1'
+                    name: Urgente
+                    description: ''
+                  - id: 229
+                    value: '3'
+                    name: Alta
+                    description: Prioridad Alta
+                  - id: 230
+                    value: '5'
+                    name: Media
+                    description: Prioridad Media
+                  - id: 231
+                    value: '7'
+                    name: Baja
+                    description: Prioridad Baja
+                  - id: 760
+                    value: '9'
+                    name: Menor
+                    description: Minor
+                next_page_token: ''
+  /issue-management/status-categories:
+    get:
+      tags:
+        - default
+      summary: ListStatusCategories
+      description: >-
+        **Endpoint**: GET /Issue_management
+
+
+        **Description**: Returns ListStatusCategories
+
+
+        **FULL URL**:
+        [http://api.adempiere.io](http://api.adempiere.io/api)/issue-management/status-categories
+
+
+        **Method**: GET
+
+
+        **Application Example**
+
+
+        ``` bash
+
+        curl --location
+        'http://api.adempiere.io/issue-management/status-categories' \
+
+        --header 'Authorization: Bearer
+        eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMDAwMTQ2IiwiQURfQ2xpZW50X0lEIjoxMSwiQURfT3JnX0lEIjowLCJBRF9Sb2xlX0lEIjoxMDIsIkFEX1VzZXJfSUQiOjEwMCwiTV9XYXJlaG91c2VfSUQiOjAsIkFEX0xhbmd1YWdlIjoiZXNfTVgiLCJpYXQiOjE3MTA2Mjg3ODAsImV4cCI6MTcxMDcxNTE4MH0.8Sg48hnxmTbqs7nG_JoafC7AwXbHX3jWAPLPJ0Qo7VU'
+
+         ```
+
+        **Example Answer**
+
+
+        ``` json
+
+        {
+            "record_count": "1",
+            "records": [
+                {
+                    "id": 100,
+                    "name": "Default",
+                    "description": "Default Request Status",
+                    "is_default": true
+                }
+            ],
+            "next_page_token": ""
+        }
+
+         ```
+
+        **Change control**
+
+
+        | **Version** | date | author | Description of Changes |
+
+        | --- | --- | --- | --- |
+
+        | 1.0 | 15/03/2024 | Ricardo | Initial creation of the document. |
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: OK
+          headers:
+            Server:
+              schema:
+                type: string
+                example: nginx/1.25.2
+            Date:
+              schema:
+                type: string
+                example: Fri, 08 Mar 2024 14:19:21 GMT
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Content-Length:
+              schema:
+                type: integer
+                example: '177'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            grpc-encoding:
+              schema:
+                type: string
+                example: identity
+            grpc-accept-encoding:
+              schema:
+                type: string
+                example: gzip
+            x-envoy-upstream-service-time:
+              schema:
+                type: integer
+                example: '425'
+            grpc-status:
+              schema:
+                type: integer
+                example: '0'
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Max-Age:
+              schema:
+                type: integer
+                example: '3600'
+            Access-Control-Expose-Headers:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+                example: '*'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                record_count: '1'
+                records:
+                  - id: 100
+                    name: Default
+                    description: Default Request Status
+                    is_default: true
+                next_page_token: ''
+  /issue-management/categories:
+    get:
+      tags:
+        - default
+      summary: ListCategories
+      description: >-
+        **Endpoint**: GET /issue-management
+
+
+        **Description**: Returns ListCategories
+
+
+        **FULL URL**:
+        [http://api.adempiere.io](http://api.adempiere.io/api)/issue-management/categories
+
+
+        **Method**: GET
+
+
+        **Application Example**
+
+
+        ``` bash
+
+        curl --location 'http://api.adempiere.io/issue-management/categories' \
+
+        --header 'Authorization: Bearer
+        eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMDAwMTQ2IiwiQURfQ2xpZW50X0lEIjoxMSwiQURfT3JnX0lEIjowLCJBRF9Sb2xlX0lEIjoxMDIsIkFEX1VzZXJfSUQiOjEwMCwiTV9XYXJlaG91c2VfSUQiOjAsIkFEX0xhbmd1YWdlIjoiZXNfTVgiLCJpYXQiOjE3MTA2Mjg3ODAsImV4cCI6MTcxMDcxNTE4MH0.8Sg48hnxmTbqs7nG_JoafC7AwXbHX3jWAPLPJ0Qo7VU'
+
+         ```
+
+        **Example Answer**
+
+
+        ``` json
+
+        {
+                 "id": 100,
+                 "name": "Seeding",
+                 "description": ""
+        }
+
+         ```
+
+        **Change control**
+
+
+        | **Version** | date | author | Description of Changes |
+
+        | --- | --- | --- | --- |
+
+        | 1.0 | 15/03/2024 | Ricardo | Initial creation of the document. |
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: OK
+          headers:
+            Server:
+              schema:
+                type: string
+                example: nginx/1.25.2
+            Date:
+              schema:
+                type: string
+                example: Sun, 17 Mar 2024 21:07:07 GMT
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Content-Length:
+              schema:
+                type: integer
+                example: '265'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            grpc-encoding:
+              schema:
+                type: string
+                example: identity
+            grpc-accept-encoding:
+              schema:
+                type: string
+                example: gzip
+            x-envoy-upstream-service-time:
+              schema:
+                type: integer
+                example: '93'
+            grpc-status:
+              schema:
+                type: integer
+                example: '0'
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Max-Age:
+              schema:
+                type: integer
+                example: '3600'
+            Access-Control-Expose-Headers:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+                example: '*'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                record_count: '3'
+                records:
+                  - id: 100
+                    name: Seeding
+                    description: ''
+                  - id: 101
+                    name: Cutting
+                    description: ''
+                  - id: 102
+                    name: Watering
+                    description: ''
+                next_page_token: ''
+  /issue-management/groups:
+    get:
+      tags:
+        - default
+      summary: ListGroups
+      description: >-
+        **Endpoint**: GET /issue-management
+
+
+        **Description**: Returns ListGroups
+
+
+        **FULL URL**:
+        [http://api.adempiere.io](http://api.adempiere.io/api)/issue-management/groups
+
+
+        **Method**: GET
+
+
+        **Application Example**
+
+
+        ``` bash
+
+        curl --location 'http://api.adempiere.io/issue-management/groups' \
+
+        --header 'Authorization: Bearer
+        eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMDAwMTQ2IiwiQURfQ2xpZW50X0lEIjoxMSwiQURfT3JnX0lEIjowLCJBRF9Sb2xlX0lEIjoxMDIsIkFEX1VzZXJfSUQiOjEwMCwiTV9XYXJlaG91c2VfSUQiOjAsIkFEX0xhbmd1YWdlIjoiZXNfTVgiLCJpYXQiOjE3MTA2Mjg3ODAsImV4cCI6MTcxMDcxNTE4MH0.8Sg48hnxmTbqs7nG_JoafC7AwXbHX3jWAPLPJ0Qo7VU'
+
+         ```
+
+        **Example Answer**
+
+
+        ``` json
+         {
+                    "id": 100,
+                    "name": "Flowers",
+                    "description": ""
+                }
+
+         ```
+
+        **Change control**
+
+
+        | **Version** | date | author | Description of Changes |
+
+        | --- | --- | --- | --- |
+
+        | 1.0 | 15/03/2024 | Ricardo | Initial creation of the document. |
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: OK
+          headers:
+            Server:
+              schema:
+                type: string
+                example: nginx/1.25.2
+            Date:
+              schema:
+                type: string
+                example: Sun, 17 Mar 2024 21:11:33 GMT
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Content-Length:
+              schema:
+                type: integer
+                example: '196'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            grpc-encoding:
+              schema:
+                type: string
+                example: identity
+            grpc-accept-encoding:
+              schema:
+                type: string
+                example: gzip
+            x-envoy-upstream-service-time:
+              schema:
+                type: integer
+                example: '98'
+            grpc-status:
+              schema:
+                type: integer
+                example: '0'
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Max-Age:
+              schema:
+                type: integer
+                example: '3600'
+            Access-Control-Expose-Headers:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+                example: '*'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                record_count: '2'
+                records:
+                  - id: 100
+                    name: Flowers
+                    description: ''
+                  - id: 101
+                    name: Trees
+                    description: ''
+                next_page_token: ''
+  /issue-management/task-statuses:
+    get:
+      tags:
+        - default
+      summary: ListTaskStatuses
+      description: >-
+        **Endpoint**: GET /issue-management
+
+
+        **Description**: Returns ListTaskStatuses
+
+
+        **FULL URL**:
+        [http://api.adempiere.io](http://api.adempiere.io/api)/issue-management/task-statuses
+
+
+        **Method**: GET
+
+
+        **Application Example**
+
+
+        ``` bash
+
+        curl --location 'http://api.adempiere.io/issue-management/task-statuses'
+        \
+
+        --header 'Authorization: Bearer
+        eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMDAwMTQ2IiwiQURfQ2xpZW50X0lEIjoxMSwiQURfT3JnX0lEIjowLCJBRF9Sb2xlX0lEIjoxMDIsIkFEX1VzZXJfSUQiOjEwMCwiTV9XYXJlaG91c2VfSUQiOjAsIkFEX0xhbmd1YWdlIjoiZXNfTVgiLCJpYXQiOjE3MTA2Mjg3ODAsImV4cCI6MTcxMDcxNTE4MH0.8Sg48hnxmTbqs7nG_JoafC7AwXbHX3jWAPLPJ0Qo7VU'
+
+         ```
+
+        **Example Answer**
+
+
+        ``` json
+         {
+                    "id": 815,
+                    "value": "0",
+                    "name": " 0% No Iniciado",
+                    "description": ""
+                }
+
+         ```
+
+        **Change control**
+
+
+        | **Version** | date | author | Description of Changes |
+
+        | --- | --- | --- | --- |
+
+        | 1.0 | 15/03/2024 | Ricardo | Initial creation of the document. |
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: OK
+          headers:
+            Server:
+              schema:
+                type: string
+                example: nginx/1.25.2
+            Date:
+              schema:
+                type: string
+                example: Sun, 17 Mar 2024 21:16:22 GMT
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Content-Length:
+              schema:
+                type: integer
+                example: '888'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            grpc-encoding:
+              schema:
+                type: string
+                example: identity
+            grpc-accept-encoding:
+              schema:
+                type: string
+                example: gzip
+            x-envoy-upstream-service-time:
+              schema:
+                type: integer
+                example: '95'
+            grpc-status:
+              schema:
+                type: integer
+                example: '0'
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Max-Age:
+              schema:
+                type: integer
+                example: '3600'
+            Access-Control-Expose-Headers:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+                example: '*'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                record_count: '9'
+                records:
+                  - id: 815
+                    value: '0'
+                    name: ' 0% No Iniciado'
+                    description: ''
+                  - id: 817
+                    value: '2'
+                    name: ' 20% Iniciado'
+                    description: ''
+                  - id: 819
+                    value: '4'
+                    name: ' 40% Ocupado'
+                    description: ''
+                  - id: 820
+                    value: '6'
+                    name: ' 60% Buen Progreso'
+                    description: ''
+                  - id: 818
+                    value: '8'
+                    name: ' 80% Cerca de Finalizar'
+                    description: ''
+                  - id: 821
+                    value: '9'
+                    name: ' 90% Finalizando'
+                    description: ''
+                  - id: 822
+                    value: A
+                    name: ' 95% Casi Hecho'
+                    description: ''
+                  - id: 823
+                    value: C
+                    name: ' 99% Limpieza'
+                    description: ''
+                  - id: 816
+                    value: D
+                    name: 100% Completo
+                    description: ''
+                next_page_token: ''
+  /issue-management/business-partners:
+    get:
+      tags:
+        - default
+      summary: ListBusinessPartners
+      description: >-
+        **Endpoint**: GET /issue-management
+
+
+        **Description**: Returns ListBusinessPartners
+
+
+        **FULL URL**:
+        [http://api.adempiere.io](http://api.adempiere.io/api)/issue-management/business-partners
+
+
+        **Method**: GET
+
+
+        **Application Example**
+
+
+        ``` bash
+
+        curl --location
+        'http://api.adempiere.io/issue-management/business-partners' \
+
+        --header 'Authorization: Bearer
+        eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMDAwMTQ2IiwiQURfQ2xpZW50X0lEIjoxMSwiQURfT3JnX0lEIjowLCJBRF9Sb2xlX0lEIjoxMDIsIkFEX1VzZXJfSUQiOjEwMCwiTV9XYXJlaG91c2VfSUQiOjAsIkFEX0xhbmd1YWdlIjoiZXNfTVgiLCJpYXQiOjE3MTA2Mjg3ODAsImV4cCI6MTcxMDcxNTE4MH0.8Sg48hnxmTbqs7nG_JoafC7AwXbHX3jWAPLPJ0Qo7VU'
+
+         ```
+
+        **Example Answer**
+
+
+        ``` json
+         {
+                    "id": 113,
+                    "value": "GardenAdmin",
+                    "name": "GardenAdmin BP",
+                    "description": ""
+                }
+
+         ```
+
+        **Change control**
+
+
+        | **Version** | date | author | Description of Changes |
+
+        | --- | --- | --- | --- |
+
+        | 1.0 | 15/03/2024 | Ricardo | Initial creation of the document. |
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: OK
+          headers:
+            Server:
+              schema:
+                type: string
+                example: nginx/1.25.2
+            Date:
+              schema:
+                type: string
+                example: Sun, 17 Mar 2024 21:19:04 GMT
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Content-Length:
+              schema:
+                type: integer
+                example: '1775'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            grpc-encoding:
+              schema:
+                type: string
+                example: identity
+            grpc-accept-encoding:
+              schema:
+                type: string
+                example: gzip
+            x-envoy-upstream-service-time:
+              schema:
+                type: integer
+                example: '138'
+            grpc-status:
+              schema:
+                type: integer
+                example: '0'
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Max-Age:
+              schema:
+                type: integer
+                example: '3600'
+            Access-Control-Expose-Headers:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+                example: '*'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                record_count: '17'
+                records:
+                  - id: 113
+                    value: GardenAdmin
+                    name: GardenAdmin BP
+                    description: ''
+                  - id: 117
+                    value: C&W
+                    name: C&W Construction
+                    description: ''
+                  - id: 118
+                    value: JoeBlock
+                    name: Joe Block
+                    description: ''
+                  - id: 119
+                    value: GardenUser
+                    name: GardenUser BP
+                    description: ''
+                  - id: 121
+                    value: Patio
+                    name: Patio Fun, Inc.
+                    description: ''
+                  - id: 50000
+                    value: Wood, Inc
+                    name: Wood, Inc
+                    description: ''
+                  - id: 50001
+                    value: Color, Inc
+                    name: Color, Inc
+                    description: ''
+                  - id: 50002
+                    value: Chrome, Inc
+                    name: Chrome, Inc
+                    description: ''
+                  - id: 50003
+                    value: Chemical Product, inc
+                    name: Chemical Product, inc
+                    description: ''
+                  - id: 50004
+                    value: Store Central
+                    name: Store Central
+                    description: ''
+                  - id: 50005
+                    value: Store East
+                    name: Store East
+                    description: ''
+                  - id: 50007
+                    value: Store North
+                    name: Store North
+                    description: ''
+                  - id: 50008
+                    value: Store South
+                    name: Store South
+                    description: ''
+                  - id: 50009
+                    value: Store West
+                    name: Store West
+                    description: ''
+                  - id: 120
+                    value: SeedFarm
+                    name: Seed Farm Inc.
+                    description: Customer & Vendor
+                  - id: 112
+                    value: Standard
+                    name: Standard
+                    description: Walk-In Customer
+                  - id: 114
+                    value: TreeFarm
+                    name: Tree Farm Inc.
+                    description: Vendor
+                next_page_token: ''
+  /issue-management/projects:
+    get:
+      tags:
+        - default
+      summary: ListProjects
+      description: >-
+        **Endpoint**: GET /issue-management
+
+
+        **Description**: Returns ListProjects
+
+
+        **FULL URL**:
+        [http://api.adempiere.io](http://api.adempiere.io/api)/issue-management/projects
+
+
+        **Method**: GET
+
+
+        **Application Example**
+
+
+        ``` bash
+
+        curl --location 'http://api.adempiere.io/issue-management/projects' \
+
+        --header 'Authorization: Bearer
+        eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMDAwMTQ2IiwiQURfQ2xpZW50X0lEIjoxMSwiQURfT3JnX0lEIjowLCJBRF9Sb2xlX0lEIjoxMDIsIkFEX1VzZXJfSUQiOjEwMCwiTV9XYXJlaG91c2VfSUQiOjAsIkFEX0xhbmd1YWdlIjoiZXNfTVgiLCJpYXQiOjE3MTA2Mjg3ODAsImV4cCI6MTcxMDcxNTE4MH0.8Sg48hnxmTbqs7nG_JoafC7AwXbHX3jWAPLPJ0Qo7VU'
+
+         ```
+
+        **Example Answer**
+
+
+        ``` json
+
+        {
+                    "id": 100,
+                    "value": "Standard",
+                    "name": "Standard",
+                    "description": ""
+                }
+
+         ```
+
+        **Change control**
+
+
+        | **Version** | date | author | Description of Changes |
+
+        | --- | --- | --- | --- |
+
+        | 1.0 | 15/03/2024 | Ricardo | Initial creation of the document. |
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: OK
+          headers:
+            Server:
+              schema:
+                type: string
+                example: nginx/1.25.2
+            Date:
+              schema:
+                type: string
+                example: Sun, 17 Mar 2024 21:20:49 GMT
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Content-Length:
+              schema:
+                type: integer
+                example: '296'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            grpc-encoding:
+              schema:
+                type: string
+                example: identity
+            grpc-accept-encoding:
+              schema:
+                type: string
+                example: gzip
+            x-envoy-upstream-service-time:
+              schema:
+                type: integer
+                example: '235'
+            grpc-status:
+              schema:
+                type: integer
+                example: '0'
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Max-Age:
+              schema:
+                type: integer
+                example: '3600'
+            Access-Control-Expose-Headers:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+                example: '*'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                record_count: '2'
+                records:
+                  - id: 100
+                    value: Standard
+                    name: Standard
+                    description: ''
+                  - id: 101
+                    value: Landscape
+                    name: Landcape for New Complex
+                    description: New Layout of the front garden.
+                next_page_token: ''
+  /issue-management/issues/{table_name}/{record_id}/exists:
+    get:
+      tags:
+        - default
+      summary: ExistsIssues
+      description: >-
+        **Endpoint**: GET /Issue_management
+
+
+        **Description**: Returns ExistsIssues
+
+
+        **FULL URL**:
+        [http://api.adempiere.io](http://api.adempiere.io/api)/issue-management/issues/{table_name}/{record_id}/exists
+
+
+        **Method**: GET
+
+
+        **Parameters (Params)**
+
+
+        table_name (String,Mandatory)
+
+
+        record_id (Int32,Mandatory)
+
+
+        **Application Example**
+
+
+        ``` bash
+
+        curl --location
+        'http://api.adempiere.io/issue-management/issues/C_DocTypeCounter/100/exists'
+        \
+
+        --header 'Authorization: Bearer
+        eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMDAwMTQ2IiwiQURfQ2xpZW50X0lEIjoxMSwiQURfT3JnX0lEIjowLCJBRF9Sb2xlX0lEIjoxMDIsIkFEX1VzZXJfSUQiOjEwMCwiTV9XYXJlaG91c2VfSUQiOjAsIkFEX0xhbmd1YWdlIjoiZXNfTVgiLCJpYXQiOjE3MTA2Mjg3ODAsImV4cCI6MTcxMDcxNTE4MH0.8Sg48hnxmTbqs7nG_JoafC7AwXbHX3jWAPLPJ0Qo7VU'
+
+         ```
+
+        **Example Answer**
+
+
+        ``` json
+
+        {
+            "record_count": 0
+        }
+
+         ```
+
+        **Common mistakes**
+
+
+        - table name not found in logs
+            
+
+        ``` json
+
+        {
+            "code": 13,
+            "message": "Tabla * No encontrado *",
+            "details": []
+        }
+
+         ```
+
+        **Change control**
+
+
+        | **Version** | date | author | Description of Changes |
+
+        | --- | --- | --- | --- |
+
+        | 1.0 | 15/03/2024 | Ricardo | Initial creation of the document. |
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: table_name
+          in: path
+          schema:
+            type: string
+          required: true
+          example: C_DocTypeCounter
+        - name: record_id
+          in: path
+          schema:
+            type: integer
+          required: true
+          example: '100'
+      responses:
+        '200':
+          description: OK
+          headers:
+            Server:
+              schema:
+                type: string
+                example: nginx/1.25.2
+            Date:
+              schema:
+                type: string
+                example: Fri, 08 Mar 2024 16:21:40 GMT
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Content-Length:
+              schema:
+                type: integer
+                example: '23'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            grpc-encoding:
+              schema:
+                type: string
+                example: identity
+            grpc-accept-encoding:
+              schema:
+                type: string
+                example: gzip
+            x-envoy-upstream-service-time:
+              schema:
+                type: integer
+                example: '110'
+            grpc-status:
+              schema:
+                type: integer
+                example: '0'
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Max-Age:
+              schema:
+                type: integer
+                example: '3600'
+            Access-Control-Expose-Headers:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+                example: '*'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                record_count: 0
+  /issue-management/status-categories/{status_category_id}/statuses:
+    get:
+      tags:
+        - default
+      summary: Issue_management_statusCategoryId
+      description: >-
+        **Endpoint**: GET /Issue_management
+
+
+        **Description**: Returns ListStatuses
+
+
+        **FULL URL**:
+        [http://api.adempiere.io](http://api.adempiere.io/api)/issue-management/status-categories/{status_category_id}/statuses/{request_type_id}
+
+
+        **Method**: GET
+
+
+        **Parameters (Params)**
+
+
+        request_type_id (Int32,Mandatory)
+
+
+        status_category_id (Int32,Mandatory)
+
+
+        **Application Example**
+
+
+        ``` bash
+
+        curl --location
+        'http://api.adempiere.io/issue-management/status-categories/100/statuses?request_type_id=100'
+        \
+
+        --header 'Authorization: Bearer
+        eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMDAwMTQ2IiwiQURfQ2xpZW50X0lEIjoxMSwiQURfT3JnX0lEIjowLCJBRF9Sb2xlX0lEIjoxMDIsIkFEX1VzZXJfSUQiOjEwMCwiTV9XYXJlaG91c2VfSUQiOjAsIkFEX0xhbmd1YWdlIjoiZXNfTVgiLCJpYXQiOjE3MTA2Mjg3ODAsImV4cCI6MTcxMDcxNTE4MH0.8Sg48hnxmTbqs7nG_JoafC7AwXbHX3jWAPLPJ0Qo7VU'
+
+         ```
+
+        **Example Answer**
+
+
+        ``` json
+
+        {
+                    "id": 100,
+                    "value": "Open",
+                    "name": "Open",
+                    "description": "",
+                    "sequence": 1,
+                    "is_default": true
+                },
+
+         ```
+
+        **Common mistakes**
+
+
+        - request type id not found in logs
+            
+
+        ``` json
+
+        {
+            "record_count": "0",
+            "records": [],
+            "next_page_token": ""
+        }
+
+         ```
+
+        **Change control**
+
+
+        | **Version** | date | author | Description of Changes |
+
+        | --- | --- | --- | --- |
+
+        | 1.0 | 15/03/2024 | Ricardo | Initial creation of the document. |
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: request_type_id
+          in: query
+          schema:
+            type: integer
+          example: '100'
+        - name: status_category_id
+          in: path
+          schema:
+            type: integer
+          required: true
+          example: '100'
+      responses:
+        '200':
+          description: OK
+          headers:
+            Server:
+              schema:
+                type: string
+                example: nginx/1.25.2
+            Date:
+              schema:
+                type: string
+                example: Fri, 08 Mar 2024 14:42:38 GMT
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Content-Length:
+              schema:
+                type: integer
+                example: '595'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            grpc-encoding:
+              schema:
+                type: string
+                example: identity
+            grpc-accept-encoding:
+              schema:
+                type: string
+                example: gzip
+            x-envoy-upstream-service-time:
+              schema:
+                type: integer
+                example: '79'
+            grpc-status:
+              schema:
+                type: integer
+                example: '0'
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Max-Age:
+              schema:
+                type: integer
+                example: '3600'
+            Access-Control-Expose-Headers:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+                example: '*'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                record_count: '4'
+                records:
+                  - id: 100
+                    value: Open
+                    name: Open
+                    description: ''
+                    sequence: 1
+                    is_default: true
+                  - id: 101
+                    value: Waiting
+                    name: Waiting on customer
+                    description: ''
+                    sequence: 2
+                    is_default: false
+                  - id: 102
+                    value: Closed
+                    name: Closed
+                    description: ''
+                    sequence: 3
+                    is_default: false
+                  - id: 103
+                    value: Final
+                    name: Final Close
+                    description: ''
+                    sequence: 9
+                    is_default: false
+                next_page_token: ''
+  /issue-management/statuses:
+    get:
+      tags:
+        - default
+      summary: Issue_management_statuses
+      description: >-
+        **Endpoint**: GET /issue-management
+
+
+        **Description**: Returns ListStatuses
+
+
+        **FULL URL**:
+        [http://api.adempiere.io](http://api.adempiere.io/api)/issue-management/statuses/{request_type_id}
+
+
+        **Method**: GET
+
+
+        **Parameters (Params)**
+
+
+        request_type_id (Int32, Mandatory)
+
+
+        **Application Example**
+
+
+        ``` bash
+
+        curl --location
+        'http://api.adempiere.io/issue-management/statuses?request_type_id=100'
+        \
+
+        --header 'Authorization: Bearer
+        eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMDAwMTQ2IiwiQURfQ2xpZW50X0lEIjoxMSwiQURfT3JnX0lEIjowLCJBRF9Sb2xlX0lEIjoxMDIsIkFEX1VzZXJfSUQiOjEwMCwiTV9XYXJlaG91c2VfSUQiOjAsIkFEX0xhbmd1YWdlIjoiZXNfTVgiLCJpYXQiOjE3MTA2Mjg3ODAsImV4cCI6MTcxMDcxNTE4MH0.8Sg48hnxmTbqs7nG_JoafC7AwXbHX3jWAPLPJ0Qo7VU'
+
+         ```
+
+        **Example Answer**
+
+
+        ``` json
+         {
+                    "id": 100,
+                    "value": "Open",
+                    "name": "Open",
+                    "description": "",
+                    "sequence": 1,
+                    "is_default": true
+                },
+
+         ```
+
+        **Common mistakes**
+
+
+        - request type id not found in logs
+            
+
+        ```
+
+        {
+            "record_count": "0",
+            "records": [],
+            "next_page_token": ""
+        }
+
+         ```
+
+        **Change control**
+
+
+        | **Version** | date | author | Description of Changes |
+
+        | --- | --- | --- | --- |
+
+        | 1.0 | 15/03/2024 | Ricardo | Initial creation of the document. |
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: request_type_id
+          in: query
+          schema:
+            type: integer
+          example: '100'
+      responses:
+        '200':
+          description: OK
+          headers:
+            Server:
+              schema:
+                type: string
+                example: nginx/1.25.2
+            Date:
+              schema:
+                type: string
+                example: Fri, 08 Mar 2024 14:32:41 GMT
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Content-Length:
+              schema:
+                type: integer
+                example: '595'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            grpc-encoding:
+              schema:
+                type: string
+                example: identity
+            grpc-accept-encoding:
+              schema:
+                type: string
+                example: gzip
+            x-envoy-upstream-service-time:
+              schema:
+                type: integer
+                example: '120'
+            grpc-status:
+              schema:
+                type: integer
+                example: '0'
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Max-Age:
+              schema:
+                type: integer
+                example: '3600'
+            Access-Control-Expose-Headers:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+                example: '*'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                record_count: '4'
+                records:
+                  - id: 100
+                    value: Open
+                    name: Open
+                    description: ''
+                    sequence: 1
+                    is_default: true
+                  - id: 101
+                    value: Waiting
+                    name: Waiting on customer
+                    description: ''
+                    sequence: 2
+                    is_default: false
+                  - id: 102
+                    value: Closed
+                    name: Closed
+                    description: ''
+                    sequence: 3
+                    is_default: false
+                  - id: 103
+                    value: Final
+                    name: Final Close
+                    description: ''
+                    sequence: 9
+                    is_default: false
+                next_page_token: ''
+  /issue-management/issues/all:
+    get:
+      tags:
+        - default
+      summary: ListIssues
+      description: >-
+        **Endpoint**: GET /issue-management
+
+
+        **Description**: Returns ListIssues
+
+
+        **FULL URL**:
+        [http://api.adempiere.io](http://api.adempiere.io/api)/issue-management/issues/all
+
+
+        **Method**: GET
+
+
+        **Application Example**
+
+
+        ``` bash
+
+        curl --location 'http://api.adempiere.io/issue-management/issues/all' \
+
+        --header 'Authorization: Bearer
+        eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMDAwMTQ2IiwiQURfQ2xpZW50X0lEIjoxMSwiQURfT3JnX0lEIjowLCJBRF9Sb2xlX0lEIjoxMDIsIkFEX1VzZXJfSUQiOjEwMCwiTV9XYXJlaG91c2VfSUQiOjAsIkFEX0xhbmd1YWdlIjoiZXNfTVgiLCJpYXQiOjE3MTA2Mjg3ODAsImV4cCI6MTcxMDcxNTE4MH0.8Sg48hnxmTbqs7nG_JoafC7AwXbHX3jWAPLPJ0Qo7VU'
+
+         ```
+
+        **Example Answer**
+
+
+        ``` json
+
+        {
+            "record_count": "1",
+            "records": [
+                {
+                    "id": 100,
+                    "document_no": "10000002",
+                    "subject": "10000002",
+                    "summary": "Could you please trim the trees for me?",
+                    "created": "2006-01-20T17:51:27Z",
+                    "last_updated": "2006-01-20T17:51:27Z",
+                    "request_type": {
+                        "id": 101,
+                        "name": "Service Request",
+                        "description": "",
+                        "due_date_tolerance": 7,
+                        "default_status": {
+                            "id": 100,
+                            "value": "Open",
+                            "name": "Open",
+                            "description": "",
+                            "sequence": 1,
+                            "is_default": true
+                        },
+                        "is_default": false
+                    },
+                    "user": {
+                        "id": 100,
+                        "name": "SuperUser",
+                        "description": "Super User with Access to all levels",
+                        "avatar": ""
+                    },
+                    "sales_representative": {
+                        "id": 101,
+                        "name": "GardenAdmin",
+                        "description": "GardenAdmin",
+                        "avatar": ""
+                    },
+                    "status": {
+                        "id": 100,
+                        "value": "Open",
+                        "name": "Open",
+                        "description": "",
+                        "sequence": 1,
+                        "is_default": true
+                    },
+                    "priority": {
+                        "id": 230,
+                        "value": "5",
+                        "name": "Media",
+                        "description": "Prioridad Media"
+                    },
+                    "date_next_action": "0001-01-01T00:00:00Z",
+                    "due_type": {
+                        "id": 443,
+                        "value": "5",
+                        "name": "Por vencer",
+                        "description": ""
+                    },
+                    "category": {
+                        "id": 101,
+                        "name": "Cutting",
+                        "description": ""
+                    },
+                    "group": {
+                        "id": 101,
+                        "name": "Trees",
+                        "description": ""
+                    },
+                    "business_partner": {
+                        "id": 120,
+                        "value": "SeedFarm",
+                        "name": "Seed Farm Inc.",
+                        "description": "Customer & Vendor"
+                    },
+                    "project": {
+                        "id": 0,
+                        "value": "",
+                        "name": "",
+                        "description": ""
+                    },
+                    "parent_issue": {
+                        "id": 0,
+                        "document_no": "",
+                        "subject": "",
+                        "summary": ""
+                    },
+                    "task_status": {
+                        "id": 0,
+                        "value": "",
+                        "name": "",
+                        "description": ""
+                    }
+                }
+            ],
+            "next_page_token": ""
+        }
+
+         ```
+
+        **Change control**
+
+
+        | **Version** | date | author | Description of Changes |
+
+        | --- | --- | --- | --- |
+
+        | 1.0 | 15/03/2024 | Ricardo | Initial creation of the document. |
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: OK
+          headers:
+            Server:
+              schema:
+                type: string
+                example: nginx/1.25.2
+            Date:
+              schema:
+                type: string
+                example: Sun, 17 Mar 2024 21:39:21 GMT
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Content-Length:
+              schema:
+                type: integer
+                example: '1844'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            grpc-encoding:
+              schema:
+                type: string
+                example: identity
+            grpc-accept-encoding:
+              schema:
+                type: string
+                example: gzip
+            x-envoy-upstream-service-time:
+              schema:
+                type: integer
+                example: '147'
+            grpc-status:
+              schema:
+                type: integer
+                example: '0'
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Max-Age:
+              schema:
+                type: integer
+                example: '3600'
+            Access-Control-Expose-Headers:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+                example: '*'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                record_count: '1'
+                records:
+                  - id: 100
+                    document_no: '10000002'
+                    subject: '10000002'
+                    summary: Could you please trim the trees for me?
+                    created: '2006-01-20T17:51:27Z'
+                    last_updated: '2006-01-20T17:51:27Z'
+                    request_type:
+                      id: 101
+                      name: Service Request
+                      description: ''
+                      due_date_tolerance: 7
+                      default_status:
+                        id: 100
+                        value: Open
+                        name: Open
+                        description: ''
+                        sequence: 1
+                        is_default: true
+                      is_default: false
+                    user:
+                      id: 100
+                      name: SuperUser
+                      description: Super User with Access to all levels
+                      avatar: ''
+                    sales_representative:
+                      id: 101
+                      name: GardenAdmin
+                      description: GardenAdmin
+                      avatar: ''
+                    status:
+                      id: 100
+                      value: Open
+                      name: Open
+                      description: ''
+                      sequence: 1
+                      is_default: true
+                    priority:
+                      id: 230
+                      value: '5'
+                      name: Media
+                      description: Prioridad Media
+                    date_next_action: '0001-01-01T00:00:00Z'
+                    due_type:
+                      id: 443
+                      value: '5'
+                      name: Por vencer
+                      description: ''
+                    category:
+                      id: 101
+                      name: Cutting
+                      description: ''
+                    group:
+                      id: 101
+                      name: Trees
+                      description: ''
+                    business_partner:
+                      id: 120
+                      value: SeedFarm
+                      name: Seed Farm Inc.
+                      description: Customer & Vendor
+                    project:
+                      id: 0
+                      value: ''
+                      name: ''
+                      description: ''
+                    parent_issue:
+                      id: 0
+                      document_no: ''
+                      subject: ''
+                      summary: ''
+                    task_status:
+                      id: 0
+                      value: ''
+                      name: ''
+                      description: ''
+                next_page_token: ''
