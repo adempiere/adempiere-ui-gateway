@@ -1,0 +1,384 @@
+{
+	"info": {
+		"_postman_id": "c6d66484-db13-49d3-9912-8d01377b40bc",
+		"name": "Payroll_action_notice",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "28978517"
+	},
+	"item": [
+		{
+			"name": "ListPayrollProcess",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{HOST}}/payroll-action-notice/process",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"payroll-action-notice",
+						"process"
+					]
+				},
+				"description": "**Endpoint**: GET /payroll_action_notice\n\n**Description**: Returns ListLookupItems\n\n**FULL URL**: [http://api.adempiere.io](http://api.adempiere.io/api)/payroll-action-notice/process\n\n**Method**: GET\n\n**Application Example**\n\n``` bash\ncurl --location 'http://api.adempiere.io/payroll-action-notice/process' \\\n--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMDAwMTU0IiwiQURfQ2xpZW50X0lEIjoxMSwiQURfT3JnX0lEIjo1MDAwNiwiQURfUm9sZV9JRCI6MTAyLCJBRF9Vc2VyX0lEIjoxMDAsIk1fV2FyZWhvdXNlX0lEIjowLCJBRF9MYW5ndWFnZSI6ImVzX01YIiwiaWF0IjoxNzEwNzE1NzAxLCJleHAiOjE3MTA4MDIxMDF9.sdizIymo1Yd8P8w4D4ORu2EfavUfgxsPPfQIJMNJQQ8'\n\n ```\n\n**Example Answer**\n\n``` json\n{\n    \"record_count\": \"1\",\n    \"records\": [\n        {\n            \"id\": 1000000,\n            \"table_name\": \"HR_Process\",\n            \"values\": {\n                \"KeyColumn\": 1000000,\n                \"DisplayColumn\": \"800003-qweqwe\",\n                \"UUID\": \"6436b891-b916-4263-b6c8-da115760020f\"\n            },\n            \"is_active\": true\n        }\n    ],\n    \"next_page_token\": \"\"\n}\n\n ```\n\n**Change control**\n\n| **Version** | date | author | Description of Changes |\n| --- | --- | --- | --- |\n| 1.0 | 15/03/2024 | Ricardo | Initial creation of the document. |"
+			},
+			"response": [
+				{
+					"name": "ListPayrollProcess",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/payroll-action-notice/process",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"payroll-action-notice",
+								"process"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.25.2"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 14 Mar 2024 20:34:27 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "281"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "grpc-encoding",
+							"value": "identity"
+						},
+						{
+							"key": "grpc-accept-encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "x-envoy-upstream-service-time",
+							"value": "94"
+						},
+						{
+							"key": "grpc-status",
+							"value": "0"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Max-Age",
+							"value": "3600"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"record_count\": \"1\",\n    \"records\": [\n        {\n            \"id\": 1000000,\n            \"table_name\": \"HR_Process\",\n            \"values\": {\n                \"KeyColumn\": 1000000,\n                \"DisplayColumn\": \"800003-qweqwe\",\n                \"UUID\": \"6436b891-b916-4263-b6c8-da115760020f\"\n            },\n            \"is_active\": true\n        }\n    ],\n    \"next_page_token\": \"\"\n}"
+				}
+			]
+		},
+		{
+			"name": "GetPayrollConceptDefinition",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{HOST}}/payroll-action-notice/process/:payroll_process_id/concepts/:id",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"payroll-action-notice",
+						"process",
+						":payroll_process_id",
+						"concepts",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "payroll_process_id",
+							"value": "1000001"
+						},
+						{
+							"key": "id",
+							"value": "1000000"
+						}
+					]
+				},
+				"description": "**Endpoint**: GET /payroll_action_notice\n\n**Description**: Returns Entity\n\n**FULL URL**: [http://api.adempiere.io](http://api.adempiere.io/api)/payroll-action-notice/process/{payroll_process_id}/concepts/{id}\n\n**Method**: GET\n\n**Parameters (Params)**\n\npayroll_process_id (Int32, Mandatory)\n\nid (Int32, Mandatory)\n\n**Application Example**\n\n``` bash\ncurl --location 'http://api.adempiere.io/payroll-action-notice/process/1000001/concepts/1000000' \\\n--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMDAwMTU0IiwiQURfQ2xpZW50X0lEIjoxMSwiQURfT3JnX0lEIjo1MDAwNiwiQURfUm9sZV9JRCI6MTAyLCJBRF9Vc2VyX0lEIjoxMDAsIk1fV2FyZWhvdXNlX0lEIjowLCJBRF9MYW5ndWFnZSI6ImVzX01YIiwiaWF0IjoxNzEwNzE1NzAxLCJleHAiOjE3MTA4MDIxMDF9.sdizIymo1Yd8P8w4D4ORu2EfavUfgxsPPfQIJMNJQQ8'\n\n ```\n\n**Example Answer**\n\n``` json\n {\n    \"id\": 1000000,\n    \"table_name\": \"HR_Concept\",\n    \"values\": {\n        \"HR_Concept_ID\": 1000000,\n        \"UUID\": \"415c60a5-f0c6-447d-be47-95276112e30b\",\n        \"Name\": \"1000000\",\n        \"Type\": \"C\",\n        \"ColumnType\": \"Q\",\n        \"AD_Reference_ID\": 0,\n        \"AD_Reference_ID_UUID\": null\n    }\n}\n\n ```\n\n**Common mistakes**\n\n- The payroll process ID does not match any of the records.\n    \n\n``` json\n{\n    \"code\": 13,\n    \"message\": \"Concepto Nómina. * No encontrado *\",\n    \"details\": []\n}\n ```\n\n**Change control**\n\n| **Version** | date | author | Description of Changes |\n| --- | --- | --- | --- |\n| 1.0 | 15/03/2024 | Ricardo | Initial creation of the document. |"
+			},
+			"response": [
+				{
+					"name": "GetPayrollConceptDefinition",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/payroll-action-notice/process/:payroll_process_id/concepts/:id",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"payroll-action-notice",
+								"process",
+								":payroll_process_id",
+								"concepts",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "payroll_process_id",
+									"value": "1000001"
+								},
+								{
+									"key": "id",
+									"value": "1000000"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.25.2"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 14 Mar 2024 20:52:04 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "255"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "grpc-encoding",
+							"value": "identity"
+						},
+						{
+							"key": "grpc-accept-encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "x-envoy-upstream-service-time",
+							"value": "83"
+						},
+						{
+							"key": "grpc-status",
+							"value": "0"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Max-Age",
+							"value": "3600"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 1000000,\n    \"table_name\": \"HR_Concept\",\n    \"values\": {\n        \"HR_Concept_ID\": 1000000,\n        \"UUID\": \"415c60a5-f0c6-447d-be47-95276112e30b\",\n        \"Name\": \"1000000\",\n        \"Type\": \"C\",\n        \"ColumnType\": \"Q\",\n        \"AD_Reference_ID\": 0,\n        \"AD_Reference_ID_UUID\": null\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "DeletePayrollMovements",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"ids\":1\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{HOST}}/payroll-action-notice/delete-movements",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"payroll-action-notice",
+						"delete-movements"
+					]
+				},
+				"description": "**Endpoint**: GET /payroll_action_notice\n\n**Description**: Returns Empty\n\n**FULL URL**: [http://api.adempiere.io](http://api.adempiere.io/api)/payroll-action-notice/delete-movements\n\n**Method**: GET\n\n**Parameters (Body)**\n\nids (Int32, Mandatory)\n\n**Application Example**\n\n``` bash\ncurl --location 'http://api.adempiere.io/payroll-action-notice/delete-movements' \\\n--header 'Content-Type: application/json' \\\n--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMDAwMTU0IiwiQURfQ2xpZW50X0lEIjoxMSwiQURfT3JnX0lEIjo1MDAwNiwiQURfUm9sZV9JRCI6MTAyLCJBRF9Vc2VyX0lEIjoxMDAsIk1fV2FyZWhvdXNlX0lEIjowLCJBRF9MYW5ndWFnZSI6ImVzX01YIiwiaWF0IjoxNzEwNzE1NzAxLCJleHAiOjE3MTA4MDIxMDF9.sdizIymo1Yd8P8w4D4ORu2EfavUfgxsPPfQIJMNJQQ8' \\\n--data '{\n    \"ids\":1000001\n}'\n\n ```\n\n**Example Answer**\n\n```\n{}         \n\n ```\n\n**Change control**\n\n| **Version** | date | author | Description of Changes |\n| --- | --- | --- | --- |\n| 1.0 | 15/03/2024 | Ricardo | Initial creation of the document. |"
+			},
+			"response": [
+				{
+					"name": "DeletePayrollMovements",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"ids\":1000001\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HOST}}/payroll-action-notice/delete-movements",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"payroll-action-notice",
+								"delete-movements"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.25.2"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 14 Mar 2024 20:47:26 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "3"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "grpc-encoding",
+							"value": "identity"
+						},
+						{
+							"key": "grpc-accept-encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "x-envoy-upstream-service-time",
+							"value": "79"
+						},
+						{
+							"key": "grpc-status",
+							"value": "0"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Max-Age",
+							"value": "3600"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{}"
+				}
+			]
+		}
+	]
+}

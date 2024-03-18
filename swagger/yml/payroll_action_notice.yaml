@@ -1,0 +1,464 @@
+openapi: 3.0.0
+info:
+  title: Payroll_action_notice
+  version: 1.0.0
+servers:
+  - url: http://{{host}}
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+paths:
+  /payroll-action-notice/process:
+    get:
+      tags:
+        - default
+      summary: ListPayrollProcess
+      description: >-
+        **Endpoint**: GET /payroll_action_notice
+
+
+        **Description**: Returns ListLookupItems
+
+
+        **FULL URL**:
+        [http://api.adempiere.io](http://api.adempiere.io/api)/payroll-action-notice/process
+
+
+        **Method**: GET
+
+
+        **Application Example**
+
+
+        ``` bash
+
+        curl --location 'http://api.adempiere.io/payroll-action-notice/process'
+        \
+
+        --header 'Authorization: Bearer
+        eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMDAwMTU0IiwiQURfQ2xpZW50X0lEIjoxMSwiQURfT3JnX0lEIjo1MDAwNiwiQURfUm9sZV9JRCI6MTAyLCJBRF9Vc2VyX0lEIjoxMDAsIk1fV2FyZWhvdXNlX0lEIjowLCJBRF9MYW5ndWFnZSI6ImVzX01YIiwiaWF0IjoxNzEwNzE1NzAxLCJleHAiOjE3MTA4MDIxMDF9.sdizIymo1Yd8P8w4D4ORu2EfavUfgxsPPfQIJMNJQQ8'
+
+         ```
+
+        **Example Answer**
+
+
+        ``` json
+
+        {
+            "record_count": "1",
+            "records": [
+                {
+                    "id": 1000000,
+                    "table_name": "HR_Process",
+                    "values": {
+                        "KeyColumn": 1000000,
+                        "DisplayColumn": "800003-qweqwe",
+                        "UUID": "6436b891-b916-4263-b6c8-da115760020f"
+                    },
+                    "is_active": true
+                }
+            ],
+            "next_page_token": ""
+        }
+
+         ```
+
+        **Change control**
+
+
+        | **Version** | date | author | Description of Changes |
+
+        | --- | --- | --- | --- |
+
+        | 1.0 | 15/03/2024 | Ricardo | Initial creation of the document. |
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: OK
+          headers:
+            Server:
+              schema:
+                type: string
+                example: nginx/1.25.2
+            Date:
+              schema:
+                type: string
+                example: Thu, 14 Mar 2024 20:34:27 GMT
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Content-Length:
+              schema:
+                type: integer
+                example: '281'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            grpc-encoding:
+              schema:
+                type: string
+                example: identity
+            grpc-accept-encoding:
+              schema:
+                type: string
+                example: gzip
+            x-envoy-upstream-service-time:
+              schema:
+                type: integer
+                example: '94'
+            grpc-status:
+              schema:
+                type: integer
+                example: '0'
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Max-Age:
+              schema:
+                type: integer
+                example: '3600'
+            Access-Control-Expose-Headers:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+                example: '*'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                record_count: '1'
+                records:
+                  - id: 1000000
+                    table_name: HR_Process
+                    values:
+                      KeyColumn: 1000000
+                      DisplayColumn: 800003-qweqwe
+                      UUID: 6436b891-b916-4263-b6c8-da115760020f
+                    is_active: true
+                next_page_token: ''
+  /payroll-action-notice/process/{payroll_process_id}/concepts/{id}:
+    get:
+      tags:
+        - default
+      summary: GetPayrollConceptDefinition
+      description: >-
+        **Endpoint**: GET /payroll_action_notice
+
+
+        **Description**: Returns Entity
+
+
+        **FULL URL**:
+        [http://api.adempiere.io](http://api.adempiere.io/api)/payroll-action-notice/process/{payroll_process_id}/concepts/{id}
+
+
+        **Method**: GET
+
+
+        **Parameters (Params)**
+
+
+        payroll_process_id (Int32, Mandatory)
+
+
+        id (Int32, Mandatory)
+
+
+        **Application Example**
+
+
+        ``` bash
+
+        curl --location
+        'http://api.adempiere.io/payroll-action-notice/process/1000001/concepts/1000000'
+        \
+
+        --header 'Authorization: Bearer
+        eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMDAwMTU0IiwiQURfQ2xpZW50X0lEIjoxMSwiQURfT3JnX0lEIjo1MDAwNiwiQURfUm9sZV9JRCI6MTAyLCJBRF9Vc2VyX0lEIjoxMDAsIk1fV2FyZWhvdXNlX0lEIjowLCJBRF9MYW5ndWFnZSI6ImVzX01YIiwiaWF0IjoxNzEwNzE1NzAxLCJleHAiOjE3MTA4MDIxMDF9.sdizIymo1Yd8P8w4D4ORu2EfavUfgxsPPfQIJMNJQQ8'
+
+         ```
+
+        **Example Answer**
+
+
+        ``` json
+         {
+            "id": 1000000,
+            "table_name": "HR_Concept",
+            "values": {
+                "HR_Concept_ID": 1000000,
+                "UUID": "415c60a5-f0c6-447d-be47-95276112e30b",
+                "Name": "1000000",
+                "Type": "C",
+                "ColumnType": "Q",
+                "AD_Reference_ID": 0,
+                "AD_Reference_ID_UUID": null
+            }
+        }
+
+         ```
+
+        **Common mistakes**
+
+
+        - The payroll process ID does not match any of the records.
+            
+
+        ``` json
+
+        {
+            "code": 13,
+            "message": "Concepto Nómina. * No encontrado *",
+            "details": []
+        }
+         ```
+
+        **Change control**
+
+
+        | **Version** | date | author | Description of Changes |
+
+        | --- | --- | --- | --- |
+
+        | 1.0 | 15/03/2024 | Ricardo | Initial creation of the document. |
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: payroll_process_id
+          in: path
+          schema:
+            type: integer
+          required: true
+          example: '1000001'
+        - name: id
+          in: path
+          schema:
+            type: integer
+          required: true
+          example: '1000000'
+      responses:
+        '200':
+          description: OK
+          headers:
+            Server:
+              schema:
+                type: string
+                example: nginx/1.25.2
+            Date:
+              schema:
+                type: string
+                example: Thu, 14 Mar 2024 20:52:04 GMT
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Content-Length:
+              schema:
+                type: integer
+                example: '255'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            grpc-encoding:
+              schema:
+                type: string
+                example: identity
+            grpc-accept-encoding:
+              schema:
+                type: string
+                example: gzip
+            x-envoy-upstream-service-time:
+              schema:
+                type: integer
+                example: '83'
+            grpc-status:
+              schema:
+                type: integer
+                example: '0'
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Max-Age:
+              schema:
+                type: integer
+                example: '3600'
+            Access-Control-Expose-Headers:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+                example: '*'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                id: 1000000
+                table_name: HR_Concept
+                values:
+                  HR_Concept_ID: 1000000
+                  UUID: 415c60a5-f0c6-447d-be47-95276112e30b
+                  Name: '1000000'
+                  Type: C
+                  ColumnType: Q
+                  AD_Reference_ID: 0
+                  AD_Reference_ID_UUID: null
+  /payroll-action-notice/delete-movements:
+    post:
+      tags:
+        - default
+      summary: DeletePayrollMovements
+      description: >-
+        **Endpoint**: GET /payroll_action_notice
+
+
+        **Description**: Returns Empty
+
+
+        **FULL URL**:
+        [http://api.adempiere.io](http://api.adempiere.io/api)/payroll-action-notice/delete-movements
+
+
+        **Method**: GET
+
+
+        **Parameters (Body)**
+
+
+        ids (Int32, Mandatory)
+
+
+        **Application Example**
+
+
+        ``` bash
+
+        curl --location
+        'http://api.adempiere.io/payroll-action-notice/delete-movements' \
+
+        --header 'Content-Type: application/json' \
+
+        --header 'Authorization: Bearer
+        eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMDAwMTU0IiwiQURfQ2xpZW50X0lEIjoxMSwiQURfT3JnX0lEIjo1MDAwNiwiQURfUm9sZV9JRCI6MTAyLCJBRF9Vc2VyX0lEIjoxMDAsIk1fV2FyZWhvdXNlX0lEIjowLCJBRF9MYW5ndWFnZSI6ImVzX01YIiwiaWF0IjoxNzEwNzE1NzAxLCJleHAiOjE3MTA4MDIxMDF9.sdizIymo1Yd8P8w4D4ORu2EfavUfgxsPPfQIJMNJQQ8'
+        \
+
+        --data '{
+            "ids":1000001
+        }'
+
+         ```
+
+        **Example Answer**
+
+
+        ```
+
+        {}         
+
+         ```
+
+        **Change control**
+
+
+        | **Version** | date | author | Description of Changes |
+
+        | --- | --- | --- | --- |
+
+        | 1.0 | 15/03/2024 | Ricardo | Initial creation of the document. |
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                ids: 1
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: OK
+          headers:
+            Server:
+              schema:
+                type: string
+                example: nginx/1.25.2
+            Date:
+              schema:
+                type: string
+                example: Thu, 14 Mar 2024 20:47:26 GMT
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Content-Length:
+              schema:
+                type: integer
+                example: '3'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            grpc-encoding:
+              schema:
+                type: string
+                example: identity
+            grpc-accept-encoding:
+              schema:
+                type: string
+                example: gzip
+            x-envoy-upstream-service-time:
+              schema:
+                type: integer
+                example: '79'
+            grpc-status:
+              schema:
+                type: integer
+                example: '0'
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Max-Age:
+              schema:
+                type: integer
+                example: '3600'
+            Access-Control-Expose-Headers:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+                example: '*'
+          content:
+            application/json:
+              schema:
+                type: object
+              example: {}
