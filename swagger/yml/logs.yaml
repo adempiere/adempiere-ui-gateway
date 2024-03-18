@@ -1,0 +1,1455 @@
+openapi: 3.0.0
+info:
+  title: Logs
+  version: 1.0.0
+servers:
+  - url: http://{{host}}
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+paths:
+  /logs/entities/{table_name}/{id}:
+    get:
+      tags:
+        - default
+      summary: entities
+      description: >-
+        **Endpoint**: GET /Logs
+
+
+        **Description**: Returns ListProcessLogs
+
+
+        **FULL URL**:
+        [http://api.adempiere.io](http://api.adempiere.io/api)/logs/entities/{table_name}/{id}
+
+
+        **Method**: GET
+
+
+        **Parameters (Params)**
+
+
+        table_name (String, Mandatory)
+
+
+        id (Int32, Mandatory)
+
+
+        **Application Example**
+
+
+        ``` bash
+
+        curl --location
+        'http://api.adempiere.io/logs/entities/AD_Migration/1000437' \
+
+        --header 'Content-Type: application/json' \
+
+        --header 'Authorization: Bearer
+        eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMDAwMTU0IiwiQURfQ2xpZW50X0lEIjoxMSwiQURfT3JnX0lEIjo1MDAwNiwiQURfUm9sZV9JRCI6MTAyLCJBRF9Vc2VyX0lEIjoxMDAsIk1fV2FyZWhvdXNlX0lEIjowLCJBRF9MYW5ndWFnZSI6ImVzX01YIiwiaWF0IjoxNzEwNzE1NzAxLCJleHAiOjE3MTA4MDIxMDF9.sdizIymo1Yd8P8w4D4ORu2EfavUfgxsPPfQIJMNJQQ8'
+
+         ```
+
+        **Example Answer**
+
+
+        ``` json
+         {
+                    "log_id": 1000003,
+                    "id": 1000437,
+                    "displayed_name": "Migration",
+                    "window_id": 53084,
+                    "table_name": "AD_Migration",
+                    "session_id": 1000004,
+                    "user_id": 100,
+                    "user_name": "SuperUser",
+                    "transaction_name": "POSave_907c9717-123f-437d-9ef6-f84a876f4133",
+                    "event_type": "UPDATE",
+                    "log_date": "2017-08-01T05:40:26Z",
+                    "change_logs": [
+                        {
+                            "column_name": "StatusCode",
+                            "display_column_name": "Status Code",
+                            "old_value": "U",
+                            "old_display_value": "Unapplied",
+                            "new_value": "P",
+                            "new_display_value": "Partially applied",
+                            "description": ""
+                        }
+                    ]
+                },
+
+         ```
+
+        **Common mistakes**
+
+
+        - the table name does not correspond to any of the records
+            
+
+        ``` json
+
+        {
+            "code": 13,
+            "message": "Tabla * No encontrado *",
+            "details": []
+        }
+
+         ```
+
+        **Change control**
+
+
+        | **Version** | date | author | Description of Changes |
+
+        | --- | --- | --- | --- |
+
+        | 1.0 | 15/03/2024 | Ricardo | Initial creation of the document. |
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: table_name
+          in: path
+          schema:
+            type: string
+          required: true
+          example: AD_Migration
+        - name: id
+          in: path
+          schema:
+            type: integer
+          required: true
+          example: '1000437'
+      responses:
+        '200':
+          description: OK
+          headers:
+            Server:
+              schema:
+                type: string
+                example: nginx/1.25.2
+            Date:
+              schema:
+                type: string
+                example: Fri, 29 Sep 2023 17:36:28 GMT
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Content-Length:
+              schema:
+                type: integer
+                example: '2542'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            grpc-encoding:
+              schema:
+                type: string
+                example: identity
+            grpc-accept-encoding:
+              schema:
+                type: string
+                example: gzip
+            x-envoy-upstream-service-time:
+              schema:
+                type: integer
+                example: '98'
+            grpc-status:
+              schema:
+                type: integer
+                example: '0'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Max-Age:
+              schema:
+                type: integer
+                example: '3600'
+            Access-Control-Expose-Headers:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+                example: '*'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                record_count: '4'
+                entity_logs:
+                  - log_id: 1000003
+                    id: 1000437
+                    displayed_name: Migration
+                    window_id: 53084
+                    table_name: AD_Migration
+                    session_id: 1000004
+                    user_id: 100
+                    user_name: SuperUser
+                    transaction_name: POSave_907c9717-123f-437d-9ef6-f84a876f4133
+                    event_type: UPDATE
+                    log_date: '2017-08-01T05:40:26Z'
+                    change_logs:
+                      - column_name: StatusCode
+                        display_column_name: Status Code
+                        old_value: U
+                        old_display_value: Unapplied
+                        new_value: P
+                        new_display_value: Partially applied
+                        description: ''
+                  - log_id: 1000002
+                    id: 1000437
+                    displayed_name: Migration
+                    window_id: 53084
+                    table_name: AD_Migration
+                    session_id: 1000004
+                    user_id: 100
+                    user_name: SuperUser
+                    transaction_name: POSave_78c6e563-e573-4002-b0df-e39867042a54
+                    event_type: UPDATE
+                    log_date: '2017-08-01T05:26:14Z'
+                    change_logs:
+                      - column_name: StatusCode
+                        display_column_name: Status Code
+                        old_value: U
+                        old_display_value: Unapplied
+                        new_value: P
+                        new_display_value: Partially applied
+                        description: ''
+                  - log_id: 1000001
+                    id: 1000437
+                    displayed_name: Migration
+                    window_id: 53084
+                    table_name: AD_Migration
+                    session_id: 1000003
+                    user_id: 100
+                    user_name: SuperUser
+                    transaction_name: POSave_137d3f42-cbd3-48bc-9b1a-7294514795ce
+                    event_type: UPDATE
+                    log_date: '2017-08-01T05:11:09Z'
+                    change_logs:
+                      - column_name: StatusCode
+                        display_column_name: Status Code
+                        old_value: P
+                        old_display_value: Partially applied
+                        new_value: U
+                        new_display_value: Unapplied
+                        description: ''
+                  - log_id: 1000000
+                    id: 1000437
+                    displayed_name: Migration
+                    window_id: 53084
+                    table_name: AD_Migration
+                    session_id: 1000001
+                    user_id: 100
+                    user_name: SuperUser
+                    transaction_name: POSave_48e9304f-bef6-4529-9238-3fa0e188d1bb
+                    event_type: UPDATE
+                    log_date: '2017-08-01T04:54:25Z'
+                    change_logs:
+                      - column_name: StatusCode
+                        display_column_name: Status Code
+                        old_value: P
+                        old_display_value: Partially applied
+                        new_value: U
+                        new_display_value: Unapplied
+                        description: ''
+                next_page_token: ''
+  /logs/chat-entries/{table_name}/{record_id}/exists:
+    get:
+      tags:
+        - default
+      summary: ExistsChatEntries
+      description: >-
+        **Endpoint**: GET /Logs
+
+
+        **Description**: Returns ExistsChatEntries
+
+
+        **FULL URL**:
+        [http://api.adempiere.io](http://api.adempiere.io/api)/logs/chat-entries/{table_name}/{record_id}/exists
+
+
+        **Method**: GET
+
+
+        **Parameters (Params)**
+
+
+        table_name (String, Mandatory)
+
+
+        record_id (Int32, Mandatory)
+
+
+        **Application Example**
+
+
+        ``` bash
+
+        curl --location
+        'http://api.adempiere.io/logs/chat-entries/M_Warehouse/54135/exists' \
+
+        --header 'Authorization: Bearer
+        eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMDAwMTU0IiwiQURfQ2xpZW50X0lEIjoxMSwiQURfT3JnX0lEIjo1MDAwNiwiQURfUm9sZV9JRCI6MTAyLCJBRF9Vc2VyX0lEIjoxMDAsIk1fV2FyZWhvdXNlX0lEIjowLCJBRF9MYW5ndWFnZSI6ImVzX01YIiwiaWF0IjoxNzEwNzE1NzAxLCJleHAiOjE3MTA4MDIxMDF9.sdizIymo1Yd8P8w4D4ORu2EfavUfgxsPPfQIJMNJQQ8'
+
+         ```
+
+        **Example Answer**
+
+
+        ``` json
+
+        {
+            "record_count": 0
+        }
+
+         ```
+
+        **Common mistakes**
+
+
+        - the table name does not correspond to any of the records
+            
+
+        ``` json
+
+        {
+            "code": 13,
+            "message": "Tabla * No encontrado *",
+            "details": []
+        }
+
+         ```
+
+        **Change control**
+
+
+        | **Version** | date | author | Description of Changes |
+
+        | --- | --- | --- | --- |
+
+        | 1.0 | 15/03/2024 | Ricardo | Initial creation of the document. |
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: table_name
+          in: path
+          schema:
+            type: string
+          required: true
+          example: M_Warehouse
+        - name: record_id
+          in: path
+          schema:
+            type: integer
+          required: true
+          example: '54135'
+      responses:
+        '200':
+          description: OK
+          headers:
+            Server:
+              schema:
+                type: string
+                example: nginx/1.25.2
+            Date:
+              schema:
+                type: string
+                example: Fri, 08 Mar 2024 17:56:17 GMT
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Content-Length:
+              schema:
+                type: integer
+                example: '23'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            grpc-encoding:
+              schema:
+                type: string
+                example: identity
+            grpc-accept-encoding:
+              schema:
+                type: string
+                example: gzip
+            x-envoy-upstream-service-time:
+              schema:
+                type: integer
+                example: '162'
+            grpc-status:
+              schema:
+                type: integer
+                example: '0'
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Max-Age:
+              schema:
+                type: integer
+                example: '3600'
+            Access-Control-Expose-Headers:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+                example: '*'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                record_count: 0
+  /logs/workflows:
+    get:
+      tags:
+        - default
+      summary: workflows
+      description: >-
+        **Endpoint**: GET /Logs
+
+
+        **Description**: Returns ListWorkflowLogs
+
+
+        **FULL URL**:
+        [http://api.adempiere.io](http://api.adempiere.io/api)/logs/workflows/{table_name}/{id}
+
+
+        **Method**: GET
+
+
+        **Parameters (Params)**
+
+
+        table_name (String, Mandatory)
+
+
+        id (Int32, Mandatory)
+
+
+        **Application Example**
+
+
+        ``` bash
+
+        curl --location
+        'http://api.adempiere.io/logs/workflows?table_name=C_BPartner&id=50000'
+        \
+
+        --header 'Content-Type: application/json' \
+
+        --header 'Authorization: Bearer
+        eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMDAwMTU0IiwiQURfQ2xpZW50X0lEIjoxMSwiQURfT3JnX0lEIjo1MDAwNiwiQURfUm9sZV9JRCI6MTAyLCJBRF9Vc2VyX0lEIjoxMDAsIk1fV2FyZWhvdXNlX0lEIjowLCJBRF9MYW5ndWFnZSI6ImVzX01YIiwiaWF0IjoxNzEwNzE1NzAxLCJleHAiOjE3MTA4MDIxMDF9.sdizIymo1Yd8P8w4D4ORu2EfavUfgxsPPfQIJMNJQQ8'
+
+         ```
+
+        **Example Answer**
+
+
+        ``` json
+
+        {
+            "record_count": "1",
+            "workflow_logs": [
+                {
+                    "process_id": 50000,
+                    "workflow_id": 131,
+                    "workflow_name": "Business Partner Approval",
+                    "id": 50000,
+                    "table_name": "C_BPartner",
+                    "user_id": 100,
+                    "user_name": "SuperUser",
+                    "responsible_id": 101,
+                    "responsible_name": "Invoker",
+                    "text_message": "",
+                    "processed": false,
+                    "workflow_state": "SUSPENDED",
+                    "priority": "URGENT",
+                    "workflow_events": [
+                        {
+                            "node_id": 244,
+                            "node_name": "Business Partner",
+                            "id": 50000,
+                            "table_name": "C_BPartner",
+                            "user_id": 100,
+                            "user_name": "SuperUser",
+                            "responsible_id": 100,
+                            "responsible_name": "Organization",
+                            "text_message": "",
+                            "time_elapsed": "0",
+                            "attribute_name": "",
+                            "old_value": "",
+                            "new_value": "",
+                            "workflow_state": "SUSPENDED",
+                            "event_type": "PROCESS_CREATED",
+                            "log_date": "2008-09-22T18:13:32Z"
+                        }
+                    ],
+                    "log_date": "2008-09-22T18:13:24Z"
+                }
+            ],
+            "next_page_token": ""
+        }
+
+         ```
+
+        **Common mistakes**
+
+
+        - the table name does not correspond to any of the records
+            
+
+        ``` json
+
+        {
+            "code": 13,
+            "message": "Tabla * No encontrado *",
+            "details": []
+        }
+
+         ```
+
+        **Change control**
+
+
+        | **Version** | date | author | Description of Changes |
+
+        | --- | --- | --- | --- |
+
+        | 1.0 | 15/03/2024 | Ricardo | Initial creation of the document. |
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: table_name
+          in: query
+          schema:
+            type: string
+          example: C_BPartner
+        - name: id
+          in: query
+          schema:
+            type: integer
+          example: '50000'
+      responses:
+        '200':
+          description: OK
+          headers:
+            Server:
+              schema:
+                type: string
+                example: nginx/1.25.2
+            Date:
+              schema:
+                type: string
+                example: Fri, 29 Sep 2023 17:43:04 GMT
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Content-Length:
+              schema:
+                type: integer
+                example: '984'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            grpc-encoding:
+              schema:
+                type: string
+                example: identity
+            grpc-accept-encoding:
+              schema:
+                type: string
+                example: gzip
+            x-envoy-upstream-service-time:
+              schema:
+                type: integer
+                example: '54'
+            grpc-status:
+              schema:
+                type: integer
+                example: '0'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Max-Age:
+              schema:
+                type: integer
+                example: '3600'
+            Access-Control-Expose-Headers:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+                example: '*'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                record_count: '1'
+                workflow_logs:
+                  - process_id: 50000
+                    workflow_id: 131
+                    workflow_name: Business Partner Approval
+                    id: 50000
+                    table_name: C_BPartner
+                    user_id: 100
+                    user_name: SuperUser
+                    responsible_id: 101
+                    responsible_name: Invoker
+                    text_message: ''
+                    processed: false
+                    workflow_state: SUSPENDED
+                    priority: URGENT
+                    workflow_events:
+                      - node_id: 244
+                        node_name: Business Partner
+                        id: 50000
+                        table_name: C_BPartner
+                        user_id: 100
+                        user_name: SuperUser
+                        responsible_id: 100
+                        responsible_name: Organization
+                        text_message: ''
+                        time_elapsed: '0'
+                        attribute_name: ''
+                        old_value: ''
+                        new_value: ''
+                        workflow_state: SUSPENDED
+                        event_type: PROCESS_CREATED
+                        log_date: '2008-09-22T18:13:32Z'
+                    log_date: '2008-09-22T18:13:24Z'
+                next_page_token: ''
+  /logs/recent-items:
+    get:
+      tags:
+        - default
+      summary: ListRecentItems
+      description: >-
+        **Endpoint**: GET /Logs
+
+
+        **Description**: Returns ListRecentItems
+
+
+        **FULL URL**:
+        [http://api.adempiere.io](http://api.adempiere.io/api)/logs/recent-items
+
+
+        **Method**: GET
+
+
+        **Application Example**
+
+
+        ``` bash
+
+        curl --location 'http://api.adempiere.io/logs/recent-items' \
+
+        --header 'Authorization: Bearer
+        eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMDAwMTU0IiwiQURfQ2xpZW50X0lEIjoxMSwiQURfT3JnX0lEIjo1MDAwNiwiQURfUm9sZV9JRCI6MTAyLCJBRF9Vc2VyX0lEIjoxMDAsIk1fV2FyZWhvdXNlX0lEIjowLCJBRF9MYW5ndWFnZSI6ImVzX01YIiwiaWF0IjoxNzEwNzE1NzAxLCJleHAiOjE3MTA4MDIxMDF9.sdizIymo1Yd8P8w4D4ORu2EfavUfgxsPPfQIJMNJQQ8'
+
+         ```
+
+        **Example Answer**
+
+
+        ``` json
+
+        {
+                    "menu_id": 126,
+                    "menu_name": "Producto",
+                    "menu_description": "Mantener Productos",
+                    "window_id": 140,
+                    "tab_id": 0,
+                    "table_id": 0,
+                    "table_name": "",
+                    "id": 0,
+                    "display_name": "Producto",
+                    "updated": "2024-03-08T18:00:46.884Z",
+                    "reference_id": 140,
+                    "action": "W"
+                },
+
+         ```
+
+        **Change control**
+
+
+        | **Version** | date | author | Description of Changes |
+
+        | --- | --- | --- | --- |
+
+        | 1.0 | 15/03/2024 | Ricardo | Initial creation of the document. |
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: OK
+          headers:
+            Server:
+              schema:
+                type: string
+                example: nginx/1.25.2
+            Date:
+              schema:
+                type: string
+                example: Fri, 08 Mar 2024 18:04:24 GMT
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Content-Length:
+              schema:
+                type: integer
+                example: '7263'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            grpc-encoding:
+              schema:
+                type: string
+                example: identity
+            grpc-accept-encoding:
+              schema:
+                type: string
+                example: gzip
+            x-envoy-upstream-service-time:
+              schema:
+                type: integer
+                example: '149'
+            grpc-status:
+              schema:
+                type: integer
+                example: '0'
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Max-Age:
+              schema:
+                type: integer
+                example: '3600'
+            Access-Control-Expose-Headers:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+                example: '*'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                record_count: '20'
+                recent_items:
+                  - menu_id: 126
+                    menu_name: Producto
+                    menu_description: Mantener Productos
+                    window_id: 140
+                    tab_id: 0
+                    table_id: 0
+                    table_name: ''
+                    id: 0
+                    display_name: Producto
+                    updated: '2024-03-08T18:00:46.884Z'
+                    reference_id: 140
+                    action: W
+                  - menu_id: 53055
+                    menu_name: Orden de Manufactura
+                    menu_description: Mantenimiento de órdenes de manufactura
+                    window_id: 53009
+                    tab_id: 0
+                    table_id: 0
+                    table_name: ''
+                    id: 0
+                    display_name: Orden de Manufactura
+                    updated: '2024-03-08T16:03:51Z'
+                    reference_id: 53009
+                    action: W
+                  - menu_id: 53075
+                    menu_name: Crear Tipo de Documento de Manufactura
+                    menu_description: Permite crear los tipos de documento para manufactura
+                    window_id: 0
+                    tab_id: 0
+                    table_id: 0
+                    table_name: ''
+                    id: 0
+                    display_name: Crear Tipo de Documento de Manufactura
+                    updated: '2024-03-08T16:03:36Z'
+                    reference_id: 53050
+                    action: P
+                  - menu_id: 347
+                    menu_name: Imprimir Facturas
+                    menu_description: Imprima las facturas en papel o para enviar en PDF
+                    window_id: 0
+                    tab_id: 0
+                    table_id: 0
+                    table_name: ''
+                    id: 0
+                    display_name: Imprimir Facturas
+                    updated: '2024-03-08T16:03:26.519Z'
+                    reference_id: 200
+                    action: P
+                  - menu_id: 54771
+                    menu_name: Catálogo de Productos
+                    menu_description: >-
+                      Muestra atributos de productos con precio, disponibilidad
+                      y otras características
+                    window_id: 0
+                    tab_id: 0
+                    table_id: 0
+                    table_name: ''
+                    id: 0
+                    display_name: Catálogo de Productos
+                    updated: '2024-03-08T15:51:58.419Z'
+                    reference_id: 54550
+                    action: R
+                  - menu_id: 178
+                    menu_name: Documentos por Cobrar
+                    menu_description: Entrar factura de cliente
+                    window_id: 167
+                    tab_id: 0
+                    table_id: 0
+                    table_name: ''
+                    id: 0
+                    display_name: Documentos por Cobrar
+                    updated: '2024-03-08T15:34:16Z'
+                    reference_id: 167
+                    action: W
+                  - menu_id: 54597
+                    menu_name: Consulta de Precios
+                    menu_description: Consulta precio de Productos y Valores
+                    window_id: 0
+                    tab_id: 0
+                    table_id: 0
+                    table_name: ''
+                    id: 0
+                    display_name: Consulta de Precios
+                    updated: '2024-03-08T14:49:56Z'
+                    reference_id: 53085
+                    action: X
+                  - menu_id: 419
+                    menu_name: Punto de Venta
+                    menu_description: Terminal de Punto de Venta
+                    window_id: 0
+                    tab_id: 0
+                    table_id: 0
+                    table_name: ''
+                    id: 0
+                    display_name: Punto de Venta
+                    updated: '2024-03-08T14:49:44.468Z'
+                    reference_id: 113
+                    action: X
+                  - menu_id: 121
+                    menu_name: Tipo de Documento
+                    menu_description: Mantener tipos de documentos
+                    window_id: 135
+                    tab_id: 0
+                    table_id: 0
+                    table_name: ''
+                    id: 0
+                    display_name: Tipo de Documento
+                    updated: '2024-03-08T14:49:33Z'
+                    reference_id: 135
+                    action: W
+                  - menu_id: 308
+                    menu_name: Todas las Solicitudes
+                    menu_description: Ver y trabajar sobre todas las solicitudes
+                    window_id: 232
+                    tab_id: 0
+                    table_id: 0
+                    table_name: ''
+                    id: 0
+                    display_name: Todas las Solicitudes
+                    updated: '2024-03-08T14:30:09Z'
+                    reference_id: 232
+                    action: W
+                  - menu_id: 476
+                    menu_name: Contra Documentos
+                    menu_description: Mantenga los tipos contra documento
+                    window_id: 327
+                    tab_id: 0
+                    table_id: 0
+                    table_name: ''
+                    id: 0
+                    display_name: Contra Documentos
+                    updated: '2024-03-08T14:27:15.120Z'
+                    reference_id: 327
+                    action: W
+                  - menu_id: 54538
+                    menu_name: Orden de Devolución (Cliente)
+                    menu_description: Entre y Cambie las Autorizaciones de Devolución de Cliente
+                    window_id: 53695
+                    tab_id: 0
+                    table_id: 0
+                    table_name: ''
+                    id: 0
+                    display_name: Orden de Devolución (Cliente)
+                    updated: '2024-03-08T13:38:50Z'
+                    reference_id: 53695
+                    action: W
+                  - menu_id: 53233
+                    menu_name: Generar Plan de Recolección basado en ventas
+                    menu_description: >-
+                      Esta consulta permite seleccionar las orden de venta para
+                      generar una Orden de Salida.
+                    window_id: 0
+                    tab_id: 0
+                    table_id: 0
+                    table_name: ''
+                    id: 0
+                    display_name: Generar Plan de Recolección basado en ventas
+                    updated: '2024-03-08T13:34:50Z'
+                    reference_id: 50000
+                    action: S
+                  - menu_id: 129
+                    menu_name: Órdenes de Venta
+                    menu_description: Entrar y cambiar ordenes de ventas
+                    window_id: 143
+                    tab_id: 0
+                    table_id: 0
+                    table_name: ''
+                    id: 0
+                    display_name: Órdenes de Venta
+                    updated: '2024-03-08T13:34:45Z'
+                    reference_id: 143
+                    action: W
+                  - menu_id: 53362
+                    menu_name: Tablero de Ventas
+                    menu_description: >-
+                      El tablero de ventas proporciona una ubicación única para
+                      gestionar las oportunidades de ventas
+                    window_id: 53156
+                    tab_id: 0
+                    table_id: 0
+                    table_name: ''
+                    id: 0
+                    display_name: Tablero de Ventas
+                    updated: '2024-03-08T13:15:09Z'
+                    reference_id: 53156
+                    action: W
+                  - menu_id: 452
+                    menu_name: Tema de Solicitud para Cotización
+                    menu_description: >-
+                      Mantenimiento al Tema Solicitud para Cotización y los
+                      subscriptores
+                    window_id: 314
+                    tab_id: 0
+                    table_id: 0
+                    table_name: ''
+                    id: 0
+                    display_name: Tema de Solicitud para Cotización
+                    updated: '2024-03-08T13:14:41Z'
+                    reference_id: 314
+                    action: W
+                  - menu_id: 171
+                    menu_name: Banco
+                    menu_description: Mantener Bancos
+                    window_id: 158
+                    tab_id: 0
+                    table_id: 0
+                    table_name: ''
+                    id: 0
+                    display_name: Banco
+                    updated: '2024-03-08T13:13:06.814Z'
+                    reference_id: 158
+                    action: W
+                  - menu_id: 135
+                    menu_name: Presupuesto Contable
+                    menu_description: Mantener presupuestos de libro mayor
+                    window_id: 154
+                    tab_id: 0
+                    table_id: 0
+                    table_name: ''
+                    id: 0
+                    display_name: Presupuesto Contable
+                    updated: '2024-03-08T13:09:26Z'
+                    reference_id: 154
+                    action: W
+                  - menu_id: 53225
+                    menu_name: Mis Documentos sin Procesar
+                    menu_description: Mis Documentos sin Procesar
+                    window_id: 53086
+                    tab_id: 0
+                    table_id: 0
+                    table_name: ''
+                    id: 0
+                    display_name: Mis Documentos sin Procesar
+                    updated: '2024-03-08T12:50:05.611Z'
+                    reference_id: 53086
+                    action: W
+                  - menu_id: 53499
+                    menu_name: Programación de actividades
+                    menu_description: >-
+                      Consulta para programar las fechas de inicio y fin de las
+                      actividades de las órdenes de manufactura
+                    window_id: 0
+                    tab_id: 0
+                    table_id: 0
+                    table_name: ''
+                    id: 0
+                    display_name: Programación de actividades
+                    updated: '2024-03-08T12:27:24Z'
+                    reference_id: 50017
+                    action: S
+                next_page_token: ''
+  /logs/user-activities:
+    get:
+      tags:
+        - default
+      summary: ListUserActivites
+      description: >-
+        **Endpoint**: GET /Logs
+
+
+        **Description**: Returns ListUserActivites
+
+
+        **FULL URL**:
+        [http://api.adempiere.io](http://api.adempiere.io/api)/logs/user-activities
+
+
+        **Method**: GET
+
+
+        **Application Example**
+
+
+        ``` bash
+
+        curl --location 'http://api.adempiere.io/logs/user-activities' \
+
+        --header 'Authorization: Bearer
+        eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMDAwMTU0IiwiQURfQ2xpZW50X0lEIjoxMSwiQURfT3JnX0lEIjo1MDAwNiwiQURfUm9sZV9JRCI6MTAyLCJBRF9Vc2VyX0lEIjoxMDAsIk1fV2FyZWhvdXNlX0lEIjowLCJBRF9MYW5ndWFnZSI6ImVzX01YIiwiaWF0IjoxNzEwNzE1NzAxLCJleHAiOjE3MTA4MDIxMDF9.sdizIymo1Yd8P8w4D4ORu2EfavUfgxsPPfQIJMNJQQ8'
+
+         ```
+
+        **Example Answer**
+
+
+        ``` json
+
+        {
+                    "user_activity_type": "PROCESS_LOG",
+                    "process_log": {
+                        "id": 140,
+                        "name": "Copy Accounts",
+                        "description": "Copy and overwrite Accounts to Products of this category",
+                        "instance_id": 1001238,
+                        "is_error": true,
+                        "summary": "Llenar campos obligatorios: Categoría del Producto, Esquema Contable",
+                        "result_table_name": "",
+                        "is_processing": false,
+                        "last_run": "2024-03-08T18:56:50Z",
+                        "logs": [],
+                        "parameters": {},
+                        "process_intance_parameters": []
+                    }
+                },
+
+         ```
+
+        **Change control**
+
+
+        | **Version** | date | author | Description of Changes |
+
+        | --- | --- | --- | --- |
+
+        | 1.0 | 15/03/2024 | Ricardo | Initial creation of the document. |
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: OK
+          headers:
+            Server:
+              schema:
+                type: string
+                example: nginx/1.25.2
+            Date:
+              schema:
+                type: string
+                example: Fri, 08 Mar 2024 19:05:09 GMT
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Content-Length:
+              schema:
+                type: integer
+                example: '2259'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            grpc-encoding:
+              schema:
+                type: string
+                example: identity
+            grpc-accept-encoding:
+              schema:
+                type: string
+                example: gzip
+            x-envoy-upstream-service-time:
+              schema:
+                type: integer
+                example: '63'
+            grpc-status:
+              schema:
+                type: integer
+                example: '0'
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Max-Age:
+              schema:
+                type: integer
+                example: '3600'
+            Access-Control-Expose-Headers:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+                example: '*'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                record_count: '4'
+                records:
+                  - user_activity_type: PROCESS_LOG
+                    process_log:
+                      id: 140
+                      name: Copy Accounts
+                      description: Copy and overwrite Accounts to Products of this category
+                      instance_id: 1001238
+                      is_error: true
+                      summary: >-
+                        Llenar campos obligatorios: Categoría del Producto,
+                        Esquema Contable
+                      result_table_name: ''
+                      is_processing: false
+                      last_run: '2024-03-08T18:56:50Z'
+                      logs: []
+                      parameters: {}
+                      process_intance_parameters: []
+                  - user_activity_type: PROCESS_LOG
+                    process_log:
+                      id: 140
+                      name: Copy Accounts
+                      description: Copy and overwrite Accounts to Products of this category
+                      instance_id: 1001237
+                      is_error: true
+                      summary: >-
+                        Llenar campos obligatorios: Categoría del Producto,
+                        Esquema Contable
+                      result_table_name: ''
+                      is_processing: false
+                      last_run: '2024-03-08T18:55:59Z'
+                      logs: []
+                      parameters: {}
+                      process_intance_parameters: []
+                  - user_activity_type: PROCESS_LOG
+                    process_log:
+                      id: 120
+                      name: Order Transactions
+                      description: Order Transactions
+                      instance_id: 1001236
+                      is_error: true
+                      summary: ''
+                      result_table_name: ''
+                      is_processing: false
+                      last_run: '2024-03-08T18:54:18Z'
+                      logs: []
+                      parameters: {}
+                      output:
+                        id: 0
+                        name: ''
+                        description: ''
+                        file_name: ''
+                        output: ''
+                        mime_type: ''
+                        data_cols: '0'
+                        data_rows: '0'
+                        header_name: ''
+                        footer_name: ''
+                        print_format_id: 0
+                        report_view_id: 0
+                        table_name: ''
+                        output_stream: ''
+                        report_type: P
+                      process_intance_parameters: []
+                  - user_activity_type: PROCESS_LOG
+                    process_log:
+                      id: 241
+                      name: Delete Notices
+                      description: Delete all Notices
+                      instance_id: 1001235
+                      is_error: false
+                      summary: Borrado = 9
+                      result_table_name: ''
+                      is_processing: false
+                      last_run: '2024-03-08T18:14:38Z'
+                      logs: []
+                      parameters: {}
+                      process_intance_parameters: []
+                next_page_token: ''
+  /logs/process/instance/{instance_id}:
+    get:
+      tags:
+        - default
+      summary: process_instanceId
+      description: >-
+        **Endpoint**: GET /Logs
+
+
+        **Description**: Returns ListProcessLogs
+
+
+        **FULL URL**:
+        [http://api.adempiere.io](http://api.adempiere.io/api)/logs/process/instance/{instance_id}
+
+
+        **Method**: GET
+
+
+        **Application Example**
+
+
+        ``` bash
+
+        curl --location 'http://api.adempiere.io/logs/process/instance/1000437'
+        \
+
+        --header 'Authorization: Bearer
+        eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMDAwMTU0IiwiQURfQ2xpZW50X0lEIjoxMSwiQURfT3JnX0lEIjo1MDAwNiwiQURfUm9sZV9JRCI6MTAyLCJBRF9Vc2VyX0lEIjoxMDAsIk1fV2FyZWhvdXNlX0lEIjowLCJBRF9MYW5ndWFnZSI6ImVzX01YIiwiaWF0IjoxNzEwNzE1NzAxLCJleHAiOjE3MTA4MDIxMDF9.sdizIymo1Yd8P8w4D4ORu2EfavUfgxsPPfQIJMNJQQ8'
+
+         ```
+
+        **Example Answer**
+
+
+        ``` json
+
+        {
+            "record_count": "1",
+            "process_logs": [
+                {
+                    "id": 295,
+                    "name": "Role Access Update",
+                    "description": "Update the access rights of a role or roles of a client",
+                    "instance_id": 1000437,
+                    "is_error": false,
+                    "summary": "",
+                    "result_table_name": "",
+                    "is_processing": false,
+                    "last_run": "2017-08-01T07:18:52Z",
+                    "logs": [
+                        {
+                            "record_id": 0,
+                            "log": "Role Template: -"
+                        },
+                        {
+                            "record_id": 1,
+                            "log": "System Administrator: Ventana #160 -  Proceso #87 -  Forma Especial #12 -  Smart Browse #1 -  Flujo de Trabajo #9 -  Acción en el Documento #14"
+                        },
+                        {
+                            "record_id": 2,
+                            "log": "GardenWorld Admin: Ventana #412 -  Proceso #461 -  Forma Especial #41 -  Smart Browse #44 -  Flujo de Trabajo #60 -  Acción en el Documento #686"
+                        },
+                        {
+                            "record_id": 3,
+                            "log": "GardenWorld User: Ventana #279 -  Proceso #415 -  Forma Especial #34 -  Smart Browse #44 -  Flujo de Trabajo #57 -  Acción en el Documento #686"
+                        },
+                        {
+                            "record_id": 4,
+                            "log": "Web Service Execution: -"
+                        }
+                    ],
+                    "parameters": {},
+                    "process_intance_parameters": [
+                        {
+                            "id": 538,
+                            "name": "Compañía",
+                            "column_name": "AD_Client_ID"
+                        }
+                    ]
+                }
+            ],
+            "next_page_token": ""
+        }
+
+         ```
+
+        **Change control**
+
+
+        | **Version** | date | author | Description of Changes |
+
+        | --- | --- | --- | --- |
+
+        | 1.0 | 15/03/2024 | Ricardo | Initial creation of the document. |
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: instance_id
+          in: path
+          schema:
+            type: integer
+          required: true
+          example: '1000437'
+      responses:
+        '200':
+          description: OK
+          headers:
+            Server:
+              schema:
+                type: string
+                example: nginx/1.25.2
+            Date:
+              schema:
+                type: string
+                example: Sun, 10 Mar 2024 19:41:33 GMT
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Content-Length:
+              schema:
+                type: integer
+                example: '1252'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            grpc-encoding:
+              schema:
+                type: string
+                example: identity
+            grpc-accept-encoding:
+              schema:
+                type: string
+                example: gzip
+            x-envoy-upstream-service-time:
+              schema:
+                type: integer
+                example: '124'
+            grpc-status:
+              schema:
+                type: integer
+                example: '0'
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Max-Age:
+              schema:
+                type: integer
+                example: '3600'
+            Access-Control-Expose-Headers:
+              schema:
+                type: string
+                example: '*'
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+                example: '*'
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                record_count: '1'
+                process_logs:
+                  - id: 295
+                    name: Role Access Update
+                    description: Update the access rights of a role or roles of a client
+                    instance_id: 1000437
+                    is_error: false
+                    summary: ''
+                    result_table_name: ''
+                    is_processing: false
+                    last_run: '2017-08-01T07:18:52Z'
+                    logs:
+                      - record_id: 0
+                        log: 'Role Template: -'
+                      - record_id: 1
+                        log: >-
+                          System Administrator: Ventana #160 -  Proceso #87 - 
+                          Forma Especial #12 -  Smart Browse #1 -  Flujo de
+                          Trabajo #9 -  Acción en el Documento #14
+                      - record_id: 2
+                        log: >-
+                          GardenWorld Admin: Ventana #412 -  Proceso #461 - 
+                          Forma Especial #41 -  Smart Browse #44 -  Flujo de
+                          Trabajo #60 -  Acción en el Documento #686
+                      - record_id: 3
+                        log: >-
+                          GardenWorld User: Ventana #279 -  Proceso #415 - 
+                          Forma Especial #34 -  Smart Browse #44 -  Flujo de
+                          Trabajo #57 -  Acción en el Documento #686
+                      - record_id: 4
+                        log: 'Web Service Execution: -'
+                    parameters: {}
+                    process_intance_parameters:
+                      - id: 538
+                        name: Compañía
+                        column_name: AD_Client_ID
+                next_page_token: ''
