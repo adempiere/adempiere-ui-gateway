@@ -5,8 +5,7 @@
     container_name: ${ENVOY_GRPC_PROXY_CONTAINER_NAME}
     hostname: ${ENVOY_GRPC_PROXY_HOSTNAME}
     depends_on:
-      adempiere.grpc.server:
-        condition: service_healthy
+      - adempiere.grpc.server
     healthcheck:
       test: "bash -c 'printf \"GET / HTTP/1.1\n\n\" > /dev/tcp/127.0.0.1/${ENVOY_GRPC_PROXY_BACKEND_PORT}; exit $?;'"
       interval: 10s

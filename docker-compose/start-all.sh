@@ -178,7 +178,7 @@ STORAGE_array[$ADEMPIERE_ZK]="$NO_SERVICE_IMPLEMENTED"
 STORAGE_array[$ADEMPIERE_PROCESSOR]="$NO_SERVICE_IMPLEMENTED"
 STORAGE_array[$DKRON_SCHEDULER]="$NO_SERVICE_IMPLEMENTED"
 STORAGE_array[$ADEMPIERE_GRPC_SERVER]="09a-adempiere_grpc_server_service.yml"
-STORAGE_array[$GRPC_PROXY]="10d-grpc_proxy_service_vue.yml"
+STORAGE_array[$GRPC_PROXY]="10e-grpc_proxy_service_storage.yml"
 STORAGE_array[$VUE_UI]="11a-vue_ui_service.yml"
 STORAGE_array[$ZOOKEEPER]="$NO_SERVICE_IMPLEMENTED"
 STORAGE_array[$KAFKA]="$NO_SERVICE_IMPLEMENTED"
@@ -352,6 +352,9 @@ then
 fi
 
 # 6.- Execute docker compose
-echo "Docker Compose will be executed with file: \"$DOCKER_COMPOSE_FILE\"";
+echo "Docker Compose will be executed with file: \"$DOCKER_COMPOSE_FILE\""
 cp env_template.env .env
+#docker compose -f $DOCKER_COMPOSE_FILE --dry-run up -d
 docker compose -f $DOCKER_COMPOSE_FILE up -d
+
+echo "Docker Compose started"

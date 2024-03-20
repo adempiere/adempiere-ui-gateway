@@ -5,8 +5,7 @@
     container_name: ${KAFKA_CONTAINER_NAME}
     hostname: ${KAFKA_HOSTNAME}
     depends_on:
-      zookeeper:
-        condition: service_healthy
+      - zookeeper
     environment:
       KAFKA_BROKER_ID: 1
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:${ZOOKEEPER_PORT}
