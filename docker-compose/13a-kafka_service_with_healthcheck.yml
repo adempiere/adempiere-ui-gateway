@@ -5,8 +5,7 @@
     container_name: ${KAFKA_CONTAINER_NAME}
     hostname: ${KAFKA_HOSTNAME}
     depends_on:
-      zookeeper:
-        condition: service_healthy
+      - zookeeper
     healthcheck:
       test: "bash -c 'printf \"GET / HTTP/1.1\n\n\" > /dev/tcp/127.0.0.1/${KAFKA_PORT}; exit $?;'"
       interval: 10s
