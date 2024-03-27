@@ -1,0 +1,31 @@
+
+  # For modes: STANDARD, STORAGE, VUE, DEVELOP, CACHE, AUTH
+  adempiere.grpc.server:
+    image: ${VUE_BACKEND_GRPC_SERVER_IMAGE}
+    container_name: ${VUE_BACKEND_GRPC_SERVER_CONTAINER_NAME}
+    hostname: ${VUE_BACKEND_GRPC_SERVER_HOSTNAME}
+    depends_on:
+      postgresql.service:
+        condition: service_healthy
+    restart: ${GENERIC_RESTART}
+    healthcheck:
+      test: "bash -c 'printf \"GET / HTTP/1.1\n\n\" > /dev/tcp/127.0.0.1/${VUE_BACKEND_GRPC_SERVER_PORT}; exit $?;'"
+      interval: 10s
+      retries: 60
+      start_period: 20s
+      timeout: 10s
+    environment:
+      SERVER_PORT: ${VUE_BACKEND_GRPC_SERVER_PORT}
+      DB_HOST: ${VUE_BACKEND_GRPC_SERVER_DB_CONTAINER_NAME}
+      DB_PORT: ${VUE_BACKEND_GRPC_SERVER_DB_PORT}
+      DB_NAME: ${VUE_BACKEND_GRPC_SERVER_DB_NAME}
+      DB_USER: ${VUE_BACKEND_GRPC_SERVER_DB_USER}
+      DB_PASSWORD: ${VUE_BACKEND_GRPC_SERVER_DB_PASSWORD}
+      JWT_SECRET_KEY: ${VUE_BACKEND_GRPC_SERVER_JWT_SECRET_KEY}
+      # SERVICES_ENABLED: ${VUE_BACKEND_GRPC_SERVER_SERVICES_ENABLED}           # IN ADEMPIERE-ALL-SERVICES, NOT COMMENTED
+      SERVER_LOG_LEVEL: ${VUE_BACKEND_GRPC_SERVER_LOG_LEVEL}
+    volumes:
+      - ${TIMEZONE_PATH_ON_HOST}:${TIMEZONE_PATH_ON_CONTAINER}:${TIMEZONE_OPTIONS}    # Map the Timezone  of the host to the Timezone of the container
+      - ${LOCALTIME_PATH_ON_HOST}:${LOCALTIME_PATH_ON_CONTAINER}:${LOCALTIME_OPTIONS} # Map the Localtime of the host to the Timezone of the container
+    networks:
+      - adempiere_network

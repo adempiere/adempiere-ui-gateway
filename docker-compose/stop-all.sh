@@ -1,21 +1,16 @@
 #!/bin/bash
 
-# Script to stop all services of the Compose file.
-# The file must be called for stopping the services
+# Script to stop all services started with the Docker Compose file.
+# The services were called with this Docker Compose file via script "start-all.sh".
 
-savefile=.DOCKER_COMPOSE_FILE
-if [ -e $savefile ]
+DOCKER_COMPOSE_FILE=docker-compose.yml
+
+echo "All services started with the Docker Compose file \"$DOCKER_COMPOSE_FILE\" will be stopped!"
+docker compose -f $DOCKER_COMPOSE_FILE down
+
+# To avoid misunderstandings, the Docker Compose file is deleted.
+# It may be created again by calling "start-all.sh".
+if [ -e $DOCKER_COMPOSE_FILE ]
 then
-    docker_compose_file=$(cat $savefile)
-else
-    docker_compose_file=docker-compose.yml
-fi
-
-echo "All services started with the Docker Compose file \"$docker_compose_file\" will be stopped"
-docker compose -f $docker_compose_file down
-
-# To avoid misunderstandings, the file is deleted
-if [ -e $savefile ]
-then
-    rm $savefile
+    rm $DOCKER_COMPOSE_FILE &&  echo "The Docker Compose file \"$DOCKER_COMPOSE_FILE\" was deleted!"
 fi
