@@ -1,5 +1,5 @@
 # adempiere-ui-gateway
-Default Gateway for ADempiere UI
+This project implements a Default Gateway for ADempiere UI
 
 This API Gateway offers an *ADempiere User Interface Gateway Definition*.
 

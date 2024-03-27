@@ -12,5 +12,5 @@ docker compose -f $DOCKER_COMPOSE_FILE down
 # It may be created again by calling "start-all.sh".
 if [ -e $DOCKER_COMPOSE_FILE ]
 then
-    rm $DOCKER_COMPOSE_FILE
+    rm $DOCKER_COMPOSE_FILE &&  echo "The Docker Compose file \"$DOCKER_COMPOSE_FILE\" was deleted!"
 fi
