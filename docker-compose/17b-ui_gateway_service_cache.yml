@@ -1,0 +1,35 @@
+
+  # For modes: CACHE
+  ui.gateway:
+    image: ${NGINX_UI_GATEWAY_IMAGE}
+    container_name: ${NGINX_UI_GATEWAY_CONTAINER_NAME}
+    hostname: ${NGINX_UI_GATEWAY_HOSTNAME}
+    depends_on:
+      grpc.proxy:
+        condition: service_healthy
+      # vue.ui:
+      #   condition: service_healthy
+      opensearch.gateway.rs:
+        condition: service_started
+      # adempiere.site:
+      #   condition: service_started
+    ports:
+      - ${NGINX_UI_GATEWAY_EXTERNAL_PORT}:${NGINX_UI_GATEWAY_INTERNAL_PORT}
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./nginx/gateway/api_gateway.conf:/etc/nginx/api_gateway.conf
+      - ./nginx/api_json_errors.conf:/etc/nginx/api_json_errors.conf
+      #- ./keys/api_keys.conf:/etc/nginx/api_keys.conf
+      # open search
+      - ./nginx/upstreams/opensearch_gateway_rs.conf:/etc/nginx/api_upstreams_conf.d/opensearch_gateway_rs.conf
+      - ./nginx/api/opensearch/:/etc/nginx/api_conf.d/opensearch/
+      # grpc proxy
+      - ./nginx/upstreams/adempiere_backend.conf:/etc/nginx/api_upstreams_conf.d/adempiere_backend.conf
+      - ./nginx/api/backend/:/etc/nginx/api_conf.d/backend/
+      # vue
+      - ./nginx/upstreams/adempiere_frontend.conf:/etc/nginx/api_upstreams_conf.d/adempiere_frontend.conf
+      # time zone
+      - ${TIMEZONE_PATH_ON_HOST}:${TIMEZONE_PATH_ON_CONTAINER}:${TIMEZONE_OPTIONS}    # Map the Timezone  of the host to the Timezone of the container
+      - ${LOCALTIME_PATH_ON_HOST}:${LOCALTIME_PATH_ON_CONTAINER}:${LOCALTIME_OPTIONS} # Map the Localtime of the host to the Timezone of the container
+    networks:
+      - adempiere_network

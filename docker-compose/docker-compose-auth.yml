@@ -63,8 +63,6 @@ services:
     container_name: ${ADEMPIERE_SITE_CONTAINER_NAME}
     hostname: ${ADEMPIERE_SITE_HOSTNAME}
     restart: ${GENERIC_RESTART}
-    # ports:                                                                          # Ports not configured. Why?
-    #  - ${ADEMPIERE_SITE_EXTERNAL_PORT}:${ADEMPIERE_SITE_PORT}                       # Ports not configured. Why?
     volumes:
       - ${TIMEZONE_PATH_ON_HOST}:${TIMEZONE_PATH_ON_CONTAINER}:${TIMEZONE_OPTIONS}    # Map the Timezone  of the host to the Timezone of the container
       - ${LOCALTIME_PATH_ON_HOST}:${LOCALTIME_PATH_ON_CONTAINER}:${LOCALTIME_OPTIONS} # Map the Localtime of the host to the Timezone of the container
@@ -97,8 +95,6 @@ services:
     depends_on:
       postgresql.service:
         condition: service_healthy
-    # ports:
-    #  - ${ADEMPIERE_ZK_EXTERNAL_PORT}:${ADEMPIERE_ZK_PORT}
     networks:
       - adempiere_network
 
@@ -425,7 +421,7 @@ services:
       - ${TIMEZONE_PATH_ON_HOST}:${TIMEZONE_PATH_ON_CONTAINER}:${TIMEZONE_OPTIONS}    # Map the Timezone  of the host to the Timezone of the container
       - ${LOCALTIME_PATH_ON_HOST}:${LOCALTIME_PATH_ON_CONTAINER}:${LOCALTIME_OPTIONS} # Map the Localtime of the host to the Timezone of the container
     ports:
-      - ${KEYCLOAK_PORT}:8080
+      - ${KEYCLOAK_EXTERNAL_PORT}:${KEYCLOAK_PORT}
     networks:
       - adempiere_network
 

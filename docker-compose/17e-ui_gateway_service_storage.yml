@@ -1,0 +1,33 @@
+
+  # For modes: STORAGE
+  ui.gateway:
+    image: ${NGINX_UI_GATEWAY_IMAGE}
+    container_name: ${NGINX_UI_GATEWAY_CONTAINER_NAME}
+    hostname: ${NGINX_UI_GATEWAY_HOSTNAME}
+    depends_on:
+      grpc.proxy:
+        condition: service_healthy
+      s3.gateway.rs:
+        condition: service_started
+    ports:
+      - ${NGINX_UI_GATEWAY_EXTERNAL_PORT}:${NGINX_UI_GATEWAY_INTERNAL_PORT}
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./nginx/gateway/api_gateway_vue.conf:/etc/nginx/api_gateway.conf
+      - ./nginx/api_json_errors.conf:/etc/nginx/api_json_errors.conf
+      #- ./keys/api_keys.conf:/etc/nginx/api_keys.conf
+      # s3
+      - ./nginx/upstreams/s3_storage.conf:/etc/nginx/api_upstreams_conf.d/s3_storage.conf
+      - ./nginx/upstreams/s3_console_ui.conf:/etc/nginx/api_upstreams_conf.d/s3_console_ui.conf
+      - ./nginx/upstreams/s3_gateway_rs.conf:/etc/nginx/api_upstreams_conf.d/s3_gateway_rs.conf
+      - ./nginx/api/s3/:/etc/nginx/api_conf.d/s3/
+      # grpc proxy
+      - ./nginx/upstreams/adempiere_backend.conf:/etc/nginx/api_upstreams_conf.d/adempiere_backend.conf
+      - ./nginx/api/backend/:/etc/nginx/api_conf.d/backend/
+      # vue
+      - ./nginx/upstreams/adempiere_frontend.conf:/etc/nginx/api_upstreams_conf.d/adempiere_frontend.conf
+      # time zone
+      - ${TIMEZONE_PATH_ON_HOST}:${TIMEZONE_PATH_ON_CONTAINER}:${TIMEZONE_OPTIONS}    # Map the Timezone  of the host to the Timezone of the container
+      - ${LOCALTIME_PATH_ON_HOST}:${LOCALTIME_PATH_ON_CONTAINER}:${LOCALTIME_OPTIONS} # Map the Localtime of the host to the Timezone of the container
+    networks:
+      - adempiere_network

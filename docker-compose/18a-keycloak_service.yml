@@ -1,0 +1,29 @@
+
+  # For modes: AUTH
+  keycloak:
+    image: ${KEYCLOAK_IMAGE}
+    container_name: ${KEYCLOAK_CONTAINER_NAME}
+    hostname: ${KEYCLOAK_HOSTNAME}
+    depends_on:
+      postgresql.service:
+        condition: service_healthy
+    restart: ${GENERIC_RESTART}
+    environment:
+      KEYCLOAK_ADMIN: ${KEYCLOAK_ADMIN}
+      KEYCLOAK_ADMIN_PASSWORD: ${KEYCLOAK_ADMIN_PASSWORD}
+      DB_VENDOR: ${KEYCLOAK_DB_VENDOR}
+      DB_ADDR: ${KEYCLOAK_DB_HOST}
+      DB_DATABASE: ${KEYCLOAK_DB_DATABASE}
+      DB_USER: ${POSTGRES_USER}
+      DB_SCHEMA: ${KEYCLOAK_DB_SCHEMA}
+      DB_PASSWORD: ${POSTGRES_PASSWORD}
+    command: "start-dev --import-realm"
+    ports:
+      - ${KEYCLOAK_EXTERNAL_PORT}:${KEYCLOAK_PORT}
+    volumes:
+      - ./keycloak/master-realm.json:/opt/keycloak/data/import/master-realm.json
+      - ./keycloak/adempiere-realm.json:/opt/keycloak/data/import/adempiere-realm.json
+      - ${TIMEZONE_PATH_ON_HOST}:${TIMEZONE_PATH_ON_CONTAINER}:${TIMEZONE_OPTIONS}    # Map the Timezone  of the host to the Timezone of the container
+      - ${LOCALTIME_PATH_ON_HOST}:${LOCALTIME_PATH_ON_CONTAINER}:${LOCALTIME_OPTIONS} # Map the Localtime of the host to the Timezone of the container
+    networks:
+      - adempiere_network

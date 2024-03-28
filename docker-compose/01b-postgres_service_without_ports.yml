@@ -1,0 +1,53 @@
+
+  # For modes: STANDARD, VUE, STORAGE, CACHE, AUTH
+  postgresql.service:
+    build:
+      context: ${POSTGRES_CONTEXT_PATH_ON_HOST}              # Path relative to Working Directory where Dockerfile will be found
+      dockerfile: ${DOCKERFILE_NAME}                         # Must exist in context. Otherwise, error. Valid only if no "image" defined.
+      args:
+        # ARG is used to define build-time variables, whereas ENV is used to define run-time variables.
+        # ARG is not available in the final image, whereas ENV is set in the final image.
+        # ARG can be overridden during the build process using the "build-arg" flag, whereas ENV cannot be overridden during the build process.
+        POSTGRES_IMAGE: ${POSTGRES_IMAGE}                    # Only this is actually needed for the Dockerfile. The other args are left just in case.
+        ADEMPIERE_DB_NAME: ${ADEMPIERE_DB_NAME}
+        ADEMPIERE_DB_USER: ${ADEMPIERE_DB_USER}
+        ADEMPIERE_DB_PASSWORD: ${ADEMPIERE_DB_PASSWORD}
+        POSTGRES_DEFAULT_RESTORE_FILE: ${POSTGRES_DEFAULT_RESTORE_FILE}
+        HOME_PATH_ON_CONTAINERS: ${HOME_PATH_ON_CONTAINERS}
+        POSTGRES_DB_BACKUP_PATH_ON_CONTAINER: ${POSTGRES_DB_BACKUP_PATH_ON_CONTAINER}
+        ADEMPIERE_GITHUB_ARTIFACT: ${ADEMPIERE_GITHUB_ARTIFACT}
+        ADEMPIERE_GITHUB_COMPRESSED_FILE: ${ADEMPIERE_GITHUB_COMPRESSED_FILE}
+        POSTGRES_RESTORE_FILE_NAME: ${POSTGRES_RESTORE_FILE_NAME}
+    container_name: ${POSTGRES_CONTAINER_NAME}
+    hostname: ${POSTGRES_HOSTNAME}
+    image: ${POSTGRES_IMAGE_REPO_NAME}                        # "image" is in this context just another image RepoTag, visible with "docker image inspect" and "docker images"
+                                                              # Omitting it, the Repository name will be "${COMPOSE_PROJECT_NAME}+Service name"
+    restart: ${GENERIC_RESTART}
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres && psql -U ${ADEMPIERE_DB_USER} -d ${ADEMPIERE_DB_NAME} -c 'SELECT Version FROM AD_SYSTEM'"]
+      interval: 10s
+      retries: 60
+      start_period: 20s
+      timeout: 10s
+    environment:            # Values needed for initdb.sh and debugging
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      ADEMPIERE_DB_NAME: ${ADEMPIERE_DB_NAME}
+      ADEMPIERE_DB_USER: ${ADEMPIERE_DB_USER}
+      ADEMPIERE_DB_PASSWORD: ${ADEMPIERE_DB_PASSWORD}
+      POSTGRES_DEFAULT_RESTORE_FILE: ${POSTGRES_DEFAULT_RESTORE_FILE}
+      HOME_PATH_ON_CONTAINERS: ${HOME_PATH_ON_CONTAINERS}
+      POSTGRES_DB_BACKUP_PATH_ON_CONTAINER: ${POSTGRES_DB_BACKUP_PATH_ON_CONTAINER}
+      ADEMPIERE_GITHUB_ARTIFACT: ${ADEMPIERE_GITHUB_ARTIFACT}
+      ADEMPIERE_GITHUB_COMPRESSED_FILE: ${ADEMPIERE_GITHUB_COMPRESSED_FILE}
+      POSTGRES_RESTORE_FILE_NAME: ${POSTGRES_RESTORE_FILE_NAME}
+      POSTGRES_EXTERNAL_PORT:  ${POSTGRES_EXTERNAL_PORT}
+    # ports:
+    #   - ${POSTGRES_EXTERNAL_PORT}:${POSTGRES_PORT}          # Set a fixed external port
+    volumes:
+      - volume_postgres:${POSTGRES_DEFAULT_DB_PATH_ON_CONTAINER} # Database dir for container. Default for Postgres.
+      - volume_backups:${POSTGRES_DB_BACKUP_PATH_ON_CONTAINER}   # Backup dir for container. Must be created with Dockerfile
+      - ${TIMEZONE_PATH_ON_HOST}:${TIMEZONE_PATH_ON_CONTAINER}:${TIMEZONE_OPTIONS}    # Map the Timezone  of the host to the Timezone of the container
+      - ${LOCALTIME_PATH_ON_HOST}:${LOCALTIME_PATH_ON_CONTAINER}:${LOCALTIME_OPTIONS} # Map the Localtime of the host to the Timezone of the container
+    networks:
+      - adempiere_network
