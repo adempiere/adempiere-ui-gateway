@@ -12,6 +12,10 @@
       retries: 60
       start_period: 20s
       timeout: 10s
+    environment:
+      SERVER_PORT: ${ENVOY_GRPC_PROXY_BACKEND_PORT}
+      BACKEND_HOST: ${ENVOY_GRPC_PROXY_BACKEND_HOST}
+      BACKEND_PORT: ${ENVOY_GRPC_PROXY_BACKEND_SERVER_PORT}
     ports:
       - ${ENVOY_GRPC_PROXY_BACKEND_EXTERNAL_PORT}:${ENVOY_GRPC_PROXY_BACKEND_PORT}
     volumes:
