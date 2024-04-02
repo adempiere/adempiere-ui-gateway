@@ -1,5 +1,5 @@
 
-  # For modes: STANDARD, AUTH
+  # For modes: STANDARD, STORAGE, AUTH
   s3.gateway.rs:
     image: ${S3_GATEWAY_RS_IMAGE}
     container_name: ${S3_GATEWAY_RS_CONTAINER_NAME}
@@ -8,6 +8,12 @@
       s3.storage:
         condition: service_healthy
     restart: ${GENERIC_RESTART}
+    healthcheck:
+      test: "bash -c 'printf \"GET / HTTP/1.1\n\n\" > /dev/tcp/127.0.0.1/7878; exit $?;'"
+      interval: 10s
+      retries: 60
+      start_period: 20s
+      timeout: 10s
     environment:
       S3_URL: ${S3_GATEWAY_RS_S3_URL}
       API_KEY: ${S3_GATEWAY_RS_API_KEY}

@@ -1,5 +1,5 @@
 
-  # For modes: CACHE
+  # For modes: CACHE, AUTH
   zookeeper:
     image: ${ZOOKEEPER_IMAGE}
     container_name: ${ZOOKEEPER_CONTAINER_NAME}
