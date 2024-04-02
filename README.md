@@ -152,8 +152,10 @@ It can also be called with the legacy flag  **-l** (this is only legacy and not 
     It will be deleted when *stop-all.sh* is executed
 - *stop-all.sh*: shell script to automatically stop all services that were started with the script *start-all.sh* and defined in file *docker-compose.yml*.
   The file *docker-compose.yml* is deleted after stopping all services.
-- *stop-and-delete-all.sh*: shell script to delete all containers, images, networks, cache and volumnes created with *start-all.sh* or by executing *docker-compose.yml*.  
-After executing this shell, no trace of the application will be left over. Only the persistent directory will not be affected, which must be manually deleted if desired.  
+- *stop-and-delete-all.sh*: shell script to delete **all** containers, images, networks, cache and volumes, **including the ones** created without  *start-all.sh* or by executing *docker-compose.yml*. 
+**Be very careful when using this script, because it will reset everything you have of Docker**.
+
+    After executing this shell, no trace of the application will be left over. Only the persistent directory will not be affected, which must be manually deleted if desired.  
 The file *docker-compose.yml* is deleted after stopping and deleting all objects.
 - *postgresql/Dockerfile*: the Dockerfile used.
   It mainly copies postgresql/initdb.sh to the container, so it can be executed at start.
@@ -355,19 +357,20 @@ The file *docker-compose.yml* - created with script start-all.sh - contains the 
 The file *docker-compose.yml* is deleted after stopping all services.
 
 ### Delete All Docker Objects
-Sometimes, due to different reasons, you need to undo everything and start anew.
-Then:All
+Sometimes, due to different reasons, you need to undo everything you have created on Docker and start anew. This is mostly in development, not in production.
+Then:
 - All Docker containers must be shut down.
 - All Docker containers must be deleted.
 - All Docker images must be deleted.
 - The Docker installation cache must be cleared.
 - All Docker networks and volumes must be deleted.
 
-Execute command:
+Execute script:
 ```Shell
 cd adempiere-ui-gateway/docker-compose
 ./stop-and-delete-all.sh
 ```
+**Be very careful when using this script, because it will delete all Docker objects you have!**
 
 ### Database Access
 Connect to database via port **55432** with a DB connector, e.g. PGAdmin.
