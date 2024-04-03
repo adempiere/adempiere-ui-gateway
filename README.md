@@ -50,25 +50,25 @@ Take note that the ports are defined in file *env_template.env* as external port
 - A Postgres databasee accesible e.g. by PGAdmin via port **55432**
 
 ### Application Stack
-The application stack consists of the following services defined in the *docker-compose files* (and retrieved on the console with *docker compose ls*); these services will eventually run as containers:
-- *adempiere-site*: defines the landing page (web site) for this application
-- *postgresql.service*: defines the Postgres database
-- *adempiere-zk*: defines the Jetty server and the ADempiere ZK UI
-- *adempiere-grpc-server*: Defines a grpc server as the backend server for Vue
-- *adempiere.processor*: for processes that are executed outside Adempiere
-- *dkron.scheduler*: a scheduler
-- *grpc.proxy*: an envoy server
-- *vue-ui*: defines ADempiere Vue UI
-- *opensearch.node*:
-- *opensearch.setup*:
-- *zookeeper*:
-- *kafka*:
-- *opensearch.gateway.rs*:
-- *keycloak*:
-- *ui.gateway*:
-- *s3.storage*:
-- *s3.client*:
-- *s3.gateway.rs*:
+The application stack consists of the following services defined in the *docker-compose files* (and retrieved on the console with **docker compose ls**); these services will eventually run as containers:
+- **adempiere-site**: defines the landing page (web site) for this application
+- **postgresql.service**: defines the Postgres database
+- **adempiere-zk**: defines the Jetty server and the ADempiere ZK UI
+- **adempiere-grpc-server**: Defines a grpc server as the backend server for Vue
+- **adempiere.processor**: for processes that are executed outside Adempiere
+- **dkron.scheduler**: a scheduler
+- **grpc.proxy**: an envoy server
+- **vue-ui**: defines ADempiere Vue UI
+- **opensearch.node**: stores the Application Dictionary definitions
+- **opensearch.setup**: configure the service *opensearch.node*
+- **zookeeper**: controller for *kafka* service
+- **kafka**: messaging and streaming
+- **opensearch.gateway.rs**:
+- **keycloak**: user management on service *postgresql.service*
+- **ui.gateway**:
+- **s3.storage**: for attachments
+- **s3.client**: configuration of "s3-storage" service
+- **s3.gateway.rs**:
 
 Additional objects defined in the *docker-compose files*:
 - *adempiere_network*: defines the subnet used in the involved Docker containers (e.g. **192.168.100.0/24**)
@@ -100,18 +100,16 @@ It may exist more than one docker compose service file for every service (see do
   - **03a-s3_client_service.yml**: implementation of s3 client service.
   - **04a-s3_gateway_rs_service_develop.yml**: one implementation of s3 gateway rs service.
   - **04b-s3_gateway_rs_service_standard.yml**: another implementation of s3 gateway rs service.
-  - **04c-s3_gateway_rs_service_storage.yml**: another implementation of s3 gateway rs service.
   - **05a-adempiere_site_service.yml**: implementation of home site service.
   - **06a-adempiere_zk_service.yml**: implementation of ZK service.
   - **07a-adempiere_processor_service.yml**: implementation of processor service.
   - **08a-dkron_scheduler_service.yml**: implementation of dkron service.
   - **09a-adempiere_grpc_server_service.yml**: implementation of grpc service.
-  - **10a-grpc_proxy_service_cache.yml**: one implementation of grpc proxy service.
   - **10b-grpc_proxy_service_develop.yml**: other implementation of grpc proxy service.
   - **10c-grpc_proxy_service_standard.yml**: other implementation of grpc proxy service.
   - **10d-grpc_proxy_service_vue.yml**: yet other implementation of grpc proxy service.
   - **11a-vue_ui_service.yml**: implementation of Vue service.
-  - **and many more**: see for project [all docker compose service files](https://github.com/Systemhaus-Westfalia/adempiere-ui-gateway/tree/feature/flexible_services_definition/docker-compose).
+  - **and more**: see [all docker compose service files](https://github.com/Systemhaus-Westfalia/adempiere-ui-gateway/tree/feature/flexible_services_definition/docker-compose).
 - *docker-compose files*: the docker compose service files to be used. Here all services are defined in one file.
   Variables used in these files are taken from file *.env*.  
 These files are now legacy, i.e. they were the first attempt, but -due to more flexibility and reusability- the service definition files are now preferred (see preceeding section).  
