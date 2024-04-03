@@ -112,14 +112,14 @@ It may exist more than one docker compose service file for every service (see do
   - **and more**: see [all docker compose service files](https://github.com/Systemhaus-Westfalia/adempiere-ui-gateway/tree/feature/flexible_services_definition/docker-compose).
 - *docker-compose files*: the docker compose service files to be used. Here all services are defined in one file.
   Variables used in these files are taken from file *.env*.  
-These files are now legacy, i.e. they were the first attempt, but -due to more flexibility and reusability- the service definition files are now preferred (see preceeding section).  
+**These files are now legacy**, i.e. they were the first attempt, but -due to more flexibility and reusability- the service definition files are now preferred (see preceeding section).  
 
   As of now, the existing docker compose files are the following:
   - **docker-compose-standard.yml**: the default; when no other file is pecified, this file is taken.
   - **docker-compose-auth.yml**: complete Stack with Open-ID authentication
     Includes a keycloak service and allows its usage as SSO service connecting ADempiere by Open-ID
   - **docker-compose-cache.yml**:
-  - **docker-compose-develop.yml**: only backend services for for development
+  - **docker-compose-develop.yml**: services for development, for example with ports exposed
   - **docker-compose-storage.yml**
   - **docker-compose-vue.yml**: for vue minimal stack services
 - *start-all.sh*: shell script to create and eventually automatically execute docker compose.  
