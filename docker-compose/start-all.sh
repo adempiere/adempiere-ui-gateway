@@ -306,15 +306,7 @@ case "${docker_compose_option}" in
                services_array=(${VUE_array[*]})
              fi;;
 
-    default) MODE_SERVICES=STANDARD
-             if [ $legacy_behavior -eq 1 ]
-             then
-               cp $LEGACY_STANDARD_DOCKER_COMPOSE_FILE $DOCKER_COMPOSE_FILE && echo "File \"$LEGACY_STANDARD_DOCKER_COMPOSE_FILE\" copied to  \"$DOCKER_COMPOSE_FILE\""; 
-             else
-               services_array=(${STANDARD_array[*]})
-             fi;;
-
-    *)       MODE_SERVICES=STANDARD
+    default|*) MODE_SERVICES=STANDARD     # STANDARD is the default
              if [ $legacy_behavior -eq 1 ]
              then
                cp $LEGACY_STANDARD_DOCKER_COMPOSE_FILE $DOCKER_COMPOSE_FILE && echo "File \"$LEGACY_STANDARD_DOCKER_COMPOSE_FILE\" copied to  \"$DOCKER_COMPOSE_FILE\""; 
