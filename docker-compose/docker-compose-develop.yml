@@ -129,7 +129,7 @@ services:
       BUCKET_NAME: ${S3_GATEWAY_RS_BUCKET_NAME}
       ALLOWED_ORIGIN: ${ALLOWED_ORIGIN}
     ports:
-      - ${S3_GATEWAY_RS_PORT}:7878
+      - ${S3_GATEWAY_RS_EXTERNAL_PORT}:7878
     networks:
       - adempiere_network
 
