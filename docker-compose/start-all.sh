@@ -145,6 +145,7 @@ DEVELOP_array[$OPENSEARCH_SETUP]="15a-opensearch_setup_service.yml"
 DEVELOP_array[$OPENSEARCH_GATEWAY_RS]="16c-opensearch_gateway_rs_service_develop.yml"
 DEVELOP_array[$UI_GATEWAY]="17c-ui_gateway_service_develop.yml"
 DEVELOP_array[$KEYCLOAK]="18a-keycloak_service.yml"
+DEVELOP_array[$KEYCLOAK]="19a-opensearch_dashboards_service_with_port.yml"
 
 # Services for STANDARD
 declare -a STANDARD_array
