@@ -1,0 +1,22 @@
+
+  # For modes: DEVELOP
+  opensearch.dashboards:
+    image: ${OPENSEARCH_DASHBOARDS_IMAGE}
+    container_name: ${OPENSEARCH_DASHBOARDS_CONTAINER_NAME}
+    hostname: ${OPENSEARCH_DASHBOARDS_HOSTNAME}
+    healthcheck:
+      test: "bash -c 'printf \"GET / HTTP/1.1\n\n\" > /dev/tcp/127.0.0.1/${OPENSEARCH_DASHBOARDS_PORT}; exit $?;'"
+      interval: 10s
+      retries: 60
+      start_period: 20s
+      timeout: 10s
+    depends_on:
+      opensearch.node:
+        condition: service_healthy
+    environment:
+      OPENSEARCH_HOSTS: '["http://${OPENSEARCH_HOSTNAME}:${OPENSEARCH_PORT}"]'
+      DISABLE_SECURITY_DASHBOARDS_PLUGIN: true
+    ports:
+      - ${OPENSEARCH_DASHBOARDS_EXTERNAL_PORT}:${OPENSEARCH_DASHBOARDS_PORT} # Map host port 5601 to container port 5601
+    networks:
+      - adempiere_network
