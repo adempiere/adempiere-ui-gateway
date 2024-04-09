@@ -78,8 +78,8 @@ Additional objects defined in the *docker-compose files*:
 - `volume_scheduler`: defines the mounting point for the scheduler (`TO BE IMPLEMENTED YET`)
 
 ### Architecture
-The application stack as graphic:
-![ADempiere Architecture](docs/adempiere_ui_gateway_Architecture.png)
+- The application `vue` stack as graphic:
+![ADempiere Vue Architecture](docs/architecture/architecture-vue.png)
 
 ### File Structure
 - *README.md*: this very file
