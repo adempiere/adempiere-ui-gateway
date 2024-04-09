@@ -67,6 +67,7 @@ OPENSEARCH_SETUP=14
 OPENSEARCH_GATEWAY_RS=15
 UI_GATEWAY=16
 KEYCLOAK=17
+OPENSEARCH_DASHBOARDS=18
 NO_SERVICE_IMPLEMENTED=NO_SERVICE_IMPLEMENTED
 
 # 2b.- All services enumerated in the order the arrays are filled.
@@ -74,7 +75,7 @@ NO_SERVICE_IMPLEMENTED=NO_SERVICE_IMPLEMENTED
 #      (there is no way assotiated arrays can be ordered).
 #      It will be used when looping through the selected services array.
 declare -a SERVICES_ordered_array
-SERVICES_ordered_array=(POSTGRESQL_SERVICE S3_STORAGE S3_CLIENT S3_GATEWAY_RS ADEMPIERE_SITE ADEMPIERE_ZK ADEMPIERE_PROCESSOR DKRON_SCHEDULER ADEMPIERE_GRPC_SERVER GRPC_PROXY VUE_UI ZOOKEEPER KAFKA OPENSEARCH_NODE OPENSEARCH_SETUP OPENSEARCH_GATEWAY_RS UI_GATEWAY KEYCLOAK)
+SERVICES_ordered_array=(POSTGRESQL_SERVICE S3_STORAGE S3_CLIENT S3_GATEWAY_RS ADEMPIERE_SITE ADEMPIERE_ZK ADEMPIERE_PROCESSOR DKRON_SCHEDULER ADEMPIERE_GRPC_SERVER GRPC_PROXY VUE_UI ZOOKEEPER KAFKA OPENSEARCH_NODE OPENSEARCH_SETUP OPENSEARCH_GATEWAY_RS UI_GATEWAY KEYCLOAK OPENSEARCH_DASHBOARDS)
 
 
 # 2c.- Define arrays for service cases
@@ -131,20 +132,21 @@ DEVELOP_array[$POSTGRESQL_SERVICE]="01a-postgres_service_with_ports.yml"
 DEVELOP_array[$S3_STORAGE]="02a-s3_storage_service.yml"
 DEVELOP_array[$S3_CLIENT]="03a-s3_client_service.yml"
 DEVELOP_array[$S3_GATEWAY_RS]="04a-s3_gateway_rs_service_develop.yml"
-DEVELOP_array[$ADEMPIERE_SITE]="$NO_SERVICE_IMPLEMENTED"
-DEVELOP_array[$ADEMPIERE_ZK]="$NO_SERVICE_IMPLEMENTED"
-DEVELOP_array[$ADEMPIERE_PROCESSOR]="$NO_SERVICE_IMPLEMENTED"
-DEVELOP_array[$DKRON_SCHEDULER]="$NO_SERVICE_IMPLEMENTED"
+DEVELOP_array[$ADEMPIERE_SITE]="05a-adempiere_site_service.yml"
+DEVELOP_array[$ADEMPIERE_ZK]="06a-adempiere_zk_service.yml"
+DEVELOP_array[$ADEMPIERE_PROCESSOR]="07a-adempiere_processor_service.yml"
+DEVELOP_array[$DKRON_SCHEDULER]="08a-dkron_scheduler_service.yml"
 DEVELOP_array[$ADEMPIERE_GRPC_SERVER]="09a-adempiere_grpc_server_service.yml"
 DEVELOP_array[$GRPC_PROXY]="10b-grpc_proxy_service_develop.yml"
-DEVELOP_array[$VUE_UI]="$NO_SERVICE_IMPLEMENTED"
-DEVELOP_array[$ZOOKEEPER]="$NO_SERVICE_IMPLEMENTED"
-DEVELOP_array[$KAFKA]="$NO_SERVICE_IMPLEMENTED"
+DEVELOP_array[$VUE_UI]="11a-vue_ui_service.yml"
+DEVELOP_array[$ZOOKEEPER]="12a-zookeeper_service.yml"
+DEVELOP_array[$KAFKA]="13a-kafka_service.yml"
 DEVELOP_array[$OPENSEARCH_NODE]="14a-opensearch_node_service_with_port.yml"
 DEVELOP_array[$OPENSEARCH_SETUP]="15a-opensearch_setup_service.yml"
 DEVELOP_array[$OPENSEARCH_GATEWAY_RS]="16c-opensearch_gateway_rs_service_develop.yml"
 DEVELOP_array[$UI_GATEWAY]="17c-ui_gateway_service_develop.yml"
-DEVELOP_array[$KEYCLOAK]="$NO_SERVICE_IMPLEMENTED"
+DEVELOP_array[$KEYCLOAK]="18a-keycloak_service.yml"
+DEVELOP_array[$OPENSEARCH_DASHBOARDS]="19a-opensearch_dashboards_service_with_port.yml"
 
 # Services for STANDARD
 declare -a STANDARD_array
@@ -306,15 +308,7 @@ case "${docker_compose_option}" in
                services_array=(${VUE_array[*]})
              fi;;
 
-    default) MODE_SERVICES=STANDARD
-             if [ $legacy_behavior -eq 1 ]
-             then
-               cp $LEGACY_STANDARD_DOCKER_COMPOSE_FILE $DOCKER_COMPOSE_FILE && echo "File \"$LEGACY_STANDARD_DOCKER_COMPOSE_FILE\" copied to  \"$DOCKER_COMPOSE_FILE\""; 
-             else
-               services_array=(${STANDARD_array[*]})
-             fi;;
-
-    *)       MODE_SERVICES=STANDARD
+    default|*) MODE_SERVICES=STANDARD     # STANDARD is the default
              if [ $legacy_behavior -eq 1 ]
              then
                cp $LEGACY_STANDARD_DOCKER_COMPOSE_FILE $DOCKER_COMPOSE_FILE && echo "File \"$LEGACY_STANDARD_DOCKER_COMPOSE_FILE\" copied to  \"$DOCKER_COMPOSE_FILE\""; 
