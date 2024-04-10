@@ -84,7 +84,7 @@ Additional objects defined in the *docker-compose files*:
 - The application `storage` stack as graphic:
 ![ADempiere Vue Architecture](docs/architecture/architecture-storage.png)
 
-- The application `storage` stack as graphic:
+- The application `cache` stack as graphic:
 ![ADempiere Vue Architecture](docs/architecture/architecture-cache.png)
 
 ### File Structure
