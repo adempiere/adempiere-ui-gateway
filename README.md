@@ -63,6 +63,7 @@ The application stack consists of the following services defined in the *docker-
 - **opensearch.setup**: configure the service *opensearch.node*
 - **zookeeper**: controller for *kafka* service
 - **kafka**: messaging and streaming
+- **kafdrop**: a Kafka Cluster Overview
 - **opensearch.gateway.rs**:
 - **keycloak**: user management on service *postgresql.service*
 - **ui.gateway**:
