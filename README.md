@@ -84,6 +84,9 @@ Additional objects defined in the *docker-compose files*:
 - The application `storage` stack as graphic:
 ![ADempiere Vue Architecture](docs/architecture/architecture-storage.png)
 
+- The application `cache` stack as graphic:
+![ADempiere Vue Architecture](docs/architecture/architecture-cache.png)
+
 ### File Structure
 - *README.md*: this very file
 - *env_template.env*: template for definition of all variables used in docker composed files.  
