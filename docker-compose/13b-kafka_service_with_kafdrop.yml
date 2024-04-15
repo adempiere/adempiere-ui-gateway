@@ -1,5 +1,5 @@
 
-  # For modes: CACHE, AUTH
+  # For modes: DEVELOP
   kafka:
     image: ${KAFKA_IMAGE}
     container_name: ${KAFKA_CONTAINER_NAME}
@@ -17,7 +17,7 @@
     environment:
       KAFKA_BROKER_ID: 1
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:${ZOOKEEPER_PORT}
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092,PLAINTEXT_HOST://${KAFKA_BROKER_HOST}:${KAFKA_EXTERNAL_PORT}
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:${KAFKA_PORT},PLAINTEXT_HOST://${KAFKA_BROKER_HOST}:${KAFKA_EXTERNAL_PORT}
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
       KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
@@ -29,15 +29,19 @@
     networks:
       - adempiere_network
 
+  # For modes: DEVELOP
   kafdrop:
-    image: obsidiandynamics/kafdrop:latest
-    ports:
-      - 19000:9000  # 9000 collides with s3.storage
-    environment:
-      # ZOOKEEPER_CONNECT: zookeeper:2181
-      KAFKA_BROKERCONNECT: kafka:29092
+    image:  ${KAFDROP_IMAGE}
+    container_name: ${KAFDROP_CONTAINER_NAME}
+    hostname: ${KAFDROP_HOSTNAME}
+    restart: ${GENERIC_RESTART}
     depends_on:
-      - kafka
+      kafka:
+        condition: service_healthy
+    environment:
+      KAFKA_BROKERCONNECT: kafka:${KAFKA_PORT}
+    ports:
+      - ${KAFDROP_EXTERNAL_PORT}:${KAFDROP_PORT}
     volumes:
       - ${TIMEZONE_PATH_ON_HOST}:${TIMEZONE_PATH_ON_CONTAINER}:${TIMEZONE_OPTIONS}    # Map the Timezone  of the host to the Timezone of the container
       - ${LOCALTIME_PATH_ON_HOST}:${LOCALTIME_PATH_ON_CONTAINER}:${LOCALTIME_OPTIONS} # Map the Localtime of the host to the Timezone of the container

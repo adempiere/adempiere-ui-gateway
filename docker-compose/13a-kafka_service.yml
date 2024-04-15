@@ -1,5 +1,5 @@
 
-  # For modes: CACHE, AUTH
+  # For modes: CACHE, AUTH, STANDARD
   kafka:
     image: ${KAFKA_IMAGE}
     container_name: ${KAFKA_CONTAINER_NAME}
