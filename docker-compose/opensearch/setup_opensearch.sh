@@ -1,7 +1,7 @@
 #!/usr/bin/env sh
 
 echo "Setup for allows increase size... ${OPENSEARCH_HOST}"
-curl --location --request PUT "$OPENSEARCH_HOST}/_all/_settings" \
+curl --location --request PUT "${OPENSEARCH_HOST}/_all/_settings" \
 	--header 'Content-Type: application/json' \
 	--data '{"index.blocks.read_only_allow_delete": null}'
 
