@@ -53,12 +53,12 @@ static_resources:
                 - express_receipt.ExpressReceipt
                 - express_shipment.ExpressShipment
                 - field.business_partner.BusinessPartnerInfoService
+                - field.invoice.InvoiceInfoService
                 - field.product.ProductInfoService
                 - file_management.FileManagement
                 - general_ledger.GeneralLedger
                 - import_file_loader.ImportFileLoader
                 - in_out.InOut
-                - invoice.Invoice
                 - issue_management.IssueManagement
                 - location_address.LocationAddress
                 - logs.Logs

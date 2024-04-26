@@ -9,7 +9,6 @@
     depends_on:
       opensearch.node:
         condition: service_healthy
-    image: ${OPENSEARCH_SETUP_IMAGE_REPO_NAME}
     environment:
       OPENSEARCH_HOST: ${OPENSEARCH_SETUP_NODE_HOSTNAME}
     volumes:
