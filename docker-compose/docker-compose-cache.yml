@@ -234,13 +234,13 @@ services:
     networks:
       - adempiere_network
 
-  opensearch.gateway.rs:
-    image: ${OPENSEARCH_GATEWAY_RS_IMAGE}
-    container_name: ${OPENSEARCH_GATEWAY_RS_CONTAINER_NAME}
-    hostname: ${OPENSEARCH_GATEWAY_RS_HOSTNAME}
+  dictionary.rs:
+    image: ${DICTIONARY_RS_IMAGE}
+    container_name: ${DICTIONARY_RS_CONTAINER_NAME}
+    hostname: ${DICTIONARY_RS_HOSTNAME}
     restart: ${GENERIC_RESTART}
     healthcheck:
-      test: "bash -c 'printf \"GET / HTTP/1.1\n\n\" > /dev/tcp/127.0.0.1/${OPENSEARCH_GATEWAY_RS_PORT}; exit $?;'"
+      test: "bash -c 'printf \"GET / HTTP/1.1\n\n\" > /dev/tcp/127.0.0.1/${DICTIONARY_RS_PORT}; exit $?;'"
       interval: 10s
       retries: 60
       start_period: 20s
@@ -249,9 +249,9 @@ services:
       - ${TIMEZONE_PATH_ON_HOST}:${TIMEZONE_PATH_ON_CONTAINER}:${TIMEZONE_OPTIONS}    # Map the Timezone  of the host to the Timezone of the container
       - ${LOCALTIME_PATH_ON_HOST}:${LOCALTIME_PATH_ON_CONTAINER}:${LOCALTIME_OPTIONS} # Map the Localtime of the host to the Timezone of the container
     environment:
-      PORT: ${OPENSEARCH_GATEWAY_RS_PORT}
-      KAFKA_HOST: ${OPENSEARCH_GATEWAY_RS_KAFKA_HOST}
-      OPENSEARCH_URL: ${OPENSEARCH_GATEWAY_RS_OPENSEARCH_URL}
+      PORT: ${DICTIONARY_RS_PORT}
+      KAFKA_HOST: ${DICTIONARY_RS_KAFKA_HOST}
+      OPENSEARCH_URL: ${DICTIONARY_RS_OPENSEARCH_URL}
       ALLOWED_ORIGIN: ${ALLOWED_ORIGIN}
     depends_on:
       opensearch.node:
@@ -259,7 +259,7 @@ services:
       kafka:
         condition: service_healthy
     # ports:
-    #   - ${OPENSEARCH_GATEWAY_RS_EXTERNAL_PORT}:${OPENSEARCH_GATEWAY_RS_PORT}
+    #   - ${DICTIONARY_RS_EXTERNAL_PORT}:${DICTIONARY_RS_PORT}
     networks:
       - adempiere_network
 
@@ -274,7 +274,7 @@ services:
         condition: service_healthy
       # vue.ui:
       #   condition: service_healthy
-      opensearch.gateway.rs:
+      dictionary.rs:
         condition: service_started
       # adempiere.site:
       #   condition: service_started
@@ -285,9 +285,9 @@ services:
       - ./nginx/gateway/api_gateway_vue.conf:/etc/nginx/api_gateway.conf
       - ./nginx/api_json_errors.conf:/etc/nginx/api_json_errors.conf
       #- ./keys/api_keys.conf:/etc/nginx/api_keys.conf
-      # open search
-      - ./nginx/upstreams/opensearch_gateway_rs.conf:/etc/nginx/api_upstreams_conf.d/opensearch_gateway_rs.conf
-      - ./nginx/api/opensearch/:/etc/nginx/api_conf.d/opensearch/
+      # dictionary
+      - ./nginx/upstreams/dictionary_rs.conf:/etc/nginx/api_upstreams_conf.d/dictionary_rs.conf
+      - ./nginx/api/dictionary_rs/:/etc/nginx/api_conf.d/dictionary_rs/
       # grpc proxy
       - ./nginx/upstreams/adempiere_backend.conf:/etc/nginx/api_upstreams_conf.d/adempiere_backend.conf
       - ./nginx/api/backend/:/etc/nginx/api_conf.d/backend/

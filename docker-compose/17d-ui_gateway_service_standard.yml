@@ -9,7 +9,7 @@
         condition: service_healthy
       # vue.ui:
       #   condition: service_healthy
-      opensearch.gateway.rs:
+      dictionary.rs:
         condition: service_started
       adempiere.site:
         condition: service_started
