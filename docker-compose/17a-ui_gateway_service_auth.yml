@@ -5,7 +5,7 @@
     container_name: ${NGINX_UI_GATEWAY_CONTAINER_NAME}
     hostname: ${NGINX_UI_GATEWAY_HOSTNAME}
     depends_on:
-      opensearch.gateway.rs:
+      dictionary.rs:
         condition: service_started
       s3.gateway.rs:
         condition: service_started

@@ -9,7 +9,7 @@
         condition: service_healthy
       # vue.ui:
       #   condition: service_healthy
-      opensearch.gateway.rs:
+      dictionary.rs:
         condition: service_started
       # adempiere.site:
       #   condition: service_started
@@ -22,9 +22,9 @@
       # backend
       - ./nginx/upstreams/adempiere_backend.conf:/etc/nginx/api_upstreams_conf.d/adempiere_backend.conf
       - ./nginx/api/backend/:/etc/nginx/api_conf.d/backend/
-      # open search
-      - ./nginx/upstreams/opensearch_gateway_rs.conf:/etc/nginx/api_upstreams_conf.d/opensearch_gateway_rs.conf
-      - ./nginx/api/opensearch/:/etc/nginx/api_conf.d/opensearch/
+      # dictionary
+      - ./nginx/upstreams/dictionary_rs.conf:/etc/nginx/api_upstreams_conf.d/dictionary_rs.conf
+      - ./nginx/api/dictionary_rs/:/etc/nginx/api_conf.d/dictionary_rs/
       # s3
       - ./nginx/upstreams/s3_storage.conf:/etc/nginx/api_upstreams_conf.d/s3_storage.conf
       - ./nginx/upstreams/s3_console_ui.conf:/etc/nginx/api_upstreams_conf.d/s3_console_ui.conf

@@ -64,7 +64,7 @@ ZOOKEEPER=11
 KAFKA=12
 OPENSEARCH_NODE=13
 OPENSEARCH_SETUP=14
-OPENSEARCH_GATEWAY_RS=15
+DICTIONARY_RS=15
 UI_GATEWAY=16
 KEYCLOAK=17
 OPENSEARCH_DASHBOARDS=18
@@ -75,7 +75,7 @@ NO_SERVICE_IMPLEMENTED=NO_SERVICE_IMPLEMENTED
 #      (there is no way assotiated arrays can be ordered).
 #      It will be used when looping through the selected services array.
 declare -a SERVICES_ordered_array
-SERVICES_ordered_array=(POSTGRESQL_SERVICE S3_STORAGE S3_CLIENT S3_GATEWAY_RS ADEMPIERE_SITE ADEMPIERE_ZK ADEMPIERE_PROCESSOR DKRON_SCHEDULER ADEMPIERE_GRPC_SERVER GRPC_PROXY VUE_UI ZOOKEEPER KAFKA OPENSEARCH_NODE OPENSEARCH_SETUP OPENSEARCH_GATEWAY_RS UI_GATEWAY KEYCLOAK OPENSEARCH_DASHBOARDS)
+SERVICES_ordered_array=(POSTGRESQL_SERVICE S3_STORAGE S3_CLIENT S3_GATEWAY_RS ADEMPIERE_SITE ADEMPIERE_ZK ADEMPIERE_PROCESSOR DKRON_SCHEDULER ADEMPIERE_GRPC_SERVER GRPC_PROXY VUE_UI ZOOKEEPER KAFKA OPENSEARCH_NODE OPENSEARCH_SETUP DICTIONARY_RS UI_GATEWAY KEYCLOAK OPENSEARCH_DASHBOARDS)
 
 
 # 2c.- Define arrays for service cases
@@ -101,7 +101,7 @@ AUTH_array[$ZOOKEEPER]="12a-zookeeper_service.yml"
 AUTH_array[$KAFKA]="13a-kafka_service.yml"
 AUTH_array[$OPENSEARCH_NODE]="14b-opensearch_node_service_without_port.yml"
 AUTH_array[$OPENSEARCH_SETUP]="15a-opensearch_setup_service.yml"
-AUTH_array[$OPENSEARCH_GATEWAY_RS]="16a-opensearch_gateway_rs_service_standard.yml"
+AUTH_array[$DICTIONARY_RS]="16a-dictionary_rs_service_standard.yml"
 AUTH_array[$UI_GATEWAY]="17a-ui_gateway_service_auth.yml"
 AUTH_array[$KEYCLOAK]="18a-keycloak_service.yml"
 
@@ -122,7 +122,7 @@ CACHE_array[$ZOOKEEPER]="12a-zookeeper_service.yml"
 CACHE_array[$KAFKA]="13a-kafka_service.yml"
 CACHE_array[$OPENSEARCH_NODE]="14a-opensearch_node_service_with_port.yml"
 CACHE_array[$OPENSEARCH_SETUP]="15a-opensearch_setup_service.yml"
-CACHE_array[$OPENSEARCH_GATEWAY_RS]="16a-opensearch_gateway_rs_service_standard.yml"
+CACHE_array[$DICTIONARY_RS]="16a-dictionary_rs_service_standard.yml"
 CACHE_array[$UI_GATEWAY]="17b-ui_gateway_service_cache.yml"
 CACHE_array[$KEYCLOAK]="$NO_SERVICE_IMPLEMENTED"
 
@@ -143,7 +143,7 @@ DEVELOP_array[$ZOOKEEPER]="12a-zookeeper_service.yml"
 DEVELOP_array[$KAFKA]="13b-kafka_service_with_kafdrop.yml"
 DEVELOP_array[$OPENSEARCH_NODE]="14a-opensearch_node_service_with_port.yml"
 DEVELOP_array[$OPENSEARCH_SETUP]="15a-opensearch_setup_service.yml"
-DEVELOP_array[$OPENSEARCH_GATEWAY_RS]="16c-opensearch_gateway_rs_service_develop.yml"
+DEVELOP_array[$DICTIONARY_RS]="16c-dictionary_rs_service_develop.yml"
 DEVELOP_array[$UI_GATEWAY]="17c-ui_gateway_service_develop.yml"
 DEVELOP_array[$KEYCLOAK]="18a-keycloak_service.yml"
 DEVELOP_array[$OPENSEARCH_DASHBOARDS]="19a-opensearch_dashboards_service_with_port.yml"
@@ -165,7 +165,7 @@ STANDARD_array[$ZOOKEEPER]="12a-zookeeper_service.yml"
 STANDARD_array[$KAFKA]="13a-kafka_service.yml"
 STANDARD_array[$OPENSEARCH_NODE]="14b-opensearch_node_service_without_port.yml"
 STANDARD_array[$OPENSEARCH_SETUP]="15a-opensearch_setup_service.yml"
-STANDARD_array[$OPENSEARCH_GATEWAY_RS]="16a-opensearch_gateway_rs_service_standard.yml"
+STANDARD_array[$DICTIONARY_RS]="16a-dictionary_rs_service_standard.yml"
 STANDARD_array[$UI_GATEWAY]="17d-ui_gateway_service_standard.yml"
 STANDARD_array[$KEYCLOAK]="$NO_SERVICE_IMPLEMENTED"
 
@@ -186,7 +186,7 @@ STORAGE_array[$ZOOKEEPER]="$NO_SERVICE_IMPLEMENTED"
 STORAGE_array[$KAFKA]="$NO_SERVICE_IMPLEMENTED"
 STORAGE_array[$OPENSEARCH_NODE]="$NO_SERVICE_IMPLEMENTED"
 STORAGE_array[$OPENSEARCH_SETUP]="$NO_SERVICE_IMPLEMENTED"
-STORAGE_array[$OPENSEARCH_GATEWAY_RS]="$NO_SERVICE_IMPLEMENTED"
+STORAGE_array[$DICTIONARY_RS]="$NO_SERVICE_IMPLEMENTED"
 STORAGE_array[$UI_GATEWAY]="17e-ui_gateway_service_storage.yml"
 STORAGE_array[$KEYCLOAK]="$NO_SERVICE_IMPLEMENTED"
 
@@ -207,7 +207,7 @@ VUE_array[$ZOOKEEPER]="$NO_SERVICE_IMPLEMENTED"
 VUE_array[$KAFKA]="$NO_SERVICE_IMPLEMENTED"
 VUE_array[$OPENSEARCH_NODE]="$NO_SERVICE_IMPLEMENTED"
 VUE_array[$OPENSEARCH_SETUP]="$NO_SERVICE_IMPLEMENTED"
-VUE_array[$OPENSEARCH_GATEWAY_RS]="$NO_SERVICE_IMPLEMENTED"
+VUE_array[$DICTIONARY_RS]="$NO_SERVICE_IMPLEMENTED"
 VUE_array[$UI_GATEWAY]="17f-ui_gateway_service_vue.yml"
 VUE_array[$KEYCLOAK]="$NO_SERVICE_IMPLEMENTED"
 
