@@ -56,8 +56,11 @@ static_resources:
                 - express_movement.ExpressMovement
                 - express_receipt.ExpressReceipt
                 - express_shipment.ExpressShipment
+                - field.FieldManagementService
                 - field.business_partner.BusinessPartnerInfoService
                 - field.invoice.InvoiceInfoService
+                - field.order.OrderInfoService
+                - field.payment.PaymentInfoService
                 - field.product.ProductInfoService
                 - file_management.FileManagement
                 - general_ledger.GeneralLedger
@@ -69,10 +72,8 @@ static_resources:
                 - match_po_receipt_invoice.MatchPORReceiptInvoice
                 - material_management.MaterialManagement
                 - notice_management.NoticeManagement
-                - order.Order
                 - payment_allocation.PaymentAllocation
                 - payment_print_export.PaymentPrintExport
-                - payment.Payment
                 - payroll_action_notice.PayrollActionNotice
                 - data.Store
                 - record_management.RecordManagement
