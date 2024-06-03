@@ -11,6 +11,8 @@ This application downloads the required images, runs the configured containers a
 
 It consists of a *docker compose* project that defines all services needed to run ADempiere, ZK, Vue and other services. 
 
+A configuration file (_.env_) define all values to be used in the service creation and a start script (_start-all.sh_) define the stack, i.e. the services to be used. Any combination of the services offered is possible.
+
 When executed, the *docker compose* project eventually runs the services defined in *docker-compose files* as Docker containers.
 The running Docker containers comprise the application.
 There are several docker compose files that start different services, according to the needs.
@@ -43,11 +45,13 @@ There are several docker compose files that start different services, according 
 ### User's perspective
 From a user's point of view, the application consists of the following.
 Take note that the ports are defined in file *env_template.env* as external ports and can be changed if needed or desired.
-- A home web site accesible via port **8080**
+- A home web site accesible via port **80**
   From which all applications can be called
-- An ADempiere ZK UI accesible via port **8888**
-- An ADempiere Vue UI accesible via port **8891**
-- A Postgres databasee accesible e.g. by PGAdmin via port **55432**
+- An ADempiere ZK UI accesible via path **/webui**
+- An ADempiere Vue UI accesible via port **/vue**
+- A Postgres database accesible e.g. by PGAdmin via port **55432**
+- An OpenSearch Dashboard accesible via port **5601**
+- A Kafdrop Kafka Queue Monitor and Administrator accesible via port **19000**
 
 ### Application Stack
 The application stack consists of the following services defined in the *docker-compose files* (and retrieved on the console with **docker compose ls**); these services will eventually run as containers:
@@ -63,13 +67,14 @@ The application stack consists of the following services defined in the *docker-
 - **opensearch.setup**: configure the service *opensearch.node*
 - **zookeeper**: controller for *kafka* service
 - **kafka**: messaging and streaming
-- **kafdrop**: a Kafka Cluster Overview
+- **kafdrop**: a Kafka Cluster Queues Overview, Monitor and Administrator
 - **dictionary.rs**:
 - **keycloak**: user management on service *postgresql.service*
 - **ui.gateway**:
 - **s3.storage**: for attachments
 - **s3.client**: configuration of "s3-storage" service
 - **s3.gateway.rs**:
+- **opensearch.dashboards**: display and monitor of e.g. exported menus, smart browsers, forms, windows, processes.
 
 Additional objects defined in the *docker-compose files*:
 - `adempiere_network`: defines the subnet used in the involved Docker containers (e.g. **192.168.100.0/24**)
@@ -187,6 +192,14 @@ The file `docker-compose.yml` is deleted after stopping and deleting all objects
 - `postgresql/persistent_files`: directory on host used for persistency with the ZK container. It allows to share files bewteen the host and the ZK container.
 - *docs*: directory containing images and documents used in this README file.
 
+### Misc 
+**OpenSearch Dashboard**
+![Selection_522](https://github.com/adempiere/adempiere-ui-gateway/assets/1789408/abe548f6-0ed1-4b91-b70d-d1d0729d9600)
+
+**Kafdrop Kafka Queue Monitor/Administrator**
+![Selection_523](https://github.com/adempiere/adempiere-ui-gateway/assets/1789408/7c15df8c-6cd9-4eea-92ac-c03bfd3d36b9)
+
+
 ## Installation
 ### Requirements
 ##### 1 Install Tools
@@ -265,6 +278,7 @@ cd adempiere-ui-gateway/docker-compose
 Or without arguments
 ```shell
 ./start-all.sh -d
+./start-all.sh
 ```
 
 The script `start-all.sh` carries out the steps of the automatic installation.
@@ -371,10 +385,14 @@ mkdir postgresql/postgres_database
 mkdir postgresql/backups
 ```
 ##### 3 Copy backup file (if restore is needed)
-- If you are executing this project for the first time or you want to restore the database, execute a database backup e.g.:
-`pg_dump -v --no-owner -h localhost -U postgres <DB-NAME> > adempiere-$(date '+%Y-%m-%d').backup`.
-- The file must be named `seed.backup` or as it was defined in *env_template.env*, variable `POSTGRES_RESTORE_FILE_NAME`.
-  Then, copy or move it to `adempiere-all-service/postgresql/backups`.
+- If you are executing this project for the first time or you want to restore the database, execute a database backup.
+- First, go to the backups directory 
+  _cd .../adempiere-ui-gateway/docker-compose/postgresql/postgres_backups_
+- Here you can run a backup directly from host using the _docker exec_ command
+  _docker exec -i adempiere-ui-gateway.postgresql pg_dump --no-owner -h localhost -U postgres adempiere > adempiere-$(date '+%Y-%m-%d').backup_
+- Or you can go into the container with _docker exec -it adempiere-ui-gateway.postgresql bash_ and execute there a backup e.g.: `cd /home/adempiere/postgres_backups` followed by `pg_dump -v --no-owner -h localhost -U postgres <DB-NAME> > adempiere-$(date '+%Y-%m-%d').backup`. Remember to first change directory to the shared directory between host and Postgres container.
+- The file can have the name you wish, but if you want to execute a restore, it must be named `seed.backup` or as it was defined in *env_template.env*, variable `POSTGRES_RESTORE_FILE_NAME`.
+  The backup file should be visible under `adempiere-ui-gateway/postgresql/backups`. You can copy it for safety reasons to other location e.g. the cloud.
 - Make sure it is not the compressed backup (e.g. .jar).
 - The database directory `adempiere-all-service/postgresql/postgres_database` must be empty for the restore to ocurr.
   A backup will not ocurr if the database directory has contents.
