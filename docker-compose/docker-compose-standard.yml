@@ -253,7 +253,39 @@ services:
       JWT_SECRET_KEY: ${VUE_BACKEND_GRPC_SERVER_JWT_SECRET_KEY}
       SERVER_LOG_LEVEL: ${VUE_BACKEND_GRPC_SERVER_LOG_LEVEL}
     #ports:
-    #  - ${VUE_BACKEND_PORT}
+    #  - ${VUE_BACKEND_GRPC_SERVER_PORT}
+    networks:
+      - adempiere_network
+
+
+
+  adempiere.report.engine:
+    image: ${VUE_REPORT_GRPC_SERVER_IMAGE}
+    container_name: ${VUE_REPORT_GRPC_SERVER_CONTAINER_NAME}
+    hostname: ${VUE_REPORT_GRPC_SERVER_HOSTNAME}
+    restart: ${GENERIC_RESTART}
+    volumes:
+      - ${TIMEZONE_PATH_ON_HOST}:${TIMEZONE_PATH_ON_CONTAINER}:${TIMEZONE_OPTIONS}    # Map the Timezone  of the host to the Timezone of the container
+      - ${LOCALTIME_PATH_ON_HOST}:${LOCALTIME_PATH_ON_CONTAINER}:${LOCALTIME_OPTIONS} # Map the Localtime of the host to the Timezone of the container
+    healthcheck:
+      test: "bash -c 'printf \"GET / HTTP/1.1\n\n\" > /dev/tcp/127.0.0.1/${VUE_REPORT_GRPC_SERVER_PORT}; exit $?;'"
+      interval: 10s
+      retries: 60
+      start_period: 20s
+      timeout: 10s
+    depends_on:
+      postgresql.service:
+        condition: service_healthy
+    environment:
+      SERVER_PORT: ${VUE_REPORT_GRPC_SERVER_PORT}
+      DB_HOST: ${VUE_REPORT_GRPC_SERVER_DB_HOST}
+      DB_PORT: ${VUE_REPORT_GRPC_SERVER_DB_PORT}
+      DB_NAME: ${VUE_REPORT_GRPC_SERVER_DB_NAME}
+      DB_USER: ${VUE_REPORT_GRPC_SERVER_DB_USER}
+      DB_PASSWORD: ${VUE_REPORT_GRPC_SERVER_DB_PASSWORD}
+      SERVER_LOG_LEVEL: ${VUE_REPORT_GRPC_SERVER_LOG_LEVEL}
+    # ports:
+    #  - ${VUE_REPORT_GRPC_SERVER_PORT}
     networks:
       - adempiere_network
 
@@ -271,11 +303,13 @@ services:
       - ./envoy/envoy.yaml:/etc/envoy/envoy.yaml:ro
       - ./envoy/definitions/adempiere-grpc-server.pb:/data/adempiere-grpc-server.pb:ro
       - ./envoy/definitions/adempiere-processors-service-service.pb:/data/adempiere-processors-service-service.pb:ro
+      - ./envoy/definitions/adempiere-report-engine-service.dsc:/data/adempiere-report-engine-service.dsc:ro
       - ${TIMEZONE_PATH_ON_HOST}:${TIMEZONE_PATH_ON_CONTAINER}:${TIMEZONE_OPTIONS}    # Map the Timezone  of the host to the Timezone of the container
       - ${LOCALTIME_PATH_ON_HOST}:${LOCALTIME_PATH_ON_CONTAINER}:${LOCALTIME_OPTIONS} # Map the Localtime of the host to the Timezone of the container
     depends_on:
       - adempiere.grpc.server
       - adempiere.processor
+      - adempiere.report.engine
     # ports:
     #   # Vue Backend Port
     #  - ${ENVOY_GRPC_PROXY_BACKEND_EXTERNAL_PORT}:${ENVOY_GRPC_PROXY_BACKEND_PORT}
