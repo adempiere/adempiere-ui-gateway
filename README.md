@@ -465,6 +465,9 @@ Connect to database via port **55432** with a DB connector, e.g. PGAdmin.
 Or to the port the variable `POSTGRES_EXTERNAL_PORT` points in file `env_template.env`.
 
 ## Using Certificates
+You can use whatever cerfiticate you may choose.
+Here, instructions to implement Letsencrypt are documented.
+If you decide to implement with other Certificate Authority (CA), you can follow the instructions, only changing Letsencrypt with the CA selected.
 ### Get Letsencrypt Certificate
 Steps to use Letsencrypt certificates for a secure communication:
 - Letsencrypt issues Certificates only to a server which owns a Domainename.
