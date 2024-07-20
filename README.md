@@ -45,8 +45,7 @@ There are several docker compose files that start different services, according 
 ### User's perspective
 From a user's point of view, the application consists of the following.
 Take note that the ports are defined in file *env_template.env* as external ports and can be changed if needed or desired.
-- A home web site accesible via port **80**
-  From which all applications can be called
+- A home web site accesible via port **80**, or port **443** (assuming Letsencrypt certificates were generated and configured for the Host it is running on).
 - An ADempiere ZK UI accesible via path **/webui**
 - An ADempiere Vue UI accesible via port **/vue**
 - A Postgres database accesible e.g. by PGAdmin via port **55432**
@@ -55,14 +54,14 @@ Take note that the ports are defined in file *env_template.env* as external port
 
 ### Application Stack
 The application stack consists of the following services defined in the *docker-compose files* (and retrieved on the console with **docker compose ls**); these services will eventually run as containers:
-- **adempiere-site**: defines the landing page (web site) for this application
-- **postgresql.service**: defines the Postgres database
-- **adempiere-zk**: defines the Jetty server and the ADempiere ZK UI
-- **adempiere-grpc-server**: Defines a grpc server as the backend server for Vue
+- **adempiere-site**: the landing page (web site) for this application
+- **postgresql.service**: the Postgres database
+- **adempiere-zk**: the Jetty server and the ADempiere ZK UI
+- **adempiere-grpc-server**: a grpc server as the backend server for Vue
 - **adempiere.processor**: for processes that are executed outside Adempiere
 - **dkron.scheduler**: a scheduler
 - **grpc.proxy**: an envoy server
-- **vue-ui**: defines ADempiere Vue UI
+- **vue-ui**: ADempiere Vue UI
 - **opensearch.node**: stores the Application Dictionary definitions
 - **opensearch.setup**: configure the service *opensearch.node*
 - **zookeeper**: controller for *kafka* service
@@ -70,18 +69,18 @@ The application stack consists of the following services defined in the *docker-
 - **kafdrop**: a Kafka Cluster Queues Overview, Monitor and Administrator
 - **dictionary.rs**:
 - **keycloak**: user management on service *postgresql.service*
-- **ui.gateway**:
+- **ui.gateway**: manages all incoming requests and distributes them to the corresponding containers.
 - **s3.storage**: for attachments
 - **s3.client**: configuration of "s3-storage" service
 - **s3.gateway.rs**:
 - **opensearch.dashboards**: display and monitor of e.g. exported menus, smart browsers, forms, windows, processes.
 
 Additional objects defined in the *docker-compose files*:
-- `adempiere_network`: defines the subnet used in the involved Docker containers (e.g. **192.168.100.0/24**)
-- `volume_postgres`: defines the mounting point of the Postgres database (typically directory **/var/lib/postgresql/data**) to a local directory on the host where the Docker container runs. This implement a persistent database.
-- `volume_backups`: defines the mounting point for a backup (or restore) directory on the Docker container to a local directrory on the host where the Docker container has access.
+- `adempiere_network`: the subnet used in the involved Docker containers (e.g. **192.168.100.0/24**)
+- `volume_postgres`: the mounting point of the Postgres database (typically directory **/var/lib/postgresql/data**) to a local directory on the host where the Docker container runs. This implement a persistent database.
+- `volume_backups`: the mounting point for a backup (or restore) directory on the Docker container to a local directrory on the host where the Docker container has access.
 - `volume_persistent_files`: mounting point for the ZK container
-- `volume_scheduler`: defines the mounting point for the scheduler (`TO BE IMPLEMENTED YET`)
+- `volume_scheduler`: the mounting point for the scheduler (`TO BE IMPLEMENTED YET`)
 
 ### Architecture
 - The application `vue` stack as graphic:
@@ -464,6 +463,42 @@ cd adempiere-ui-gateway/docker-compose
 ### Database Access
 Connect to database via port **55432** with a DB connector, e.g. PGAdmin.
 Or to the port the variable `POSTGRES_EXTERNAL_PORT` points in file `env_template.env`.
+
+## Using Certificates
+You can use whatever cerfiticate you may choose.
+Here, instructions to implement Letsencrypt are documented.
+If you decide to implement with other Certificate Authority (CA), you can follow the instructions, only changing Letsencrypt with the CA selected.
+### Get Letsencrypt Certificate
+Steps to use Letsencrypt certificates for a secure communication:
+- Letsencrypt issues Certificates only to a server which owns a Domainename.
+- On your registrar, make sure the Domainname you want to use points to the to the IP of the Host server.
+- Install the program `certbot` on your Host to get certificates.
+- The port 80 must be enabled on the Host so certbot can generate the certificates.
+- Generate with certbot on the Host the `Letsencrypt certificates`. The option `--standalone` suits best when doing it manually.
+- Example: `sudo certbot certonly --standalone --preferred-challenges http -d YOUR_DOMAINNAME`
+- If the generation runs successsfully four files will be created: privkey.pem, fullchain.pem, chain.pem and cert.pem.
+- On files `docker-compose/docker-compose-standard.yml` and `docker-compose/17d-ui_gateway_service_standard.yml`, replace YOUR_DOMAINNAME with the DNS value you have acquired the Certificate for on the Host.
+- Still on files `docker-compose/docker-compose-standard.yml` and `docker-compose/17d-ui_gateway_service_standard.yml`, make sure that the files `fullchain.pem` and `privkey.pem` are mounted to the files where Letsencrypt generated the certificates.
+- If you want to apply Certificates to other application stacks, you must apply the changes on the other files where the service ui.gateway is defined.
+- On file `docker-compose/nginx/gateway/api_gateway.conf`, uncomment the directives concerning the certificate and replace the text YOUR_DOMAINNAME with the Domain Name reserved for the Host.
+- Still on file `docker-compose/nginx/gateway/api_gateway.conf`, make sure that the variables `ssl_certificate` and `ssl_certificate_key` are mounted to the files where Letsencrypt generated the certificates.
+- **Important**
+    - the Letsencrypt certificate generation includes cron jobs to renew the certificate validation.
+    - the certificate validation process runs twice a day and needs the port 80 to be unused while validating.
+    - this means, the Nginx server must be down for the renewal to be effective.
+    - so you must either synchronize the certificate validation process to be on time with a programmed downtime of the Nginx server, or you disable the certificate validation process and stop the Nginx server and run the certificate validation process manually at least one month before expiration.
+    - another solution would be to open another port but 80 to access Nginx, but it is up to you.
+### Make Certificate Transmission Secure
+Diffie-Hellman script makes the certificate transmission more secure.
+- Generate on the Host a `Diffie-Hollman` key to secure the Certificate transmission.
+- Usually, you generate it with the following command: `openssl dhparam -out /etc/nginx/dhparam.pem 4096`.
+- It may take long to generate the key.
+- On files `docker-compose/docker-compose-standard.yml` and `docker-compose/17d-ui_gateway_service_standard.yml`, make sure the Diffie-Hellman key is mounted orrectly.
+- On file `docker-compose/nginx/gateway/api_gateway.conf`, make sure that the variable `ssl_dhparam` is mounted to the file where the Diffie-Hollman key was generated.
+### Misc Certificates
+- Enable access of Port 443 on the Host.
+- You can still use HTTP protocoll, because the context for port 80 is left untouched.
+- Remember that Letsencrypt certificates are issued for 90 days.
 
 ## Useful Commands
 This application uses **Docker Compose** and as such, all docker and docker compose commands can be called to work wit it.
