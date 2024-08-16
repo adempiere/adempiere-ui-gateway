@@ -55,7 +55,7 @@ Take note that the ports are defined in file *env_template.env* as external port
 
 ### Application Stack
 The application stack consists of the following services defined in the *docker-compose files* (and retrieved on the console with **docker compose ls**); these services will eventually run as containers:
-- **adempiere-site**: Defines the landing page (web site) for this application
+- **adempiere-site**: Defines the landing page (web site) for this application.
 - **postgresql-service**: Defines the Postgres database.
 - **adempiere-zk**: Defines the Jetty server and the ADempiere ZK UI.
 - **adempiere-grpc-server**: Defines a grpc server as the backend server for Vue.
