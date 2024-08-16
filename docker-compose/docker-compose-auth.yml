@@ -2,7 +2,7 @@ name: services-gateway-auth
 
 # Example API for images
 services:
-  postgresql.service:
+  postgresql-service:
     build:
       context: ${POSTGRES_CONTEXT_PATH_ON_HOST}              # Path relative to Working Directory where Dockerfile will be found
       dockerfile: ${DOCKERFILE_NAME}                         # Must exist in context. Otherwise, error. Valid only if no "image" defined.
@@ -54,7 +54,7 @@ services:
 
 
 
-  adempiere.site:
+  adempiere-site:
     image: ${ADEMPIERE_SITE_IMAGE}
     container_name: ${ADEMPIERE_SITE_CONTAINER_NAME}
     hostname: ${ADEMPIERE_SITE_HOSTNAME}
@@ -67,13 +67,13 @@ services:
       VUE_HOST: ${ADEMPIERE_SITE_VUE_URL}
       SCHEDULER_HOST: ${ADEMPIERE_SITE_SCHEDULER_URL}
     depends_on:
-      - adempiere.zk     # Docker Compose Service
+      - adempiere-zk     # Docker Compose Service
     networks:
       - adempiere_network
 
 
 
-  adempiere.zk:
+  adempiere-zk:
     image: ${ADEMPIERE_ZK_IMAGE}
     container_name: ${ADEMPIERE_ZK_CONTAINER_NAME}
     hostname: ${ADEMPIERE_ZK_HOSTNAME}
@@ -89,14 +89,14 @@ services:
       ADEMPIERE_DB_USER: ${ADEMPIERE_ZK_DB_USER}
       ADEMPIERE_DB_PASSWORD: ${ADEMPIERE_ZK_DB_PASSWORD}
     depends_on:
-      postgresql.service:
+      postgresql-service:
         condition: service_healthy
     networks:
       - adempiere_network
 
 
 
-  adempiere.processor:
+  adempiere-processor:
     image: ${ADEMPIERE_PROCESSOR_IMAGE}
     container_name: ${ADEMPIERE_PROCESSOR_CONTAINER_NAME}
     hostname: ${ADEMPIERE_PROCESSOR_HOSTNAME}
@@ -118,12 +118,12 @@ services:
       DB_USER: ${ADEMPIERE_PROCESSOR_DB_USER}
       DB_PASSWORD: ${ADEMPIERE_PROCESSOR_DB_PASSWORD}
     depends_on:
-      postgresql.service:
+      postgresql-service:
         condition: service_healthy
     networks:
       - adempiere_network
 
-  dkron.scheduler:
+  dkron-scheduler:
     image: ${DKRON_IMAGE}
     container_name: ${DKRON_CONTAINER_NAME}
     hostname: ${DKRON_HOSTNAME}
@@ -146,7 +146,7 @@ services:
 
 
 
-  adempiere.grpc.server:
+  adempiere-grpc-server:
     image: ${VUE_BACKEND_GRPC_SERVER_IMAGE}
     container_name: ${VUE_BACKEND_GRPC_SERVER_CONTAINER_NAME}
     hostname: ${VUE_BACKEND_GRPC_SERVER_HOSTNAME}
@@ -161,7 +161,7 @@ services:
       start_period: 20s
       timeout: 10s
     depends_on:
-      postgresql.service:
+      postgresql-service:
         condition: service_healthy
     environment:
       SERVER_PORT: ${VUE_BACKEND_GRPC_SERVER_PORT}
@@ -179,7 +179,7 @@ services:
 
 
 
-  adempiere.report.engine:
+  adempiere-report-engine:
     image: ${VUE_REPORT_GRPC_SERVER_IMAGE}
     container_name: ${VUE_REPORT_GRPC_SERVER_CONTAINER_NAME}
     hostname: ${VUE_REPORT_GRPC_SERVER_HOSTNAME}
@@ -194,7 +194,7 @@ services:
       start_period: 20s
       timeout: 10s
     depends_on:
-      postgresql.service:
+      postgresql-service:
         condition: service_healthy
     environment:
       SERVER_PORT: ${VUE_REPORT_GRPC_SERVER_PORT}
@@ -211,7 +211,7 @@ services:
 
 
 
-  grpc.proxy:
+  grpc-proxy:
     image: ${ENVOY_GRPC_PROXY_IMAGE}
     container_name: ${ENVOY_GRPC_PROXY_CONTAINER_NAME}
     hostname: ${ENVOY_GRPC_PROXY_HOSTNAME}
@@ -231,9 +231,9 @@ services:
       - ${TIMEZONE_PATH_ON_HOST}:${TIMEZONE_PATH_ON_CONTAINER}:${TIMEZONE_OPTIONS}    # Map the Timezone  of the host to the Timezone of the container
       - ${LOCALTIME_PATH_ON_HOST}:${LOCALTIME_PATH_ON_CONTAINER}:${LOCALTIME_OPTIONS} # Map the Localtime of the host to the Timezone of the container
     depends_on:
-      - adempiere.grpc.server
-      - adempiere.processor
-      - adempiere.report.engine
+      - adempiere-grpc-server
+      - adempiere-processor
+      - adempiere-report-engine
     # ports:
     #  - ${ENVOY_GRPC_PROXY_BACKEND_EXTERNAL_PORT}:${ENVOY_GRPC_PROXY_BACKEND_PORT}
     networks:
@@ -241,7 +241,7 @@ services:
 
 
 
-  s3.storage:
+  s3-storage:
     image: ${S3_IMAGE}
     container_name: ${S3_CONTAINER_NAME}
     hostname: ${S3_HOSTNAME}
@@ -270,7 +270,7 @@ services:
     networks:
       - adempiere_network
 
-  s3.client:
+  s3-client:
     image: ${S3_CLIENT_IMAGE}
     container_name: ${S3_CLIENT_CONTAINER_NAME}
     hostname: ${S3_CLIENT_HOSTNAME}
@@ -278,18 +278,18 @@ services:
       - ${TIMEZONE_PATH_ON_HOST}:${TIMEZONE_PATH_ON_CONTAINER}:${TIMEZONE_OPTIONS}    # Map the Timezone  of the host to the Timezone of the container
       - ${LOCALTIME_PATH_ON_HOST}:${LOCALTIME_PATH_ON_CONTAINER}:${LOCALTIME_OPTIONS} # Map the Localtime of the host to the Timezone of the container
     depends_on:
-      s3.storage:
+      s3-storage:
         condition: service_healthy
     entrypoint: >
       /bin/sh -c "
-      /usr/bin/mc alias set s3_minio_server http://s3.storage:9000 ${S3_CLIENT_ACCESS_KEY} ${S3_CLIENT_SECRET_KEY};
+      /usr/bin/mc alias set s3_minio_server http://s3-storage:9000 ${S3_CLIENT_ACCESS_KEY} ${S3_CLIENT_SECRET_KEY};
       /usr/bin/mc mb s3_minio_server/${S3_CLIENT_BUCKET_NAME} || true;
       exit 0;
       "
     networks:
       - adempiere_network
 
-  s3.gateway.rs:
+  s3-gateway-rs:
     image: ${S3_GATEWAY_RS_IMAGE}
     container_name: ${S3_GATEWAY_RS_CONTAINER_NAME}
     hostname: ${S3_GATEWAY_RS_HOSTNAME}
@@ -304,7 +304,7 @@ services:
       - ${TIMEZONE_PATH_ON_HOST}:${TIMEZONE_PATH_ON_CONTAINER}:${TIMEZONE_OPTIONS}    # Map the Timezone  of the host to the Timezone of the container
       - ${LOCALTIME_PATH_ON_HOST}:${LOCALTIME_PATH_ON_CONTAINER}:${LOCALTIME_OPTIONS} # Map the Localtime of the host to the Timezone of the container
     depends_on:
-      s3.storage:
+      s3-storage:
         condition: service_healthy
     environment:
       PORT: ${S3_GATEWAY_RS_PORT}
@@ -320,12 +320,12 @@ services:
 
 
 
-  opensearch.node:
+  opensearch-node:
     image: ${OPENSEARCH_IMAGE}
     container_name: ${OPENSEARCH_CONTAINER_NAME}
     hostname: ${OPENSEARCH_HOSTNAME}
     environment:
-      - node.name=opensearch.node
+      - node.name=opensearch-node
       - discovery.type=single-node
       - "DISABLE_INSTALL_DEMO_CONFIG=true" # Prevents execution of bundled demo script which installs demo certificates and security configurations to OpenSearch
       - "DISABLE_SECURITY_PLUGIN=true" # Disables Security plugin
@@ -354,7 +354,7 @@ services:
     networks:
       - adempiere_network
   
-  opensearch.setup:
+  opensearch-setup:
     build:
       context: opensearch/
       dockerfile: setup.Dockerfile
@@ -364,7 +364,7 @@ services:
       - ${TIMEZONE_PATH_ON_HOST}:${TIMEZONE_PATH_ON_CONTAINER}:${TIMEZONE_OPTIONS}    # Map the Timezone  of the host to the Timezone of the container
       - ${LOCALTIME_PATH_ON_HOST}:${LOCALTIME_PATH_ON_CONTAINER}:${LOCALTIME_OPTIONS} # Map the Localtime of the host to the Timezone of the container
     depends_on:
-       opensearch.node:
+       opensearch-node:
         condition: service_healthy
     environment:
       OPENSEARCH_HOST: ${OPENSEARCH_SETUP_NODE_HOSTNAME}
@@ -422,7 +422,7 @@ services:
     networks:
       - adempiere_network
 
-  dictionary.rs:
+  dictionary-rs:
     image: ${DICTIONARY_RS_IMAGE}
     container_name: ${DICTIONARY_RS_CONTAINER_NAME}
     hostname: ${DICTIONARY_RS_HOSTNAME}
@@ -442,7 +442,7 @@ services:
       OPENSEARCH_URL: ${DICTIONARY_RS_OPENSEARCH_URL}
       ALLOWED_ORIGIN: ${ALLOWED_ORIGIN}
     depends_on:
-      opensearch.node:
+      opensearch-node:
         condition: service_healthy
       kafka:
         condition: service_healthy
@@ -468,7 +468,7 @@ services:
       DB_SCHEMA: ${KEYCLOAK_DB_SCHEMA}
       DB_PASSWORD: ${POSTGRES_PASSWORD}
     depends_on:
-      postgresql.service:
+      postgresql-service:
         condition: service_healthy
     command: "start-dev --import-realm"
     volumes:
@@ -483,20 +483,20 @@ services:
 
 
 
-  ui.gateway:
+  ui-gateway:
     image: ${NGINX_UI_GATEWAY_IMAGE}
     container_name: ${NGINX_UI_GATEWAY_CONTAINER_NAME}
     hostname: ${NGINX_UI_GATEWAY_HOSTNAME}
     depends_on:
-      dictionary.rs:
+      dictionary-rs:
         condition: service_started
-      s3.gateway.rs:
+      s3-gateway-rs:
         condition: service_started
-      grpc.proxy:
+      grpc-proxy:
         condition: service_healthy
-      # vue.ui:
+      # vue-ui:
       #   condition: service_healthy
-      adempiere.site:
+      adempiere-site:
         condition: service_started
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf
@@ -515,7 +515,7 @@ services:
 
 
 
-  vue.ui:
+  vue-ui:
     image: ${VUE_UI_IMAGE}
     container_name: ${VUE_UI_CONTAINER_NAME}
     hostname: ${VUE_UI_HOSTNAME}

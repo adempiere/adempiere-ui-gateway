@@ -1,6 +1,6 @@
 
   # For modes: STANDARD, VUE, STORAGE, CACHE, AUTH
-  vue.ui:
+  vue-ui:
     image: ${VUE_UI_IMAGE}
     container_name: ${VUE_UI_CONTAINER_NAME}
     hostname: ${VUE_UI_HOSTNAME}

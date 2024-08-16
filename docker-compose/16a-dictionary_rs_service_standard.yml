@@ -1,11 +1,11 @@
 
   # For modes: STANDARD, CACHE, AUTH
-  dictionary.rs:
+  dictionary-rs:
     image: ${DICTIONARY_RS_IMAGE}
     container_name: ${DICTIONARY_RS_CONTAINER_NAME}
     hostname: ${DICTIONARY_RS_HOSTNAME}
     depends_on:
-      opensearch.node:
+      opensearch-node:
         condition: service_healthy
       kafka:
         condition: service_healthy

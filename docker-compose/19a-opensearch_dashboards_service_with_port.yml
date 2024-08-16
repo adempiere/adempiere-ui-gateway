@@ -1,6 +1,6 @@
 
   # For modes: DEVELOP
-  opensearch.dashboards:
+  opensearch-dashboards:
     image: ${OPENSEARCH_DASHBOARDS_IMAGE}
     container_name: ${OPENSEARCH_DASHBOARDS_CONTAINER_NAME}
     hostname: ${OPENSEARCH_DASHBOARDS_HOSTNAME}
@@ -11,7 +11,7 @@
       start_period: 20s
       timeout: 10s
     depends_on:
-      opensearch.node:
+      opensearch-node:
         condition: service_healthy
     environment:
       OPENSEARCH_HOSTS: '["http://${OPENSEARCH_HOSTNAME}:${OPENSEARCH_PORT}"]'

@@ -1,11 +1,11 @@
 
   # For modes: STANDARD, STORAGE, VUE, DEVELOP, CACHE, AUTH
-  adempiere.grpc.server:
+  adempiere-grpc-server:
     image: ${VUE_BACKEND_GRPC_SERVER_IMAGE}
     container_name: ${VUE_BACKEND_GRPC_SERVER_CONTAINER_NAME}
     hostname: ${VUE_BACKEND_GRPC_SERVER_HOSTNAME}
     depends_on:
-      postgresql.service:
+      postgresql-service:
         condition: service_healthy
     restart: ${GENERIC_RESTART}
     healthcheck:

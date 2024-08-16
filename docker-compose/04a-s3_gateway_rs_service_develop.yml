@@ -1,11 +1,11 @@
 
   # For modes: DEVELOP
-  s3.gateway.rs:
+  s3-gateway-rs:
     image: ${S3_GATEWAY_RS_IMAGE}
     container_name: ${S3_GATEWAY_RS_CONTAINER_NAME}
     hostname: ${S3_GATEWAY_RS_HOSTNAME}
     depends_on:
-      s3.storage:
+      s3-storage:
         condition: service_healthy
     restart: ${GENERIC_RESTART}
     healthcheck:

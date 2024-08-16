@@ -55,26 +55,26 @@ Take note that the ports are defined in file *env_template.env* as external port
 
 ### Application Stack
 The application stack consists of the following services defined in the *docker-compose files* (and retrieved on the console with **docker compose ls**); these services will eventually run as containers:
-- **adempiere-site**: defines the landing page (web site) for this application
-- **postgresql.service**: defines the Postgres database
-- **adempiere-zk**: defines the Jetty server and the ADempiere ZK UI
-- **adempiere-grpc-server**: Defines a grpc server as the backend server for Vue
-- **adempiere.processor**: for processes that are executed outside Adempiere
-- **dkron.scheduler**: a scheduler
-- **grpc.proxy**: an envoy server
-- **vue-ui**: defines ADempiere Vue UI
-- **opensearch.node**: stores the Application Dictionary definitions
-- **opensearch.setup**: configure the service *opensearch.node*
-- **zookeeper**: controller for *kafka* service
-- **kafka**: messaging and streaming
-- **kafdrop**: a Kafka Cluster Queues Overview, Monitor and Administrator
-- **dictionary.rs**:
-- **keycloak**: user management on service *postgresql.service*
-- **ui.gateway**:
-- **s3.storage**: for attachments
-- **s3.client**: configuration of "s3-storage" service
-- **s3.gateway.rs**:
-- **opensearch.dashboards**: display and monitor of e.g. exported menus, smart browsers, forms, windows, processes.
+- **adempiere-site**: Defines the landing page (web site) for this application
+- **postgresql-service**: Defines the Postgres database.
+- **adempiere-zk**: Defines the Jetty server and the ADempiere ZK UI.
+- **adempiere-grpc-server**: Defines a grpc server as the backend server for Vue.
+- **adempiere-processor**: For processes that are executed outside Adempiere.
+- **dkron-scheduler**: A scheduler.
+- **grpc-proxy**: API RESTful transcoding to gRPC backends.
+- **vue-ui**: Defines new ADempiere UI with Vue.
+- **opensearch-node**: Stores the Application Dictionary definitions.
+- **opensearch-setup**: Configure the service *opensearch-node* and import snapshot.
+- **zookeeper**: Controller for *kafka* service.
+- **kafka**: Messaging and streaming queue.
+- **kafdrop**: A Kafka Cluster Queues Overview, Monitor and Administrator.
+- **dictionary-rs**: API RESTful to manage adempiere dictionary with OpenSearch as cache.
+- **keycloak**: User management on service *postgresql-service*.
+- **ui-gateway**: A reverse proxy and routing to redirect multiple services.
+- **s3-storage**: For attachments and files.
+- **s3-client**: Set default configuration of "s3-storage" service.
+- **s3-gateway-rs**: API RESTful to manage files with client.
+- **opensearch-dashboards**: Display and monitor of indexes e.g. exported menus, smart browsers, forms, windows, processes.
 
 Additional objects defined in the *docker-compose files*:
 - `adempiere_network`: defines the subnet used in the involved Docker containers (e.g. **192.168.100.0/24**)
@@ -477,7 +477,7 @@ docker compose  -f <filename> down
 ##### Stop aAd Delete One Service (services defined in *docker-compose* files)
 ```Shell
 docker compose rm -s -f <service name>
-docker compose rm -s -f postgresql.service
+docker compose rm -s -f postgresql-service
 docker compose rm -s -f adempiere-zk
 etc.
 ```

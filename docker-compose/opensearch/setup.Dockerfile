@@ -1,7 +1,7 @@
 FROM debian:bullseye
 
 ENV \
-	OPENSEARCH_HOST="http://opensearch.node:9200"
+	OPENSEARCH_HOST="http://opensearch-node:9200"
 
 
 RUN apt-get update && \
