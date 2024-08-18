@@ -444,8 +444,6 @@ services:
     depends_on:
       opensearch-node:
         condition: service_healthy
-      kafka:
-        condition: service_healthy
     # ports:
     #   - ${DICTIONARY_RS_EXTERNAL_PORT}:${DICTIONARY_RS_PORT}
     networks:
