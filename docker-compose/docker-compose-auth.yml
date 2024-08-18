@@ -353,21 +353,21 @@ services:
     #   - ${OPENSEARCH_PERFORMANCE_PORT}:9600 # required for Performance Analyzer
     networks:
       - adempiere_network
-  
+
   opensearch-setup:
     build:
       context: opensearch/
       dockerfile: setup.Dockerfile
     container_name: ${OPENSEARCH_SETUP_CONTAINER_NAME}
     hostname: ${OPENSEARCH_SETUP_HOSTNAME}
-    volumes:
-      - ${TIMEZONE_PATH_ON_HOST}:${TIMEZONE_PATH_ON_CONTAINER}:${TIMEZONE_OPTIONS}    # Map the Timezone  of the host to the Timezone of the container
-      - ${LOCALTIME_PATH_ON_HOST}:${LOCALTIME_PATH_ON_CONTAINER}:${LOCALTIME_OPTIONS} # Map the Localtime of the host to the Timezone of the container
     depends_on:
-       opensearch-node:
+      opensearch-node:
         condition: service_healthy
     environment:
       OPENSEARCH_HOST: ${OPENSEARCH_SETUP_NODE_HOSTNAME}
+    volumes:
+      - ${TIMEZONE_PATH_ON_HOST}:${TIMEZONE_PATH_ON_CONTAINER}:${TIMEZONE_OPTIONS}    # Map the Timezone  of the host to the Timezone of the container
+      - ${LOCALTIME_PATH_ON_HOST}:${LOCALTIME_PATH_ON_CONTAINER}:${LOCALTIME_OPTIONS} # Map the Localtime of the host to the Timezone of the container
     networks:
       - adempiere_network
 
