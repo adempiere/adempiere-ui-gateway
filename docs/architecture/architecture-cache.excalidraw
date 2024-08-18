@@ -1197,11 +1197,11 @@
       "locked": false,
       "fontSize": 16.46673133311469,
       "fontFamily": 2,
-      "text": "postgresql.service",
+      "text": "postgresql-service",
       "textAlign": "left",
       "verticalAlign": "top",
       "containerId": null,
-      "originalText": "postgresql.service",
+      "originalText": "postgresql-service",
       "lineHeight": 1.15
     },
     {
@@ -1965,11 +1965,11 @@
       "locked": false,
       "fontSize": 16.46673133311469,
       "fontFamily": 2,
-      "text": "opensearch.setup",
+      "text": "opensearch-setup",
       "textAlign": "left",
       "verticalAlign": "top",
       "containerId": null,
-      "originalText": "opensearch.setup",
+      "originalText": "opensearch-setup",
       "lineHeight": 1.15
     },
     {
@@ -2000,11 +2000,11 @@
       "locked": false,
       "fontSize": 16.46673133311469,
       "fontFamily": 2,
-      "text": "ui.gateway",
+      "text": "ui-gateway",
       "textAlign": "left",
       "verticalAlign": "top",
       "containerId": null,
-      "originalText": "ui.gateway",
+      "originalText": "ui-gateway",
       "lineHeight": 1.15
     },
     {
@@ -2035,11 +2035,11 @@
       "locked": false,
       "fontSize": 16.46673133311469,
       "fontFamily": 2,
-      "text": "vue.ui",
+      "text": "vue-ui",
       "textAlign": "left",
       "verticalAlign": "top",
       "containerId": null,
-      "originalText": "vue.ui",
+      "originalText": "vue-ui",
       "lineHeight": 1.15
     },
     {
@@ -2070,11 +2070,11 @@
       "locked": false,
       "fontSize": 16.46673133311469,
       "fontFamily": 2,
-      "text": "grpc.proxy",
+      "text": "grpc-proxy",
       "textAlign": "left",
       "verticalAlign": "top",
       "containerId": null,
-      "originalText": "grpc.proxy",
+      "originalText": "grpc-proxy",
       "lineHeight": 1.15
     },
     {
@@ -2105,11 +2105,11 @@
       "locked": false,
       "fontSize": 16.46673133311469,
       "fontFamily": 2,
-      "text": "adempiere.grpc.server",
+      "text": "adempiere-grpc-server",
       "textAlign": "left",
       "verticalAlign": "top",
       "containerId": null,
-      "originalText": "adempiere.grpc.server",
+      "originalText": "adempiere-grpc-server",
       "lineHeight": 1.15
     },
     {

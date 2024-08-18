@@ -6,7 +6,7 @@
 -- Add App-Registration with S3 Minio
 INSERT INTO AD_AppRegistration 
     (AD_AppRegistration_ID,AD_AppSupport_ID,AD_Client_ID,AD_Org_ID,ApplicationType,Created,CreatedBy,Host,IsActive,Name,Port,Timeout,Updated,UpdatedBy,UUID,Value,VersionNo) 
-    VALUES (nextId((SELECT AD_Sequence_ID::integer FROM AD_Sequence WHERE Name = 'AD_AppRegistration' AND AD_Client_ID = 0 AND IsTableID = 'Y'), 'N'),50012,11,0,'WDV',TO_TIMESTAMP('2024-02-09 11:02:44','YYYY-MM-DD HH24:MI:SS'),100,'http://s3.storage:9000','Y','S3 Minio Storage',0,0,TO_TIMESTAMP('2024-02-09 11:02:44','YYYY-MM-DD HH24:MI:SS'),100,'78669372-61a4-457c-a158-102f0e1008ea','S3-MINIO','1.0')
+    VALUES (nextId((SELECT AD_Sequence_ID::integer FROM AD_Sequence WHERE Name = 'AD_AppRegistration' AND AD_Client_ID = 0 AND IsTableID = 'Y'), 'N'),50012,11,0,'WDV',TO_TIMESTAMP('2024-02-09 11:02:44','YYYY-MM-DD HH24:MI:SS'),100,'http://s3-storage:9000','Y','S3 Minio Storage',0,0,TO_TIMESTAMP('2024-02-09 11:02:44','YYYY-MM-DD HH24:MI:SS'),100,'78669372-61a4-457c-a158-102f0e1008ea','S3-MINIO','1.0')
 ;
 
 -- Add App-Regitration Parameters values

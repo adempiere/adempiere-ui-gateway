@@ -1,6 +1,6 @@
 
   # For modes: STANDARD, STORAGE, DEVELOP, AUTH
-  s3.storage:
+  s3-storage:
     image: ${S3_IMAGE}
     container_name: ${S3_CONTAINER_NAME}
     hostname: ${S3_HOSTNAME}

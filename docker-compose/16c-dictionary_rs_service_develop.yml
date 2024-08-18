@@ -1,11 +1,11 @@
 
   # For modes: DEVELOP
-  dictionary.rs:
+  dictionary-rs:
     image: ${DICTIONARY_RS_IMAGE}
     container_name: ${DICTIONARY_RS_CONTAINER_NAME}
     hostname: ${DICTIONARY_RS_HOSTNAME}
     depends_on:
-      opensearch.node:
+      opensearch-node:
         condition: service_healthy
     restart: ${GENERIC_RESTART}
     healthcheck:

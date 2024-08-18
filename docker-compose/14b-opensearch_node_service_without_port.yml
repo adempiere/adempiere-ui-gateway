@@ -1,6 +1,6 @@
 
   # For modes: STANDARD, AUTH
-  opensearch.node:
+  opensearch-node:
     image: ${OPENSEARCH_IMAGE}
     container_name: ${OPENSEARCH_CONTAINER_NAME}
     hostname: ${OPENSEARCH_HOSTNAME}
@@ -18,7 +18,7 @@
         soft: 65536 # maximum number of open files for the OpenSearch user, set to at least 65536 on modern systems
         hard: 65536
     environment:
-      - node.name=opensearch.node
+      - node.name=opensearch-node
       - discovery.type=single-node
       - "DISABLE_INSTALL_DEMO_CONFIG=true" # Prevents execution of bundled demo script which installs demo certificates and security configurations to OpenSearch
       - "DISABLE_SECURITY_PLUGIN=true" # Disables Security plugin

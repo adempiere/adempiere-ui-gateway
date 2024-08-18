@@ -1,13 +1,13 @@
 
   # For modes: STANDARD, DEVELOP, CACHE, AUTH
-  opensearch.setup:
+  opensearch-setup:
     build:
       context: opensearch/
       dockerfile: setup.Dockerfile
     container_name: ${OPENSEARCH_SETUP_CONTAINER_NAME}
     hostname: ${OPENSEARCH_SETUP_HOSTNAME}
     depends_on:
-      opensearch.node:
+      opensearch-node:
         condition: service_healthy
     environment:
       OPENSEARCH_HOST: ${OPENSEARCH_SETUP_NODE_HOSTNAME}

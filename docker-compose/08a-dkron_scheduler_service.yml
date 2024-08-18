@@ -1,6 +1,6 @@
 
   # For modes: STANDARD, AUTH
-  dkron.scheduler:
+  dkron-scheduler:
     image: ${DKRON_IMAGE}
     container_name: ${DKRON_CONTAINER_NAME}
     hostname: ${DKRON_HOSTNAME}

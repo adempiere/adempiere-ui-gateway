@@ -1,12 +1,12 @@
 
   # For modes: STANDARD, AUTH
-  grpc.proxy:
+  grpc-proxy:
     image: ${ENVOY_GRPC_PROXY_IMAGE}
     container_name: ${ENVOY_GRPC_PROXY_CONTAINER_NAME}
     hostname: ${ENVOY_GRPC_PROXY_HOSTNAME}
     depends_on:
-      - adempiere.grpc.server
-      - adempiere.processor
+      - adempiere-grpc-server
+      - adempiere-processor
     healthcheck:
       test: "bash -c 'printf \"GET / HTTP/1.1\n\n\" > /dev/tcp/127.0.0.1/${ENVOY_GRPC_PROXY_BACKEND_PORT}; exit $?;'"
       interval: 10s
@@ -21,6 +21,7 @@
     volumes:
       - ./envoy/envoy.yaml:/etc/envoy/envoy.yaml:ro
       - ./envoy/definitions/adempiere-grpc-server.pb:/data/adempiere-grpc-server.pb:ro
+      - ./envoy/definitions/adempiere-report-engine-service.dsc:/data/adempiere-report-engine-service.dsc:ro
       - ./envoy/definitions/adempiere-processors-service-service.pb:/data/adempiere-processors-service-service.pb:ro
       - ${TIMEZONE_PATH_ON_HOST}:${TIMEZONE_PATH_ON_CONTAINER}:${TIMEZONE_OPTIONS}    # Map the Timezone  of the host to the Timezone of the container
       - ${LOCALTIME_PATH_ON_HOST}:${LOCALTIME_PATH_ON_CONTAINER}:${LOCALTIME_OPTIONS} # Map the Localtime of the host to the Timezone of the container
