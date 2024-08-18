@@ -7,6 +7,7 @@
     depends_on:
       - adempiere-grpc-server
       - adempiere-processor
+      - adempiere-report-engine
     healthcheck:
       test: "bash -c 'printf \"GET / HTTP/1.1\n\n\" > /dev/tcp/127.0.0.1/${ENVOY_GRPC_PROXY_BACKEND_PORT}; exit $?;'"
       interval: 10s
