@@ -1,0 +1,31 @@
+
+  # For modes: STANDARD, AUTH
+  adempiere.report.engine:
+    image: ${VUE_REPORT_GRPC_SERVER_IMAGE}
+    container_name: ${VUE_REPORT_GRPC_SERVER_CONTAINER_NAME}
+    hostname: ${VUE_REPORT_GRPC_SERVER_HOSTNAME}
+    restart: ${GENERIC_RESTART}
+    volumes:
+      - ${TIMEZONE_PATH_ON_HOST}:${TIMEZONE_PATH_ON_CONTAINER}:${TIMEZONE_OPTIONS}    # Map the Timezone  of the host to the Timezone of the container
+      - ${LOCALTIME_PATH_ON_HOST}:${LOCALTIME_PATH_ON_CONTAINER}:${LOCALTIME_OPTIONS} # Map the Localtime of the host to the Timezone of the container
+    healthcheck:
+      test: "bash -c 'printf \"GET / HTTP/1.1\n\n\" > /dev/tcp/127.0.0.1/${VUE_REPORT_GRPC_SERVER_PORT}; exit $?;'"
+      interval: 10s
+      retries: 60
+      start_period: 20s
+      timeout: 10s
+    depends_on:
+      postgresql.service:
+        condition: service_healthy
+    environment:
+      SERVER_PORT: ${VUE_REPORT_GRPC_SERVER_PORT}
+      DB_HOST: ${VUE_REPORT_GRPC_SERVER_DB_HOST}
+      DB_PORT: ${VUE_REPORT_GRPC_SERVER_DB_PORT}
+      DB_NAME: ${VUE_REPORT_GRPC_SERVER_DB_NAME}
+      DB_USER: ${VUE_REPORT_GRPC_SERVER_DB_USER}
+      DB_PASSWORD: ${VUE_REPORT_GRPC_SERVER_DB_PASSWORD}
+      SERVER_LOG_LEVEL: ${VUE_REPORT_GRPC_SERVER_LOG_LEVEL}
+    # ports:
+    #  - ${VUE_REPORT_GRPC_SERVER_PORT}
+    networks:
+      - adempiere_network
