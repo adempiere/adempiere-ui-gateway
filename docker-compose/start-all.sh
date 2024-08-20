@@ -58,16 +58,17 @@ ADEMPIERE_ZK=5
 ADEMPIERE_PROCESSOR=6
 DKRON_SCHEDULER=7
 ADEMPIERE_GRPC_SERVER=8
-GRPC_PROXY=9
-VUE_UI=10
-ZOOKEEPER=11
-KAFKA=12
-OPENSEARCH_NODE=13
-OPENSEARCH_SETUP=14
-DICTIONARY_RS=15
-UI_GATEWAY=16
-KEYCLOAK=17
-OPENSEARCH_DASHBOARDS=18
+REPORT_ENGINE=9
+GRPC_PROXY=10
+VUE_UI=11
+ZOOKEEPER=12
+KAFKA=13
+OPENSEARCH_NODE=14
+OPENSEARCH_SETUP=15
+DICTIONARY_RS=16
+UI_GATEWAY=17
+KEYCLOAK=18
+OPENSEARCH_DASHBOARDS=19
 NO_SERVICE_IMPLEMENTED=NO_SERVICE_IMPLEMENTED
 
 # 2b.- All services enumerated in the order the arrays are filled.
@@ -75,7 +76,7 @@ NO_SERVICE_IMPLEMENTED=NO_SERVICE_IMPLEMENTED
 #      (there is no way assotiated arrays can be ordered).
 #      It will be used when looping through the selected services array.
 declare -a SERVICES_ordered_array
-SERVICES_ordered_array=(POSTGRESQL_SERVICE S3_STORAGE S3_CLIENT S3_GATEWAY_RS ADEMPIERE_SITE ADEMPIERE_ZK ADEMPIERE_PROCESSOR DKRON_SCHEDULER ADEMPIERE_GRPC_SERVER GRPC_PROXY VUE_UI ZOOKEEPER KAFKA OPENSEARCH_NODE OPENSEARCH_SETUP DICTIONARY_RS UI_GATEWAY KEYCLOAK OPENSEARCH_DASHBOARDS)
+SERVICES_ordered_array=(POSTGRESQL_SERVICE S3_STORAGE S3_CLIENT S3_GATEWAY_RS ADEMPIERE_SITE ADEMPIERE_ZK ADEMPIERE_PROCESSOR DKRON_SCHEDULER ADEMPIERE_GRPC_SERVER REPORT_ENGINE GRPC_PROXY VUE_UI ZOOKEEPER KAFKA OPENSEARCH_NODE OPENSEARCH_SETUP DICTIONARY_RS UI_GATEWAY KEYCLOAK OPENSEARCH_DASHBOARDS)
 
 
 # 2c.- Define arrays for service cases
@@ -95,15 +96,17 @@ AUTH_array[$ADEMPIERE_ZK]="06a-adempiere_zk_service.yml"
 AUTH_array[$ADEMPIERE_PROCESSOR]="07a-adempiere_processor_service.yml"
 AUTH_array[$DKRON_SCHEDULER]="08a-dkron_scheduler_service.yml"
 AUTH_array[$ADEMPIERE_GRPC_SERVER]="09a-adempiere_grpc_server_service.yml"
-AUTH_array[$GRPC_PROXY]="10c-grpc_proxy_service_standard.yml"
-AUTH_array[$VUE_UI]="11a-vue_ui_service.yml"
-AUTH_array[$ZOOKEEPER]="12a-zookeeper_service.yml"
-AUTH_array[$KAFKA]="13a-kafka_service.yml"
-AUTH_array[$OPENSEARCH_NODE]="14b-opensearch_node_service_without_port.yml"
-AUTH_array[$OPENSEARCH_SETUP]="15a-opensearch_setup_service.yml"
-AUTH_array[$DICTIONARY_RS]="16a-dictionary_rs_service_standard.yml"
-AUTH_array[$UI_GATEWAY]="17a-ui_gateway_service_auth.yml"
-AUTH_array[$KEYCLOAK]="18a-keycloak_service.yml"
+AUTH_array[$REPORT_ENGINE]="10a-report_engine_service.yml"
+AUTH_array[$GRPC_PROXY]="11c-grpc_proxy_service_standard.yml"
+AUTH_array[$VUE_UI]="12a-vue_ui_service.yml"
+AUTH_array[$ZOOKEEPER]="13a-zookeeper_service.yml"
+AUTH_array[$KAFKA]="14a-kafka_service.yml"
+AUTH_array[$OPENSEARCH_NODE]="15b-opensearch_node_service_without_port.yml"
+AUTH_array[$OPENSEARCH_SETUP]="16a-opensearch_setup_service.yml"
+AUTH_array[$DICTIONARY_RS]="17a-dictionary_rs_service_standard.yml"
+AUTH_array[$UI_GATEWAY]="18a-ui_gateway_service_auth.yml"
+AUTH_array[$KEYCLOAK]="19a-keycloak_service.yml"
+AUTH_array[$OPENSEARCH_DASHBOARDS]="$NO_SERVICE_IMPLEMENTED"
 
 # Services for CACHE
 declare -a CACHE_array
@@ -116,15 +119,17 @@ CACHE_array[$ADEMPIERE_ZK]="$NO_SERVICE_IMPLEMENTED"
 CACHE_array[$ADEMPIERE_PROCESSOR]="$NO_SERVICE_IMPLEMENTED"
 CACHE_array[$DKRON_SCHEDULER]="$NO_SERVICE_IMPLEMENTED"
 CACHE_array[$ADEMPIERE_GRPC_SERVER]="09a-adempiere_grpc_server_service.yml"
-CACHE_array[$GRPC_PROXY]="10d-grpc_proxy_service_vue.yml"
-CACHE_array[$VUE_UI]="11a-vue_ui_service.yml"
-CACHE_array[$ZOOKEEPER]="12a-zookeeper_service.yml"
-CACHE_array[$KAFKA]="13a-kafka_service.yml"
-CACHE_array[$OPENSEARCH_NODE]="14a-opensearch_node_service_with_port.yml"
-CACHE_array[$OPENSEARCH_SETUP]="15a-opensearch_setup_service.yml"
-CACHE_array[$DICTIONARY_RS]="16a-dictionary_rs_service_standard.yml"
-CACHE_array[$UI_GATEWAY]="17b-ui_gateway_service_cache.yml"
+CACHE_array[$REPORT_ENGINE]="$NO_SERVICE_IMPLEMENTED"
+CACHE_array[$GRPC_PROXY]="11d-grpc_proxy_service_vue.yml"
+CACHE_array[$VUE_UI]="12a-vue_ui_service.yml"
+CACHE_array[$ZOOKEEPER]="13a-zookeeper_service.yml"
+CACHE_array[$KAFKA]="14a-kafka_service.yml"
+CACHE_array[$OPENSEARCH_NODE]="15a-opensearch_node_service_with_port.yml"
+CACHE_array[$OPENSEARCH_SETUP]="16a-opensearch_setup_service.yml"
+CACHE_array[$DICTIONARY_RS]="17a-dictionary_rs_service_standard.yml"
+CACHE_array[$UI_GATEWAY]="18b-ui_gateway_service_cache.yml"
 CACHE_array[$KEYCLOAK]="$NO_SERVICE_IMPLEMENTED"
+CACHE_array[$OPENSEARCH_DASHBOARDS]="$NO_SERVICE_IMPLEMENTED"
 
 # Services for DEVELOP
 declare -a DEVELOP_array
@@ -137,16 +142,17 @@ DEVELOP_array[$ADEMPIERE_ZK]="06a-adempiere_zk_service.yml"
 DEVELOP_array[$ADEMPIERE_PROCESSOR]="07a-adempiere_processor_service.yml"
 DEVELOP_array[$DKRON_SCHEDULER]="08a-dkron_scheduler_service.yml"
 DEVELOP_array[$ADEMPIERE_GRPC_SERVER]="09a-adempiere_grpc_server_service.yml"
-DEVELOP_array[$GRPC_PROXY]="10b-grpc_proxy_service_develop.yml"
-DEVELOP_array[$VUE_UI]="11a-vue_ui_service.yml"
-DEVELOP_array[$ZOOKEEPER]="12a-zookeeper_service.yml"
-DEVELOP_array[$KAFKA]="13b-kafka_service_with_kafdrop.yml"
-DEVELOP_array[$OPENSEARCH_NODE]="14a-opensearch_node_service_with_port.yml"
-DEVELOP_array[$OPENSEARCH_SETUP]="15a-opensearch_setup_service.yml"
-DEVELOP_array[$DICTIONARY_RS]="16c-dictionary_rs_service_develop.yml"
-DEVELOP_array[$UI_GATEWAY]="17c-ui_gateway_service_develop.yml"
-DEVELOP_array[$KEYCLOAK]="18a-keycloak_service.yml"
-DEVELOP_array[$OPENSEARCH_DASHBOARDS]="19a-opensearch_dashboards_service_with_port.yml"
+DEVELOP_array[$REPORT_ENGINE]="$NO_SERVICE_IMPLEMENTED"
+DEVELOP_array[$GRPC_PROXY]="11b-grpc_proxy_service_develop.yml"
+DEVELOP_array[$VUE_UI]="12a-vue_ui_service.yml"
+DEVELOP_array[$ZOOKEEPER]="13a-zookeeper_service.yml"
+DEVELOP_array[$KAFKA]="14b-kafka_service_with_kafdrop.yml"
+DEVELOP_array[$OPENSEARCH_NODE]="15a-opensearch_node_service_with_port.yml"
+DEVELOP_array[$OPENSEARCH_SETUP]="16a-opensearch_setup_service.yml"
+DEVELOP_array[$DICTIONARY_RS]="17c-dictionary_rs_service_develop.yml"
+DEVELOP_array[$UI_GATEWAY]="18c-ui_gateway_service_develop.yml"
+DEVELOP_array[$KEYCLOAK]="19a-keycloak_service.yml"
+DEVELOP_array[$OPENSEARCH_DASHBOARDS]="20a-opensearch_dashboards_service_with_port.yml"
 
 # Services for STANDARD
 declare -a STANDARD_array
@@ -159,15 +165,17 @@ STANDARD_array[$ADEMPIERE_ZK]="06a-adempiere_zk_service.yml"
 STANDARD_array[$ADEMPIERE_PROCESSOR]="07a-adempiere_processor_service.yml"
 STANDARD_array[$DKRON_SCHEDULER]="08a-dkron_scheduler_service.yml"
 STANDARD_array[$ADEMPIERE_GRPC_SERVER]="09a-adempiere_grpc_server_service.yml"
-STANDARD_array[$GRPC_PROXY]="10c-grpc_proxy_service_standard.yml"
-STANDARD_array[$VUE_UI]="11a-vue_ui_service.yml"
-STANDARD_array[$ZOOKEEPER]="12a-zookeeper_service.yml"
-STANDARD_array[$KAFKA]="13a-kafka_service.yml"
-STANDARD_array[$OPENSEARCH_NODE]="14b-opensearch_node_service_without_port.yml"
-STANDARD_array[$OPENSEARCH_SETUP]="15a-opensearch_setup_service.yml"
-STANDARD_array[$DICTIONARY_RS]="16a-dictionary_rs_service_standard.yml"
-STANDARD_array[$UI_GATEWAY]="17d-ui_gateway_service_standard.yml"
+STANDARD_array[$REPORT_ENGINE]="10a-report_engine_service.yml"
+STANDARD_array[$GRPC_PROXY]="11c-grpc_proxy_service_standard.yml"
+STANDARD_array[$VUE_UI]="12a-vue_ui_service.yml"
+STANDARD_array[$ZOOKEEPER]="13a-zookeeper_service.yml"
+STANDARD_array[$KAFKA]="14a-kafka_service.yml"
+STANDARD_array[$OPENSEARCH_NODE]="15b-opensearch_node_service_without_port.yml"
+STANDARD_array[$OPENSEARCH_SETUP]="16a-opensearch_setup_service.yml"
+STANDARD_array[$DICTIONARY_RS]="17a-dictionary_rs_service_standard.yml"
+STANDARD_array[$UI_GATEWAY]="18d-ui_gateway_service_standard.yml"
 STANDARD_array[$KEYCLOAK]="$NO_SERVICE_IMPLEMENTED"
+STANDARD_array[$OPENSEARCH_DASHBOARDS]="$NO_SERVICE_IMPLEMENTED"
 
 # Services for STORAGE
 declare -a STORAGE_array
@@ -180,15 +188,17 @@ STORAGE_array[$ADEMPIERE_ZK]="$NO_SERVICE_IMPLEMENTED"
 STORAGE_array[$ADEMPIERE_PROCESSOR]="$NO_SERVICE_IMPLEMENTED"
 STORAGE_array[$DKRON_SCHEDULER]="$NO_SERVICE_IMPLEMENTED"
 STORAGE_array[$ADEMPIERE_GRPC_SERVER]="09a-adempiere_grpc_server_service.yml"
-STORAGE_array[$GRPC_PROXY]="10d-grpc_proxy_service_vue.yml"
-STORAGE_array[$VUE_UI]="11a-vue_ui_service.yml"
+STORAGE_array[$REPORT_ENGINE]="$NO_SERVICE_IMPLEMENTED"
+STORAGE_array[$GRPC_PROXY]="11d-grpc_proxy_service_vue.yml"
+STORAGE_array[$VUE_UI]="12a-vue_ui_service.yml"
 STORAGE_array[$ZOOKEEPER]="$NO_SERVICE_IMPLEMENTED"
 STORAGE_array[$KAFKA]="$NO_SERVICE_IMPLEMENTED"
 STORAGE_array[$OPENSEARCH_NODE]="$NO_SERVICE_IMPLEMENTED"
 STORAGE_array[$OPENSEARCH_SETUP]="$NO_SERVICE_IMPLEMENTED"
 STORAGE_array[$DICTIONARY_RS]="$NO_SERVICE_IMPLEMENTED"
-STORAGE_array[$UI_GATEWAY]="17e-ui_gateway_service_storage.yml"
+STORAGE_array[$UI_GATEWAY]="18e-ui_gateway_service_storage.yml"
 STORAGE_array[$KEYCLOAK]="$NO_SERVICE_IMPLEMENTED"
+STORAGE_array[$OPENSEARCH_DASHBOARDS]="$NO_SERVICE_IMPLEMENTED"
 
 # Services for VUE
 declare -a VUE_array
@@ -201,15 +211,17 @@ VUE_array[$ADEMPIERE_ZK]="$NO_SERVICE_IMPLEMENTED"
 VUE_array[$ADEMPIERE_PROCESSOR]="$NO_SERVICE_IMPLEMENTED"
 VUE_array[$DKRON_SCHEDULER]="$NO_SERVICE_IMPLEMENTED"
 VUE_array[$ADEMPIERE_GRPC_SERVER]="09a-adempiere_grpc_server_service.yml"
-VUE_array[$GRPC_PROXY]="10d-grpc_proxy_service_vue.yml"
-VUE_array[$VUE_UI]="11a-vue_ui_service.yml"
+VUE_array[$REPORT_ENGINE]="$NO_SERVICE_IMPLEMENTED"
+VUE_array[$GRPC_PROXY]="11d-grpc_proxy_service_vue.yml"
+VUE_array[$VUE_UI]="12a-vue_ui_service.yml"
 VUE_array[$ZOOKEEPER]="$NO_SERVICE_IMPLEMENTED"
 VUE_array[$KAFKA]="$NO_SERVICE_IMPLEMENTED"
 VUE_array[$OPENSEARCH_NODE]="$NO_SERVICE_IMPLEMENTED"
 VUE_array[$OPENSEARCH_SETUP]="$NO_SERVICE_IMPLEMENTED"
 VUE_array[$DICTIONARY_RS]="$NO_SERVICE_IMPLEMENTED"
-VUE_array[$UI_GATEWAY]="17f-ui_gateway_service_vue.yml"
+VUE_array[$UI_GATEWAY]="18f-ui_gateway_service_vue.yml"
 VUE_array[$KEYCLOAK]="$NO_SERVICE_IMPLEMENTED"
+VUE_array[$OPENSEARCH_DASHBOARDS]="$NO_SERVICE_IMPLEMENTED"
 
 # All arrays that contain services have been defined. Now proceed to the creation of the docker compose file.
 
