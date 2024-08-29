@@ -59,7 +59,7 @@ static_resources:
                 - express_shipment.ExpressShipment
                 - field.FieldManagementService
                 - field.business_partner.BusinessPartnerInfoService
-                - field.in_out.InOut
+                - field.in_out.InOutInfoService
                 - field.invoice.InvoiceInfoService
                 - field.order.OrderInfoService
                 - field.payment.PaymentInfoService
