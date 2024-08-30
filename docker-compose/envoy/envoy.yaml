@@ -48,8 +48,9 @@ static_resources:
                 # package.service
                 # - services_enabled
                 - bank_statement_match.BankStatementMatch
-                - data.BusinessData
                 - core_functionality.CoreFunctionality
+                - data.BusinessData
+                - data.Store
                 - dashboarding.Dashboarding
                 - dictionary.Dictionary
                 - enrollment.Register
@@ -58,6 +59,7 @@ static_resources:
                 - express_shipment.ExpressShipment
                 - field.FieldManagementService
                 - field.business_partner.BusinessPartnerInfoService
+                - field.in_out.InOutInfoService
                 - field.invoice.InvoiceInfoService
                 - field.order.OrderInfoService
                 - field.payment.PaymentInfoService
@@ -65,7 +67,6 @@ static_resources:
                 - file_management.FileManagement
                 - general_ledger.GeneralLedger
                 - import_file_loader.ImportFileLoader
-                - in_out.InOut
                 - issue_management.IssueManagement
                 - location_address.LocationAddress
                 - logs.Logs
@@ -75,10 +76,12 @@ static_resources:
                 - payment_allocation.PaymentAllocation
                 - payment_print_export.PaymentPrintExport
                 - payroll_action_notice.PayrollActionNotice
-                - data.Store
+                - preference_management.PreferenceManagement
                 - record_management.RecordManagement
                 - report_management.ReportManagement
                 - security.Security
+                - send_notifications.SendNotifications
+                - store.WebStore
                 - task_management.TaskManagement
                 - time_control.TimeControl
                 - time_record.TimeRecord
@@ -87,7 +90,6 @@ static_resources:
                 - user_customization.UserCustomization
                 - user_interface.UserInterface
                 - wms.WarehouseManagement
-                - store.WebStore
                 - workflow.Workflow
               print_options:
                 add_whitespace: true
