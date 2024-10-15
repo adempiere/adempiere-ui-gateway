@@ -5,7 +5,7 @@
     container_name: ${KEYCLOAK_CONTAINER_NAME}
     hostname: ${KEYCLOAK_HOSTNAME}
     depends_on:
-      postgresql.service:
+      postgresql-service:
         condition: service_healthy
     restart: ${GENERIC_RESTART}
     environment:

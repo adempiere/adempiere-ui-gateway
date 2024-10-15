@@ -1,15 +1,15 @@
 
   # For modes: STORAGE
-  ui.gateway:
+  ui-gateway:
     image: ${NGINX_UI_GATEWAY_IMAGE}
     container_name: ${NGINX_UI_GATEWAY_CONTAINER_NAME}
     hostname: ${NGINX_UI_GATEWAY_HOSTNAME}
     depends_on:
-      grpc.proxy:
+      grpc-proxy:
         condition: service_healthy
-      # vue.ui:
+      # vue-ui:
       #   condition: service_healthy
-      s3.gateway.rs:
+      s3-gateway-rs:
         condition: service_started
     ports:
       - ${NGINX_UI_GATEWAY_EXTERNAL_PORT}:${NGINX_UI_GATEWAY_INTERNAL_PORT}

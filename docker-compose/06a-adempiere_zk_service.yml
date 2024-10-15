@@ -1,11 +1,11 @@
 
   # For modes: STANDARD, AUTH
-  adempiere.zk:
+  adempiere-zk:
     image: ${ADEMPIERE_ZK_IMAGE}
     container_name: ${ADEMPIERE_ZK_CONTAINER_NAME}
     hostname: ${ADEMPIERE_ZK_HOSTNAME}
     depends_on:
-      postgresql.service:
+      postgresql-service:
         condition: service_healthy
     restart: ${GENERIC_RESTART}
     environment:

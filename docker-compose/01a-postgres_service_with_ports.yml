@@ -1,6 +1,6 @@
 
   # For mode: DEVELOP
-  postgresql.service:
+  postgresql-service:
     build:
       context: ${POSTGRES_CONTEXT_PATH_ON_HOST}              # Path relative to Working Directory where Dockerfile will be found
       dockerfile: ${DOCKERFILE_NAME}                         # Must exist in context. Otherwise, error. Valid only if no "image" defined.

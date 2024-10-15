@@ -1,11 +1,11 @@
 
   # For modes: STANDARD, AUTH
-  adempiere.processor:
+  adempiere-processor:
     image: ${ADEMPIERE_PROCESSOR_IMAGE}
     container_name: ${ADEMPIERE_PROCESSOR_CONTAINER_NAME}
     hostname: ${ADEMPIERE_PROCESSOR_HOSTNAME}
     depends_on:
-      postgresql.service:
+      postgresql-service:
         condition: service_healthy
     restart: ${GENERIC_RESTART}
     healthcheck:

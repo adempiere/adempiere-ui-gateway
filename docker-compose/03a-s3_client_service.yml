@@ -1,15 +1,15 @@
 
   # For modes: STANDARD, STORAGE, DEVELOP, AUTH
-  s3.client:
+  s3-client:
     image: ${S3_CLIENT_IMAGE}
     container_name: ${S3_CLIENT_CONTAINER_NAME}
     hostname: ${S3_CLIENT_HOSTNAME}
     depends_on:
-      s3.storage:
+      s3-storage:
         condition: service_healthy
     entrypoint: >
       /bin/sh -c "
-      /usr/bin/mc alias set s3_minio_server http://s3.storage:9000 ${S3_CLIENT_ACCESS_KEY} ${S3_CLIENT_SECRET_KEY};
+      /usr/bin/mc alias set s3_minio_server http://s3-storage:9000 ${S3_CLIENT_ACCESS_KEY} ${S3_CLIENT_SECRET_KEY};
       /usr/bin/mc mb s3_minio_server/${S3_CLIENT_BUCKET_NAME} || true;
       exit 0;
       "

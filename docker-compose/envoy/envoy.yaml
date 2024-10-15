@@ -234,7 +234,7 @@ static_resources:
                 # WARNING: "docker.for.mac.localhost" has been deprecated from Docker v18.03.0.
                 # If you're running an older version of Docker, please use "docker.for.mac.localhost" instead.
                 # Reference: https://docs.docker.com/docker-for-mac/release-notes/#docker-community-edition-18030-ce-mac59-2018-03-26
-                address: adempiere.grpc.server # for local testing change for your ip
+                address: adempiere-grpc-server # for local testing change for your ip
                 port_value: 50059
 
   - name: adempiere_processor_cluster
@@ -256,7 +256,7 @@ static_resources:
                 # WARNING: "docker.for.mac.localhost" has been deprecated from Docker v18.03.0.
                 # If you're running an older version of Docker, please use "docker.for.mac.localhost" instead.
                 # Reference: https://docs.docker.com/docker-for-mac/release-notes/#docker-community-edition-18030-ce-mac59-2018-03-26
-                address: adempiere.processor # for local testing change for your ip
+                address: adempiere-processor # for local testing change for your ip
                 port_value: 50060
 
   - name: adempiere_report_engine_cluster
@@ -278,5 +278,5 @@ static_resources:
                 # WARNING: "docker.for.mac.localhost" has been deprecated from Docker v18.03.0.
                 # If you're running an older version of Docker, please use "docker.for.mac.localhost" instead.
                 # Reference: https://docs.docker.com/docker-for-mac/release-notes/#docker-community-edition-18030-ce-mac59-2018-03-26
-                address: adempiere.report.engine # for local testing change for your ip
+                address: adempiere-report-engine # for local testing change for your ip
                 port_value: 50061

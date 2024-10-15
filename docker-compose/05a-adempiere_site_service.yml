@@ -1,6 +1,6 @@
 
   # For modes: STANDARD, AUTH
-  adempiere.site:
+  adempiere-site:
     image: ${ADEMPIERE_SITE_IMAGE}
     container_name: ${ADEMPIERE_SITE_CONTAINER_NAME}
     hostname: ${ADEMPIERE_SITE_HOSTNAME}
@@ -13,7 +13,7 @@
       VUE_HOST: ${ADEMPIERE_SITE_VUE_URL}
       SCHEDULER_HOST: ${ADEMPIERE_SITE_SCHEDULER_URL}
     depends_on:
-      - adempiere.zk     # Docker Compose Service
+      - adempiere-zk     # Docker Compose Service
     # ports:
     #  - ${ADEMPIERE_SITE_EXTERNAL_PORT}:${ADEMPIERE_SITE_PORT}
     networks:
