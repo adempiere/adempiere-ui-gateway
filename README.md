@@ -203,6 +203,9 @@ The file `docker-compose.yml` is deleted after stopping and deleting all objects
 **Kafdrop Kafka Queue Monitor/Administrator**
 ![Selection_523](https://github.com/adempiere/adempiere-ui-gateway/assets/1789408/7c15df8c-6cd9-4eea-92ac-c03bfd3d36b9)
 
+**DKron Envoy Process Monitor**
+![26-DKron-Browser png](https://github.com/user-attachments/assets/01bf6316-89fd-4c4b-b309-49f08e20263b)
+
 
 ## Installation
 ### Requirements
