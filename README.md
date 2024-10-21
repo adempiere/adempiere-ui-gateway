@@ -1,21 +1,23 @@
 # adempiere-ui-gateway
-This project implements a Default Gateway for ADempiere UI
+This project implements a Default Gateway for ADempiere UI.
 
-This API Gateway offers an *ADempiere User Interface Gateway Definition*.
+This API Gateway was created initially to offer an *ADempiere User Interface Gateway Definition*. It has evolved to a complete stack application. 
 
-The main scope for this project is gRPC [transcoding](https://cloud.google.com/endpoints/docs/grpc/transcoding).
+One important scope for this project is gRPC [transcoding](https://cloud.google.com/endpoints/docs/grpc/transcoding).
 
 See [this article](https://www.nginx.com/blog/deploying-nginx-plus-as-an-api-gateway-part-1/) for more info.
 
 This application downloads the required images, runs the configured containers and restores the database if needed on your local machine **just by calling a script**!
 
-It consists of a *docker compose* project that defines all services needed to run ADempiere, ZK, Vue and other services. 
+It consists of a *docker compose* project that defines all services needed to run ADempiere, Postgres, ZK, Vue and other services. 
 
-A configuration file (_.env_) define all values to be used in the service creation and a start script (_start-all.sh_) define the stack, i.e. the services to be used. Any combination of the services offered is possible.
+A configuration file (_.env_) define all modifiable values (e.g. release versions) to be used in the service creation; also a start script (_start-all.sh_) defines the stack, i.e. the services to be used. Any combination of the services offered is possible.
 
-When executed, the *docker compose* project eventually runs the services defined in *docker-compose files* as Docker containers.
-The running Docker containers comprise the application.
-There are several docker compose files that start different services, according to the needs.
+When executed e.g. with the command _docker compose up_, the *docker compose* project eventually runs the services defined in *docker-compose files* as Docker containers.
+The running Docker containers comprise the application stack.
+There are several _docker compose files_ that start different services, according to the needs. See section _Application Stack_, where the _docker compose files_ are described.
+
+Due to the technology used, it is highly recommended to have a good knowledge of _docker_ and _docker compose_ to work properly with this application.
 
 ### Benefits of the application:
 - In its simplest form, it can be used as a demo of the latest -or any- ADempiere version.
@@ -48,10 +50,11 @@ Take note that the ports are defined in file *env_template.env* as external port
 - A home web site accesible via port **80**
   From which all applications can be called
 - An ADempiere ZK UI accesible via path **/webui**
-- An ADempiere Vue UI accesible via port **/vue**
+- An ADempiere Vue UI accesible via path **/vue**
 - A Postgres database accesible e.g. by PGAdmin via port **55432**
 - An OpenSearch Dashboard accesible via port **5601**
 - A Kafdrop Kafka Queue Monitor and Administrator accesible via port **19000**
+- A DKron browser for monitoring scheduled jobs accesible via port **8899**
 
 ### Application Stack
 The application stack consists of the following services defined in the *docker-compose files* (and retrieved on the console with **docker compose ls**); these services will eventually run as containers:
@@ -60,7 +63,7 @@ The application stack consists of the following services defined in the *docker-
 - **adempiere-zk**: Defines the Jetty server and the ADempiere ZK UI.
 - **adempiere-grpc-server**: Defines a grpc server as the backend server for Vue.
 - **adempiere-processor**: For processes that are executed outside Adempiere.
-- **dkron-scheduler**: A scheduler.
+- **dkron-scheduler**: A scheduler for these processes.
 - **grpc-proxy**: API RESTful transcoding to gRPC backends.
 - **vue-ui**: Defines new ADempiere UI with Vue.
 - **opensearch-node**: Stores the Application Dictionary definitions.
@@ -74,7 +77,7 @@ The application stack consists of the following services defined in the *docker-
 - **s3-storage**: For attachments and files.
 - **s3-client**: Set default configuration of "s3-storage" service.
 - **s3-gateway-rs**: API RESTful to manage files with client.
-- **opensearch-dashboards**: Display and monitor of indexes e.g. exported menus, smart browsers, forms, windows, processes.
+- **opensearch-dashboards**: Display and monitor of OpenSearch indexes e.g. exported menus, smart browsers, forms, windows, processes.
 
 Additional objects defined in the *docker-compose files*:
 - `adempiere_network`: defines the subnet used in the involved Docker containers (e.g. **192.168.100.0/24**)
@@ -146,6 +149,7 @@ It can also be called with the legacy flag  **-l** (this is only legacy and not 
   Depending on the parameters, Docker Compose is executed for the eventually assembled `docker-compose.yml` file.
 
   Here, some examples of how the parameters work:
+  
     - **./start-all.sh** (default behavior without parameters)
       If the script is called without a flag, the 'standard' purpose/mode will be taken and also no legacy assumed (i.e. the docker compose service files for "standard" will be used to assemble the file `docker-compose.yml`).
     - **./start-all.sh -l** (default behavior, with legacy)
@@ -240,10 +244,16 @@ git checkout main
 ### Automatic Execution
 
 ##### 1 Execute With One Script
-Execute script `start-all.sh -d [auth, cache, develop, storage, vue, default]`:
+Execute script `start-all.sh -d [default, auth, cache, develop, storage, vue]`:
 
 ```shell
 cd adempiere-ui-gateway/docker-compose
+```
+
+- Default (Standard) stack:
+```shell
+./start-all.sh -d default
+./start-all.sh
 ```
 
 - Auth stack:
@@ -270,11 +280,6 @@ cd adempiere-ui-gateway/docker-compose
 ```shell
 ./start-all.sh -d vue
 ```
-
-- Default (Standard) stack:
-```shell
-./start-all.sh -d default
-```
 Or without arguments
 ```shell
 ./start-all.sh -d
@@ -289,10 +294,20 @@ If no flag and/or parameter is given, the call will default to `docker compose -
 If directories `postgresql/postgres_database` and `postgresql/backups` do not exist, they are created.
 
 **Legacy** (flag `-l`)
-Execute script `start-all.sh -d  [auth, cache, develop, storage, vue, default] -l`:
+Execute script `start-all.sh -d  [default, auth, cache, develop, storage, vue] -l`:
 
 ```shell
 cd adempiere-ui-gateway/docker-compose
+```
+
+- Default (Standard) stack:
+```shell
+./start-all.sh -d default -l
+```
+
+- Default (Standard) stack without arguments:
+```shell
+./start-all.sh -d -l
 ```
 
 - Auth stack:
@@ -324,16 +339,12 @@ cd adempiere-ui-gateway/docker-compose
 ```shell
 ./start-all.sh -d default -l
 ```
-Or without arguments
-```shell
-./start-all.sh -d -l
-```
 
 For legacy, the script `start-all.sh` copies the corresponding docker-compose file (one of `docker-compose-auth.yml`, `docker-compose-cache.yml`, `docker-compose-vue.yml`, etc.) to **docker-compose.yml**.  
 Then, docker compose is executed on this file.
 
 ##### 2 Result Of Script Execution
-Whatever parameters are passed when calling `./start-all.sh`, decker compose is always called as follows: `docker compose -f docker-compose.yml`.
+Whatever parameters are passed when calling `./start-all.sh`, a file named _docker-compose.yml_ is produced and _docker compose_ is always called as follows: `docker compose -f docker-compose.yml`.
 
   Depending on the parameters passed, the file `docker-compose.yml` will define several services in the desired order. Which docker compose service files are used depends on the purpose/mode: for example when testing Vue, the combination is different than for Authentication.
 
@@ -371,7 +382,7 @@ The execution of `postgresql/initdb.sh` will be skipped if
 - Open separately Adempiere Vue: open browser and type in the following url
   - [${HOST_URL}/vue](${HOST_URL}/vue)
   HOST_URL as defined in configuration file (env_template.env or .env)
-- Open separately Envoy:  (`TO BE IMPLEMENTED YET`)
+- Open separately DKron Envoy Monitor:  httpp://api.adempiere.io:8899
 
 
 ### Manual Execution
@@ -395,7 +406,7 @@ mkdir postgresql/backups
 - The file can have the name you wish, but if you want to execute a restore, it must be named `seed.backup` or as it was defined in *env_template.env*, variable `POSTGRES_RESTORE_FILE_NAME`.
   The backup file should be visible under `adempiere-ui-gateway/postgresql/backups`. You can copy it for safety reasons to other location e.g. the cloud.
 - Make sure it is not the compressed backup (e.g. .jar).
-- The database directory `adempiere-all-service/postgresql/postgres_database` must be empty for the restore to ocurr.
+- The database directory `adempiere-ui-gateway/docker-compose/postgresql/postgres_database` must be empty for the restore to ocurr.
   A backup will not ocurr if the database directory has contents.
 ```shell
 cp <PATH-TO-BACKUP-FILE> postgresql/backups
@@ -537,8 +548,8 @@ docker compose convert
 ```shell
 docker container logs <CONTAINER>                         -->> variable defined in *env_template.env*
 docker container logs <CONTAINER> | less                  -->> variable defined in *env_template.env*
-docker container logs adempiere-all.postgres
-docker container logs adempiere-all.postgres | less
+docker container logs adempiere-ui-gateway.postgres
+docker container logs adempiere-ui-gateway.postgres | less
 
 ```
 
@@ -546,8 +557,8 @@ docker container logs adempiere-all.postgres | less
 Display the values a container is working with.
 ```Shell
 docker container inspect <CONTAINER>
-docker container inspect adempiere-all.postgres
-docker container inspect adempiere-all.zk
+docker container inspect adempiere-ui-gateway.postgres
+docker container inspect adempiere-ui-gateway.zk
 etc.
 
 ```
@@ -555,7 +566,7 @@ etc.
 ##### Debug IV: Log Into Container
 ```Shell
 docker container exec -it <CONTAINER> <COMMAND>
-docker container exec -it adempiere-all.postgres bash
+docker container exec -it adempiere-ui-gateway.postgres bash
 etc.
 
 ```
@@ -566,11 +577,11 @@ Sometimes it is needed to delete all files that comprises the database.
 Be careful with these commands, once done, there is no way to undo it!
 The database directory must be empty for the restore to work.
 ```Shell
-sudo ls -al /var/lib/docker/volumes/<POSTGRES_VOLUME>              -->> variable defined in *env_template.env*
-sudo ls -al /var/lib/docker/volumes/adempiere-all.volume_postgres  -->> default value
+sudo ls -al /var/lib/docker/volumes/<POSTGRES_VOLUME>                     -->> variable defined in *env_template.env*
+sudo ls -al /var/lib/docker/volumes/adempiere-ui-gateway.volume_postgres  -->> default value
 
 sudo rm -rf /var/lib/docker/volumes/<POSTGRES_VOLUME>/_data
-sudo rm -rf /var/lib/docker/volumes/adempiere-all.volume_postgres/_data
+sudo rm -rf /var/lib/docker/volumes/adempiere-ui-gateway.volume_postgres/_data
 ```
 
 ##### Delete Databse On Host II (using mounted volume on host)
