@@ -207,6 +207,10 @@ The file `docker-compose.yml` is deleted after stopping and deleting all objects
 **DKron Envoy Process Monitor**
 ![26-DKron-Browser png](https://github.com/user-attachments/assets/01bf6316-89fd-4c4b-b309-49f08e20263b)
 
+**MinIO Object Monitor**
+![Selection_604](https://github.com/user-attachments/assets/556fbc3e-2e79-45ec-ad16-5dc55cdd79e7)
+
+
 
 ## Installation
 ### Requirements
