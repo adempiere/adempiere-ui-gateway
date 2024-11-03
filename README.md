@@ -50,7 +50,7 @@ Take note that the ports are defined in file *env_template.env* as external port
 - A home web site, accessible via port **80**
   From which all applications can be called
 - An ADempiere ZK UI, accessible via path **/webui**
-- An ADempiere Vue U,I accessible via path **/vue**
+- An ADempiere Vue UI, accessible via path **/vue**
 - A Postgres database, accessible e.g. by PGAdmin via port **55432**
 - An OpenSearch Dashboard, accessible via port **5601**
 - A Kafdrop Kafka Queue Monitor and Administrator, accessible via port **19000**
