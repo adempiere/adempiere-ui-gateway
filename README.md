@@ -1,7 +1,7 @@
 # adempiere-ui-gateway
 This project implements a Default Gateway for ADempiere UI.
 
-This API Gateway was created initially to offer an *ADempiere User Interface Gateway Definition*. It has evolved to a complete stack application. 
+This API Gateway was initially created to offer an *ADempiere User Interface Gateway Definition*. It has evolved to a complete stack application. 
 
 One important scope for this project is gRPC [transcoding](https://cloud.google.com/endpoints/docs/grpc/transcoding).
 
@@ -11,7 +11,7 @@ This application downloads the required images, runs the configured containers a
 
 It consists of a *docker compose* project that defines all services needed to run ADempiere, Postgres, ZK, Vue and other services. 
 
-A configuration file (_.env_) define all modifiable values (e.g. release versions) to be used in the service creation; also a start script (_start-all.sh_) defines the stack, i.e. the services to be used. Any combination of the services offered is possible.
+A configuration file (_.env_) defines all modifiable values (e.g. release versions) to be used in the service creation; a start script (_start-all.sh_) defines the stack, i.e. the services to be used. Any combination of the services offered is possible.
 
 When executed e.g. with the command _docker compose up_, the *docker compose* project eventually runs the services defined in *docker-compose files* as Docker containers.
 The running Docker containers comprise the application stack.
@@ -20,7 +20,7 @@ There are several _docker compose files_ that start different services, accordin
 Due to the technology used, it is highly recommended to have a good knowledge of _docker_ and _docker compose_ to work properly with this application.
 
 ### Benefits of the application:
-- In its simplest form, it can be used as a demo of the latest -or any- ADempiere version.
+- In its simplest form, it can be used as a demo of the latest -or any desired- ADempiere version.
 - No big installation hassle for getting it running: just execute the shell script **start-all.sh** .
 - It can run on different hosts just by changing
   - the target IP to the one of the host or
@@ -47,14 +47,15 @@ Due to the technology used, it is highly recommended to have a good knowledge of
 ### User's perspective
 From a user's point of view, the application consists of the following.
 Take note that the ports are defined in file *env_template.env* as external ports and can be changed if needed or desired.
-- A home web site accesible via port **80**
+- A home web site, accessible via port **80**
   From which all applications can be called
-- An ADempiere ZK UI accesible via path **/webui**
-- An ADempiere Vue UI accesible via path **/vue**
-- A Postgres database accesible e.g. by PGAdmin via port **55432**
-- An OpenSearch Dashboard accesible via port **5601**
-- A Kafdrop Kafka Queue Monitor and Administrator accesible via port **19000**
-- A DKron browser for monitoring scheduled jobs accesible via port **8899**
+- An ADempiere ZK UI, accessible via path **/webui**
+- An ADempiere Vue UI, accessible via path **/vue**
+- A Postgres database, accessible e.g. by PGAdmin via port **55432**
+- An OpenSearch Dashboard, accessible via port **5601**
+- A Kafdrop Kafka Queue Monitor and Administrator, accessible via port **19000**
+- A DKron browser for monitoring scheduled jobs, accessible via port **8899**
+- A MinIO Console (actually a browser) for monitoring objects stored (like files, reports, images), accessible via port **9090**
 
 ### Application Stack
 The application stack consists of the following services defined in the *docker-compose files* (and retrieved on the console with **docker compose ls**); these services will eventually run as containers:
@@ -196,7 +197,7 @@ The file `docker-compose.yml` is deleted after stopping and deleting all objects
 - `postgresql/persistent_files`: directory on host used for persistency with the ZK container. It allows to share files bewteen the host and the ZK container.
 - *docs*: directory containing images and documents used in this README file.
 
-### Misc 
+### Misc-Browsers to Monitor different services
 **OpenSearch Dashboard**
 ![Selection_522](https://github.com/adempiere/adempiere-ui-gateway/assets/1789408/abe548f6-0ed1-4b91-b70d-d1d0729d9600)
 
@@ -205,6 +206,10 @@ The file `docker-compose.yml` is deleted after stopping and deleting all objects
 
 **DKron Envoy Process Monitor**
 ![26-DKron-Browser png](https://github.com/user-attachments/assets/01bf6316-89fd-4c4b-b309-49f08e20263b)
+
+**MinIO Object Monitor**
+![Selection_604](https://github.com/user-attachments/assets/556fbc3e-2e79-45ec-ad16-5dc55cdd79e7)
+
 
 
 ## Installation
@@ -488,7 +493,7 @@ This application uses **Docker Compose** and as such, all docker and docker comp
 ```Shell
 docker compose  -f <filename> down
 ```
-##### Stop aAd Delete One Service (services defined in *docker-compose* files)
+##### Stop and Delete One Service (services defined in *docker-compose* files)
 ```Shell
 docker compose rm -s -f <service name>
 docker compose rm -s -f postgresql-service
@@ -527,9 +532,21 @@ docker compose ps -a
 ```
 
 ### Misc Commands
+##### Dsiplay all Services (docker compose must run; otherwise error "no configuration file provided: not found")
+```Shell
+docker compose config --services
+```
+
+
 ##### Display All Docker Images
 ```Shell
 docker images -a
+```
+
+##### Display All Docker Containers Started with Docker Compose
+```Shell
+docker compose ps -a
+docker compose ps -a --format "{{.ID}}: {{.Names}}"
 ```
 
 ##### Display All Docker Containers
