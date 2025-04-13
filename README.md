@@ -1,17 +1,15 @@
 # adempiere-ui-gateway
-This project implements a Default Gateway for ADempiere UI.
+This project implements a Stack for ADempiere UI.
 
-This API Gateway was initially created to offer an *ADempiere User Interface Gateway Definition*. It has evolved to a complete stack application. 
+The stack consists of different containers that interact with each other to deliver the functionality of ADempiere.
 
-One important scope for this project is gRPC [transcoding](https://cloud.google.com/endpoints/docs/grpc/transcoding).
+This API Gateway was created initially to offer an *ADempiere User Interface Gateway Definition*. It has evolved to a complete stack application. 
 
-See [this article](https://www.nginx.com/blog/deploying-nginx-plus-as-an-api-gateway-part-1/) for more info.
+This application downloads the required images for each container, runs the configured containers and restores the database if needed on your local machine **just by calling a script**!
 
-This application downloads the required images, runs the configured containers and restores the database if needed on your local machine **just by calling a script**!
+It basically consists of a *docker compose* project that defines all services needed to run ADempiere, Postgres, ZK, Vue and other services.
 
-It consists of a *docker compose* project that defines all services needed to run ADempiere, Postgres, ZK, Vue and other services. 
-
-A configuration file (_.env_) defines all modifiable values (e.g. release versions) to be used in the service creation; a start script (_start-all.sh_) defines the stack, i.e. the services to be used. Any combination of the services offered is possible.
+A configuration file (_.env_) defines all modifiable values (e.g. release versions) to be used in the service creation; also a start script (_start-all.sh_) defines the stack, i.e. the services to be used. Any combination of the services offered is possible.
 
 When executed e.g. with the command _docker compose up_, the *docker compose* project eventually runs the services defined in *docker-compose files* as Docker containers.
 The running Docker containers comprise the application stack.
@@ -74,10 +72,10 @@ The application stack consists of the following services defined in the *docker-
 - **kafdrop**: A Kafka Cluster Queues Overview, Monitor and Administrator.
 - **dictionary-rs**: API RESTful to manage adempiere dictionary with OpenSearch as cache.
 - **keycloak**: User management on service *postgresql-service*.
-- **ui-gateway**: A reverse proxy and routing to redirect multiple services.
-- **s3-storage**: For attachments and files.
-- **s3-client**: Set default configuration of "s3-storage" service.
-- **s3-gateway-rs**: API RESTful to manage files with client.
+- **ui-gateway**: Unique access point acting as a reverse proxy and routing to redirect multiple services.
+- **s3-storage**: S3 (Simple Storage Service) for attachments and files.
+- **s3-client**: S3 (Simple Storage Service) default access configuration.
+- **s3-gateway-rs**: S3 (Simple Storage Service) API RESTful between ui-gateway and implemented S3 to manage files with client.
 - **opensearch-dashboards**: Display and monitor of OpenSearch indexes e.g. exported menus, smart browsers, forms, windows, processes.
 
 Additional objects defined in the *docker-compose files*:
@@ -210,6 +208,22 @@ The file `docker-compose.yml` is deleted after stopping and deleting all objects
 **MinIO Object Monitor**
 ![Selection_604](https://github.com/user-attachments/assets/556fbc3e-2e79-45ec-ad16-5dc55cdd79e7)
 
+
+### Security Information
+Please take the following explanations into consideration when implementing this solution.
+
+This stack is based on Docker.
+It is well known that Docker -because of its very nature- permits the direct access of its exposed ports, bypassing any firewall configuration set on the host.
+Simply put: the firewall is useless.
+
+This represents a danger as anybody can get access of any container via the exposed port.
+Particularly dangerous is getting access to the Processors Service, where a processor can be defined and cause any harm.
+
+How to avoid this? By creating a Firewall before the host where the stack is implemented and by not exposing the host to the internet.
+Some brands like Azure, AWS or Digital Ocean offer a Firewall. 
+
+In the following image, an example how to configure a Firewall on Digital Ocean:
+![image](https://github.com/user-attachments/assets/13c3e565-7bce-4d9d-abbb-6db8b2d6cb99)
 
 
 ## Installation
