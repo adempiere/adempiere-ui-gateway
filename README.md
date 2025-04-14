@@ -547,7 +547,7 @@ docker compose ps -a
 ```
 
 ### Misc Commands
-##### Dsiplay all Services (docker compose must run; otherwise error "no configuration file provided: not found")
+##### Display all Services (docker compose must run; otherwise error "no configuration file provided: not found")
 ```Shell
 docker compose config --services
 ```
