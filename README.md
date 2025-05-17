@@ -86,15 +86,164 @@ Additional objects defined in the *docker-compose files*:
 - `volume_persistent_files`: mounting point for the ZK container
 - `volume_scheduler`: defines the mounting point for the scheduler (`TO BE IMPLEMENTED YET`)
 
+
+
 ### Architecture
-- The application `vue` stack as graphic:
-![ADempiere Vue Architecture](docs/architecture/architecture-vue.png)
 
-- The application `storage` stack as graphic:
-![ADempiere Vue Architecture](docs/architecture/architecture-storage.png)
+#### The Standard/All (`all`) profile/stack activates the services of:
+ - postgres-service
+ - s3-storage
+ - s3-client
+ - s3-gateway-rs
+ - adempiere-zk
+ - keycloak
+ - adempiere-site
+ - adempiere-processor
+ - dkron-scheduler
+ - adempiere-grpc-server
+ - adempiere-report-engine
+ - grpc-proxy
+ - zookeeper
+ - kafka
+ - opensearch-node
+ - opensearch-setup
+ - dictionary-rs
+ - vue-ui
+ - ui-gateway
 
-- The application `cache` stack as graphic:
-![ADempiere Vue Architecture](docs/architecture/architecture-cache.png)
+![ADempiere All Architecture](docs/architecture/architecture-all.png)
+
+Start with:
+```bash
+docker compose -f ./docker-compose-profile.yml up
+```
+Or
+```bash
+COMPOSE_PROFILES="all" docker compose -f ./docker-compose-profile.yml up
+```
+Or
+```bash
+docker compose -f ./docker-compose-profile.yml --profile all up
+```
+
+
+#### The ADempiere Authentication (`auth`) profile/stack activates the services of:
+ - postgres-service
+ - adempiere-zk
+ - keycloak
+ - adempiere-grpc-server
+ - grpc-proxy
+ - vue-ui
+ - ui-gateway
+
+![ADempiere Authentication Architecture](docs/architecture/architecture-auth.png)
+
+Start with:
+```bash
+COMPOSE_PROFILES="auth" docker compose -f ./docker-compose-profile.yml up
+```
+
+
+#### The Dictionary Cache (`cache`) profile/stack activates the services of:
+ - postgres-service
+ - adempiere-grpc-server
+ - grpc-proxy
+ - zookeeper
+ - kafka
+ - opensearch-node
+ - opensearch-setup
+ - dictionary-rs
+ - vue-ui
+ - ui-gateway
+
+![Dictionary Cache Architecture](docs/architecture/architecture-cache.png)
+
+Start with:
+```bash
+COMPOSE_PROFILES="cache" docker compose -f ./docker-compose-profile.yml up
+```
+
+
+#### The Report Engine (`report`) profile/stack activates the services of:
+ - postgres-service
+ - adempiere-grpc-server
+ - adempiere-report-engine
+ - grpc-proxy
+ - vue-ui
+ - ui-gateway
+
+![ADempiere Report Engine Architecture](docs/architecture/architecture-report.png)
+
+Start with:
+```bash
+COMPOSE_PROFILES="report" docker compose -f ./docker-compose-profile.yml up
+```
+
+
+#### The Processor Scheduler (`scheduler`) profile/stack activates the services of:
+ - postgres-service
+ - adempiere-zk
+ - adempiere-processor
+ - dkron-scheduler
+ - adempiere-grpc-server
+ - grpc-proxy
+ - vue-ui
+ - ui-gateway
+
+![ADempiere Processor Scheduler Architecture](docs/architecture/architecture-scheduler.png)
+
+Start with:
+```bash
+COMPOSE_PROFILES="scheduler" docker compose -f ./docker-compose-profile.yml up
+```
+
+
+#### The S3 Storage (`storage`) profile/stack activates the services of:
+ - postgres-service
+ - s3-storage
+ - s3-client
+ - s3-gateway-rs
+ - adempiere-grpc-server
+ - grpc-proxy
+ - vue-ui
+ - ui-gateway
+
+![ADempiere S3 Storage Architecture](docs/architecture/architecture-storage.png)
+
+Start with:
+```bash
+COMPOSE_PROFILES="storage" docker compose -f ./docker-compose-profile.yml up
+```
+
+
+#### The ADempiere-Vue UI (`vue`) profile/stack activates the services of:
+- postgres-service
+- adempiere-grpc-server
+- grpc-proxy
+- vue-ui
+- ui-gateway
+
+![ADempiere Vue UI Architecture](docs/architecture/architecture-vue.png)
+
+Start with:
+```bash
+COMPOSE_PROFILES="vue" docker compose -f ./docker-compose-profile.yml up
+```
+
+
+#### The ADempiere-Zk UI (`zk`) profile/stack activates the services of:
+ - postgres-service
+ - zk
+ - ui-gateway
+
+![ADempiere Zk UI Architecture](docs/architecture/architecture-zk.png)
+
+Start with:
+```bash
+COMPOSE_PROFILES="zk" docker compose -f ./docker-compose-profile.yml up
+```
+
+
 
 ### File Structure
 - *README.md*: this very file
