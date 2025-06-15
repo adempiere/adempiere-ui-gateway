@@ -32,8 +32,8 @@ services:
       - zk
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U postgres && psql -U ${ADEMPIERE_DB_USER} -d ${ADEMPIERE_DB_NAME} -c 'SELECT Version FROM AD_SYSTEM'"]
-      interval: 10s
-      retries: 60
+      interval: 30s
+      retries: 5
       start_period: 20s
       timeout: 10s
     environment:            # Values needed for initdb.sh and debugging
@@ -76,8 +76,8 @@ services:
       - storage
     healthcheck:
       test: "bash -c 'printf \"GET / HTTP/1.1\n\n\" > /dev/tcp/127.0.0.1/9000; exit $?;'"
-      interval: 10s
-      retries: 60
+      interval: 30s
+      retries: 5
       start_period: 20s
       timeout: 10s
     environment:
@@ -127,8 +127,8 @@ services:
     restart: ${GENERIC_RESTART}
     healthcheck:
       test: "bash -c 'printf \"GET / HTTP/1.1\n\n\" > /dev/tcp/127.0.0.1/${S3_GATEWAY_RS_PORT}; exit $?;'"
-      interval: 10s
-      retries: 60
+      interval: 30s
+      retries: 5
       start_period: 20s
       timeout: 10s
     profiles:
@@ -251,8 +251,8 @@ services:
     restart: ${GENERIC_RESTART}
     healthcheck:
       test: "bash -c 'printf \"GET / HTTP/1.1\n\n\" > /dev/tcp/127.0.0.1/${ADEMPIERE_PROCESSOR_PORT}; exit $?;'"
-      interval: 10s
-      retries: 60
+      interval: 30s
+      retries: 5
       start_period: 20s
       timeout: 10s
     profiles:
@@ -311,8 +311,8 @@ services:
     restart: ${GENERIC_RESTART}
     healthcheck:
       test: "bash -c 'printf \"GET / HTTP/1.1\n\n\" > /dev/tcp/127.0.0.1/${VUE_BACKEND_GRPC_SERVER_PORT}; exit $?;'"
-      interval: 10s
-      retries: 60
+      interval: 30s
+      retries: 5
       start_period: 20s
       timeout: 10s
     profiles:
@@ -353,8 +353,8 @@ services:
     restart: ${GENERIC_RESTART}
     healthcheck:
       test: "bash -c 'printf \"GET / HTTP/1.1\n\n\" > /dev/tcp/127.0.0.1/${VUE_REPORT_GRPC_SERVER_PORT}; exit $?;'"
-      interval: 10s
-      retries: 60
+      interval: 30s
+      retries: 5
       start_period: 20s
       timeout: 10s
     profiles:
@@ -393,8 +393,8 @@ services:
         required: false
     healthcheck:
       test: "bash -c 'printf \"GET / HTTP/1.1\n\n\" > /dev/tcp/127.0.0.1/${ENVOY_GRPC_PROXY_BACKEND_PORT}; exit $?;'"
-      interval: 10s
-      retries: 60
+      interval: 30s
+      retries: 5
       start_period: 20s
       timeout: 10s
     profiles:
@@ -431,8 +431,8 @@ services:
     hostname: ${ZOOKEEPER_HOSTNAME}
     healthcheck:
       test: echo srvr | nc localhost 2181 | grep Mode  # get info from zookeeper server
-      interval: 10s
-      retries: 60
+      interval: 30s
+      retries: 5
       start_period: 20s
       timeout: 10s
     profiles:
@@ -442,6 +442,7 @@ services:
     environment:
       ZOOKEEPER_CLIENT_PORT: ${ZOOKEEPER_PORT}
       ZOOKEEPER_TICK_TIME: ${ZOOKEEPER_TICK_TIME}
+      ZOOKEEPER_LOG4J_ROOT_LOGLEVEL: ${ZOOKEEPER_LOG_LEVEL}
     volumes:
       - ${TIMEZONE_PATH_ON_HOST}:${TIMEZONE_PATH_ON_CONTAINER}:${TIMEZONE_OPTIONS}    # Map the Timezone  of the host to the Timezone of the container
       - ${LOCALTIME_PATH_ON_HOST}:${LOCALTIME_PATH_ON_CONTAINER}:${LOCALTIME_OPTIONS} # Map the Localtime of the host to the Timezone of the container
@@ -476,6 +477,7 @@ services:
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
       KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_LOG4J_ROOT_LOGLEVEL: ${KAFKA_LOG_LEVEL}
     volumes:
       - ${TIMEZONE_PATH_ON_HOST}:${TIMEZONE_PATH_ON_CONTAINER}:${TIMEZONE_OPTIONS}    # Map the Timezone  of the host to the Timezone of the container
       - ${LOCALTIME_PATH_ON_HOST}:${LOCALTIME_PATH_ON_CONTAINER}:${LOCALTIME_OPTIONS} # Map the Localtime of the host to the Timezone of the container
@@ -513,15 +515,13 @@ services:
     container_name: ${OPENSEARCH_CONTAINER_NAME}
     hostname: ${OPENSEARCH_HOSTNAME}
     environment:
-      - node.name=opensearch-node
-      - discovery.type=single-node
-      - "OPENSEARCH_JAVA_OPTS=-Xms1g -Xmx1g"
+      - "OPENSEARCH_JAVA_OPTS=-Xms1g -Xmx1g -Dopensearch.logger.level=${OPENSEARCH_LOG_LEVEL}"
       - "DISABLE_INSTALL_DEMO_CONFIG=true" # Prevents execution of bundled demo script which installs demo certificates and security configurations to OpenSearch
       - "DISABLE_SECURITY_PLUGIN=true" # Disables Security plugin
     healthcheck:
       test: "bash -c 'printf \"GET / HTTP/1.1\n\n\" > /dev/tcp/127.0.0.1/9200; exit $?;'"
-      interval: 10s
-      retries: 60
+      interval: 30s
+      retries: 5
       start_period: 20s
       timeout: 10s
     profiles:
@@ -574,8 +574,8 @@ services:
     hostname: ${OPENSEARCH_DASHBOARDS_HOSTNAME}
     healthcheck:
       test: "bash -c 'printf \"GET / HTTP/1.1\n\n\" > /dev/tcp/127.0.0.1/${OPENSEARCH_DASHBOARDS_PORT}; exit $?;'"
-      interval: 10s
-      retries: 60
+      interval: 30s
+      retries: 5
       start_period: 20s
       timeout: 10s
     depends_on:
@@ -603,8 +603,8 @@ services:
     restart: ${GENERIC_RESTART}
     healthcheck:
       test: "bash -c 'printf \"GET / HTTP/1.1\n\n\" > /dev/tcp/127.0.0.1/${DICTIONARY_RS_PORT}; exit $?;'"
-      interval: 10s
-      retries: 60
+      interval: 30s
+      retries: 5
       start_period: 20s
       timeout: 10s
     profiles:
