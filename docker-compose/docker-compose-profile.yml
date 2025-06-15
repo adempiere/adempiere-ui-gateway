@@ -630,6 +630,13 @@ services:
     image: ${VUE_UI_IMAGE}
     container_name: ${VUE_UI_CONTAINER_NAME}
     hostname: ${VUE_UI_HOSTNAME}
+    healthcheck:
+      test:
+        ["CMD", "curl", "-f", "http://127.0.0.1/"]
+      interval: 30s
+      retries: 5
+      start_period: 10s
+      timeout: 10s
     restart: ${GENERIC_RESTART}
     profiles:
       - ''
