@@ -11,9 +11,9 @@
       - "--node-name=node1"
       - "--server"
       - "--ui=true"
-    # ports:
-    #   - ${DKRON_AGENT_EXTERNAL_PORT}:${DKRON_AGENT_PORT}
-    #   - ${DKRON_UI_EXTERNAL_PORT}:${DKRON_UI_PORT}
+    ports:
+      - ${DKRON_AGENT_EXTERNAL_PORT}:${DKRON_AGENT_PORT}  # when commented, dkron browser will display an error
+      - ${DKRON_UI_EXTERNAL_PORT}:${DKRON_UI_PORT}        # when commented, dkron browser will display an error
     volumes:
       - volume_dkron:/dkron.data
       - ${TIMEZONE_PATH_ON_HOST}:${TIMEZONE_PATH_ON_CONTAINER}:${TIMEZONE_OPTIONS}    # Map the Timezone  of the host to the Timezone of the container

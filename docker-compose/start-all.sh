@@ -68,6 +68,7 @@ DICTIONARY_RS=15
 UI_GATEWAY=16
 KEYCLOAK=17
 OPENSEARCH_DASHBOARDS=18
+ELECTRONIC_INVOICING_SV=19
 NO_SERVICE_IMPLEMENTED=NO_SERVICE_IMPLEMENTED
 
 # 2b.- All services enumerated in the order the arrays are filled.
@@ -75,7 +76,7 @@ NO_SERVICE_IMPLEMENTED=NO_SERVICE_IMPLEMENTED
 #      (there is no way assotiated arrays can be ordered).
 #      It will be used when looping through the selected services array.
 declare -a SERVICES_ordered_array
-SERVICES_ordered_array=(POSTGRESQL_SERVICE S3_STORAGE S3_CLIENT S3_GATEWAY_RS ADEMPIERE_SITE ADEMPIERE_ZK ADEMPIERE_PROCESSOR DKRON_SCHEDULER ADEMPIERE_GRPC_SERVER GRPC_PROXY VUE_UI ZOOKEEPER KAFKA OPENSEARCH_NODE OPENSEARCH_SETUP DICTIONARY_RS UI_GATEWAY KEYCLOAK OPENSEARCH_DASHBOARDS)
+SERVICES_ordered_array=(POSTGRESQL_SERVICE S3_STORAGE S3_CLIENT S3_GATEWAY_RS ADEMPIERE_SITE ADEMPIERE_ZK ADEMPIERE_PROCESSOR DKRON_SCHEDULER ADEMPIERE_GRPC_SERVER GRPC_PROXY VUE_UI ZOOKEEPER KAFKA OPENSEARCH_NODE OPENSEARCH_SETUP DICTIONARY_RS UI_GATEWAY KEYCLOAK OPENSEARCH_DASHBOARDS ELECTRONIC_INVOICING_SV)
 
 
 # 2c.- Define arrays for service cases
@@ -149,8 +150,10 @@ DEVELOP_array[$KEYCLOAK]="18a-keycloak_service.yml"
 DEVELOP_array[$OPENSEARCH_DASHBOARDS]="19a-opensearch_dashboards_service_with_port.yml"
 
 # Services for STANDARD
+# Ich habe das an unsere Beduerfnisse angepasst
 declare -a STANDARD_array
-STANDARD_array[$POSTGRESQL_SERVICE]="01b-postgres_service_without_ports.yml"
+#STANDARD_array[$POSTGRESQL_SERVICE]="01b-postgres_service_without_ports.yml"
+STANDARD_array[$POSTGRESQL_SERVICE]="01a-postgres_service_with_ports.yml"
 STANDARD_array[$S3_STORAGE]="02a-s3_storage_service.yml"
 STANDARD_array[$S3_CLIENT]="03a-s3_client_service.yml"
 STANDARD_array[$S3_GATEWAY_RS]="04b-s3_gateway_rs_service_standard.yml"
@@ -162,12 +165,15 @@ STANDARD_array[$ADEMPIERE_GRPC_SERVER]="09a-adempiere_grpc_server_service.yml"
 STANDARD_array[$GRPC_PROXY]="10c-grpc_proxy_service_standard.yml"
 STANDARD_array[$VUE_UI]="11a-vue_ui_service.yml"
 STANDARD_array[$ZOOKEEPER]="12a-zookeeper_service.yml"
-STANDARD_array[$KAFKA]="13a-kafka_service.yml"
+#STANDARD_array[$KAFKA]="13a-kafka_service.yml"
+STANDARD_array[$KAFKA]="13b-kafka_service_with_kafdrop.yml"
 STANDARD_array[$OPENSEARCH_NODE]="14b-opensearch_node_service_without_port.yml"
 STANDARD_array[$OPENSEARCH_SETUP]="15a-opensearch_setup_service.yml"
 STANDARD_array[$DICTIONARY_RS]="16a-dictionary_rs_service_standard.yml"
 STANDARD_array[$UI_GATEWAY]="17d-ui_gateway_service_standard.yml"
 STANDARD_array[$KEYCLOAK]="$NO_SERVICE_IMPLEMENTED"
+STANDARD_array[$OPENSEARCH_DASHBOARDS]="19a-opensearch_dashboards_service_with_port.yml"
+STANDARD_array[$ELECTRONIC_INVOICING_SV]="92-svfe-api-firmador.yml"  # Container f. Electronic Invoicing SV
 
 # Services for STORAGE
 declare -a STORAGE_array
