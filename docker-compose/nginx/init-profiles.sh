@@ -125,8 +125,8 @@ else
     cp /etc/nginx/templates/locations/adempiere_report.conf /etc/nginx/api_conf.d/
   fi
   if [[ "$ENABLE_LANDING_PAGE" == "true" ]]; then
-    cp /etc/nginx/templates/upstreams/lading_page.conf /etc/nginx/api_upstreams_conf.d/
-    cp /etc/nginx/templates/locations/lading_page.conf /etc/nginx/api_conf.d/
+    cp /etc/nginx/templates/upstreams/landing_page.conf /etc/nginx/api_upstreams_conf.d/
+    cp /etc/nginx/templates/locations/landing_page.conf /etc/nginx/api_conf.d/
   fi
   if [[ "$ENABLE_S3_GATEWAY_RS" == "true" ]]; then
     cp /etc/nginx/templates/upstreams/s3_gateway_rs.conf /etc/nginx/api_upstreams_conf.d/
