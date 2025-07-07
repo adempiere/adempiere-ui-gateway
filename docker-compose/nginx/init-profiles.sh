@@ -18,7 +18,7 @@ ENABLE_S3_GATEWAY_RS=false
 ENABLE_VUE=false
 ENABLE_ZK=false
 # Check if the variable is empty or equal to “all”.
-if [[ -z "$ACTIVE_PROFILES" || "$ACTIVE_PROFILES" == "all" ]]; then
+if [[ -z "$ACTIVE_PROFILES" || "$ACTIVE_PROFILES" == "none" || "$ACTIVE_PROFILES" == "all" ]]; then
   echo "The variable is empty or equal to 'all'"
   ENABLE_DICTIONARY_RS=true
   ENABLE_ENVOY_BACKEND=true
@@ -32,7 +32,7 @@ else
   # Iterate over each profile in the array
   for profile in $profiles_list; do
     case "$profile" in
-      "" | "all")
+      "" | "¨none" | "all")
         echo "The variable is empty or equal to 'all'."
         ENABLE_DICTIONARY_RS=true
         ENABLE_ENVOY_BACKEND=true
@@ -125,8 +125,8 @@ else
     cp /etc/nginx/templates/locations/adempiere_report.conf /etc/nginx/api_conf.d/
   fi
   if [[ "$ENABLE_LANDING_PAGE" == "true" ]]; then
-    cp /etc/nginx/templates/upstreams/lading_page.conf /etc/nginx/api_upstreams_conf.d/
-    cp /etc/nginx/templates/locations/lading_page.conf /etc/nginx/api_conf.d/
+    cp /etc/nginx/templates/upstreams/landing_page.conf /etc/nginx/api_upstreams_conf.d/
+    cp /etc/nginx/templates/locations/landing_page.conf /etc/nginx/api_conf.d/
   fi
   if [[ "$ENABLE_S3_GATEWAY_RS" == "true" ]]; then
     cp /etc/nginx/templates/upstreams/s3_gateway_rs.conf /etc/nginx/api_upstreams_conf.d/
