@@ -43,7 +43,7 @@ static_resources:
           - name: envoy.filters.http.grpc_json_transcoder
             typed_config:
               "@type": type.googleapis.com/envoy.extensions.filters.http.grpc_json_transcoder.v3.GrpcJsonTranscoder
-              proto_descriptor: "/data/adempiere-grpc-server.pb"
+              proto_descriptor: "/data/adempiere-grpc-server.dsc"
               services:
                 # package.service
                 # - services_enabled
@@ -53,6 +53,7 @@ static_resources:
                 - data.Store
                 - dashboarding.Dashboarding
                 - dictionary.Dictionary
+                # - display_definition.DisplayDefinition
                 - enrollment.Register
                 - express_movement.ExpressMovement
                 - express_receipt.ExpressReceipt
@@ -83,6 +84,7 @@ static_resources:
                 - send_notifications.SendNotifications
                 - store.WebStore
                 - task_management.TaskManagement
+                # - ticket_management.TicketManagement
                 - time_control.TimeControl
                 - time_record.TimeRecord
                 - trial_balance_drillable.TrialBalanceDrillable
