@@ -115,15 +115,15 @@ Additional objects defined in the *docker-compose files*:
 
 Start with:
 ```bash
-docker compose -f ./docker-compose-profile.yml up
+docker compose up
 ```
 Or
 ```bash
-COMPOSE_PROFILES="all" docker compose -f ./docker-compose-profile.yml up
+docker compose --profile all up
 ```
 Or
 ```bash
-docker compose -f ./docker-compose-profile.yml --profile all up
+COMPOSE_PROFILES="all" docker compose up
 ```
 
 
@@ -140,7 +140,7 @@ docker compose -f ./docker-compose-profile.yml --profile all up
 
 Start with:
 ```bash
-COMPOSE_PROFILES="auth" docker compose -f ./docker-compose-profile.yml up
+COMPOSE_PROFILES="auth" docker compose up
 ```
 
 
@@ -160,7 +160,7 @@ COMPOSE_PROFILES="auth" docker compose -f ./docker-compose-profile.yml up
 
 Start with:
 ```bash
-COMPOSE_PROFILES="cache" docker compose -f ./docker-compose-profile.yml up
+COMPOSE_PROFILES="cache" docker compose up
 ```
 
 
@@ -176,7 +176,7 @@ COMPOSE_PROFILES="cache" docker compose -f ./docker-compose-profile.yml up
 
 Start with:
 ```bash
-COMPOSE_PROFILES="report" docker compose -f ./docker-compose-profile.yml up
+COMPOSE_PROFILES="report" docker compose up
 ```
 
 
@@ -194,7 +194,7 @@ COMPOSE_PROFILES="report" docker compose -f ./docker-compose-profile.yml up
 
 Start with:
 ```bash
-COMPOSE_PROFILES="scheduler" docker compose -f ./docker-compose-profile.yml up
+COMPOSE_PROFILES="scheduler" docker compose up
 ```
 
 
@@ -212,22 +212,22 @@ COMPOSE_PROFILES="scheduler" docker compose -f ./docker-compose-profile.yml up
 
 Start with:
 ```bash
-COMPOSE_PROFILES="storage" docker compose -f ./docker-compose-profile.yml up
+COMPOSE_PROFILES="storage" docker compose up
 ```
 
 
 #### The ADempiere-Vue UI (`vue`) profile/stack activates the services of:
-- postgres-service
-- adempiere-grpc-server
-- grpc-proxy
-- vue-ui
-- ui-gateway
+ - postgres-service
+ - adempiere-grpc-server
+ - grpc-proxy
+ - vue-ui
+ - ui-gateway
 
 ![ADempiere Vue UI Architecture](docs/architecture/architecture-vue.png)
 
 Start with:
 ```bash
-COMPOSE_PROFILES="vue" docker compose -f ./docker-compose-profile.yml up
+COMPOSE_PROFILES="vue" docker compose up
 ```
 
 
@@ -240,7 +240,24 @@ COMPOSE_PROFILES="vue" docker compose -f ./docker-compose-profile.yml up
 
 Start with:
 ```bash
-COMPOSE_PROFILES="zk" docker compose -f ./docker-compose-profile.yml up
+COMPOSE_PROFILES="zk" docker compose up
+```
+
+
+#### Multiple profiles
+For example `report`, `vue` and `zk` combined profiles, activates the services of:
+
+ - postgres-service
+ - adempiere-grpc-server
+ - adempiere-report-engine
+ - grpc-proxy
+ - vue-ui
+ - zk
+ - ui-gateway
+
+Start with:
+```bash
+COMPOSE_PROFILES="report,vue,zk" docker compose up
 ```
 
 
