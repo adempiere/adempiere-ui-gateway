@@ -64,9 +64,9 @@ export $PROFILES
 
 
 # 3.- Execute docker compose
-DOCKER_COMPOSE_FILE=docker-compose-profile.yml
+DOCKER_COMPOSE_FILE=docker-compose.yml
 echo "Docker Compose will be executed with file: \"$DOCKER_COMPOSE_FILE\""
 #docker compose -f $DOCKER_COMPOSE_FILE --dry-run up -d
-COMPOSE_PROFILES=$PROFILES docker compose -f docker-compose-profile.yml up
+COMPOSE_PROFILES=$PROFILES docker compose -f $DOCKER_COMPOSE_FILE up
 
 echo "Docker Compose started"
