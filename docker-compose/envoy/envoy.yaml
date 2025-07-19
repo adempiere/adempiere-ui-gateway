@@ -145,7 +145,7 @@ static_resources:
           - name: envoy.filters.http.grpc_json_transcoder
             typed_config:
               "@type": type.googleapis.com/envoy.extensions.filters.http.grpc_json_transcoder.v3.GrpcJsonTranscoder
-              proto_descriptor: "/data/adempiere-processors-service-service.pb"
+              proto_descriptor: "/data/adempiere-processors-service.dsc"
               services:
                 - processor.Processors
               print_options:
