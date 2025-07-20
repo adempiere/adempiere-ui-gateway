@@ -49,11 +49,10 @@ services:
       ADEMPIERE_GITHUB_COMPRESSED_FILE: ${ADEMPIERE_GITHUB_COMPRESSED_FILE}
       POSTGRES_RESTORE_FILE_NAME: ${POSTGRES_RESTORE_FILE_NAME}
       POSTGRES_EXTERNAL_PORT:  ${POSTGRES_EXTERNAL_PORT}
+      TZ: ${GENERIC_TIMEZONE}
     volumes:
       - volume_postgres:${POSTGRES_DEFAULT_DB_PATH_ON_CONTAINER} # Database dir for container. Default for Postgres.
       - volume_backups:${POSTGRES_DB_BACKUP_PATH_ON_CONTAINER}   # Backup dir for container. Must be created with Dockerfile
-      - ${TIMEZONE_PATH_ON_HOST}:${TIMEZONE_PATH_ON_CONTAINER}:${TIMEZONE_OPTIONS}    # Map the Timezone  of the host to the Timezone of the container
-      - ${LOCALTIME_PATH_ON_HOST}:${LOCALTIME_PATH_ON_CONTAINER}:${LOCALTIME_OPTIONS} # Map the Localtime of the host to the Timezone of the container
     ports:
       - ${POSTGRES_EXTERNAL_PORT}:${POSTGRES_PORT}          # Set a fixed external port
     networks:
@@ -84,10 +83,9 @@ services:
       MINIO_ROOT_USER: ${S3_USER}
       MINIO_ROOT_PASSWORD: ${S3_PASSWORD}
       # MINIO_BROWSER_REDIRECT_URL: ${S3_CONSOLE_BROWSER_REDIRECT_URL}
+      TZ: ${GENERIC_TIMEZONE}
     volumes:
       - volume_s3:/data
-      - ${TIMEZONE_PATH_ON_HOST}:${TIMEZONE_PATH_ON_CONTAINER}:${TIMEZONE_OPTIONS}    # Map the Timezone  of the host to the Timezone of the container
-      - ${LOCALTIME_PATH_ON_HOST}:${LOCALTIME_PATH_ON_CONTAINER}:${LOCALTIME_OPTIONS} # Map the Localtime of the host to the Timezone of the container
     ports:
       - ${S3_EXTERNAL_PORT}:9000
       - ${S3_CONSOLE_EXTERNAL_PORT}:${S3_CONSOLE_PORT}
@@ -111,9 +109,8 @@ services:
       - ''
       - all
       - storage
-    volumes:
-      - ${TIMEZONE_PATH_ON_HOST}:${TIMEZONE_PATH_ON_CONTAINER}:${TIMEZONE_OPTIONS}    # Map the Timezone  of the host to the Timezone of the container
-      - ${LOCALTIME_PATH_ON_HOST}:${LOCALTIME_PATH_ON_CONTAINER}:${LOCALTIME_OPTIONS} # Map the Localtime of the host to the Timezone of the container
+    environment:
+      TZ: ${GENERIC_TIMEZONE}
     networks:
       - adempiere_network
 
@@ -143,9 +140,7 @@ services:
       BUCKET_NAME: ${S3_GATEWAY_RS_BUCKET_NAME}
       ALLOWED_ORIGIN: ${ALLOWED_ORIGIN}
       MANAGE_HTTPS: ${S3_GATEWAY_RS_MANAGE_HTTPS}
-    volumes:
-      - ${TIMEZONE_PATH_ON_HOST}:${TIMEZONE_PATH_ON_CONTAINER}:${TIMEZONE_OPTIONS}    # Map the Timezone  of the host to the Timezone of the container
-      - ${LOCALTIME_PATH_ON_HOST}:${LOCALTIME_PATH_ON_CONTAINER}:${LOCALTIME_OPTIONS} # Map the Localtime of the host to the Timezone of the container
+      TZ: ${GENERIC_TIMEZONE}
     # ports:
     #   - ${S3_GATEWAY_RS_EXTERNAL_PORT}:7878
     networks:
@@ -174,10 +169,9 @@ services:
       ADEMPIERE_DB_NAME: ${ADEMPIERE_ZK_DB_NAME}
       ADEMPIERE_DB_USER: ${ADEMPIERE_ZK_DB_USER}
       ADEMPIERE_DB_PASSWORD: ${ADEMPIERE_ZK_DB_PASSWORD}
+      TZ: ${GENERIC_TIMEZONE}
     volumes:
       - volume_persistent_files:${ADEMPIERE_ZK_PERSISTENT_FILES_PATH_ON_CONTAINER}    # Persistent Directory for files to be copied.
-      - ${TIMEZONE_PATH_ON_HOST}:${TIMEZONE_PATH_ON_CONTAINER}:${TIMEZONE_OPTIONS}    # Map the Timezone  of the host to the Timezone of the container
-      - ${LOCALTIME_PATH_ON_HOST}:${LOCALTIME_PATH_ON_CONTAINER}:${LOCALTIME_OPTIONS} # Map the Localtime of the host to the Timezone of the container
     ports:
      - ${ADEMPIERE_ZK_EXTERNAL_PORT}:${ADEMPIERE_ZK_PORT}
     networks:
@@ -206,12 +200,11 @@ services:
       DB_USER: ${POSTGRES_USER}
       DB_SCHEMA: ${KEYCLOAK_DB_SCHEMA}
       DB_PASSWORD: ${POSTGRES_PASSWORD}
+      TZ: ${GENERIC_TIMEZONE}
     command: "start-dev --import-realm"
     volumes:
       - ./keycloak/master-realm.json:/opt/keycloak/data/import/master-realm.json
       - ./keycloak/adempiere-realm.json:/opt/keycloak/data/import/adempiere-realm.json
-      - ${TIMEZONE_PATH_ON_HOST}:${TIMEZONE_PATH_ON_CONTAINER}:${TIMEZONE_OPTIONS}    # Map the Timezone  of the host to the Timezone of the container
-      - ${LOCALTIME_PATH_ON_HOST}:${LOCALTIME_PATH_ON_CONTAINER}:${LOCALTIME_OPTIONS} # Map the Localtime of the host to the Timezone of the container
     ports:
       - ${KEYCLOAK_EXTERNAL_PORT}:${KEYCLOAK_PORT}
     networks:
@@ -231,9 +224,6 @@ services:
       ZK_HOST: ${ADEMPIERE_SITE_ZK_URL}
       VUE_HOST: ${ADEMPIERE_SITE_VUE_URL}
       SCHEDULER_HOST: ${ADEMPIERE_SITE_SCHEDULER_URL}
-    volumes:
-      - ${TIMEZONE_PATH_ON_HOST}:${TIMEZONE_PATH_ON_CONTAINER}:${TIMEZONE_OPTIONS}    # Map the Timezone  of the host to the Timezone of the container
-      - ${LOCALTIME_PATH_ON_HOST}:${LOCALTIME_PATH_ON_CONTAINER}:${LOCALTIME_OPTIONS} # Map the Localtime of the host to the Timezone of the container
     # ports:
     #  - ${ADEMPIERE_SITE_EXTERNAL_PORT}:${ADEMPIERE_SITE_PORT}
     networks:
@@ -266,9 +256,7 @@ services:
       DB_NAME: ${ADEMPIERE_PROCESSOR_DB_NAME}
       DB_USER: ${ADEMPIERE_PROCESSOR_DB_USER}
       DB_PASSWORD: ${ADEMPIERE_PROCESSOR_DB_PASSWORD}
-    volumes:
-      - ${TIMEZONE_PATH_ON_HOST}:${TIMEZONE_PATH_ON_CONTAINER}:${TIMEZONE_OPTIONS}    # Map the Timezone  of the host to the Timezone of the container
-      - ${LOCALTIME_PATH_ON_HOST}:${LOCALTIME_PATH_ON_CONTAINER}:${LOCALTIME_OPTIONS} # Map the Localtime of the host to the Timezone of the container
+      TZ: ${GENERIC_TIMEZONE}
     #ports:
     #  - ${VUE_BACKEND_GRPC_SERVER_PORT}
     networks:
@@ -289,10 +277,10 @@ services:
       - ''
       - all
       - scheduler
+    environment:
+      TZ: ${GENERIC_TIMEZONE}
     volumes:
       - volume_dkron:/dkron.data
-      - ${TIMEZONE_PATH_ON_HOST}:${TIMEZONE_PATH_ON_CONTAINER}:${TIMEZONE_OPTIONS}    # Map the Timezone  of the host to the Timezone of the container
-      - ${LOCALTIME_PATH_ON_HOST}:${LOCALTIME_PATH_ON_CONTAINER}:${LOCALTIME_OPTIONS} # Map the Localtime of the host to the Timezone of the container
     ports:
       - ${DKRON_AGENT_EXTERNAL_PORT}:${DKRON_AGENT_PORT}
       - ${DKRON_UI_EXTERNAL_PORT}:${DKRON_UI_PORT}
@@ -333,9 +321,7 @@ services:
       DB_PASSWORD: ${VUE_BACKEND_GRPC_SERVER_DB_PASSWORD}
       JWT_SECRET_KEY: ${VUE_BACKEND_GRPC_SERVER_JWT_SECRET_KEY}
       SERVER_LOG_LEVEL: ${VUE_BACKEND_GRPC_SERVER_LOG_LEVEL}
-    volumes:
-      - ${TIMEZONE_PATH_ON_HOST}:${TIMEZONE_PATH_ON_CONTAINER}:${TIMEZONE_OPTIONS}    # Map the Timezone  of the host to the Timezone of the container
-      - ${LOCALTIME_PATH_ON_HOST}:${LOCALTIME_PATH_ON_CONTAINER}:${LOCALTIME_OPTIONS} # Map the Localtime of the host to the Timezone of the container
+      TZ: ${GENERIC_TIMEZONE}
     #ports:
     #  - ${VUE_BACKEND_GRPC_SERVER_PORT}
     networks:
@@ -369,9 +355,7 @@ services:
       DB_USER: ${VUE_REPORT_GRPC_SERVER_DB_USER}
       DB_PASSWORD: ${VUE_REPORT_GRPC_SERVER_DB_PASSWORD}
       SERVER_LOG_LEVEL: ${VUE_REPORT_GRPC_SERVER_LOG_LEVEL}
-    volumes:
-      - ${TIMEZONE_PATH_ON_HOST}:${TIMEZONE_PATH_ON_CONTAINER}:${TIMEZONE_OPTIONS}    # Map the Timezone  of the host to the Timezone of the container
-      - ${LOCALTIME_PATH_ON_HOST}:${LOCALTIME_PATH_ON_CONTAINER}:${LOCALTIME_OPTIONS} # Map the Localtime of the host to the Timezone of the container
+      TZ: ${GENERIC_TIMEZONE}
     # ports:
     #  - ${VUE_REPORT_GRPC_SERVER_PORT}
     networks:
@@ -406,13 +390,13 @@ services:
       - scheduler
       - storage
       - vue
+    environment:
+      TZ: ${GENERIC_TIMEZONE}
     volumes:
       - ./envoy/envoy.yaml:/etc/envoy/envoy.yaml:ro
       - ./envoy/definitions/adempiere-grpc-server.dsc:/data/adempiere-grpc-server.dsc:ro
       - ./envoy/definitions/adempiere-report-engine-service.dsc:/data/adempiere-report-engine-service.dsc:ro
       - ./envoy/definitions/adempiere-processors-service.dsc:/data/adempiere-processors-service.dsc:ro
-      - ${TIMEZONE_PATH_ON_HOST}:${TIMEZONE_PATH_ON_CONTAINER}:${TIMEZONE_OPTIONS}    # Map the Timezone  of the host to the Timezone of the container
-      - ${LOCALTIME_PATH_ON_HOST}:${LOCALTIME_PATH_ON_CONTAINER}:${LOCALTIME_OPTIONS} # Map the Localtime of the host to the Timezone of the container
     ports:
       # Vue Backend Port
      - ${ENVOY_GRPC_PROXY_BACKEND_EXTERNAL_PORT}:${ENVOY_GRPC_PROXY_BACKEND_PORT}
@@ -443,9 +427,7 @@ services:
       ZOOKEEPER_CLIENT_PORT: ${ZOOKEEPER_PORT}
       ZOOKEEPER_TICK_TIME: ${ZOOKEEPER_TICK_TIME}
       ZOOKEEPER_LOG4J_ROOT_LOGLEVEL: ${ZOOKEEPER_LOG_LEVEL}
-    volumes:
-      - ${TIMEZONE_PATH_ON_HOST}:${TIMEZONE_PATH_ON_CONTAINER}:${TIMEZONE_OPTIONS}    # Map the Timezone  of the host to the Timezone of the container
-      - ${LOCALTIME_PATH_ON_HOST}:${LOCALTIME_PATH_ON_CONTAINER}:${LOCALTIME_OPTIONS} # Map the Localtime of the host to the Timezone of the container
+      TZ: ${GENERIC_TIMEZONE}
     # ports:
     #   - ${ZOOKEEPER_PORT}:2181
     networks:
@@ -478,9 +460,7 @@ services:
       KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
       KAFKA_LOG4J_ROOT_LOGLEVEL: ${KAFKA_LOG_LEVEL}
-    volumes:
-      - ${TIMEZONE_PATH_ON_HOST}:${TIMEZONE_PATH_ON_CONTAINER}:${TIMEZONE_OPTIONS}    # Map the Timezone  of the host to the Timezone of the container
-      - ${LOCALTIME_PATH_ON_HOST}:${LOCALTIME_PATH_ON_CONTAINER}:${LOCALTIME_OPTIONS} # Map the Localtime of the host to the Timezone of the container
+      TZ: ${GENERIC_TIMEZONE}
     ports:
       # - ${KAFKA_EXTERNAL_PORT}:${KAFKA_PORT} # it is not necessary to expose
       - ${KAFKA_BROKER_EXTERNAL_PORT}:${KAFKA_BROKER_PORT}
@@ -502,9 +482,7 @@ services:
         condition: service_healthy
     environment:
       KAFKA_BROKERCONNECT: ${KAFDROP_KAFKA_HOST}
-    volumes:
-      - ${TIMEZONE_PATH_ON_HOST}:${TIMEZONE_PATH_ON_CONTAINER}:${TIMEZONE_OPTIONS}    # Map the Timezone  of the host to the Timezone of the container
-      - ${LOCALTIME_PATH_ON_HOST}:${LOCALTIME_PATH_ON_CONTAINER}:${LOCALTIME_OPTIONS} # Map the Localtime of the host to the Timezone of the container
+      TZ: ${GENERIC_TIMEZONE}
     ports:
       - ${KAFDROP_EXTERNAL_PORT}:${KAFDROP_PORT}
     networks:
@@ -518,6 +496,7 @@ services:
       - "OPENSEARCH_JAVA_OPTS=-Xms1g -Xmx1g -Dopensearch.logger.level=${OPENSEARCH_LOG_LEVEL}"
       - "DISABLE_INSTALL_DEMO_CONFIG=true" # Prevents execution of bundled demo script which installs demo certificates and security configurations to OpenSearch
       - "DISABLE_SECURITY_PLUGIN=true" # Disables Security plugin
+      - TZ=${GENERIC_TIMEZONE}
     healthcheck:
       test: "bash -c 'printf \"GET / HTTP/1.1\n\n\" > /dev/tcp/127.0.0.1/9200; exit $?;'"
       interval: 30s
@@ -539,8 +518,6 @@ services:
       - volume_opensearch:/usr/share/opensearch/data
       - ./opensearch/opensearch.yml:/usr/share/opensearch/config/opensearch.yml
       - ./opensearch/snapshots:/mnt/snapshots
-      - ${TIMEZONE_PATH_ON_HOST}:${TIMEZONE_PATH_ON_CONTAINER}:${TIMEZONE_OPTIONS}    # Map the Timezone  of the host to the Timezone of the container
-      - ${LOCALTIME_PATH_ON_HOST}:${LOCALTIME_PATH_ON_CONTAINER}:${LOCALTIME_OPTIONS} # Map the Localtime of the host to the Timezone of the container
     # ports:
     #   - ${OPENSEARCH_PORT}:9200
     #   - ${OPENSEARCH_PERFORMANCE_PORT}:9600 # required for Performance Analyzer
@@ -562,9 +539,7 @@ services:
       - cache
     environment:
       OPENSEARCH_HOST: ${OPENSEARCH_SETUP_NODE_HOSTNAME}
-    volumes:
-      - ${TIMEZONE_PATH_ON_HOST}:${TIMEZONE_PATH_ON_CONTAINER}:${TIMEZONE_OPTIONS}    # Map the Timezone  of the host to the Timezone of the container
-      - ${LOCALTIME_PATH_ON_HOST}:${LOCALTIME_PATH_ON_CONTAINER}:${LOCALTIME_OPTIONS} # Map the Localtime of the host to the Timezone of the container
+      TZ: ${GENERIC_TIMEZONE}
     networks:
       - adempiere_network
 
@@ -588,6 +563,7 @@ services:
     environment:
       OPENSEARCH_HOSTS: '["http://${OPENSEARCH_HOSTNAME}:${OPENSEARCH_PORT}"]'
       DISABLE_SECURITY_DASHBOARDS_PLUGIN: true
+      TZ: ${GENERIC_TIMEZONE}
     ports:
       - ${OPENSEARCH_DASHBOARDS_EXTERNAL_PORT}:${OPENSEARCH_DASHBOARDS_PORT} # Map host port 5601 to container port 5601
     networks:
@@ -616,9 +592,7 @@ services:
       KAFKA_HOST: ${DICTIONARY_RS_KAFKA_HOST}
       OPENSEARCH_URL: ${DICTIONARY_RS_OPENSEARCH_URL}
       ALLOWED_ORIGIN: ${ALLOWED_ORIGIN}
-    volumes:
-      - ${TIMEZONE_PATH_ON_HOST}:${TIMEZONE_PATH_ON_CONTAINER}:${TIMEZONE_OPTIONS}    # Map the Timezone  of the host to the Timezone of the container
-      - ${LOCALTIME_PATH_ON_HOST}:${LOCALTIME_PATH_ON_CONTAINER}:${LOCALTIME_OPTIONS} # Map the Localtime of the host to the Timezone of the container
+      TZ: ${GENERIC_TIMEZONE}
     # ports:
     #   - ${DICTIONARY_RS_EXTERNAL_PORT}:${DICTIONARY_RS_PORT}
     networks:
@@ -650,9 +624,7 @@ services:
     environment:
       API_URL: ${VUE_UI_API_URL}
       PUBLIC_PATH: ${VUE_UI_PUBLIC_PATH}
-    volumes:
-      - ${TIMEZONE_PATH_ON_HOST}:${TIMEZONE_PATH_ON_CONTAINER}:${TIMEZONE_OPTIONS}    # Map the Timezone  of the host to the Timezone of the container
-      - ${LOCALTIME_PATH_ON_HOST}:${LOCALTIME_PATH_ON_CONTAINER}:${LOCALTIME_OPTIONS} # Map the Localtime of the host to the Timezone of the container
+      TZ: ${GENERIC_TIMEZONE}
     # ports:
     #   - ${VUE_UI_EXTERNAL_PORT}:80
     networks:
@@ -697,7 +669,8 @@ services:
     command: ["nginx", "-g", "daemon off;"]
     environment:
       - ACTIVE_PROFILES=none
-      - COMPOSE_PROFILES=${COMPOSE_PROFILES:-none}  # Inject the profiles manually
+      - COMPOSE_PROFILES=${COMPOSE_PROFILES:-none} # Inject the profiles manually
+      - TZ=${GENERIC_TIMEZONE}
     volumes:
       - ./nginx/init-profiles.sh:/docker-entrypoint.d/40-init-profiles.sh
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf
@@ -708,9 +681,6 @@ services:
       - ./nginx/gateway/api_gateway.conf:/etc/nginx/api_gateway.conf
       - ./nginx/api_json_errors.conf:/etc/nginx/api_json_errors.conf
       #- ./keys/api_keys.conf:/etc/nginx/api_keys.conf
-      # time zone
-      - ${TIMEZONE_PATH_ON_HOST}:${TIMEZONE_PATH_ON_CONTAINER}:${TIMEZONE_OPTIONS}    # Map the Timezone  of the host to the Timezone of the container
-      - ${LOCALTIME_PATH_ON_HOST}:${LOCALTIME_PATH_ON_CONTAINER}:${LOCALTIME_OPTIONS} # Map the Localtime of the host to the Timezone of the container
     ports:
       - ${NGINX_UI_GATEWAY_EXTERNAL_PORT}:${NGINX_UI_GATEWAY_INTERNAL_PORT}
     networks:
