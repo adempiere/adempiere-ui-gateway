@@ -515,7 +515,7 @@ services:
     container_name: ${OPENSEARCH_CONTAINER_NAME}
     hostname: ${OPENSEARCH_HOSTNAME}
     environment:
-      - "OPENSEARCH_JAVA_OPTS=-Xms1g -Xmx1g -Dopensearch.logger.level=${OPENSEARCH_LOG_LEVEL}"
+      - "OPENSEARCH_JAVA_OPTS=-Dopensearch.logger.level=${OPENSEARCH_LOG_LEVEL}"
       - "DISABLE_INSTALL_DEMO_CONFIG=true" # Prevents execution of bundled demo script which installs demo certificates and security configurations to OpenSearch
       - "DISABLE_SECURITY_PLUGIN=true" # Disables Security plugin
     healthcheck:
