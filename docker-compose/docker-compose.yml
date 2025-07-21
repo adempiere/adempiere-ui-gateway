@@ -178,8 +178,8 @@ services:
       - volume_persistent_files:${ADEMPIERE_ZK_PERSISTENT_FILES_PATH_ON_CONTAINER}    # Persistent Directory for files to be copied.
       - ${TIMEZONE_PATH_ON_HOST}:${TIMEZONE_PATH_ON_CONTAINER}:${TIMEZONE_OPTIONS}    # Map the Timezone  of the host to the Timezone of the container
       - ${LOCALTIME_PATH_ON_HOST}:${LOCALTIME_PATH_ON_CONTAINER}:${LOCALTIME_OPTIONS} # Map the Localtime of the host to the Timezone of the container
-    ports:
-     - ${ADEMPIERE_ZK_EXTERNAL_PORT}:${ADEMPIERE_ZK_PORT}
+    # ports:
+    #  - ${ADEMPIERE_ZK_EXTERNAL_PORT}:${ADEMPIERE_ZK_PORT}
     networks:
       - adempiere_network
 
@@ -413,13 +413,13 @@ services:
       - ./envoy/definitions/adempiere-processors-service.dsc:/data/adempiere-processors-service.dsc:ro
       - ${TIMEZONE_PATH_ON_HOST}:${TIMEZONE_PATH_ON_CONTAINER}:${TIMEZONE_OPTIONS}    # Map the Timezone  of the host to the Timezone of the container
       - ${LOCALTIME_PATH_ON_HOST}:${LOCALTIME_PATH_ON_CONTAINER}:${LOCALTIME_OPTIONS} # Map the Localtime of the host to the Timezone of the container
-    ports:
-      # Vue Backend Port
-     - ${ENVOY_GRPC_PROXY_BACKEND_EXTERNAL_PORT}:${ENVOY_GRPC_PROXY_BACKEND_PORT}
-      # Processor Port
-     - ${ENVOY_GRPC_PROXY_PROCESSOR_EXTERNAL_PORT}:${ENVOY_GRPC_PROXY_PROCESSOR_PORT}
-      # Report Port
-     - ${ENVOY_GRPC_PROXY_REPORT_EXTERNAL_PORT}:${ENVOY_GRPC_PROXY_REPORT_PORT}
+    # ports:
+    #   # Vue Backend Port
+    #  - ${ENVOY_GRPC_PROXY_BACKEND_EXTERNAL_PORT}:${ENVOY_GRPC_PROXY_BACKEND_PORT}
+    #   # Processor Port
+    #  - ${ENVOY_GRPC_PROXY_PROCESSOR_EXTERNAL_PORT}:${ENVOY_GRPC_PROXY_PROCESSOR_PORT}
+    #   # Report Port
+    #  - ${ENVOY_GRPC_PROXY_REPORT_EXTERNAL_PORT}:${ENVOY_GRPC_PROXY_REPORT_PORT}
     networks:
       - adempiere_network
 
