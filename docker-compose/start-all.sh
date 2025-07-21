@@ -62,11 +62,22 @@ echo "Profiles: \"$PROFILES\""
 export $PROFILES
 
 
+# # `--detach` / `-d` run Docker Compose services in the background
+# # TODO: When it does not have the first argument of profiles that starts `all`, it takes `-d` (if it exists) as profile erroneously.
+# DETACH=""
+# if [ -n $2 ] && [ ! -z $2 ]; then
+#     DETACH=$2
+# fi
+# export $DETACH
+
+
+
 
 # 3.- Execute docker compose
 DOCKER_COMPOSE_FILE=docker-compose.yml
 echo "Docker Compose will be executed with file: \"$DOCKER_COMPOSE_FILE\""
 #docker compose -f $DOCKER_COMPOSE_FILE --dry-run up -d
-COMPOSE_PROFILES=$PROFILES docker compose -f $DOCKER_COMPOSE_FILE up
+COMPOSE_PROFILES=$PROFILES docker compose -f $DOCKER_COMPOSE_FILE up -d
+# COMPOSE_PROFILES=$PROFILES docker compose -f $DOCKER_COMPOSE_FILE up $DETACH
 
 echo "Docker Compose started"
