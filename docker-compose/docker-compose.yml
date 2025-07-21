@@ -58,6 +58,7 @@ services:
       - ${POSTGRES_EXTERNAL_PORT}:${POSTGRES_PORT}          # Set a fixed external port
     networks:
       - adempiere_network
+      - other_external_network
 
 
 
@@ -93,6 +94,7 @@ services:
       - ${S3_CONSOLE_EXTERNAL_PORT}:${S3_CONSOLE_PORT}
     networks:
       - adempiere_network
+      - other_external_network
 
   s3-client:
     image: ${S3_CLIENT_IMAGE}
@@ -116,6 +118,7 @@ services:
       - ${LOCALTIME_PATH_ON_HOST}:${LOCALTIME_PATH_ON_CONTAINER}:${LOCALTIME_OPTIONS} # Map the Localtime of the host to the Timezone of the container
     networks:
       - adempiere_network
+      - other_external_network
 
   s3-gateway-rs:
     image: ${S3_GATEWAY_RS_IMAGE}
@@ -150,6 +153,7 @@ services:
     #   - ${S3_GATEWAY_RS_EXTERNAL_PORT}:7878
     networks:
       - adempiere_network
+      - other_external_network
 
 
 
@@ -182,6 +186,7 @@ services:
      - ${ADEMPIERE_ZK_EXTERNAL_PORT}:${ADEMPIERE_ZK_PORT}
     networks:
       - adempiere_network
+      - other_external_network
 
 
 
@@ -216,6 +221,7 @@ services:
       - ${KEYCLOAK_EXTERNAL_PORT}:${KEYCLOAK_PORT}
     networks:
       - adempiere_network
+      - other_external_network
 
   adempiere-site:
     image: ${ADEMPIERE_SITE_IMAGE}
@@ -238,6 +244,7 @@ services:
     #  - ${ADEMPIERE_SITE_EXTERNAL_PORT}:${ADEMPIERE_SITE_PORT}
     networks:
       - adempiere_network
+      - other_external_network
 
 
 
@@ -273,6 +280,7 @@ services:
     #  - ${VUE_BACKEND_GRPC_SERVER_PORT}
     networks:
       - adempiere_network
+      - other_external_network
 
   dkron-scheduler:
     image: ${DKRON_IMAGE}
@@ -298,6 +306,7 @@ services:
       - ${DKRON_UI_EXTERNAL_PORT}:${DKRON_UI_PORT}
     networks:
       - adempiere_network
+      - other_external_network
 
 
 
@@ -340,6 +349,7 @@ services:
     #  - ${VUE_BACKEND_GRPC_SERVER_PORT}
     networks:
       - adempiere_network
+      - other_external_network
 
 
 
@@ -376,6 +386,7 @@ services:
     #  - ${VUE_REPORT_GRPC_SERVER_PORT}
     networks:
       - adempiere_network
+      - other_external_network
 
   grpc-proxy:
     image: ${ENVOY_GRPC_PROXY_IMAGE}
@@ -422,6 +433,7 @@ services:
      - ${ENVOY_GRPC_PROXY_REPORT_EXTERNAL_PORT}:${ENVOY_GRPC_PROXY_REPORT_PORT}
     networks:
       - adempiere_network
+      - other_external_network
 
 
 
@@ -450,6 +462,7 @@ services:
     #   - ${ZOOKEEPER_PORT}:2181
     networks:
       - adempiere_network
+      - other_external_network
 
 
   kafka:
@@ -486,6 +499,7 @@ services:
       - ${KAFKA_BROKER_EXTERNAL_PORT}:${KAFKA_BROKER_PORT}
     networks:
       - adempiere_network
+      - other_external_network
 
   # For modes
   kafdrop:
@@ -509,6 +523,7 @@ services:
       - ${KAFDROP_EXTERNAL_PORT}:${KAFDROP_PORT}
     networks:
       - adempiere_network
+      - other_external_network
 
   opensearch-node:
     image: ${OPENSEARCH_IMAGE}
@@ -546,6 +561,7 @@ services:
     #   - ${OPENSEARCH_PERFORMANCE_PORT}:9600 # required for Performance Analyzer
     networks:
       - adempiere_network
+      - other_external_network
 
   opensearch-setup:
     build:
@@ -567,6 +583,7 @@ services:
       - ${LOCALTIME_PATH_ON_HOST}:${LOCALTIME_PATH_ON_CONTAINER}:${LOCALTIME_OPTIONS} # Map the Localtime of the host to the Timezone of the container
     networks:
       - adempiere_network
+      - other_external_network
 
   opensearch-dashboards:
     image: ${OPENSEARCH_DASHBOARDS_IMAGE}
@@ -592,6 +609,7 @@ services:
       - ${OPENSEARCH_DASHBOARDS_EXTERNAL_PORT}:${OPENSEARCH_DASHBOARDS_PORT} # Map host port 5601 to container port 5601
     networks:
       - adempiere_network
+      - other_external_network
 
   dictionary-rs:
     image: ${DICTIONARY_RS_IMAGE}
@@ -623,6 +641,7 @@ services:
     #   - ${DICTIONARY_RS_EXTERNAL_PORT}:${DICTIONARY_RS_PORT}
     networks:
       - adempiere_network
+      - other_external_network
 
 
 
@@ -657,6 +676,7 @@ services:
     #   - ${VUE_UI_EXTERNAL_PORT}:80
     networks:
       - adempiere_network
+      - other_external_network
 
 
 
@@ -715,6 +735,7 @@ services:
       - ${NGINX_UI_GATEWAY_EXTERNAL_PORT}:${NGINX_UI_GATEWAY_INTERNAL_PORT}
     networks:
       - adempiere_network
+      - other_external_network
 
 
 
@@ -728,6 +749,9 @@ networks:
     #   config:
     #     - subnet: ${NETWORK_SUBNET}      # Set subnet for all containers created.
     #       gateway: ${NETWORK_GATEWAY}
+  other_external_network:
+    name: ${OTHER_EXTERNAL_NETWORK}
+    external: true
 
 
 volumes:
