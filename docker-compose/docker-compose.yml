@@ -723,11 +723,11 @@ networks:
   adempiere_network:
     name: ${ADEMPIERE_NETWORK}
     driver: bridge
-    # ipam:
-    #   driver: default
-    #   config:
-    #     - subnet: ${NETWORK_SUBNET}      # Set subnet for all containers created.
-    #       gateway: ${NETWORK_GATEWAY}
+    ipam:
+      driver: default
+      config:
+        - subnet: ${NETWORK_SUBNET}      # Set subnet for all containers created.
+          gateway: ${NETWORK_GATEWAY}
 
 
 volumes:
