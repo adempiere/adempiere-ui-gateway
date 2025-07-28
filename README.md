@@ -9,13 +9,13 @@ This application downloads the required images for each container, runs the conf
 
 It basically consists of a *docker compose* project that defines all services needed to run ADempiere, Postgres, ZK, Vue and other services.
 
-A configuration file (_.env_) defines all modifiable values (e.g. release versions) to be used in the service creation; also a start script (_start-all.sh_) defines the stack, i.e. the services to be used. Any combination of the services offered is possible.
+A configuration file (_env_template.env_) defines all modifiable values (e.g. release versions) to be used in the service creation; also a start script (_start-all.sh_) defines the stack, i.e. the services to be used. Any combination of the services offered is possible with the help of Docker Compose "profiles".
 
-When executed e.g. with the command _docker compose up_, the *docker compose* project eventually runs the services defined in *docker-compose files* as Docker containers.
+When executed e.g. with the command _docker compose up_, the *docker compose* project eventually runs the services defined in *docker-compose.yml* file as Docker containers.
 The running Docker containers comprise the application stack.
-There are several _docker compose files_ that start different services, according to the needs. See section _Application Stack_, where the _docker compose files_ are described.
+There are several _docker compose profiles_ that start different services, according to the needs. See section _Application Stack_, where the _docker-compose.yml_ file is described.
 
-Due to the technology used, it is highly recommended to have a good knowledge of _docker_ and _docker compose_ to work properly with this application.
+Due to the technology used, it is highly recommended to have a good knowledge of _docker_ and _docker compose_ to work properly with this application. It is also useful to know how each container works.
 
 ### Benefits of the application:
 - In its simplest form, it can be used as a demo of the latest -or any desired- ADempiere version.
@@ -57,7 +57,7 @@ Take note that the ports are defined in file *env_template.env* as external port
 - A MinIO Console (actually a browser) for monitoring objects stored (like files, reports, images), accessible via port **9090**
 
 ### Application Stack
-The application stack consists of the following services defined in the *docker-compose files* (and retrieved on the console with **docker compose ls**); these services will eventually run as containers:
+The application stack consists of the following services defined in the *docker-compose.yml* file (and retrieved on the console with **docker compose ls**); these services will eventually run as containers:
 - **adempiere-site**: Defines the landing page (web site) for this application.
 - **postgresql-service**: Defines the Postgres database.
 - **adempiere-zk**: Defines the Jetty server and the ADempiere ZK UI.
@@ -264,17 +264,15 @@ COMPOSE_PROFILES="report,vue,zk" docker compose up
 
 ### File Structure
 - *README.md*: this very file
-- *env_template.env*: template for definition of all variables used in docker composed files. Usually, this file is edited for testing and copied to *.env* before running docker compose.
-- *docker-compose.yml*: Defines a multple services, with different configurations for different purposes/modes as profiles/stacks.
+- *env_template.env*: template for definition of all variables used in docker composed files. Usually, this file is edited for testing and copied to *.env* before running docker compose. Please remember that the file Docker Compose needs to run is *.env*, so make sure it exists and has the values you desire.
+- *docker-compose.yml*: Defines multple services, with different configurations for different purposes/modes as profiles/stacks. These are controlled by profiles.
 - `start-all.sh`: First of all, the persistent directory (database) and the backup directory are created if not existent; then the file *env_template.env* is copied to *.env* and eventually Docker Compose is started for the file `docker-compose.yml`.
 
 - `stop-all.sh`: shell script to automatically stop all services that were started with the script `start-all.sh` and defined in file `docker-compose.yml`.
-  The file `docker-compose.yml` is deleted after stopping all services.
 - `stop-and-delete-all.sh`: shell script to delete **all** containers, images, networks, cache and volumes, **including the ones** created without `start-all.sh` or by executing `docker-compose.yml`.
 **Be very careful when using this script, because it will reset everything you have of Docker**.
 
     After executing this shell, no trace of the application will be left over. Only the persistent directory will not be affected, which must be manually deleted if desired.
-The file `docker-compose.yml` is deleted after stopping and deleting all objects.
 - `postgresql/Dockerfile`: the Dockerfile used.
   It mainly copies `postgresql/initdb.sh` to the container, so it can be executed at start.
 - `postgresql/initdb.sh`: shell script executed when Postgres starts.
@@ -323,7 +321,7 @@ Particularly dangerous is getting access to the Processors Service, where a proc
 How to avoid this? By creating a Firewall before the host where the stack is implemented and by not exposing the host to the internet.
 Some brands like Azure, AWS or Digital Ocean offer a Firewall.
 
-In the following image, an example how to configure a Firewall on Digital Ocean:
+In the following image, an example how to configure a Firewall on Digital Ocean, where for example, the sssh/sftp port was directed to port 10099:
 ![image](https://github.com/user-attachments/assets/13c3e565-7bce-4d9d-abbb-6db8b2d6cb99)
 
 
@@ -659,8 +657,16 @@ etc.
 
 ##### Debug IV: Log Into Container
 ```Shell
-docker container exec -it <CONTAINER> <COMMAND>
+docker container exec -it <CONTAINER> <SHELL_TO_BE_USED>
 docker container exec -it adempiere-ui-gateway.postgres bash
+etc.
+
+```
+
+##### Debug V: Run a Command in a Container From Outside
+```Shell
+docker container exec -it <CONTAINER> <COMMAND>
+docker container exec -it adempiere-ui-gateway.postgres date
 etc.
 
 ```
