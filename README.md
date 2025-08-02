@@ -260,7 +260,34 @@ Start with:
 COMPOSE_PROFILES="report,vue,zk" docker compose up
 ```
 
+### Images
+Image versions used in file *docker-compose.yml*, to be found in DockerHub.
 
+| Image                               | Image Name                                   |  Tag (Version)                        |
+| ----------------------------------- |:--------------------------------------------:|:-------------------------------------:|
+| PostgreSQL                          | postgres                                     | 14.5                                  |
+| Main Page                           | openls/adempiere-landing-page (1)            | alpine-1.0.3                          |
+| OpenSearch API RESTful              | openls/dictionary-rs  (2)                    | 1.5.5                                 |
+| ADempiere Report Engine             | openls/adempiere-report-engine-service (2)   | alpine-1.3.7                          |
+| S3 Minio Client/Storage             | quay.io/minio/minio                          | RELEASE.2024-07-31T05-46-26Z          |
+| DKron Task Scheduler                | dkron/dkron                                  | 3.2.7                                 |
+| Zookeeper for Kafka Brokers         | confluentinc/cp-zookeeper                    | 7.6.1                                 |
+| Kafka Queue Manager                 | confluentinc/cp-kafka                        | 7.6.1                                 |
+| Kafdrop Kafka Cluster Overview      | obsidiandynamics/kafdrop                     | 4.0.1                                 |
+| OpenSearch Search Engine            | opensearchproject/opensearch                 | 2.15.0                                |
+| OpenSearch Dashboards UI            | opensearchproject/opensearch-dashboards      | 2.15.0                                |
+| NGINX UI Gateway                    | nginx                                        | 1.27.0-alpine3.19                     |
+| Keycloak ID & Access Management     | keycloak/keycloak                            | 23.0.7                                |
+| ADempiere Vue Backend (gRPC Server) | marcalwestf/adempiere-grpc-server (3)        | 3.9.4.001-shw-1.0.25                  |
+| Proxy for Processors/Backend        | marcalwestf/adempiere-grpc-server-proxy (3)  | 3.9.4.001-shw-1.0.25                  |
+| Adempiere ZK UI                     | marcalwestf/adempiere-shw-zk (3)             | jetty-3.9.4.001-shw-1.1.27            |
+| ADempiere Processors gRPC Server    | marcalwestf/adempiere-processors-service (3) | alpine-1.1.2                          |
+Notes:
+(1) The landing page can be in your favorite image
+(2) These Images will be in future be in *adempiere* instead of *openls*
+(3) These are images that contain the costumizations. The *Image Name* will be the repository where the customization is implemented; mostly the own repository.
+
+Beware that **image versions may change ongoing**.
 
 ### File Structure
 - *README.md*: this very file
