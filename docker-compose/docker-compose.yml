@@ -75,7 +75,7 @@ services:
       - all
       - storage
     healthcheck:
-      test: "bash -c 'printf \"GET / HTTP/1.1\n\n\" > /dev/tcp/127.0.0.1/9000; exit $?;'"
+      test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
       interval: 30s
       retries: 5
       start_period: 20s
@@ -104,7 +104,7 @@ services:
     entrypoint: >
       /bin/sh -c "
       /usr/bin/mc alias set s3_minio_server http://s3-storage:9000 ${S3_CLIENT_ACCESS_KEY} ${S3_CLIENT_SECRET_KEY};
-      /usr/bin/mc mb s3_minio_server/${S3_CLIENT_BUCKET_NAME} || true;
+      /usr/bin/mc mb --ignore-existing s3_minio_server/${S3_CLIENT_BUCKET_NAME};
       exit 0;
       "
     profiles:
