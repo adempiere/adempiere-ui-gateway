@@ -45,12 +45,8 @@ else
 fi
 
 # Environment file to set values on docker compose file.
-if [ ! -f ".env" ]; then
-    echo "Copy the enviroment template file to \".env\"."
-    cp env_template.env .env
-else
-    echo "The enviroment file exists already: no need to create it."
-fi
+echo "Copy the enviroment template file to \".env\"."
+cp -f env_template.env .env
 
 
 # 2 set profiles
