@@ -84,7 +84,7 @@ services:
       MINIO_ROOT_USER: ${S3_USER}
       MINIO_ROOT_PASSWORD: ${S3_PASSWORD}
       # MINIO_BROWSER_REDIRECT_URL: ${S3_CONSOLE_BROWSER_REDIRECT_URL}
-      TZ: ${GENERIC_TIMEZONE}
+      TZ: ${GENERIC_CENTRAL_STANDARD_TIME}
     volumes:
       - volume_s3:/data
     ports:
@@ -112,7 +112,7 @@ services:
       - all
       - storage
     environment:
-      TZ: ${GENERIC_TIMEZONE}
+      TZ: ${GENERIC_CENTRAL_STANDARD_TIME}
     networks:
       - adempiere_network
       - other_external_network
@@ -230,6 +230,7 @@ services:
       ZK_HOST: ${ADEMPIERE_SITE_ZK_URL}
       VUE_HOST: ${ADEMPIERE_SITE_VUE_URL}
       SCHEDULER_HOST: ${ADEMPIERE_SITE_SCHEDULER_URL}
+      TZ: ${GENERIC_TIMEZONE}
     # ports:
     #  - ${ADEMPIERE_SITE_EXTERNAL_PORT}:${ADEMPIERE_SITE_PORT}
     networks:
@@ -402,7 +403,7 @@ services:
       - storage
       - vue
     environment:
-      TZ: ${GENERIC_TIMEZONE}
+      TZ: ${GENERIC_CENTRAL_STANDARD_TIME}
     volumes:
       - ./envoy/envoy.yaml:/etc/envoy/envoy.yaml:ro
       - ./envoy/definitions/adempiere-grpc-server.dsc:/data/adempiere-grpc-server.dsc:ro
