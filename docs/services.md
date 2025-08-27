@@ -5,7 +5,7 @@
   - [http://localhost](http://localhost)
   - http://0.0.0.0/
   - httpp://api.adempiere.io (it must be configured to which host it points)
-- Or you can use IP as defined in configuration file (env_template.env or .env) in variables HOST_URL, ADEMPIERE_SITE_EXTERNAL_PORT
+- Or you can use IP as defined in configuration file (env_template.env) in variables HOST_URL, ADEMPIERE_SITE_EXTERNAL_PORT
   From here, the user can navigate via buttons to ZK UI, Vue UI or Envoy browser.
 - Open separately Adempiere ZK: open browser and type in the following url [${HOST_URL}/webui](${HOST_URL}/webui)
 - HOST_URL can be also defined in configuration file (env_template.env or .env) to be accessed via port e.g. [http://localhost:8888](http://localhost:8888)
