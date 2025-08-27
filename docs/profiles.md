@@ -1,11 +1,13 @@
 
 ## Profiles
-This applications expñoits the Docker Compose Profiles.
+This applications exploits the Docker Compose Profiles.
+
 It basically defines a group of services that can be started or stopped togheter; this group is named a "profile".
 In the file docker-compose.yml the profiles are defined for every service; this can be changed anytime accordingly to the needs.
+
 By calling *docker compose up* or *./start-all.sh* plus a parameter, the parameter is interpreted as the profile to be used.
 
-#### Services activated with Authentication Profile
+#### Services activated with _Authentication_ Profile
  - postgres-service
  - adempiere-zk
  - keycloak
@@ -22,7 +24,7 @@ COMPOSE_PROFILES="auth" docker compose up
 ```
 
 
-#### Services activated with Dictionary Cache Profile
+#### Services activated with _Dictionary Cache_ Profile
  - postgres-service
  - adempiere-grpc-server
  - grpc-proxy
@@ -42,7 +44,7 @@ COMPOSE_PROFILES="cache" docker compose up
 ```
 
 
-#### Services activated with Report Engine Profile
+#### Services activated with _Dictionary Report Engine_ Profile
  - postgres-service
  - adempiere-grpc-server
  - adempiere-report-engine
@@ -58,7 +60,7 @@ COMPOSE_PROFILES="report" docker compose up
 ```
 
 
-#### Services activated with Processor Scheduler Profile
+#### Services activated with _Processor Scheduler_ Profile
  - postgres-service
  - adempiere-zk
  - adempiere-processor
@@ -76,7 +78,7 @@ COMPOSE_PROFILES="scheduler" docker compose up
 ```
 
 
-#### Services activated with S3 Storage Profile
+#### Services activated with _S3 Storage_ Profile
  - postgres-service
  - s3-storage
  - s3-client
@@ -94,7 +96,7 @@ COMPOSE_PROFILES="storage" docker compose up
 ```
 
 
-#### Services activated with ADempiere-Vue UI Profile
+#### Services activated with _ADempiere-Vue UI_ Profile
  - postgres-service
  - adempiere-grpc-server
  - grpc-proxy
@@ -109,7 +111,7 @@ COMPOSE_PROFILES="vue" docker compose up
 ```
 
 
-#### Services activated with ADempiere-Zk UI Profile
+#### Services activated with _ADempiere-Zk UI_ Profile
  - postgres-service
  - zk
  - ui-gateway
