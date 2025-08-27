@@ -12,8 +12,8 @@ Particularly dangerous is getting access to the Processors Service, where a proc
 How to avoid this? By creating a Firewall before the host where the stack is implemented and by not exposing the host to the internet.
 Some brands like Azure, AWS or Digital Ocean offer a Firewall.
 
-In the following image, an example how to configure a Firewall on Digital Ocean, where for example, the sssh/sftp port was directed to port 10099:
-![image](https://github.com/user-attachments/assets/13c3e565-7bce-4d9d-abbb-6db8b2d6cb99)
+In the following image, an example how to configure a Firewall on Digital Ocean, where for example, the ssh/sftp port was directed to port 10099:
+![Security DO](./security-ports.png)
 
 
 [Back to README](../README.md)| [Previous: Services](./services.md) | [Next: Debugging](./debugging.md)

@@ -140,4 +140,4 @@ Start with:
 COMPOSE_PROFILES="report,vue,zk" docker compose up
 ```
 
-[Back to README](../README.md) | [Previous: Architecture](./architecture.md)  | [Next: Installation](./installation.md) 
+[Back to README](../README.md) | [Previous: Architecture](./architecture.md)  | [Next: Installation](./installation.md)

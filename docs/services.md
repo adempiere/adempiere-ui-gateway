@@ -18,16 +18,16 @@
 
 ### Other services
 **OpenSearch Dashboard**
-![Selection_522](https://github.com/adempiere/adempiere-ui-gateway/assets/1789408/abe548f6-0ed1-4b91-b70d-d1d0729d9600)
+![OpenSearch Dashboard](./services-opensearch-dashboard.png)
 
 **Kafdrop Kafka Queue Monitor/Administrator**
-![Selection_523](https://github.com/adempiere/adempiere-ui-gateway/assets/1789408/7c15df8c-6cd9-4eea-92ac-c03bfd3d36b9)
+![Kaffdrop Kafka Queue Monitor](./services-kafdrop.png)
 
 **DKron Envoy Process Monitor**
-![26-DKron-Browser png](https://github.com/user-attachments/assets/01bf6316-89fd-4c4b-b309-49f08e20263b)
+![DKron Envoy Process Monitor](./services-dkron.png)
 
 **MinIO Object Monitor**
-![Selection_604](https://github.com/user-attachments/assets/556fbc3e-2e79-45ec-ad16-5dc55cdd79e7)
+![MinIO Objet Monitor](./services-minio.png)
 
 
 [Back to README](../README.md) | [Previous: Installation](./installation.md) | [Next: Security](./security.md)

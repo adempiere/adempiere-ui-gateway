@@ -23,4 +23,4 @@ Or
 sudo ./start-all.sh
 ```
 
-[Back to README](../README.md) | [Next: Architecture](./architecture.md) 
+[Back to README](../README.md) | [Next: Architecture](./architecture.md)
