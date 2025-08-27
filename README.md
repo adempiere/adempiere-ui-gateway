@@ -21,7 +21,7 @@ The running Docker containers comprise the application stack.
 
 Due to the technology used, it is highly recommended to have a good knowledge of _docker_ and _docker compose_ to understand and work properly with this application. It is also useful to know how each container works.
 
-### Benefits of the application
+### Benefits of the Application
 - In its simplest form, it can be used as a demo of the latest -or any desired- ADempiere version.
 - No big installation hassle for getting it running: just execute the shell script **start-all.sh** .
 - It can run on different hosts just by changing
@@ -38,7 +38,7 @@ Due to the technology used, it is highly recommended to have a good knowledge of
 
 
 ### Table of Contents
-Please follow the links for detaile information.
+Please follow the links for detailed information.
 
 - [Quick Start](docs/quickstart.md)
 - [Architecture](docs/architecture.md)
