@@ -75,7 +75,7 @@ Additional objects defined in the *docker-compose files*:
   - If there is one, it launches a restore database.
   - If there is none, the latest ADempiere seed is downloaded from Github and the restore is started with it.
 - `postgresql/postgres_database`: directory on host used as the mounting point for the Postgres container's database.
-  This makes sure that the database is not deleted even if the docker containers, docker images and even docker are deleted.
+  It implements persistence: this makes sure that the database is not deleted even if the docker containers, docker images and even docker are deleted.
   The database contents are always kept persistently on the host.
 - `postgresql/backups`: directory on host used as the mounting point for the `backups/restores` from the Postgres container.
   Here the seed file for a potential restore can be copied and eventually transferred via sftp or scp to anther place.
