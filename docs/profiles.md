@@ -1,6 +1,6 @@
 
 ## Profiles
-This applications exploits the Docker Compose Profiles.
+This application exploits the [Docker Compose Profiles](https://docs.docker.com/compose/how-tos/profiles/).
 
 It basically defines a group of services that can be started or stopped togheter; this group is named a "profile".
 In the file docker-compose.yml the profiles are defined for every service; this can be changed anytime accordingly to the needs.
