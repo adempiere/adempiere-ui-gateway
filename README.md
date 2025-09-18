@@ -28,8 +28,8 @@ Due to the technology used, it is highly recommended to have a good knowledge of
   - the target IP to the one of the host or
   - the client name
 - Completly configurable: any value can be changed for the whole application in the configuration file **env_template.env**.
-- Single containers or images can be updated and/or replaced easily, making deployments and test speedy.
-- Separations of concerns: every service implemets one and only one solution.
+- Single containers or images can be updated and/or replaced easily, making deployments and tests speedy.
+- Separation of concerns: every service implements one and only one solution.
 - The timezone and location for all containers are the same as the hosts'.
 - Ideal for testing situations due to its ease of configuration and execution.
 - No need of deep knowledge of ADempiere Installation, Application Server Installation, Docker, Images or Postgres.
