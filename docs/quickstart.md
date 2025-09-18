@@ -1,7 +1,7 @@
 ## Quick Start
-Make sure you have installed Git, Docker and Java 17.
-Clone the repsoitory.
-Once the repository is cloned, go to the DockerCompose directory:
+Make sure you have installed [Git](https://git-scm.com/downloads), [Docker](https://docs.docker.com/engine/install/) and [Java 17](https://adoptium.net/temurin/releases/?version=17).
+Clone the repository.
+Once the repository is cloned, go to the _Docker Compose_ directory:
 ```bash
 cd docker-compose
 ```
