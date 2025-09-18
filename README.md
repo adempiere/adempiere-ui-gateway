@@ -19,7 +19,7 @@ A configuration file (_env_template.env_) defines all modifiable values (e.g. re
 When executed e.g. with the command _docker compose up_ or the shell script _start-all.sh_, the *docker compose* project eventually runs the services defined in *docker-compose.yml* file as Docker containers.
 The running Docker containers comprise the application stack.
 
-Due to the technology used, it is highly recommended to have a good knowledge of _docker_ and _docker compose_ to understand and work properly with this application. It is also useful to know how each container works.
+Due to the technology used, it is highly recommended to have a good knowledge of [Docker](https://docs.docker.com/get-started/) and [Docker Compose](https://docs.docker.com/compose/) to understand and work properly with this application. It is also useful to know how each container works.
 
 ### Benefits of the Application
 - In its simplest form, it can be used as a demo of the latest -or any desired- ADempiere version.
