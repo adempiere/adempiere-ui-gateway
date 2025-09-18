@@ -3,10 +3,10 @@
 ### Requirements
 ##### 1 Install Tools
 Make sure to install the following:
-- JDK 17
-- Docker
-- Docker compose: [Docker Compose v2.16.0 or later](https://docs.docker.com/compose/install/linux/)
-- Git
+- [JDK 17](https://adoptium.net/temurin/releases/?version=17)
+- [Docker](https://docs.docker.com/engine/install/)
+- [Docker Compose v2.16.0 or later](https://docs.docker.com/compose/install/linux/)
+- [Git ](https://git-scm.com/downloads)
 
 ##### 2 Check versions
 2.1 Check `java version`
@@ -100,7 +100,7 @@ If directories `postgresql/postgres_database` and `postgresql/backups` do not ex
 ##### 2 Result Of Script Execution
 The docker compose project is executed with only services that have the profile given as parameter to the script `./start-all.sh`.
 
-  Depending on the profile passed, certain services will be executed. Which docker compose service files are used depends on the purpose/mode: for example when testing Vue, the combination is different than for Authentication.
+  Depending on the profile passed, certain services will be executed. This depends on the purpose/mode: for example when testing Vue, the combination is different than for Authentication.
 
   All images are downloaded, containers and other docker objects created, containers are started, and -depending on conditions explained in the following section- database restored.
 
@@ -111,7 +111,7 @@ Once the image have been downloaded, the container creation and start will last 
 If
 - there is a file *seed.backup* (or as defined in `env_template.env`, variable `POSTGRES_RESTORE_FILE_NAME`) in directory `postgresql/backups`, and
 - the database as specified in `env_template.env`, variable `POSTGRES_DATABASE_NAME` does not exist in Postgres, and
-- directory `postgresql/postgres_database` has no contents
+- directory `postgresql/postgres_database` does not exist.
 
 *The database  will be restored*.
 
@@ -144,8 +144,8 @@ mkdir postgresql/backups
 - The file can have the name you wish, but if you want to execute a restore, it must be named `seed.backup` or as it was defined in *env_template.env*, variable `POSTGRES_RESTORE_FILE_NAME`.
   The backup file should be visible under `adempiere-ui-gateway/postgresql/backups`. You can copy it for safety reasons to other location e.g. the cloud.
 - Make sure it is not the compressed backup (e.g. .jar).
-- The database directory `adempiere-ui-gateway/docker-compose/postgresql/postgres_database` must be empty for the restore to ocurr.
-  A backup will not ocurr if the database directory has contents.
+- The database directory `adempiere-ui-gateway/docker-compose/postgresql/postgres_database` must be non-existing for the restore to ocurr.
+  A backup will not ocurr if the database directory exists or has contents.
 ```shell
 cp <PATH-TO-BACKUP-FILE> postgresql/backups
 ```
@@ -158,7 +158,24 @@ The only variables actually needed to change are
 - `ADEMPIERE_GITHUB_VERSION` -> to the DB version needed.
 - `ADEMPIERE_GITHUB_COMPRESSED_FILE` -> to the DB version needed.
 
-![ADempiere Template](./adempiere_ui_gateway_env_template.png)
+Values in file **env_template.env**:
+> CLIENT_NAME="adempiere-ui"
+> 
+> COMPOSE_PROJECT_NAME=${CLIENT_NAME}-gateway
+> 
+> HOST_IP=192.268.0.246
+> 
+> HOST_URL=http://${HOST_IP}
+> 
+> ADEMPIERE_NETWORK=${COMPOSE_PROJECT_NAME}.network
+> 
+> NETWORK_SUBNET=192.168.100.0/24
+> 
+> NETWORK_GATEWAY=192.168.100.1
+> 
+> NETWORK_IP_RANGE=192.168.10.0/24
+> 
+> ALLOWED_ORIGIN=${HOST_IP}
 
 Other values in *env_template.env* are default values.
 Feel free to change them accordingly to your wishes/purposes.
