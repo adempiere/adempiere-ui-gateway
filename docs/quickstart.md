@@ -1,5 +1,5 @@
 # Quick Start
-### Prerequisites
+### Prerrequisites
 Make sure you have installed [Git](https://git-scm.com/downloads), [Docker](https://docs.docker.com/engine/install/) and [Java 17](https://adoptium.net/temurin/releases/?version=17).
 
 ### Clone the repository
@@ -7,14 +7,14 @@ Make sure you have installed [Git](https://git-scm.com/downloads), [Docker](http
 git clone https://github.com/adempiere/adempiere-ui-gateway.git
 ```
 
-### Change to dicrectory
+### Change to directory
 Once the repository is cloned, go to the _Docker Compose_ directory
 ```bash
 cd docker-compose
 ```
 
 ### Set correct IP
-Get the IP of your machine (here a linux host conneected via WiFi):
+Get the IP of your machine (here a linux host connected via WiFi):
 ```bash
 ip addr show | grep wlp3s0
 ```
