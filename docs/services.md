@@ -17,16 +17,16 @@
 - Open separately DKron Envoy Monitor:  httpp://api.adempiere.io:8899
 
 ### Other services
-**OpenSearch Dashboard**
+**OpenSearch Dashboard: Port 5601**
 ![OpenSearch Dashboard](./services-opensearch-dashboard.png)
 
-**Kafdrop Kafka Queue Monitor/Administrator**
+**Kafdrop Kafka Queue Monitor/Administrator: Port 19000**
 ![Kaffdrop Kafka Queue Monitor](./services-kafdrop.png)
 
-**DKron Envoy Process Monitor**
+**DKron Envoy Process Monitor Port 8899**
 ![DKron Envoy Process Monitor](./services-dkron.png)
 
-**MinIO Object Monitor**
+**MinIO Object Monitor Port 9090**
 ![MinIO Objet Monitor](./services-minio.png)
 
 
