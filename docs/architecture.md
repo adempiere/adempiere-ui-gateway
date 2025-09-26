@@ -119,6 +119,21 @@ Notes:
 (2) These Images will in future be in *adempiere* instead of *openls*
 (3) These are images that contain the costumizations. The *Image Name* will be the repository where the customization is implemented; mostly the own repository.
 
+
+### User's perspective
+From a user's point of view, the application consists of the following.
+Take note that the ports are defined in file *env_template.env* as external ports and can be changed if needed or desired.
+- A home web site, accessible via port **80**
+  From which all applications can be called
+- An ADempiere ZK UI, accessible via path **/webui**
+- An ADempiere Vue UI, accessible via path **/vue**
+- A Postgres database, accessible e.g. by PGAdmin via port **55432**
+- An OpenSearch Dashboard, accessible via port **5601**
+- Access to Kafka Queue via port **29092**
+- A Kafdrop Kafka Queue Monitor and Administrator, accessible via port **19000**
+- A DKron browser for monitoring scheduled jobs, accessible via port **8899**
+- A MinIO Console (actually a browser) for monitoring objects stored (like files, reports, images), accessible via port **9090**
+
 Beware that **image versions may change ongoing**.
 
 
