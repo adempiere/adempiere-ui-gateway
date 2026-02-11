@@ -14,6 +14,30 @@ Track recent changes, ongoing work, and current context here.
 
 ---
 
+### 2026-02-11 - Phase 0 Complete: Safety Baseline Tags Established
+**What was done:**
+- Created production baseline tag on feature/SHW_General branch
+  - Tag: `20260210/feature/SHW_General-SHW-production-baseline`
+  - Commit: 97dceb9 "Add new cases solved"
+  - Message: "Production baseline before adempiere-trunk testing (2026-02-11)"
+- Created ready-for-testing tag on adempiere-trunk branch
+  - Tag: `20260211/adempiere-trunk-ready-for-testing`
+  - Commit: adc552d "Project memory"
+  - Message: "Ready for testing - the simplified approach (2026-02-11)"
+- All tags pushed to GitHub
+
+**Safety Net Established:**
+- Can rollback to production baseline (feature/SHW_General)
+- Can rollback to before-fixes state (adempiere-trunk dd2b635)
+- Can rollback to ready-for-testing baseline (adempiere-trunk adc552d)
+
+**Context/Notes:**
+- Phase 0 completed successfully ✅
+- Three safety tags now in place across both branches
+- Next: Phase 1 - Test adempiere-trunk thoroughly (minimum 1-2 weeks recommended)
+
+---
+
 ### 2026-02-11 - Phase -1 Complete: Fixed External Network & Added Documentation
 **What was done:**
 - Created safety tag: `20260210/adempiere-trunk-before-fixes` on commit dd2b635
@@ -126,7 +150,7 @@ Created: 2026-02-11 11:49:56
 - **Status**: Running with uncommitted changes
 
 **Production Server Details:**
-- **Domain**: erp-adempiere.westfalia-it.com
+- **Domain**: the preferred domain of implementation
 - **SSL**: Let's Encrypt certificates
 - **Remote repo path**: /home/westfalia/adempiere/01-Repository/adempiere-ui-gateway/
 - **Network**: 192.168.100.0/24 (gateway: 192.168.100.1)
