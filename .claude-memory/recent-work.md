@@ -14,6 +14,35 @@ Track recent changes, ongoing work, and current context here.
 
 ---
 
+### 2026-02-11 - Phase -1 Complete: Fixed External Network & Added Documentation
+**What was done:**
+- Created safety tag: `20260210/adempiere-trunk-before-fixes` on commit dd2b635
+  - Tag message: "Before merging with feature/SHW_General (2026-02-11)"
+  - Provides rollback point before documentation and configuration fixes
+- Fixed missing OTHER_EXTERNAL_NETWORK variable in env_template.env and .env
+- Added comprehensive documentation comments explaining optional external network feature
+- Added network documentation comments in docker-compose.yml
+- Removed .env from .gitignore (both .env and env_template.env are now tracked)
+- Established best practice: Always edit env_template.env FIRST, then sync to .env
+- Committed and pushed to GitHub as commit 63d9636
+
+**Tag Details:**
+```
+Tag: 20260210/adempiere-trunk-before-fixes
+Commit: dd2b635 "Update architecture.md"
+Message: "Before merging with feature/SHW_General (2026-02-11)"
+Created: 2026-02-11 11:49:56
+```
+
+**Context/Notes:**
+- External network feature allows connecting ADempiere to other Docker stacks (optional)
+- Default: OTHER_EXTERNAL_NETWORK="${ADEMPIERE_NETWORK}" (no external connection)
+- Both .env and env_template.env are committed to git in this infrastructure project
+- Migration plan Phase -1 completed successfully ✅
+- Next: Phase 0 - Create safety baseline tags on feature/SHW_General branch
+
+---
+
 ### 2026-02-10 - Established Claude Code Session Workflow Protocol
 **What was done:**
 - Established startup protocol: Claude must check `.claude-memory/` at the start of every session
