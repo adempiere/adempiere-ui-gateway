@@ -504,6 +504,22 @@ services:
       - adempiere_network
       - other_external_network
 
+  svfe-api-firmador:
+    image: ${SVFE_IMAGE}
+    container_name: ${SVFE_CONTAINER_NAME}
+    hostname: ${SVFE_HOSTNAME}
+    restart: ${GENERIC_RESTART}
+    profiles:
+      - ''
+      - all
+    ports:
+      - ${SVFE_EXTERNAL_PORT}:${SVFE_PORT}
+    volumes:
+      - ${SVFE_CERTIFICATES_PATH_ON_HOST}:${SVFE_CERTIFICATES_PATH_ON_CONTAINER}
+    networks:
+      - adempiere_network
+      - other_external_network
+
   opensearch-node:
     image: ${OPENSEARCH_IMAGE}
     container_name: ${OPENSEARCH_CONTAINER_NAME}
@@ -712,6 +728,7 @@ services:
 
 
 networks:
+  # Main internal network for all ADempiere services
   adempiere_network:
     name: ${ADEMPIERE_NETWORK}
     driver: bridge
@@ -720,6 +737,11 @@ networks:
       config:
         - subnet: ${NETWORK_SUBNET}      # Set subnet for all containers created.
           gateway: ${NETWORK_GATEWAY}
+
+  # Optional external network for connecting to containers in other Docker stacks
+  # By default, points to the same network as adempiere_network (no external connection)
+  # To use: Create external network first, then set OTHER_EXTERNAL_NETWORK in .env
+  # Example: docker network create my-shared-network
   other_external_network:
     name: ${OTHER_EXTERNAL_NETWORK}
     external: true
