@@ -10,6 +10,110 @@ Track all test iterations for adempiere-trunk branch deployment and validation.
 
 ---
 
+## Test-03-20260212 (Remote Server - Complete Fix)
+
+**Date:** 2026-02-12
+**Environment:** Remote server (production-like)
+**Branch:** adempiere-trunk
+**Commits:**
+- 21cf002 (Disable external network feature)
+- [latest] (Update proto descriptor file)
+
+### Test Objectives
+1. Fix network creation error (other_external_network conflict)
+2. Fix envoy-grpc-proxy proto descriptor error
+3. Achieve 23/23 containers running successfully
+4. Verify UI access (ZK and Vue)
+
+### Issues Found & Fixed
+
+#### Issue 1: Network Configuration Conflict
+**Problem:** Docker Compose label conflicts when `OTHER_EXTERNAL_NETWORK="${ADEMPIERE_NETWORK}"`
+- Both `adempiere_network` and `other_external_network` pointed to same network name
+- Caused endpoint errors and container creation failures
+- Result: 22/23 containers created but envoy-grpc-proxy failed
+
+**Solution:**
+- Commented out `other_external_network` declaration in docker-compose.yml
+- Commented out network references in all 22 services
+- Added detailed re-enablement instructions for future use
+- Files: docker-compose.yml, env_template.env, .env
+
+#### Issue 2: Outdated Proto Descriptor File
+**Problem:** Envoy crashes with error:
+```
+transcoding_filter: Could not find 'form.payment_allocation.PaymentAllocation'
+in the proto descriptor
+```
+
+**Root Cause Analysis:**
+- adempiere-trunk had OLD .dsc file: 1,045,077 bytes (from commit 67621ac, July 2025)
+- feature/SHW_General had NEW .dsc file: 1,085,487 bytes (from commit c7beb9c, Feb 2026)
+- New file includes form package services missing in old file
+- Volume mounts were correct, but mounted file was outdated
+
+**Solution:**
+- Updated adempiere-grpc-server.dsc to version from commit c7beb9c
+- Verified checksum: 4b53d7a0b635a82ec040705a3980592a
+- File now contains all required services:
+  - form.payment_allocation.PaymentAllocation
+  - form.trial_balance_drillable.TrialBalanceDrillable
+  - form.out_bound_order.OutBoundOrderService
+- File: docker-compose/envoy/definitions/adempiere-grpc-server.dsc
+
+### Test Procedure
+```bash
+# On local machine
+git add docker-compose/envoy/definitions/adempiere-grpc-server.dsc
+git commit -m "Test-03: Update proto descriptor..."
+git push origin adempiere-trunk
+
+# On remote server
+cd /path/to/adempiere-ui-gateway_SHW
+git pull origin adempiere-trunk
+cd docker-compose
+sudo ./stop-all.sh
+sudo ./start-all.sh
+
+# Verify
+docker compose ps -a  # Check all 23 containers
+docker logs adempiere-ui-gateway.envoy-grpc-proxy  # No errors
+```
+
+### Expected Results
+- ✅ No network creation errors
+- ✅ All 23/23 containers start successfully
+- ✅ No proto descriptor errors from envoy
+- ✅ ZK UI accessible at /webui
+- ✅ Vue UI accessible at /vue
+- ✅ No warnings or errors in startup logs
+
+### Actual Results
+✅ **SUCCESS - All objectives achieved!**
+- All 23/23 containers started successfully
+- No errors or warnings during startup
+- ZK UI accessible and working at /webui
+- Vue UI accessible and working at /vue
+- Functional testing in progress
+
+### Key Learnings
+1. **Docker network labels:** When two networks point to same name, remove `external: true`
+2. **Volume mounts vs file content:** Correct volume mounts don't guarantee correct file version
+3. **Proto descriptor updates:** Always check .dsc file version when adding new gRPC services
+4. **Cross-branch dependencies:** Envoy config (envoy.yaml) and proto files (.dsc) must be in sync
+5. **Verification methods:** Use checksums to verify binary file updates (md5sum)
+
+### Files Modified
+- docker-compose/docker-compose.yml (commented other_external_network)
+- docker-compose/env_template.env (commented OTHER_EXTERNAL_NETWORK)
+- docker-compose/.env (synced from template)
+- docker-compose/envoy/definitions/adempiere-grpc-server.dsc (updated to new version)
+
+### Status
+✅ **COMPLETE** - All containers running, UIs accessible, ready for functional testing
+
+---
+
 ## Test-02-20260212 (Remote Server Validation)
 
 **Date:** 2026-02-12 (Planned)
