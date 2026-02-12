@@ -739,12 +739,15 @@ networks:
           gateway: ${NETWORK_GATEWAY}
 
   # Optional external network for connecting to containers in other Docker stacks
-  # By default, points to the same network as adempiere_network (no external connection)
-  # To use: Create external network first, then set OTHER_EXTERNAL_NETWORK in .env
-  # Example: docker network create my-shared-network
+  # By default, points to the same network as adempiere_network (no external connection, no conflict)
+  # To use with an existing external network:
+  #   1. Create the network manually: docker network create my-shared-network
+  #   2. Set OTHER_EXTERNAL_NETWORK="my-shared-network" in .env
+  #   3. Uncomment the "external: true" line below
+  # If external network doesn't exist, Docker Compose will create it automatically
   other_external_network:
     name: ${OTHER_EXTERNAL_NETWORK}
-    external: true
+    # external: true  # Uncomment ONLY if connecting to a pre-existing external network
 
 
 volumes:

@@ -14,6 +14,40 @@ Track recent changes, ongoing work, and current context here.
 
 ---
 
+### 2026-02-11 - Test-01: Phase 1 Configuration Fixes Ready
+**What was done:**
+- Fixed external network configuration (removed external: true)
+- Added missing variables from simplify-files branch
+  - GENERIC_TIMEZONE, GENERIC_CENTRAL_STANDARD_TIME
+  - ZOOKEEPER_LOG_LEVEL, KAFKA_LOG_LEVEL, OPENSEARCH_LOG_LEVEL
+- Fixed Envoy gRPC service namespace issues (adopted from simplify-files commit c7beb9c)
+  - Added form.out_bound_order.OutBoundOrderService
+  - Fixed form.payment_allocation.PaymentAllocation namespace
+  - Fixed form.trial_balance_drillable.TrialBalanceDrillable namespace
+- Created test log system (.claude-memory/test-log.md)
+- Established test naming convention: Test-<NUMBER>-<YYYYMMDD>
+
+**Analysis performed:**
+- Cross-branch comparison between adempiere-trunk and simplify-files
+- Identified and adopted configuration fixes while preserving Systemhaus-Westfalia image versions
+- Verified all changes match proven fixes from simplify-files branch
+
+**Files modified:**
+- docker-compose/docker-compose.yml (external network)
+- docker-compose/env_template.env (variables)
+- docker-compose/.env (synced from template)
+- docker-compose/envoy/envoy.yaml (service namespaces)
+- .claude-memory/test-log.md (new test tracking system)
+
+**Context/Notes:**
+- Test-01-20260211: Ready to commit and push
+- Test-02-20260212: Planned for remote server validation
+- All fixes prevent known startup errors (network, variables, Envoy proto descriptors)
+- Image versions from feature/SHW_General preserved (Systemhaus-Westfalia controlled)
+- Next: Push changes and test on remote server
+
+---
+
 ### 2026-02-11 - Phase 0 Complete: Safety Baseline Tags Established
 **What was done:**
 - Created production baseline tag on feature/SHW_General branch
