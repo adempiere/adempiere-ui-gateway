@@ -15,6 +15,7 @@ Track all test iterations for adempiere-trunk branch deployment and validation.
 **Date:** 2026-02-12
 **Environment:** Remote server (production-like)
 **Branch:** adempiere-trunk
+**Tag:** `20260212/adempiere-trunk-all-containers-working`
 **Commits:**
 - 21cf002 (Disable external network feature)
 - [latest] (Update proto descriptor file)
@@ -111,6 +112,11 @@ docker logs adempiere-ui-gateway.envoy-grpc-proxy  # No errors
 
 ### Status
 ✅ **COMPLETE** - All containers running, UIs accessible, ready for functional testing
+
+### Milestone Tag
+**Tag:** `20260212/adempiere-trunk-all-containers-working`
+**Pushed to:** origin/adempiere-trunk
+**Purpose:** Marks first fully working state of adempiere-trunk on remote server
 
 ---
 
