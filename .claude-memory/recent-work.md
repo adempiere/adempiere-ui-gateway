@@ -14,6 +14,44 @@ Track recent changes, ongoing work, and current context here.
 
 ---
 
+### 2026-02-12 - Health Check Timeouts Improved for Production Readiness
+**What was done:**
+- Relaxed health check timeouts for critical infrastructure services
+- Adopted balanced approach between fast failure detection and startup tolerance
+- Based on analysis comparing feature/SHW_General (10s/60 retries) vs adempiere-trunk (30s/5 retries)
+
+**Services Updated:**
+1. **postgresql-service**: retries 5→10, start_period 20s→40s (total: 2.5min → 5min)
+2. **opensearch-node**: retries 5→10, start_period 20s→40s (total: 2.5min → 5min)
+3. **zookeeper**: retries 5→8, start_period 20s→30s (total: 2.5min → 4min)
+4. **kafka**: interval 15s→30s, retries 3→8, start_period 20s→30s (total: 45s → 4min)
+
+**Rationale:**
+- Database restoration can take time (especially PostgreSQL on first run)
+- OpenSearch needs time for index initialization and cluster state recovery
+- Kafka/Zookeeper require time for cluster coordination and metadata loading
+- Previous timeouts (2.5 min) were too aggressive for complex services
+- New timeouts (4-5 min) provide production-grade reliability while still detecting failures
+
+**Test Results:**
+- ✅ All 23/23 containers started successfully on remote server
+- ✅ Total startup time: ~108 seconds (normal for this stack)
+- ✅ OpenSearch: 105s (expected for search engine initialization)
+- ✅ Kafka: 93.5s (expected for messaging platform startup)
+- ✅ No timeout errors, no premature failures
+
+**Files modified:**
+- docker-compose/docker-compose.yml (health check configurations)
+
+**Context/Notes:**
+- OpenSearch and Kafka startup times (90-105s) are normal for production systems
+- These are complex Java services with significant initialization overhead
+- Startup time is NOT a production problem - services stay running
+- Health check improvements prevent cascade failures during startup
+- Next: Add HTTPS support for production deployment
+
+---
+
 ### 2026-02-12 - Test-03 SUCCESS: All Containers Running!
 **What was done:**
 - Fixed network configuration conflict by commenting out other_external_network

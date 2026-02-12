@@ -200,6 +200,122 @@ OTHER_EXTERNAL_NETWORK="${ADEMPIERE_NETWORK}"
 
 ---
 
+### Health Check Timeout Configuration for Production Services
+**Context:**
+- Complex services (databases, search engines, messaging platforms) need time to initialize
+- Too aggressive timeouts cause false failures and cascade startup issues
+- Too lenient timeouts mask real problems and delay failure detection
+- Different service types have different startup characteristics
+
+**Problem:**
+Default Docker health checks (30s interval, 3-5 retries) are often too aggressive for:
+- PostgreSQL with database restoration
+- OpenSearch with index initialization and cluster state recovery
+- Kafka with log scanning and cluster coordination
+- Zookeeper with cluster metadata loading
+
+**Recommended Values by Service Type:**
+
+**Fast Services** (web servers, simple APIs):
+```yaml
+interval: 30s
+retries: 3-5
+start_period: 10-20s
+# Total: 1.5-2.5 minutes
+```
+
+**Database Services** (PostgreSQL, MySQL):
+```yaml
+interval: 30s
+retries: 10
+start_period: 40s
+# Total: 5 minutes (allows for restoration/migration)
+```
+
+**Search/Analytics Services** (OpenSearch, Elasticsearch):
+```yaml
+interval: 30s
+retries: 10
+start_period: 40s
+# Total: 5 minutes (allows for index recovery)
+```
+
+**Messaging/Coordination Services** (Kafka, Zookeeper):
+```yaml
+interval: 30s
+retries: 8
+start_period: 30s
+# Total: 4 minutes (allows for cluster coordination)
+```
+
+**Why These Values:**
+- `interval: 30s` - Balances responsiveness with overhead (not too frequent)
+- `retries: 8-10` - Allows temporary issues during startup without failing
+- `start_period: 30-40s` - Grace period before health checks count as failures
+- **Total timeout: 3-5 minutes** - Industry standard for production services
+
+**Important Understanding:**
+- OpenSearch startup: 60-120 seconds is **NORMAL**
+- Kafka startup: 60-90 seconds is **NORMAL**
+- These are inherent to Java services with complex initialization
+- Startup time is NOT a production problem (services stay running)
+- Focus on reliability, not optimization of startup speed
+
+**Anti-pattern:**
+❌ Reducing health check intervals to speed up startup (doesn't work - service needs actual time)
+❌ Removing dependencies to parallelize startup (breaks proper initialization order)
+❌ Setting very short timeouts in production (causes cascade failures)
+
+**Best Practice:**
+✅ Accept that complex services need 1-2 minutes to start
+✅ Use appropriate timeouts based on service complexity
+✅ Monitor for health, not for speed
+✅ Keep services running in production (avoid restarts)
+
+**Example from adempiere-trunk:**
+```yaml
+# PostgreSQL - can take time for DB restoration
+postgresql-service:
+  healthcheck:
+    test: ["CMD-SHELL", "pg_isready -U postgres && psql -U adempiere -d adempiere -c 'SELECT Version FROM AD_SYSTEM'"]
+    interval: 30s
+    retries: 10      # Increased from 5
+    start_period: 40s # Increased from 20s
+    timeout: 10s
+    # Total: 40s + (30s × 10) = 5 minutes
+
+# OpenSearch - needs time for index initialization
+opensearch-node:
+  healthcheck:
+    test: "bash -c 'printf \"GET / HTTP/1.1\n\n\" > /dev/tcp/127.0.0.1/9200; exit $?;'"
+    interval: 30s
+    retries: 10      # Increased from 5
+    start_period: 40s # Increased from 20s
+    timeout: 10s
+    # Total: 40s + (30s × 10) = 5 minutes
+
+# Kafka - cluster coordination takes time
+kafka:
+  healthcheck:
+    test: ["/usr/bin/kafka-topics --bootstrap-server localhost:9092 --list"]
+    interval: 30s     # Increased from 15s
+    retries: 8        # Increased from 3
+    start_period: 30s # Increased from 20s
+    timeout: 10s
+    # Total: 30s + (30s × 8) = 4 minutes
+```
+
+**Results After Implementation:**
+- ✅ All 23/23 containers start successfully
+- ✅ No timeout errors or false failures
+- ✅ OpenSearch: 105s startup (expected)
+- ✅ Kafka: 93.5s startup (expected)
+- ✅ Total stack startup: ~108 seconds (excellent)
+
+**Date learned:** 2026-02-12
+
+---
+
 ## Database Patterns
 
 ### Persistent Database with Mounted Volume
