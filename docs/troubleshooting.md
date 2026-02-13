@@ -2,6 +2,43 @@
 
 This guide helps you diagnose and resolve common issues with the ADempiere UI Gateway stack.
 
+## Table of Contents
+- [Quick Diagnostic Commands](#quick-diagnostic-commands)
+- [Container Health Checks Failing](#container-health-checks-failing)
+  - [Normal Startup Times](#1-normal-startup-times-not-an-error)
+  - [Insufficient Memory](#2-insufficient-memory)
+  - [Port Conflicts](#3-port-conflicts)
+- [Database Issues](#database-issues)
+  - [Database Won't Restore](#database-wont-restore)
+  - [Database Connection Refused](#database-connection-refused)
+  - [Database Already Exists](#database-already-exists-no-restore-happening)
+- [Timezone Mismatches](#timezone-mismatches)
+  - [Symptoms](#symptoms)
+  - [Diagnosis](#diagnosis)
+  - [Understanding Timezone Configuration](#understanding-timezone-configuration)
+- [Container Start/Stop Issues](#container-startstop-issues)
+  - [Containers Won't Start](#containers-wont-start)
+  - [Containers Keep Restarting](#containers-keep-restarting)
+- [Network and Access Issues](#network-and-access-issues)
+  - [Can't Access Application (Port 80)](#cant-access-application-port-80)
+  - [Can't Access ZK UI or Vue UI](#cant-access-zk-ui-or-vue-ui)
+  - [Internal Container Communication Issues](#internal-container-communication-issues)
+- [Performance Issues](#performance-issues)
+  - [Slow Startup Times](#slow-startup-times)
+  - [Slow Application Response](#slow-application-response)
+  - [High CPU or Memory Usage](#high-cpu-or-memory-usage)
+- [Disk Space Issues](#disk-space-issues)
+  - [Out of Disk Space](#out-of-disk-space)
+- [Common Error Messages](#common-error-messages)
+  - ["driver failed programming external connectivity"](#driver-failed-programming-external-connectivity)
+  - ["connection refused" to PostgreSQL](#connection-refused-to-postgresql)
+  - ["unhealthy" Status Persists](#unhealthy-status-persists)
+  - ["no such file or directory" - seed.backup](#no-such-file-or-directory---seedbackup)
+- [Getting Help](#getting-help)
+- [Prevention Tips](#prevention-tips)
+
+---
+
 ## Quick Diagnostic Commands
 
 Before diving into specific issues, these commands help identify problems:
