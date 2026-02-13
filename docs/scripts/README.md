@@ -1,6 +1,8 @@
-# Diagnostic Scripts
+# Utility Scripts
 
-This directory contains diagnostic tools for troubleshooting the ADempiere UI Gateway stack.
+This directory contains utility scripts for the ADempiere UI Gateway stack:
+- **Diagnostic scripts** for troubleshooting
+- **Backup scripts** for database management
 
 ## Timezone and Time Synchronization Scripts
 
@@ -139,6 +141,70 @@ adempiere-ui-gateway.kafka                    | Fri Feb 13 08:41:51 CST 2026    
 adempiere-ui-gateway.postgresql               | Fri 13 Feb 2026 08:41:52 AM CST     | Europe/Berlin
 ...
 ```
+
+---
+
+## Database Backup Script
+
+### 04-backup-database.sh
+
+**Purpose:** Automated PostgreSQL database backup with compression and retention management.
+
+**Usage:**
+```bash
+./04-backup-database.sh [backup-directory]
+```
+
+**What it does:**
+- Creates timestamped backup files
+- Compresses backups with gzip (~80% size reduction)
+- Implements 30-day retention policy (automatic cleanup)
+- Verifies container and database are running
+- Provides detailed progress and statistics
+- Calculates compression ratios
+
+**When to use:**
+- Manual database backups before major changes
+- Automated daily backups (via cron or systemd timer)
+- Creating backup before upgrades or migrations
+- Regular backup routine for production systems
+
+**Example output:**
+```
+==========================================
+ADempiere Database Backup
+==========================================
+Date: Thu Feb 13 11:30:45 CST 2026
+Database: adempiere
+Container: adempiere-ui-gateway.postgresql
+
+Creating backup...
+✅ Backup created successfully: adempiere-2026-02-13-113045.backup
+   Size: 245M
+
+Compressing backup...
+✅ Backup compressed: adempiere-2026-02-13-113045.backup.gz
+   Compressed size: 45M
+   Compression ratio: ~82%
+
+Cleaning old backups (keeping last 30 days)...
+📦 Backups remaining: 28
+
+==========================================
+✅ Backup completed successfully!
+==========================================
+```
+
+**Scheduling automated backups:**
+
+With cron (daily at 2 AM):
+```bash
+crontab -e
+# Add:
+0 2 * * * cd /path/to/docs/scripts && ./04-backup-database.sh >> /var/log/adempiere-backup.log 2>&1
+```
+
+See [Backup and Restore Guide](../backup-restore.md) for complete backup/restore documentation.
 
 ---
 

@@ -143,4 +143,4 @@ sudo rm -rf <PATH TO REPOSITORY>/postgresql/postgres_database
 ```
 
 
-[Back to README](../README.md) | [Previous: Security](./security.md) | [Next: Troubleshooting](./troubleshooting.md)
+[Back to README](../README.md) | [Previous: Backup and Restore](./backup-restore.md) | [Next: Troubleshooting](./troubleshooting.md)

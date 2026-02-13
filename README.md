@@ -47,6 +47,7 @@ Please follow the links for detailed information.
 - [Installation](docs/installation.md)
 - [Display Services](docs/services.md)
 - [Security Information](docs/security.md)
+- [Backup and Restore](docs/backup-restore.md)
 - [Debugging](docs/debugging.md)
 - [Troubleshooting](docs/troubleshooting.md)
 - [Additional Info](docs/additional_info.md)
