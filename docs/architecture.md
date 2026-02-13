@@ -58,9 +58,93 @@ The application stack consists of the following services defined in the *docker-
 Additional objects defined in the *docker-compose files*:
 - `adempiere_network`: defines the subnet used in the involved Docker containers (e.g. **192.168.100.0/24**)
 - `volume_postgres`: defines the mounting point of the Postgres database (typically directory **/var/lib/postgresql/data**) to a local directory on the host where the Docker container runs. This implements a persistent database.
-- `volume_backups`: defines the mounting point for a backup (or restore) directory on the Docker container to a local directory on the host where the Docker container has access. It can be used for backup or restre purposes.
+- `volume_backups`: defines the mounting point for a backup (or restore) directory on the Docker container to a local directory on the host where the Docker container has access. It can be used for backup or restore purposes.
 - `volume_persistent_files`: mounting point for the ZK container
-- `volume_scheduler`: defines the mounting point for the scheduler (`TO BE IMPLEMENTED YET`)
+- `volume_scheduler`: defines the mounting point for the DKron scheduler
+
+### Network Architecture
+
+All containers run on a custom Docker bridge network with the following configuration:
+
+| Parameter | Default Value | Purpose |
+|-----------|---------------|---------|
+| **Network Name** | `adempiere-ui-gateway.network` | Isolated network for all services |
+| **Subnet** | `192.168.100.0/24` | IP address range for containers |
+| **Gateway** | `192.168.100.1` | Network gateway address |
+
+**Key characteristics:**
+
+1. **Isolated Network:** All containers communicate on a dedicated bridge network, isolated from other Docker networks
+2. **DNS Resolution:** Containers can reach each other using service names (e.g., `postgresql-service`, `kafka`)
+3. **Internal Communication:** Services communicate internally without exposing ports to the host
+4. **Single External Entry Point:** Only nginx (port 80) is exposed to external traffic
+
+**Communication Flow:**
+
+```
+External User
+      ↓
+   [Port 80]
+      ↓
+ ┌──────────────┐
+ │    nginx     │ ← Single entry point (reverse proxy)
+ │  (Gateway)   │
+ └──────┬───────┘
+        │ Internal network (192.168.100.0/24)
+        ├─────→ ZK UI (port 8080)
+        ├─────→ Vue UI (port 80)
+        ├─────→ Envoy Proxy (port 8080) ──→ gRPC backends
+        ├─────→ OpenSearch Dashboard (port 5601)
+        ├─────→ Kafdrop (port 9000)
+        ├─────→ DKron (port 8080)
+        └─────→ MinIO Console (port 9090)
+
+Internal Services (not directly exposed):
+  - PostgreSQL (port 5432)
+  - OpenSearch (port 9200)
+  - Kafka (port 9092)
+  - Zookeeper (port 2181)
+  - gRPC servers (various ports)
+```
+
+**Port Exposure Strategy:**
+
+- **Development Mode:** Additional ports exposed for debugging (e.g., PostgreSQL 55432, Kafdrop 19000)
+- **Production Mode:** Only nginx port 80 exposed; all other access goes through nginx reverse proxy
+
+**Security Implications:**
+
+⚠️ **Important:** Docker bypasses host firewall rules (UFW, firewalld) by manipulating iptables directly.
+
+- Exposed ports are accessible even if the host firewall blocks them
+- **Always use an external firewall** (cloud provider firewall, hardware firewall)
+- Never expose the host directly to the internet without proper upstream firewall protection
+- See [Security Documentation](./security.md) for detailed guidance
+
+**Network Configuration:**
+
+All network settings are defined in `env_template.env`:
+```bash
+NETWORK_SUBNET=192.168.100.0/24
+NETWORK_GATEWAY=192.168.100.1
+NETWORK_IP_RANGE=192.168.10.0/24
+```
+
+**Troubleshooting Network Issues:**
+
+```bash
+# List Docker networks
+docker network ls
+
+# Inspect the ADempiere network
+docker network inspect adempiere-ui-gateway.network
+
+# Test connectivity between containers
+docker exec adempiere-ui-gateway.vue-ui ping postgresql-service
+docker exec adempiere-ui-gateway.vue-ui nc -zv kafka 9092
+```
+
+See [Troubleshooting Guide](./troubleshooting.md#network-and-access-issues) for common network problems.
 
 ### File Structure
 - *README.md*: the main documentation file.
@@ -94,18 +178,132 @@ Additional objects defined in the *docker-compose files*:
 
 
 
+### Health Checks and Startup Order
+
+The stack uses Docker Compose health checks to ensure services start in the correct order and are fully operational before dependent services connect to them.
+
+#### Health Check Configuration
+
+Health checks verify that a service is ready to accept connections. They run periodically and determine the service's health status.
+
+**Key services with health checks:**
+
+| Service | Health Check | Startup Time | Retry Tolerance |
+|---------|--------------|--------------|-----------------|
+| **PostgreSQL** | Database query + version check | 10-30 seconds | 3 minutes |
+| **OpenSearch** | HTTP connection test | 60-120 seconds | 5 minutes |
+| **Kafka** | Topic list command | 60-90 seconds | 4 minutes |
+| **Zookeeper** | Status check | 10-20 seconds | 2.5 minutes |
+
+**Why some services take longer to start:**
+
+- **OpenSearch (60-120s):** Java service initialization, index loading, cluster coordination
+- **Kafka (60-90s):** Java service initialization, broker startup, ZooKeeper connection
+- **PostgreSQL (10-30s):** Database initialization, especially on first restore
+
+**Total stack startup time:** 90-120 seconds is normal and expected.
+
+#### Health Check Parameters
+
+Each health check has four key parameters:
+
+- **interval:** How often to run the check (e.g., every 30 seconds)
+- **timeout:** Max time for check to complete (e.g., 10 seconds)
+- **retries:** How many failures before marking unhealthy (e.g., 10 retries)
+- **start_period:** Grace period before health checks start (e.g., 40 seconds)
+
+**Example:** PostgreSQL health check
+- Checks every 30 seconds
+- Allows 10 retries = 300 seconds (5 minutes) total tolerance
+- 40-second grace period before first check
+- Result: Up to 5.5 minutes for PostgreSQL to become healthy
+
+These relaxed timeouts accommodate:
+- Database restoration on first start
+- Large index loading
+- Network latency
+- Resource contention during initial startup
+
+#### Service Dependencies
+
+Services use `depends_on` with health check conditions to ensure proper startup order:
+
+```
+┌─────────────────────────────────────────────────────┐
+│                   Startup Order                     │
+└─────────────────────────────────────────────────────┘
+
+Layer 1 (Infrastructure):
+  ┌──────────────┐  ┌──────────────┐
+  │ PostgreSQL   │  │  Zookeeper   │
+  │ (database)   │  │  (Kafka mgr) │
+  └──────┬───────┘  └──────┬───────┘
+         │                 │
+         ↓                 ↓
+Layer 2 (Data & Messaging):
+  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐
+  │  OpenSearch  │  │    Kafka     │  │  S3 Storage  │
+  │  (cache)     │  │  (queue)     │  │   (files)    │
+  └──────┬───────┘  └──────┬───────┘  └──────┬───────┘
+         │                 │                 │
+         └────────┬────────┴─────────────────┘
+                  ↓
+Layer 3 (Backend Services):
+  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐
+  │ gRPC Server  │  │  Dictionary  │  │  Processor   │
+  │  (backend)   │  │    (API)     │  │  (tasks)     │
+  └──────┬───────┘  └──────────────┘  └──────────────┘
+         │
+         ↓
+Layer 4 (Proxy & Gateway):
+  ┌──────────────┐  ┌──────────────┐
+  │ Envoy Proxy  │  │    nginx     │
+  │  (gRPC→HTTP) │  │  (gateway)   │
+  └──────┬───────┘  └──────┬───────┘
+         │                 │
+         └────────┬────────┘
+                  ↓
+Layer 5 (User Interfaces):
+  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐
+  │   ZK UI      │  │   Vue UI     │  │Landing Page  │
+  │ (classic)    │  │  (modern)    │  │    (home)    │
+  └──────────────┘  └──────────────┘  └──────────────┘
+```
+
+**Key dependency rules:**
+- UI services wait for backend services to be healthy
+- Backend services wait for database and cache to be healthy
+- Messaging services (Kafka) wait for coordination (Zookeeper) to be healthy
+
+**Benefits:**
+- Services don't start until dependencies are ready
+- Reduces connection errors during startup
+- Ensures proper initialization order
+- Fails fast if critical services don't start
+
+**Troubleshooting:** If a service won't start, check if its dependencies are healthy:
+```bash
+docker compose ps --format "table {{.Name}}\t{{.Status}}\t{{.Health}}"
+```
+
+See [Troubleshooting Guide](./troubleshooting.md#container-health-checks-failing) for common issues.
+
+---
+
 ### Images
-Before running containers, images mus be downloaded and containers created out of these images.
+Before running containers, images must be downloaded and containers created out of these images.
 Image versions used in file *docker-compose.yml*, to be found in DockerHub.
 The actual version is defined in file *env_template.env*.
 
 | Image                               | Image Name                                   |  Tag (Version)                        |
 | ----------------------------------- |:--------------------------------------------:|:-------------------------------------:|
 | PostgreSQL                          | postgres                                     | 14.5                                  |
-| Main Page                           | openls/adempiere-landing-page (1)            | alpine-1.0.3                          |
+| Main Page / Landing Site            | openls/adempiere-landing-page (1)            | alpine-1.0.3                          |
 | OpenSearch API RESTful              | openls/dictionary-rs  (2)                    | 1.5.5                                 |
 | ADempiere Report Engine             | openls/adempiere-report-engine-service (2)   | alpine-1.3.7                          |
-| S3 Minio Client/Storage             | quay.io/minio/minio                          | RELEASE.2024-07-31T05-46-26Z          |
+| S3 Gateway RESTful API              | openls/s3-gateway-rs (2)                     | 1.2.7                                 |
+| S3 Minio Storage                    | quay.io/minio/minio                          | RELEASE.2025-07-23T15-54-02Z          |
+| S3 Minio Client                     | quay.io/minio/mc                             | RELEASE.2025-07-21T05-28-08Z          |
 | DKron Task Scheduler                | dkron/dkron                                  | 3.2.7                                 |
 | Zookeeper for Kafka Brokers         | confluentinc/cp-zookeeper                    | 7.6.1                                 |
 | Kafka Queue Manager                 | confluentinc/cp-kafka                        | 7.6.1                                 |
@@ -113,15 +311,19 @@ The actual version is defined in file *env_template.env*.
 | OpenSearch Search Engine            | opensearchproject/opensearch                 | 2.15.0                                |
 | OpenSearch Dashboards UI            | opensearchproject/opensearch-dashboards      | 2.15.0                                |
 | NGINX UI Gateway                    | nginx                                        | 1.27.0-alpine3.19                     |
+| Envoy gRPC Proxy                    | envoyproxy/envoy                             | v1.37.0                               |
 | Keycloak ID & Access Management     | keycloak/keycloak                            | 23.0.7                                |
-| ADempiere Vue Backend (gRPC Server) | marcalwestf/adempiere-grpc-server (3)        | 3.9.4.001-shw-1.0.25                  |
-| Proxy for Processors/Backend        | marcalwestf/adempiere-grpc-server-proxy (3)  | 3.9.4.001-shw-1.0.25                  |
-| Adempiere ZK UI                     | marcalwestf/adempiere-shw-zk (3)             | jetty-3.9.4.001-shw-1.1.27            |
-| ADempiere Processors gRPC Server    | marcalwestf/adempiere-processors-service (3) | alpine-1.1.2                          |
-Notes:
-(1) The landing page can be in your favorite image
-(2) These Images will in future be in *adempiere* instead of *openls*
-(3) These are images that contain the costumizations. The *Image Name* will be the repository where the customization is implemented; mostly the own repository.
+| ADempiere Vue UI                    | marcalwestf/adempiere-vue (3)                | 0.0.5                                 |
+| ADempiere Vue Backend (gRPC Server) | marcalwestf/adempiere-grpc-server (3)        | 3.9.4.001-shw-{version}               |
+| Adempiere ZK UI                     | marcalwestf/adempiere-shw-zk (3)             | jetty-3.9.4.001-shw-1.1.45            |
+| ADempiere Processors gRPC Server    | marcalwestf/adempiere-processors-service (3) | alpine-1.1.16                         |
+
+**Notes:**
+- (1) The landing page can be replaced with your own custom image
+- (2) These images will eventually be moved to the *adempiere* Docker Hub organization
+- (3) These are customized images. The *Image Name* shows the repository where customizations are maintained
+- All image versions are defined in `env_template.env` and can be changed as needed
+- **Version updates:** Check image tags regularly for security updates and new features
 
 
 ### User's perspective
