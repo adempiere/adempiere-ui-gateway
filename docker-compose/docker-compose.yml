@@ -512,6 +512,8 @@ services:
     profiles:
       - ''
       - all
+    environment:
+      TZ: ${GENERIC_TIMEZONE}
     ports:
       - ${SVFE_EXTERNAL_PORT}:${SVFE_PORT}
     volumes:
