@@ -1,27 +1,30 @@
 
 ## Installation
+
+> **💡 Important: No Java Installation Required**
+>
+> You do NOT need to install Java, JDK, or any Java tools on your host machine.
+> Java runs inside the Docker containers and is already included in the images.
+> This is one of the main benefits of using Docker!
+
 ### Requirements
 ##### 1 Install Tools
-Make sure to install the following:
-- [JDK 17](https://adoptium.net/temurin/releases/?version=17)
+Make sure to install the following on your host machine:
 - [Docker](https://docs.docker.com/engine/install/)
 - [Docker Compose v2.16.0 or later](https://docs.docker.com/compose/install/linux/)
-- [Git ](https://git-scm.com/downloads)
+- [Git](https://git-scm.com/downloads)
+
+**What you DON'T need:** Java/JDK, PostgreSQL, nginx, or any application servers - these all run inside the containers.
+
+**Security benefit:** Keeping these services isolated in containers minimizes your host's attack surface. If vulnerabilities exist in containerized software, they cannot directly compromise your host system - this is a key security advantage of Docker.
 
 ##### 2 Check versions
-2.1 Check `java version`
-```Shell
-java --version
-    openjdk 11.0.11 2021-04-20
-    OpenJDK Runtime Environment AdoptOpenJDK-11.0.11+9 (build 11.0.11+9)
-    OpenJDK 64-Bit Server VM AdoptOpenJDK-11.0.11+9 (build 11.0.11+9, mixed mode
-```
-2.2 Check `docker version`
+2.1 Check `docker version`
 ```Shell
 docker --version
     Docker version 23.0.3, build 3e7cbfd
 ```
-2.3 Check `docker compose version`
+2.2 Check `docker compose version`
 ```Shell
 docker compose version
     Docker Compose version v2.17.2

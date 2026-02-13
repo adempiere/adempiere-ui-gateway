@@ -58,7 +58,7 @@ Error response format
 {
     "code": 1,
     "message": "",
-    "deatils": []
+    "details": []
 }
 ```
 

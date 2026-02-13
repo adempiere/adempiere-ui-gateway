@@ -41,6 +41,7 @@ Due to the technology used, it is highly recommended to have a good knowledge of
 Please follow the links for detailed information.
 
 - [Quick Start](docs/quickstart.md)
+- [System Requirements](docs/system-requirements.md)
 - [Architecture](docs/architecture.md)
 - [Profiles](docs/profiles.md)
 - [Installation](docs/installation.md)

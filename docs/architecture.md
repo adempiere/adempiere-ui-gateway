@@ -9,6 +9,7 @@ The services that can be executed are:
  - adempiere-site
  - adempiere-zk
  - vue-ui
+ - vue-grpc-server
  - postgres-service
  - ui-gateway
  - adempiere-processor
@@ -20,8 +21,10 @@ The services that can be executed are:
  - s3-gateway-rs
  - grpc-proxy
  - kafka
+ - kafdrop
  - opensearch-node
  - opensearch-setup
+ - opensearch-dashboards
  - dictionary-rs
  - keycloak
  - zookeeper
@@ -32,6 +35,7 @@ The application stack consists of the following services defined in the *docker-
 - **adempiere-site**: Defines the landing page (web site) for this application. It can be implemented as wished.
 - **adempiere-zk**: Defines the Jetty server and the ADempiere ZK UI.
 - **vue-ui**: Defines the new ADempiere UI with Vue.
+- **vue-grpc-server**: Dedicated gRPC backend server for Vue UI.
 - **postgresql-service**: Defines the Postgres database, that is persistently implemented on the host.
 - **ui-gateway**: Unique access point acting as a reverse proxy and routing to redirect multiple services.
 - **adempiere-processor**: For processes that are executed outside Adempiere.
@@ -137,4 +141,4 @@ Take note that the ports are defined in file *env_template.env* as external port
 Beware that **image versions may change ongoing**.
 
 
-[Back to README](../README.md)  | [Previous: Quicksatart](./quickstart.md) | [Next: Profiles](./profiles.md)
+[Back to README](../README.md)  | [Previous: System Requirements](./system-requirements.md) | [Next: Profiles](./profiles.md)
