@@ -48,5 +48,6 @@ Please follow the links for detailed information.
 - [Display Services](docs/services.md)
 - [Security Information](docs/security.md)
 - [Debugging](docs/debugging.md)
+- [Troubleshooting](docs/troubleshooting.md)
 - [Additional Info](docs/additional_info.md)
 - [License](./LICENSE)
