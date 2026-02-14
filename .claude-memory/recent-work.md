@@ -14,6 +14,157 @@ Track recent changes, ongoing work, and current context here.
 
 ---
 
+### 2026-02-13 - POS Payment Error Fix: Missing JavaScript Engine in gRPC Server
+
+**Problem Identified:**
+- **Error:** `java.lang.NullPointerException: Cannot invoke "javax.script.ScriptEngine.put(String, Object)" because "engine" is null`
+- **Location:** POS payment processing in Vue UI (`PointOfSalesForm.processOrder`)
+- **Root Cause:** gRPC server container running Java 17 without JavaScript engine (Nashorn removed in Java 15+)
+- **Image:** `marcalwestf/adempiere-grpc-server:3.9.4.001-shw-1.0.30`
+- **GitHub Issue:** https://github.com/Systemhaus-Westfalia/adempiere-vue/issues/14
+
+**Diagnosis Steps:**
+1. Confirmed Java 17 running in container (openjdk version "17.0.16")
+2. Verified no GraalVM/Nashorn/Rhino JARs in `/opt/apps/server/lib/`
+3. Confirmed database search_path correct (`adempiere, public`)
+4. Identified that Java process uses explicit classpath listing all JARs individually
+
+**Solution Attempted (Option A - Runtime Injection):**
+- Downloaded 6 GraalVM JavaScript JARs to /tmp/graalvm-js/:
+  - js-23.0.0.jar (27.3 MB)
+  - js-scriptengine-23.0.0.jar (75 KB)
+  - truffle-api-23.0.0.jar (16.2 MB)
+  - graal-sdk-23.0.0.jar (813 KB)
+  - regex-23.0.0.jar (3 MB)
+  - icu4j-73.1.jar (14.5 MB)
+- Copied JARs into running container at `/opt/apps/server/lib/`
+- Restarted container
+- **Result:** Failed - JARs not loaded because classpath is built at container creation time
+
+**Solution Implemented (Option B - Custom Image):**
+Created custom Docker image with GraalVM JavaScript engine baked in.
+
+**Files Created:**
+- `docker-compose/Dockerfile.grpc-server-jsfix` - Dockerfile that extends base image with GraalVM JARs
+
+**Dockerfile content:**
+```dockerfile
+FROM marcalwestf/adempiere-grpc-server:3.9.4.001-shw-1.0.30
+
+USER root
+
+RUN cd /opt/apps/server/lib && \
+    wget -q https://repo1.maven.org/maven2/org/graalvm/js/js/23.0.0/js-23.0.0.jar && \
+    wget -q https://repo1.maven.org/maven2/org/graalvm/js/js-scriptengine/23.0.0/js-scriptengine-23.0.0.jar && \
+    wget -q https://repo1.maven.org/maven2/org/graalvm/truffle/truffle-api/23.0.0/truffle-api-23.0.0.jar && \
+    wget -q https://repo1.maven.org/maven2/org/graalvm/sdk/graal-sdk/23.0.0/graal-sdk-23.0.0.jar && \
+    wget -q https://repo1.maven.org/maven2/org/graalvm/regex/regex/23.0.0/regex-23.0.0.jar && \
+    wget -q https://repo1.maven.org/maven2/com/ibm/icu/icu4j/73.1/icu4j-73.1.jar && \
+    chown adempiere:adempiere *.jar
+
+USER adempiere
+```
+
+**Configuration Changes:**
+- `env_template.env`: Changed `VUE_GRPC_SERVER_IMAGE` from `marcalwestf/adempiere-grpc-server:3.9.4.001-shw-1.0.30` to `marcalwestf/adempiere-grpc-server:3.9.4.001-shw-1.0.30-jsfix`
+- `.env`: Synced from env_template.env
+
+**Build and Deploy Commands:**
+```bash
+cd docker-compose/
+sudo docker build -f Dockerfile.grpc-server-jsfix \
+  -t marcalwestf/adempiere-grpc-server:3.9.4.001-shw-1.0.30-jsfix .
+
+sudo docker compose stop adempiere-grpc-server
+sudo docker compose rm -f adempiere-grpc-server
+sudo docker compose up -d adempiere-grpc-server
+```
+
+**Verification Commands:**
+```bash
+# Verify JARs in container
+sudo docker exec adempiere-ui-gateway.vue-grpc-server ls -la /opt/apps/server/lib/ | grep graal
+
+# Check for ScriptEngine errors
+sudo docker logs adempiere-ui-gateway.vue-grpc-server 2>&1 | grep -i "scriptengine"
+
+# Test POS payment in Vue UI
+```
+
+**Status:** IN PROGRESS - Custom image created, awaiting deployment and testing on Mini PC
+
+**Cleanup After Success:**
+```bash
+# Remove old image
+sudo docker rmi marcalwestf/adempiere-grpc-server:3.9.4.001-shw-1.0.30
+
+# Remove temporary JARs
+rm -rf /tmp/graalvm-js
+
+# Remove dangling images
+sudo docker image prune -f
+```
+
+**Context/Notes:**
+- This is a missing dependency in the base image maintained by openls/marcalwestf
+- Should be reported to image maintainer for inclusion in future releases
+- The fix is permanent once custom image is built and used
+- Custom image adds ~60 MB to image size (GraalVM JARs)
+- Container name: `adempiere-ui-gateway.vue-grpc-server`
+- Service name: `adempiere-grpc-server`
+- Testing environment: Mini PC (Ubuntu 24.10, 4 CPU, 16 GB RAM, 500 GB disk) on LAN
+
+**Next Steps:**
+1. Deploy custom image on Mini PC
+2. Test POS payment functionality in Vue UI
+3. Verify no ScriptEngine errors in logs
+4. If successful, clean up old image and temporary files
+5. Document fix for image maintainer
+
+---
+
+### 2026-02-13 - Documentation Improvements: Phases 1-4 Complete
+**What was done:**
+- Completed comprehensive documentation review and improvement project (Phases 1-4)
+- **Phase 1 (Quick Wins):** Fixed quickstart.md and installation.md (removed Java requirement, fixed typos)
+- **Phase 2 (Major Documents):** Created system-requirements.md, troubleshooting.md; enhanced architecture.md
+- **Phase 3 (Backup & Restore):** Created backup-restore.md, automated backup script (docs/scripts/04-backup-database.sh)
+- **Phase 4 (Document Rewrites):** Completely rewrote services.md, debugging.md, security.md
+- Added table of contents to troubleshooting.md
+- Fixed timezone diagnostic scripts (01-03) for file redirection compatibility
+
+**Files Created/Modified:**
+- docs/quickstart.md (removed Java requirement)
+- docs/installation.md (removed JDK requirement)
+- docs/system-requirements.md (NEW - hardware, software, cloud providers including Contabo)
+- docs/troubleshooting.md (NEW - comprehensive guide with TOC)
+- docs/architecture.md (enhanced - health checks, dependencies, network architecture)
+- docs/services.md (COMPLETE REWRITE - all services, profiles, access URLs, credentials)
+- docs/debugging.md (COMPLETE REWRITE - organized by use case, advanced debugging)
+- docs/security.md (COMPLETE REWRITE - Docker firewall bypass, HTTPS, comprehensive security)
+- docs/backup-restore.md (NEW - comprehensive backup/restore procedures)
+- docs/scripts/04-backup-database.sh (NEW - automated backup with retention)
+- docs/scripts/README.md (updated with backup script documentation)
+- docs/scripts/01-03 (fixed process substitution for file redirection)
+
+**Key Decisions:**
+- Use Europe/Berlin timezone examples (not El Salvador) for generic public documentation
+- Scripts belong in docs/scripts/ (documentation), not docker-compose/ (application)
+- Generic placeholders in all examples (<your-backup-file>.backup, ${HOST_IP})
+- No deployment-specific services mentioned (removed svfe-api-firmador references)
+- Keycloak documented as optional service in auth profile
+- Sequential script numbering (01-04) in docs/scripts/
+
+**Context/Notes:**
+- Phase 5 (Final Polish) remains: cross-reference verification, README.md review, consistency check
+- Documentation now suitable for public GitHub repository (generic, no sensitive/deployment-specific info)
+- All default credentials documented with change procedures
+- Comprehensive security guide including Docker firewall bypass explanation
+- Work paused to switch to higher-priority, lower-token task
+- Resume command: "Let's continue with Phase 5 of the documentation plan"
+
+---
+
 ### 2026-02-12 - Health Check Timeouts Improved for Production Readiness
 **What was done:**
 - Relaxed health check timeouts for critical infrastructure services
