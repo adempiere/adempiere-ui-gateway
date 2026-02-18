@@ -43,7 +43,36 @@ This guide helps you diagnose and resolve common issues with the ADempiere UI Ga
 
 ## Quick Diagnostic Commands
 
-Before diving into specific issues, these commands help identify problems:
+Before diving into specific issues, these commands help identify problems.
+
+### Finding Service and Container Names
+
+Many commands below require either a **service name** (used by `docker compose`) or a **container name** (used by `docker` directly). They are different:
+
+```bash
+# List all services and their container names (running and stopped)
+docker compose ps -a
+
+# Example output:
+# NAME                                    SERVICE                  STATUS
+# adempiere-ui-gateway.vue-grpc-server    adempiere-grpc-server    running
+# adempiere-ui-gateway.postgresql         postgresql-service       running
+# adempiere-ui-gateway.nginx-ui-gateway   ui-gateway               running
+#
+# Left column  → container name  (use with: docker logs, docker exec, docker inspect)
+# Middle column → service name   (use with: docker compose logs, docker compose restart)
+
+# List only service names (one per line)
+docker compose ps --services
+
+# List only container names (docker native, no compose)
+docker ps --format "{{.Names}}"
+
+# List container names with their image
+docker ps --format "table {{.Names}}\t{{.Image}}\t{{.Status}}"
+```
+
+### General Diagnostics
 
 ```bash
 # Check which containers are running
