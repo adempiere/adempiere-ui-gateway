@@ -906,13 +906,30 @@ docker compose restart adempiere-grpc-server
 
 #### Permanent Fix (build a new image)
 
-The file `docker-compose/Dockerfile.grpc-server-groovyfix` is provided in this repository. It adds the Groovy JARs and patches the classpath at image-build time.
+Create a `Dockerfile.grpc-server-groovyfix` in `docker-compose/` with the following content. It adds the Groovy JARs and patches the classpath at image-build time.
+
+```dockerfile
+# Replace the FROM line with VUE_GRPC_SERVER_IMAGE:VUE_BACKEND_GRPC_SERVER_VERSION from env_template.env
+FROM <image>:<version>
+
+USER root
+
+RUN cd /opt/apps/server/lib && \
+    wget -q https://repo1.maven.org/maven2/org/codehaus/groovy/groovy/3.0.22/groovy-3.0.22.jar && \
+    wget -q https://repo1.maven.org/maven2/org/codehaus/groovy/groovy-jsr223/3.0.22/groovy-jsr223-3.0.22.jar && \
+    chown adempiere:adempiere groovy-3.0.22.jar groovy-jsr223-3.0.22.jar && \
+    sed -i '/^CLASSPATH=.*adempiere-grpc-server/a CLASSPATH="$CLASSPATH:$APP_HOME/lib/groovy-3.0.22.jar:$APP_HOME/lib/groovy-jsr223-3.0.22.jar"' \
+        /opt/apps/server/bin/start-backend.sh
+
+USER adempiere
+```
+
+Then build and deploy:
 
 ```bash
 cd docker-compose/
 
 # Build the fixed image
-# Replace <image>:<version> with VUE_GRPC_SERVER_IMAGE and VUE_BACKEND_GRPC_SERVER_VERSION from env_template.env
 docker build \
     -f Dockerfile.grpc-server-groovyfix \
     -t <image>:<version>-groovyfix \
