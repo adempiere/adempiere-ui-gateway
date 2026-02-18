@@ -344,4 +344,4 @@ Once you've verified your system meets these requirements:
 
 ---
 
-[Back to README](../README.md) | [Next: Installation](./installation.md)
+[Back to README](../README.md) | [Previous: Quick Start](./quickstart.md) | [Next: Architecture](./architecture.md)

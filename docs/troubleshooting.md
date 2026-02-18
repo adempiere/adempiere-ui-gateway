@@ -912,14 +912,15 @@ The file `docker-compose/Dockerfile.grpc-server-groovyfix` is provided in this r
 cd docker-compose/
 
 # Build the fixed image
+# Replace <image>:<version> with VUE_GRPC_SERVER_IMAGE and VUE_BACKEND_GRPC_SERVER_VERSION from env_template.env
 docker build \
     -f Dockerfile.grpc-server-groovyfix \
-    -t marcalwestf/adempiere-grpc-server:3.9.4.001-shw-1.0.30-groovyfix \
+    -t <image>:<version>-groovyfix \
     .
 
 # Update env_template.env to use the new image
-sed -i 's|VUE_BACKEND_GRPC_SERVER_VERSION="1.0.30"|VUE_BACKEND_GRPC_SERVER_VERSION="1.0.30-groovyfix"|' \
-    env_template.env
+# Change VUE_BACKEND_GRPC_SERVER_VERSION from "<version>" to "<version>-groovyfix"
+nano env_template.env
 cp env_template.env .env
 
 # Recreate the gRPC server container with the new image
@@ -962,7 +963,9 @@ If you've tried the solutions above and still have issues:
    docker stats --no-stream
    ```
 
-3. **Check GitHub issues:** [ADempiere UI Gateway Issues](https://github.com/adempiere/adempiere-ui-gateway/issues)
+3. **Trace the error through the stack:** See [Debugging Vue UI Errors](./debugging-vue-errors.md) for a step-by-step guide to following an error from the browser through nginx, Envoy, and the gRPC server.
+
+4. **Check GitHub issues:** [ADempiere UI Gateway Issues](https://github.com/adempiere/adempiere-ui-gateway/issues)
 
 4. **Search ADempiere community forums**
 
@@ -991,4 +994,4 @@ If you've tried the solutions above and still have issues:
 
 ---
 
-[Back to README](../README.md) | [Previous: Debugging](./debugging.md)
+[Back to README](../README.md) | [Previous: Debugging Vue UI Errors](./debugging-vue-errors.md) | [Next: Additional Info](./additional_info.md)

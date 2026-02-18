@@ -49,6 +49,7 @@ Please follow the links for detailed information.
 - [Security Information](docs/security.md)
 - [Backup and Restore](docs/backup-restore.md)
 - [Debugging](docs/debugging.md)
+- [Debugging Vue UI Errors](docs/debugging-vue-errors.md)
 - [Troubleshooting](docs/troubleshooting.md)
 - [Additional Info](docs/additional_info.md)
 - [License](./LICENSE)

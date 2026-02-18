@@ -86,7 +86,7 @@ docker compose ps
 # - Status: "Exited" = service crashed or stopped
 ```
 
-For detailed health check information, see [Architecture - Health Checks](./architecture.md#health-checks-and-startup-times).
+For detailed health check information, see [Architecture - Health Checks](./architecture.md#health-checks-and-startup-order).
 
 ---
 
@@ -568,7 +568,7 @@ docker inspect --format='{{range .State.Health.Log}}{{.Output}}{{end}}' adempier
 docker exec adempiere-ui-gateway.postgresql pg_isready -U postgres
 ```
 
-For expected health check timings, see [Architecture - Health Checks](./architecture.md#health-checks-and-startup-times).
+For expected health check timings, see [Architecture - Health Checks](./architecture.md#health-checks-and-startup-order).
 
 ---
 
@@ -757,4 +757,4 @@ See [Troubleshooting - Performance Issues](./troubleshooting.md#performance-issu
 
 ---
 
-[Back to README](../README.md) | [Previous: Backup and Restore](./backup-restore.md) | [Next: Troubleshooting](./troubleshooting.md)
+[Back to README](../README.md) | [Previous: Backup and Restore](./backup-restore.md) | [Next: Debugging Vue UI Errors](./debugging-vue-errors.md)

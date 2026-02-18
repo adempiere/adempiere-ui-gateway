@@ -9,12 +9,11 @@ The services that can be executed are:
  - adempiere-site
  - adempiere-zk
  - vue-ui
- - vue-grpc-server
- - postgres-service
+ - adempiere-grpc-server
+ - postgresql-service
  - ui-gateway
  - adempiere-processor
  - dkron-scheduler
- - adempiere-grpc-server
  - adempiere-report-engine
  - s3-storage
  - s3-client
@@ -35,12 +34,11 @@ The application stack consists of the following services defined in the *docker-
 - **adempiere-site**: Defines the landing page (web site) for this application. It can be implemented as wished.
 - **adempiere-zk**: Defines the Jetty server and the ADempiere ZK UI.
 - **vue-ui**: Defines the new ADempiere UI with Vue.
-- **vue-grpc-server**: Dedicated gRPC backend server for Vue UI.
+- **adempiere-grpc-server**: Dedicated gRPC backend server for Vue UI. Implements the ADempiere business logic (POS, invoicing, inventory, etc.) and communicates with the database.
 - **postgresql-service**: Defines the Postgres database, that is persistently implemented on the host.
 - **ui-gateway**: Unique access point acting as a reverse proxy and routing to redirect multiple services.
 - **adempiere-processor**: For processes that are executed outside Adempiere.
 - **dkron-scheduler**: A scheduler for these processes.
-- **adempiere-grpc-server**: Defines a grpc server as the backend server for Vue.
 - **adempiere-report-engine**: For reports.
 - **s3-storage**: S3 (Simple Storage Service) for attachments and files.
 - **s3-client**: S3 (Simple Storage Service) default access configuration.
@@ -82,22 +80,26 @@ All containers run on a custom Docker bridge network with the following configur
 **Communication Flow:**
 
 ```
-External User
+External User (browser)
       ↓
    [Port 80]
       ↓
  ┌──────────────┐
  │    nginx     │ ← Single entry point (reverse proxy)
- │  (Gateway)   │
+ │  (Gateway)   │   Path routing defined in docker-compose/nginx/api/
  └──────┬───────┘
         │ Internal network (192.168.100.0/24)
-        ├─────→ ZK UI (port 8080)
-        ├─────→ Vue UI (port 80)
-        ├─────→ Envoy Proxy (port 8080) ──→ gRPC backends
-        ├─────→ OpenSearch Dashboard (port 5601)
-        ├─────→ Kafdrop (port 9000)
-        ├─────→ DKron (port 8080)
-        └─────→ MinIO Console (port 9090)
+        │
+        ├── /         ──→ Landing Page             (landing_page.conf)
+        ├── /webui    ──→ ZK UI       (port 8080)  (adempiere_zk.conf)
+        ├── /vue      ──→ Vue UI      (port 80)    (adempiere_vue.conf)
+        ├── /api/     ──→ Envoy Proxy (port 5555)  (adempiere_backend.conf)
+        │                     └──→ gRPC backends
+        │             ↑ internal only — used by Vue Single Page Application (SPA), not a browser URL
+        ├── ──────────→ OpenSearch Dashboard (port 5601)
+        ├── ──────────→ Kafdrop (port 9000)
+        ├── ──────────→ DKron (port 8080)
+        └── ──────────→ MinIO Console (port 9090)
 
 Internal Services (not directly exposed):
   - PostgreSQL (port 5432)
@@ -106,6 +108,67 @@ Internal Services (not directly exposed):
   - Zookeeper (port 2181)
   - gRPC servers (various ports)
 ```
+
+The upstream definitions (which container each path routes to) are in `docker-compose/nginx/upstreams/`.
+
+<div style="page-break-before: always;"></div>
+
+**Detailed Request Flow — from Browser to Database:**
+
+*SPA = Single Page Application — the Vue frontend running in the browser.*
+
+```
+┌────────────────────────────────────────────────────────────┐
+│              BROWSER (Firefox / Chrome / Opera)            │
+└─────────────────────────────┬──────────────────────────────┘
+                              │ HTTP  port 80  [public]
+                              ▼
+┌────────────────────────────────────────────────────────────┐
+│                      nginx  (ui-gateway)                   │
+│         container: adempiere-ui-gateway.nginx-ui-gateway   │
+└───────────┬──────────────────────────────┬─────────────────┘
+            │ path /webui                  │ path /vue
+            │ internal port 8080           │ internal port 80
+            ▼                              ▼
+┌─────────────────────────┐    ┌───────────────────────────────┐
+│        ZK UI            │    │           Vue UI              │
+│ service: adempiere-zk   │    │       service: vue-ui         │
+│                         │    │  serves SPA (HTML/JS/CSS)     │
+└───────────┬─────────────┘    │  to the browser               │
+            │                  └───────────────────────────────┘
+            │                               │
+            │                        Browser runs the Vue SPA.
+            │                       SPA sends API calls to port 80
+            │                       (back to nginx, path /api/).
+            │                       nginx routes /api/ internally to Envoy:
+            │                               │ internal port 5555
+            │                               ▼
+            │                   ┌─────────────────────────────┐
+            │                   │        Envoy Proxy          │
+            │                   │     service: grpc-proxy     │
+            │                   │    HTTP/JSON  ↔  gRPC       │
+            │                   └───────────┬─────────────────┘
+            │                               │ internal port 50059  (gRPC)
+            │                               ▼
+            │                   ┌────────────────────────────┐
+            │                   │        gRPC Server         │
+            │                   │  service: adempiere-grpc-  │
+            │                   │          server            │
+            │                   │  ADempiere business logic  │
+            │                   ┴───────────┬────────────────┘
+            │                               │ internal port 5432  (SQL)
+            │                               │
+            │                               │
+            │                               │
+            │                               ▼
+            │                   ┌──────────────────────────────┐
+            │                   │          PostgreSQL          │
+            └──────────────────►│  service: postgresql-service │
+                                │  external port 55432         │
+                                └──────────────────────────────┘
+```
+
+Both ZK UI and the gRPC server connect to the same PostgreSQL instance. ZK connects directly; the gRPC server connects on behalf of the Vue SPA. PostgreSQL is also reachable externally on port 55432 (e.g. from PGAdmin on the host).
 
 **Port Exposure Strategy:**
 
@@ -145,6 +208,8 @@ docker exec adempiere-ui-gateway.vue-ui nc -zv kafka 9092
 ```
 
 See [Troubleshooting Guide](./troubleshooting.md#network-and-access-issues) for common network problems.
+
+For tracing errors that appear in the Vue UI back to their source in the gRPC server, see [Debugging Vue UI Errors](./debugging-vue-errors.md).
 
 ### File Structure
 - *README.md*: the main documentation file.
@@ -313,7 +378,7 @@ The actual version is defined in file *env_template.env*.
 | NGINX UI Gateway                    | nginx                                        | 1.27.0-alpine3.19                     |
 | Envoy gRPC Proxy                    | envoyproxy/envoy                             | v1.37.0                               |
 | Keycloak ID & Access Management     | keycloak/keycloak                            | 23.0.7                                |
-| ADempiere Vue UI                    | marcalwestf/adempiere-vue (3)                | 0.0.5                                 |
+| ADempiere Vue UI                    | marcalwestf/adempiere-vue (3)                | 0.0.6                                 |
 | ADempiere Vue Backend (gRPC Server) | marcalwestf/adempiere-grpc-server (3)        | 3.9.4.001-shw-{version}               |
 | Adempiere ZK UI                     | marcalwestf/adempiere-shw-zk (3)             | jetty-3.9.4.001-shw-1.1.45            |
 | ADempiere Processors gRPC Server    | marcalwestf/adempiere-processors-service (3) | alpine-1.1.16                         |
@@ -329,16 +394,27 @@ The actual version is defined in file *env_template.env*.
 ### User's perspective
 From a user's point of view, the application consists of the following.
 Take note that the ports are defined in file *env_template.env* as external ports and can be changed if needed or desired.
-- A home web site, accessible via port **80**
-  From which all applications can be called
-- An ADempiere ZK UI, accessible via path **/webui**
-- An ADempiere Vue UI, accessible via path **/vue**
-- A Postgres database, accessible e.g. by PGAdmin via port **55432**
-- An OpenSearch Dashboard, accessible via port **5601**
+
+Services accessible via **path** in the browser through nginx (port 80):
+
+| Path | Service | nginx config file |
+|------|---------|-------------------|
+| `/` | Landing page | `docker-compose/nginx/api/landing_page.conf` |
+| `/webui` | ADempiere ZK UI | `docker-compose/nginx/api/adempiere_zk.conf` |
+| `/vue` | ADempiere Vue UI | `docker-compose/nginx/api/adempiere_vue.conf` |
+
+The upstream targets (which container each path points to) are defined in `docker-compose/nginx/upstreams/`.
+
+The path `/api/` also exists in the nginx configuration (`docker-compose/nginx/api/adempiere_backend.conf`) but is **not** a browser URL. It is used internally by the Vue Single Page Application (SPA) to send API requests to the Envoy proxy, which transcodes them to gRPC and forwards them to the gRPC server. Opening `/api/` in a browser returns 404 because it only responds to specific programmatic API calls with proper headers and request bodies.
+
+Services accessible via **port** directly:
+
+- Postgres database, accessible e.g. by PGAdmin via port **55432**
+- OpenSearch Dashboard, accessible via port **5601**
 - Access to Kafka Queue via port **29092**
-- A Kafdrop Kafka Queue Monitor and Administrator, accessible via port **19000**
-- A DKron browser for monitoring scheduled jobs, accessible via port **8899**
-- A MinIO Console (actually a browser) for monitoring objects stored (like files, reports, images), accessible via port **9090**
+- Kafdrop Kafka Queue Monitor and Administrator, accessible via port **19000**
+- DKron browser for monitoring scheduled jobs, accessible via port **8899**
+- MinIO Console for monitoring stored objects (files, reports, images), accessible via port **9090**
 
 Beware that **image versions may change ongoing**.
 
