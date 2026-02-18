@@ -34,6 +34,8 @@ This guide helps you diagnose and resolve common issues with the ADempiere UI Ga
   - ["connection refused" to PostgreSQL](#connection-refused-to-postgresql)
   - ["unhealthy" Status Persists](#unhealthy-status-persists)
   - ["no such file or directory" - seed.backup](#no-such-file-or-directory---seedbackup)
+- [POS Application Errors](#pos-application-errors)
+  - [ScriptEngine NullPointerException (Groovy AD_Rules)](#scriptengine-nullpointerexception-groovy-ad-rules)
 - [Getting Help](#getting-help)
 - [Prevention Tips](#prevention-tips)
 
@@ -92,7 +94,7 @@ adempiere-ui-gateway.kafka         Up 90 seconds (unhealthy)
 | PostgreSQL | 10-30 seconds | Up to 3 minutes |
 | ADempiere ZK | 30-60 seconds | Up to 3 minutes |
 
-**Solution:** Wait 2-3 minutes after running `docker compose up`, then check status again.
+Solution: Wait 2-3 minutes after running `docker compose up`, then check status again.
 
 ```bash
 # Wait 2 minutes, then check
@@ -104,12 +106,10 @@ If containers are still "starting" after 5 minutes, then investigate further.
 
 #### 2. Insufficient Memory
 
-**Symptoms:**
 - Containers repeatedly restarting
 - "OOMKilled" in container status
 - Java heap space errors in logs
 
-**Check:**
 ```bash
 # Check if containers were killed due to memory
 docker compose ps -a | grep -i "oom"
@@ -118,18 +118,15 @@ docker compose ps -a | grep -i "oom"
 docker compose logs opensearch-node | grep -i "memory\|heap"
 ```
 
-**Solution:**
 - Increase host RAM (minimum 8 GB, recommended 16 GB)
 - Reduce services using specific profiles instead of `all`
 - Configure memory limits in docker-compose.yml
 
 #### 3. Port Conflicts
 
-**Symptoms:**
 - Container fails to start
 - Error: "port is already allocated"
 
-**Check:**
 ```bash
 # Check what's using port 80 (nginx)
 sudo lsof -i :80
@@ -138,7 +135,6 @@ sudo lsof -i :80
 sudo lsof -i :55432
 ```
 
-**Solution:**
 - Stop the conflicting service
 - Or change the port in `env_template.env`
 
@@ -156,17 +152,15 @@ POSTGRES_EXTERNAL_PORT="55433"  # Changed from 55432
 
 #### 4. Database Initialization Failed
 
-**Symptoms:**
 - PostgreSQL unhealthy
 - Other services waiting for database
 - "database does not exist" errors
 
-**Check:**
 ```bash
 docker compose logs postgresql-service | grep -i "error\|failed"
 ```
 
-**Solution:** See [Database Issues](#database-issues) section below.
+Solution: See [Database Issues](#database-issues) section below.
 
 ---
 
@@ -174,23 +168,20 @@ docker compose logs postgresql-service | grep -i "error\|failed"
 
 ### Database Won't Restore
 
-**Symptoms:**
 - PostgreSQL starts but database is empty
 - No ADempiere data
 - Login fails
 
-**Common Causes:**
 
 #### 1. Database Directory Already Exists
 
 The restore only happens if `postgresql/postgres_database/` is empty.
 
-**Check:**
 ```bash
 ls -la postgresql/postgres_database/
 ```
 
-**Solution:** Delete the database directory and restart:
+Solution: Delete the database directory and restart:
 
 ```bash
 # Stop containers
@@ -205,12 +196,11 @@ sudo rm -rf postgresql/postgres_database/*
 
 #### 2. Seed File Not Found
 
-**Check:**
 ```bash
 ls -la postgresql/postgres_backups/seed.backup
 ```
 
-**Solution:** Place a valid backup file:
+Solution: Place a valid backup file:
 
 ```bash
 # Copy your backup file
@@ -222,20 +212,17 @@ cp /path/to/your/backup.backup postgresql/postgres_backups/seed.backup
 
 #### 3. Restore File Corrupted
 
-**Check logs:**
 ```bash
 docker compose logs postgresql-service | grep -i "restore\|pg_restore"
 ```
 
-**Solution:** Get a fresh backup file and try again.
+Solution: Get a fresh backup file and try again.
 
 ### Database Connection Refused
 
-**Symptoms:**
 - Services can't connect to database
 - Error: "connection refused" or "could not connect to server"
 
-**Check:**
 ```bash
 # Check if PostgreSQL is running
 docker compose ps postgresql-service
@@ -247,17 +234,14 @@ docker compose logs postgresql-service
 docker exec -it adempiere-ui-gateway.postgresql psql -U postgres -d adempiere -c "SELECT version();"
 ```
 
-**Solution:**
 - Wait for PostgreSQL to fully start (30 seconds)
 - Check health status: `docker compose ps`
 - Verify credentials in `env_template.env`
 
 ### Database Already Exists (No Restore Happening)
 
-**Symptom:**
 You want a fresh restore, but the database already exists and restore is skipped.
 
-**Solution:**
 
 ```bash
 # Stop all containers
@@ -305,7 +289,7 @@ cd docs/scripts/
 
 **See also:** [Diagnostic Scripts README](./scripts/README.md) for detailed usage information.
 
-**Expected output:**
+Expected output:
 - All containers should show `Time diff: 0s (OK)`
 - All containers should have `TZ env var` set to same timezone (e.g., `Europe/Berlin`, `America/New_York`, etc.)
 
@@ -313,14 +297,13 @@ cd docs/scripts/
 
 #### 1. TZ Environment Variable Not Set
 
-**Symptom:**
 ```
 Container: adempiere-ui-gateway.site
   TZ env var: not set
   Date: Fri Feb 13 14:55:24 UTC 2026
 ```
 
-**Solution:** Add TZ to the service in `docker-compose.yml`:
+Solution: Add TZ to the service in `docker-compose.yml`:
 
 ```yaml
 service-name:
@@ -341,16 +324,14 @@ docker compose up -d service-name
 
 #### 2. Time Displays UTC Despite TZ Variable
 
-**Symptom:**
 ```
 Container: adempiere-ui-gateway.s3-storage
   Date: Fri Feb 13 14:41:53 UTC 2026  (displays UTC despite TZ setting)
   TZ env var: Europe/Berlin
 ```
 
-**Cause:** Some containers' `date` command doesn't properly respect the TZ environment variable.
+Cause: Some containers' `date` command doesn't properly respect the TZ environment variable.
 
-**Check:**
 ```bash
 # Check if container has timezone data (example: Europe)
 docker exec adempiere-ui-gateway.s3-storage ls -la /usr/share/zoneinfo/Europe/
@@ -359,13 +340,13 @@ docker exec adempiere-ui-gateway.s3-storage ls -la /usr/share/zoneinfo/Europe/
 docker exec adempiere-ui-gateway.s3-storage ls -la /etc/localtime
 ```
 
-**Solution:** Container may need timezone data mounted or installed. This is usually cosmetic (timestamps are still correct, just displayed in UTC).
+Solution: Container may need timezone data mounted or installed. This is usually cosmetic (timestamps are still correct, just displayed in UTC).
 
 #### 3. Containers Created Before TZ Configuration
 
-**Symptom:** Old containers don't have TZ set, new ones do.
+Symptom: Old containers don't have TZ set, new ones do.
 
-**Solution:** Recreate all containers:
+Solution: Recreate all containers:
 
 ```bash
 cd docker-compose/
@@ -377,12 +358,12 @@ cd docker-compose/
 
 The TZ environment variable **overrides** file-based timezone settings:
 
-**Priority (highest to lowest):**
+Priority (highest to lowest):
 1. `TZ` environment variable (preferred method)
 2. `/etc/localtime` symlink
 3. `/etc/timezone` file
 
-**Why times show as synchronized even with different timezones:**
+Why times show as synchronized even with different timezones:
 - Unix timestamps are always UTC internally
 - Display timezone (TZ variable) only affects how time is formatted
 - Time difference = 0s means clocks are synchronized (correct)
@@ -396,13 +377,12 @@ The TZ environment variable **overrides** file-based timezone settings:
 
 #### 1. Dependency Issues
 
-**Symptom:**
 ```
 adempiere-ui-gateway.vue-ui        Exited (1)
 Depends on: adempiere-grpc-server (not healthy yet)
 ```
 
-**Solution:** Dependencies require health checks to pass. Wait for dependent services:
+Solution: Dependencies require health checks to pass. Wait for dependent services:
 
 ```bash
 # Check which services are healthy
@@ -421,12 +401,10 @@ docker compose logs adempiere-grpc-server
 
 #### 2. Previous Container Not Removed
 
-**Symptom:**
 ```
 Error: Conflict. The container name "/adempiere-ui-gateway.zk" is already in use
 ```
 
-**Solution:**
 
 ```bash
 # Remove old containers
@@ -441,12 +419,10 @@ docker compose up -d
 
 #### 3. Image Pull Failed
 
-**Symptom:**
 ```
 Error: pull access denied for openls/dictionary-rs, repository does not exist
 ```
 
-**Solution:**
 - Check internet connection
 - Verify image name in `env_template.env`
 - Check if image exists on Docker Hub
@@ -454,17 +430,15 @@ Error: pull access denied for openls/dictionary-rs, repository does not exist
 
 ### Containers Keep Restarting
 
-**Check restart count:**
 ```bash
 docker compose ps -a
 ```
 
-**Check why it's failing:**
+Check why it's failing:
 ```bash
 docker compose logs <service-name> --tail 100
 ```
 
-**Common causes:**
 - Missing environment variables
 - Failed health checks (see above)
 - Application crashes (check logs)
@@ -476,11 +450,9 @@ docker compose logs <service-name> --tail 100
 
 ### Can't Access Application (Port 80)
 
-**Symptoms:**
 - Browser shows "connection refused" or "site can't be reached"
 - URL: `http://<HOST_IP>/` doesn't work
 
-**Diagnosis:**
 
 ```bash
 # 1. Check if nginx is running
@@ -498,7 +470,6 @@ docker compose logs ui-gateway
 curl http://localhost/
 ```
 
-**Solutions:**
 
 #### 1. nginx Not Running
 
@@ -524,12 +495,10 @@ sudo firewall-cmd --reload  # RHEL/CentOS
 
 #### 3. Wrong HOST_IP in Configuration
 
-**Check:**
 ```bash
 grep HOST_IP docker-compose/env_template.env
 ```
 
-**Fix:**
 ```bash
 nano docker-compose/env_template.env
 # Set HOST_IP to your actual IP or domain
@@ -542,18 +511,15 @@ HOST_IP=192.168.1.100
 
 ### Can't Access ZK UI or Vue UI
 
-**Test the paths:**
 ```bash
 curl http://<HOST_IP>/webui
 curl http://<HOST_IP>/vue
 ```
 
-**Check nginx routing:**
 ```bash
 docker exec adempiere-ui-gateway.nginx-ui-gateway cat /etc/nginx/conf.d/api_gateway.conf
 ```
 
-**Check backend services are running:**
 ```bash
 docker compose ps adempiere-zk
 docker compose ps vue-ui
@@ -561,9 +527,8 @@ docker compose ps vue-ui
 
 ### Internal Container Communication Issues
 
-**Symptom:** Services can't reach each other (e.g., Vue can't connect to gRPC backend)
+Symptom: Services can't reach each other (e.g., Vue can't connect to gRPC backend)
 
-**Check network:**
 ```bash
 # List networks
 docker network ls
@@ -576,7 +541,6 @@ docker inspect adempiere-ui-gateway.vue-ui | grep NetworkMode
 docker inspect adempiere-ui-gateway.adempiere-grpc-server | grep NetworkMode
 ```
 
-**Test connectivity between containers:**
 ```bash
 # From vue-ui to grpc-server
 docker exec adempiere-ui-gateway.vue-ui ping adempiere-grpc-server
@@ -591,14 +555,12 @@ docker exec adempiere-ui-gateway.vue-ui nc -zv postgresql-service 5432
 
 ### Slow Startup Times
 
-**Normal startup times:**
 - Total stack: 90-120 seconds
 - OpenSearch: 60-120 seconds (Java initialization)
 - Kafka: 60-90 seconds (Java initialization)
 
-**If slower than 5 minutes:**
+If slower than 5 minutes:
 
-**Check:**
 ```bash
 # Monitor container resource usage
 docker stats
@@ -608,7 +570,6 @@ htop  # or top
 df -h  # disk space
 ```
 
-**Solutions:**
 1. **Use SSD instead of HDD** - 5-10x faster
 2. **Increase RAM** - Less disk I/O
 3. **Close other applications** - Free up resources
@@ -616,7 +577,6 @@ df -h  # disk space
 
 ### Slow Application Response
 
-**Diagnose:**
 
 ```bash
 # Check container CPU/memory usage
@@ -634,7 +594,6 @@ docker exec -it adempiere-ui-gateway.postgresql psql -U postgres -d adempiere -c
 "
 ```
 
-**Solutions:**
 
 #### 1. PostgreSQL Needs Maintenance
 
@@ -664,19 +623,16 @@ docker exec adempiere-ui-gateway.vue-ui time nc -zv postgresql-service 5432
 
 ### High CPU or Memory Usage
 
-**Check which service is consuming resources:**
 
 ```bash
 docker stats --no-stream | sort -k3 -h  # Sort by CPU
 docker stats --no-stream | sort -k4 -h  # Sort by memory
 ```
 
-**Common causes:**
 - **OpenSearch** - Normal to use 2-4 GB
 - **PostgreSQL** - Large queries or missing indexes
 - **Java services** - Normal high startup CPU, should stabilize
 
-**Solutions:**
 - Add more RAM
 - Optimize database queries
 - Review application logs for errors causing retry loops
@@ -687,12 +643,10 @@ docker stats --no-stream | sort -k4 -h  # Sort by memory
 
 ### Out of Disk Space
 
-**Symptoms:**
 - Container won't start
 - Database restore fails
 - Error: "no space left on device"
 
-**Check:**
 ```bash
 # Check overall disk space
 df -h
@@ -704,7 +658,6 @@ docker system df
 docker system df -v
 ```
 
-**Solutions:**
 
 #### 1. Clean Docker Cache
 
@@ -754,16 +707,15 @@ If cleaning doesn't help, you need more disk space:
 
 ### "driver failed programming external connectivity"
 
-**Full error:**
+Full error:
 ```
 Error response from daemon: driver failed programming external connectivity
 on endpoint adempiere-ui-gateway.nginx-ui-gateway:
 Error starting userland proxy: listen tcp4 0.0.0.0:80: bind: address already in use
 ```
 
-**Cause:** Port 80 already in use by another service.
+Cause: Port 80 already in use by another service.
 
-**Solution:**
 ```bash
 # Find what's using port 80
 sudo lsof -i :80
@@ -776,15 +728,14 @@ sudo systemctl stop apache2
 
 ### "connection refused" to PostgreSQL
 
-**Error in logs:**
+Error in logs:
 ```
 connection refused: could not connect to server: Connection refused
 Is the server running on host "postgresql-service" and accepting TCP/IP connections on port 5432?
 ```
 
-**Cause:** PostgreSQL not ready yet, or not running.
+Cause: PostgreSQL not ready yet, or not running.
 
-**Solution:**
 ```bash
 # Check PostgreSQL status
 docker compose ps postgresql-service
@@ -798,7 +749,7 @@ docker compose logs postgresql-service
 
 ### "unhealthy" Status Persists
 
-**If container shows unhealthy for >5 minutes:**
+If container shows unhealthy for >5 minutes:
 
 ```bash
 # Check health check configuration
@@ -813,12 +764,11 @@ docker exec adempiere-ui-gateway.opensearch bash -c 'printf "GET / HTTP/1.1\n\n"
 
 ### "no such file or directory" - seed.backup
 
-**Error:**
+Error:
 ```
 pg_restore: error: could not open input file "/home/adempiere/postgres_backups/seed.backup": No such file or directory
 ```
 
-**Solution:**
 ```bash
 # Check if backup file exists
 ls -la postgresql/postgres_backups/
@@ -829,6 +779,132 @@ cp /path/to/backup.backup postgresql/postgres_backups/seed.backup
 # Or let the script download from GitHub automatically
 # (just ensure the file is named correctly)
 ```
+
+---
+
+## POS Application Errors
+
+### ScriptEngine NullPointerException (Groovy AD_Rules)
+
+#### Symptom
+
+When processing a POS order (clicking the cart/process button), the operation fails with:
+
+```
+java.lang.NullPointerException: Cannot invoke "javax.script.ScriptEngine.put(String, Object)" because "engine" is null
+```
+
+Full stack trace from container `adempiere-ui-gateway.vue-grpc-server` (check with `docker logs adempiere-ui-gateway.vue-grpc-server`):
+
+```
+org.compiere.model.MRule.setContext(MRule.java:240)
+org.compiere.model.ModelValidationEngine.lambda$fireDocValidate$17(ModelValidationEngine.java:501)
+org.compiere.model.MOrder.completeIt(MOrder.java:1810)
+org.spin.pos.service.order.OrderManagement.processOrder(OrderManagement.java:111)
+org.spin.grpc.service.PointOfSalesForm.processOrder(PointOfSalesForm.java:3684)
+```
+
+#### Containers Involved
+
+The request travels through this chain when a POS order is processed:
+
+```
+Browser → nginx (adempiere-ui-gateway.nginx-ui-gateway)
+        → Envoy proxy (adempiere-ui-gateway.envoy-grpc-proxy)  [HTTP/JSON ↔ gRPC transcoding]
+        → gRPC server (adempiere-ui-gateway.vue-grpc-server)   ← error occurs here
+              ↕
+        PostgreSQL (adempiere-ui-gateway.postgresql)            [stores the AD_Rule script]
+```
+
+The gRPC server calls `MOrder.completeIt()`, which triggers `ModelValidationEngine.fireDocValidate()`. This fires any active `AD_Rule` records of type Script/Document. If any rule has a `groovy:` prefix (e.g., `groovy:OrderQtyOnHand`), ADempiere requests a `groovy` ScriptEngine via the JSR-223 API — and if Groovy is not on the classpath, the engine is `null`, causing the NPE.
+
+#### Root Cause
+
+Java 17 removed the built-in Nashorn JavaScript engine and never included a Groovy engine. The gRPC server image's startup script (`start-backend.sh`) uses a **hard-coded explicit classpath** generated by Gradle at build time — it does not use a wildcard. Therefore, simply placing Groovy JARs in `lib/` is not enough; they must also be registered in the classpath.
+
+#### Diagnosis
+
+```bash
+# 1. Confirm the error in the gRPC server logs
+docker logs adempiere-ui-gateway.vue-grpc-server 2>&1 | grep -A 3 "ScriptEngine\|MRule"
+
+# 2. Check whether Groovy JARs are on the classpath
+docker exec adempiere-ui-gateway.vue-grpc-server \
+    grep "groovy" /opt/apps/server/bin/start-backend.sh
+
+# 3. Check which AD_Rules with "groovy:" prefix are active in the database
+docker exec adempiere-ui-gateway.postgresql \
+    psql -U adempiere -d adempiere -c \
+    "SELECT ad_rule_id, name, ruletype, eventtype FROM ad_rule WHERE name LIKE 'groovy:%' AND isactive = 'Y';"
+```
+
+If step 2 returns nothing, Groovy is not on the classpath — this is the cause.
+
+#### Immediate Fix (no image rebuild)
+
+Use this to fix a running container without rebuilding the image. The fix is lost if the container is recreated.
+
+```bash
+# Step 1: Download Groovy JARs to the host
+cd /tmp
+wget -q https://repo1.maven.org/maven2/org/codehaus/groovy/groovy/3.0.22/groovy-3.0.22.jar
+wget -q https://repo1.maven.org/maven2/org/codehaus/groovy/groovy-jsr223/3.0.22/groovy-jsr223-3.0.22.jar
+
+# Step 2: Copy JARs into the container
+docker cp /tmp/groovy-3.0.22.jar        adempiere-ui-gateway.vue-grpc-server:/opt/apps/server/lib/
+docker cp /tmp/groovy-jsr223-3.0.22.jar adempiere-ui-gateway.vue-grpc-server:/opt/apps/server/lib/
+docker exec -u root adempiere-ui-gateway.vue-grpc-server \
+    chown adempiere:adempiere \
+        /opt/apps/server/lib/groovy-3.0.22.jar \
+        /opt/apps/server/lib/groovy-jsr223-3.0.22.jar
+
+# Step 3: Create a script to patch the classpath in start-backend.sh
+printf '%s\n' '#!/bin/sh' \
+  'sed -i '"'"'/^CLASSPATH=.*adempiere-grpc-server/a CLASSPATH="$CLASSPATH:$APP_HOME/lib/groovy-3.0.22.jar:$APP_HOME/lib/groovy-jsr223-3.0.22.jar"'"'"' /opt/apps/server/bin/start-backend.sh' \
+  > /tmp/fix_classpath.sh
+
+docker cp /tmp/fix_classpath.sh adempiere-ui-gateway.vue-grpc-server:/tmp/
+docker exec -u root adempiere-ui-gateway.vue-grpc-server sh /tmp/fix_classpath.sh
+
+# Step 4: Verify the classpath was patched (should return 1)
+docker exec adempiere-ui-gateway.vue-grpc-server \
+    grep -c "groovy" /opt/apps/server/bin/start-backend.sh
+
+# Step 5: Restart the gRPC server to apply the change
+cd docker-compose/
+docker compose restart adempiere-grpc-server
+```
+
+#### Permanent Fix (build a new image)
+
+The file `docker-compose/Dockerfile.grpc-server-groovyfix` is provided in this repository. It adds the Groovy JARs and patches the classpath at image-build time.
+
+```bash
+cd docker-compose/
+
+# Build the fixed image
+docker build \
+    -f Dockerfile.grpc-server-groovyfix \
+    -t marcalwestf/adempiere-grpc-server:3.9.4.001-shw-1.0.30-groovyfix \
+    .
+
+# Update env_template.env to use the new image
+sed -i 's|VUE_BACKEND_GRPC_SERVER_VERSION="1.0.30"|VUE_BACKEND_GRPC_SERVER_VERSION="1.0.30-groovyfix"|' \
+    env_template.env
+cp env_template.env .env
+
+# Recreate the gRPC server container with the new image
+docker compose up -d --no-deps adempiere-grpc-server
+```
+
+#### Why Two JARs Are Needed
+
+| JAR | Purpose |
+|-----|---------|
+| `groovy-3.0.22.jar` | Core Groovy runtime (language, compiler, standard library) |
+| `groovy-jsr223-3.0.22.jar` | Registers `"groovy"` as a JSR-223 `ScriptEngine` name via `ServiceLoader` |
+
+Both are required. Without `groovy-jsr223`, the engine lookup returns `null` even with the core JAR present.
 
 ---
 
