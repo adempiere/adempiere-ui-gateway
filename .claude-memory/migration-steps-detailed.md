@@ -213,10 +213,11 @@ docker images | grep adempiere
   ```
 
 #### Change 3: Repository Secrets (GitHub UI)
-- **Action:** Delete the following repository secrets:
-  - `DOCKER_USERNAME`
-  - `DOCKER_TOKEN`
-  - `DOCKER_HUB_REPO_NAME`
+- **Action:** Keep existing secrets for now (no changes needed)
+  - `DOCKER_USERNAME` - used by old Docker Hub workflow
+  - `DOCKER_TOKEN` - used by old Docker Hub workflow
+  - `DOCKER_HUB_REPO_NAME` - used by old Docker Hub workflow
+- **Note:** These secrets are no longer used by the new ghcr.io workflow, but keep them until migration is fully tested. Consider deleting them later if Docker Hub publishing is permanently discontinued.
 
 ### Release Creation
 
@@ -292,10 +293,11 @@ After all code changes are committed:
   ```
 
 #### Change 3: Repository Secrets (GitHub UI)
-- **Action:** Delete the following repository secrets:
-  - `DOCKER_USERNAME`
-  - `DOCKER_TOKEN`
-  - `DOCKER_HUB_REPO_NAME`
+- **Action:** Keep existing secrets for now (no changes needed)
+  - `DOCKER_USERNAME` - used by old Docker Hub workflow
+  - `DOCKER_TOKEN` - used by old Docker Hub workflow
+  - `DOCKER_HUB_REPO_NAME` - used by old Docker Hub workflow
+- **Note:** These secrets are no longer used by the new ghcr.io workflow, but keep them until migration is fully tested. Consider deleting them later if Docker Hub publishing is permanently discontinued.
 
 ### Release Creation
 
@@ -696,10 +698,11 @@ After all code changes are committed:
 
 
 #### Change 3: Repository Secrets (GitHub UI)
-- **Action:** Delete the following repository secrets:
-  - `DOCKER_USERNAME`
-  - `DOCKER_TOKEN`
-  - `DOCKER_HUB_REPO_NAME`
+- **Action:** Keep existing secrets for now (no changes needed)
+  - `DOCKER_USERNAME` - used by old Docker Hub workflow
+  - `DOCKER_TOKEN` - used by old Docker Hub workflow
+  - `DOCKER_HUB_REPO_NAME` - used by old Docker Hub workflow
+- **Note:** These secrets are no longer used by the new ghcr.io workflow, but keep them until migration is fully tested. Consider deleting them later if Docker Hub publishing is permanently discontinued.
 
 ### Release Creation
 
