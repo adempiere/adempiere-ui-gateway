@@ -6,14 +6,16 @@
 
 **Progress:**
 - ✅ `marcalwestf` services (adempiere-zk, processors, grpc-server, vue): source repos confirmed, local clones available
-- ⏸️ `openls` services (s3-gateway-rs, dictionary-rs, report-engine, landing-page): awaiting GitHub repo URLs from developers
+- ✅ `openls` services (s3-gateway-rs, dictionary-rs, report-engine, landing-page): **ALL CONFIRMED** - repositories already exist in adempiere org
 - ✅ Customization library (`adempiere-shw`): confirmed
 - ✅ Target registry confirmed: `ghcr.io/adempiere/`
 
 **Scope:** 📦
-- 8 containerized services (4 `marcalwestf` confirmed + 4 `openls` pending)
+- 8 containerized services (4 `marcalwestf` need forks + 4 `openls` already in adempiere org)
 - 1 customization library repository (not containerized)
 - 1 gateway/orchestration repository
+
+**Simplified for openls services:** Repositories already exist in adempiere org — only need to change Docker publishing from Docker Hub → GitHub Container Registry (ghcr.io)
 
 ---
 
@@ -54,16 +56,16 @@ These are official or third-party images maintained by upstream projects. We do 
 | 3 | vue-grpc-server | `marcalwestf/adempiere-grpc-server:3.9.4.001-shw-1.0.30` | [link](https://hub.docker.com/u/marcalwestf) | `Systemhaus-Westfalia/adempiere-grpc-server` | `feature/shw/master` | `1.0.30` (in use) | `/data2/entwicklung/westfaliaRepository_2022-06/adempiere-grpc-server_SHW` |
 | 4 | vue-ui | `marcalwestf/adempiere-vue:0.0.5` | [link](https://hub.docker.com/u/marcalwestf) | `Systemhaus-Westfalia/adempiere-vue` | `develop` | `0.0.6` | `/data2/entwicklung/westfaliaRepository_2022-06/adempiere-vue_SHW` |
 
-#### Group 2: `openls/*` images (4 services) ⏸️ PENDING — ask developers for repo URLs
+#### Group 2: `openls/*` images (4 services) ✅ CONFIRMED — repositories already in adempiere org
 
-| # | Service | Current image | Docker Hub | Source repo | Notes |
-|---|---|---|---|---|---|
-| 5 | s3-gateway-rs | `openls/s3-gateway-rs:1.2.7` | [link](https://hub.docker.com/r/openls/s3-gateway-rs) | **TBC** | Not visible in public `openls` or `Systemhaus-Westfalia` orgs |
-| 6 | dictionary-rs | `openls/dictionary-rs:1.5.5` | [link](https://hub.docker.com/r/openls/dictionary-rs) | **TBC** | idem |
-| 7 | report-engine | `openls/adempiere-report-engine-service:alpine-1.3.7` | [link](https://hub.docker.com/r/openls/adempiere-report-engine-service) | **TBC** | idem |
-| 8 | adempiere-site | `openls/adempiere-landing-page:alpine-1.0.3` | [link](https://hub.docker.com/r/openls/adempiere-landing-page) | **TBC** | idem |
+| # | Service | Current image | Docker Hub | Source repo | Branch | Notes |
+|---|---|---|---|---|---|---|
+| 5 | s3-gateway-rs | `openls/s3-gateway-rs:1.2.7` | [link](https://hub.docker.com/r/openls/s3-gateway-rs) | `adempiere/s3_gateway_rs` | `main` | ✅ Already in adempiere org |
+| 6 | dictionary-rs | `openls/dictionary-rs:1.5.5` | [link](https://hub.docker.com/r/openls/dictionary-rs) | `adempiere/dictionary_rs` | `main` | ✅ Already in adempiere org (latest: 1.6.3) |
+| 7 | report-engine | `openls/adempiere-report-engine-service:alpine-1.3.7` | [link](https://hub.docker.com/r/openls/adempiere-report-engine-service) | `adempiere/adempiere-report-engine-service` | `main` | ✅ Already in adempiere org (latest: 1.4.1) |
+| 8 | adempiere-site | `openls/adempiere-landing-page:alpine-1.0.3` | [link](https://hub.docker.com/r/openls/adempiere-landing-page) | `adempiere/adempiere-site` | `main` | ⚠️ Repo exists but only has static site deployment (no Docker workflow) |
 
-**Note on `openls` namespace:** The `openls` Docker Hub namespace was created as a temporary workaround when artifacts were not allowed to be published to the `adempiere` GitHub org. The GitHub `openls` org exists (contact: info.openls@gmail.com) but the 4 service repos above are not visible in their public repos — they may be private or under different names. **Action required:** obtain GitHub repo URLs from developers.
+**Note on `openls` namespace:** The `openls` Docker Hub namespace was a temporary publishing location. All four services already have repositories in the `adempiere` GitHub organization. **Migration simplified:** These services only need to change their Docker publishing from Docker Hub (`openls/*`) to GitHub Container Registry (`ghcr.io/adempiere/*`). No repository forks needed.
 
 **Target registry for ALL 8 services:** `ghcr.io/adempiere/<name>` (GitHub Container Registry)
 **Packages page:** https://github.com/orgs/adempiere/packages
@@ -157,33 +159,46 @@ The migrated images will land at the same package names but will be **completely
 - Future image: `ghcr.io/adempiere/adempiere-vue:<tag>` (replaces legacy package)
 - `env_template.env` variable: `VUE_UI_IMAGE`
 
-### s3-gateway-rs ⏸️ PENDING
+### s3-gateway-rs ✅
 
 - Current image: `openls/s3-gateway-rs:1.2.7`
-- Source repo: **TBC — ask developers**
+- Source repo: `https://github.com/adempiere/s3_gateway_rs` ✅ Already in adempiere org
+- Branch: `main`
 - Future image: `ghcr.io/adempiere/s3-gateway-rs:<tag>`
 - `env_template.env` variable: `S3_GATEWAY_RS_IMAGE`
+- Migration: Change Docker publishing from Docker Hub → ghcr.io (no fork needed)
 
-### dictionary-rs ⏸️ PENDING
+### dictionary-rs ✅
 
 - Current image: `openls/dictionary-rs:1.5.5`
-- Source repo: **TBC — ask developers**
+- Source repo: `https://github.com/adempiere/dictionary_rs` ✅ Already in adempiere org
+- Branch: `main`
+- Latest version: `1.6.3`
 - Future image: `ghcr.io/adempiere/dictionary-rs:<tag>`
 - `env_template.env` variable: `DICTIONARY_RS_IMAGE`
+- Migration: Change Docker publishing from Docker Hub → ghcr.io (no fork needed)
 
-### adempiere-report-engine-service ⏸️ PENDING
+### adempiere-report-engine-service ✅
 
 - Current image: `openls/adempiere-report-engine-service:alpine-1.3.7`
-- Source repo: **TBC — ask developers**
+- Source repo: `https://github.com/adempiere/adempiere-report-engine-service` ✅ Already in adempiere org
+- Branch: `main`
+- Latest version: `1.4.1`
+- Publishes 3 images: alpine, ubuntu multiplatform, grpc-proxy
 - Future image: `ghcr.io/adempiere/adempiere-report-engine-service:<tag>`
 - `env_template.env` variable: `VUE_REPORT_GRPC_SERVER_IMAGE`
+- Migration: Change Docker publishing from Docker Hub → ghcr.io (no fork needed)
 
-### adempiere-landing-page ⏸️ PENDING
+### adempiere-landing-page ⚠️
 
 - Current image: `openls/adempiere-landing-page:alpine-1.0.3`
-- Source repo: **TBC — ask developers**
-- Future image: `ghcr.io/adempiere/adempiere-landing-page:<tag>`
+- Source repo: `https://github.com/adempiere/adempiere-site` ✅ Already in adempiere org
+- Branch: `main`
+- Future image: `ghcr.io/adempiere/adempiere-site:<tag>`
 - `env_template.env` variable: `ADEMPIERE_SITE_IMAGE`
+- **Discrepancy:** Repository currently only has `.github/workflows/deploy.yml` for static GitHub Pages deployment
+- **No Docker workflow found** - may need to add Docker publishing workflow or investigate if image comes from different source
+- Migration: Requires investigation before proceeding
 
 ---
 
@@ -420,17 +435,21 @@ Phase 5  Smoke test
    - `adempiere-processors-service`: `Systemhaus-Westfalia/adempiere-processors-service`, branch `feature/shw/customizations` ✅
    - `adempiere-grpc-server`: `Systemhaus-Westfalia/adempiere-grpc-server`, branch `feature/shw/master` ✅
    - `adempiere-vue`: `Systemhaus-Westfalia/adempiere-vue`, branch `develop` ✅
-2. ⏸️ **PENDING for `openls` services:** Obtain GitHub repo URLs from developers
-   - `s3-gateway-rs`: **TBC**
-   - `dictionary-rs`: **TBC**
-   - `adempiere-report-engine-service`: **TBC**
-   - `adempiere-landing-page`: **TBC**
+2. ✅ **Resolved for `openls` services:** All repositories confirmed - already exist in adempiere org
+   - `s3-gateway-rs`: `adempiere/s3_gateway_rs`, branch `main` ✅
+   - `dictionary-rs`: `adempiere/dictionary_rs`, branch `main` ✅
+   - `adempiere-report-engine-service`: `adempiere/adempiere-report-engine-service`, branch `main` ✅
+   - `adempiere-landing-page`: `adempiere/adempiere-site`, branch `main` ⚠️ (no Docker workflow - needs investigation)
 3. ✅ **Resolved:** Registry preference is `ghcr.io/adempiere/` (GitHub Container Registry)
 4. ✅ **Resolved:** `openls/` and `marcalwestf/` are both temporary Docker Hub namespaces — all 8 services migrate to `ghcr.io/adempiere/`
-5. Tag/version convention after migration: keep `shw-` prefix or drop it?
-6. Should the legacy `adempiere-vue` and `adempiere-grpc-server` packages be explicitly archived/deprecated before publishing the new versions?
-7. Does someone with admin rights to the `adempiere` GitHub org need to be involved from Phase 1?
-8. What is the target branch name in `adempiere/adempiere-ui-gateway` for this work — merge directly into `main` or via a feature branch?
+5. ⏸️ Tag/version convention after migration: keep `shw-` prefix or drop it?
+6. ⏸️ Should the legacy `adempiere-vue` and `adempiere-grpc-server` packages be explicitly archived/deprecated before publishing the new versions?
+7. ⏸️ Does someone with admin rights to the `adempiere` GitHub org need to be involved from Phase 1?
+8. ⏸️ What is the target branch name in `adempiere/adempiere-ui-gateway` for this work — merge directly into `main` or via a feature branch?
+9. 🆕 **adempiere-landing-page discrepancy:** The `adempiere/adempiere-site` repo only has static site deployment workflow, no Docker publishing. Need to verify:
+   - Is `openls/adempiere-landing-page:alpine-1.0.3` built from this repo?
+   - Does a Docker publishing workflow need to be added?
+   - Or is there a different source repository?
 
 ---
 
