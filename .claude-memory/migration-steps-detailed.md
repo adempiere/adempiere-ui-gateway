@@ -575,42 +575,36 @@ After all code changes are committed:
 ### File 2: `.github/workflows/publish.yml`
 
 #### Change 1: Docker Login - Registry
-- **Lines:** 102-107
-- **Before:**
+- **Location:** Lines 102-107 (the Docker login action block)
+- **What to change:** Replace the `with:` section (lines 104-107)
+- **Find this:**
   ```yaml
-  - name: Login to GitHub Container Registry
-    uses: docker/login-action@v2
-    with:
-      # CONFIGURE DOCKER SECRETS INTO REPOSITORY
-      username: ${{ secrets.DOCKER_USERNAME }}
-      password: ${{ secrets.DOCKER_TOKEN }}
+  with:
+    # CONFIGURE DOCKER SECRETS INTO REPOSITORY
+    username: ${{ secrets.DOCKER_USERNAME }}
+    password: ${{ secrets.DOCKER_TOKEN }}
   ```
-- **After:**
+- **Replace with:**
   ```yaml
-  - name: Login to GitHub Container Registry
-    uses: docker/login-action@v2
-    with:
-      registry: ghcr.io
-      username: ${{ github.actor }}
-      password: ${{ secrets.GITHUB_TOKEN }}
+  with:
+    registry: ghcr.io
+    username: ${{ github.actor }}
+    password: ${{ secrets.GITHUB_TOKEN }}
   ```
-- **Action:** Edit lines 104-107
 
 #### Change 2: Docker Image Tags
-- **Lines:** 116-117
-- **Before:**
+- **Location:** Lines 115-117 (the `tags:` section)
+- **What to change:** Replace lines 116-117 (the two tag lines under `tags: |`)
+- **Find this:**
   ```yaml
-  tags: |
-    ${{ secrets.DOCKER_REPO_ADEMPIERE_ZK }}:jetty-${{ github.event.release.tag_name }}
-    ${{ secrets.DOCKER_REPO_ADEMPIERE_ZK }}:jetty
+  ${{ secrets.DOCKER_REPO_ADEMPIERE_ZK }}:jetty-${{ github.event.release.tag_name }}
+  ${{ secrets.DOCKER_REPO_ADEMPIERE_ZK }}:jetty
   ```
-- **After:**
+- **Replace with:**
   ```yaml
-  tags: |
-    ghcr.io/adempiere/adempiere-zk:jetty-${{ github.event.release.tag_name }}
-    ghcr.io/adempiere/adempiere-zk:jetty
+  ghcr.io/adempiere/adempiere-zk:jetty-${{ github.event.release.tag_name }}
+  ghcr.io/adempiere/adempiere-zk:jetty
   ```
-- **Action:** Edit lines 116-117
 
 #### Change 3: Repository Secrets (GitHub UI)
 - **Action:** Delete the following repository secrets (Settings → Secrets):
@@ -687,18 +681,19 @@ After all code changes are committed:
 - **Action:** Edit lines 177-178, add registry line before username
 
 #### Change 2: Docker Image Tags
-- **Lines:** 186-187
-- **Before:**
+- **Location:** Lines 185-187 (the `tags:` section)
+- **What to change:** Replace lines 186-187 (the two tag lines under `tags: |`)
+- **Find this:**
   ```yaml
-  tags: |
-    ${{ secrets.DOCKER_HUB_REPO_NAME }}:alpine-${{ github.event.release.tag_name }}
+  ${{ secrets.DOCKER_HUB_REPO_NAME }}:alpine-${{ github.event.release.tag_name }}
+  ${{ secrets.DOCKER_HUB_REPO_NAME }}:alpine
   ```
-- **After:**
+- **Replace with:**
   ```yaml
-  tags: |
-    ghcr.io/adempiere/adempiere-processors-service:alpine-${{ github.event.release.tag_name }}
+  ghcr.io/adempiere/adempiere-processors-service:alpine-${{ github.event.release.tag_name }}
+  ghcr.io/adempiere/adempiere-processors-service:alpine
   ```
-- **Action:** Edit lines 186-187
+
 
 #### Change 3: Repository Secrets (GitHub UI)
 - **Action:** Delete the following repository secrets:
