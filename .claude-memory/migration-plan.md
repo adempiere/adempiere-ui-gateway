@@ -6,14 +6,14 @@
 
 **Progress:**
 - ✅ `openls` services (s3-gateway-rs, dictionary-rs, report-engine, landing-page): repositories already exist in adempiere org
-- ✅ `marcalwestf` services (adempiere-zk, processors, grpc-server, vue): source repos confirmed, local clones available
-- ✅ Customization library (`adempiere-shw`): source repo confirmed
+- ✅ `marcalwestf` services (adempiere-zk, processors, grpc-server, vue): source repositories in Systemhaus-Westfalia org
+- ✅ Customization library (`adempiere-shw`): source repository in Systemhaus-Westfalia org
 - ✅ Target registry: `ghcr.io/adempiere/`
 
 **Scope:** 📦
-- 8 containerized services (4 `openls` already in adempiere org + 4 `marcalwestf` need forks)
-- 1 customization library repository (not containerized)
-- 1 gateway/orchestration repository
+- 8 containerized services (4 `openls` already in adempiere org + 4 `marcalwestf` from Systemhaus-Westfalia → adempiere org)
+- 1 customization library repository (not containerized - publishes Maven artifacts instead of Docker images, from Systemhaus-Westfalia → adempiere org)
+- 1 gateway/orchestration repository (from Systemhaus-Westfalia → adempiere org)
 
 **Migration complexity:** `openls` services (simpler) only need Docker publishing changes; `marcalwestf` services (more complex) require repository forks and code merging
 
@@ -60,14 +60,17 @@ These are official or third-party images maintained by upstream projects. We do 
 
 | # | Service | Current image | Docker Hub | Source repo | Branch | Tag | Local directory |
 |---|---|---|---|---|---|---|---|
-| 5 | adempiere-zk | `marcalwestf/adempiere-shw-zk:jetty-3.9.4.001-shw-1.1.45` | [link](https://hub.docker.com/u/marcalwestf) | `Systemhaus-Westfalia/adempiere-shw-zk` | `master` | `3.9.4.001-shw-1.1.45` | `/data2/entwicklung/westfaliaRepository_2022-06/adempiere-shw-zk` |
-| 6 | processor | `marcalwestf/adempiere-processors-service:alpine-1.1.16` | [link](https://hub.docker.com/u/marcalwestf) | `Systemhaus-Westfalia/adempiere-processors-service` | `feature/shw/customizations` | `1.1.16` | `/data2/entwicklung/westfaliaRepository_2022-06/adempiere-processors-service_SHW` |
-| 7 | vue-grpc-server | `marcalwestf/adempiere-grpc-server:3.9.4.001-shw-1.0.30` | [link](https://hub.docker.com/u/marcalwestf) | `Systemhaus-Westfalia/adempiere-grpc-server` | `feature/shw/master` | `1.0.30` (in use) | `/data2/entwicklung/westfaliaRepository_2022-06/adempiere-grpc-server_SHW` |
-| 8 | vue-ui | `marcalwestf/adempiere-vue:0.0.5` | [link](https://hub.docker.com/u/marcalwestf) | `Systemhaus-Westfalia/adempiere-vue` | `develop` | `0.0.6` | `/data2/entwicklung/westfaliaRepository_2022-06/adempiere-vue_SHW` |
+| 5 | adempiere-zk | `marcalwestf/adempiere-shw-zk:jetty-3.9.4.001-shw-1.1.45` | [link](https://hub.docker.com/r/marcalwestf/adempiere-shw-zk) | `Systemhaus-Westfalia/adempiere-shw-zk` | `master` | `3.9.4.001-shw-1.1.45` | `/data2/entwicklung/westfaliaRepository_2022-06/adempiere-shw-zk` |
+| 6 | processor | `marcalwestf/adempiere-processors-service:alpine-1.1.16` | [link](https://hub.docker.com/r/marcalwestf/adempiere-processors-service) | `Systemhaus-Westfalia/adempiere-processors-service` | `feature/shw/customizations` | `1.1.16` | `/data2/entwicklung/westfaliaRepository_2022-06/adempiere-processors-service_SHW` |
+| 7 | vue-grpc-server | `marcalwestf/adempiere-grpc-server:3.9.4.001-shw-1.0.30` | [link](https://hub.docker.com/r/marcalwestf/adempiere-grpc-server) | `Systemhaus-Westfalia/adempiere-grpc-server` | `feature/shw/master` | `1.0.30` (in use) | `/data2/entwicklung/westfaliaRepository_2022-06/adempiere-grpc-server_SHW` |
+| 8 | vue-ui | `marcalwestf/adempiere-vue:0.0.5` | [link](https://hub.docker.com/r/marcalwestf/adempiere-vue) | `Systemhaus-Westfalia/adempiere-vue` | `develop` | `0.0.6` | `/data2/entwicklung/westfaliaRepository_2022-06/adempiere-vue_SHW` |
 
-**Note on `openls` namespace:** The `openls` Docker Hub namespace was a temporary publishing location. All four services already have repositories in the `adempiere` GitHub organization. **Migration simplified:** These services only need to change their Docker publishing from Docker Hub (`openls/*`) to GitHub Container Registry (`ghcr.io/adempiere/*`). No repository forks needed.
+**Note on `openls` namespace:** The `openls` Docker Hub namespace was a temporary publishing location. All four services already have repositories in the `adempiere` GitHub organization.
+
+**Migration simplified:** These services only need to change their Docker publishing from Docker Hub (`openls/*`) to GitHub Container Registry (`ghcr.io/adempiere/*`). No repository forks needed.
 
 **Target registry for ALL 8 services:** `ghcr.io/adempiere/<name>` (GitHub Container Registry)
+
 **Packages page:** https://github.com/orgs/adempiere/packages
 
 **Important context:**
