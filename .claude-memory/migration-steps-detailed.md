@@ -25,12 +25,12 @@ Each service section contains:
 1. [Version Creation Strategy](#version-creation-strategy)
 2. [Service: s3-gateway-rs](#service-s3-gateway-rs)
 3. [Service: dictionary-rs](#service-dictionary-rs)
-4. [Service: adempiere-report-engine-service](#service-adempiere-report-engine-service)
-5. [Service: adempiere-landing-page](#service-adempiere-landing-page)
-6. [Service: adempiere-shw-zk (ZK UI)](#service-adempiere-shw-zk-zk-ui)
-7. [Service: adempiere-processors-service](#service-adempiere-processors-service)
+4. [Service: adempiere-report-engine](#service-adempiere-report-engine)
+5. [Service: adempiere-site](#service-adempiere-site)
+6. [Service: adempiere-zk (ZK UI)](#service-adempiere-zk-zk-ui)
+7. [Service: adempiere-processor](#service-adempiere-processor)
 8. [Service: adempiere-grpc-server](#service-adempiere-grpc-server)
-9. [Service: adempiere-vue (Vue UI)](#service-adempiere-vue-vue-ui)
+9. [Service: vue-ui (Vue UI)](#service-vue-ui-vue-ui)
 10. [Library: adempiere-shw (Customization Library)](#library-adempiere-shw-customization-library)
 11. [Gateway: adempiere-ui-gateway](#gateway-adempiere-ui-gateway)
 
@@ -332,7 +332,7 @@ After all code changes are committed:
 
 ---
 
-## Service: adempiere-report-engine-service
+## Service: adempiere-report-engine
 
 **Docker Compose Service Name:** `adempiere-report-engine`
 **Repository Name:** `adempiere-report-engine-service`
@@ -510,7 +510,7 @@ After all code changes are committed:
 
 ---
 
-## Service: adempiere-landing-page
+## Service: adempiere-site
 
 **Docker Compose Service Name:** `adempiere-site`
 **Repository Name:** `adempiere-landing-page`
@@ -553,7 +553,7 @@ After all code changes are committed:
 
 ---
 
-## Service: adempiere-shw-zk (ZK UI)
+## Service: adempiere-zk (ZK UI)
 
 **Docker Compose Service Name:** `adempiere-zk`
 **Source Repository Name:** `adempiere-shw-zk`
@@ -653,7 +653,7 @@ After all code changes are committed:
 
 ---
 
-## Service: adempiere-processors-service
+## Service: adempiere-processor
 
 **Docker Compose Service Name:** `adempiere-processor`
 **Repository Name:** `adempiere-processors-service`
@@ -848,7 +848,7 @@ After all code changes are committed:
 
 ---
 
-## Service: adempiere-vue (Vue UI)
+## Service: vue-ui (Vue UI)
 
 **Docker Compose Service Name:** `vue-ui`
 **Repository Name:** `adempiere-vue`

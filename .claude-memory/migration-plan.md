@@ -150,7 +150,7 @@ These services already have repositories in the adempiere organization. Migratio
 - `env_template.env` variable: `DICTIONARY_RS_IMAGE`
 - Migration: Change Docker publishing from Docker Hub → ghcr.io
 
-### adempiere-report-engine-service
+### adempiere-report-engine (adempiere-report-engine-service repo)
 
 - Current image: `openls/adempiere-report-engine-service:alpine-1.3.7`
 - Source repo: `https://github.com/adempiere/adempiere-report-engine-service`
@@ -163,7 +163,7 @@ These services already have repositories in the adempiere organization. Migratio
 - `env_template.env` variable: `VUE_REPORT_GRPC_SERVER_IMAGE`
 - Migration: Change Docker publishing from Docker Hub → ghcr.io
 
-### adempiere-landing-page
+### adempiere-site (adempiere-landing-page repo)
 
 - Current image: `openls/adempiere-landing-page:alpine-1.0.3`
 - Source repo: `https://github.com/adempiere/adempiere-landing-page`
@@ -184,7 +184,7 @@ These services are maintained in Systemhaus-Westfalia repositories and need to b
 
 **Migration approach:** Fork source repository → Merge code → Update CI/CD workflows → Publish to ghcr.io
 
-### adempiere-shw-zk (ZK UI)
+### adempiere-zk (adempiere-shw-zk repo, ZK UI)
 
 - Current image: `marcalwestf/adempiere-shw-zk:jetty-3.9.4.001-shw-1.1.45`
 - Source repo: `https://github.com/Systemhaus-Westfalia/adempiere-shw-zk`
@@ -196,7 +196,7 @@ These services are maintained in Systemhaus-Westfalia repositories and need to b
 - `env_template.env` variable: `ADEMPIERE_ZK_IMAGE`
 - Note: image name currently has `shw-` infix — decide whether to drop or keep in new tag
 
-### adempiere-processors-service
+### adempiere-processor (adempiere-processors-service repo)
 
 - Current image: `marcalwestf/adempiere-processors-service:alpine-1.1.16`
 - Source repo: `https://github.com/Systemhaus-Westfalia/adempiere-processors-service`
@@ -220,7 +220,7 @@ These services are maintained in Systemhaus-Westfalia repositories and need to b
 - `env_template.env` variable: `VUE_BACKEND_GRPC_SERVER_IMAGE`
 - **Additional action:** apply Groovy `build.gradle` fix (add `groovy:3.0.22` + `groovy-jsr223:3.0.22`) before first release from new repo
 
-### adempiere-vue (Vue UI)
+### vue-ui (adempiere-vue repo, Vue UI)
 
 - Current image: `marcalwestf/adempiere-vue:0.0.5`
 - Source repo: `https://github.com/Systemhaus-Westfalia/adempiere-vue`
