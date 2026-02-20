@@ -45,7 +45,7 @@ These are official or third-party images maintained by upstream projects. We do 
 
 ### 1b — Images that MUST be migrated to `ghcr.io/adempiere/`
 
-**Context:** Both `openls/*` and `marcalwestf/*` Docker Hub namespaces were created as temporary publishing locations while the proper adempiere GitHub packages infrastructure was being set up. ALL artifacts from both namespaces will migrate to `ghcr.io/adempiere/` (GitHub Container Registry), visible at https://github.com/orgs/adempiere/packages.
+**Context:** Both `openls/*` and `marcalwestf/*` Docker Hub namespaces were created as temporary publishing locations while the proper adempiere GitHub packages infrastructure was being set up. ALL artifacts from both namespaces will migrate to `ghcr.io/adempiere/` (GitHub Container Registry). Migrated artifacts will be visible at https://github.com/orgs/adempiere/packages.
 
 **Total services to migrate:** 8
 
