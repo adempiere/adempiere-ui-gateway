@@ -347,131 +347,120 @@ After all code changes are committed:
 ### File 1: `.github/workflows/publish.yml`
 
 #### Change 1: Docker Login - Alpine Image
-- **Lines:** 152-157
-- **Before:**
+- **Location:** Lines 152-157 (the Docker login action block for alpine image)
+- **What to change:** Replace the `with:` section (lines 154-157 within this block)
+- **Find this:**
   ```yaml
-  - name: Login to Container Registry
-    uses: docker/login-action@v3
-    with:
-      # CONFIGURE DOCKER SECRETS INTO REPOSITORY
-      username: ${{ secrets.DOCKER_USERNAME }}
-      password: ${{ secrets.DOCKER_TOKEN }}
+  with:
+    # CONFIGURE DOCKER SECRETS INTO REPOSITORY
+    username: ${{ secrets.DOCKER_USERNAME }}
+    password: ${{ secrets.DOCKER_TOKEN }}
   ```
-- **After:**
+- **Replace with:**
   ```yaml
-  - name: Login to Container Registry
-    uses: docker/login-action@v3
-    with:
-      registry: ghcr.io
-      username: ${{ github.actor }}
-      password: ${{ secrets.GITHUB_TOKEN }}
+  with:
+    registry: ghcr.io
+    username: ${{ github.actor }}
+    password: ${{ secrets.GITHUB_TOKEN }}
   ```
-- **Action:** Edit lines 154-157
 
 #### Change 2: Alpine Image Tags
-- **Lines:** 171-172, 175
-- **Before:**
+- **Location:** Lines 171-175 (the `TAGS=` variable assignment section for alpine image)
+- **What to change:** Replace all three TAGS lines that use `${{ secrets.DOCKER_HUB_REPO_NAME }}`
+- **Find this:**
   ```yaml
   TAGS="${{ secrets.DOCKER_HUB_REPO_NAME }}:${{ github.event.release.tag_name }}-alpine"
   TAGS+=",${{ secrets.DOCKER_HUB_REPO_NAME }}:$CLEAN_BRANCH_NAME-alpine"
   ...
   TAGS+=",${{ secrets.DOCKER_HUB_REPO_NAME }}:alpine"
   ```
-- **After:**
+- **Replace with:**
   ```yaml
   TAGS="ghcr.io/adempiere/adempiere-report-engine-service:${{ github.event.release.tag_name }}-alpine"
   TAGS+=",ghcr.io/adempiere/adempiere-report-engine-service:$CLEAN_BRANCH_NAME-alpine"
   ...
   TAGS+=",ghcr.io/adempiere/adempiere-report-engine-service:alpine"
   ```
-- **Action:** Edit lines 171-172 and 175 to replace secret with hardcoded image name
 
 #### Change 3: Docker Login - Ubuntu Image
-- **Lines:** 218-223
-- **Before:**
+- **Location:** Lines 218-223 (the Docker login action block for ubuntu image)
+- **What to change:** Replace the `with:` section (lines 220-223 within this block)
+- **Find this:**
   ```yaml
-  - name: Login to Container Registry
-    uses: docker/login-action@v3
-    with:
-      # CONFIGURE DOCKER SECRETS INTO REPOSITORY
-      username: ${{ secrets.DOCKER_USERNAME }}
-      password: ${{ secrets.DOCKER_TOKEN }}
+  with:
+    # CONFIGURE DOCKER SECRETS INTO REPOSITORY
+    username: ${{ secrets.DOCKER_USERNAME }}
+    password: ${{ secrets.DOCKER_TOKEN }}
   ```
-- **After:**
+- **Replace with:**
   ```yaml
-  - name: Login to Container Registry
-    uses: docker/login-action@v3
-    with:
-      registry: ghcr.io
-      username: ${{ github.actor }}
-      password: ${{ secrets.GITHUB_TOKEN }}
+  with:
+    registry: ghcr.io
+    username: ${{ github.actor }}
+    password: ${{ secrets.GITHUB_TOKEN }}
   ```
-- **Action:** Edit lines 220-223
 
 #### Change 4: Ubuntu Image Tags
-- **Lines:** 237-238, 241
-- **Before:**
+- **Location:** Lines 237-241 (the `TAGS=` variable assignment section for ubuntu image)
+- **What to change:** Replace all three TAGS lines that use `${{ secrets.DOCKER_HUB_REPO_NAME }}`
+- **Find this:**
   ```yaml
   TAGS="${{ secrets.DOCKER_HUB_REPO_NAME }}:${{ github.event.release.tag_name }}"
   TAGS+=",${{ secrets.DOCKER_HUB_REPO_NAME }}:$CLEAN_BRANCH_NAME"
   ...
   TAGS+=",${{ secrets.DOCKER_HUB_REPO_NAME }}:latest"
   ```
-- **After:**
+- **Replace with:**
   ```yaml
   TAGS="ghcr.io/adempiere/adempiere-report-engine-service:${{ github.event.release.tag_name }}"
   TAGS+=",ghcr.io/adempiere/adempiere-report-engine-service:$CLEAN_BRANCH_NAME"
   ...
   TAGS+=",ghcr.io/adempiere/adempiere-report-engine-service:latest"
   ```
-- **Action:** Edit lines 237-238 and 241 to replace secret with hardcoded image name
 
 #### Change 5: Docker Login - gRPC Proxy Image
-- **Lines:** 309-314
-- **Before:**
+- **Location:** Lines 309-314 (the Docker login action block for gRPC proxy image)
+- **What to change:** Replace the `with:` section (lines 311-314 within this block)
+- **Find this:**
   ```yaml
-  - name: Login to Container Registry
-    uses: docker/login-action@v3
-    with:
-      # CONFIGURE DOCKER SECRETS INTO REPOSITORY
-      username: ${{ secrets.DOCKER_USERNAME }}
-      password: ${{ secrets.DOCKER_TOKEN }}
+  with:
+    # CONFIGURE DOCKER SECRETS INTO REPOSITORY
+    username: ${{ secrets.DOCKER_USERNAME }}
+    password: ${{ secrets.DOCKER_TOKEN }}
   ```
-- **After:**
+- **Replace with:**
   ```yaml
-  - name: Login to Container Registry
-    uses: docker/login-action@v3
-    with:
-      registry: ghcr.io
-      username: ${{ github.actor }}
-      password: ${{ secrets.GITHUB_TOKEN }}
+  with:
+    registry: ghcr.io
+    username: ${{ github.actor }}
+    password: ${{ secrets.GITHUB_TOKEN }}
   ```
-- **Action:** Edit lines 311-314
 
 #### Change 6: gRPC Proxy Image Tags
-- **Lines:** 328-329, 332
-- **Before:**
+- **Location:** Lines 328-332 (the `TAGS=` variable assignment section for gRPC proxy image)
+- **What to change:** Replace all three TAGS lines that use `${{ secrets.DOCKER_HUB_PROXY_REPO_NAME }}`
+- **Find this:**
   ```yaml
   TAGS="${{ secrets.DOCKER_HUB_PROXY_REPO_NAME }}:${{ github.event.release.tag_name }}"
   TAGS+=",${{ secrets.DOCKER_HUB_PROXY_REPO_NAME }}:$CLEAN_BRANCH_NAME"
   ...
   TAGS+=",${{ secrets.DOCKER_HUB_PROXY_REPO_NAME }}:latest"
   ```
-- **After:**
+- **Replace with:**
   ```yaml
   TAGS="ghcr.io/adempiere/adempiere-grpc-proxy:${{ github.event.release.tag_name }}"
   TAGS+=",ghcr.io/adempiere/adempiere-grpc-proxy:$CLEAN_BRANCH_NAME"
   ...
   TAGS+=",ghcr.io/adempiere/adempiere-grpc-proxy:latest"
   ```
-- **Action:** Edit lines 328-329 and 332 to replace secret with hardcoded image name
 
 #### Change 7: Repository Secrets (GitHub UI)
-- **Action:** Delete the following repository secrets:
-  - `DOCKER_USERNAME`
-  - `DOCKER_TOKEN`
-  - `DOCKER_HUB_REPO_NAME`
-  - `DOCKER_HUB_PROXY_REPO_NAME`
+- **Action:** Keep existing secrets for now (no changes needed)
+  - `DOCKER_USERNAME` - used by old Docker Hub workflow
+  - `DOCKER_TOKEN` - used by old Docker Hub workflow
+  - `DOCKER_HUB_REPO_NAME` - used by old Docker Hub workflow
+  - `DOCKER_HUB_PROXY_REPO_NAME` - used by old Docker Hub workflow
+- **Note:** These secrets are no longer used by the new ghcr.io workflow, but keep them until migration is fully tested. Consider deleting them later if Docker Hub publishing is permanently discontinued.
 
 ### Release Creation
 
@@ -609,11 +598,11 @@ After all code changes are committed:
   ```
 
 #### Change 3: Repository Secrets (GitHub UI)
-- **Action:** Delete the following repository secrets (Settings → Secrets):
-  - `DOCKER_USERNAME`
-  - `DOCKER_TOKEN`
-  - `DOCKER_REPO_ADEMPIERE_ZK`
-- **Note:** `GITHUB_TOKEN` is automatically available, no configuration needed
+- **Action:** Keep existing secrets for now (no changes needed)
+  - `DOCKER_USERNAME` - used by old Docker Hub workflow
+  - `DOCKER_TOKEN` - used by old Docker Hub workflow
+  - `DOCKER_REPO_ADEMPIERE_ZK` - used by old Docker Hub workflow
+- **Note:** These secrets are no longer used by the new ghcr.io workflow, but keep them until migration is fully tested. Consider deleting them later if Docker Hub publishing is permanently discontinued. `GITHUB_TOKEN` is automatically available for the new workflow, no configuration needed.
 
 ### Release Creation
 
@@ -668,19 +657,21 @@ After all code changes are committed:
 ### File 2: `.github/workflows/publish.yml`
 
 #### Change 1: Docker Login - Registry
-- **Lines:** 177-178
-- **Before:**
+- **Location:** Lines 175-178 (the Docker login action block)
+- **What to change:** Replace the `with:` section and add registry line
+- **Find this:**
   ```yaml
-  username: ${{ secrets.DOCKER_USERNAME }}
-  password: ${{ secrets.DOCKER_TOKEN }}
+  with:
+    username: ${{ secrets.DOCKER_USERNAME }}
+    password: ${{ secrets.DOCKER_TOKEN }}
   ```
-- **After:**
+- **Replace with:**
   ```yaml
-  registry: ghcr.io
-  username: ${{ github.actor }}
-  password: ${{ secrets.GITHUB_TOKEN }}
+  with:
+    registry: ghcr.io
+    username: ${{ github.actor }}
+    password: ${{ secrets.GITHUB_TOKEN }}
   ```
-- **Action:** Edit lines 177-178, add registry line before username
 
 #### Change 2: Docker Image Tags
 - **Location:** Lines 185-187 (the `tags:` section)
@@ -770,44 +761,69 @@ After all code changes are committed:
 
 **Note:** This service publishes 3 Docker images: alpine, ubuntu multiplatform, and grpc-proxy.
 
-#### Change 1: Docker Login - Alpine Image
-- **Lines:** 162, 204-205
-- **Before:**
+#### Change 1: Docker Login - All Three Images
+- **Location:** Three separate Docker login blocks (for alpine, ubuntu, and grpc-proxy images)
+- **What to change:** In each Docker login block, replace the `with:` section to add registry and change credentials
+- **Find this pattern (appears 3 times):**
   ```yaml
-  username: ${{ secrets.DOCKER_USERNAME }}
-  password: ${{ secrets.DOCKER_TOKEN }}
+  with:
+    username: ${{ secrets.DOCKER_USERNAME }}
+    password: ${{ secrets.DOCKER_TOKEN }}
   ```
-- **After:**
+- **Replace with (in all 3 locations):**
   ```yaml
-  registry: ghcr.io
-  username: ${{ github.actor }}
-  password: ${{ secrets.GITHUB_TOKEN }}
+  with:
+    registry: ghcr.io
+    username: ${{ github.actor }}
+    password: ${{ secrets.GITHUB_TOKEN }}
   ```
-- **Action:** Edit credentials in all 3 Docker login steps (alpine, ubuntu, grpc-proxy builds)
+- **Note:** Apply this change to all three Docker login actions in the workflow
 
 #### Change 2: Docker Image Tags - Alpine
-- **Lines:** Around 170-171 (alpine build)
-- **Before:** `${{ secrets.DOCKER_REPO_ADEMPIERE_GRPC_SERVER }}:alpine-${{ github.event.release.tag_name }}`
-- **After:** `ghcr.io/adempiere/adempiere-grpc-server:alpine-${{ github.event.release.tag_name }}`
-- **Action:** Edit all tag references to use `ghcr.io/adempiere/adempiere-grpc-server` prefix
+- **Location:** Alpine image tags section (around lines 170-171)
+- **What to change:** Replace all tag lines that use `${{ secrets.DOCKER_REPO_ADEMPIERE_GRPC_SERVER }}` with hardcoded image name
+- **Find this pattern:**
+  ```yaml
+  ${{ secrets.DOCKER_REPO_ADEMPIERE_GRPC_SERVER }}:alpine-${{ github.event.release.tag_name }}
+  ```
+- **Replace with:**
+  ```yaml
+  ghcr.io/adempiere/adempiere-grpc-server:alpine-${{ github.event.release.tag_name }}
+  ```
+- **Note:** Apply this replacement pattern to all alpine image tags in this section
 
 #### Change 3: Docker Image Tags - Ubuntu Multiplatform
-- **Lines:** Around 212-213
-- **Before:** Similar pattern with `${{ secrets.DOCKER_REPO_ADEMPIERE_GRPC_SERVER }}`
-- **After:** `ghcr.io/adempiere/adempiere-grpc-server:<tag>`
-- **Action:** Edit all tag references
+- **Location:** Ubuntu multiplatform image tags section (around lines 212-213)
+- **What to change:** Replace all tag lines that use `${{ secrets.DOCKER_REPO_ADEMPIERE_GRPC_SERVER }}` with hardcoded image name
+- **Find this pattern:**
+  ```yaml
+  ${{ secrets.DOCKER_REPO_ADEMPIERE_GRPC_SERVER }}:<tag>
+  ```
+- **Replace with:**
+  ```yaml
+  ghcr.io/adempiere/adempiere-grpc-server:<tag>
+  ```
+- **Note:** Apply this replacement pattern to all ubuntu image tags in this section
 
 #### Change 4: Docker Image Tags - gRPC Proxy
-- **Lines:** Around 274-275
-- **Before:** Similar pattern with secrets
-- **After:** `ghcr.io/adempiere/adempiere-grpc-server:grpc-proxy-<tag>`
-- **Action:** Edit all tag references
+- **Location:** gRPC proxy image tags section (around lines 274-275)
+- **What to change:** Replace all tag lines that use secrets with hardcoded image name
+- **Find this pattern:**
+  ```yaml
+  <secret>:grpc-proxy-<tag>
+  ```
+- **Replace with:**
+  ```yaml
+  ghcr.io/adempiere/adempiere-grpc-server:grpc-proxy-<tag>
+  ```
+- **Note:** Apply this replacement pattern to all grpc-proxy image tags in this section
 
 #### Change 5: Repository Secrets (GitHub UI)
-- **Action:** Delete the following repository secrets:
-  - `DOCKER_USERNAME`
-  - `DOCKER_TOKEN`
-  - `DOCKER_REPO_ADEMPIERE_GRPC_SERVER`
+- **Action:** Keep existing secrets for now (no changes needed)
+  - `DOCKER_USERNAME` - used by old Docker Hub workflow
+  - `DOCKER_TOKEN` - used by old Docker Hub workflow
+  - `DOCKER_REPO_ADEMPIERE_GRPC_SERVER` - used by old Docker Hub workflow
+- **Note:** These secrets are no longer used by the new ghcr.io workflow, but keep them until migration is fully tested. Consider deleting them later if Docker Hub publishing is permanently discontinued.
 
 ### Release Creation
 
@@ -853,70 +869,75 @@ After all code changes are committed:
 ### File 1: `.github/workflows/publish.yml`
 
 #### Change 1: Docker Login - Alpine Image
-- **Lines:** 128-133
-- **Before:**
+- **Location:** Lines 128-133 (the Docker login action block for alpine image)
+- **What to change:** Replace the `with:` section (lines 130-133 within this block)
+- **Find this:**
   ```yaml
-  - name: Login to GitHub Container Registry
-    uses: docker/login-action@v2
-    with:
-      # CONFIGURE DOCKER SECRETS INTO REPOSITORY
-      username: ${{ secrets.DOCKER_USERNAME }}
-      password: ${{ secrets.DOCKER_TOKEN }}
+  with:
+    # CONFIGURE DOCKER SECRETS INTO REPOSITORY
+    username: ${{ secrets.DOCKER_USERNAME }}
+    password: ${{ secrets.DOCKER_TOKEN }}
   ```
-- **After:**
+- **Replace with:**
   ```yaml
-  - name: Login to GitHub Container Registry
-    uses: docker/login-action@v2
-    with:
-      registry: ghcr.io
-      username: ${{ github.actor }}
-      password: ${{ secrets.GITHUB_TOKEN }}
+  with:
+    registry: ghcr.io
+    username: ${{ github.actor }}
+    password: ${{ secrets.GITHUB_TOKEN }}
   ```
-- **Action:** Edit lines 130-133, add registry line
 
 #### Change 2: Docker Login - Multiplatform Image
-- **Lines:** 166-171
-- **Before:** Same pattern with `DOCKER_USERNAME` and `DOCKER_TOKEN`
-- **After:** Same as Change 1
-- **Action:** Edit lines 168-171, add registry line
+- **Location:** Lines 166-171 (the Docker login action block for multiplatform image)
+- **What to change:** Replace the `with:` section (lines 168-171 within this block)
+- **Find this:**
+  ```yaml
+  with:
+    # CONFIGURE DOCKER SECRETS INTO REPOSITORY
+    username: ${{ secrets.DOCKER_USERNAME }}
+    password: ${{ secrets.DOCKER_TOKEN }}
+  ```
+- **Replace with:**
+  ```yaml
+  with:
+    registry: ghcr.io
+    username: ${{ github.actor }}
+    password: ${{ secrets.GITHUB_TOKEN }}
+  ```
 
 #### Change 3: Docker Image Tags - Alpine
-- **Lines:** 141-143
-- **Before:**
+- **Location:** Lines 141-143 (the `tags:` section for alpine image)
+- **What to change:** Replace lines 142-143 (the two tag lines under `tags: |`)
+- **Find this:**
   ```yaml
-  tags: |
-    ${{ secrets.DOCKER_REPO_FRONTEND }}:alpine
-    ${{ secrets.DOCKER_REPO_FRONTEND }}:alpine-${{ github.event.release.tag_name }}
+  ${{ secrets.DOCKER_REPO_FRONTEND }}:alpine
+  ${{ secrets.DOCKER_REPO_FRONTEND }}:alpine-${{ github.event.release.tag_name }}
   ```
-- **After:**
+- **Replace with:**
   ```yaml
-  tags: |
-    ghcr.io/adempiere/adempiere-vue:alpine
-    ghcr.io/adempiere/adempiere-vue:alpine-${{ github.event.release.tag_name }}
+  ghcr.io/adempiere/adempiere-vue:alpine
+  ghcr.io/adempiere/adempiere-vue:alpine-${{ github.event.release.tag_name }}
   ```
-- **Action:** Edit lines 142-143
 
 #### Change 4: Docker Image Tags - Multiplatform
-- **Lines:** 180-182
-- **Before:**
+- **Location:** Lines 180-182 (the `tags:` section for multiplatform image)
+- **What to change:** Replace lines 181-182 (the two tag lines under `tags: |`)
+- **Find this:**
   ```yaml
-  tags: |
-    ${{ secrets.DOCKER_REPO_FRONTEND }}:latest
-    ${{ secrets.DOCKER_REPO_FRONTEND }}:${{ github.event.release.tag_name }}
+  ${{ secrets.DOCKER_REPO_FRONTEND }}:latest
+  ${{ secrets.DOCKER_REPO_FRONTEND }}:${{ github.event.release.tag_name }}
   ```
-- **After:**
+- **Replace with:**
   ```yaml
-  tags: |
-    ghcr.io/adempiere/adempiere-vue:latest
-    ghcr.io/adempiere/adempiere-vue:${{ github.event.release.tag_name }}
+  ghcr.io/adempiere/adempiere-vue:latest
+  ghcr.io/adempiere/adempiere-vue:${{ github.event.release.tag_name }}
   ```
-- **Action:** Edit lines 181-182
 
 #### Change 5: Repository Secrets (GitHub UI)
-- **Action:** Delete the following repository secrets:
-  - `DOCKER_USERNAME`
-  - `DOCKER_TOKEN`
-  - `DOCKER_REPO_FRONTEND`
+- **Action:** Keep existing secrets for now (no changes needed)
+  - `DOCKER_USERNAME` - used by old Docker Hub workflow
+  - `DOCKER_TOKEN` - used by old Docker Hub workflow
+  - `DOCKER_REPO_FRONTEND` - used by old Docker Hub workflow
+- **Note:** These secrets are no longer used by the new ghcr.io workflow, but keep them until migration is fully tested. Consider deleting them later if Docker Hub publishing is permanently discontinued.
 
 ### Release Creation
 
@@ -1038,9 +1059,10 @@ After all code changes are committed:
 - **Action:** Edit lines 37-38
 
 #### Change 2: Repository Secrets (GitHub UI)
-- **Action:** Delete the following repository secrets:
-  - `DEPLOY_USER`
-  - `DEPLOY_TOKEN`
+- **Action:** Keep existing secrets for now (no changes needed)
+  - `DEPLOY_USER` - used by old Maven publishing workflow
+  - `DEPLOY_TOKEN` - used by old Maven publishing workflow
+- **Note:** These secrets are no longer used by the new GitHub Packages workflow (which uses `GITHUB_TOKEN`), but keep them until migration is fully tested. Consider deleting them later if the old Maven publishing is permanently discontinued.
 
 #### Change 3: Publishing Destination
 - **Verification:** The `libraryRepo` variable in `build.gradle` (line 33) controls where artifacts are published
