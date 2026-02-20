@@ -5,9 +5,9 @@
 **Goal:** 🎯 Move `Systemhaus-Westfalia/adempiere-ui-gateway` (branch `adempiere-trunk`) to its upstream origin `adempiere/adempiere-ui-gateway`.
 
 **Repository Status:**
-- ✅ `openls` group: all 4 repositories confirmed in adempiere org
+- ✅ `openls` group: all 4 repositories in adempiere org
   - `s3_gateway_rs`, `dictionary_rs`, `adempiere-report-engine-service`, `adempiere-landing-page`
-- ✅ `marcalwestf` group: all 4 source repositories confirmed in Systemhaus-Westfalia org
+- ✅ `marcalwestf` group: all 4 source repositories in Systemhaus-Westfalia org
   - `adempiere-shw-zk`, `adempiere-processors-service`, `adempiere-grpc-server`, `adempiere-vue`
 - ✅ Customization library: `adempiere-shw` repository in Systemhaus-Westfalia org
 - ✅ Target registry: `ghcr.io/adempiere/`
@@ -204,7 +204,7 @@ These services are maintained in Systemhaus-Westfalia repositories and need to b
 - Branch: `feature/shw/master`
 - Tag: `1.0.30` (in use)
 - Local directory: `/data2/entwicklung/westfaliaRepository_2022-06/adempiere-grpc-server_SHW`
-- Workflows confirmed: `ci.yml` and `publish.yml`
+- Workflows: `ci.yml` and `publish.yml`
 - Future image: `ghcr.io/adempiere/adempiere-grpc-server:<tag>` (replaces legacy package)
 - `env_template.env` variable: `VUE_BACKEND_GRPC_SERVER_IMAGE`
 - **Additional action:** apply Groovy `build.gradle` fix (add `groovy:3.0.22` + `groovy-jsr223:3.0.22`) before first release from new repo
@@ -400,7 +400,7 @@ For each of the **8 service repos**, only `publish.yml` needs significant change
 | Publish trigger branch | current SHW/openls branch | agreed adempiere branch (TBD, constraint c) |
 | Version tag | `shw-x.y.z` suffix (marcalwestf) | agreed community convention (TBD, constraint c) |
 
-**Registry confirmed:** `ghcr.io/adempiere/` (GitHub Container Registry) — artifacts visible at https://github.com/orgs/adempiere/packages
+**Target registry:** `ghcr.io/adempiere/` (GitHub Container Registry) — artifacts visible at https://github.com/orgs/adempiere/packages
 
 **Open question (constraint e):** Are the CI/CD workflows in `adempiere` org repos more or less up-to-date than the SHW ones? Need to compare before deciding which is the base for the adapted workflow.
 
@@ -421,7 +421,7 @@ For each of the **8 service repos**, only `publish.yml` needs significant change
 ```
 Phase 1  Audit
          ├── Confirm source repo names/branches for all 8 services
-         ├── Registry confirmed: ghcr.io/adempiere/ (GitHub Container Registry)
+         ├── Target registry: ghcr.io/adempiere/ (GitHub Container Registry)
          └── Identify which services already have repos in adempiere org
 
 Phase 2  Per-service (8 services — can run in parallel)
@@ -449,7 +449,7 @@ Phase 5  Smoke test
 
 ## Open Questions (to resolve before or during Phase 1)
 
-1. ✅ **Resolved for `marcalwestf` services:** Source repos and branches confirmed
+1. ✅ **Resolved for `marcalwestf` services:** Source repos and branches identified
    - `adempiere-shw-zk`: `Systemhaus-Westfalia/adempiere-shw-zk`, branch `master` ✅
    - `adempiere-processors-service`: `Systemhaus-Westfalia/adempiere-processors-service`, branch `feature/shw/customizations` ✅
    - `adempiere-grpc-server`: `Systemhaus-Westfalia/adempiere-grpc-server`, branch `feature/shw/master` ✅
