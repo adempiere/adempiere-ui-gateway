@@ -133,8 +133,9 @@ For each service repository:
 
 6. **Publish Release**
    - Click "Publish release"
-   - GitHub Actions workflow (`.github/workflows/publish.yml`) will trigger automatically
+   - GitHub Actions workflow (named `publish.yml`, `publish.yaml`, `release.yml`, or `release.yaml` depending on repository) will trigger automatically
    - Monitor the Actions tab to verify successful build and publication
+   - **Note:** Workflow naming is inconsistent across repositories - standardization is a migration goal
 
 ### Verification After Release
 

@@ -99,7 +99,7 @@ These are official or third-party images maintained by upstream projects. We do 
 - Four `marcalwestf` repositories (need repository migration): `adempiere-shw-zk`, `adempiere-processors-service`, `adempiere-grpc-server`, `adempiere-vue` — must be forked/merged from Systemhaus-Westfalia to adempiere org, then change Docker image publishing from Docker Hub (`marcalwestf/*`) to GitHub Container Registry (`ghcr.io/adempiere/*`)
 - One customization library repository: `adempiere-shw` must be forked from Systemhaus-Westfalia to adempiere org (as `adempiere-customizations`)
 
-**e)** CI/CD: use Systemhaus-Westfalia workflows as the reference (they are more up to date than adempiere's). Adapt `publish.yml` to publish to the adempiere org. Compare with adempiere's existing workflow files.
+**e)** CI/CD: use Systemhaus-Westfalia workflows as the reference (they are more up to date than adempiere's). Adapt the publishing workflow (named `publish.yml` or `release.yml` depending on repository) to publish to the adempiere org. Compare with adempiere's existing workflow files. **Goal:** Standardize workflow filename across all repositories (decide on either `publish.yml` or `release.yml` as the unified convention).
 
 **f)** `svfe-api-firmador` (El Salvador e-invoicing) is NOT migrated — it stays Westfalia-specific.
 
@@ -113,7 +113,7 @@ These are official or third-party images maintained by upstream projects. We do 
 2. Fork / create the repo under `adempiere` GitHub org (if not already there)
 3. Decide target branch name and tag convention (constraint c)
 4. Push code into the new repo
-5. Adapt `publish.yml` to publish Docker image to `ghcr.io/adempiere/<name>` (see Part 5)
+5. Adapt publishing workflow (`publish.yml` or `release.yml`) to publish Docker image to `ghcr.io/adempiere/<name>` (see Part 5)
 6. Add required org-level secrets
 7. Cut a release and verify image is accessible at `ghcr.io/adempiere/<name>`
 8. Update the corresponding image variable in `env_template.env`
@@ -124,7 +124,7 @@ These are official or third-party images maintained by upstream projects. We do 
 
 These services already have repositories in the adempiere organization. Migration only requires updating CI/CD workflows to publish to GitHub Container Registry.
 
-**Migration approach:** Update `.github/workflows/publish.yml` → Change Docker Hub to ghcr.io → Create release
+**Migration approach:** Update `.github/workflows/publish.yml` (or `release.yml`) → Change Docker Hub to ghcr.io → Create release
 
 ### s3-gateway-rs
 
@@ -402,7 +402,7 @@ Additionally, `adempiere-shw-zk` references the official ADempiere ZK UI:
 
 ## Part 5 — CI/CD Changes for Service Repos (constraint e)
 
-For each of the **8 service repos**, only `publish.yml` needs significant changes. `ci.yml` (build/test) usually requires no registry changes.
+For each of the **8 service repos**, only the publishing workflow (`publish.yml` or `release.yml`) needs significant changes. `ci.yml` (build/test) usually requires no registry changes.
 
 | What | From | To |
 |---|---|---|
@@ -440,7 +440,7 @@ Phase 2  Per-service (8 services — can run in parallel)
          ├── Fork/create repo under adempiere org
          ├── Decide branch name + tag convention (constraint c)
          ├── Push code
-         ├── Adapt publish.yml → publish to ghcr.io/adempiere/<name>
+         ├── Adapt publishing workflow → publish to ghcr.io/adempiere/<name>
          ├── Add org secrets
          └── Cut release → verify image at ghcr.io/adempiere/<name>
 
