@@ -1162,6 +1162,8 @@ The env files reference specific version tags. Those versions must exist before 
 
 The migration should follow this sequence to minimize dependencies. **Each service must complete ALL steps (code changes, commit, release creation, image publication, verification) before moving to the next service.**
 
+**Note:** The service numbers below (Service 1, Service 2, etc.) indicate the **recommended migration sequence**, starting with simpler migrations and progressing to more complex ones.
+
 ### Phase 1: Foundation (Customization Library)
 
 **Service 1: adempiere-shw → adempiere-customizations**
@@ -1222,7 +1224,7 @@ For each service below, follow this workflow:
 
 ### Phase 4: Gateway Orchestration (VERSION REFERENCES)
 
-**⚠️ CRITICAL:** Do NOT start this phase until ALL services (Services 2-9: both openls and marcalwestf) have published Docker images.
+**⚠️ CRITICAL:** Do NOT start this phase until ALL 8 containerized services (both openls and marcalwestf groups) have published Docker images to ghcr.io.
 
 **Service 10: adempiere-ui-gateway**
 - **Action:** Update `env_template.env` with all new image references
