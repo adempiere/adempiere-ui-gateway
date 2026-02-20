@@ -45,9 +45,9 @@ These are official or third-party images maintained by upstream projects. We do 
 
 ### 1b — Images that MUST be migrated to `ghcr.io/adempiere/`
 
-**Context:** Both `openls/*` and `marcalwestf/*` Docker Hub namespaces were created as temporary publishing locations while the proper adempiere GitHub packages infrastructure was being set up. ALL artifacts from both namespaces will migrate to `ghcr.io/adempiere/` (GitHub Container Registry). Migrated artifacts will be visible at https://github.com/orgs/adempiere/packages.
+**Context:** Both `openls/*` and `marcalwestf/*` Docker Hub namespaces were created as temporary publishing locations while the proper adempiere GitHub packages infrastructure was being set up. ALL Docker images from both namespaces will be republished to `ghcr.io/adempiere/` (GitHub Container Registry). Published images will be visible at https://github.com/orgs/adempiere/packages.
 
-**Total services to migrate:** 8
+**Total containerized services:** 8 (4 openls + 4 marcalwestf)
 
 #### Group 1: `openls/*` images (4 services) — Already in adempiere org
 
@@ -94,7 +94,10 @@ These are official or third-party images maintained by upstream projects. We do 
 
 **c)** Branch names and tag/version conventions for the migrated repos are TBD — must be decided before any release is cut.
 
-**d)** Eight containerized services must be migrated: four from `marcalwestf` (adempiere-zk, adempiere-processors-service, adempiere-grpc-server, adempiere-vue) and four from `openls` (s3-gateway-rs, dictionary-rs, adempiere-report-engine-service, adempiere-landing-page). Additionally, one customization library (adempiere-customizations) must be migrated.
+**d)** Eight containerized services with two different migration patterns:
+- Four `openls` repositories (already in adempiere org): `s3_gateway_rs`, `dictionary_rs`, `adempiere-report-engine-service`, `adempiere-landing-page` — only need to change Docker image publishing from Docker Hub (`openls/*`) to GitHub Container Registry (`ghcr.io/adempiere/*`)
+- Four `marcalwestf` repositories (need repository migration): `adempiere-shw-zk`, `adempiere-processors-service`, `adempiere-grpc-server`, `adempiere-vue` — must be forked/merged from Systemhaus-Westfalia to adempiere org, then change Docker image publishing from Docker Hub (`marcalwestf/*`) to GitHub Container Registry (`ghcr.io/adempiere/*`)
+- One customization library repository: `adempiere-shw` must be forked from Systemhaus-Westfalia to adempiere org (as `adempiere-customizations`)
 
 **e)** CI/CD: use Systemhaus-Westfalia workflows as the reference (they are more up to date than adempiere's). Adapt `publish.yml` to publish to the adempiere org. Compare with adempiere's existing workflow files.
 
@@ -469,7 +472,7 @@ Phase 5  Smoke test
    - `adempiere-report-engine-service`: `adempiere/adempiere-report-engine-service`, branch `main`
    - `adempiere-landing-page`: `adempiere/adempiere-site`, branch `main` (⚠️ no Docker workflow - needs investigation)
 3. ✅ **Resolved:** Registry preference is `ghcr.io/adempiere/` (GitHub Container Registry)
-4. ✅ **Resolved:** `openls/` and `marcalwestf/` are both temporary Docker Hub namespaces — all 8 services migrate to `ghcr.io/adempiere/`
+4. ✅ **Resolved:** `openls/` and `marcalwestf/` are both temporary Docker Hub namespaces — all 8 services will republish Docker images to `ghcr.io/adempiere/`
 5. ⏸️ Tag/version convention after migration: keep `shw-` prefix or drop it?
 6. ⏸️ Should the legacy `adempiere-vue` and `adempiere-grpc-server` packages be explicitly archived/deprecated before publishing the new versions?
 7. ⏸️ Does someone with admin rights to the `adempiere` GitHub org need to be involved from Phase 1?
