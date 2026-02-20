@@ -233,7 +233,7 @@ docker images | grep adempiere
   - `DOCKER_REPO_ADEMPIERE_ZK`
 - **Note:** `GITHUB_TOKEN` is automatically available, no configuration needed
 
-### Step 3: Create Release
+### Release Creation
 
 After all code changes are committed:
 
@@ -317,7 +317,7 @@ After all code changes are committed:
   - `DOCKER_TOKEN`
   - `DOCKER_HUB_REPO_NAME`
 
-### Step 3: Create Release
+### Release Creation
 
 After all code changes are committed:
 
@@ -419,7 +419,7 @@ After all code changes are committed:
   - `DOCKER_TOKEN`
   - `DOCKER_REPO_ADEMPIERE_GRPC_SERVER`
 
-### Step 3: Create Release
+### Release Creation
 
 After all code changes are committed:
 
@@ -525,7 +525,7 @@ After all code changes are committed:
   - `DOCKER_TOKEN`
   - `DOCKER_REPO_FRONTEND`
 
-### Step 2: Create Release
+### Release Creation
 
 After all code changes are committed:
 
@@ -757,7 +757,7 @@ Once source repository is identified:
 - **Verification:** The `libraryRepo` variable in `build.gradle` (line 33) controls where artifacts are published
 - **Action:** Verify that after build.gradle changes, artifacts will publish to `maven.pkg.github.com/adempiere/adempiere-customizations`
 
-### Step 4: Create Release
+### Release Creation
 
 After all code changes are committed:
 
