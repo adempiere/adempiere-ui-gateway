@@ -162,10 +162,15 @@ docker images | grep adempiere
 ## Service: adempiere-shw-zk (ZK UI)
 
 **Source Repository:** `https://github.com/Systemhaus-Westfalia/adempiere-shw-zk`
+
 **Source Branch:** `master`
+
 **Target Repository:** `https://github.com/adempiere/adempiere-zk` (fork and customize)
+
 **Target Branch:** TBD
+
 **Current Docker Image:** `marcalwestf/adempiere-shw-zk:jetty-3.9.4.001-shw-1.1.45`
+
 **Target Docker Image:** `ghcr.io/adempiere/adempiere-zk:jetty-<version>`
 
 ### File 1: `build.gradle`
@@ -256,10 +261,15 @@ After all code changes are committed:
 ## Service: adempiere-processors-service
 
 **Source Repository:** `https://github.com/Systemhaus-Westfalia/adempiere-processors-service`
+
 **Source Branch:** `feature/shw/customizations`
+
 **Target Repository:** `https://github.com/adempiere/adempiere-processors-service` (merge changes)
+
 **Target Branch:** TBD
+
 **Current Docker Image:** `marcalwestf/adempiere-processors-service:alpine-1.1.16`
+
 **Target Docker Image:** `ghcr.io/adempiere/adempiere-processors-service:alpine-<version>`
 
 ### File 1: `build.gradle`
@@ -338,10 +348,15 @@ After all code changes are committed:
 ## Service: adempiere-grpc-server
 
 **Source Repository:** `https://github.com/Systemhaus-Westfalia/adempiere-grpc-server`
+
 **Source Branch:** `feature/shw/master`
+
 **Target Repository:** `https://github.com/adempiere/adempiere-grpc-server` (merge changes)
+
 **Target Branch:** TBD
+
 **Current Docker Image:** `marcalwestf/adempiere-grpc-server:3.9.4.001-shw-1.0.30`
+
 **Target Docker Image:** `ghcr.io/adempiere/adempiere-grpc-server:3.9.4.001-<version>`
 
 **⚠️ Special Note:** This service requires the Groovy dependency fix (add `groovy:3.0.22` and `groovy-jsr223:3.0.22` dependencies).
@@ -441,10 +456,15 @@ After all code changes are committed:
 ## Service: adempiere-vue (Vue UI)
 
 **Source Repository:** `https://github.com/Systemhaus-Westfalia/adempiere-vue`
+
 **Source Branch:** `develop`
+
 **Target Repository:** `https://github.com/adempiere/adempiere-vue` (merge changes)
+
 **Target Branch:** TBD
+
 **Current Docker Image:** `marcalwestf/adempiere-vue:0.0.5`
+
 **Target Docker Image:** `ghcr.io/adempiere/adempiere-vue:<version>`
 
 **Note:** This is a Node.js/Vue.js project (uses `package.json`, not `build.gradle`). No Maven dependencies to change.
@@ -545,10 +565,15 @@ After all code changes are committed:
 ## Service: s3-gateway-rs
 
 **Source Repository:** Unknown (openls temporary namespace)
+
 **Source Branch:** TBD
+
 **Target Repository:** `https://github.com/adempiere/adempiere-s3-gateway` (to be created)
+
 **Target Branch:** TBD
+
 **Current Docker Image:** `openls/s3-gateway-rs:1.2.7`
+
 **Target Docker Image:** `ghcr.io/adempiere/adempiere-s3-gateway:<version>`
 
 **⚠️ Action Required:** User must identify the source repository and branch for this service.
@@ -569,10 +594,15 @@ Once source repository is identified:
 ## Service: dictionary-rs
 
 **Source Repository:** Unknown (openls temporary namespace)
+
 **Source Branch:** TBD
+
 **Target Repository:** `https://github.com/adempiere/adempiere-dictionary-service` (to be created)
+
 **Target Branch:** TBD
+
 **Current Docker Image:** `openls/dictionary-rs:1.5.5`
+
 **Target Docker Image:** `ghcr.io/adempiere/adempiere-dictionary-service:<version>`
 
 **⚠️ Action Required:** User must identify the source repository and branch for this service.
@@ -593,10 +623,15 @@ Once source repository is identified:
 ## Service: adempiere-report-engine-service
 
 **Source Repository:** Unknown (openls temporary namespace)
+
 **Source Branch:** TBD
+
 **Target Repository:** `https://github.com/adempiere/adempiere-report-engine-service` (verify/create)
+
 **Target Branch:** TBD
+
 **Current Docker Image:** `openls/adempiere-report-engine-service:alpine-1.3.7`
+
 **Target Docker Image:** `ghcr.io/adempiere/adempiere-report-engine-service:alpine-<version>`
 
 **⚠️ Action Required:** User must identify the source repository and branch for this service.
@@ -617,10 +652,15 @@ Once source repository is identified:
 ## Service: adempiere-landing-page
 
 **Source Repository:** Unknown (openls temporary namespace)
+
 **Source Branch:** TBD
+
 **Target Repository:** `https://github.com/adempiere/adempiere-landing-page` (to be created)
+
 **Target Branch:** TBD
+
 **Current Docker Image:** `openls/adempiere-landing-page:alpine-1.0.3`
+
 **Target Docker Image:** `ghcr.io/adempiere/adempiere-landing-page:alpine-<version>`
 
 **⚠️ Action Required:** User must identify the source repository and branch for this service.
@@ -641,10 +681,15 @@ Once source repository is identified:
 ## Library: adempiere-shw (Customization Library)
 
 **Source Repository:** `https://github.com/Systemhaus-Westfalia/adempiere-shw`
+
 **Source Branch:** `main`
+
 **Target Repository:** `https://github.com/adempiere/adempiere-customizations` (generic template)
+
 **Target Branch:** TBD
+
 **Current Maven Artifact:** `com.shw:adempiere-shw.shw_libs:3.9.4.001-1.1.48`
+
 **Target Maven Artifact:** `io.github.adempiere:adempiere-customizations.libs:<version>` (as stub)
 
 **Special Handling:** This repository should be migrated as a **generic template** with customization stubs, not with SHW-specific implementations.
@@ -768,9 +813,13 @@ After all code changes are committed:
 ## Gateway: adempiere-ui-gateway
 
 **Source Repository:** `https://github.com/Systemhaus-Westfalia/adempiere-ui-gateway`
+
 **Source Branch:** `adempiere-trunk`
+
 **Target Repository:** `https://github.com/adempiere/adempiere-ui-gateway`
+
 **Target Branch:** TBD
+
 **Purpose:** Main orchestration stack that references all containerized services
 
 ---
