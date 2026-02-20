@@ -7,7 +7,9 @@
 
 ## Purpose
 
-This document provides precise, line-by-line instructions for migrating the ADempiere UI Gateway stack from Systemhaus-Westfalia repositories to the official adempiere organization.
+This document provides precise, line-by-line instructions for migrating the ADempiere UI Gateway stack to publish all Docker images to the official adempiere organization's GitHub Container Registry. This includes:
+- Four repositories already in adempiere org (openls namespace) that only need Docker publishing changes
+- Four repositories from Systemhaus-Westfalia that need both repository migration and Docker publishing changes
 
 Each service section contains:
 - **File paths** - exact location of files to modify
