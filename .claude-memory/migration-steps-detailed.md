@@ -168,7 +168,7 @@ docker images | grep adempiere
 
 - **Source Repository:** `https://github.com/adempiere/s3_gateway_rs` ✅ Already in adempiere org
 - **Source Branch:** `main`
-- **Target Repository:** Same repository (no fork needed)
+- **Target Repository:** `https://github.com/adempiere/s3_gateway_rs` (same - no fork needed)
 - **Target Branch:** `main` (or create new branch for migration)
 - **Current Docker Image:** `openls/s3-gateway-rs:1.2.7` (Docker Hub)
 - **Target Docker Image:** `ghcr.io/adempiere/s3-gateway-rs:<version>` (GitHub Container Registry)
@@ -253,7 +253,7 @@ After all code changes are committed:
 
 - **Source Repository:** `https://github.com/adempiere/dictionary_rs` ✅ Already in adempiere org
 - **Source Branch:** `main`
-- **Target Repository:** Same repository (no fork needed)
+- **Target Repository:** `https://github.com/adempiere/dictionary_rs` (same - no fork needed)
 - **Target Branch:** `main` (or create new branch for migration)
 - **Current Docker Image:** `openls/dictionary-rs:1.5.5` (Docker Hub)
 - **Target Docker Image:** `ghcr.io/adempiere/dictionary-rs:<version>` (GitHub Container Registry)
@@ -338,7 +338,7 @@ After all code changes are committed:
 
 - **Source Repository:** `https://github.com/adempiere/adempiere-report-engine-service` ✅ Already in adempiere org
 - **Source Branch:** `main`
-- **Target Repository:** Same repository (no fork needed)
+- **Target Repository:** `https://github.com/adempiere/adempiere-report-engine-service` (same - no fork needed)
 - **Target Branch:** `main` (or create new branch for migration)
 - **Current Docker Images:** (Docker Hub)
   - `openls/adempiere-report-engine-service:alpine-1.3.7`
@@ -516,7 +516,7 @@ After all code changes are committed:
 
 - **Source Repository:** `https://github.com/adempiere/adempiere-landing-page` ✅ Already in adempiere org
 - **Source Branch:** `main`
-- **Target Repository:** Same repository (no fork needed)
+- **Target Repository:** `https://github.com/adempiere/adempiere-landing-page` (same - no fork needed)
 - **Target Branch:** `main`
 - **Current Docker Image:** `openls/adempiere-landing-page:alpine-1.0.3` (env_template.env line 317: `ADEMPIERE_SITE_IMAGE`)
 - **Target Docker Image:** `ghcr.io/adempiere/adempiere-landing-page:alpine-<version>` (GitHub Container Registry)

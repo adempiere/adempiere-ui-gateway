@@ -127,46 +127,51 @@ These services already have repositories in the adempiere organization. Migratio
 
 - Current image: `openls/s3-gateway-rs:1.2.7`
 - Source repo: `https://github.com/adempiere/s3_gateway_rs`
+- Target repo: `https://github.com/adempiere/s3_gateway_rs` (same - no fork needed)
 - Branch: `main`
 - Current repository version: `1.2.7`
 - Suggested migration version: `1.2.8`
 - Future image: `ghcr.io/adempiere/s3-gateway-rs:<tag>`
 - `env_template.env` variable: `S3_GATEWAY_RS_IMAGE`
-- Migration: Change Docker publishing from Docker Hub → ghcr.io (no fork needed)
+- Migration: Change Docker publishing from Docker Hub → ghcr.io
 
 ### dictionary-rs
 
 - Current image: `openls/dictionary-rs:1.5.5`
 - Source repo: `https://github.com/adempiere/dictionary_rs`
+- Target repo: `https://github.com/adempiere/dictionary_rs` (same - no fork needed)
 - Branch: `main`
 - Current repository version: `1.6.3`
 - Suggested migration version: `1.6.4`
 - Future image: `ghcr.io/adempiere/dictionary-rs:<tag>`
 - `env_template.env` variable: `DICTIONARY_RS_IMAGE`
-- Migration: Change Docker publishing from Docker Hub → ghcr.io (no fork needed)
+- Migration: Change Docker publishing from Docker Hub → ghcr.io
 
 ### adempiere-report-engine-service
 
 - Current image: `openls/adempiere-report-engine-service:alpine-1.3.7`
 - Source repo: `https://github.com/adempiere/adempiere-report-engine-service`
+- Target repo: `https://github.com/adempiere/adempiere-report-engine-service` (same - no fork needed)
 - Branch: `main`
 - Current repository version: `1.4.1`
 - Suggested migration version: `1.4.2`
 - Publishes 3 images: alpine, ubuntu multiplatform, grpc-proxy
 - Future image: `ghcr.io/adempiere/adempiere-report-engine-service:<tag>`
 - `env_template.env` variable: `VUE_REPORT_GRPC_SERVER_IMAGE`
-- Migration: Change Docker publishing from Docker Hub → ghcr.io (no fork needed)
+- Migration: Change Docker publishing from Docker Hub → ghcr.io
 
 ### adempiere-landing-page
 
 - Current image: `openls/adempiere-landing-page:alpine-1.0.3`
-- Source repo: `https://github.com/adempiere/adempiere-site`
+- Source repo: `https://github.com/adempiere/adempiere-landing-page`
+- Target repo: `https://github.com/adempiere/adempiere-landing-page` (same - no fork needed)
 - Branch: `main`
-- Future image: `ghcr.io/adempiere/adempiere-site:<tag>`
+- Local directory: `/data2/entwicklung/westfaliaRepository_2022-06/adempiere-landing-page_ADEMPIERE`
+- Current repository version: `1.0.3`
+- Suggested migration version: `1.0.4`
+- Future image: `ghcr.io/adempiere/adempiere-landing-page:<tag>`
 - `env_template.env` variable: `ADEMPIERE_SITE_IMAGE`
-- **Discrepancy:** Repository currently only has `.github/workflows/deploy.yml` for static GitHub Pages deployment
-- **No Docker workflow found** - may need to add Docker publishing workflow or investigate if image comes from different source
-- Migration: Requires investigation before proceeding
+- Migration: Change Docker publishing from Docker Hub → ghcr.io
 
 ---
 
@@ -179,7 +184,8 @@ These services are maintained in Systemhaus-Westfalia repositories and need to b
 ### adempiere-shw-zk (ZK UI)
 
 - Current image: `marcalwestf/adempiere-shw-zk:jetty-3.9.4.001-shw-1.1.45`
-- Source repo: `Systemhaus-Westfalia/adempiere-shw-zk`
+- Source repo: `https://github.com/Systemhaus-Westfalia/adempiere-shw-zk`
+- Target repo: `https://github.com/adempiere/adempiere-zk` (fork required)
 - Branch: `master`
 - Tag: `3.9.4.001-shw-1.1.45`
 - Local directory: `/data2/entwicklung/westfaliaRepository_2022-06/adempiere-shw-zk`
@@ -190,7 +196,8 @@ These services are maintained in Systemhaus-Westfalia repositories and need to b
 ### adempiere-processors-service
 
 - Current image: `marcalwestf/adempiere-processors-service:alpine-1.1.16`
-- Source repo: `Systemhaus-Westfalia/adempiere-processors-service`
+- Source repo: `https://github.com/Systemhaus-Westfalia/adempiere-processors-service`
+- Target repo: `https://github.com/adempiere/adempiere-processors-service` (merge required)
 - Branch: `feature/shw/customizations`
 - Tag: `1.1.16`
 - Local directory: `/data2/entwicklung/westfaliaRepository_2022-06/adempiere-processors-service_SHW`
@@ -200,7 +207,8 @@ These services are maintained in Systemhaus-Westfalia repositories and need to b
 ### adempiere-grpc-server
 
 - Current image: `marcalwestf/adempiere-grpc-server:3.9.4.001-shw-1.0.30`
-- Source repo: `Systemhaus-Westfalia/adempiere-grpc-server`
+- Source repo: `https://github.com/Systemhaus-Westfalia/adempiere-grpc-server`
+- Target repo: `https://github.com/adempiere/adempiere-grpc-server` (merge required)
 - Branch: `feature/shw/master`
 - Tag: `1.0.30` (in use)
 - Local directory: `/data2/entwicklung/westfaliaRepository_2022-06/adempiere-grpc-server_SHW`
@@ -212,7 +220,8 @@ These services are maintained in Systemhaus-Westfalia repositories and need to b
 ### adempiere-vue (Vue UI)
 
 - Current image: `marcalwestf/adempiere-vue:0.0.5`
-- Source repo: `Systemhaus-Westfalia/adempiere-vue`
+- Source repo: `https://github.com/Systemhaus-Westfalia/adempiere-vue`
+- Target repo: `https://github.com/adempiere/adempiere-vue` (merge required)
 - Branch: `develop`
 - Tag: `0.0.6`
 - Local directory: `/data2/entwicklung/westfaliaRepository_2022-06/adempiere-vue_SHW`
