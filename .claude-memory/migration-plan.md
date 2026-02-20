@@ -51,9 +51,9 @@ These are official or third-party images maintained by upstream projects. We do 
 
 | # | Service | Current image | Docker Hub | Source repo | Branch | Notes |
 |---|---|---|---|---|---|---|
-| 1 | s3-gateway-rs | `openls/s3-gateway-rs:1.2.7` | [link](https://hub.docker.com/r/openls/s3-gateway-rs) | `adempiere/s3_gateway_rs` | `main` | Latest version: 1.2.7 |
-| 2 | dictionary-rs | `openls/dictionary-rs:1.5.5` | [link](https://hub.docker.com/r/openls/dictionary-rs) | `adempiere/dictionary_rs` | `main` | Latest version: 1.6.3 |
-| 3 | report-engine | `openls/adempiere-report-engine-service:alpine-1.3.7` | [link](https://hub.docker.com/r/openls/adempiere-report-engine-service) | `adempiere/adempiere-report-engine-service` | `main` | Latest version: 1.4.1, publishes 3 images |
+| 1 | s3-gateway-rs | `openls/s3-gateway-rs:1.2.7` | [link](https://hub.docker.com/r/openls/s3-gateway-rs) | `adempiere/s3_gateway_rs` | `main` | Current: 1.2.7, suggested migration: 1.2.8 |
+| 2 | dictionary-rs | `openls/dictionary-rs:1.5.5` | [link](https://hub.docker.com/r/openls/dictionary-rs) | `adempiere/dictionary_rs` | `main` | Current: 1.6.3, suggested migration: 1.6.4 |
+| 3 | report-engine | `openls/adempiere-report-engine-service:alpine-1.3.7` | [link](https://hub.docker.com/r/openls/adempiere-report-engine-service) | `adempiere/adempiere-report-engine-service` | `main` | Current: 1.4.1, suggested migration: 1.4.2, publishes 3 images |
 | 4 | adempiere-site | `openls/adempiere-landing-page:alpine-1.0.3` | [link](https://hub.docker.com/r/openls/adempiere-landing-page) | `adempiere/adempiere-site` | `main` | ⚠️ No Docker workflow found, needs investigation |
 
 #### Group 2: `marcalwestf/*` images (4 services) — Require repository fork
@@ -125,6 +125,8 @@ These services already have repositories in the adempiere organization. Migratio
 - Current image: `openls/s3-gateway-rs:1.2.7`
 - Source repo: `https://github.com/adempiere/s3_gateway_rs`
 - Branch: `main`
+- Current repository version: `1.2.7`
+- Suggested migration version: `1.2.8`
 - Future image: `ghcr.io/adempiere/s3-gateway-rs:<tag>`
 - `env_template.env` variable: `S3_GATEWAY_RS_IMAGE`
 - Migration: Change Docker publishing from Docker Hub → ghcr.io (no fork needed)
@@ -134,7 +136,8 @@ These services already have repositories in the adempiere organization. Migratio
 - Current image: `openls/dictionary-rs:1.5.5`
 - Source repo: `https://github.com/adempiere/dictionary_rs`
 - Branch: `main`
-- Latest version: `1.6.3`
+- Current repository version: `1.6.3`
+- Suggested migration version: `1.6.4`
 - Future image: `ghcr.io/adempiere/dictionary-rs:<tag>`
 - `env_template.env` variable: `DICTIONARY_RS_IMAGE`
 - Migration: Change Docker publishing from Docker Hub → ghcr.io (no fork needed)
@@ -144,7 +147,8 @@ These services already have repositories in the adempiere organization. Migratio
 - Current image: `openls/adempiere-report-engine-service:alpine-1.3.7`
 - Source repo: `https://github.com/adempiere/adempiere-report-engine-service`
 - Branch: `main`
-- Latest version: `1.4.1`
+- Current repository version: `1.4.1`
+- Suggested migration version: `1.4.2`
 - Publishes 3 images: alpine, ubuntu multiplatform, grpc-proxy
 - Future image: `ghcr.io/adempiere/adempiere-report-engine-service:<tag>`
 - `env_template.env` variable: `VUE_REPORT_GRPC_SERVER_IMAGE`
