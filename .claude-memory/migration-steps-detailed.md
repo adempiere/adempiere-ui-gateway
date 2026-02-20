@@ -24,7 +24,7 @@ Each service section contains:
 2. [Service: s3-gateway-rs](#service-s3-gateway-rs)
 3. [Service: dictionary-rs](#service-dictionary-rs)
 4. [Service: adempiere-report-engine-service](#service-adempiere-report-engine-service)
-5. [Service: adempiere-landing-page (adempiere-site)](#service-adempiere-landing-page-adempiere-site)
+5. [Service: adempiere-landing-page](#service-adempiere-landing-page)
 6. [Service: adempiere-shw-zk (ZK UI)](#service-adempiere-shw-zk-zk-ui)
 7. [Service: adempiere-processors-service](#service-adempiere-processors-service)
 8. [Service: adempiere-grpc-server](#service-adempiere-grpc-server)
@@ -161,6 +161,9 @@ docker images | grep adempiere
 
 ## Service: s3-gateway-rs
 
+**Docker Compose Service Name:** `s3-gateway-rs`
+**Repository Name:** `s3_gateway_rs`
+
 ### Migration Details
 
 - **Source Repository:** `https://github.com/adempiere/s3_gateway_rs` ✅ Already in adempiere org
@@ -243,6 +246,9 @@ After all code changes are committed:
 
 ## Service: dictionary-rs
 
+**Docker Compose Service Name:** `dictionary-rs`
+**Repository Name:** `dictionary_rs`
+
 ### Migration Details
 
 - **Source Repository:** `https://github.com/adempiere/dictionary_rs` ✅ Already in adempiere org
@@ -324,6 +330,9 @@ After all code changes are committed:
 ---
 
 ## Service: adempiere-report-engine-service
+
+**Docker Compose Service Name:** `adempiere-report-engine`
+**Repository Name:** `adempiere-report-engine-service`
 
 ### Migration Details
 
@@ -498,39 +507,54 @@ After all code changes are committed:
 
 ---
 
-## Service: adempiere-landing-page (adempiere-site)
+## Service: adempiere-landing-page
+
+**Docker Compose Service Name:** `adempiere-site`
+**Repository Name:** `adempiere-landing-page`
 
 ### Migration Details
 
-- **Source Repository:** `https://github.com/adempiere/adempiere-site` ✅ Already in adempiere org
+- **Source Repository:** `https://github.com/adempiere/adempiere-landing-page` ✅ Already in adempiere org
 - **Source Branch:** `main`
 - **Target Repository:** Same repository (no fork needed)
 - **Target Branch:** `main`
-- **Current Docker Image:** `openls/adempiere-landing-page:alpine-1.0.3` (referenced in env_template.env)
-- **Target Docker Image:** `ghcr.io/adempiere/adempiere-site:alpine-<version>` (GitHub Container Registry)
+- **Current Docker Image:** `openls/adempiere-landing-page:alpine-1.0.3` (env_template.env line 317: `ADEMPIERE_SITE_IMAGE`)
+- **Target Docker Image:** `ghcr.io/adempiere/adempiere-landing-page:alpine-<version>` (GitHub Container Registry)
+- **Local Clone:** `/data2/entwicklung/westfaliaRepository_2022-06/adempiere-landing-page_ADEMPIERE`
+- **Current Version:** `1.0.3` (latest git tag)
+- **Suggested Migration Version:** `1.0.4`
 
-**⚠️ DISCREPANCY FOUND:** The repository `adempiere-site` currently has a `.github/workflows/deploy.yml` workflow that only deploys a static VuePress site to GitHub Pages. It does NOT publish any Docker images. However, the gateway's `env_template.env` line 317 references a Docker image `openls/adempiere-landing-page:alpine-1.0.3`.
+### Docker Publishing Workflow
 
-**Possible Scenarios:**
-1. **Different repository**: The Docker image might come from a different repository not yet identified
-2. **Old workflow**: The repository may have had Docker publishing in the past but was removed
-3. **Manual build**: The image might be built and published manually, not via GitHub Actions
+**Current workflow:** `.github/workflows/publish.yaml`
+- Builds VuePress site with pnpm
+- Publishes to Docker Hub using `DOCKER_REPO_ADEMPIERE_LANDING_PAGE` secret (currently `openls/adempiere-landing-page`)
+- Creates both alpine and multi-platform images
+- Uses `build-docker/production-alpine.Dockerfile` and `build-docker/production.Dockerfile`
 
-**Action Required:**
-- Verify the actual source of the `openls/adempiere-landing-page:alpine-1.0.3` Docker image
-- Check if there's a different repository that publishes this image
-- Or check if the adempiere-site repository needs a Docker publishing workflow added
+### Migration Steps
 
-**IF a Docker publishing workflow exists or needs to be added**, the migration pattern would be:
-1. Add/modify `.github/workflows/publish.yml` to include Docker image building
-2. Change Docker Hub → ghcr.io
-3. Update image tags to `ghcr.io/adempiere/adempiere-site:alpine-<version>`
-4. Create release and verify publication
-5. Update gateway env_template.env line 317
+1. **Update Docker Registry in Workflow:**
+   - Edit `.github/workflows/publish.yaml`
+   - Change Docker Hub login to GitHub Container Registry (ghcr.io)
+   - Update image tags from `${{ secrets.DOCKER_REPO_ADEMPIERE_LANDING_PAGE }}` to `ghcr.io/adempiere/adempiere-landing-page`
+   - Configure GitHub secrets: `GHCR_USERNAME` and `GHCR_TOKEN`
+
+2. **Create New Release:**
+   - Tag: `1.0.4`
+   - Verify: `docker pull ghcr.io/adempiere/adempiere-landing-page:alpine-1.0.4`
+
+3. **Update Gateway Configuration:**
+   - Edit `env_template.env` line 317
+   - Change to: `ADEMPIERE_SITE_IMAGE="ghcr.io/adempiere/adempiere-landing-page:alpine-1.0.4"`
 
 ---
 
 ## Service: adempiere-shw-zk (ZK UI)
+
+**Docker Compose Service Name:** `adempiere-zk`
+**Source Repository Name:** `adempiere-shw-zk`
+**Target Repository Name:** `adempiere-zk`
 
 ### Migration Details
 
@@ -628,6 +652,9 @@ After all code changes are committed:
 
 ## Service: adempiere-processors-service
 
+**Docker Compose Service Name:** `adempiere-processor`
+**Repository Name:** `adempiere-processors-service`
+
 ### Migration Details
 
 - **Source Repository:** `https://github.com/Systemhaus-Westfalia/adempiere-processors-service`
@@ -711,6 +738,9 @@ After all code changes are committed:
 ---
 
 ## Service: adempiere-grpc-server
+
+**Docker Compose Service Name:** `adempiere-grpc-server`
+**Repository Name:** `adempiere-grpc-server`
 
 ### Migration Details
 
@@ -816,6 +846,9 @@ After all code changes are committed:
 ---
 
 ## Service: adempiere-vue (Vue UI)
+
+**Docker Compose Service Name:** `vue-ui`
+**Repository Name:** `adempiere-vue`
 
 ### Migration Details
 
