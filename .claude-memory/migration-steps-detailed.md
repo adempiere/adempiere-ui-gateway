@@ -1239,7 +1239,7 @@ For each service below, follow this workflow:
 - Release tag: `1.4.2`
 - Verify: `docker pull ghcr.io/adempiere/adempiere-report-engine-service:1.4.2`
 
-**Service 5: adempiere-landing-page**
+**Service 5: adempiere-site**
 - Release tag: `alpine-1.0.4`
 - Verify: `docker pull ghcr.io/adempiere/adempiere-landing-page:alpine-1.0.4`
 
