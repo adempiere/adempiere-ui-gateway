@@ -17,22 +17,6 @@
 
 ---
 
-## Constraints (agreed)
-
-**a)** External images (envoy, kafka, opensearch, postgres, nginx, etc.) stay as-is.
-
-**b)** Images currently published under `Systemhaus-Westfalia` / `marcalwestf` must be republished under the `adempiere` GitHub org.
-
-**c)** Branch names and tag/version conventions for the migrated repos are TBD — must be decided before any release is cut.
-
-**d)** Eight containerized services must be migrated: four from `marcalwestf` (adempiere-zk, adempiere-processors-service, adempiere-grpc-server, adempiere-vue) and four from `openls` (s3-gateway-rs, dictionary-rs, adempiere-report-engine-service, adempiere-landing-page). Additionally, one customization library (adempiere-customizations) must be migrated. Source repos confirmed for the `marcalwestf` services; `openls` repos TBC.
-
-**e)** CI/CD: use Systemhaus-Westfalia workflows as the reference (they are more up to date than adempiere's). Adapt `publish.yml` to publish to the adempiere org. Compare with adempiere's existing workflow files.
-
-**f)** `svfe-api-firmador` (El Salvador e-invoicing) is NOT migrated — it stays Westfalia-specific.
-
----
-
 ## Part 1 — Complete Container Inventory
 
 ### 1a — Images kept as-is (no migration needed)
@@ -97,7 +81,23 @@ The migrated images will land at the same package names but will be **completely
 
 ---
 
-## Part 2 — Per-Service Migration (8 services total)
+## Part 2 — Constraints (agreed)
+
+**a)** External images (envoy, kafka, opensearch, postgres, nginx, etc.) stay as-is.
+
+**b)** Images currently published under `Systemhaus-Westfalia` / `marcalwestf` must be republished under the `adempiere` GitHub org.
+
+**c)** Branch names and tag/version conventions for the migrated repos are TBD — must be decided before any release is cut.
+
+**d)** Eight containerized services must be migrated: four from `marcalwestf` (adempiere-zk, adempiere-processors-service, adempiere-grpc-server, adempiere-vue) and four from `openls` (s3-gateway-rs, dictionary-rs, adempiere-report-engine-service, adempiere-landing-page). Additionally, one customization library (adempiere-customizations) must be migrated. Source repos confirmed for the `marcalwestf` services; `openls` repos TBC.
+
+**e)** CI/CD: use Systemhaus-Westfalia workflows as the reference (they are more up to date than adempiere's). Adapt `publish.yml` to publish to the adempiere org. Compare with adempiere's existing workflow files.
+
+**f)** `svfe-api-firmador` (El Salvador e-invoicing) is NOT migrated — it stays Westfalia-specific.
+
+---
+
+## Part 3 — Per-Service Migration (8 services total)
 
 ### Common pattern for each service
 
@@ -105,14 +105,14 @@ The migrated images will land at the same package names but will be **completely
 2. Fork / create the repo under `adempiere` GitHub org (if not already there)
 3. Decide target branch name and tag convention (constraint c)
 4. Push code into the new repo
-5. Adapt `publish.yml` to publish Docker image to `ghcr.io/adempiere/<name>` (see Part 4)
+5. Adapt `publish.yml` to publish Docker image to `ghcr.io/adempiere/<name>` (see Part 5)
 6. Add required org-level secrets
 7. Cut a release and verify image is accessible at `ghcr.io/adempiere/<name>`
 8. Update the corresponding image variable in `env_template.env`
 
 ---
 
-## Part 2a — Containerized Services
+## Part 3a — Containerized Services
 
 ### adempiere-shw-zk (ZK UI) ✅
 
@@ -187,7 +187,7 @@ The migrated images will land at the same package names but will be **completely
 
 ---
 
-## Part 2b — Customization Library Repository (not containerized)
+## Part 3b — Customization Library Repository (not containerized)
 
 ### Understanding Customizations
 
@@ -320,7 +320,7 @@ Additionally, `adempiere-shw-zk` references the official ADempiere ZK UI:
 
 ---
 
-## Part 3 — Gateway Repository Migration
+## Part 4 — Gateway Repository Migration
 
 ### Source vs target
 
@@ -336,7 +336,7 @@ Additionally, `adempiere-shw-zk` references the official ADempiere ZK UI:
      - `HOST_TIMEZONE="America/El_Salvador"` → `HOST_TIMEZONE="<your-timezone>"`
    - Remove or generalize any remaining Westfalia-specific service configurations
    - Verify `svfe-api-firmador` has no references in the PR delta
-3. **Update all eight image references** in `env_template.env` (after Part 2 services are published):
+3. **Update all eight image references** in `env_template.env` (after Part 3 services are published):
 
    | Variable | From | To |
    |---|---|---|
@@ -350,11 +350,11 @@ Additionally, `adempiere-shw-zk` references the official ADempiere ZK UI:
    | `ADEMPIERE_SITE_IMAGE` | `openls/adempiere-landing-page:alpine-1.0.3` | `ghcr.io/adempiere/adempiere-landing-page:<tag>` |
 4. **Add `.github/workflows/ci.yml`** (currently absent from this repo) — at minimum a syntax check (`docker compose config`) on PRs
 5. **Open PR** from `adempiere-trunk` → `adempiere/adempiere-ui-gateway:main`
-6. **Update documentation** (see Part 5)
+6. **Update documentation** (see Part 6)
 
 ---
 
-## Part 4 — CI/CD Changes for Service Repos (constraint e)
+## Part 5 — CI/CD Changes for Service Repos (constraint e)
 
 For each of the **8 service repos**, only `publish.yml` needs significant changes. `ci.yml` (build/test) usually requires no registry changes.
 
@@ -372,7 +372,7 @@ For each of the **8 service repos**, only `publish.yml` needs significant change
 
 ---
 
-## Part 5 — Documentation Updates
+## Part 6 — Documentation Updates
 
 - Update all references to `Systemhaus-Westfalia` GitHub URLs in `docs/`
 - Update `CLAUDE.md`: branch reference `adempiere-trunk` → `main` (or whatever the target is)
@@ -382,7 +382,7 @@ For each of the **8 service repos**, only `publish.yml` needs significant change
 
 ---
 
-## Part 6 — Execution Order
+## Part 7 — Execution Order
 
 ```
 Phase 1  Audit
@@ -399,7 +399,7 @@ Phase 2  Per-service (8 services — can run in parallel)
          └── Cut release → verify image at ghcr.io/adempiere/<name>
 
 Phase 3  Gateway repo (after at least one image per service exists)
-         ├── Update env_template.env — all 8 image references (see table in Part 3)
+         ├── Update env_template.env — all 8 image references (see table in Part 4)
          ├── Clean deployment-specific content
          ├── Add .github/workflows/ci.yml
          └── Open PR to adempiere/adempiere-ui-gateway:main
