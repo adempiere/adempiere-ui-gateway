@@ -19,12 +19,17 @@
 
 ## Constraints (agreed)
 
-- (a) External images (envoy, kafka, opensearch, postgres, nginx, etc.) stay as-is.
-- (b) Images currently published under `Systemhaus-Westfalia` / `marcalwestf` must be republished under the `adempiere` GitHub org.
-- (c) Branch names and tag/version conventions for the migrated repos are TBD — must be decided before any release is cut.
-- (d) Eight containerized services must be migrated: four from `marcalwestf` (adempiere-zk, adempiere-processors-service, adempiere-grpc-server, adempiere-vue) and four from `openls` (s3-gateway-rs, dictionary-rs, adempiere-report-engine-service, adempiere-landing-page). Additionally, one customization library (adempiere-customizations) must be migrated. Source repos confirmed for the `marcalwestf` services; `openls` repos TBC.
-- (e) CI/CD: use Systemhaus-Westfalia workflows as the reference (they are more up to date than adempiere's). Adapt `publish.yml` to publish to the adempiere org. Compare with adempiere's existing workflow files.
-- (f) `svfe-api-firmador` (El Salvador e-invoicing) is NOT migrated — it stays Westfalia-specific.
+**a)** External images (envoy, kafka, opensearch, postgres, nginx, etc.) stay as-is.
+
+**b)** Images currently published under `Systemhaus-Westfalia` / `marcalwestf` must be republished under the `adempiere` GitHub org.
+
+**c)** Branch names and tag/version conventions for the migrated repos are TBD — must be decided before any release is cut.
+
+**d)** Eight containerized services must be migrated: four from `marcalwestf` (adempiere-zk, adempiere-processors-service, adempiere-grpc-server, adempiere-vue) and four from `openls` (s3-gateway-rs, dictionary-rs, adempiere-report-engine-service, adempiere-landing-page). Additionally, one customization library (adempiere-customizations) must be migrated. Source repos confirmed for the `marcalwestf` services; `openls` repos TBC.
+
+**e)** CI/CD: use Systemhaus-Westfalia workflows as the reference (they are more up to date than adempiere's). Adapt `publish.yml` to publish to the adempiere org. Compare with adempiere's existing workflow files.
+
+**f)** `svfe-api-firmador` (El Salvador e-invoicing) is NOT migrated — it stays Westfalia-specific.
 
 ---
 
