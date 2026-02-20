@@ -21,14 +21,14 @@ Each service section contains:
 ## Table of Contents
 
 1. [Version Creation Strategy](#version-creation-strategy)
-2. [Service: adempiere-shw-zk (ZK UI)](#service-adempiere-shw-zk-zk-ui)
-3. [Service: adempiere-processors-service](#service-adempiere-processors-service)
-4. [Service: adempiere-grpc-server](#service-adempiere-grpc-server)
-5. [Service: adempiere-vue (Vue UI)](#service-adempiere-vue-vue-ui)
-6. [Service: s3-gateway-rs](#service-s3-gateway-rs)
-7. [Service: dictionary-rs](#service-dictionary-rs)
-8. [Service: adempiere-report-engine-service](#service-adempiere-report-engine-service)
-9. [Service: adempiere-landing-page (adempiere-site)](#service-adempiere-landing-page-adempiere-site)
+2. [Service: s3-gateway-rs](#service-s3-gateway-rs)
+3. [Service: dictionary-rs](#service-dictionary-rs)
+4. [Service: adempiere-report-engine-service](#service-adempiere-report-engine-service)
+5. [Service: adempiere-landing-page (adempiere-site)](#service-adempiere-landing-page-adempiere-site)
+6. [Service: adempiere-shw-zk (ZK UI)](#service-adempiere-shw-zk-zk-ui)
+7. [Service: adempiere-processors-service](#service-adempiere-processors-service)
+8. [Service: adempiere-grpc-server](#service-adempiere-grpc-server)
+9. [Service: adempiere-vue (Vue UI)](#service-adempiere-vue-vue-ui)
 10. [Library: adempiere-shw (Customization Library)](#library-adempiere-shw-customization-library)
 11. [Gateway: adempiere-ui-gateway](#gateway-adempiere-ui-gateway)
 
@@ -156,6 +156,377 @@ docker images | grep adempiere
 2. Test the new Docker image/artifact
 3. Move to next service
 4. After ALL services have new versions → Update gateway env files
+
+---
+
+## Service: s3-gateway-rs
+
+### Migration Details
+
+- **Source Repository:** `https://github.com/adempiere/s3_gateway_rs` ✅ Already in adempiere org
+- **Source Branch:** `main`
+- **Target Repository:** Same repository (no fork needed)
+- **Target Branch:** `main` (or create new branch for migration)
+- **Current Docker Image:** `openls/s3-gateway-rs:1.2.7` (Docker Hub)
+- **Target Docker Image:** `ghcr.io/adempiere/s3-gateway-rs:<version>` (GitHub Container Registry)
+
+**Note:** This repository is already in the adempiere organization. Migration only requires changing the publishing destination from Docker Hub to ghcr.io.
+
+### File 1: `.github/workflows/release.yaml`
+
+#### Change 1: Docker Login - Add Registry
+- **Lines:** 53-58
+- **Before:**
+  ```yaml
+  - name: Login to GitHub Container Registry
+    uses: docker/login-action@v3
+    with:
+      # CONFIGURE DOCKER SECRETS INTO REPOSITORY
+      username: ${{ secrets.DOCKER_USERNAME }}
+      password: ${{ secrets.DOCKER_TOKEN }}
+  ```
+- **After:**
+  ```yaml
+  - name: Login to GitHub Container Registry
+    uses: docker/login-action@v3
+    with:
+      registry: ghcr.io
+      username: ${{ github.actor }}
+      password: ${{ secrets.GITHUB_TOKEN }}
+  ```
+- **Action:** Edit lines 55-58
+
+#### Change 2: Docker Image Tags
+- **Lines:** 69-71
+- **Before:**
+  ```yaml
+  tags: |
+    ${{ secrets.DOCKER_HUB_REPO_NAME }}:${{ github.event.release.tag_name }}
+    ${{ secrets.DOCKER_HUB_REPO_NAME }}
+  ```
+- **After:**
+  ```yaml
+  tags: |
+    ghcr.io/adempiere/s3-gateway-rs:${{ github.event.release.tag_name }}
+    ghcr.io/adempiere/s3-gateway-rs:latest
+  ```
+- **Action:** Edit lines 70-71
+
+#### Change 3: Repository Secrets (GitHub UI)
+- **Action:** Delete the following repository secrets:
+  - `DOCKER_USERNAME`
+  - `DOCKER_TOKEN`
+  - `DOCKER_HUB_REPO_NAME`
+
+### Release Creation
+
+After all code changes are committed:
+
+1. **Create GitHub Release**
+   - Tag: `1.2.8` (or chosen version per strategy)
+   - Target: `main` branch
+   - Title: "S3 Gateway RS v1.2.8 - Migration to ghcr.io"
+
+2. **GitHub Actions Publishes Image**
+   - Workflow: `.github/workflows/release.yaml` triggers automatically
+   - Builds and publishes: `ghcr.io/adempiere/s3-gateway-rs:1.2.8`
+   - Platforms: `linux/amd64`, `linux/amd64/v2`, `linux/arm64/v8`
+
+3. **Verify Publication**
+   ```bash
+   docker pull ghcr.io/adempiere/s3-gateway-rs:1.2.8
+   ```
+
+**⚠️ Do NOT update gateway env files yet** - wait until all services have new versions published.
+
+---
+
+## Service: dictionary-rs
+
+### Migration Details
+
+- **Source Repository:** `https://github.com/adempiere/dictionary_rs` ✅ Already in adempiere org
+- **Source Branch:** `main`
+- **Target Repository:** Same repository (no fork needed)
+- **Target Branch:** `main` (or create new branch for migration)
+- **Current Docker Image:** `openls/dictionary-rs:1.5.5` (Docker Hub)
+- **Target Docker Image:** `ghcr.io/adempiere/dictionary-rs:<version>` (GitHub Container Registry)
+
+**Note:** This repository is already in the adempiere organization. Migration only requires changing the publishing destination from Docker Hub to ghcr.io.
+
+### File 1: `.github/workflows/release.yaml`
+
+#### Change 1: Docker Login - Add Registry
+- **Lines:** 53-58
+- **Before:**
+  ```yaml
+  - name: Login to GitHub Container Registry
+    uses: docker/login-action@v3
+    with:
+      # CONFIGURE DOCKER SECRETS INTO REPOSITORY
+      username: ${{ secrets.DOCKER_USERNAME }}
+      password: ${{ secrets.DOCKER_TOKEN }}
+  ```
+- **After:**
+  ```yaml
+  - name: Login to GitHub Container Registry
+    uses: docker/login-action@v3
+    with:
+      registry: ghcr.io
+      username: ${{ github.actor }}
+      password: ${{ secrets.GITHUB_TOKEN }}
+  ```
+- **Action:** Edit lines 55-58
+
+#### Change 2: Docker Image Tags
+- **Lines:** 69-71
+- **Before:**
+  ```yaml
+  tags: |
+    ${{ secrets.DOCKER_HUB_REPO_NAME }}:${{ github.event.release.tag_name }}
+    ${{ secrets.DOCKER_HUB_REPO_NAME }}
+  ```
+- **After:**
+  ```yaml
+  tags: |
+    ghcr.io/adempiere/dictionary-rs:${{ github.event.release.tag_name }}
+    ghcr.io/adempiere/dictionary-rs:latest
+  ```
+- **Action:** Edit lines 70-71
+
+#### Change 3: Repository Secrets (GitHub UI)
+- **Action:** Delete the following repository secrets:
+  - `DOCKER_USERNAME`
+  - `DOCKER_TOKEN`
+  - `DOCKER_HUB_REPO_NAME`
+
+### Release Creation
+
+After all code changes are committed:
+
+1. **Create GitHub Release**
+   - Tag: `1.6.4` (or chosen version per strategy - note: latest is 1.6.3)
+   - Target: `main` branch
+   - Title: "Dictionary RS v1.6.4 - Migration to ghcr.io"
+
+2. **GitHub Actions Publishes Image**
+   - Workflow: `.github/workflows/release.yaml` triggers automatically
+   - Builds and publishes: `ghcr.io/adempiere/dictionary-rs:1.6.4`
+   - Platforms: `linux/amd64`, `linux/amd64/v2`, `linux/arm64/v8`
+
+3. **Verify Publication**
+   ```bash
+   docker pull ghcr.io/adempiere/dictionary-rs:1.6.4
+   ```
+
+**⚠️ Do NOT update gateway env files yet** - wait until all services have new versions published.
+
+---
+
+## Service: adempiere-report-engine-service
+
+### Migration Details
+
+- **Source Repository:** `https://github.com/adempiere/adempiere-report-engine-service` ✅ Already in adempiere org
+- **Source Branch:** `main`
+- **Target Repository:** Same repository (no fork needed)
+- **Target Branch:** `main` (or create new branch for migration)
+- **Current Docker Images:** (Docker Hub)
+  - `openls/adempiere-report-engine-service:alpine-1.3.7`
+  - `openls/adempiere-report-engine-service:1.3.7` (ubuntu)
+  - `openls/adempiere-grpc-proxy:1.3.7`
+- **Target Docker Images:** (GitHub Container Registry)
+  - `ghcr.io/adempiere/adempiere-report-engine-service:alpine-<version>`
+  - `ghcr.io/adempiere/adempiere-report-engine-service:<version>` (ubuntu)
+  - `ghcr.io/adempiere/adempiere-grpc-proxy:<version>`
+
+**Note:** This repository is already in the adempiere organization and publishes **3 separate Docker images**. Migration requires changing the publishing destination from Docker Hub to ghcr.io.
+
+### File 1: `.github/workflows/publish.yml`
+
+#### Change 1: Docker Login - Alpine Image
+- **Lines:** 152-157
+- **Before:**
+  ```yaml
+  - name: Login to Container Registry
+    uses: docker/login-action@v3
+    with:
+      # CONFIGURE DOCKER SECRETS INTO REPOSITORY
+      username: ${{ secrets.DOCKER_USERNAME }}
+      password: ${{ secrets.DOCKER_TOKEN }}
+  ```
+- **After:**
+  ```yaml
+  - name: Login to Container Registry
+    uses: docker/login-action@v3
+    with:
+      registry: ghcr.io
+      username: ${{ github.actor }}
+      password: ${{ secrets.GITHUB_TOKEN }}
+  ```
+- **Action:** Edit lines 154-157
+
+#### Change 2: Alpine Image Tags
+- **Lines:** 171-172, 175
+- **Before:**
+  ```yaml
+  TAGS="${{ secrets.DOCKER_HUB_REPO_NAME }}:${{ github.event.release.tag_name }}-alpine"
+  TAGS+=",${{ secrets.DOCKER_HUB_REPO_NAME }}:$CLEAN_BRANCH_NAME-alpine"
+  ...
+  TAGS+=",${{ secrets.DOCKER_HUB_REPO_NAME }}:alpine"
+  ```
+- **After:**
+  ```yaml
+  TAGS="ghcr.io/adempiere/adempiere-report-engine-service:${{ github.event.release.tag_name }}-alpine"
+  TAGS+=",ghcr.io/adempiere/adempiere-report-engine-service:$CLEAN_BRANCH_NAME-alpine"
+  ...
+  TAGS+=",ghcr.io/adempiere/adempiere-report-engine-service:alpine"
+  ```
+- **Action:** Edit lines 171-172 and 175 to replace secret with hardcoded image name
+
+#### Change 3: Docker Login - Ubuntu Image
+- **Lines:** 218-223
+- **Before:**
+  ```yaml
+  - name: Login to Container Registry
+    uses: docker/login-action@v3
+    with:
+      # CONFIGURE DOCKER SECRETS INTO REPOSITORY
+      username: ${{ secrets.DOCKER_USERNAME }}
+      password: ${{ secrets.DOCKER_TOKEN }}
+  ```
+- **After:**
+  ```yaml
+  - name: Login to Container Registry
+    uses: docker/login-action@v3
+    with:
+      registry: ghcr.io
+      username: ${{ github.actor }}
+      password: ${{ secrets.GITHUB_TOKEN }}
+  ```
+- **Action:** Edit lines 220-223
+
+#### Change 4: Ubuntu Image Tags
+- **Lines:** 237-238, 241
+- **Before:**
+  ```yaml
+  TAGS="${{ secrets.DOCKER_HUB_REPO_NAME }}:${{ github.event.release.tag_name }}"
+  TAGS+=",${{ secrets.DOCKER_HUB_REPO_NAME }}:$CLEAN_BRANCH_NAME"
+  ...
+  TAGS+=",${{ secrets.DOCKER_HUB_REPO_NAME }}:latest"
+  ```
+- **After:**
+  ```yaml
+  TAGS="ghcr.io/adempiere/adempiere-report-engine-service:${{ github.event.release.tag_name }}"
+  TAGS+=",ghcr.io/adempiere/adempiere-report-engine-service:$CLEAN_BRANCH_NAME"
+  ...
+  TAGS+=",ghcr.io/adempiere/adempiere-report-engine-service:latest"
+  ```
+- **Action:** Edit lines 237-238 and 241 to replace secret with hardcoded image name
+
+#### Change 5: Docker Login - gRPC Proxy Image
+- **Lines:** 309-314
+- **Before:**
+  ```yaml
+  - name: Login to Container Registry
+    uses: docker/login-action@v3
+    with:
+      # CONFIGURE DOCKER SECRETS INTO REPOSITORY
+      username: ${{ secrets.DOCKER_USERNAME }}
+      password: ${{ secrets.DOCKER_TOKEN }}
+  ```
+- **After:**
+  ```yaml
+  - name: Login to Container Registry
+    uses: docker/login-action@v3
+    with:
+      registry: ghcr.io
+      username: ${{ github.actor }}
+      password: ${{ secrets.GITHUB_TOKEN }}
+  ```
+- **Action:** Edit lines 311-314
+
+#### Change 6: gRPC Proxy Image Tags
+- **Lines:** 328-329, 332
+- **Before:**
+  ```yaml
+  TAGS="${{ secrets.DOCKER_HUB_PROXY_REPO_NAME }}:${{ github.event.release.tag_name }}"
+  TAGS+=",${{ secrets.DOCKER_HUB_PROXY_REPO_NAME }}:$CLEAN_BRANCH_NAME"
+  ...
+  TAGS+=",${{ secrets.DOCKER_HUB_PROXY_REPO_NAME }}:latest"
+  ```
+- **After:**
+  ```yaml
+  TAGS="ghcr.io/adempiere/adempiere-grpc-proxy:${{ github.event.release.tag_name }}"
+  TAGS+=",ghcr.io/adempiere/adempiere-grpc-proxy:$CLEAN_BRANCH_NAME"
+  ...
+  TAGS+=",ghcr.io/adempiere/adempiere-grpc-proxy:latest"
+  ```
+- **Action:** Edit lines 328-329 and 332 to replace secret with hardcoded image name
+
+#### Change 7: Repository Secrets (GitHub UI)
+- **Action:** Delete the following repository secrets:
+  - `DOCKER_USERNAME`
+  - `DOCKER_TOKEN`
+  - `DOCKER_HUB_REPO_NAME`
+  - `DOCKER_HUB_PROXY_REPO_NAME`
+
+### Release Creation
+
+After all code changes are committed:
+
+1. **Create GitHub Release**
+   - Tag: `1.4.2` (or chosen version per strategy - note: latest is 1.4.1)
+   - Target: `main` branch
+   - Title: "ADempiere Report Engine v1.4.2 - Migration to ghcr.io"
+
+2. **GitHub Actions Publishes 3 Images**
+   - Workflow: `.github/workflows/publish.yml` triggers automatically
+   - Publishes:
+     - `ghcr.io/adempiere/adempiere-report-engine-service:1.4.2-alpine`
+     - `ghcr.io/adempiere/adempiere-report-engine-service:1.4.2` (ubuntu multiplatform)
+     - `ghcr.io/adempiere/adempiere-grpc-proxy:1.4.2`
+
+3. **Verify Publication**
+   ```bash
+   docker pull ghcr.io/adempiere/adempiere-report-engine-service:1.4.2-alpine
+   docker pull ghcr.io/adempiere/adempiere-report-engine-service:1.4.2
+   docker pull ghcr.io/adempiere/adempiere-grpc-proxy:1.4.2
+   ```
+
+**⚠️ Do NOT update gateway env files yet** - wait until all services have new versions published.
+
+---
+
+## Service: adempiere-landing-page (adempiere-site)
+
+### Migration Details
+
+- **Source Repository:** `https://github.com/adempiere/adempiere-site` ✅ Already in adempiere org
+- **Source Branch:** `main`
+- **Target Repository:** Same repository (no fork needed)
+- **Target Branch:** `main`
+- **Current Docker Image:** `openls/adempiere-landing-page:alpine-1.0.3` (referenced in env_template.env)
+- **Target Docker Image:** `ghcr.io/adempiere/adempiere-site:alpine-<version>` (GitHub Container Registry)
+
+**⚠️ DISCREPANCY FOUND:** The repository `adempiere-site` currently has a `.github/workflows/deploy.yml` workflow that only deploys a static VuePress site to GitHub Pages. It does NOT publish any Docker images. However, the gateway's `env_template.env` line 317 references a Docker image `openls/adempiere-landing-page:alpine-1.0.3`.
+
+**Possible Scenarios:**
+1. **Different repository**: The Docker image might come from a different repository not yet identified
+2. **Old workflow**: The repository may have had Docker publishing in the past but was removed
+3. **Manual build**: The image might be built and published manually, not via GitHub Actions
+
+**Action Required:**
+- Verify the actual source of the `openls/adempiere-landing-page:alpine-1.0.3` Docker image
+- Check if there's a different repository that publishes this image
+- Or check if the adempiere-site repository needs a Docker publishing workflow added
+
+**IF a Docker publishing workflow exists or needs to be added**, the migration pattern would be:
+1. Add/modify `.github/workflows/publish.yml` to include Docker image building
+2. Change Docker Hub → ghcr.io
+3. Update image tags to `ghcr.io/adempiere/adempiere-site:alpine-<version>`
+4. Create release and verify publication
+5. Update gateway env_template.env line 317
 
 ---
 
@@ -550,377 +921,6 @@ After all code changes are committed:
 
 ---
 
-## Service: s3-gateway-rs
-
-### Migration Details
-
-- **Source Repository:** `https://github.com/adempiere/s3_gateway_rs` ✅ Already in adempiere org
-- **Source Branch:** `main`
-- **Target Repository:** Same repository (no fork needed)
-- **Target Branch:** `main` (or create new branch for migration)
-- **Current Docker Image:** `openls/s3-gateway-rs:1.2.7` (Docker Hub)
-- **Target Docker Image:** `ghcr.io/adempiere/s3-gateway-rs:<version>` (GitHub Container Registry)
-
-**Note:** This repository is already in the adempiere organization. Migration only requires changing the publishing destination from Docker Hub to ghcr.io.
-
-### File 1: `.github/workflows/release.yaml`
-
-#### Change 1: Docker Login - Add Registry
-- **Lines:** 53-58
-- **Before:**
-  ```yaml
-  - name: Login to GitHub Container Registry
-    uses: docker/login-action@v3
-    with:
-      # CONFIGURE DOCKER SECRETS INTO REPOSITORY
-      username: ${{ secrets.DOCKER_USERNAME }}
-      password: ${{ secrets.DOCKER_TOKEN }}
-  ```
-- **After:**
-  ```yaml
-  - name: Login to GitHub Container Registry
-    uses: docker/login-action@v3
-    with:
-      registry: ghcr.io
-      username: ${{ github.actor }}
-      password: ${{ secrets.GITHUB_TOKEN }}
-  ```
-- **Action:** Edit lines 55-58
-
-#### Change 2: Docker Image Tags
-- **Lines:** 69-71
-- **Before:**
-  ```yaml
-  tags: |
-    ${{ secrets.DOCKER_HUB_REPO_NAME }}:${{ github.event.release.tag_name }}
-    ${{ secrets.DOCKER_HUB_REPO_NAME }}
-  ```
-- **After:**
-  ```yaml
-  tags: |
-    ghcr.io/adempiere/s3-gateway-rs:${{ github.event.release.tag_name }}
-    ghcr.io/adempiere/s3-gateway-rs:latest
-  ```
-- **Action:** Edit lines 70-71
-
-#### Change 3: Repository Secrets (GitHub UI)
-- **Action:** Delete the following repository secrets:
-  - `DOCKER_USERNAME`
-  - `DOCKER_TOKEN`
-  - `DOCKER_HUB_REPO_NAME`
-
-### Release Creation
-
-After all code changes are committed:
-
-1. **Create GitHub Release**
-   - Tag: `1.2.8` (or chosen version per strategy)
-   - Target: `main` branch
-   - Title: "S3 Gateway RS v1.2.8 - Migration to ghcr.io"
-
-2. **GitHub Actions Publishes Image**
-   - Workflow: `.github/workflows/release.yaml` triggers automatically
-   - Builds and publishes: `ghcr.io/adempiere/s3-gateway-rs:1.2.8`
-   - Platforms: `linux/amd64`, `linux/amd64/v2`, `linux/arm64/v8`
-
-3. **Verify Publication**
-   ```bash
-   docker pull ghcr.io/adempiere/s3-gateway-rs:1.2.8
-   ```
-
-**⚠️ Do NOT update gateway env files yet** - wait until all services have new versions published.
-
----
-
-## Service: dictionary-rs
-
-### Migration Details
-
-- **Source Repository:** `https://github.com/adempiere/dictionary_rs` ✅ Already in adempiere org
-- **Source Branch:** `main`
-- **Target Repository:** Same repository (no fork needed)
-- **Target Branch:** `main` (or create new branch for migration)
-- **Current Docker Image:** `openls/dictionary-rs:1.5.5` (Docker Hub)
-- **Target Docker Image:** `ghcr.io/adempiere/dictionary-rs:<version>` (GitHub Container Registry)
-
-**Note:** This repository is already in the adempiere organization. Migration only requires changing the publishing destination from Docker Hub to ghcr.io.
-
-### File 1: `.github/workflows/release.yaml`
-
-#### Change 1: Docker Login - Add Registry
-- **Lines:** 53-58
-- **Before:**
-  ```yaml
-  - name: Login to GitHub Container Registry
-    uses: docker/login-action@v3
-    with:
-      # CONFIGURE DOCKER SECRETS INTO REPOSITORY
-      username: ${{ secrets.DOCKER_USERNAME }}
-      password: ${{ secrets.DOCKER_TOKEN }}
-  ```
-- **After:**
-  ```yaml
-  - name: Login to GitHub Container Registry
-    uses: docker/login-action@v3
-    with:
-      registry: ghcr.io
-      username: ${{ github.actor }}
-      password: ${{ secrets.GITHUB_TOKEN }}
-  ```
-- **Action:** Edit lines 55-58
-
-#### Change 2: Docker Image Tags
-- **Lines:** 69-71
-- **Before:**
-  ```yaml
-  tags: |
-    ${{ secrets.DOCKER_HUB_REPO_NAME }}:${{ github.event.release.tag_name }}
-    ${{ secrets.DOCKER_HUB_REPO_NAME }}
-  ```
-- **After:**
-  ```yaml
-  tags: |
-    ghcr.io/adempiere/dictionary-rs:${{ github.event.release.tag_name }}
-    ghcr.io/adempiere/dictionary-rs:latest
-  ```
-- **Action:** Edit lines 70-71
-
-#### Change 3: Repository Secrets (GitHub UI)
-- **Action:** Delete the following repository secrets:
-  - `DOCKER_USERNAME`
-  - `DOCKER_TOKEN`
-  - `DOCKER_HUB_REPO_NAME`
-
-### Release Creation
-
-After all code changes are committed:
-
-1. **Create GitHub Release**
-   - Tag: `1.6.4` (or chosen version per strategy - note: latest is 1.6.3)
-   - Target: `main` branch
-   - Title: "Dictionary RS v1.6.4 - Migration to ghcr.io"
-
-2. **GitHub Actions Publishes Image**
-   - Workflow: `.github/workflows/release.yaml` triggers automatically
-   - Builds and publishes: `ghcr.io/adempiere/dictionary-rs:1.6.4`
-   - Platforms: `linux/amd64`, `linux/amd64/v2`, `linux/arm64/v8`
-
-3. **Verify Publication**
-   ```bash
-   docker pull ghcr.io/adempiere/dictionary-rs:1.6.4
-   ```
-
-**⚠️ Do NOT update gateway env files yet** - wait until all services have new versions published.
-
----
-
-## Service: adempiere-report-engine-service
-
-### Migration Details
-
-- **Source Repository:** `https://github.com/adempiere/adempiere-report-engine-service` ✅ Already in adempiere org
-- **Source Branch:** `main`
-- **Target Repository:** Same repository (no fork needed)
-- **Target Branch:** `main` (or create new branch for migration)
-- **Current Docker Images:** (Docker Hub)
-  - `openls/adempiere-report-engine-service:alpine-1.3.7`
-  - `openls/adempiere-report-engine-service:1.3.7` (ubuntu)
-  - `openls/adempiere-grpc-proxy:1.3.7`
-- **Target Docker Images:** (GitHub Container Registry)
-  - `ghcr.io/adempiere/adempiere-report-engine-service:alpine-<version>`
-  - `ghcr.io/adempiere/adempiere-report-engine-service:<version>` (ubuntu)
-  - `ghcr.io/adempiere/adempiere-grpc-proxy:<version>`
-
-**Note:** This repository is already in the adempiere organization and publishes **3 separate Docker images**. Migration requires changing the publishing destination from Docker Hub to ghcr.io.
-
-### File 1: `.github/workflows/publish.yml`
-
-#### Change 1: Docker Login - Alpine Image
-- **Lines:** 152-157
-- **Before:**
-  ```yaml
-  - name: Login to Container Registry
-    uses: docker/login-action@v3
-    with:
-      # CONFIGURE DOCKER SECRETS INTO REPOSITORY
-      username: ${{ secrets.DOCKER_USERNAME }}
-      password: ${{ secrets.DOCKER_TOKEN }}
-  ```
-- **After:**
-  ```yaml
-  - name: Login to Container Registry
-    uses: docker/login-action@v3
-    with:
-      registry: ghcr.io
-      username: ${{ github.actor }}
-      password: ${{ secrets.GITHUB_TOKEN }}
-  ```
-- **Action:** Edit lines 154-157
-
-#### Change 2: Alpine Image Tags
-- **Lines:** 171-172, 175
-- **Before:**
-  ```yaml
-  TAGS="${{ secrets.DOCKER_HUB_REPO_NAME }}:${{ github.event.release.tag_name }}-alpine"
-  TAGS+=",${{ secrets.DOCKER_HUB_REPO_NAME }}:$CLEAN_BRANCH_NAME-alpine"
-  ...
-  TAGS+=",${{ secrets.DOCKER_HUB_REPO_NAME }}:alpine"
-  ```
-- **After:**
-  ```yaml
-  TAGS="ghcr.io/adempiere/adempiere-report-engine-service:${{ github.event.release.tag_name }}-alpine"
-  TAGS+=",ghcr.io/adempiere/adempiere-report-engine-service:$CLEAN_BRANCH_NAME-alpine"
-  ...
-  TAGS+=",ghcr.io/adempiere/adempiere-report-engine-service:alpine"
-  ```
-- **Action:** Edit lines 171-172 and 175 to replace secret with hardcoded image name
-
-#### Change 3: Docker Login - Ubuntu Image
-- **Lines:** 218-223
-- **Before:**
-  ```yaml
-  - name: Login to Container Registry
-    uses: docker/login-action@v3
-    with:
-      # CONFIGURE DOCKER SECRETS INTO REPOSITORY
-      username: ${{ secrets.DOCKER_USERNAME }}
-      password: ${{ secrets.DOCKER_TOKEN }}
-  ```
-- **After:**
-  ```yaml
-  - name: Login to Container Registry
-    uses: docker/login-action@v3
-    with:
-      registry: ghcr.io
-      username: ${{ github.actor }}
-      password: ${{ secrets.GITHUB_TOKEN }}
-  ```
-- **Action:** Edit lines 220-223
-
-#### Change 4: Ubuntu Image Tags
-- **Lines:** 237-238, 241
-- **Before:**
-  ```yaml
-  TAGS="${{ secrets.DOCKER_HUB_REPO_NAME }}:${{ github.event.release.tag_name }}"
-  TAGS+=",${{ secrets.DOCKER_HUB_REPO_NAME }}:$CLEAN_BRANCH_NAME"
-  ...
-  TAGS+=",${{ secrets.DOCKER_HUB_REPO_NAME }}:latest"
-  ```
-- **After:**
-  ```yaml
-  TAGS="ghcr.io/adempiere/adempiere-report-engine-service:${{ github.event.release.tag_name }}"
-  TAGS+=",ghcr.io/adempiere/adempiere-report-engine-service:$CLEAN_BRANCH_NAME"
-  ...
-  TAGS+=",ghcr.io/adempiere/adempiere-report-engine-service:latest"
-  ```
-- **Action:** Edit lines 237-238 and 241 to replace secret with hardcoded image name
-
-#### Change 5: Docker Login - gRPC Proxy Image
-- **Lines:** 309-314
-- **Before:**
-  ```yaml
-  - name: Login to Container Registry
-    uses: docker/login-action@v3
-    with:
-      # CONFIGURE DOCKER SECRETS INTO REPOSITORY
-      username: ${{ secrets.DOCKER_USERNAME }}
-      password: ${{ secrets.DOCKER_TOKEN }}
-  ```
-- **After:**
-  ```yaml
-  - name: Login to Container Registry
-    uses: docker/login-action@v3
-    with:
-      registry: ghcr.io
-      username: ${{ github.actor }}
-      password: ${{ secrets.GITHUB_TOKEN }}
-  ```
-- **Action:** Edit lines 311-314
-
-#### Change 6: gRPC Proxy Image Tags
-- **Lines:** 328-329, 332
-- **Before:**
-  ```yaml
-  TAGS="${{ secrets.DOCKER_HUB_PROXY_REPO_NAME }}:${{ github.event.release.tag_name }}"
-  TAGS+=",${{ secrets.DOCKER_HUB_PROXY_REPO_NAME }}:$CLEAN_BRANCH_NAME"
-  ...
-  TAGS+=",${{ secrets.DOCKER_HUB_PROXY_REPO_NAME }}:latest"
-  ```
-- **After:**
-  ```yaml
-  TAGS="ghcr.io/adempiere/adempiere-grpc-proxy:${{ github.event.release.tag_name }}"
-  TAGS+=",ghcr.io/adempiere/adempiere-grpc-proxy:$CLEAN_BRANCH_NAME"
-  ...
-  TAGS+=",ghcr.io/adempiere/adempiere-grpc-proxy:latest"
-  ```
-- **Action:** Edit lines 328-329 and 332 to replace secret with hardcoded image name
-
-#### Change 7: Repository Secrets (GitHub UI)
-- **Action:** Delete the following repository secrets:
-  - `DOCKER_USERNAME`
-  - `DOCKER_TOKEN`
-  - `DOCKER_HUB_REPO_NAME`
-  - `DOCKER_HUB_PROXY_REPO_NAME`
-
-### Release Creation
-
-After all code changes are committed:
-
-1. **Create GitHub Release**
-   - Tag: `1.4.2` (or chosen version per strategy - note: latest is 1.4.1)
-   - Target: `main` branch
-   - Title: "ADempiere Report Engine v1.4.2 - Migration to ghcr.io"
-
-2. **GitHub Actions Publishes 3 Images**
-   - Workflow: `.github/workflows/publish.yml` triggers automatically
-   - Publishes:
-     - `ghcr.io/adempiere/adempiere-report-engine-service:1.4.2-alpine`
-     - `ghcr.io/adempiere/adempiere-report-engine-service:1.4.2` (ubuntu multiplatform)
-     - `ghcr.io/adempiere/adempiere-grpc-proxy:1.4.2`
-
-3. **Verify Publication**
-   ```bash
-   docker pull ghcr.io/adempiere/adempiere-report-engine-service:1.4.2-alpine
-   docker pull ghcr.io/adempiere/adempiere-report-engine-service:1.4.2
-   docker pull ghcr.io/adempiere/adempiere-grpc-proxy:1.4.2
-   ```
-
-**⚠️ Do NOT update gateway env files yet** - wait until all services have new versions published.
-
----
-
-## Service: adempiere-landing-page (adempiere-site)
-
-### Migration Details
-
-- **Source Repository:** `https://github.com/adempiere/adempiere-site` ✅ Already in adempiere org
-- **Source Branch:** `main`
-- **Target Repository:** Same repository (no fork needed)
-- **Target Branch:** `main`
-- **Current Docker Image:** `openls/adempiere-landing-page:alpine-1.0.3` (referenced in env_template.env)
-- **Target Docker Image:** `ghcr.io/adempiere/adempiere-site:alpine-<version>` (GitHub Container Registry)
-
-**⚠️ DISCREPANCY FOUND:** The repository `adempiere-site` currently has a `.github/workflows/deploy.yml` workflow that only deploys a static VuePress site to GitHub Pages. It does NOT publish any Docker images. However, the gateway's `env_template.env` line 317 references a Docker image `openls/adempiere-landing-page:alpine-1.0.3`.
-
-**Possible Scenarios:**
-1. **Different repository**: The Docker image might come from a different repository not yet identified
-2. **Old workflow**: The repository may have had Docker publishing in the past but was removed
-3. **Manual build**: The image might be built and published manually, not via GitHub Actions
-
-**Action Required:**
-- Verify the actual source of the `openls/adempiere-landing-page:alpine-1.0.3` Docker image
-- Check if there's a different repository that publishes this image
-- Or check if the adempiere-site repository needs a Docker publishing workflow added
-
-**IF a Docker publishing workflow exists or needs to be added**, the migration pattern would be:
-1. Add/modify `.github/workflows/publish.yml` to include Docker image building
-2. Change Docker Hub → ghcr.io
-3. Update image tags to `ghcr.io/adempiere/adempiere-site:alpine-<version>`
-4. Create release and verify publication
-5. Update gateway env_template.env line 317
-
----
-
 ## Library: adempiere-shw (Customization Library)
 
 ### Migration Details
@@ -1174,48 +1174,55 @@ The migration should follow this sequence to minimize dependencies. **Each servi
   5. Verify at `github.com/adempiere/adempiere-customizations/packages`
 - **Output:** Generic customization template available
 
-### Phase 2: Core Services (No Inter-Dependencies)
+### Phase 2: Simple Migrations (openls - Already in adempiere org)
+
+These services only require workflow updates (Docker Hub → ghcr.io). Start with these to build confidence.
 
 For each service below, follow this workflow:
-- Make code changes → Commit → Create release → Verify publication
+- Update `.github/workflows/publish.yml` → Commit → Create release → Verify publication
 
-**Service 2: adempiere-shw-zk → adempiere-zk**
-- Release tag: `jetty-3.9.4.001-1.1.46`
-- Verify: `docker pull ghcr.io/adempiere/adempiere-zk:jetty-3.9.4.001-1.1.46`
-
-**Service 3: adempiere-processors-service**
-- Release tag: `alpine-1.1.17`
-- Verify: `docker pull ghcr.io/adempiere/adempiere-processors-service:alpine-1.1.17`
-
-**Service 4: adempiere-grpc-server**
-- Release tag: `3.9.4.001-1.0.31`
-- Verify: `docker pull ghcr.io/adempiere/adempiere-grpc-server:3.9.4.001-1.0.31`
-
-**Service 5: adempiere-vue**
-- Release tag: `0.0.6`
-- Verify: `docker pull ghcr.io/adempiere/adempiere-vue:0.0.6`
-
-### Phase 3: Supporting Services (Rust Microservices)
-
-**Service 6: s3-gateway-rs**
+**Service 2: s3-gateway-rs**
 - Release tag: `1.2.8`
 - Verify: `docker pull ghcr.io/adempiere/s3-gateway-rs:1.2.8`
 
-**Service 7: dictionary-rs**
+**Service 3: dictionary-rs**
 - Release tag: `1.6.4`
 - Verify: `docker pull ghcr.io/adempiere/dictionary-rs:1.6.4`
 
-**Service 8: adempiere-report-engine-service**
+**Service 4: adempiere-report-engine-service**
 - Release tag: `1.4.2`
 - Verify: `docker pull ghcr.io/adempiere/adempiere-report-engine-service:1.4.2`
 
-**Service 9: adempiere-landing-page**
+**Service 5: adempiere-landing-page**
 - Release tag: `alpine-1.0.4`
 - Verify: `docker pull ghcr.io/adempiere/adempiere-landing-page:alpine-1.0.4`
 
+### Phase 3: Complex Migrations (marcalwestf - Require Repository Forks)
+
+These services require forking repositories and merging code before workflow updates.
+
+For each service below, follow this workflow:
+- Fork/merge repository → Update workflows → Commit → Create release → Verify publication
+
+**Service 6: adempiere-shw-zk → adempiere-zk**
+- Release tag: `jetty-3.9.4.001-1.1.46`
+- Verify: `docker pull ghcr.io/adempiere/adempiere-zk:jetty-3.9.4.001-1.1.46`
+
+**Service 7: adempiere-processors-service**
+- Release tag: `alpine-1.1.17`
+- Verify: `docker pull ghcr.io/adempiere/adempiere-processors-service:alpine-1.1.17`
+
+**Service 8: adempiere-grpc-server**
+- Release tag: `3.9.4.001-1.0.31`
+- Verify: `docker pull ghcr.io/adempiere/adempiere-grpc-server:3.9.4.001-1.0.31`
+
+**Service 9: adempiere-vue**
+- Release tag: `0.0.6`
+- Verify: `docker pull ghcr.io/adempiere/adempiere-vue:0.0.6`
+
 ### Phase 4: Gateway Orchestration (VERSION REFERENCES)
 
-**⚠️ CRITICAL:** Do NOT start this phase until ALL services (2-9) have published Docker images.
+**⚠️ CRITICAL:** Do NOT start this phase until ALL services (Services 2-9: both openls and marcalwestf) have published Docker images.
 
 **Service 10: adempiere-ui-gateway**
 - **Action:** Update `env_template.env` with all new image references
