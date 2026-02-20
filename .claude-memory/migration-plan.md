@@ -470,17 +470,14 @@ Phase 5  Smoke test
    - `s3-gateway-rs`: `adempiere/s3_gateway_rs`, branch `main`
    - `dictionary-rs`: `adempiere/dictionary_rs`, branch `main`
    - `adempiere-report-engine-service`: `adempiere/adempiere-report-engine-service`, branch `main`
-   - `adempiere-landing-page`: `adempiere/adempiere-site`, branch `main` (⚠️ no Docker workflow - needs investigation)
+   - `adempiere-landing-page`: `adempiere/adempiere-landing-page`, branch `main`, workflow: `.github/workflows/publish.yaml` ✅
 3. ✅ **Resolved:** Registry preference is `ghcr.io/adempiere/` (GitHub Container Registry)
 4. ✅ **Resolved:** `openls/` and `marcalwestf/` are both temporary Docker Hub namespaces — all 8 services will republish Docker images to `ghcr.io/adempiere/`
 5. ⏸️ Tag/version convention after migration: keep `shw-` prefix or drop it?
 6. ⏸️ Should the legacy `adempiere-vue` and `adempiere-grpc-server` packages be explicitly archived/deprecated before publishing the new versions?
 7. ⏸️ Does someone with admin rights to the `adempiere` GitHub org need to be involved from Phase 1?
 8. ⏸️ What is the target branch name in `adempiere/adempiere-ui-gateway` for this work — merge directly into `main` or via a feature branch?
-9. 🆕 **adempiere-landing-page discrepancy:** The `adempiere/adempiere-site` repo only has static site deployment workflow, no Docker publishing. Need to verify:
-   - Is `openls/adempiere-landing-page:alpine-1.0.3` built from this repo?
-   - Does a Docker publishing workflow need to be added?
-   - Or is there a different source repository?
+9. ✅ **Resolved - adempiere-landing-page:** Repository is `adempiere/adempiere-landing-page` (NOT `adempiere-site`). It has Docker publishing workflow `.github/workflows/publish.yaml` that builds and publishes the Docker image `openls/adempiere-landing-page:alpine-1.0.3`. Local clone available at `/data2/entwicklung/westfaliaRepository_2022-06/adempiere-landing-page_ADEMPIERE`.
 
 ---
 
