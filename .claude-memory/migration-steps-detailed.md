@@ -181,42 +181,36 @@ docker images | grep adempiere
 ### File 1: `.github/workflows/release.yaml`
 
 #### Change 1: Docker Login - Add Registry
-- **Lines:** 53-58
-- **Before:**
+- **Location:** Lines 53-58 (the Docker login action block)
+- **What to change:** Replace the `with:` section (lines 55-58 within this block)
+- **Find this:**
   ```yaml
-  - name: Login to GitHub Container Registry
-    uses: docker/login-action@v3
-    with:
-      # CONFIGURE DOCKER SECRETS INTO REPOSITORY
-      username: ${{ secrets.DOCKER_USERNAME }}
-      password: ${{ secrets.DOCKER_TOKEN }}
+  with:
+    # CONFIGURE DOCKER SECRETS INTO REPOSITORY
+    username: ${{ secrets.DOCKER_USERNAME }}
+    password: ${{ secrets.DOCKER_TOKEN }}
   ```
-- **After:**
+- **Replace with:**
   ```yaml
-  - name: Login to GitHub Container Registry
-    uses: docker/login-action@v3
-    with:
-      registry: ghcr.io
-      username: ${{ github.actor }}
-      password: ${{ secrets.GITHUB_TOKEN }}
+  with:
+    registry: ghcr.io
+    username: ${{ github.actor }}
+    password: ${{ secrets.GITHUB_TOKEN }}
   ```
-- **Action:** Edit lines 55-58
 
 #### Change 2: Docker Image Tags
-- **Lines:** 69-71
-- **Before:**
+- **Location:** Lines 69-71 (the `tags:` section)
+- **What to change:** Replace lines 70-71 (the two tag lines under `tags: |`)
+- **Find this:**
   ```yaml
-  tags: |
-    ${{ secrets.DOCKER_HUB_REPO_NAME }}:${{ github.event.release.tag_name }}
-    ${{ secrets.DOCKER_HUB_REPO_NAME }}
+  ${{ secrets.DOCKER_HUB_REPO_NAME }}:${{ github.event.release.tag_name }}
+  ${{ secrets.DOCKER_HUB_REPO_NAME }}
   ```
-- **After:**
+- **Replace with:**
   ```yaml
-  tags: |
-    ghcr.io/adempiere/s3-gateway-rs:${{ github.event.release.tag_name }}
-    ghcr.io/adempiere/s3-gateway-rs:latest
+  ghcr.io/adempiere/s3-gateway-rs:${{ github.event.release.tag_name }}
+  ghcr.io/adempiere/s3-gateway-rs:latest
   ```
-- **Action:** Edit lines 70-71
 
 #### Change 3: Repository Secrets (GitHub UI)
 - **Action:** Delete the following repository secrets:
@@ -266,42 +260,36 @@ After all code changes are committed:
 ### File 1: `.github/workflows/release.yaml`
 
 #### Change 1: Docker Login - Add Registry
-- **Lines:** 53-58
-- **Before:**
+- **Location:** Lines 53-58 (the Docker login action block)
+- **What to change:** Replace the `with:` section (lines 55-58 within this block)
+- **Find this:**
   ```yaml
-  - name: Login to GitHub Container Registry
-    uses: docker/login-action@v3
-    with:
-      # CONFIGURE DOCKER SECRETS INTO REPOSITORY
-      username: ${{ secrets.DOCKER_USERNAME }}
-      password: ${{ secrets.DOCKER_TOKEN }}
+  with:
+    # CONFIGURE DOCKER SECRETS INTO REPOSITORY
+    username: ${{ secrets.DOCKER_USERNAME }}
+    password: ${{ secrets.DOCKER_TOKEN }}
   ```
-- **After:**
+- **Replace with:**
   ```yaml
-  - name: Login to GitHub Container Registry
-    uses: docker/login-action@v3
-    with:
-      registry: ghcr.io
-      username: ${{ github.actor }}
-      password: ${{ secrets.GITHUB_TOKEN }}
+  with:
+    registry: ghcr.io
+    username: ${{ github.actor }}
+    password: ${{ secrets.GITHUB_TOKEN }}
   ```
-- **Action:** Edit lines 55-58
 
 #### Change 2: Docker Image Tags
-- **Lines:** 69-71
-- **Before:**
+- **Location:** Lines 69-71 (the `tags:` section)
+- **What to change:** Replace lines 70-71 (the two tag lines under `tags: |`)
+- **Find this:**
   ```yaml
-  tags: |
-    ${{ secrets.DOCKER_HUB_REPO_NAME }}:${{ github.event.release.tag_name }}
-    ${{ secrets.DOCKER_HUB_REPO_NAME }}
+  ${{ secrets.DOCKER_HUB_REPO_NAME }}:${{ github.event.release.tag_name }}
+  ${{ secrets.DOCKER_HUB_REPO_NAME }}
   ```
-- **After:**
+- **Replace with:**
   ```yaml
-  tags: |
-    ghcr.io/adempiere/dictionary-rs:${{ github.event.release.tag_name }}
-    ghcr.io/adempiere/dictionary-rs:latest
+  ghcr.io/adempiere/dictionary-rs:${{ github.event.release.tag_name }}
+  ghcr.io/adempiere/dictionary-rs:latest
   ```
-- **Action:** Edit lines 70-71
 
 #### Change 3: Repository Secrets (GitHub UI)
 - **Action:** Delete the following repository secrets:
