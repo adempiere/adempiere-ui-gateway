@@ -12,7 +12,7 @@
 - ✅ `marcalwestf` group: all 4 source repositories in Systemhaus-Westfalia org
   - `adempiere-shw-zk`, `adempiere-processors-service`, `adempiere-grpc-server`, `adempiere-vue`
 - ✅ Customization library: `adempiere-shw` repository in Systemhaus-Westfalia org
-- ✅ Third-party images: 13 official/external images (no migration - kept as-is, see Part 1a)
+- ✅ Third-party images: 13 official/external images (no migration - kept as-is, see Part 2a)
 - ✅ Target registry: `ghcr.io/adempiere/`
 
 **Scope:** 📦
@@ -27,11 +27,11 @@
 ## Table of Contents
 
 1. [Overview](#overview)
-2. [Part 1 — Complete Container Inventory](#part-1--complete-container-inventory)
-   - [1a — Third-Party and Official Images](#1a--third-party-and-official-images-no-migration)
-   - [1b — ADempiere Services: Publishing Changes Only](#1b--adempiere-services-publishing-changes-only)
-   - [1c — ADempiere Services: Repository Migration Required](#1c--adempiere-services-repository-migration-required)
-3. [Part 2 — Constraints](#part-2--constraints)
+2. [Part 1 — Constraints](#part-1--constraints)
+3. [Part 2 — Complete Container Inventory](#part-2--complete-container-inventory)
+   - [2a — Third-Party and Official Images](#2a--third-party-and-official-images-no-migration)
+   - [2b — ADempiere Services: Publishing Changes Only](#2b--adempiere-services-publishing-changes-only)
+   - [2c — ADempiere Services: Repository Migration Required](#2c--adempiere-services-repository-migration-required)
 4. [Part 3 — Per-Service Migration](#part-3--per-service-migration-8-services-total)
    - [3a — openls services](#part-3a--containerized-services-openls-already-in-adempiere-org)
    - [3b — marcalwestf services](#part-3b--containerized-services-marcalwestf-require-repository-fork)
@@ -45,9 +45,28 @@
 
 ---
 
-## Part 1 — Complete Container Inventory
+## Part 1 — Constraints
 
-### 1a — Third-Party and Official Images (No Migration)
+**a)** External images (PostgreSQL, MinIO, Envoy, nginx, Kafka, OpenSearch, Keycloak, DKron) remain unchanged - maintained by upstream projects.
+
+**b)** Images currently published under `Systemhaus-Westfalia` / `marcalwestf` must be republished under the `adempiere` GitHub org.
+
+**c)** Branch names and tag/version conventions for the migrated repos are TBD — must be decided before any release is cut.
+
+**d)** Eight containerized services with two different migration patterns:
+- Four `openls` repositories (already in adempiere org): `s3_gateway_rs`, `dictionary_rs`, `adempiere-report-engine-service`, `adempiere-landing-page` — only need to change Docker image publishing from Docker Hub (`openls/*`) to GitHub Container Registry (`ghcr.io/adempiere/*`)
+- Four `marcalwestf` repositories (need repository migration): `adempiere-shw-zk`, `adempiere-processors-service`, `adempiere-grpc-server`, `adempiere-vue` — must be forked/merged from Systemhaus-Westfalia to adempiere org, then change Docker image publishing from Docker Hub (`marcalwestf/*`) to GitHub Container Registry (`ghcr.io/adempiere/*`)
+- One customization library repository: `adempiere-shw` must be forked from Systemhaus-Westfalia to adempiere org (as `adempiere-customizations`)
+
+**e)** CI/CD: use Systemhaus-Westfalia workflows as the reference (they are more up to date than adempiere's). Adapt the publishing workflow (named `publish.yml` or `release.yml` depending on repository) to publish to the adempiere org. Compare with adempiere's existing workflow files. **Goal:** Standardize workflow filename across all repositories (decide on either `publish.yml` or `release.yml` as the unified convention).
+
+**f)** `svfe-api-firmador` (El Salvador e-invoicing) is NOT migrated — it stays Westfalia-specific.
+
+---
+
+## Part 2 — Complete Container Inventory
+
+### 2a — Third-Party and Official Images (No Migration)
 
 These are official or third-party images maintained by upstream projects. We do not control these images and they remain unchanged.
 
@@ -67,7 +86,7 @@ These are official or third-party images maintained by upstream projects. We do 
 | scheduler-dkron | `dkron/dkron:3.2.7` | dkron (official) |
 | svfe-api-firmador | `svfe/svfe-api-firmador:v20230109` | **Excluded** — Westfalia-specific (constraint f) |
 
-### 1b — ADempiere Services: Publishing Changes Only
+### 2b — ADempiere Services: Publishing Changes Only
 
 **Context:**
 - The `openls/*` Docker Hub namespace was created as a temporary publishing location while the proper adempiere GitHub packages infrastructure was being set up
@@ -91,7 +110,7 @@ These are official or third-party images maintained by upstream projects. We do 
 
 ---
 
-### 1c — ADempiere Services: Repository Migration Required
+### 2c — ADempiere Services: Repository Migration Required
 
 **Context:**
 - The `marcalwestf/*` Docker Hub namespace was created as a temporary publishing location while the proper adempiere GitHub packages infrastructure was being set up
@@ -117,25 +136,6 @@ These are official or third-party images maintained by upstream projects. We do 
 
 2. **Open question:**
    - Should the legacy packages be archived/deprecated explicitly before publishing the new versions?
-
----
-
-## Part 2 — Constraints
-
-**a)** External images (PostgreSQL, MinIO, Envoy, nginx, Kafka, OpenSearch, Keycloak, DKron) remain unchanged - maintained by upstream projects.
-
-**b)** Images currently published under `Systemhaus-Westfalia` / `marcalwestf` must be republished under the `adempiere` GitHub org.
-
-**c)** Branch names and tag/version conventions for the migrated repos are TBD — must be decided before any release is cut.
-
-**d)** Eight containerized services with two different migration patterns:
-- Four `openls` repositories (already in adempiere org): `s3_gateway_rs`, `dictionary_rs`, `adempiere-report-engine-service`, `adempiere-landing-page` — only need to change Docker image publishing from Docker Hub (`openls/*`) to GitHub Container Registry (`ghcr.io/adempiere/*`)
-- Four `marcalwestf` repositories (need repository migration): `adempiere-shw-zk`, `adempiere-processors-service`, `adempiere-grpc-server`, `adempiere-vue` — must be forked/merged from Systemhaus-Westfalia to adempiere org, then change Docker image publishing from Docker Hub (`marcalwestf/*`) to GitHub Container Registry (`ghcr.io/adempiere/*`)
-- One customization library repository: `adempiere-shw` must be forked from Systemhaus-Westfalia to adempiere org (as `adempiere-customizations`)
-
-**e)** CI/CD: use Systemhaus-Westfalia workflows as the reference (they are more up to date than adempiere's). Adapt the publishing workflow (named `publish.yml` or `release.yml` depending on repository) to publish to the adempiere org. Compare with adempiere's existing workflow files. **Goal:** Standardize workflow filename across all repositories (decide on either `publish.yml` or `release.yml` as the unified convention).
-
-**f)** `svfe-api-firmador` (El Salvador e-invoicing) is NOT migrated — it stays Westfalia-specific.
 
 ---
 
