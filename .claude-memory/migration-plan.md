@@ -28,7 +28,7 @@
 
 1. [Overview](#overview)
 2. [Part 1 — Complete Container Inventory](#part-1--complete-container-inventory)
-   - [1a — Images kept as-is](#1a--images-kept-as-is-no-migration-needed)
+   - [1a — Third-Party and Official Images](#1a--third-party-and-official-images-no-migration)
    - [1b — Images to migrate](#1b--images-that-must-be-migrated-to-ghcrioadempiere)
 3. [Part 2 — Constraints](#part-2--constraints)
 4. [Part 3 — Per-Service Migration](#part-3--per-service-migration-8-services-total)
@@ -46,7 +46,7 @@
 
 ## Part 1 — Complete Container Inventory
 
-### 1a — Images kept as-is (no migration needed)
+### 1a — Third-Party and Official Images (No Migration)
 
 These are official or third-party images maintained by upstream projects. We do not control these images and they remain unchanged.
 
