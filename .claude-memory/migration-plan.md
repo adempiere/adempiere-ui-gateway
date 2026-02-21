@@ -29,7 +29,7 @@
 1. [Overview](#overview)
 2. [Part 1 — Complete Container Inventory](#part-1--complete-container-inventory)
    - [1a — Third-Party and Official Images](#1a--third-party-and-official-images-no-migration)
-   - [1b — Images to migrate](#1b--images-that-must-be-migrated-to-ghcrioadempiere)
+   - [1b — ADempiere Service Images](#1b--adempiere-service-images-migration-required)
 3. [Part 2 — Constraints](#part-2--constraints)
 4. [Part 3 — Per-Service Migration](#part-3--per-service-migration-8-services-total)
    - [3a — openls services](#part-3a--containerized-services-openls-already-in-adempiere-org)
@@ -66,9 +66,12 @@ These are official or third-party images maintained by upstream projects. We do 
 | scheduler-dkron | `dkron/dkron:3.2.7` | dkron (official) |
 | svfe-api-firmador | `svfe/svfe-api-firmador:v20230109` | **Excluded** — Westfalia-specific (constraint f) |
 
-### 1b — Images that MUST be migrated to `ghcr.io/adempiere/`
+### 1b — ADempiere Service Images (Migration Required)
 
-**Context:** Both `openls/*` and `marcalwestf/*` Docker Hub namespaces were created as temporary publishing locations while the proper adempiere GitHub packages infrastructure was being set up. ALL Docker images from both namespaces will be republished to `ghcr.io/adempiere/` (GitHub Container Registry). Published images will be visible at https://github.com/orgs/adempiere/packages.
+**Context:**
+- Both `openls/*` and `marcalwestf/*` Docker Hub namespaces were created as temporary publishing locations while the proper adempiere GitHub packages infrastructure was being set up
+- ALL Docker images from both namespaces will be republished to `ghcr.io/adempiere/` (GitHub Container Registry)
+- Published images will be visible at: https://github.com/orgs/adempiere/packages
 
 **Total containerized services:** 8 (4 openls + 4 marcalwestf)
 
