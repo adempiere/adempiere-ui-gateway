@@ -1,4 +1,4 @@
-# Migration Plan: SHW → adempiere/adempiere-ui-gateway
+# Migration Plan: Systemhaus-Westfalia/adempiere-ui-gateway → adempiere/adempiere-ui-gateway
 
 ## Overview
 
