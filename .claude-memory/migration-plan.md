@@ -29,7 +29,8 @@
 1. [Overview](#overview)
 2. [Part 1 — Complete Container Inventory](#part-1--complete-container-inventory)
    - [1a — Third-Party and Official Images](#1a--third-party-and-official-images-no-migration)
-   - [1b — ADempiere Service Images](#1b--adempiere-service-images-migration-required)
+   - [1b — ADempiere Services: Publishing Changes Only](#1b--adempiere-services-publishing-changes-only)
+   - [1c — ADempiere Services: Repository Migration Required](#1c--adempiere-services-repository-migration-required)
 3. [Part 2 — Constraints](#part-2--constraints)
 4. [Part 3 — Per-Service Migration](#part-3--per-service-migration-8-services-total)
    - [3a — openls services](#part-3a--containerized-services-openls-already-in-adempiere-org)
@@ -66,16 +67,15 @@ These are official or third-party images maintained by upstream projects. We do 
 | scheduler-dkron | `dkron/dkron:3.2.7` | dkron (official) |
 | svfe-api-firmador | `svfe/svfe-api-firmador:v20230109` | **Excluded** — Westfalia-specific (constraint f) |
 
-### 1b — ADempiere Service Images (Migration Required)
+### 1b — ADempiere Services: Publishing Changes Only
 
 **Context:**
-- Both `openls/*` and `marcalwestf/*` Docker Hub namespaces were created as temporary publishing locations while the proper adempiere GitHub packages infrastructure was being set up
-- ALL Docker images from both namespaces will be republished to `ghcr.io/adempiere/` (GitHub Container Registry)
+- The `openls/*` Docker Hub namespace was created as a temporary publishing location while the proper adempiere GitHub packages infrastructure was being set up
+- These 4 services already have repositories in the `adempiere` GitHub organization - no repository migration needed
+- Only Docker image publishing needs to change from Docker Hub (`openls/*`) to GitHub Container Registry (`ghcr.io/adempiere/*`)
 - Published images will be visible at: https://github.com/orgs/adempiere/packages
 
-**Total containerized services:** 8 (4 openls + 4 marcalwestf)
-
-#### Group 1: `openls/*` images (4 services) — Already in adempiere org
+**Total services:** 4 (openls namespace)
 
 | # | Service name (compose) | Repository name (GitHub) | Current image | Docker Hub | Branch | Local directory | Notes |
 |---|---|---|---|---|---|---|---|
@@ -84,12 +84,22 @@ These are official or third-party images maintained by upstream projects. We do 
 | 3 | `adempiere-report-engine` | `adempiere-report-engine-service` | `openls/adempiere-report-engine-service:alpine-1.3.7` | [link](https://hub.docker.com/r/openls/adempiere-report-engine-service) | `main` | — | Current: 1.4.1, suggested: 1.4.2 |
 | 4 | `adempiere-site` | `adempiere-landing-page` | `openls/adempiere-landing-page:alpine-1.0.3` | [link](https://hub.docker.com/r/openls/adempiere-landing-page) | `main` | `/data2/.../adempiere-landing-page_ADEMPIERE` | Current: 1.0.3, suggested: 1.0.4 |
 
-**Notes on openls services:**
+**Notes:**
 1. **Temporary namespace:** The `openls` Docker Hub namespace was a temporary publishing location. All four services already have repositories in the `adempiere` GitHub organization.
 
-2. **Migration simplified:** These services only need to change their Docker publishing from Docker Hub (`openls/*`) to GitHub Container Registry (`ghcr.io/adempiere/*`). No repository forks needed.
+2. **Migration approach:** These services only need CI/CD workflow updates to change their Docker publishing from Docker Hub (`openls/*`) to GitHub Container Registry (`ghcr.io/adempiere/*`). No repository forks or merges needed.
 
-#### Group 2: `marcalwestf/*` images (4 services) — Require repository fork
+---
+
+### 1c — ADempiere Services: Repository Migration Required
+
+**Context:**
+- The `marcalwestf/*` Docker Hub namespace was created as a temporary publishing location while the proper adempiere GitHub packages infrastructure was being set up
+- These 4 services are maintained in Systemhaus-Westfalia repositories and must be forked/merged into the adempiere organization
+- Both repository migration AND Docker publishing changes are required (from Docker Hub `marcalwestf/*` to GitHub Container Registry `ghcr.io/adempiere/*`)
+- Published images will be visible at: https://github.com/orgs/adempiere/packages
+
+**Total services:** 4 (marcalwestf namespace)
 
 | # | Service name (compose) | Repository name (GitHub) | Current image | Docker Hub | Branch | Tag | Local directory |
 |---|---|---|---|---|---|---|---|
@@ -98,17 +108,14 @@ These are official or third-party images maintained by upstream projects. We do 
 | 7 | `adempiere-grpc-server` | `adempiere-grpc-server` | `marcalwestf/adempiere-grpc-server:3.9.4.001-shw-1.0.30` | [link](https://hub.docker.com/r/marcalwestf/adempiere-grpc-server) | `feature/shw/master` | `1.0.30` | `/data2/.../adempiere-grpc-server_SHW` |
 | 8 | `vue-ui` | `adempiere-vue` | `marcalwestf/adempiere-vue:0.0.5` | [link](https://hub.docker.com/r/marcalwestf/adempiere-vue) | `develop` | `0.0.6` | `/data2/.../adempiere-vue_SHW` |
 
-**Additional Notes:**
-1. **Target registry for ALL 8 services:** `ghcr.io/adempiere/<name>` (GitHub Container Registry)
-   - Packages page: https://github.com/orgs/adempiere/packages
-
-2. **Important context:** Two services already have **legacy/non-working packages** published at `ghcr.io/adempiere/`:
+**Notes:**
+1. **Legacy packages:** Two of these services already have **legacy/non-working packages** published at `ghcr.io/adempiere/`:
    - `adempiere-vue` (111k downloads) — legacy version, not currently functional
    - `adempiere-grpc-server` (33.9k downloads) — legacy version, not currently functional
 
    The migrated images will land at the same package names but will be **completely new/rewritten versions** based on the working SHW fork code. The legacy packages will be replaced.
 
-3. **Open questions:**
+2. **Open question:**
    - Should the legacy packages be archived/deprecated explicitly before publishing the new versions?
 
 ---
