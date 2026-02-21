@@ -1,5 +1,7 @@
 # Migration Plan: SHW → adempiere/adempiere-ui-gateway
 
+## Overview
+
 **Status:** 📝 DRAFT — under review
 
 **Goal:** 🎯 Move `Systemhaus-Westfalia/adempiere-ui-gateway` (branch `adempiere-trunk`) to its upstream origin `adempiere/adempiere-ui-gateway`.
