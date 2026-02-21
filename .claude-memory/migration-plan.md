@@ -84,6 +84,11 @@ These are official or third-party images maintained by upstream projects. We do 
 | 3 | `adempiere-report-engine` | `adempiere-report-engine-service` | `openls/adempiere-report-engine-service:alpine-1.3.7` | [link](https://hub.docker.com/r/openls/adempiere-report-engine-service) | `main` | — | Current: 1.4.1, suggested: 1.4.2 |
 | 4 | `adempiere-site` | `adempiere-landing-page` | `openls/adempiere-landing-page:alpine-1.0.3` | [link](https://hub.docker.com/r/openls/adempiere-landing-page) | `main` | `/data2/.../adempiere-landing-page_ADEMPIERE` | Current: 1.0.3, suggested: 1.0.4 |
 
+**Notes on openls services:**
+1. **Temporary namespace:** The `openls` Docker Hub namespace was a temporary publishing location. All four services already have repositories in the `adempiere` GitHub organization.
+
+2. **Migration simplified:** These services only need to change their Docker publishing from Docker Hub (`openls/*`) to GitHub Container Registry (`ghcr.io/adempiere/*`). No repository forks needed.
+
 #### Group 2: `marcalwestf/*` images (4 services) — Require repository fork
 
 | # | Service name (compose) | Repository name (GitHub) | Current image | Docker Hub | Branch | Tag | Local directory |
@@ -93,21 +98,17 @@ These are official or third-party images maintained by upstream projects. We do 
 | 7 | `adempiere-grpc-server` | `adempiere-grpc-server` | `marcalwestf/adempiere-grpc-server:3.9.4.001-shw-1.0.30` | [link](https://hub.docker.com/r/marcalwestf/adempiere-grpc-server) | `feature/shw/master` | `1.0.30` | `/data2/.../adempiere-grpc-server_SHW` |
 | 8 | `vue-ui` | `adempiere-vue` | `marcalwestf/adempiere-vue:0.0.5` | [link](https://hub.docker.com/r/marcalwestf/adempiere-vue) | `develop` | `0.0.6` | `/data2/.../adempiere-vue_SHW` |
 
-**Note on `openls` namespace:**
-1. **Temporary namespace:** The `openls` Docker Hub namespace was a temporary publishing location. All four services already have repositories in the `adempiere` GitHub organization.
-
-2. **Migration simplified:** These services only need to change their Docker publishing from Docker Hub (`openls/*`) to GitHub Container Registry (`ghcr.io/adempiere/*`). No repository forks needed.
-
-3. **Target registry for ALL 8 services:** `ghcr.io/adempiere/<name>` (GitHub Container Registry)
+**Additional Notes:**
+1. **Target registry for ALL 8 services:** `ghcr.io/adempiere/<name>` (GitHub Container Registry)
    - Packages page: https://github.com/orgs/adempiere/packages
 
-4. **Important context:** Two services already have **legacy/non-working packages** published at `ghcr.io/adempiere/`:
+2. **Important context:** Two services already have **legacy/non-working packages** published at `ghcr.io/adempiere/`:
    - `adempiere-vue` (111k downloads) — legacy version, not currently functional
    - `adempiere-grpc-server` (33.9k downloads) — legacy version, not currently functional
 
    The migrated images will land at the same package names but will be **completely new/rewritten versions** based on the working SHW fork code. The legacy packages will be replaced.
 
-5. **Open questions:**
+3. **Open questions:**
    - Should the legacy packages be archived/deprecated explicitly before publishing the new versions?
 
 ---
