@@ -141,17 +141,6 @@ These are official or third-party images maintained by upstream projects. We do 
 
 ## Part 3 — Per-Service Migration (8 services total)
 
-### Common pattern for each service
-
-1. Confirm source repo name and branch in `Systemhaus-Westfalia` or `adempiere` GitHub org
-2. Fork / create the repo under `adempiere` GitHub org (if not already there)
-3. Decide target branch name and tag convention (constraint c)
-4. Push code into the new repo
-5. Adapt publishing workflow (`publish.yml` or `release.yml`) to publish Docker image to `ghcr.io/adempiere/<name>` (see Part 5)
-6. Add required org-level secrets
-7. Cut a release and verify image is accessible at `ghcr.io/adempiere/<name>`
-8. Update the corresponding image variable in `env_template.env`
-
 ---
 
 ## Part 3a — Containerized Services: openls (Already in adempiere org)
@@ -465,12 +454,7 @@ For each of the **8 service repos**, only the publishing workflow (`publish.yml`
 ## Part 7 — Execution Order
 
 ```
-Phase 1  Audit
-         ├── Confirm source repo names/branches for all 8 services
-         ├── Target registry: ghcr.io/adempiere/ (GitHub Container Registry)
-         └── Identify which services already have repos in adempiere org
-
-Phase 2  Per-service (8 services — can run in parallel)
+Phase 1  Per-service (8 services — can run in parallel)
          ├── Fork/create repo under adempiere org
          ├── Decide branch name + tag convention (constraint c)
          ├── Push code
@@ -478,16 +462,16 @@ Phase 2  Per-service (8 services — can run in parallel)
          ├── Add org secrets
          └── Cut release → verify image at ghcr.io/adempiere/<name>
 
-Phase 3  Gateway repo (after at least one image per service exists)
+Phase 2  Gateway repo (after at least one image per service exists)
          ├── Update env_template.env — all 8 image references (see table in Part 4)
          ├── Clean deployment-specific content
          ├── Add .github/workflows/ci.yml
          └── Open PR to adempiere/adempiere-ui-gateway:main
 
-Phase 4  Docs (parallel with Phase 3)
+Phase 3  Docs (parallel with Phase 2)
          └── Update all SHW references in docs/, CLAUDE.md, README.md
 
-Phase 5  Smoke test
+Phase 4  Smoke test
          └── Pull fresh on clean machine; full stack test (ZK + Vue + POS)
 ```
 
