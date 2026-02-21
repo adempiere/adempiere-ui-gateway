@@ -736,8 +736,6 @@ After all code changes are committed:
 - **Current Docker Image:** `marcalwestf/adempiere-grpc-server:3.9.4.001-shw-1.0.30`
 - **Target Docker Image:** `ghcr.io/adempiere/adempiere-grpc-server:3.9.4.001-<version>`
 
-**⚠️ Special Note:** This service requires the Groovy dependency fix (add `groovy:3.0.22` and `groovy-jsr223:3.0.22` dependencies).
-
 ### File 1: `build.gradle`
 
 #### Change 1: Maven Repository URL
@@ -751,16 +749,6 @@ After all code changes are committed:
 - **Before:** `implementation 'com.shw:adempiere-shw.shw_libs:3.9.4.001-1.1.48'`
 - **After:** `// implementation 'io.github.adempiere:adempiere-customizations.libs:3.9.4.001-<version>'`
 - **Action:** Comment out line 126 and replace with stub reference
-
-#### Change 3: Add Groovy Dependencies (Bug Fix)
-- **Location:** After line 126 (in dependencies block)
-- **Add:**
-  ```gradle
-  // Groovy ScriptEngine support (required for script execution)
-  implementation 'org.codehaus.groovy:groovy:3.0.22'
-  implementation 'org.codehaus.groovy:groovy-jsr223:3.0.22'
-  ```
-- **Action:** Insert new lines after line 126
 
 ### File 2: `.github/workflows/publish.yml`
 
@@ -1431,7 +1419,6 @@ This migration creates a **generic template stack** at `adempiere` organization.
 - Check container logs: `docker logs <container-name>`
 - Verify image tag matches published version
 - Ensure environment variables are correct in env_template.env and .env
-- Check for missing Groovy dependencies (adempiere-grpc-server issue)
 
 ---
 

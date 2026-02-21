@@ -124,8 +124,8 @@ These are official or third-party images maintained by upstream projects. We do 
 |---|---|---|---|---|---|---|---|
 | 5 | `adempiere-zk` | `adempiere-shw-zk` | `marcalwestf/adempiere-shw-zk:jetty-3.9.4.001-shw-1.1.45` | [link](https://hub.docker.com/r/marcalwestf/adempiere-shw-zk) | `master` | `3.9.4.001-shw-1.1.45` | `/data2/.../adempiere-shw-zk` |
 | 6 | `adempiere-processor` | `adempiere-processors-service` | `marcalwestf/adempiere-processors-service:alpine-1.1.16` | [link](https://hub.docker.com/r/marcalwestf/adempiere-processors-service) | `feature/shw/customizations` | `1.1.16` | `/data2/.../adempiere-processors-service_SHW` |
-| 7 | `adempiere-grpc-server` | `adempiere-grpc-server` | `marcalwestf/adempiere-grpc-server:3.9.4.001-shw-1.0.30` | [link](https://hub.docker.com/r/marcalwestf/adempiere-grpc-server) | `feature/shw/master` | `1.0.30` | `/data2/.../adempiere-grpc-server_SHW` |
-| 8 | `vue-ui` | `adempiere-vue` | `marcalwestf/adempiere-vue:0.0.5` | [link](https://hub.docker.com/r/marcalwestf/adempiere-vue) | `develop` | `0.0.6` | `/data2/.../adempiere-vue_SHW` |
+| 7 | `adempiere-grpc-server` | `adempiere-grpc-server` | `marcalwestf/adempiere-grpc-server:3.9.4.001-shw-1.0.31` | [link](https://hub.docker.com/r/marcalwestf/adempiere-grpc-server) | `feature/shw/master` | `1.0.31` | `/data2/.../adempiere-grpc-server_SHW` |
+| 8 | `vue-ui` | `adempiere-vue` | `marcalwestf/adempiere-vue:0.0.6` | [link](https://hub.docker.com/r/marcalwestf/adempiere-vue) | `develop` | `0.0.6` | `/data2/.../adempiere-vue_SHW` |
 
 **Notes:**
 1. **Legacy packages:** Two of these services already have **legacy/non-working packages** published at `ghcr.io/adempiere/`:
@@ -232,20 +232,19 @@ These services are maintained in Systemhaus-Westfalia repositories and need to b
 
 ### adempiere-grpc-server
 
-- Current image: `marcalwestf/adempiere-grpc-server:3.9.4.001-shw-1.0.30`
+- Current image: `marcalwestf/adempiere-grpc-server:3.9.4.001-shw-1.0.31`
 - Source repo: `https://github.com/Systemhaus-Westfalia/adempiere-grpc-server`
 - Target repo: `https://github.com/adempiere/adempiere-grpc-server` (merge required)
 - Branch: `feature/shw/master`
-- Tag: `1.0.30` (in use)
+- Tag: `1.0.31` (in use)
 - Local directory: `/data2/entwicklung/westfaliaRepository_2022-06/adempiere-grpc-server_SHW`
 - Workflows: `ci.yml` and `publish.yml`
 - Future image: `ghcr.io/adempiere/adempiere-grpc-server:<tag>` (replaces legacy package)
 - `env_template.env` variable: `VUE_BACKEND_GRPC_SERVER_IMAGE`
-- **Additional action:** apply Groovy `build.gradle` fix (add `groovy:3.0.22` + `groovy-jsr223:3.0.22`) before first release from new repo
 
 ### vue-ui (adempiere-vue repo, Vue UI)
 
-- Current image: `marcalwestf/adempiere-vue:0.0.5`
+- Current image: `marcalwestf/adempiere-vue:0.0.6`
 - Source repo: `https://github.com/Systemhaus-Westfalia/adempiere-vue`
 - Target repo: `https://github.com/adempiere/adempiere-vue` (merge required)
 - Branch: `develop`
@@ -411,8 +410,8 @@ Additionally, `adempiere-shw-zk` references the official ADempiere ZK UI:
    |---|---|---|
    | `ADEMPIERE_ZK_IMAGE` | `marcalwestf/adempiere-shw-zk:jetty-3.9.4.001-shw-1.1.45` | `ghcr.io/adempiere/adempiere-zk:<tag>` |
    | `ADEMPIERE_PROCESSOR_IMAGE` | `marcalwestf/adempiere-processors-service:alpine-1.1.16` | `ghcr.io/adempiere/adempiere-processors-service:<tag>` |
-   | `VUE_BACKEND_GRPC_SERVER_IMAGE` | `marcalwestf/adempiere-grpc-server:3.9.4.001-shw-1.0.30` | `ghcr.io/adempiere/adempiere-grpc-server:<tag>` |
-   | `VUE_UI_IMAGE` | `marcalwestf/adempiere-vue:0.0.5` | `ghcr.io/adempiere/adempiere-vue:<tag>` |
+   | `VUE_BACKEND_GRPC_SERVER_IMAGE` | `marcalwestf/adempiere-grpc-server:3.9.4.001-shw-1.0.31` | `ghcr.io/adempiere/adempiere-grpc-server:<tag>` |
+   | `VUE_UI_IMAGE` | `marcalwestf/adempiere-vue:0.0.6` | `ghcr.io/adempiere/adempiere-vue:<tag>` |
    | `S3_GATEWAY_RS_IMAGE` | `openls/s3-gateway-rs:1.2.7` | `ghcr.io/adempiere/s3-gateway-rs:<tag>` |
    | `DICTIONARY_RS_IMAGE` | `openls/dictionary-rs:1.5.5` | `ghcr.io/adempiere/dictionary-rs:<tag>` |
    | `VUE_REPORT_GRPC_SERVER_IMAGE` | `openls/adempiere-report-engine-service:alpine-1.3.7` | `ghcr.io/adempiere/adempiere-report-engine-service:<tag>` |
@@ -501,7 +500,6 @@ Phase 4  Smoke test
 
 ## Additional Items (raised proactively)
 
-- **Groovy `build.gradle` fix** (`adempiere-grpc-server`): apply before first adempiere release so the issue is fixed at source, not just patched in the Dockerfile.
 - **Divergence management**: once adempiere repos are live, define how Westfalia-specific patches flow back upstream vs. staying in the SHW fork.
 - **`swagger/` directory**: check for SHW-specific references.
 - **Secrets and org access**: coordinate with an `adempiere` org admin before Phase 2.
