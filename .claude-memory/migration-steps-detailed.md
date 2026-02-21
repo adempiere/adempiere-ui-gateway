@@ -33,6 +33,11 @@ Each service section contains:
 9. [Service: vue-ui (Vue UI)](#service-vue-ui-vue-ui)
 10. [Library: adempiere-shw (Customization Library)](#library-adempiere-shw-customization-library)
 11. [Gateway: adempiere-ui-gateway](#gateway-adempiere-ui-gateway)
+12. [Execution Order Recommendation](#execution-order-recommendation)
+13. [Verification Checklist](#verification-checklist)
+14. [Notes for Implementors (Customizations)](#notes-for-implementors-customizations)
+15. [Appendix: Common Issues and Solutions](#appendix-common-issues-and-solutions)
+16. [Document Maintenance](#document-maintenance)
 
 ---
 
