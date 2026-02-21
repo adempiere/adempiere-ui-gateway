@@ -24,6 +24,24 @@
 - `openls` services (simpler): only need Docker publishing changes
 - `marcalwestf` services (more complex): require repository forks and code merging
 
+## Table of Contents
+
+1. [Overview](#overview)
+2. [Part 1 — Complete Container Inventory](#part-1--complete-container-inventory)
+   - [1a — Images kept as-is](#1a--images-kept-as-is-no-migration-needed)
+   - [1b — Images to migrate](#1b--images-that-must-be-migrated-to-ghcrioadempiere)
+3. [Part 2 — Constraints](#part-2--constraints)
+4. [Part 3 — Per-Service Migration](#part-3--per-service-migration-8-services-total)
+   - [3a — openls services](#part-3a--containerized-services-openls-already-in-adempiere-org)
+   - [3b — marcalwestf services](#part-3b--containerized-services-marcalwestf-require-repository-fork)
+   - [3c — Customization Library](#part-3c--customization-library-repository-not-containerized)
+5. [Part 4 — Gateway Repository](#part-4--gateway-repository-migration)
+6. [Part 5 — CI/CD Changes](#part-5--cicd-changes-for-service-repos-constraint-e)
+7. [Part 6 — Documentation Updates](#part-6--documentation-updates)
+8. [Part 7 — Execution Order](#part-7--execution-order)
+9. [Open Questions](#open-questions-to-resolve-before-or-during-phase-1)
+10. [Additional Items](#additional-items-raised-proactively)
+
 ---
 
 ## Part 1 — Complete Container Inventory
