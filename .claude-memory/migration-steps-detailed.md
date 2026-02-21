@@ -23,16 +23,16 @@ Each service section contains:
 ## Table of Contents
 
 1. [Version Creation Strategy](#version-creation-strategy)
-2. [Service: s3-gateway-rs](#service-s3-gateway-rs)
-3. [Service: dictionary-rs](#service-dictionary-rs)
-4. [Service: adempiere-report-engine](#service-adempiere-report-engine)
-5. [Service: adempiere-site](#service-adempiere-site)
-6. [Service: adempiere-zk (ZK UI)](#service-adempiere-zk-zk-ui)
-7. [Service: adempiere-processor](#service-adempiere-processor)
-8. [Service: adempiere-grpc-server](#service-adempiere-grpc-server)
-9. [Service: vue-ui (Vue UI)](#service-vue-ui-vue-ui)
-10. [Library: adempiere-shw (Customization Library)](#library-adempiere-shw-customization-library)
-11. [Gateway: adempiere-ui-gateway](#gateway-adempiere-ui-gateway)
+2. ⬜ [Service: s3-gateway-rs](#service-s3-gateway-rs)
+3. ⬜ [Service: dictionary-rs](#service-dictionary-rs)
+4. ⬜ [Service: adempiere-report-engine](#service-adempiere-report-engine)
+5. ⬜ [Service: adempiere-site](#service-adempiere-site)
+6. ⬜ [Service: adempiere-zk (ZK UI)](#service-adempiere-zk-zk-ui)
+7. ⬜ [Service: adempiere-processor](#service-adempiere-processor)
+8. ⬜ [Service: adempiere-grpc-server](#service-adempiere-grpc-server)
+9. ⬜ [Service: vue-ui (Vue UI)](#service-vue-ui-vue-ui)
+10. ⬜ [Library: adempiere-shw (Customization Library)](#library-adempiere-shw-customization-library)
+11. ⬜ [Gateway: adempiere-ui-gateway](#gateway-adempiere-ui-gateway)
 12. [Execution Order Recommendation](#execution-order-recommendation)
 13. [Verification Checklist](#verification-checklist)
 14. [Notes for Implementors (Customizations)](#notes-for-implementors-customizations)
@@ -169,6 +169,8 @@ docker images | grep adempiere
 
 ## Service: s3-gateway-rs
 
+**Status:** ⬜ Not started
+
 **Docker Compose Service Name:** `s3-gateway-rs`
 **Repository Name:** `s3_gateway_rs`
 
@@ -249,6 +251,8 @@ After all code changes are committed:
 
 ## Service: dictionary-rs
 
+**Status:** ⬜ Not started
+
 **Docker Compose Service Name:** `dictionary-rs`
 **Repository Name:** `dictionary_rs`
 
@@ -328,6 +332,8 @@ After all code changes are committed:
 ---
 
 ## Service: adempiere-report-engine
+
+**Status:** ⬜ Not started
 
 **Docker Compose Service Name:** `adempiere-report-engine`
 **Repository Name:** `adempiere-report-engine-service`
@@ -496,6 +502,8 @@ After all code changes are committed:
 
 ## Service: adempiere-site
 
+**Status:** ⬜ Not started
+
 **Docker Compose Service Name:** `adempiere-site`
 **Repository Name:** `adempiere-landing-page`
 
@@ -538,6 +546,8 @@ After all code changes are committed:
 ---
 
 ## Service: adempiere-zk (ZK UI)
+
+**Status:** ⬜ Not started
 
 **Docker Compose Service Name:** `adempiere-zk`
 **Source Repository Name:** `adempiere-shw-zk`
@@ -633,6 +643,8 @@ After all code changes are committed:
 
 ## Service: adempiere-processor
 
+**Status:** ⬜ Not started
+
 **Docker Compose Service Name:** `adempiere-processor`
 **Repository Name:** `adempiere-processors-service`
 
@@ -723,6 +735,8 @@ After all code changes are committed:
 ---
 
 ## Service: adempiere-grpc-server
+
+**Status:** ⬜ Not started
 
 **Docker Compose Service Name:** `adempiere-grpc-server`
 **Repository Name:** `adempiere-grpc-server`
@@ -845,6 +859,8 @@ After all code changes are committed:
 
 ## Service: vue-ui (Vue UI)
 
+**Status:** ⬜ Not started
+
 **Docker Compose Service Name:** `vue-ui`
 **Repository Name:** `adempiere-vue`
 
@@ -958,6 +974,8 @@ After all code changes are committed:
 ---
 
 ## Library: adempiere-shw (Customization Library)
+
+**Status:** ⬜ Not started
 
 ### Migration Details
 
@@ -1088,6 +1106,8 @@ After all code changes are committed:
 ---
 
 ## Gateway: adempiere-ui-gateway
+
+**Status:** ⬜ Not started
 
 ### Migration Details
 

@@ -96,12 +96,12 @@ These are official or third-party images maintained by upstream projects. We do 
 
 **Total services:** 4 (openls namespace)
 
-| # | Service name (compose) | Repository name (GitHub) | Current image | Docker Hub | Branch | Local directory | Notes |
-|---|---|---|---|---|---|---|---|
-| 1 | `s3-gateway-rs` | `s3_gateway_rs` | `openls/s3-gateway-rs:1.2.7` | [link](https://hub.docker.com/r/openls/s3-gateway-rs) | `main` | — | Current: 1.2.7, suggested: 1.2.8 |
-| 2 | `dictionary-rs` | `dictionary_rs` | `openls/dictionary-rs:1.5.5` | [link](https://hub.docker.com/r/openls/dictionary-rs) | `main` | — | Current: 1.6.3, suggested: 1.6.4 |
-| 3 | `adempiere-report-engine` | `adempiere-report-engine-service` | `openls/adempiere-report-engine-service:alpine-1.3.7` | [link](https://hub.docker.com/r/openls/adempiere-report-engine-service) | `main` | — | Current: 1.4.1, suggested: 1.4.2 |
-| 4 | `adempiere-site` | `adempiere-landing-page` | `openls/adempiere-landing-page:alpine-1.0.3` | [link](https://hub.docker.com/r/openls/adempiere-landing-page) | `main` | `/data2/.../adempiere-landing-page_ADEMPIERE` | Current: 1.0.3, suggested: 1.0.4 |
+| # | Status | Service name (compose) | Repository name (GitHub) | Current image | Docker Hub | Branch | Local directory | Notes |
+|---|--------|---|---|---|---|---|---|---|
+| 1 | ⬜ | `s3-gateway-rs` | `s3_gateway_rs` | `openls/s3-gateway-rs:1.2.7` | [link](https://hub.docker.com/r/openls/s3-gateway-rs) | `main` | — | Current: 1.2.7, suggested: 1.2.8 |
+| 2 | ⬜ | `dictionary-rs` | `dictionary_rs` | `openls/dictionary-rs:1.5.5` | [link](https://hub.docker.com/r/openls/dictionary-rs) | `main` | — | Current: 1.6.3, suggested: 1.6.4 |
+| 3 | ⬜ | `adempiere-report-engine` | `adempiere-report-engine-service` | `openls/adempiere-report-engine-service:alpine-1.3.7` | [link](https://hub.docker.com/r/openls/adempiere-report-engine-service) | `main` | — | Current: 1.4.1, suggested: 1.4.2 |
+| 4 | ⬜ | `adempiere-site` | `adempiere-landing-page` | `openls/adempiere-landing-page:alpine-1.0.3` | [link](https://hub.docker.com/r/openls/adempiere-landing-page) | `main` | `/data2/.../adempiere-landing-page_ADEMPIERE` | Current: 1.0.3, suggested: 1.0.4 |
 
 **Notes:**
 1. **Temporary namespace:** The `openls` Docker Hub namespace was a temporary publishing location. All four services already have repositories in the `adempiere` GitHub organization.
@@ -120,12 +120,12 @@ These are official or third-party images maintained by upstream projects. We do 
 
 **Total services:** 4 (marcalwestf namespace)
 
-| # | Service name (compose) | Repository name (GitHub) | Current image | Docker Hub | Branch | Tag | Local directory |
-|---|---|---|---|---|---|---|---|
-| 5 | `adempiere-zk` | `adempiere-shw-zk` | `marcalwestf/adempiere-shw-zk:jetty-3.9.4.001-shw-1.1.45` | [link](https://hub.docker.com/r/marcalwestf/adempiere-shw-zk) | `master` | `3.9.4.001-shw-1.1.45` | `/data2/.../adempiere-shw-zk` |
-| 6 | `adempiere-processor` | `adempiere-processors-service` | `marcalwestf/adempiere-processors-service:alpine-1.1.16` | [link](https://hub.docker.com/r/marcalwestf/adempiere-processors-service) | `feature/shw/customizations` | `1.1.16` | `/data2/.../adempiere-processors-service_SHW` |
-| 7 | `adempiere-grpc-server` | `adempiere-grpc-server` | `marcalwestf/adempiere-grpc-server:3.9.4.001-shw-1.0.31` | [link](https://hub.docker.com/r/marcalwestf/adempiere-grpc-server) | `feature/shw/master` | `1.0.31` | `/data2/.../adempiere-grpc-server_SHW` |
-| 8 | `vue-ui` | `adempiere-vue` | `marcalwestf/adempiere-vue:0.0.6` | [link](https://hub.docker.com/r/marcalwestf/adempiere-vue) | `develop` | `0.0.6` | `/data2/.../adempiere-vue_SHW` |
+| # | Status | Service name (compose) | Repository name (GitHub) | Current image | Docker Hub | Branch | Tag | Local directory |
+|---|--------|---|---|---|---|---|---|---|
+| 5 | ⬜ | `adempiere-zk` | `adempiere-shw-zk` | `marcalwestf/adempiere-shw-zk:jetty-3.9.4.001-shw-1.1.45` | [link](https://hub.docker.com/r/marcalwestf/adempiere-shw-zk) | `master` | `3.9.4.001-shw-1.1.45` | `/data2/.../adempiere-shw-zk` |
+| 6 | ⬜ | `adempiere-processor` | `adempiere-processors-service` | `marcalwestf/adempiere-processors-service:alpine-1.1.16` | [link](https://hub.docker.com/r/marcalwestf/adempiere-processors-service) | `feature/shw/customizations` | `1.1.16` | `/data2/.../adempiere-processors-service_SHW` |
+| 7 | ⬜ | `adempiere-grpc-server` | `adempiere-grpc-server` | `marcalwestf/adempiere-grpc-server:3.9.4.001-shw-1.0.31` | [link](https://hub.docker.com/r/marcalwestf/adempiere-grpc-server) | `feature/shw/master` | `1.0.31` | `/data2/.../adempiere-grpc-server_SHW` |
+| 8 | ⬜ | `vue-ui` | `adempiere-vue` | `marcalwestf/adempiere-vue:0.0.6` | [link](https://hub.docker.com/r/marcalwestf/adempiere-vue) | `develop` | `0.0.6` | `/data2/.../adempiere-vue_SHW` |
 
 **Notes:**
 1. **Legacy packages:** Two of these services already have **legacy/non-working packages** published at `ghcr.io/adempiere/`:
@@ -151,6 +151,8 @@ These services already have repositories in the adempiere organization. Migratio
 
 ### s3-gateway-rs
 
+**Status:** ⬜ Not started
+
 - Current image: `openls/s3-gateway-rs:1.2.7`
 - Source repo: `https://github.com/adempiere/s3_gateway_rs`
 - Target repo: `https://github.com/adempiere/s3_gateway_rs` (same - no fork needed)
@@ -162,6 +164,8 @@ These services already have repositories in the adempiere organization. Migratio
 - Migration: Change Docker publishing from Docker Hub → ghcr.io
 
 ### dictionary-rs
+
+**Status:** ⬜ Not started
 
 - Current image: `openls/dictionary-rs:1.5.5`
 - Source repo: `https://github.com/adempiere/dictionary_rs`
@@ -175,6 +179,8 @@ These services already have repositories in the adempiere organization. Migratio
 
 ### adempiere-report-engine (adempiere-report-engine-service repo)
 
+**Status:** ⬜ Not started
+
 - Current image: `openls/adempiere-report-engine-service:alpine-1.3.7`
 - Source repo: `https://github.com/adempiere/adempiere-report-engine-service`
 - Target repo: `https://github.com/adempiere/adempiere-report-engine-service` (same - no fork needed)
@@ -187,6 +193,8 @@ These services already have repositories in the adempiere organization. Migratio
 - Migration: Change Docker publishing from Docker Hub → ghcr.io
 
 ### adempiere-site (adempiere-landing-page repo)
+
+**Status:** ⬜ Not started
 
 - Current image: `openls/adempiere-landing-page:alpine-1.0.3`
 - Source repo: `https://github.com/adempiere/adempiere-landing-page`
@@ -209,6 +217,8 @@ These services are maintained in Systemhaus-Westfalia repositories and need to b
 
 ### adempiere-zk (adempiere-shw-zk repo, ZK UI)
 
+**Status:** ⬜ Not started
+
 - Current image: `marcalwestf/adempiere-shw-zk:jetty-3.9.4.001-shw-1.1.45`
 - Source repo: `https://github.com/Systemhaus-Westfalia/adempiere-shw-zk`
 - Target repo: `https://github.com/adempiere/adempiere-zk` (fork required)
@@ -221,6 +231,8 @@ These services are maintained in Systemhaus-Westfalia repositories and need to b
 
 ### adempiere-processor (adempiere-processors-service repo)
 
+**Status:** ⬜ Not started
+
 - Current image: `marcalwestf/adempiere-processors-service:alpine-1.1.16`
 - Source repo: `https://github.com/Systemhaus-Westfalia/adempiere-processors-service`
 - Target repo: `https://github.com/adempiere/adempiere-processors-service` (merge required)
@@ -231,6 +243,8 @@ These services are maintained in Systemhaus-Westfalia repositories and need to b
 - `env_template.env` variable: `ADEMPIERE_PROCESSOR_IMAGE`
 
 ### adempiere-grpc-server
+
+**Status:** ⬜ Not started
 
 - Current image: `marcalwestf/adempiere-grpc-server:3.9.4.001-shw-1.0.31`
 - Source repo: `https://github.com/Systemhaus-Westfalia/adempiere-grpc-server`
@@ -243,6 +257,8 @@ These services are maintained in Systemhaus-Westfalia repositories and need to b
 - `env_template.env` variable: `VUE_BACKEND_GRPC_SERVER_IMAGE`
 
 ### vue-ui (adempiere-vue repo, Vue UI)
+
+**Status:** ⬜ Not started
 
 - Current image: `marcalwestf/adempiere-vue:0.0.6`
 - Source repo: `https://github.com/Systemhaus-Westfalia/adempiere-vue`
