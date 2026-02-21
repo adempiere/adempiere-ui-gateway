@@ -10,6 +10,7 @@
 - ✅ `marcalwestf` group: all 4 source repositories in Systemhaus-Westfalia org
   - `adempiere-shw-zk`, `adempiere-processors-service`, `adempiere-grpc-server`, `adempiere-vue`
 - ✅ Customization library: `adempiere-shw` repository in Systemhaus-Westfalia org
+- ✅ Third-party images: 13 official/external images (no migration - kept as-is, see Part 1a)
 - ✅ Target registry: `ghcr.io/adempiere/`
 
 **Scope:** 📦
@@ -17,7 +18,9 @@
 - 1 customization library repository (not containerized - publishes Maven artifacts instead of Docker images, from Systemhaus-Westfalia → adempiere org)
 - 1 gateway/orchestration repository (from Systemhaus-Westfalia → adempiere org)
 
-**Migration complexity:** `openls` services (simpler) only need Docker publishing changes; `marcalwestf` services (more complex) require repository forks and code merging
+**Migration complexity:**
+- `openls` services (simpler): only need Docker publishing changes
+- `marcalwestf` services (more complex): require repository forks and code merging
 
 ---
 
