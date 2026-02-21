@@ -23,7 +23,7 @@ Each service section contains:
 ## Table of Contents
 
 1. [Version Creation Strategy](#version-creation-strategy)
-2. ⬜ [Service: s3-gateway-rs](#service-s3-gateway-rs)
+2. 🔄 [Service: s3-gateway-rs](#service-s3-gateway-rs)
 3. ⬜ [Service: dictionary-rs](#service-dictionary-rs)
 4. ⬜ [Service: adempiere-report-engine](#service-adempiere-report-engine)
 5. ⬜ [Service: adempiere-site](#service-adempiere-site)
@@ -169,7 +169,7 @@ docker images | grep adempiere
 
 ## Service: s3-gateway-rs
 
-**Status:** ⬜ Not started
+**Status:** 🔄 WIP
 
 **Docker Compose Service Name:** `s3-gateway-rs`
 **Repository Name:** `s3_gateway_rs`

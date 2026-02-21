@@ -3,6 +3,7 @@
 ## Overview
 
 **Status:** 📝 DRAFT — under review
+**Last Updated:** 2026-02-21
 
 **Goal:** 🎯 Move `Systemhaus-Westfalia/adempiere-ui-gateway` (branch `adempiere-trunk`) to its upstream origin `adempiere/adempiere-ui-gateway`.
 
@@ -98,7 +99,7 @@ These are official or third-party images maintained by upstream projects. We do 
 
 | # | Status | Service name (compose) | Repository name (GitHub) | Current image | Docker Hub | Branch | Local directory | Notes |
 |---|--------|---|---|---|---|---|---|---|
-| 1 | ⬜ | `s3-gateway-rs` | `s3_gateway_rs` | `openls/s3-gateway-rs:1.2.7` | [link](https://hub.docker.com/r/openls/s3-gateway-rs) | `main` | — | Current: 1.2.7, suggested: 1.2.8 |
+| 1 | 🔄 | `s3-gateway-rs` | `s3_gateway_rs` | `openls/s3-gateway-rs:1.2.7` | [link](https://hub.docker.com/r/openls/s3-gateway-rs) | `main` | — | Current: 1.2.7, suggested: 1.2.8 |
 | 2 | ⬜ | `dictionary-rs` | `dictionary_rs` | `openls/dictionary-rs:1.5.5` | [link](https://hub.docker.com/r/openls/dictionary-rs) | `main` | — | Current: 1.6.3, suggested: 1.6.4 |
 | 3 | ⬜ | `adempiere-report-engine` | `adempiere-report-engine-service` | `openls/adempiere-report-engine-service:alpine-1.3.7` | [link](https://hub.docker.com/r/openls/adempiere-report-engine-service) | `main` | — | Current: 1.4.1, suggested: 1.4.2 |
 | 4 | ⬜ | `adempiere-site` | `adempiere-landing-page` | `openls/adempiere-landing-page:alpine-1.0.3` | [link](https://hub.docker.com/r/openls/adempiere-landing-page) | `main` | `/data2/.../adempiere-landing-page_ADEMPIERE` | Current: 1.0.3, suggested: 1.0.4 |
@@ -151,7 +152,7 @@ These services already have repositories in the adempiere organization. Migratio
 
 ### s3-gateway-rs
 
-**Status:** ⬜ Not started
+**Status:** 🔄 WIP
 
 - Current image: `openls/s3-gateway-rs:1.2.7`
 - Source repo: `https://github.com/adempiere/s3_gateway_rs`
