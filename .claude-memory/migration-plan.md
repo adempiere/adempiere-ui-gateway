@@ -122,7 +122,7 @@ These are official or third-party images maintained by upstream projects. We do 
 
 ## Part 2 — Constraints
 
-**a)** External images (envoy, kafka, opensearch, postgres, nginx, etc.) stay as-is.
+**a)** External images (PostgreSQL, MinIO, Envoy, nginx, Kafka, OpenSearch, Keycloak, DKron) remain unchanged - maintained by upstream projects.
 
 **b)** Images currently published under `Systemhaus-Westfalia` / `marcalwestf` must be republished under the `adempiere` GitHub org.
 
