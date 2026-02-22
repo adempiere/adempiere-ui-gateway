@@ -1133,53 +1133,53 @@ The env files reference specific version tags. Those versions must exist before 
 
 ### File 1: `docker-compose/env_template.env`
 
-#### Change 1: ZK UI Image
-- **Line:** 130
-- **Before:** `ADEMPIERE_ZK_IMAGE="marcalwestf/adempiere-shw-zk:jetty-3.9.4.001-shw-1.1.45"`
-- **After:** `ADEMPIERE_ZK_IMAGE="ghcr.io/adempiere/adempiere-zk:jetty-<version>"`
-- **Action:** Edit line 130
-
-#### Change 2: Processors Service Image
-- **Line:** 151
-- **Before:** `ADEMPIERE_PROCESSOR_IMAGE="marcalwestf/adempiere-processors-service:alpine-1.1.16"`
-- **After:** `ADEMPIERE_PROCESSOR_IMAGE="ghcr.io/adempiere/adempiere-processors-service:alpine-<version>"`
-- **Action:** Edit line 151
-
-#### Change 3: gRPC Server Image
-- **Line:** 233
-- **Before:** `VUE_BACKEND_GRPC_SERVER_IMAGE="marcalwestf/adempiere-grpc-server:3.9.4.001-shw-${VUE_BACKEND_GRPC_SERVER_VERSION}"`
-- **After:** `VUE_BACKEND_GRPC_SERVER_IMAGE="ghcr.io/adempiere/adempiere-grpc-server:3.9.4.001-${VUE_BACKEND_GRPC_SERVER_VERSION}"`
-- **Action:** Edit line 233
-
-#### Change 4: Vue UI Image
-- **Line:** 290
-- **Before:** `VUE_UI_IMAGE="marcalwestf/adempiere-vue:0.0.5"`
-- **After:** `VUE_UI_IMAGE="ghcr.io/adempiere/adempiere-vue:<version>"`
-- **Action:** Edit line 290
-
-#### Change 5: S3 Gateway Image
+#### Change 1: S3 Gateway Image
 - **Line:** 117
 - **Before:** `S3_GATEWAY_RS_IMAGE="openls/s3-gateway-rs:1.2.7"`
 - **After:** `S3_GATEWAY_RS_IMAGE="ghcr.io/adempiere/s3-gateway-rs:<version>"`
 - **Action:** Edit line 117
 
-#### Change 6: Dictionary Service Image
+#### Change 2: Dictionary Service Image
 - **Line:** 221
 - **Before:** `DICTIONARY_RS_IMAGE="openls/dictionary-rs:1.5.5"`
 - **After:** `DICTIONARY_RS_IMAGE="ghcr.io/adempiere/dictionary-rs:<version>"`
 - **Action:** Edit line 221
 
-#### Change 7: Report Engine Service Image
+#### Change 3: Report Engine Service Image
 - **Line:** 248
 - **Before:** `VUE_REPORT_GRPC_SERVER_IMAGE="openls/adempiere-report-engine-service:alpine-1.3.7"`
 - **After:** `VUE_REPORT_GRPC_SERVER_IMAGE="ghcr.io/adempiere/adempiere-report-engine-service:alpine-<version>"`
 - **Action:** Edit line 248
 
-#### Change 8: Landing Page Service Image
+#### Change 4: Landing Page Service Image
 - **Line:** 317
 - **Before:** `ADEMPIERE_SITE_IMAGE="openls/adempiere-landing-page:alpine-1.0.3"`
 - **After:** `ADEMPIERE_SITE_IMAGE="ghcr.io/adempiere/adempiere-landing-page:alpine-<version>"`
 - **Action:** Edit line 317
+
+#### Change 5: ZK UI Image
+- **Line:** 130
+- **Before:** `ADEMPIERE_ZK_IMAGE="marcalwestf/adempiere-shw-zk:jetty-3.9.4.001-shw-1.1.45"`
+- **After:** `ADEMPIERE_ZK_IMAGE="ghcr.io/adempiere/adempiere-zk:jetty-<version>"`
+- **Action:** Edit line 130
+
+#### Change 6: Processors Service Image
+- **Line:** 151
+- **Before:** `ADEMPIERE_PROCESSOR_IMAGE="marcalwestf/adempiere-processors-service:alpine-1.1.16"`
+- **After:** `ADEMPIERE_PROCESSOR_IMAGE="ghcr.io/adempiere/adempiere-processors-service:alpine-<version>"`
+- **Action:** Edit line 151
+
+#### Change 7: gRPC Server Image
+- **Line:** 233
+- **Before:** `VUE_BACKEND_GRPC_SERVER_IMAGE="marcalwestf/adempiere-grpc-server:3.9.4.001-shw-${VUE_BACKEND_GRPC_SERVER_VERSION}"`
+- **After:** `VUE_BACKEND_GRPC_SERVER_IMAGE="ghcr.io/adempiere/adempiere-grpc-server:3.9.4.001-${VUE_BACKEND_GRPC_SERVER_VERSION}"`
+- **Action:** Edit line 233
+
+#### Change 8: Vue UI Image
+- **Line:** 290
+- **Before:** `VUE_UI_IMAGE="marcalwestf/adempiere-vue:0.0.5"`
+- **After:** `VUE_UI_IMAGE="ghcr.io/adempiere/adempiere-vue:<version>"`
+- **Action:** Edit line 290
 
 #### Change 9: Sync to .env File
 - **After all env_template.env changes:**
@@ -1288,14 +1288,14 @@ For each service below, follow this workflow:
 **Service 10: adempiere-ui-gateway**
 - **Action:** Update `env_template.env` with all new image references
 - **Steps:**
-  1. Update line 130: ZK image → `ghcr.io/adempiere/adempiere-zk:jetty-3.9.4.001-1.1.46`
-  2. Update line 151: Processors → `ghcr.io/adempiere/adempiere-processors-service:alpine-1.1.17`
-  3. Update line 233: gRPC server → `ghcr.io/adempiere/adempiere-grpc-server:3.9.4.001-1.0.31`
-  4. Update line 290: Vue UI → `ghcr.io/adempiere/adempiere-vue:0.0.6`
-  5. Update line 117: S3 gateway → `ghcr.io/adempiere/s3-gateway-rs:1.2.8`
-  6. Update line 221: Dictionary → `ghcr.io/adempiere/dictionary-rs:1.6.4`
-  7. Update line 248: Report engine → `ghcr.io/adempiere/adempiere-report-engine-service:alpine-1.4.2`
-  8. Update line 317: Landing page → `ghcr.io/adempiere/adempiere-landing-page:alpine-1.0.4`
+  1. Update line 117: S3 gateway → `ghcr.io/adempiere/s3-gateway-rs:1.2.8`
+  2. Update line 221: Dictionary → `ghcr.io/adempiere/dictionary-rs:1.6.4`
+  3. Update line 248: Report engine → `ghcr.io/adempiere/adempiere-report-engine-service:alpine-1.4.2`
+  4. Update line 317: Landing page → `ghcr.io/adempiere/adempiere-landing-page:alpine-1.0.4`
+  5. Update line 130: ZK image → `ghcr.io/adempiere/adempiere-zk:jetty-3.9.4.001-1.1.46`
+  6. Update line 151: Processors → `ghcr.io/adempiere/adempiere-processors-service:alpine-1.1.17`
+  7. Update line 233: gRPC server → `ghcr.io/adempiere/adempiere-grpc-server:3.9.4.001-1.0.31`
+  8. Update line 290: Vue UI → `ghcr.io/adempiere/adempiere-vue:0.0.6`
   9. Copy all changes from `env_template.env` to `.env`
   10. Update documentation (CLAUDE.md, docs/*.md)
   11. Commit all changes
