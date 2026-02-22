@@ -245,7 +245,7 @@ After all code changes are committed:
    docker pull ghcr.io/adempiere/s3-gateway-rs:1.2.8
    ```
 
-**⚠️ Do NOT update gateway env files yet** - wait until all services have new versions published.
+**💡 Testing:** You can update the gateway env files and test this service immediately. Each service is independent and can be tested separately. See [Gateway: adempiere-ui-gateway](#gateway-adempiere-ui-gateway) section for env file update instructions.
 
 ---
 
@@ -327,7 +327,7 @@ After all code changes are committed:
    docker pull ghcr.io/adempiere/dictionary-rs:1.6.4
    ```
 
-**⚠️ Do NOT update gateway env files yet** - wait until all services have new versions published.
+**💡 Testing:** You can update the gateway env files and test this service immediately. Each service is independent and can be tested separately. See [Gateway: adempiere-ui-gateway](#gateway-adempiere-ui-gateway) section for env file update instructions.
 
 ---
 
@@ -496,7 +496,7 @@ After all code changes are committed:
    docker pull ghcr.io/adempiere/adempiere-grpc-proxy:1.4.2
    ```
 
-**⚠️ Do NOT update gateway env files yet** - wait until all services have new versions published.
+**💡 Testing:** You can update the gateway env files and test this service immediately. Each service is independent and can be tested separately. See [Gateway: adempiere-ui-gateway](#gateway-adempiere-ui-gateway) section for env file update instructions.
 
 ---
 
@@ -542,6 +542,8 @@ After all code changes are committed:
 3. **Update Gateway Configuration:**
    - Edit `env_template.env` line 317
    - Change to: `ADEMPIERE_SITE_IMAGE="ghcr.io/adempiere/adempiere-landing-page:alpine-1.0.4"`
+
+**💡 Testing:** You can update the gateway env files and test this service immediately. Each service is independent and can be tested separately. See [Gateway: adempiere-ui-gateway](#gateway-adempiere-ui-gateway) section for env file update instructions.
 
 ---
 
