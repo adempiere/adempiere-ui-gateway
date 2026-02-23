@@ -14,6 +14,7 @@ Make sure you have installed [Git](https://git-scm.com/downloads) and [Docker](h
 ✓ Docker (20.10 or later)
 ✓ Docker Compose (v2.16.0 or later)
 ✓ Git
+✓ Python
 
 ### What You DON'T Need
 
@@ -37,16 +38,88 @@ Once the repository is cloned, go to the _Docker Compose_ directory
 cd docker-compose
 ```
 
-### Set correct IP
+### Set values
 Get the IP of your machine (here a linux host connected via WiFi):
 ```bash
 ip addr show | grep wlp3s0
 ```
 
-Replace on file env_template.env the value of variable **HOST_IP** with your host IP:
+Replace on file `override.env` the value of variable **HOST_IP** with your host IP:
 ```bash
-nano env_template.env
+cp override_template.env override.env
 ```
+### Set values
+You have two recommended ways to set host-specific values (e.g. IP, external ports, credentials):
+
+- Option A (recommended): create or edit a local override file so you don't modify the template shipped in the repo.
+	1. Copy the provided example template:
+	```bash
+	cp docker-compose/override_template.env docker-compose/override.env
+	```
+	2. Edit only the variables you want to change (example: `HOST_IP`, `POSTGRES_EXTERNAL_PORT`):
+	```bash
+	nano docker-compose/override.env
+	```
+
+- Option B (less recommended): directly edit `docker-compose/env_template.env`. Be careful not to commit sensitive values.
+	- To find your host IP (example for Wi‑Fi interface `wlp3s0`):
+	```bash
+	ip addr show | grep wlp3s0
+	```
+	- Then open the template and update `HOST_IP`:
+	```bash
+	nano docker-compose/env_template.env
+	```
+
+Notes:
+- Use `override.env` to keep local changes out of git (the repo already ignores `docker-compose/override.env`).
+- Variable names must match exactly those used in `env_template.env` (the generator resolves references like `${VAR}` recursively).
+
+Generate `.env` using the provided wrapper (requires Python 3.10+):
+```bash
+cd docker-compose
+./generate-env.sh override.env .env
+# or directly with python:
+python3 generate_env.py env_template.env override.env .env
+```
+
+
+### Generate .env (optional — recommended if you want to override values)
+You can create a small `override.env` with only the variables you want to change and generate a merged `.env` that preserves template order and comments.
+
+Example `override.env` (only override what you need):
+```
+### Generate .env (optional — recommended when using overrides)
+If you created `docker-compose/override.env` the repository includes a generator that merges it with the template and resolves variable references.
+
+Example `docker-compose/override.env` (only the variables you want to change):
+```
+# local overrides
+HOST_IP=192.0.2.10
+POSTGRES_EXTERNAL_PORT=55433
+OPENSEARCH_PORT=9300
+```
+
+Generate the merged `.env` (from repo root):
+```bash
+cd docker-compose
+
+# preferred wrapper (calls the Python generator and validates):
+./generate-env.sh override.env .env
+
+# or call the script directly:
+python3 generate_env.py env_template.env override.env .env
+```
+
+Behavior notes:
+- `generate_env.py` resolves `${VAR}` and `$VAR` recursively (up to a convergence limit). If you set `KAFKA_BROKER_EXTERNAL_PORT=${KAFKA_BROKER_PORT}` in `override.env` and `KAFKA_BROKER_PORT=29092`, the final `.env` will contain `KAFKA_BROKER_EXTERNAL_PORT=29092` and any template entries that reference it (e.g. `KAFKA_EXTERNAL_BROKERCONNECT="${HOST_IP}:${KAFKA_BROKER_EXTERNAL_PORT}"`) will be expanded accordingly.
+- `start-all.sh` will: use `docker-compose/override.env` (if present) to generate `.env`; if `.env` already exists and no `override.env` is present, it will keep the existing `.env` and will not overwrite it.
+
+Start the stack:
+```bash
+./start-all.sh
+```
+
 
 ### Start Services
 Start on a console with either command:

@@ -1,1 +1,7 @@
 /bin/
+
+.env
+**/.env
+
+# local override for docker-compose (contains secrets)
+docker-compose/override.env
