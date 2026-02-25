@@ -45,8 +45,21 @@ else
 fi
 
 # Environment file to set values on docker compose file.
-echo "Copy the enviroment template file to \".env\"."
-cp -f env_template.env .env
+# Behavior:
+# - If docker-compose/override.env exists -> generate merged .env using generate-env.sh
+# - Else if .env does not exist -> copy env_template.env to .env
+# - Else (.env exists and no override) -> keep existing .env (do not overwrite)
+GENERATOR_SCRIPT="$(dirname "$0")/generate-env.sh"
+if [ -f "$(dirname "$0")/override.env" ]; then
+    echo "Found override.env -> generating .env via generate-env.sh"
+    # call wrapper which runs the python generator
+    "$GENERATOR_SCRIPT" "$(dirname "$0")/override.env" "$(dirname "$0")/.env"
+elif [ ! -f .env ]; then
+    echo "Creating .env from env_template.env"
+    cp -f env_template.env .env
+else
+    echo ".env already exists and no override.env found — keeping existing .env"
+fi
 
 
 # 2 set profiles

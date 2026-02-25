@@ -13,6 +13,7 @@ Make sure to install the following on your host machine:
 - [Docker](https://docs.docker.com/engine/install/)
 - [Docker Compose v2.16.0 or later](https://docs.docker.com/compose/install/linux/)
 - [Git](https://git-scm.com/downloads)
+- [Python 3.10 or later](https://www.python.org/downloads/) (required for `docker-compose/generate_env.py`; Python 3.11 recommended)
 
 **What you DON'T need:** Java/JDK, PostgreSQL, nginx, or any application servers - these all run inside the containers.
 

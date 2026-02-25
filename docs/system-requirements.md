@@ -68,6 +68,7 @@ You **MUST** have these installed on your host:
 | **Docker** | 20.10 | 24.x (latest stable) |
 | **Docker Compose** | v2.16.0 | v2.20+ |
 | **Git** | 2.x | 2.40+ |
+| **Python** | 3.x | 3.10+ |
 
 ### Verify Your Installation
 
@@ -85,6 +86,10 @@ docker compose version
 # Git version
 git --version
 # Should show: git version 2.x or higher
+
+# Python version
+python3 --version
+# Should show: Python 3.x or higher
 ```
 
 ### Software You DON'T Need
