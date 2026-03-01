@@ -506,10 +506,15 @@ return convertToNumber(currentOrder.value.refund_amount) === 0  // was !==
 
 ## Related Documentation
 
-- **Backend debugging**: [debugging-vue-errors.md](./debugging-vue-errors.md) - Tracing errors through nginx/envoy/gRPC/database stack
+- **Backend debugging**: [debugging-backend-stack.md](./debugging-backend-stack.md) - Tracing errors through nginx/envoy/gRPC/database stack
 - **Vue dev setup**: See project README for configuring development environment
 - **API reference**: Check `docs/api/` for endpoint specifications
 
 ---
 
 **Keep this checklist handy for all Vue frontend debugging sessions!**
+
+---
+
+[Back to README](../README.md) | [Previous: Debugging Backend Stack](./debugging-backend-stack.md) | [Next: Troubleshooting](./troubleshooting.md)
+

@@ -316,7 +316,7 @@ cd docs/scripts/
 ./03-all-container-times-simple.sh
 ```
 
-**See also:** [Diagnostic Scripts README](./scripts/README.md) for detailed usage information.
+**See also:** Diagnostic Scripts README (TODO: not yet available) for detailed usage information.
 
 Expected output:
 - All containers should show `Time diff: 0s (OK)`
@@ -980,7 +980,7 @@ If you've tried the solutions above and still have issues:
    docker stats --no-stream
    ```
 
-3. **Trace the error through the stack:** See [Debugging Vue UI Errors](./debugging-vue-errors.md) for a step-by-step guide to following an error from the browser through nginx, Envoy, and the gRPC server.
+3. **Trace the error through the stack:** See [Debugging Vue Frontend](./debugging-vue-frontend.md) for a step-by-step guide to following an error from the browser through nginx, Envoy, and the gRPC server.
 
 4. **Check GitHub issues:** [ADempiere UI Gateway Issues](https://github.com/adempiere/adempiere-ui-gateway/issues)
 
@@ -1011,4 +1011,5 @@ If you've tried the solutions above and still have issues:
 
 ---
 
-[Back to README](../README.md) | [Previous: Debugging Vue UI Errors](./debugging-vue-errors.md) | [Next: Additional Info](./additional_info.md)
+[Back to README](../README.md) | [Previous: Debugging Vue Frontend](./debugging-vue-frontend.md) | [Next: Additional Info](./additional_info.md)
+

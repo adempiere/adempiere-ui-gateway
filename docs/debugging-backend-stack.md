@@ -1,4 +1,4 @@
-# Debugging Vue UI Errors Through the Stack
+# Debugging Vue Frontend Through the Stack
 
 When the Vue UI displays an error, the root cause is almost never in the browser itself — it is somewhere in the chain of containers behind it. This guide explains how to trace an error from the browser all the way to the gRPC server where ADempiere business logic runs.
 
@@ -276,3 +276,4 @@ The browser receives a 502 with no meaningful response body.
 ---
 
 [Back to README](../README.md) | [Previous: Debugging](./debugging.md) | [Next: Troubleshooting](./troubleshooting.md)
+

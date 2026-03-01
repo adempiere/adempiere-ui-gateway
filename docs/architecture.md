@@ -209,7 +209,7 @@ docker exec adempiere-ui-gateway.vue-ui nc -zv kafka 9092
 
 See [Troubleshooting Guide](./troubleshooting.md#network-and-access-issues) for common network problems.
 
-For tracing errors that appear in the Vue UI back to their source in the gRPC server, see [Debugging Vue UI Errors](./debugging-vue-errors.md).
+For tracing errors that appear in the Vue UI back to their source in the gRPC server, see [Debugging Vue UI Errors](./debugging-vue-frontend.md).
 
 ### File Structure
 - *README.md*: the main documentation file.
@@ -419,4 +419,8 @@ Services accessible via **port** directly:
 Beware that **image versions may change ongoing**.
 
 
+
+---
+
 [Back to README](../README.md)  | [Previous: System Requirements](./system-requirements.md) | [Next: Profiles](./profiles.md)
+

@@ -5,6 +5,7 @@ This guide provides comprehensive debugging commands and techniques for troubles
 For common problems and their solutions, see the [Troubleshooting Guide](./troubleshooting.md).
 
 ## Table of Contents
+
 - [Prerequisites](#prerequisites)
 - [Basic Operations](#basic-operations)
 - [Service Management](#service-management)
@@ -15,6 +16,8 @@ For common problems and their solutions, see the [Troubleshooting Guide](./troub
 - [Database Operations](#database-operations)
 - [Advanced Debugging](#advanced-debugging)
 - [Utility Scripts](#utility-scripts)
+- [Common Debugging Scenarios](#common-debugging-scenarios)
+- [Additional Resources](#additional-resources)
 
 ---
 
@@ -589,7 +592,7 @@ The project includes diagnostic scripts in `docs/scripts/` for common debugging 
 ./docs/scripts/03-all-container-times-simple.sh
 ```
 
-See [Scripts README](./scripts/README.md) for complete documentation.
+See Scripts README (TODO: not yet available) for complete documentation.
 
 ### Database Backup Script
 
@@ -753,8 +756,9 @@ See [Troubleshooting - Performance Issues](./troubleshooting.md#performance-issu
 - **[Services Documentation](./services.md)** - Complete service reference
 - **[Backup and Restore Guide](./backup-restore.md)** - Database operations
 - **[System Requirements](./system-requirements.md)** - Resource planning
-- **[Scripts README](./scripts/README.md)** - Diagnostic script documentation
+- **Scripts README (TODO: not yet available)** - Diagnostic script documentation
 
 ---
 
-[Back to README](../README.md) | [Previous: Backup and Restore](./backup-restore.md) | [Next: Debugging Vue UI Errors](./debugging-vue-errors.md)
+[Back to README](../README.md) | [Previous: Backup and Restore](./backup-restore.md) | [Next: Debugging Vue Frontend](./debugging-vue-frontend.md)
+

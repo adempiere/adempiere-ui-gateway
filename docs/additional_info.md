@@ -62,4 +62,8 @@ Error response format
 }
 ```
 
+
+---
+
 [Back to README](../README.md)  | [Previous: Troubleshooting](./troubleshooting.md)
+

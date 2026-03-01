@@ -1,4 +1,3 @@
-```markdown
 # adempiere-ui-gateway
 A comprehensive Docker-based deployment system for ADempiere ERP with modular service profiles.
 
@@ -50,11 +49,9 @@ Please follow the links for detailed information.
 - [Security Information](docs/security.md)
 - [Backup and Restore](docs/backup-restore.md)
 - [Debugging](docs/debugging.md)
-- [Debugging Vue UI Errors](docs/debugging-vue-errors.md)
+- [Debugging Vue Frontend](docs/debugging-vue-frontend.md)
 - [Troubleshooting](docs/troubleshooting.md)
 - [Additional Info](docs/additional_info.md)
 - [License](./LICENSE)
 
 - See installation prerequisites in [Installation](docs/installation.md) (Python 3.10+ required for the generator script).
-
-```

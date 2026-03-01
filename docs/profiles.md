@@ -196,4 +196,8 @@ COMPOSE_PROFILES="report,vue,zk" docker compose up
 
 **Note:** The default profile (empty string `''`) is always included unless you explicitly specify other profiles.
 
+
+---
+
 [Back to README](../README.md) | [Previous: Architecture](./architecture.md)  | [Next: Installation](./installation.md)
+
