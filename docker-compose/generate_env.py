@@ -74,7 +74,7 @@ _var_pattern = re.compile(r'\$(?:\{([^}]+)\}|([A-Za-z_][A-Za-z0-9_]*))')
 def substitute_once(value: str, mapping: dict) -> str:
     def repl(m):
         key = m.group(1) or m.group(2)
-        return mapping.get(key, '')
+        return mapping.get(key, m.group(0))
     return _var_pattern.sub(repl, value)
 
 
