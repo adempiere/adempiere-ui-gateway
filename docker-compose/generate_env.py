@@ -92,6 +92,25 @@ def resolve_mapping(mapping: dict, max_iters=20) -> dict:
     return resolved
 
 
+def _report_overrides(base: dict, override: dict, override_path: Path) -> None:
+    if not override_path.exists():
+        print('No override.env found — using env_template.env as-is')
+        return
+    if not override:
+        print('override.env is empty — no changes from template')
+        return
+    changed = {k: (base.get(k, '<not in template>'), v)
+               for k, v in override.items()
+               if base.get(k) != v}
+    if not changed:
+        print('override.env present but all values match template — no effective changes')
+        return
+    print('Changes from override.env:')
+    max_len = max(len(k) for k in changed)
+    for k, (old_val, new_val) in changed.items():
+        print(f'  {k:{max_len}}  "{old_val}"  →  "{new_val}"')
+
+
 def main():
     argv = sys.argv
     base_path = Path(argv[1]) if len(argv) > 1 else Path('docker-compose/env_template.env')
@@ -100,6 +119,7 @@ def main():
 
     base, base_comments = parse_env(base_path)
     override, override_comments = parse_env(override_path)
+    _report_overrides(base, override, override_path)
     merged = base.copy()
     merged.update(override)
     resolved = resolve_mapping(merged)
