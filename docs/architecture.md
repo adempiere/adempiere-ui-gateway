@@ -340,6 +340,20 @@ These relaxed timeouts accommodate:
 - Network latency
 - Resource contention during initial startup
 
+**Recommended values by service type:**
+
+| Service type | `interval` | `retries` | `start_period` | Total tolerance |
+|---|---|---|---|---|
+| Fast services (web servers, simple APIs) | 30s | 3–5 | 10–20s | ~2.5 min |
+| Database services (PostgreSQL) | 30s | 10 | 40s | ~5.5 min |
+| Search/analytics (OpenSearch) | 30s | 10 | 40s | ~5.5 min |
+| Messaging/coordination (Kafka, Zookeeper) | 30s | 8 | 30s | ~4.5 min |
+
+**Anti-patterns to avoid:**
+- Reducing health check intervals to speed up startup — the service needs actual initialization time regardless
+- Removing `depends_on` entries to parallelize startup — this breaks proper initialization order
+- Very short timeouts in production — causes cascade failures
+
 #### Service Dependencies
 
 Services use `depends_on` with health check conditions to ensure proper startup order:

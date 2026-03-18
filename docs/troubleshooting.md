@@ -36,6 +36,10 @@ This guide helps you diagnose and resolve common issues with the ADempiere UI Ga
   - ["no such file or directory" - seed.backup](#no-such-file-or-directory---seedbackup)
 - [POS Application Errors](#pos-application-errors)
   - [ScriptEngine NullPointerException (Groovy AD_Rules)](#scriptengine-nullpointerexception-groovy-ad-rules)
+- [Vue Menu Empty After Database Restore](#vue-menu-empty-after-database-restore)
+- [Container Configuration Issues](#container-configuration-issues)
+  - [Wrong Container Names or Prefix](#wrong-container-names-or-prefix)
+  - [Cannot Access postgres_database Directory](#cannot-access-postgresql-postgres_database-directory)
 - [Getting Help](#getting-help)
 - [Prevention Tips](#prevention-tips)
 
@@ -952,6 +956,177 @@ docker compose up -d --no-deps adempiere-grpc-server
 | `groovy-jsr223-3.0.22.jar` | Registers `"groovy"` as a JSR-223 `ScriptEngine` name via `ServiceLoader` |
 
 Both are required. Without `groovy-jsr223`, the engine lookup returns `null` even with the core JAR present.
+
+---
+
+## Vue Menu Empty After Database Restore
+
+After restoring a new or different database, the Vue UI (`/vue`) may show only folder nodes without any windows, processes, or reports. This is caused by stale OpenSearch indices and/or missing Kafka topic data. Follow this procedure in order.
+
+**Why this happens:**
+
+| Symptom | Root Cause |
+|---------|-----------|
+| Only folder nodes, no windows or processes | Stale OpenSearch indices from previous DB, or `menu_item`/`role` Kafka topics not consumed |
+| Menu API fails silently | nginx cached the old IP of the restarted `dictionary-rs` container |
+| Topics created but menu still empty | dictionary-rs subscribed before some topics existed — missed them due to Kafka rebalance timing |
+
+**Background:** Kafka topics are not persistent — cleared on every stack restart. OpenSearch indices persist on the volume and can contain stale data. The `dictionary-rs` service builds OpenSearch indices by consuming Kafka topics; it subscribes to all topics on startup. If a topic is created after the last Kafka rebalance, `dictionary-rs` will not consume it and that index will never be built.
+
+### Step 1 — Apply DB Migrations (if not already done)
+
+In ADempiere ZK (`/webui`), run these two XML migrations **in order**:
+
+1. `00010250_ECA56_1_0_Export_Tree_Definition.xml`
+2. `00010260_ECA56_1_0_Filter_Menu_by_Tree_Definition.xml`
+
+These configure which trees are exported via Application Dictionary export. Without them, the `menu_tree` Kafka topic will not receive correct tree definitions.
+
+**Verify:** In ZK, open window **Migration** and confirm both records appear with status `Applied`.
+
+### Step 2 — Delete All Stale OpenSearch Menu Indices
+
+**Via OpenSearch Dashboards** (`http://<HOST>:5601`):
+- Go to Index Management → Indices
+- Filter by `menu*`, select all and delete
+
+**Via CLI:**
+```bash
+docker exec adempiere-ui-gateway.opensearch \
+  curl -s -X DELETE 'http://localhost:9200/menu*'
+```
+
+Verify no `menu*` indices remain.
+
+### Step 3 — Export ALL Application Dictionary Types in One Run
+
+In ADempiere ZK (`/webui`), go to **System → Application Dictionary → Export Application Dictionary** and check **all** of the following in a **single run**:
+
+- **Export Tree** ← critical, easy to forget
+- Export Menu / Menu Items
+- Export Windows
+- Export Processes
+- Export Browsers
+- Export Forms
+- Export Roles
+
+> **Why all at once:** Running exports separately creates Kafka topics at different moments. If a topic is created after the last Kafka rebalance, `dictionary-rs` will not consume it and the corresponding index will never be built.
+
+Do **not** restart the stack after the export — `dictionary-rs` consumes in real time while the stack is running.
+
+### Step 4 — Restart dictionary-rs
+
+After the export is complete:
+
+```bash
+docker restart adempiere-ui-gateway.dictionary-rs
+```
+
+Monitor consumption:
+```bash
+docker container logs -f adempiere-ui-gateway.dictionary-rs 2>&1 | grep -v 'Offsets committed'
+```
+
+Wait until all messages are consumed. The `menu_item` topic is the largest (~2000 messages) and takes 3–4 minutes.
+
+Optionally verify topic message counts:
+```bash
+docker exec adempiere-ui-gateway.kafka \
+  kafka-run-class kafka.tools.GetOffsetShell \
+  --bootstrap-server localhost:9092 --topic menu_item --time -1
+```
+
+### Step 5 — Reload nginx
+
+When `dictionary-rs` restarts, Docker assigns it a new IP. nginx caches upstream IPs and must be reloaded to re-resolve the hostname:
+
+```bash
+docker exec adempiere-ui-gateway.nginx-ui-gateway nginx -s reload
+```
+
+### Step 6 — Verify
+
+Open `http://<HOST>/vue`, log in, and confirm the full menu appears with windows, processes, and reports.
+
+If the menu is still broken:
+```bash
+docker container logs adempiere-ui-gateway.nginx-ui-gateway 2>&1 | \
+  grep -E 'menu|dictionary|unreachable|error' | tail -20
+```
+
+If you see `connect() failed (113: Host is unreachable)`, the nginx reload did not take effect. Try a full restart (causes brief downtime):
+```bash
+docker restart adempiere-ui-gateway.nginx-ui-gateway
+```
+
+### Quick Reference
+
+```bash
+# 1. Delete stale OpenSearch menu indices
+docker exec adempiere-ui-gateway.opensearch \
+  curl -s -X DELETE 'http://localhost:9200/menu*'
+
+# 2. In ZK: export ALL application dictionary types in one run (with Export Tree checked)
+
+# 3. Restart dictionary-rs after export completes
+docker restart adempiere-ui-gateway.dictionary-rs
+
+# 4. Monitor until all topics consumed
+docker container logs -f adempiere-ui-gateway.dictionary-rs 2>&1 | grep -v 'Offsets committed'
+
+# 5. Reload nginx
+docker exec adempiere-ui-gateway.nginx-ui-gateway nginx -s reload
+
+# 6. Open /vue and verify menu
+```
+
+---
+
+## Container Configuration Issues
+
+### Wrong Container Names or Prefix
+
+**Symptoms:**
+- Containers start but have an unexpected name prefix (e.g., `myproject-gateway.postgresql` instead of `adempiere-ui-gateway.postgresql`)
+- Commands using container names fail because the name doesn't match
+
+**Cause:**
+- `COMPOSE_PROJECT_NAME` in `env_template.env` determines all container and network names
+- The stack was started with a different value than expected
+
+**Solution:**
+```bash
+# Check the current value
+grep COMPOSE_PROJECT_NAME docker-compose/env_template.env
+
+# After changing it, restart the stack so .env is regenerated:
+./stop-all.sh
+./start-all.sh
+```
+
+**Note:** Do not edit `.env` directly — it is generated automatically by `start-all.sh`. Always edit `env_template.env`.
+
+---
+
+### Cannot Access `postgresql/postgres_database/` Directory
+
+**Symptoms:**
+- `ls postgresql/postgres_database/` returns "Permission denied"
+- `rm -rf postgresql/postgres_database/*` fails without sudo
+
+**Cause:**
+- PostgreSQL runs inside the container as the `postgres` system user, which has a different UID than your host user
+- The directory and its contents are owned by that UID
+
+**Solution:**
+```bash
+# Use sudo for host-level operations:
+sudo ls postgresql/postgres_database/
+sudo rm -rf postgresql/postgres_database/*
+
+# Or access from inside the container:
+docker exec -it adempiere-ui-gateway.postgresql bash
+```
 
 ---
 
