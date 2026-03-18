@@ -111,8 +111,8 @@ cd docker-compose
 python3 generate_env.py env_template.env override.env .env
 ```
 
-Behavior notes:
-- `generate_env.py` resolves `${VAR}` and `$VAR` recursively (up to a convergence limit). If you set `KAFKA_BROKER_EXTERNAL_PORT=${KAFKA_BROKER_PORT}` in `override.env` and `KAFKA_BROKER_PORT=29092`, the final `.env` will contain `KAFKA_BROKER_EXTERNAL_PORT=29092` and any template entries that reference it (e.g. `KAFKA_EXTERNAL_BROKERCONNECT="${HOST_IP}:${KAFKA_BROKER_EXTERNAL_PORT}"`) will be expanded accordingly.
+Behavior notes:  
+- `generate_env.py` resolves `${VAR}` and `$VAR` recursively (up to a convergence limit). If you set `KAFKA_BROKER_EXTERNAL_PORT=${KAFKA_BROKER_PORT}` in `override.env` and `KAFKA_BROKER_PORT=29092`, the final `.env` will contain `KAFKA_BROKER_EXTERNAL_PORT=29092` and any template entries that reference it (e.g. `KAFKA_EXTERNAL_BROKERCONNECT="${HOST_IP}:${KAFKA_BROKER_EXTERNAL_PORT}"`) will be expanded accordingly.  
 - `start-all.sh` will: use `docker-compose/override.env` (if present) to generate `.env`; if `.env` already exists and no `override.env` is present, it will keep the existing `.env` and will not overwrite it.
 
 Start the stack:
@@ -163,6 +163,23 @@ A: Then you would need Java on your host for development. But for simply running
 **Q: Do I need to install PostgreSQL, nginx, or other services?**
 
 A: **No!** All services run inside Docker containers. You only need Docker itself.
+
+---
+
+### Key Configuration Variables
+
+The primary configuration file is `docker-compose/env_template.env`. Edit it to customise your deployment. `start-all.sh` automatically generates `.env` from it (and from `override.env` if present) — do not create `.env` manually.
+
+| Variable | Purpose | Example |
+|----------|---------|---------|
+| `COMPOSE_PROJECT_NAME` | Project/client name; all container names are derived from this | `adempiere-ui-gateway` |
+| `HOST_IP` | IP address or domain where the stack is accessible | `erp-adempiere.example.com` |
+| `POSTGRES_IMAGE` | PostgreSQL Docker image version | `postgres:14.5` |
+| `ADEMPIERE_GITHUB_VERSION` | ADempiere database seed version downloaded on first start | `3.9.4` |
+| `POSTGRES_EXTERNAL_PORT` | External port for PostgreSQL access (develop mode) | `55432` |
+| `NETWORK_SUBNET` | Docker bridge network subnet | `192.168.100.0/24` |
+
+For the complete variable reference, open `docker-compose/env_template.env` — it contains inline comments for every variable.
 
 ---
 

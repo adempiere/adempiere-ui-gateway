@@ -1,8 +1,20 @@
 
 ## Profiles
+
+### Profile-Based Activation Pattern
+
+The stack uses a **profile-based activation** model to allow flexible service composition from a single `docker-compose.yml` file:
+
+- Every service definition is tagged with one or more profile names (e.g. `''`, `all`, `auth`, `cache`, `develop`, `storage`, `vue`, `zk`).
+- `start-all.sh` selects which profile(s) to activate based on the `-d <mode>` argument.
+- Only services whose profile matches the activated set are started — all others are ignored.
+- The `start-all.sh` script assembles `docker-compose.yml` from the appropriate fragment files for the selected mode before invoking `docker compose`. See [Stack Assembly Logic](./architecture.md#stack-assembly-logic) for details.
+
+This design means you can run a minimal Vue-only stack, a full production stack, or anything in between — without modifying the service definitions.
+
 This application exploits the [Docker Compose Profiles](https://docs.docker.com/compose/how-tos/profiles/).
 
-It basically defines a group of services that can be started or stopped together; this group is named a "profile".
+It basically defines a group of services that can be started or stopped together; this group is named a "profile".  
 In the file docker-compose.yml the profiles are defined for every service; this can be changed anytime accordingly to the needs.
 
 By calling *docker compose up* or *./start-all.sh* plus a parameter, the parameter is interpreted as the profile to be used.

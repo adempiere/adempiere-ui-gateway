@@ -51,7 +51,7 @@ For detailed architecture information including health checks and dependencies, 
 ### Zookeeper
 - **Service Name:** `zookeeper-service`
 - **Container Name:** `adempiere-ui-gateway.zookeeper`
-- **Image:** `wurstmeister/zookeeper:latest`
+- **Image:** `confluentinc/cp-zookeeper:7.6.1`
 - **Purpose:** Coordination service for Kafka
 - **Profiles:** All (required for Kafka)
 - **Access:** `zookeeper:2181` (internal only)
@@ -64,7 +64,7 @@ For detailed architecture information including health checks and dependencies, 
 ### OpenSearch (Dictionary Cache)
 - **Service Name:** `opensearch-service`
 - **Container Name:** `adempiere-ui-gateway.opensearch`
-- **Image:** `opensearchproject/opensearch:2.11.1`
+- **Image:** `opensearchproject/opensearch:2.15.0`
 - **Purpose:** Dictionary and metadata caching for fast lookups
 - **Profiles:** `standard`, `develop`, `cache`
 - **Access:** `opensearch:9200` (internal), `opensearch:9300` (cluster)
@@ -75,7 +75,7 @@ For detailed architecture information including health checks and dependencies, 
 ### OpenSearch Dashboards
 - **Service Name:** `opensearch-dashboards`
 - **Container Name:** `adempiere-ui-gateway.opensearch-dashboards`
-- **Image:** `opensearchproject/opensearch-dashboards:2.11.1`
+- **Image:** `opensearchproject/opensearch-dashboards:2.15.0`
 - **Purpose:** Web UI for OpenSearch cluster management
 - **Profiles:** `develop`, `cache`
 - **Access:** `http://${HOST_IP}:5601`
@@ -87,7 +87,7 @@ For detailed architecture information including health checks and dependencies, 
 ### Kafka
 - **Service Name:** `kafka-service`
 - **Container Name:** `adempiere-ui-gateway.kafka`
-- **Image:** `wurstmeister/kafka:2.13-2.6.0`
+- **Image:** `confluentinc/cp-kafka:7.6.1`
 - **Purpose:** Message broker for asynchronous events
 - **Profiles:** All (core messaging)
 - **Access:** `kafka:9092` (internal)
@@ -97,7 +97,7 @@ For detailed architecture information including health checks and dependencies, 
 ### Kafdrop (Kafka Monitor)
 - **Service Name:** `kafdrop-service`
 - **Container Name:** `adempiere-ui-gateway.kafdrop`
-- **Image:** `obsidiandynamics/kafdrop:latest`
+- **Image:** `obsidiandynamics/kafdrop:4.0.1`
 - **Purpose:** Web UI for Kafka topic monitoring and management
 - **Profiles:** `standard`, `develop`
 - **Access:** `http://${HOST_IP}:19000`
@@ -109,7 +109,7 @@ For detailed architecture information including health checks and dependencies, 
 ### MinIO S3 Storage
 - **Service Name:** `s3-service`
 - **Container Name:** `adempiere-ui-gateway.s3`
-- **Image:** `minio/minio:latest`
+- **Image:** `quay.io/minio/minio:RELEASE.2025-07-23T15-54-02Z`
 - **Purpose:** S3-compatible object storage for files and attachments
 - **Profiles:** `standard`, `develop`, `storage`
 - **Access:**
@@ -128,7 +128,7 @@ For detailed architecture information including health checks and dependencies, 
 ### gRPC Backend Server
 - **Service Name:** `grpc-server-service`
 - **Container Name:** `adempiere-ui-gateway.grpc-server`
-- **Image:** `openls/adempiere-grpc-server:alpine-1.3.0`
+- **Image:** `marcalwestf/adempiere-grpc-server:3.9.4.001-shw-1.0.34`
 - **Purpose:** Core ADempiere business logic via gRPC API
 - **Profiles:** All (core service)
 - **Access:** `grpc-server:50059` (internal, via Envoy)
@@ -139,7 +139,7 @@ For detailed architecture information including health checks and dependencies, 
 ### Dictionary Service (Rust)
 - **Service Name:** `dictionary-rs`
 - **Container Name:** `adempiere-ui-gateway.dictionary-rs`
-- **Image:** `openls/adempiere-dictionary-rs:alpine-0.2.2`
+- **Image:** `ghcr.io/adempiere/dictionary-rs:1.6.5`
 - **Purpose:** High-performance dictionary service written in Rust
 - **Profiles:** All (core service)
 - **Access:** `dictionary-rs:50051` (internal, via Envoy)
@@ -149,7 +149,7 @@ For detailed architecture information including health checks and dependencies, 
 ### Processor Service
 - **Service Name:** `adempiere-processor-service`
 - **Container Name:** `adempiere-ui-gateway.processor`
-- **Image:** `openls/adempiere-processor-service:alpine-1.2.0`
+- **Image:** `marcalwestf/adempiere-processors-service:alpine-1.1.18`
 - **Purpose:** Background job execution and scheduled tasks
 - **Profiles:** `standard`, `develop`
 - **Access:** Internal only (no external ports)
@@ -164,7 +164,7 @@ For detailed architecture information including health checks and dependencies, 
 ### Envoy gRPC Proxy
 - **Service Name:** `envoy-proxy-service`
 - **Container Name:** `adempiere-ui-gateway.envoy-grpc-proxy`
-- **Image:** `envoyproxy/envoy:v1.28.0`
+- **Image:** `envoyproxy/envoy:v1.37.0`
 - **Purpose:** gRPC to HTTP/REST transcoding proxy
 - **Profiles:** All (core service)
 - **Access:** `envoy:8080` (internal, via nginx)
@@ -175,7 +175,7 @@ For detailed architecture information including health checks and dependencies, 
 ### nginx API Gateway
 - **Service Name:** `nginx-ui-gateway`
 - **Container Name:** `adempiere-ui-gateway.nginx-ui-gateway`
-- **Image:** `adempiere/nginx_ui_gateway:1.0.0`
+- **Image:** `nginx:1.27.0-alpine3.19`
 - **Purpose:** Reverse proxy and API gateway (single entry point)
 - **Profiles:** All (core service)
 - **Access:** `http://${HOST_IP}:80` (main entry point)
@@ -196,7 +196,7 @@ For detailed architecture information including health checks and dependencies, 
 ### Landing Page
 - **Service Name:** `adempiere-site`
 - **Container Name:** `adempiere-ui-gateway.site`
-- **Image:** `openls/adempiere-site:1.3.1`
+- **Image:** `ghcr.io/adempiere/adempiere-landing-page:alpine-1.0.4`
 - **Purpose:** Welcome page with navigation to UIs
 - **Profiles:** All (core service)
 - **Access:** `http://${HOST_IP}/` (via nginx)
@@ -205,7 +205,7 @@ For detailed architecture information including health checks and dependencies, 
 ### ADempiere ZK UI (Classic)
 - **Service Name:** `adempiere-zk-service`
 - **Container Name:** `adempiere-ui-gateway.zk`
-- **Image:** `openls/adempiere-zk:alpine-3.9.4-3.1.0`
+- **Image:** `marcalwestf/adempiere-shw-zk:jetty-3.9.4.001-shw-1.1.48`
 - **Purpose:** Traditional Java-based web UI (ZK framework)
 - **Profiles:** `standard`, `develop`, `zk`
 - **Access:** `http://${HOST_IP}/webui` (via nginx)
@@ -217,7 +217,7 @@ For detailed architecture information including health checks and dependencies, 
 ### ADempiere Vue UI (Modern)
 - **Service Name:** `adempiere-vue-service`
 - **Container Name:** `adempiere-ui-gateway.vue`
-- **Image:** `openls/adempiere-vue:experimental-3.2.8`
+- **Image:** `marcalwestf/adempiere-vue:0.0.8`
 - **Purpose:** Modern Vue.js-based web UI
 - **Profiles:** `vue`, `develop`
 - **Access:** `http://${HOST_IP}/vue` (via nginx)
@@ -231,7 +231,7 @@ For detailed architecture information including health checks and dependencies, 
 ### DKron Scheduler
 - **Service Name:** `scheduler-dkron`
 - **Container Name:** `adempiere-ui-gateway.scheduler-dkron`
-- **Image:** `dkron/dkron:latest`
+- **Image:** `dkron/dkron:3.2.7`
 - **Purpose:** Distributed job scheduler and monitor
 - **Profiles:** `standard`, `develop`
 - **Access:** `http://${HOST_IP}:8899`

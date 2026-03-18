@@ -7,8 +7,9 @@
 > Java runs inside the Docker containers and is already included in the images.
 > This is one of the main benefits of using Docker!
 
-### Requirements
-##### 1 Install Tools
+### 1. Requirements
+
+#### Install Tools
 Make sure to install the following on your host machine:
 - [Docker](https://docs.docker.com/engine/install/)
 - [Docker Compose v2.16.0 or later](https://docs.docker.com/compose/install/linux/)
@@ -19,53 +20,55 @@ Make sure to install the following on your host machine:
 
 **Security benefit:** Keeping these services isolated in containers minimizes your host's attack surface. If vulnerabilities exist in containerized software, they cannot directly compromise your host system - this is a key security advantage of Docker.
 
-##### 2 Check versions
-2.1 Check `docker version`
+#### Check Versions
+Check `docker version`:
 ```Shell
 docker --version
     Docker version 23.0.3, build 3e7cbfd
 ```
-2.2 Check `docker compose version`
+Check `docker compose version`:
 ```Shell
 docker compose version
     Docker Compose version v2.17.2
 ```
-### Clone This Repository
+
+### 2. Clone This Repository
 ```Shell
 git clone https://github.com/adempiere/adempiere-ui-gateway
 cd adempiere-ui-gateway
 ```
-### Make sure to use correct branch
+
+### 3. Switch to the Correct Branch
 ```Shell
 git checkout main
 ```
 
-### Automatic Execution
+### 4. Automatic Execution
 
-##### 1 Execute With One Script
+#### a. Execute With One Script
 Execute script `start-all.sh [all, auth, cache, report, scheduler, storage, vue, zk]`:
 
 ```shell
 cd adempiere-ui-gateway/docker-compose
 ```
 
-- Default/Standard/All (`all`) profile/stack:
+- Default/Standard profile/stack:
 ```shell
 ./start-all.sh
 ```
-Or
+Or:
 ```shell
-./start-all.sh all
+./start-all.sh -d default
 ```
 
 - Authentication (`auth`) profile/stack:
 ```shell
-./start-all.sh auth
+./start-all.sh -d auth
 ```
 
 - Dictionary Cache (`cache`) profile/stack:
 ```shell
-./start-all.sh cache
+./start-all.sh -d cache
 ```
 
 - Report Engine (`report`) profile/stack:
@@ -100,8 +103,7 @@ Depending on the parameter -that BTW selects the profile- the script assembles t
 If no flag and/or parameter is given, the call will default to `docker compose -f docker-compose.yml` for the services combination **all**.
 If directories `postgresql/postgres_database` and `postgresql/backups` do not exist, they are created.
 
-
-##### 2 Result Of Script Execution
+#### b. Result Of Script Execution
 The docker compose project is executed with only services that have the profile given as parameter to the script `./start-all.sh`.
 
   Depending on the profile passed, certain services will be executed. This depends on the purpose/mode: for example when testing Vue, the combination is different than for Authentication.
@@ -111,7 +113,7 @@ The docker compose project is executed with only services that have the profile 
 This might take some time, depending on your bandwith and the size of the restore file.
 Once the image have been downloaded, the container creation and start will last less than without downloading.
 
-##### 3 Cases When Database Will Be Restored
+#### c. Cases When Database Will Be Restored
 If
 - there is a file *seed.backup* (or as defined in `env_template.env`, variable `POSTGRES_RESTORE_FILE_NAME`) in directory `postgresql/backups`, and
 - the database as specified in `env_template.env`, variable `POSTGRES_DATABASE_NAME` does not exist in Postgres, and
@@ -119,7 +121,7 @@ If
 
 *The database  will be restored*.
 
-##### 4 Cases When Database Will Not Be Restored
+#### d. Cases When Database Will Not Be Restored
 The execution of `postgresql/initdb.sh` will be skipped if
 - directory `postgresql/postgres_database` has contents, or
 - in file `docker-compose.yml` there is a definition for *image*.
@@ -127,18 +129,21 @@ The execution of `postgresql/initdb.sh` will be skipped if
 
 
 
-### Manual Execution
+### 5. Manual Execution
 Alternative to **Automatic Execution**.
 Recommendable for the first installation.
-##### 1 Create the directory on the host where the database will be mounted
+
+#### a. Create the directory on the host where the database will be mounted
 ```shell
 mkdir postgresql/postgres_database
 ```
-##### 2 Create the directory on the host where the backups will be mounted
+
+#### b. Create the directory on the host where the backups will be mounted
 ```shell
 mkdir postgresql/backups
 ```
-##### 3 Copy backup file (if restore is needed)
+
+#### c. Copy backup file (if restore is needed)
 - If you are executing this project for the first time or you want to restore the database, execute a database backup.
 - First, go to the backups directory
   _cd .../adempiere-ui-gateway/docker-compose/postgresql/postgres_backups_
@@ -153,7 +158,8 @@ mkdir postgresql/backups
 ```shell
 cp <PATH-TO-BACKUP-FILE> postgresql/backups
 ```
-##### 5 Modify env_template.env as needed
+
+#### d. Modify env_template.env as needed
 The only variables actually needed to change are
 - `COMPOSE_PROJECT_NAME` -> to the name you want to give the project, e.g. the name of your client.
   From this name, all images and container names are derived.
@@ -164,38 +170,35 @@ The only variables actually needed to change are
 
 Values in file **env_template.env**:
 > CLIENT_NAME="adempiere-ui"
-> 
+>
 > COMPOSE_PROJECT_NAME=${CLIENT_NAME}-gateway
-> 
+>
 > HOST_IP=192.268.0.246
-> 
+>
 > HOST_URL=http://${HOST_IP}
-> 
+>
 > ADEMPIERE_NETWORK=${COMPOSE_PROJECT_NAME}.network
-> 
+>
 > NETWORK_SUBNET=192.168.100.0/24
-> 
+>
 > NETWORK_GATEWAY=192.168.100.1
-> 
+>
 > NETWORK_IP_RANGE=192.168.10.0/24
-> 
+>
 > ALLOWED_ORIGIN=${HOST_IP}
 
 Other values in *env_template.env* are default values.
 Feel free to change them accordingly to your wishes/purposes.
 There should be no need to change file `docker-compose.yml`.
 
-##### 6 Copy env_template.env if it was modified
-Once you modified *env_template.env* as needed, copy it to `.env`. This is not needed if you run `start-all.sh`.
-```shell
-cp env_template.env .env
-```
+#### e. env_template.env and .env
+Once you have modified *env_template.env* as needed, run `start-all.sh` — it will automatically generate `.env` from `env_template.env` (and `override.env` if present) before starting Docker Compose. **Do not copy `env_template.env` to `.env` manually.**
 
-##### 7 File initdb.sh (optional)
+#### f. File initdb.sh (optional)
 Modify `postgresql/initdb.sh` as necessary, depending on what you may want to do at database first start.
 You may create roles, schemas, etc.
 
-##### 8 Execute docker compose
+#### g. Execute docker compose
 Run `docker compose`
 ```shell
 cd adempiere-ui-gateway/docker-compose
@@ -206,7 +209,7 @@ docker compose -f <filename> up -d
 
 This might take some time, depending on your bandwith and the size of the restore file.
 
-### Stop All Services That Were Started With Script start-all.sh
+### 6. Stop All Services That Were Started With Script start-all.sh
 To stop all Docker containers that were started with script `start-all.sh`, just execute:
 ```Shell
 cd adempiere-ui-gateway/docker-compose
@@ -215,7 +218,7 @@ cd adempiere-ui-gateway/docker-compose
 The file `docker-compose.yml` - created with script `start-all.sh` - contains the services tobe stopped.
 The file `docker-compose.yml` is deleted after stopping all services.
 
-### Delete All Docker Objects
+### 7. Delete All Docker Objects
 Sometimes, due to different reasons, you need to undo everything you have created on Docker and start anew. This is mostly in development, not in production.
 Then:
 - All Docker containers must be shut down.
@@ -231,12 +234,12 @@ cd adempiere-ui-gateway/docker-compose
 ```
 **Be very careful when using this script, because it will delete all Docker objects you have!**
 
-### Database Access
+### 8. Database Access
 Connect to database via port **55432** with a DB connector, e.g. PGAdmin.
 Or to the port the variable `POSTGRES_EXTERNAL_PORT` points in file `env_template.env`.
 It is recommendable to configure the PGAdmin access with ssh certification.
 
-### PGAdmin Access with ssh certificate
+### 9. PGAdmin Access with ssh certificate
 First step: generate a ssh certificate for a host's user and deploy it on the host
 
 PGAdmin Server Configuration

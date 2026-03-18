@@ -239,13 +239,10 @@ docker container inspect --format='{{.Config.Env}}' adempiere-ui-gateway.grpc-se
 
 ### View Merged Docker Compose Configuration
 
-Renders the actual configuration that will be applied to Docker:
+Renders the actual configuration that will be applied to Docker. Run this while the stack is running (so `.env` exists):
 
 ```bash
-# Copy environment file
-cp env_template.env .env
-
-# View merged configuration
+# View merged configuration (stack must be running, or .env must exist)
 docker compose convert
 
 # This shows:
@@ -260,6 +257,8 @@ docker compose convert
 - Verify configuration before starting stack
 - Check which ports are exposed
 - Confirm volume mount paths
+
+**Note:** `.env` is generated automatically by `start-all.sh`. It exists while the stack is running and is deleted by `stop-all.sh`. Do not create it manually.
 
 ---
 

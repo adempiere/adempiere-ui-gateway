@@ -1,4 +1,22 @@
 
+## Overview
+
+The **ADempiere UI Gateway** is a Docker Compose-based stack for running ADempiere ERP with multiple UI options (ZK and Vue), integrated services, and a complete microservices architecture. The stack uses nginx as a reverse proxy/API gateway to route requests to various backend services.
+
+**Key Technologies:**
+- Docker Compose (v2.16.0+)
+- PostgreSQL 14.5 (database)
+- nginx (API gateway/reverse proxy with JavaScript and Lua support)
+- ADempiere ZK (classic UI)
+- ADempiere Vue (modern UI)
+- gRPC backend services with Envoy proxy
+- OpenSearch (dictionary cache)
+- Kafka + Zookeeper (messaging)
+- MinIO S3 (file storage)
+- Keycloak (authentication — optional)
+- DKron (job scheduling)
+
+---
 
 ## Architecture
 
@@ -29,35 +47,36 @@ The services that can be executed are:
  - zookeeper
 
 
-### Quick Description of Application Stack
-The application stack consists of the following services defined in the *docker-compose.yml* file (and retrieved on the console with **sudo docker compose ls**); these services will eventually run as containers:
-- **adempiere-site**: Defines the landing page (web site) for this application. It can be implemented as wished.
-- **adempiere-zk**: Defines the Jetty server and the ADempiere ZK UI.
-- **vue-ui**: Defines the new ADempiere UI with Vue.
-- **adempiere-grpc-server**: Dedicated gRPC backend server for Vue UI. Implements the ADempiere business logic (POS, invoicing, inventory, etc.) and communicates with the database.
-- **postgresql-service**: Defines the Postgres database, that is persistently implemented on the host.
-- **ui-gateway**: Unique access point acting as a reverse proxy and routing to redirect multiple services.
-- **adempiere-processor**: For processes that are executed outside Adempiere.
-- **dkron-scheduler**: A scheduler for these processes.
-- **adempiere-report-engine**: For reports.
-- **s3-storage**: S3 (Simple Storage Service) for attachments and files.
-- **s3-client**: S3 (Simple Storage Service) default access configuration.
-- **s3-gateway-rs**: S3 (Simple Storage Service) API RESTful between ui-gateway and implemented S3 to manage files with client.
-- **grpc-proxy**: API RESTful transcoding to gRPC backends.
-- **opensearch-node**: Stores the Application Dictionary definitions.
-- **opensearch-setup**: Configure the service *opensearch-node* and import snapshot.
-- **kafka**: Messaging and streaming queue.
-- **kafdrop**: A Kafka Cluster Queues Overview, Monitor and Administrator.
-- **dictionary-rs**: API RESTful to manage adempiere dictionary with OpenSearch as cache.
-- **opensearch-dashboards**: Display and monitor of OpenSearch indexes e.g. exported menus, smart browsers, forms, windows, processes.
-- **keycloak**: User management on service *postgresql-service*.
-- **zookeeper**: Controller for *kafka* service.
+### Quick Description of Application Stack  
+The application stack consists of the following services defined in the *docker-compose.yml* file (and retrieved on the console with **sudo docker compose ls**); these services will eventually run as containers:  
+  - **adempiere-site**: Defines the landing page (web site) for this application. It can be implemented as wished.  
+  - **adempiere-zk**: Defines the Jetty server and the ADempiere ZK UI.  
+  - **vue-ui**: Defines the new ADempiere UI with Vue.  
+  - **adempiere-grpc-server**: Dedicated gRPC backend server for Vue UI. Implements the ADempiere business logic (POS, invoicing, inventory, etc.) and communicates with the database.  
+  - **postgresql-service**: Defines the Postgres database, that is persistently implemented on the host.  
+  - **ui-gateway**: Unique access point acting as a reverse proxy and routing to redirect multiple services.  
+  - **adempiere-processor**: For processes that are executed outside Adempiere.  
+  - **dkron-scheduler**: A scheduler for these processes.  
+  - **adempiere-report-engine**: For reports.  
+  - **s3-storage**: S3 (Simple Storage Service) for attachments and files.  
+  - **s3-client**: S3 (Simple Storage Service) default access configuration.  
+  - **s3-gateway-rs**: S3 (Simple Storage Service) API RESTful between ui-gateway and implemented S3 to manage files with client.  
+  - **grpc-proxy**: API RESTful transcoding to gRPC backends.  
+  - **opensearch-node**: Stores the Application Dictionary definitions.  
+  - **opensearch-setup**: Configure the service *opensearch-node* and import snapshot.  
+  - **kafka**: Messaging and streaming queue.  
+  - **kafdrop**: A Kafka Cluster Queues Overview, Monitor and Administrator.  
+  - **dictionary-rs**: API RESTful to manage adempiere dictionary with OpenSearch as cache.  
+  - **opensearch-dashboards**: Display and monitor of OpenSearch indexes e.g. exported menus, smart browsers, forms, windows, processes.  
+  - **keycloak**: User management on service *postgresql-service*.  
+  - **zookeeper**: Controller for *kafka* service.  
 
-Additional objects defined in the *docker-compose files*:
-- `adempiere_network`: defines the subnet used in the involved Docker containers (e.g. **192.168.100.0/24**)
-- `volume_postgres`: defines the mounting point of the Postgres database (typically directory **/var/lib/postgresql/data**) to a local directory on the host where the Docker container runs. This implements a persistent database.
-- `volume_backups`: defines the mounting point for a backup (or restore) directory on the Docker container to a local directory on the host where the Docker container has access. It can be used for backup or restore purposes.
-- `volume_persistent_files`: mounting point for the ZK container
+Additional objects defined in the *docker-compose files*:  
+- `adempiere_network`: defines the subnet used by all containers (e.g. **192.168.100.0/24**).   
+      Individual container IP addresses within this subnet are assigned dynamically and change every time the stack is restarted; inter-container communication must therefore use container hostnames, not IP addresses.  
+- `volume_postgres`: defines the mounting point of the Postgres database (typically directory **/var/lib/postgresql/data**) to a local directory on the host where the Docker container runs. This implements a persistent database.  
+- `volume_backups`: defines the mounting point for a backup (or restore) directory on the Docker container to a local directory on the host where the Docker container has access. It can be used for backup or restore purposes.  
+- `volume_persistent_files`: mounting point for the ZK container  
 - `volume_scheduler`: defines the mounting point for the DKron scheduler
 
 ### Network Architecture
@@ -211,9 +230,41 @@ See [Troubleshooting Guide](./troubleshooting.md#network-and-access-issues) for 
 
 For tracing errors that appear in the Vue UI back to their source in the gRPC server, see [Debugging Vue UI Errors](./debugging-vue-frontend.md).
 
+### Repository Structure
+
+```
+docker-compose/
+├── env_template.env          # Main configuration — edit this, not .env
+├── override_template.env     # Template for machine-specific overrides — copy to override.env and set values
+├── override.env              # (not in git) Active overrides: values here replace env_template.env defaults in .env
+├── docker-compose.yml        # All service definitions with profiles (assembled by start-all.sh)
+├── start-all.sh              # Start stack script (assembles docker-compose.yml, activates profiles)
+├── stop-all.sh               # Stop stack script (also deletes assembled docker-compose.yml)
+├── stop-and-delete-all.sh    # Complete cleanup script
+├── postgresql/
+│   ├── postgres_database/    # Persistent DB storage (mounted volume)
+│   ├── postgres_backups/     # Backup/restore files
+│   ├── persistent_files/     # ZK container shared files
+│   ├── postgres.Dockerfile   # Custom Postgres image
+│   └── initdb.sh             # DB initialization script (runs on first start)
+├── nginx/
+│   ├── nginx.conf            # Main nginx config
+│   ├── api_gateway.conf      # API gateway routing
+│   ├── upstreams/            # Backend service definitions
+│   ├── api/                  # API endpoint configs
+│   └── gateway/              # Gateway-specific configs
+└── opensearch/
+    └── setup_opensearch.sh   # OpenSearch initialization
+```
+
 ### File Structure
 - *README.md*: the main documentation file.
 - *env_template.env*: template for definition of all variables used in docker composed files. Usually, this file is edited for testing and copied to *.env* before running docker compose. Please remember that the file Docker Compose needs to run is *.env*.
+- *override_template.env*: git-tracked template for deployment-specific value overrides. When a variable in `env_template.env` needs a different value on a particular machine or deployment — such as a specific hostname or IP — copy this file to `override.env` and set the desired values there. Example:
+  ```
+  HOST_IP=my.url.com
+  ```
+- *override.env*: the active overrides file, **not tracked by git**. It contains a subset of variables from `env_template.env` whose values replace the template defaults when `start-all.sh` assembles `.env`. This keeps machine-specific configuration out of version control. Create it from `override_template.env` only when needed; if it does not exist, the template values are used unchanged.
 - *docker-compose.yml*: Defines multple services, with different configurations for different purposes/modes as profiles/stacks. These are controlled by profiles.
 - `start-all.sh`: First of all, the persistent directory (database) and the backup directory are created if not existent. The profiles is set depending on the input parameter; then the file *env_template.env* is copied to *.env* and eventually Docker Compose is started for the file `docker-compose.yml`.
 - `stop-all.sh`: shell script to automatically stop all services that were started with the script `start-all.sh` and defined in file `docker-compose.yml`.
@@ -360,40 +411,39 @@ Before running containers, images must be downloaded and containers created out 
 Image versions used in file *docker-compose.yml*, to be found in DockerHub.
 The actual version is defined in file *env_template.env*.
 
-| Image                               | Image Name                                   |  Tag (Version)                        |
-| ----------------------------------- |:--------------------------------------------:|:-------------------------------------:|
-| PostgreSQL                          | postgres                                     | 14.5                                  |
-| Main Page / Landing Site            | openls/adempiere-landing-page (1)            | alpine-1.0.3                          |
-| OpenSearch API RESTful              | openls/dictionary-rs  (2)                    | 1.5.5                                 |
-| ADempiere Report Engine             | openls/adempiere-report-engine-service (2)   | alpine-1.3.7                          |
-| S3 Gateway RESTful API              | openls/s3-gateway-rs (2)                     | 1.2.7                                 |
-| S3 Minio Storage                    | quay.io/minio/minio                          | RELEASE.2025-07-23T15-54-02Z          |
-| S3 Minio Client                     | quay.io/minio/mc                             | RELEASE.2025-07-21T05-28-08Z          |
-| DKron Task Scheduler                | dkron/dkron                                  | 3.2.7                                 |
-| Zookeeper for Kafka Brokers         | confluentinc/cp-zookeeper                    | 7.6.1                                 |
-| Kafka Queue Manager                 | confluentinc/cp-kafka                        | 7.6.1                                 |
-| Kafdrop Kafka Cluster Overview      | obsidiandynamics/kafdrop                     | 4.0.1                                 |
-| OpenSearch Search Engine            | opensearchproject/opensearch                 | 2.15.0                                |
-| OpenSearch Dashboards UI            | opensearchproject/opensearch-dashboards      | 2.15.0                                |
-| NGINX UI Gateway                    | nginx                                        | 1.27.0-alpine3.19                     |
-| Envoy gRPC Proxy                    | envoyproxy/envoy                             | v1.37.0                               |
-| Keycloak ID & Access Management     | keycloak/keycloak                            | 23.0.7                                |
-| ADempiere Vue UI                    | marcalwestf/adempiere-vue (3)                | 0.0.6                                 |
-| ADempiere Vue Backend (gRPC Server) | marcalwestf/adempiere-grpc-server (3)        | 3.9.4.001-shw-{version}               |
-| Adempiere ZK UI                     | marcalwestf/adempiere-shw-zk (3)             | jetty-3.9.4.001-shw-1.1.45            |
-| ADempiere Processors gRPC Server    | marcalwestf/adempiere-processors-service (3) | alpine-1.1.16                         |
+| Image                               | Image Name                                                    |  Tag (Version)                        |
+| ----------------------------------- |:-------------------------------------------------------------:|:-------------------------------------:|
+| PostgreSQL                          | postgres                                                      | 14.5                                  |
+| Main Page / Landing Site            | ghcr.io/adempiere/adempiere-landing-page (1)                  | alpine-1.0.4                          |
+| OpenSearch API RESTful              | ghcr.io/adempiere/dictionary-rs                               | 1.6.5                                 |
+| ADempiere Report Engine             | ghcr.io/adempiere/adempiere-report-engine-service             | 1.4.2-alpine                          |
+| S3 Gateway RESTful API              | ghcr.io/adempiere/s3-gateway-rs                               | 1.2.8                                 |
+| S3 Minio Storage                    | quay.io/minio/minio                                           | RELEASE.2025-07-23T15-54-02Z          |
+| S3 Minio Client                     | quay.io/minio/mc                                              | RELEASE.2025-07-21T05-28-08Z          |
+| DKron Task Scheduler                | dkron/dkron                                                   | 3.2.7                                 |
+| Zookeeper for Kafka Brokers         | confluentinc/cp-zookeeper                                     | 7.6.1                                 |
+| Kafka Queue Manager                 | confluentinc/cp-kafka                                         | 7.6.1                                 |
+| Kafdrop Kafka Cluster Overview      | obsidiandynamics/kafdrop                                      | 4.0.1                                 |
+| OpenSearch Search Engine            | opensearchproject/opensearch                                  | 2.15.0                                |
+| OpenSearch Dashboards UI            | opensearchproject/opensearch-dashboards                       | 2.15.0                                |
+| NGINX UI Gateway                    | nginx                                                         | 1.27.0-alpine3.19                     |
+| Envoy gRPC Proxy                    | envoyproxy/envoy                                              | v1.37.0                               |
+| Keycloak ID & Access Management     | keycloak/keycloak                                             | 23.0.7                                |
+| ADempiere Vue UI                    | marcalwestf/adempiere-vue (2)                                 | 0.0.8                                 |
+| ADempiere Vue Backend (gRPC Server) | marcalwestf/adempiere-grpc-server (2)                         | 3.9.4.001-shw-1.0.34                  |
+| Adempiere ZK UI                     | marcalwestf/adempiere-shw-zk (2)                              | jetty-3.9.4.001-shw-1.1.48            |
+| ADempiere Processors gRPC Server    | marcalwestf/adempiere-processors-service (2)                  | alpine-1.1.18                         |
 
-**Notes:**
-- (1) The landing page can be replaced with your own custom image
-- (2) These images will eventually be moved to the *adempiere* Docker Hub organization
-- (3) These are customized images. The *Image Name* shows the repository where customizations are maintained
-- All image versions are defined in `env_template.env` and can be changed as needed
+**Notes:**  
+- (1) The landing page can be replaced with your own custom image  
+- (2) These are Systemhaus-Westfalia customized images, maintained in the `marcalwestf` Docker Hub namespace  
+- All image versions are defined in `env_template.env` and can be changed as needed  
 - **Version updates:** Check image tags regularly for security updates and new features
 
 
-### User's perspective
-From a user's point of view, the application consists of the following.
-Take note that the ports are defined in file *env_template.env* as external ports and can be changed if needed or desired.
+### User's perspective  
+From a user's point of view, the application consists of the following.  
+Take note that the ports are defined in file *env_template.env* as external ports and can be changed if needed or desired.  
 
 Services accessible via **path** in the browser through nginx (port 80):
 
@@ -405,7 +455,9 @@ Services accessible via **path** in the browser through nginx (port 80):
 
 The upstream targets (which container each path points to) are defined in `docker-compose/nginx/upstreams/`.
 
-The path `/api/` also exists in the nginx configuration (`docker-compose/nginx/api/adempiere_backend.conf`) but is **not** a browser URL. It is used internally by the Vue Single Page Application (SPA) to send API requests to the Envoy proxy, which transcodes them to gRPC and forwards them to the gRPC server. Opening `/api/` in a browser returns 404 because it only responds to specific programmatic API calls with proper headers and request bodies.
+The path `/api/` also exists in the nginx configuration (`docker-compose/nginx/api/adempiere_backend.conf`) but is **not** a browser URL.   
+It is used internally by the Vue Single Page Application (SPA) to send API requests to the Envoy proxy, which transcodes them to gRPC and forwards them to the gRPC server.  
+Opening `/api/` in a browser returns 404 because it only responds to specific programmatic API calls with proper headers and request bodies.
 
 Services accessible via **port** directly:
 

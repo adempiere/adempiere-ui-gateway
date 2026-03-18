@@ -1,6 +1,6 @@
 # Docker Images - Version Management
 
-**Date:** 2026-03-03
+**Date:** 2026-03-18
 **Purpose:** Track and manage Docker images used in the ADempiere UI Gateway stack
 
 ---
@@ -19,9 +19,9 @@ The ADempiere UI Gateway stack uses Docker images from three sources:
    - Migrated from Docker Hub to GitHub Container Registry
    - Published at: https://github.com/orgs/adempiere/packages
 
-3. **Legacy ADempiere** (`openls/*` on Docker Hub)
-   - Awaiting migration to `ghcr.io/adempiere/*`
-   - Should be migrated as part of the community effort
+3. **Third-party / official images** (PostgreSQL, MinIO, Envoy, nginx, Kafka, OpenSearch, Keycloak, DKron)
+   - Maintained by their respective upstream projects
+   - Not part of any migration — kept as-is
 
 ---
 
@@ -33,9 +33,9 @@ These are Systemhaus-Westfalia customizations and should **NOT** be migrated to 
 
 | Image | Current Version | Registry | Status |
 |-------|----------------|----------|--------|
-| adempiere-shw-zk | jetty-3.9.4.001-shw-1.1.45 | marcalwestf | ✓ Active |
-| adempiere-processors-service | alpine-1.1.16 | marcalwestf | ✓ Active |
-| adempiere-grpc-server | 3.9.4.001-shw-1.0.30 | marcalwestf | ✓ Active |
+| adempiere-shw-zk | jetty-3.9.4.001-shw-1.1.48 | marcalwestf | ✓ Active |
+| adempiere-processors-service | alpine-1.1.18 | marcalwestf | ✓ Active |
+| adempiere-grpc-server | 3.9.4.001-shw-1.0.34 | marcalwestf | ✓ Active |
 | adempiere-vue | 0.0.8 | marcalwestf | ✓ Active |
 
 **Repositories:**
@@ -52,23 +52,14 @@ Successfully migrated to GitHub Container Registry:
 |-------|----------------|----------|--------|
 | s3-gateway-rs | 1.2.8 | ghcr.io/adempiere | ✅ Migrated |
 | adempiere-report-engine-service | 1.4.2-alpine | ghcr.io/adempiere | ✅ Migrated |
+| dictionary-rs | 1.6.5 | ghcr.io/adempiere | ✅ Migrated |
+| adempiere-landing-page | alpine-1.0.4 | ghcr.io/adempiere | ✅ Migrated |
 
 **Packages:**
 - https://github.com/adempiere/s3_gateway_rs/pkgs/container/s3-gateway-rs
 - https://github.com/adempiere/adempiere-report-engine-service/pkgs/container/adempiere-report-engine-service
-
-### Legacy ADempiere (Awaiting Migration)
-
-Still on Docker Hub, should be migrated:
-
-| Image | Current Version | Registry | Status |
-|-------|----------------|----------|--------|
-| dictionary-rs | 1.6.2 | openls | ❌ Not migrated |
-| adempiere-landing-page | alpine-1.0.3 | openls | ❌ Not migrated |
-
-**Target:**
-- `ghcr.io/adempiere/dictionary-rs`
-- `ghcr.io/adempiere/adempiere-landing-page`
+- https://github.com/adempiere/dictionary_rs/pkgs/container/dictionary-rs
+- https://github.com/adempiere/adempiere-landing-page/pkgs/container/adempiere-landing-page
 
 ---
 

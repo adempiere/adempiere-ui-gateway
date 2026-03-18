@@ -24,10 +24,11 @@ Due to the technology used, it is highly recommended to have a good knowledge of
 ### Benefits of the Application
 - In its simplest form, it can be used as a demo of the latest -or any desired- ADempiere version.
 - No big installation hassle for getting it running: just execute the shell script **start-all.sh** .
-- It can run on different hosts just by changing
-  - the target IP to the one of the host or
-  - the client name
-- Completly configurable: any value can be changed for the whole application in the configuration file **env_template.env**.
+- It can run on different hosts just by changing  
+    - the target IP to the one of the host or  
+    - the client name
+- Fully configurable: all stack parameters — hostnames, ports, image versions, database settings, and more — are defined in a single configuration file, **env_template.env**.   
+    Machine-specific overrides can be placed in **override.env** without touching the versioned template.
 - Single containers or images can be updated and/or replaced easily, making deployments and tests speedy.
 - Separation of concerns: every service implements one and only one solution.
 - The timezone and location for all containers are the same as the hosts'.
@@ -55,3 +56,9 @@ Please follow the links for detailed information.
 - [License](./LICENSE)
 
 - See installation prerequisites in [Installation](docs/installation.md) (Python 3.10+ required for the generator script).
+
+### Branch Information
+
+- **`main`** — upstream base; use for pull requests to the adempiere org
+- **`feature/SHW_General`** — production branch used by active Systemhaus-Westfalia production sites
+- **`adempiere-trunk`** — current development branch: complete Systemhaus-Westfalia stack, starting point for migration to the adempiere org
