@@ -49,7 +49,7 @@ git checkout main
 Execute script `start-all.sh [all, auth, cache, report, scheduler, storage, vue, zk]`:
 
 ```shell
-cd adempiere-ui-gateway/docker-compose
+cd docker-compose
 ```
 
 - Default/Standard profile/stack:
@@ -159,14 +159,21 @@ mkdir postgresql/backups
 cp <PATH-TO-BACKUP-FILE> postgresql/backups
 ```
 
-#### d. Modify env_template.env as needed
-The only variables actually needed to change are
-- `COMPOSE_PROJECT_NAME` -> to the name you want to give the project, e.g. the name of your client.
-  From this name, all images and container names are derived.
-- `HOST_IP` -> to to the IP your host has.
-- `POSTGRES_IMAGE` -> to the Postgres version you want to use.
-- `ADEMPIERE_GITHUB_VERSION` -> to the DB version needed.
-- `ADEMPIERE_GITHUB_COMPRESSED_FILE` -> to the DB version needed.
+#### d. Modify configuration as needed
+
+**Recommended:** copy `override_template.env` to `override.env` and edit only what you need to change. `override.env` is git-ignored, so local values are never accidentally committed.
+
+```shell
+cp override_template.env override.env
+nano override.env
+```
+
+Alternatively, edit `env_template.env` directly. The variables most commonly changed are:
+- `COMPOSE_PROJECT_NAME` -> the name of your project/client; all container names are derived from this.
+- `HOST_IP` -> the IP address or domain of your host.
+- `POSTGRES_IMAGE` -> the Postgres version to use.
+- `ADEMPIERE_GITHUB_VERSION` -> the ADempiere DB seed version.
+- `ADEMPIERE_GITHUB_COMPRESSED_FILE` -> the DB seed archive name.
 
 Values in file **env_template.env**:
 > CLIENT_NAME="adempiere-ui"
@@ -199,10 +206,8 @@ Modify `postgresql/initdb.sh` as necessary, depending on what you may want to do
 You may create roles, schemas, etc.
 
 #### g. Execute docker compose
-Run `docker compose`
 ```shell
-cd adempiere-ui-gateway/docker-compose
-docker compose -f <filename> up -d
+./start-all.sh
 ```
 
 **Result: all images are downloaded, containers and other docker objects created, containers are started, and database restored**.
@@ -212,11 +217,9 @@ This might take some time, depending on your bandwith and the size of the restor
 ### 6. Stop All Services That Were Started With Script start-all.sh
 To stop all Docker containers that were started with script `start-all.sh`, just execute:
 ```Shell
-cd adempiere-ui-gateway/docker-compose
+cd docker-compose
 ./stop-all.sh
 ```
-The file `docker-compose.yml` - created with script `start-all.sh` - contains the services tobe stopped.
-The file `docker-compose.yml` is deleted after stopping all services.
 
 ### 7. Delete All Docker Objects
 Sometimes, due to different reasons, you need to undo everything you have created on Docker and start anew. This is mostly in development, not in production.
@@ -229,7 +232,7 @@ Then:
 
 Execute script:
 ```Shell
-cd adempiere-ui-gateway/docker-compose
+cd docker-compose
 ./stop-and-delete-all.sh
 ```
 **Be very careful when using this script, because it will delete all Docker objects you have!**
