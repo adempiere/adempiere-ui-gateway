@@ -2,8 +2,8 @@
 
 > **💡 Important: No Java Installation Required**
 >
-> You do NOT need to install Java, JDK, or any Java tools on your computer.
-> Java runs inside the Docker containers and is already included in the images.
+> You do NOT need to install Java, JDK, or any Java tools on your computer.  
+> Java runs inside the Docker containers and is already included in the images.  
 > This is one of the main benefits of using Docker!
 
 ### What You Need
@@ -36,37 +36,38 @@ cd docker-compose
 
 You have two ways to set host-specific values (e.g. IP address, external ports, credentials):
 
-- **Option A — recommended:** create a local `override.env` so you don't modify the versioned template.
+- **Option A — recommended:** create a local `override.env` so you don't modify the versioned template.  
 
-  1. Copy the provided example template:
+    1. Copy the provided example template:
      ```bash
      cp override_template.env override.env
      ```
-  2. Edit only the variables you want to change (e.g. `HOST_IP`, `POSTGRES_EXTERNAL_PORT`):
+    2. Edit only the variables you want to change (e.g. `HOST_IP`, `POSTGRES_EXTERNAL_PORT`):
      ```bash
      nano override.env
      ```
   - `override.env` is git-ignored — your local values will never be accidentally committed.
   - `start-all.sh` detects `override.env` and automatically generates a merged `.env` from it.
 
-- **Option B — less recommended:** directly edit `env_template.env`. Be careful not to commit sensitive values.
-  ```bash
-  nano env_template.env
-  ```
+- **Option B — less recommended:** directly edit `env_template.env`. Be careful not to commit sensitive values.  
+      ```bash
+      nano env_template.env
+      ```  
 
-To find your host IP (example for Wi-Fi interface `wlp3s0`):
-```bash
-ip addr show | grep wlp3s0
-```
+    To find your host IP (example for Wi-Fi interface `wlp3s0`):  
+      ```bash
+      ip addr show | grep wlp3s0
+      ```
 
 **Notes on variable resolution:**  
-- `generate_env.py` resolves `${VAR}` and `$VAR` references recursively. For example: if `override.env` sets `HOST_IP=192.0.2.10`, all template variables that reference `${HOST_IP}` will be expanded accordingly.  
-- You can also call the generator manually:  
-  ```bash
-  ./generate-env.sh override.env .env
-  # or directly:
-  python3 generate_env.py env_template.env override.env .env
-  ```
+- `generate_env.py` resolves `${VAR}` and `$VAR` references recursively.   
+      For example: if `override.env` sets `HOST_IP=192.0.2.10`, all template variables that reference `${HOST_IP}` will be expanded accordingly.  
+- You can also call the generator manually:
+    ```bash
+  ./generate-env.sh override.env .env    
+    # or directly:  
+    python3 generate_env.py env_template.env override.env .env
+    ```
 
 ### Start the Stack
 
@@ -112,9 +113,10 @@ A: **No!** All services run inside Docker containers. You only need Docker itsel
 
 ---
 
-### Key Configuration Variables
-
-The primary configuration file is `docker-compose/env_template.env`. Edit it to customise your deployment, or use `override.env` for host-specific values. `start-all.sh` automatically generates `.env` from them — do not create `.env` manually.
+### Key Configuration Variables  
+The primary configuration file is `docker-compose/env_template.env`.  
+Edit it to customise your deployment, or use `override.env` for host-specific values.  
+`start-all.sh` automatically generates `.env` from them — do not create `.env` manually.
 
 | Variable | Purpose | Example |
 |----------|---------|---------|
