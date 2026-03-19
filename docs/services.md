@@ -39,21 +39,21 @@ For detailed architecture information including health checks and dependencies, 
 - **Container Name:** `adempiere-ui-gateway.postgresql`
 - **Image:** `postgres:14.5`
 - **Purpose:** Primary database for ADempiere ERP data
-- **Profiles:** All (core service)
+- **Profiles:** `all, auth, cache, report, scheduler, storage, vue, zk`
 - **Access:**
-  - **Internal:** `postgresql:5432` (container network)
-  - **External (develop mode):** `${HOST_IP}:55432`
+  - **Internal:** `postgresql-service:5432` (container network)
+  - **External:** `${HOST_IP}:55432` (port exposed when `POSTGRES_EXTERNAL_PORT` is set)
   - **Credentials:** postgres/postgres (default)
 - **Data Persistence:** `postgresql/postgres_database/` (mounted volume)
 - **Health Check:** 30s startup, 10s interval, 5s timeout
 - **Documentation:** See [Backup and Restore Guide](./backup-restore.md)
 
 ### Zookeeper
-- **Service Name:** `zookeeper-service`
+- **Service Name:** `zookeeper`
 - **Container Name:** `adempiere-ui-gateway.zookeeper`
 - **Image:** `confluentinc/cp-zookeeper:7.6.1`
 - **Purpose:** Coordination service for Kafka
-- **Profiles:** All (required for Kafka)
+- **Profiles:** `all, cache`
 - **Access:** `zookeeper:2181` (internal only)
 - **Health Check:** 30s startup, 10s interval, 5s timeout
 
@@ -62,12 +62,12 @@ For detailed architecture information including health checks and dependencies, 
 ## Data & Messaging Services
 
 ### OpenSearch (Dictionary Cache)
-- **Service Name:** `opensearch-service`
+- **Service Name:** `opensearch-node`
 - **Container Name:** `adempiere-ui-gateway.opensearch`
 - **Image:** `opensearchproject/opensearch:2.15.0`
 - **Purpose:** Dictionary and metadata caching for fast lookups
-- **Profiles:** `standard`, `develop`, `cache`
-- **Access:** `opensearch:9200` (internal), `opensearch:9300` (cluster)
+- **Profiles:** `all, cache`
+- **Access:** `opensearch-node:9200` (internal), `opensearch-node:9300` (cluster)
 - **Web UI:** See OpenSearch Dashboards below
 - **Health Check:** 90s startup, 30s interval, 10s timeout
 - **Memory:** 2GB heap (JVM_HEAP_SIZE)
@@ -77,7 +77,7 @@ For detailed architecture information including health checks and dependencies, 
 - **Container Name:** `adempiere-ui-gateway.opensearch-dashboards`
 - **Image:** `opensearchproject/opensearch-dashboards:2.15.0`
 - **Purpose:** Web UI for OpenSearch cluster management
-- **Profiles:** `develop`, `cache`
+- **Profiles:** `all, cache`
 - **Access:** `http://${HOST_IP}:5601`
 - **Default Credentials:** admin/admin
 - **Health Check:** 90s startup, 30s interval, 10s timeout
@@ -85,21 +85,21 @@ For detailed architecture information including health checks and dependencies, 
 ![OpenSearch Dashboard](./services-opensearch-dashboard.png)
 
 ### Kafka
-- **Service Name:** `kafka-service`
+- **Service Name:** `kafka`
 - **Container Name:** `adempiere-ui-gateway.kafka`
 - **Image:** `confluentinc/cp-kafka:7.6.1`
 - **Purpose:** Message broker for asynchronous events
-- **Profiles:** All (core messaging)
+- **Profiles:** `all, cache`
 - **Access:** `kafka:9092` (internal)
 - **Dependencies:** Requires Zookeeper
 - **Health Check:** 60s startup, 30s interval, 10s timeout
 
 ### Kafdrop (Kafka Monitor)
-- **Service Name:** `kafdrop-service`
+- **Service Name:** `kafdrop`
 - **Container Name:** `adempiere-ui-gateway.kafdrop`
 - **Image:** `obsidiandynamics/kafdrop:4.0.1`
 - **Purpose:** Web UI for Kafka topic monitoring and management
-- **Profiles:** `standard`, `develop`
+- **Profiles:** `all, cache`
 - **Access:** `http://${HOST_IP}:19000`
 - **Dependencies:** Requires Kafka
 - **Health Check:** 60s startup, 30s interval, 10s timeout
@@ -107,11 +107,11 @@ For detailed architecture information including health checks and dependencies, 
 ![Kafdrop Kafka Monitor](./services-kafdrop.png)
 
 ### MinIO S3 Storage
-- **Service Name:** `s3-service`
-- **Container Name:** `adempiere-ui-gateway.s3`
+- **Service Name:** `s3-storage`
+- **Container Name:** `adempiere-ui-gateway.s3-storage`
 - **Image:** `quay.io/minio/minio:RELEASE.2025-07-23T15-54-02Z`
 - **Purpose:** S3-compatible object storage for files and attachments
-- **Profiles:** `standard`, `develop`, `storage`
+- **Profiles:** `all, storage`
 - **Access:**
   - **API:** `http://${HOST_IP}:9000`
   - **Console:** `http://${HOST_IP}:9090`
@@ -126,12 +126,12 @@ For detailed architecture information including health checks and dependencies, 
 ## Backend Services
 
 ### gRPC Backend Server
-- **Service Name:** `grpc-server-service`
-- **Container Name:** `adempiere-ui-gateway.grpc-server`
+- **Service Name:** `adempiere-grpc-server`
+- **Container Name:** `adempiere-ui-gateway.vue-grpc-server`
 - **Image:** `marcalwestf/adempiere-grpc-server:3.9.4.001-shw-1.0.34`
 - **Purpose:** Core ADempiere business logic via gRPC API
-- **Profiles:** All (core service)
-- **Access:** `grpc-server:50059` (internal, via Envoy)
+- **Profiles:** `all, auth, cache, report, scheduler, storage, vue`
+- **Access:** `adempiere-grpc-server:50059` (internal, via Envoy)
 - **Dependencies:** PostgreSQL, OpenSearch, Kafka, S3
 - **Health Check:** 120s startup, 30s interval, 10s timeout
 - **Memory:** Java service (2-4GB recommended)
@@ -141,17 +141,17 @@ For detailed architecture information including health checks and dependencies, 
 - **Container Name:** `adempiere-ui-gateway.dictionary-rs`
 - **Image:** `ghcr.io/adempiere/dictionary-rs:1.6.5`
 - **Purpose:** High-performance dictionary service written in Rust
-- **Profiles:** All (core service)
+- **Profiles:** `all, cache`
 - **Access:** `dictionary-rs:50051` (internal, via Envoy)
 - **Dependencies:** PostgreSQL, OpenSearch
 - **Health Check:** 90s startup, 30s interval, 10s timeout
 
 ### Processor Service
-- **Service Name:** `adempiere-processor-service`
+- **Service Name:** `adempiere-processor`
 - **Container Name:** `adempiere-ui-gateway.processor`
 - **Image:** `marcalwestf/adempiere-processors-service:alpine-1.1.18`
 - **Purpose:** Background job execution and scheduled tasks
-- **Profiles:** `standard`, `develop`
+- **Profiles:** `all, scheduler`
 - **Access:** Internal only (no external ports)
 - **Dependencies:** PostgreSQL, gRPC Server, Kafka
 - **Health Check:** 120s startup, 30s interval, 10s timeout
@@ -162,22 +162,22 @@ For detailed architecture information including health checks and dependencies, 
 ## Proxy & Gateway Services
 
 ### Envoy gRPC Proxy
-- **Service Name:** `envoy-proxy-service`
+- **Service Name:** `grpc-proxy`
 - **Container Name:** `adempiere-ui-gateway.envoy-grpc-proxy`
 - **Image:** `envoyproxy/envoy:v1.37.0`
 - **Purpose:** gRPC to HTTP/REST transcoding proxy
-- **Profiles:** All (core service)
-- **Access:** `envoy:8080` (internal, via nginx)
+- **Profiles:** `all, auth, cache, report, scheduler, storage, vue`
+- **Access:** `grpc-proxy:8080` (internal, via nginx)
 - **Dependencies:** gRPC Server, Dictionary Service
 - **Health Check:** 30s startup, 30s interval, 10s timeout
 - **Configuration:** `envoy/envoy.yaml`
 
 ### nginx API Gateway
-- **Service Name:** `nginx-ui-gateway`
+- **Service Name:** `ui-gateway`
 - **Container Name:** `adempiere-ui-gateway.nginx-ui-gateway`
 - **Image:** `nginx:1.27.0-alpine3.19`
 - **Purpose:** Reverse proxy and API gateway (single entry point)
-- **Profiles:** All (core service)
+- **Profiles:** `all, auth, cache, report, scheduler, storage, vue, zk`
 - **Access:** `http://${HOST_IP}:80` (main entry point)
 - **Routes:**
   - `/` → Landing page
@@ -187,7 +187,7 @@ For detailed architecture information including health checks and dependencies, 
   - Various monitoring tool routes
 - **Dependencies:** All UI and backend services
 - **Health Check:** 30s startup, 10s interval, 5s timeout
-- **Configuration:** `nginx/nginx.conf`, `nginx/api_gateway.conf`
+- **Configuration:** `nginx/nginx.conf`, `nginx/gateway/api_gateway.conf`
 
 ---
 
@@ -198,16 +198,16 @@ For detailed architecture information including health checks and dependencies, 
 - **Container Name:** `adempiere-ui-gateway.site`
 - **Image:** `ghcr.io/adempiere/adempiere-landing-page:alpine-1.0.4`
 - **Purpose:** Welcome page with navigation to UIs
-- **Profiles:** All (core service)
+- **Profiles:** `all`
 - **Access:** `http://${HOST_IP}/` (via nginx)
 - **Health Check:** 30s startup, 10s interval, 5s timeout
 
 ### ADempiere ZK UI (Classic)
-- **Service Name:** `adempiere-zk-service`
+- **Service Name:** `adempiere-zk`
 - **Container Name:** `adempiere-ui-gateway.zk`
 - **Image:** `marcalwestf/adempiere-shw-zk:jetty-3.9.4.001-shw-1.1.48`
 - **Purpose:** Traditional Java-based web UI (ZK framework)
-- **Profiles:** `standard`, `develop`, `zk`
+- **Profiles:** `all, auth, report, scheduler, zk`
 - **Access:** `http://${HOST_IP}/webui` (via nginx)
 - **Dependencies:** gRPC Server, PostgreSQL
 - **Health Check:** 120s startup, 30s interval, 10s timeout
@@ -215,11 +215,11 @@ For detailed architecture information including health checks and dependencies, 
 - **Data Persistence:** `postgresql/persistent_files/` (shared files)
 
 ### ADempiere Vue UI (Modern)
-- **Service Name:** `adempiere-vue-service`
-- **Container Name:** `adempiere-ui-gateway.vue`
+- **Service Name:** `vue-ui`
+- **Container Name:** `adempiere-ui-gateway.vue-ui`
 - **Image:** `marcalwestf/adempiere-vue:0.0.8`
 - **Purpose:** Modern Vue.js-based web UI
-- **Profiles:** `vue`, `develop`
+- **Profiles:** `all, auth, cache, report, scheduler, storage, vue`
 - **Access:** `http://${HOST_IP}/vue` (via nginx)
 - **Dependencies:** Envoy proxy (gRPC services)
 - **Health Check:** 60s startup, 30s interval, 10s timeout
@@ -229,11 +229,11 @@ For detailed architecture information including health checks and dependencies, 
 ## Monitoring & Management
 
 ### DKron Scheduler
-- **Service Name:** `scheduler-dkron`
+- **Service Name:** `dkron-scheduler`
 - **Container Name:** `adempiere-ui-gateway.scheduler-dkron`
 - **Image:** `dkron/dkron:3.2.7`
 - **Purpose:** Distributed job scheduler and monitor
-- **Profiles:** `standard`, `develop`
+- **Profiles:** `all, scheduler`
 - **Access:** `http://${HOST_IP}:8899`
 - **Health Check:** 30s startup, 30s interval, 10s timeout
 - **Use Cases:** Scheduled reports, data synchronization, cleanup tasks
@@ -245,11 +245,11 @@ For detailed architecture information including health checks and dependencies, 
 ## Optional Services
 
 ### Keycloak (Identity & Access Management)
-- **Service Name:** `keycloak-service`
-- **Container Name:** `adempiere-ui-gateway.keycloak`
+- **Service Name:** `keycloak`
+- **Container Name:** `adempiere-ui-gateway.keycloak-service`
 - **Image:** `keycloak/keycloak:23.0.7`
 - **Purpose:** Single Sign-On (SSO) and identity management
-- **Profiles:** `auth` (optional authentication stack)
+- **Profiles:** `all, auth`
 - **Access:** `http://${HOST_IP}:8080`
 - **Default Credentials:** admin/admin
 - **Dependencies:** PostgreSQL (separate database)
@@ -275,7 +275,7 @@ All services are accessed via the `HOST_IP` variable defined in `env_template.en
 | **MinIO Console** | `http://${HOST_IP}:9090` | 9090 | minioadmin/minioadmin |
 | **DKron Scheduler** | `http://${HOST_IP}:8899` | 8899 | Job scheduling |
 | **Keycloak** | `http://${HOST_IP}:8080` | 8080 | admin/admin (auth profile) |
-| **PostgreSQL** | `${HOST_IP}:55432` | 55432 | postgres/postgres (develop mode only) |
+| **PostgreSQL** | `${HOST_IP}:55432` | 55432 | postgres/postgres |
 
 ### Examples
 
@@ -295,71 +295,85 @@ If `HOST_IP=erp.example.com`:
 
 Different service combinations can be started using stack profiles. For complete details on starting stacks, see [Quick Start Guide](./quickstart.md).
 
-### Default/Standard Profile
-**Command:** `./start-all.sh` or `./start-all.sh -d default`
+### `all` (Default)
+**Command:** `./start-all.sh` or `./start-all.sh -d all`
 
-**Services included:**
-- Infrastructure: PostgreSQL, Zookeeper
-- Data & Messaging: OpenSearch, Kafka, Kafdrop, MinIO
-- Backend: gRPC Server, Dictionary, Processor
-- Proxy: Envoy, nginx
-- UI: Landing page, ZK UI
-- Monitoring: DKron
+**Services included:** All services — PostgreSQL, Zookeeper, Kafka, Kafdrop, OpenSearch (+Dashboards), MinIO S3, gRPC Server, Dictionary-RS, Processor, Envoy, nginx, Landing Page, ZK UI, Vue UI, DKron, Keycloak
 
-**Use case:** Production deployment with classic ZK interface
+**Use case:** Full stack deployment with all features enabled
 
-### Develop Profile
-**Command:** `./start-all.sh -d develop`
-
-**Additional services/features:**
-- Exposes PostgreSQL on port 55432 for external access
-- Includes OpenSearch Dashboards (port 5601)
-- All monitoring tools enabled
-- Additional debug ports exposed
-
-**Use case:** Development and debugging
-
-### Vue Profile
-**Command:** `./start-all.sh -d vue`
-
-**Services included:**
-- Minimal backend services (PostgreSQL, gRPC, Dictionary, Envoy)
-- Vue UI only (no ZK UI)
-- No monitoring tools
-
-**Use case:** Testing Vue interface with minimal resource usage
-
-### Auth Profile
+### `auth`
 **Command:** `./start-all.sh -d auth`
 
-**Additional services:**
-- All standard services
-- Keycloak identity management
-- SSO configuration
+**Services included:**
+- Infrastructure: PostgreSQL
+- Backend: gRPC Server, Envoy
+- UI: nginx, ZK UI, Vue UI
+- Auth: Keycloak
 
 **Use case:** Deployments requiring LDAP/AD integration or SSO
 
-### Cache Profile
+### `cache`
 **Command:** `./start-all.sh -d cache`
 
 **Services included:**
-- PostgreSQL
-- OpenSearch + Dashboards
-- Dictionary service
-- Minimal stack for testing dictionary cache
+- Infrastructure: PostgreSQL, Zookeeper
+- Data: Kafka, Kafdrop, OpenSearch (+setup +Dashboards)
+- Backend: gRPC Server, Dictionary-RS, Envoy
+- UI: nginx, Vue UI
 
 **Use case:** Testing and debugging OpenSearch dictionary caching
 
-### Storage Profile
+### `report`
+**Command:** `./start-all.sh -d report`
+
+**Services included:**
+- Infrastructure: PostgreSQL
+- Backend: gRPC Server, Envoy
+- UI: nginx, ZK UI, Vue UI
+
+**Use case:** Report generation with minimal services
+
+### `scheduler`
+**Command:** `./start-all.sh -d scheduler`
+
+**Services included:**
+- Infrastructure: PostgreSQL
+- Backend: gRPC Server, Processor, Envoy
+- UI: nginx, ZK UI, Vue UI
+- Monitoring: DKron
+
+**Use case:** Background job processing and scheduled tasks
+
+### `storage`
 **Command:** `./start-all.sh -d storage`
 
 **Services included:**
-- PostgreSQL
-- MinIO S3 storage
-- gRPC Server
-- Minimal stack for testing file storage
+- Infrastructure: PostgreSQL
+- Data: MinIO S3
+- Backend: gRPC Server, Envoy
+- UI: nginx, Vue UI
 
 **Use case:** Testing and debugging S3 file operations
+
+### `vue`
+**Command:** `./start-all.sh -d vue`
+
+**Services included:**
+- Infrastructure: PostgreSQL
+- Backend: gRPC Server, Envoy
+- UI: nginx, Vue UI (no ZK UI)
+
+**Use case:** Testing Vue interface with minimal resource usage
+
+### `zk`
+**Command:** `./start-all.sh -d zk`
+
+**Services included:**
+- Infrastructure: PostgreSQL
+- UI: nginx, ZK UI
+
+**Use case:** Minimal classic ZK UI stack
 
 ---
 
@@ -423,4 +437,3 @@ For a detailed view of service dependencies and startup order, see the [Architec
 ---
 
 [Back to README](../README.md) | [Previous: Installation](./installation.md) | [Next: Security](./security.md)
-
