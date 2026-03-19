@@ -1,10 +1,9 @@
 
 ## Additional Info
 
-This service just exposes the port `80`. You should configure to use `api.adempiere.io` (for linux just add this domain to `/etc/hosts`).
-Or: change the variable HOST_IP in file env_template.env and .env.
+The stack exposes port `80`. The main service responding to all requests is `nginx` (service `ui-gateway`).
 
-The main service responding to all request a `nginx`.
+Set the `HOST_IP` variable in `env_template.env` (or `override.env`) to your server's IP or domain name. Alternatively, add a local alias to `/etc/hosts`:
 
 ```
 nano /etc/hosts
@@ -16,7 +15,7 @@ nano /etc/hosts
 
 ### Request using transcoding
 
-This request use the `nginx` + `envoy` + `adempiere-grpc-server` using [transcoding](https://cloud.google.com/endpoints/docs/grpc/transcoding).
+This request uses `nginx` (`ui-gateway`) + Envoy (`grpc-proxy`) + `adempiere-grpc-server` with [gRPC transcoding](https://cloud.google.com/endpoints/docs/grpc/transcoding).
 
 The base URL is `/api/`
 
@@ -32,36 +31,6 @@ curl --location 'http://api.adempiere.io/api/security/services'
     "services": []
 }
 ```
-
-### Request using legacy node server
-
-This request use the `nginx` + `proxy-adempierer-api` using default `http`
-
-The base URL is `/api/`
-
-**Example Request**
-
-```Shell
-curl --location 'http://api.adempiere.io/api/user/open-id/services'
-```
-
-**Response**
-```json
-{
-    "code": 200,
-    "result": []
-}
-```
-
-Error response format
-```json
-{
-    "code": 1,
-    "message": "",
-    "details": []
-}
-```
-
 
 ---
 
