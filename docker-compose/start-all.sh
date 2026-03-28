@@ -64,11 +64,11 @@ fi
 
 # 2 set profiles
 PROFILES="all"
-if [ -n $1 ] && [ ! -z $1 ]; then
-    PROFILES=$1
+if [ -n "$1" ] && [[ "$1" != -* ]]; then
+    PROFILES="$1"
 fi
 echo "Profiles: \"$PROFILES\""
-export $PROFILES
+export PROFILES
 
 
 # # `--detach` / `-d` run Docker Compose services in the background
