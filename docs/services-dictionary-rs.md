@@ -2,15 +2,14 @@
 
 ## Abstract Overview
 
-`dictionary-rs` is a high-performance caching layer for ADempiere's application dictionary. It
-intercepts dictionary change events published by ADempiere to Kafka, stores the resulting data in
-OpenSearch, and answers REST queries directly from the cache — bypassing the Java gRPC server for
-these lookups. This reduces response time from approximately 1 second (Java gRPC path) to
+`dictionary-rs` is a high-performance caching layer for ADempiere's application dictionary.  
+It intercepts dictionary change events published by ADempiere to Kafka, stores the resulting data in OpenSearch, and answers REST queries directly from the cache — bypassing the Java gRPC server for these lookups.  
+This reduces response time from approximately 1 second (Java gRPC path) to
 approximately 47 ms.
 
-The service is written in Rust and exposes a REST API. It has no persistent state of its own:
-OpenSearch is its store, and Kafka is its change feed. If the OpenSearch index is lost or
-corrupted, ADempiere republishes the relevant topics and the cache is rebuilt automatically.
+The service is written in Rust and exposes a REST API.  
+It has no persistent state of its own: OpenSearch is its store, and Kafka is its change feed.  
+If the OpenSearch index is lost or corrupted, ADempiere republishes the relevant topics and the cache is rebuilt automatically.
 
 ---
 
@@ -19,10 +18,9 @@ corrupted, ADempiere republishes the relevant topics and the cache is rebuilt au
 ### Role in the Stack
 
 In the ADempiere UI Gateway, the frontend (Vue or ZK) needs to load window, form, process,
-browser, and menu definitions every time a user opens a screen. These definitions come from
-ADempiere's application dictionary (AD_Window, AD_Form, AD_Process, etc.). Loading them through
-the Java gRPC server on every request is slow (~1 s). `dictionary-rs` provides a fast read path
-(~47 ms) by serving these definitions from an OpenSearch index.
+browser, and menu definitions every time a user opens a screen.  
+These definitions come from ADempiere's application dictionary (AD_Window, AD_Form, AD_Process, etc.).  
+Loading them through the Java gRPC server on every request is slow (~1 s). `dictionary-rs` provides a fast read path (~47 ms) by serving these definitions from an OpenSearch index.
 
 ```
 ADempiere (Java) ──Kafka──► dictionary-rs ──► OpenSearch (index)
@@ -107,6 +105,32 @@ Menu items are indexed per language, client, role, and optionally user:
 
 `dictionary-rs` is only active in the `cache` and `all` profiles. If the stack is started with a
 profile that omits it (e.g. `vue` only), dictionary requests fall back to the Java gRPC server.
+
+### Updating the Image
+
+Updating `dictionary-rs` to a new version **does not require restarting ADempiere or clearing the
+OpenSearch cache**. The procedure is:
+
+1. Update `DICTIONARY_RS_IMAGE` in `docker-compose/env_template.env`.
+2. Restart only the `dictionary-rs` container:
+   ```bash
+   cd docker-compose
+   docker compose pull dictionary-rs
+   docker compose up -d --no-deps dictionary-rs
+   ```
+
+**Why no other action is needed:**
+- OpenSearch data lives in its own Docker volume — it is unaffected by restarting `dictionary-rs`.
+- Kafka retains messages (default: 7 days). On reconnect, `dictionary-rs` resumes from its stored
+  consumer group offset and processes any messages that arrived during the downtime automatically.
+- No other container in the stack depends on `dictionary-rs` being restarted.
+
+**Exception — index schema change:** If the release notes for the new version mention a breaking
+change to the OpenSearch index structure, the indices must be cleared before restarting. In that
+case follow the Cache Rebuild procedure below. ADempiere itself still does not need to be
+restarted — Kafka retains the messages and `dictionary-rs` will re-index them on startup.
+
+---
 
 ### Cache Rebuild
 

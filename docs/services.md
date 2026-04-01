@@ -140,7 +140,8 @@ For detailed architecture information including health checks and dependencies, 
 - **Service Name:** `dictionary-rs`
 - **Container Name:** `adempiere-ui-gateway.dictionary-rs`
 - **Image:** `ghcr.io/adempiere/dictionary-rs:1.6.5`
-- **Purpose:** High-performance caching layer for ADempiere's application dictionary (windows, forms, processes, browsers, menus, roles). Consumes dictionary change events from Kafka, indexes them in OpenSearch, and serves REST queries from the cache — bypassing the Java gRPC server for these lookups (~47 ms vs ~1 s).
+- **Purpose:** High-performance caching layer for ADempiere's application dictionary (windows, forms, processes, browsers, menus, roles).  
+  Consumes dictionary change events from Kafka, indexes them in OpenSearch, and serves REST queries from the cache — bypassing the Java gRPC server for these lookups (~47 ms vs ~1 s).
 - **Profiles:** `all, cache`
 - **Access:** `dictionary-rs:50051` (internal, via Envoy)
 - **Dependencies:** PostgreSQL, OpenSearch, Kafka
