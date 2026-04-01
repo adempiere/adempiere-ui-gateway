@@ -119,16 +119,16 @@ OpenSearch cache**. The procedure is:
    docker compose up -d --no-deps dictionary-rs
    ```
 
-**Why no other action is needed:**
-- OpenSearch data lives in its own Docker volume — it is unaffected by restarting `dictionary-rs`.
-- Kafka retains messages (default: 7 days). On reconnect, `dictionary-rs` resumes from its stored
-  consumer group offset and processes any messages that arrived during the downtime automatically.
-- No other container in the stack depends on `dictionary-rs` being restarted.
+**Why no other action is needed:**  
+- OpenSearch data lives in its own Docker volume — it is unaffected by restarting `dictionary-rs`.  
+- Kafka retains messages (default: 7 days).  
+- On reconnect, `dictionary-rs` resumes from its stored consumer group offset and processes any messages that arrived during the downtime automatically.  
+- No other container in the stack depends on `dictionary-rs` being restarted.  
 
-**Exception — index schema change:** If the release notes for the new version mention a breaking
-change to the OpenSearch index structure, the indices must be cleared before restarting. In that
-case follow the Cache Rebuild procedure below. ADempiere itself still does not need to be
-restarted — Kafka retains the messages and `dictionary-rs` will re-index them on startup.
+**Exception — index schema change:**  
+- If the release notes for the new version mention a breaking change to the OpenSearch index structure, the indices must be cleared before restarting.  
+- In that case follow the Cache Rebuild procedure below.  
+- ADempiere itself still does not need to be restarted — Kafka retains the messages and `dictionary-rs` will re-index them on startup.
 
 ---
 
