@@ -154,10 +154,13 @@ For detailed architecture information including health checks and dependencies, 
 - **Image:** `marcalwestf/adempiere-processors-service:alpine-1.1.18`
 - **Purpose:** Background job execution and scheduled tasks
 - **Profiles:** `all, scheduler`
-- **Access:** Internal only (no external ports)
+- **Access:** Port **8899** (DKron Envoy Process Monitor)
 - **Dependencies:** PostgreSQL, gRPC Server, Kafka
 - **Health Check:** 120s startup, 30s interval, 10s timeout
 - **Security Note:** Never expose this service externally (see [Security](./security.md))
+
+**DKron Envoy Process Monitor**
+![26-DKron-Browser png](https://github.com/user-attachments/assets/01bf6316-89fd-4c4b-b309-49f08e20263b)
 
 ---
 
