@@ -151,7 +151,7 @@ For detailed architecture information including health checks and dependencies, 
 ### Processor Service
 - **Service Name:** `adempiere-processor`
 - **Container Name:** `adempiere-ui-gateway.processor`
-- **Image:** `marcalwestf/adempiere-processors-service:alpine-1.1.18`
+- **Image:** `marcalwestf/adempiere-processors-service:alpine-1.1.19`
 - **Purpose:** Background job execution and scheduled tasks
 - **Profiles:** `all, scheduler`
 - **Access:** Port **8899** (DKron Envoy Process Monitor)
