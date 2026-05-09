@@ -214,14 +214,103 @@ You may create roles, schemas, etc.
 
 This might take some time, depending on your bandwith and the size of the restore file.
 
-### 6. Stop All Services That Were Started With Script start-all.sh
+### 6. Post-Installation: Initialize the Vue Menu
+
+> **This step is mandatory after every fresh installation or database restore.**
+> Without it, the Vue UI (`/vue`) will show a truncated menu with folder nodes only — no windows, processes, or reports.
+
+**Why this is needed:** `dictionary-rs` subscribes to Kafka topics at startup. On a fresh installation the topics do not exist yet, so `dictionary-rs` misses the initial rebalance. After the export creates the topics, `dictionary-rs` must be restarted so it can subscribe and consume correctly.
+
+#### Step 6a — Delete any stale OpenSearch menu indices
+
+```bash
+cd /opt/development/adempiere-ui-gateway/docker-compose
+
+# Allow wildcard deletion (required by OpenSearch)
+sudo docker exec adempiere-ui-gateway.opensearch \
+  curl -s -X PUT 'http://localhost:9200/_cluster/settings' \
+  -H 'Content-Type: application/json' \
+  -d '{"persistent":{"action.destructive_requires_name":false}}'
+
+# Delete all menu indices
+sudo docker exec adempiere-ui-gateway.opensearch \
+  curl -s -X DELETE 'http://localhost:9200/menu*'
+```
+
+#### Step 6b — Export Application Dictionary in ZK
+
+Open **http://\<HOST_IP\>/webui** → log in → go to:
+**System Admin → Application Dictionary → Export Application Dictionary**
+
+Enable **all** of the following in a **single run**:
+
+| Option | Notes |
+|--------|-------|
+| ✅ Export Tree | Critical — easy to forget |
+| ✅ Export Menu / Menu Items | |
+| ✅ Export Windows | |
+| ✅ Export Processes | |
+| ✅ Export Browsers | |
+| ✅ Export Forms | |
+| ✅ Export Roles | |
+
+> **"Commit Failed" message:** If the export ends with `** Created XXXX Commit Failed.`, this is **cosmetic**. The Kafka messages are sent before the final database commit. The data is in Kafka. Verify with:
+> ```bash
+> sudo docker exec adempiere-ui-gateway.kafka \
+>   kafka-topics --bootstrap-server localhost:9092 --list
+> ```
+> All 7 topics must appear: `browser`, `form`, `menu_item`, `menu_tree`, `process`, `role`, `window`.
+
+Do **not** restart the stack after the export — `dictionary-rs` must be running to consume the messages.
+
+#### Step 6c — Restart dictionary-rs
+
+```bash
+sudo docker restart adempiere-ui-gateway.dictionary-rs
+```
+
+#### Step 6d — Wait for consumption to complete
+
+```bash
+sudo docker container logs -f adempiere-ui-gateway.dictionary-rs 2>&1 | grep -v 'Offsets committed'
+```
+
+Wait until the `menu_item` indices appear and stabilize in OpenSearch (takes ~10–15 minutes; `menu_item` is the largest topic with ~1000 messages):
+
+```bash
+sudo docker exec adempiere-ui-gateway.opensearch \
+  curl -s 'http://localhost:9200/_cat/indices?v' | grep 'menu_item'
+```
+
+Expected result when done (doc counts stable, no longer increasing):
+- `menu_item_en_us` / `menu_item_es_sv`: ~1000 docs each
+- `menu_tree`: ~6 docs
+- `role_*` indices: present
+
+#### Step 6e — Reload nginx
+
+```bash
+sudo docker exec adempiere-ui-gateway.nginx-ui-gateway nginx -s reload
+```
+
+This forces nginx to re-resolve the `dictionary-rs` hostname after the restart.
+
+#### Step 6f — Verify
+
+Open **http://\<HOST_IP\>/vue**, log in, and confirm the full menu appears with windows, processes, and reports.
+
+If the menu is still incomplete, see [troubleshooting.md — Vue Menu Empty After Database Restore](./troubleshooting.md#vue-menu-empty-after-database-restore).
+
+---
+
+### 7. Stop All Services That Were Started With Script start-all.sh
 To stop all Docker containers that were started with script `start-all.sh`, just execute:
 ```Shell
 cd docker-compose
 ./stop-all.sh
 ```
 
-### 7. Delete All Docker Objects
+### 8. Delete All Docker Objects
 Sometimes, due to different reasons, you need to undo everything you have created on Docker and start anew. This is mostly in development, not in production.
 Then:
 - All Docker containers must be shut down.
@@ -237,12 +326,12 @@ cd docker-compose
 ```
 **Be very careful when using this script, because it will delete all Docker objects you have!**
 
-### 8. Database Access
+### 9. Database Access
 Connect to database via port **55432** with a DB connector, e.g. PGAdmin.
 Or to the port the variable `POSTGRES_EXTERNAL_PORT` points in file `env_template.env`.
 It is recommendable to configure the PGAdmin access with ssh certification.
 
-### 9. PGAdmin Access with ssh certificate
+### 10. PGAdmin Access with ssh certificate
 First step: generate a ssh certificate for a host's user and deploy it on the host
 
 PGAdmin Server Configuration
