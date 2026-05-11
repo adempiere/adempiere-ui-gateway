@@ -2,7 +2,12 @@
 
 This document describes all services available in the ADempiere UI Gateway stack, organized by category and stack profile.
 
+> **Accessing services remotely?**  
+> When running on a cloud server, use an SSH tunnel instead of opening firewall ports.  
+> See **[Remote Access via SSH Tunnel](./remote-access.md)** for the complete guide.
+
 ## Table of Contents
+- [Remote Access via SSH Tunnel](./remote-access.md) ← start here for cloud deployments
 - [Service Categories](#service-categories)
 - [Infrastructure Services](#infrastructure-services)
 - [Data & Messaging Services](#data--messaging-services)
