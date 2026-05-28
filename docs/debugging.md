@@ -795,6 +795,7 @@ See [Troubleshooting - Performance Issues](./troubleshooting.md#performance-issu
 - **[Services Documentation](./services.md)** - Complete service reference
 - **[Backup and Restore Guide](./backup-restore.md)** - Database operations
 - **[System Requirements](./system-requirements.md)** - Resource planning
+- **[Kafka Debugging Guide](./debugging-kafka.md)** - Kafka CLI testing (topics, produce, consume, consumer groups)
 - **Scripts README (TODO: not yet available)** - Diagnostic script documentation
 
 ---
