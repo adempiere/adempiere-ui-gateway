@@ -89,6 +89,53 @@ Open in a browser:
 
 Replace `<HOST_IP>` with the value you set for `HOST_IP` in your configuration.
 
+### Verify All Services (CLI)
+
+To check the status of every service from the command line, run the health check script from the `docker-compose/` directory:
+
+```bash
+./health-check.sh
+```
+
+The script checks all containers (running status and health) and probes the HTTP endpoint of each service. It reports results with clear pass/fail indicators and exits with code `1` if any check fails.
+
+Example output:
+
+```
+═══════════════════════════════════════════════════════════
+  ADempiere UI Gateway — Service Health Check
+  Project : adempiere-ui-gateway
+  Date    : 2026-06-06 07:49:40
+═══════════════════════════════════════════════════════════
+
+─── 1. Infrastructure ──────────────────────────────────────
+  PostgreSQL                                        ✅  running · healthy
+  Kafka                                             ✅  running · healthy
+  OpenSearch                                        ✅  running · healthy
+  MinIO S3 Client (init)                            ✅  exited cleanly (init container — expected)
+  ...
+
+─── 5. HTTP Endpoint Checks ────────────────────────────────
+  Nginx (root)                                      ✅  HTTP 200  →  http://192.168.100.18:80/
+  Vue UI  (via nginx /vue)                          ✅  HTTP 200  →  http://192.168.100.18:80/vue
+  ZK UI   (via nginx /webui)                        ✅  HTTP 302  →  http://192.168.100.18:80/webui
+  Dictionary RS                                     ✅  HTTP 200  →  http://192.168.100.19:7878/
+  ...
+
+═══════════════════════════════════════════════════════════
+  ✅  Passed  : 31
+  ❌  Failed  : 0
+  ⚠️   Warnings: 0
+  ─────────────────────
+  Total   : 31
+═══════════════════════════════════════════════════════════
+```
+
+**Notes:**
+- Init containers (`s3-client`, `opensearch-setup`) are expected to show `exited cleanly` — this is normal.
+- HTTP checks use each container's internal Docker network IP, so the script works correctly regardless of the host's LAN IP or network location.
+- The script auto-detects whether `sudo` is required for Docker commands.
+
 ---
 
 ### Frequently Asked Questions
