@@ -24,6 +24,7 @@ This guide helps you diagnose and resolve common issues with the ADempiere UI Ga
   - [Can't Access Application (Port 80)](#cant-access-application-port-80)
   - [Can't Access ZK UI or Vue UI](#cant-access-zk-ui-or-vue-ui)
   - [Internal Container Communication Issues](#internal-container-communication-issues)
+  - [Services fail to start or return 502 when host has multiple active network interfaces (dual NIC)](#services-fail-to-start-or-return-502-when-host-has-multiple-active-network-interfaces-dual-nic)
 - [Performance Issues](#performance-issues)
   - [Slow Startup Times](#slow-startup-times)
   - [Slow Application Response](#slow-application-response)
@@ -598,6 +599,47 @@ docker exec adempiere-ui-gateway.vue-ui ping adempiere-grpc-server
 # From any container to postgres
 docker exec adempiere-ui-gateway.vue-ui nc -zv postgresql-service 5432
 ```
+
+### Services fail to start or return 502 when host has multiple active network interfaces (dual NIC)
+
+**Symptoms:**
+- One or more services return HTTP 502 (Bad Gateway) even though their container shows `running`
+- A service's logs show a repeated startup loop (e.g. Jetty scanning a WAR file every second without deploying it)
+- The stack appears healthy at the container level but inter-container communication silently fails
+
+**Cause:**
+
+Docker relies on the host's Linux routing table and `iptables` rules to forward traffic over its internal bridge network. When the host has two active network interfaces (e.g. both WiFi and a wired ethernet cable connected simultaneously), competing default routes and ambiguous `iptables` rules can cause Docker bridge traffic to be misrouted. Container-to-container connections — such as a web application container trying to reach the database container — fail or time out, preventing services from initialising correctly.
+
+**Example failure chain (observed with ADempiere ZK):**
+
+1. The host had both WiFi and cable active, creating two default routes.
+2. ZK (Jetty) started but could not reach PostgreSQL over the Docker bridge due to routing ambiguity.
+3. Without a working database connection, Jetty could not deploy `webui.war` and entered a scan loop, logging `scan accepted webui.war` every second indefinitely.
+4. Nginx proxied `/webui` to ZK, but since Jetty's HTTP server never started, nginx returned **502 Bad Gateway**.
+
+**Fix:**
+
+Disable all network interfaces except the one used for the LAN. On Linux, deactivate the unused interface:
+
+```bash
+# Identify active interfaces
+ip link show
+
+# Bring down the unused one (e.g. WiFi)
+sudo ip link set wlan0 down
+# or via NetworkManager:
+nmcli device disconnect wlan0
+```
+
+Then stop and restart the full stack:
+
+```bash
+sudo ./stop-and-delete-all.sh
+sudo ./start-all.sh
+```
+
+With a single active interface, Docker's bridge routing is unambiguous and all services start correctly.
 
 ---
 
