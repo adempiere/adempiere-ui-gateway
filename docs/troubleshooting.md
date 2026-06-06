@@ -18,6 +18,7 @@ This guide helps you diagnose and resolve common issues with the ADempiere UI Ga
   - [Understanding Timezone Configuration](#understanding-timezone-configuration)
 - [Container Start/Stop Issues](#container-startstop-issues)
   - [Containers Won't Start](#containers-wont-start)
+  - [Image Pull Interrupted by TCP Connection Reset](#4-image-pull-interrupted-by-tcp-connection-reset)
   - [Containers Keep Restarting](#containers-keep-restarting)
 - [Network and Access Issues](#network-and-access-issues)
   - [Can't Access Application (Port 80)](#cant-access-application-port-80)
@@ -460,6 +461,22 @@ Error: pull access denied for openls/dictionary-rs, repository does not exist
 - Verify image name in `env_template.env`
 - Check if image exists on Docker Hub
 - Try manual pull: `docker pull <image-name>:<tag>`
+
+#### 4. Image Pull Interrupted by TCP Connection Reset
+
+```
+failed to copy: read tcp <uuid>:<port> -> <uuid>:443: read: connection reset by peer
+```
+
+This is a network reliability issue (unstable router or connection) that drops large image downloads mid-transfer. Docker caches already-downloaded layers, so each retry continues from where it left off rather than starting over.
+
+Use this retry loop — it re-runs the pull automatically until all images are fully downloaded:
+
+```bash
+until sudo docker compose pull --no-parallel; do echo "Pull interrupted, retrying in 5 seconds..."; sleep 5; done
+```
+
+`--no-parallel` pulls one image at a time, reducing connection load and making interrupted downloads easier to resume. Once the loop exits cleanly, start the stack normally.
 
 ### Containers Keep Restarting
 
