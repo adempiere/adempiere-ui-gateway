@@ -608,6 +608,7 @@ services:
 
   dictionary-rs:
     image: ${DICTIONARY_RS_IMAGE}
+    platform: linux/amd64/v2
     container_name: ${DICTIONARY_RS_CONTAINER_NAME}
     hostname: ${DICTIONARY_RS_HOSTNAME}
     depends_on:
