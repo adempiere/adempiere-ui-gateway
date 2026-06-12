@@ -504,6 +504,72 @@ return convertToNumber(currentOrder.value.refund_amount) === 0  // was !==
 
 ---
 
+## 🏗️ Deployment: Correct Path and Configuration
+
+### nginx proxy chain
+
+```
+Browser → nginx-ui-gateway (/vue/*) → vue-ui (/) → /usr/share/nginx/html/
+```
+
+`nginx-ui-gateway` strips the `/vue` prefix before forwarding to `vue-ui`.
+The `vue-ui` container serves files from `/usr/share/nginx/html/` (its nginx
+root), not from any subdirectory.
+
+### Correct deploy command
+
+```bash
+docker cp dist/. adempiere-ui-gateway.vue-ui:/usr/share/nginx/html/
+```
+
+### publicPath must be `/vue/`
+
+In `config/default.json` the `publicPath` must be `/vue/` so the browser
+requests assets from `/vue/static/…`, which nginx routes correctly:
+
+```json
+"server": {
+  "publicPath": "/vue/"
+}
+```
+
+Any other value causes an empty frame — the browser requests assets from a
+path nginx does not route.
+
+### Webpack build cache
+
+If the compiled JS hash is unchanged after editing source files, webpack
+reused its persistent cache. Clear it and rebuild:
+
+```bash
+rm -rf node_modules/.cache
+NODE_OPTIONS=--openssl-legacy-provider yarn build:prod
+```
+
+### Service worker: bypasses even hard refresh
+
+The Vue build registers a service worker (SW) that precaches all JS/CSS files
+and `index.html`. It intercepts every browser request — including Ctrl+Shift+R
+— and serves the stale cached version. A new deployment is completely
+invisible until the SW is cleared.
+
+**One-time fix per browser:**
+1. DevTools → **Application** → **Service Workers** → **Unregister**
+2. **Storage** → **Clear site data**
+3. Hard refresh
+
+**Fastest alternative during debugging:** Chrome/Opera incognito window
+(`Ctrl+Shift+N`). Private windows carry no registered SWs.
+
+### `docker cp` changes are lost on container recreate
+
+`docker cp` changes survive `docker stop`/`start` and `docker restart`.
+They do **not** survive a container recreate (`docker-compose down && up`,
+full stack restart). After any recreate the container reverts to its image —
+redeploy all `docker cp` changes before testing.
+
+---
+
 ## Related Documentation
 
 - **Backend debugging**: [debugging-backend-stack.md](./debugging-backend-stack.md) - Tracing errors through nginx/envoy/gRPC/database stack
