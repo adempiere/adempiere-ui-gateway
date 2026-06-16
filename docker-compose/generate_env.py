@@ -70,6 +70,25 @@ def parse_env(path: Path):
 
 _var_pattern = re.compile(r'\$(?:\{([^}]+)\}|([A-Za-z_][A-Za-z0-9_]*))')
 
+REQUIRED_SENTINEL = '__CHANGE_ME__'
+
+
+def check_required(resolved: dict) -> None:
+    """Abort if any value is still the required-but-unset sentinel.
+
+    Some values (e.g. container timezone) must never silently fall back to a
+    default — a wrong timezone produces wrong record timestamps that nobody
+    notices until it's an audit/compliance problem. Failing loudly here beats
+    failing silently at runtime.
+    """
+    unset = sorted(k for k, v in resolved.items() if v == REQUIRED_SENTINEL)
+    if unset:
+        print('ERROR: the following required values must be set in override.env '
+              'before generating .env:', file=sys.stderr)
+        for k in unset:
+            print(f'  {k}', file=sys.stderr)
+        sys.exit(1)
+
 
 def substitute_once(value: str, mapping: dict) -> str:
     def repl(m):
@@ -123,6 +142,7 @@ def main():
     merged = base.copy()
     merged.update(override)
     resolved = resolve_mapping(merged)
+    check_required(resolved)
 
     out_lines = []
     def _format_value(v: str) -> str:

@@ -443,14 +443,13 @@ The actual version is defined in file *env_template.env*.
 | NGINX UI Gateway                    | nginx                                                         | 1.27.0-alpine3.19                     |
 | Envoy gRPC Proxy                    | envoyproxy/envoy                                              | v1.37.0                               |
 | Keycloak ID & Access Management     | keycloak/keycloak                                             | 23.0.7                                |
-| ADempiere Vue UI                    | marcalwestf/adempiere-vue (2)                                 | 0.0.8                                 |
-| ADempiere Vue Backend (gRPC Server) | marcalwestf/adempiere-grpc-server (2)                         | 3.9.4.001-shw-1.0.34                  |
-| Adempiere ZK UI                     | marcalwestf/adempiere-shw-zk (2)                              | jetty-3.9.4.001-shw-1.1.48            |
-| ADempiere Processors gRPC Server    | marcalwestf/adempiere-processors-service (2)                  | alpine-1.1.18                         |
+| ADempiere Vue UI                    | ghcr.io/adempiere/adempiere-vue                               | 1.0.0                                  |
+| ADempiere Vue Backend (gRPC Server) | ghcr.io/adempiere/adempiere-grpc-server                       | 1.0.0                                  |
+| Adempiere ZK UI                     | ghcr.io/adempiere/adempiere-zk                                 | 1.0.0                                  |
+| ADempiere Processors gRPC Server    | ghcr.io/adempiere/adempiere-processors-service                 | 1.0.0                                  |
 
 **Notes:**  
 - (1) The landing page can be replaced with your own custom image  
-- (2) These are Systemhaus-Westfalia customized images, maintained in the `marcalwestf` Docker Hub namespace  
 - All image versions are defined in `env_template.env` and can be changed as needed  
 - **Version updates:** Check image tags regularly for security updates and new features
 

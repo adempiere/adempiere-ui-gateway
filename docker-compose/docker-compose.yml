@@ -504,24 +504,6 @@ services:
       - adempiere_network
       # - other_external_network  # DISABLED: Uncomment to enable external network connectivity
 
-  svfe-api-firmador:
-    image: ${SVFE_IMAGE}
-    container_name: ${SVFE_CONTAINER_NAME}
-    hostname: ${SVFE_HOSTNAME}
-    restart: ${GENERIC_RESTART}
-    profiles:
-      - ''
-      - all
-    environment:
-      TZ: ${GENERIC_TIMEZONE}
-    ports:
-      - ${SVFE_EXTERNAL_PORT}:${SVFE_PORT}
-    volumes:
-      - ${SVFE_CERTIFICATES_PATH_ON_HOST}:${SVFE_CERTIFICATES_PATH_ON_CONTAINER}
-    networks:
-      - adempiere_network
-      # - other_external_network  # DISABLED: Uncomment to enable external network connectivity
-
   opensearch-node:
     image: ${OPENSEARCH_IMAGE}
     container_name: ${OPENSEARCH_CONTAINER_NAME}

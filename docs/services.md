@@ -133,7 +133,7 @@ For detailed architecture information including health checks and dependencies, 
 ### gRPC Backend Server
 - **Service Name:** `adempiere-grpc-server`
 - **Container Name:** `adempiere-ui-gateway.vue-grpc-server`
-- **Image:** `marcalwestf/adempiere-grpc-server:3.9.4.001-shw-1.0.34`
+- **Image:** `ghcr.io/adempiere/adempiere-grpc-server:1.0.0`
 - **Purpose:** Core ADempiere business logic via gRPC API
 - **Profiles:** `all, auth, cache, report, scheduler, storage, vue`
 - **Access:** `adempiere-grpc-server:50059` (internal, via Envoy)
@@ -144,7 +144,7 @@ For detailed architecture information including health checks and dependencies, 
 ### Dictionary Service (Rust)
 - **Service Name:** `dictionary-rs`
 - **Container Name:** `adempiere-ui-gateway.dictionary-rs`
-- **Image:** `ghcr.io/adempiere/dictionary-rs:1.6.5`
+- **Image:** `ghcr.io/adempiere/dictionary-rs:1.6.7`
 - **Purpose:** High-performance caching layer for ADempiere's application dictionary (windows, forms, processes, browsers, menus, roles).  
   Consumes dictionary change events from Kafka, indexes them in OpenSearch, and serves REST queries from the cache — bypassing the Java gRPC server for these lookups (~47 ms vs ~1 s).
 - **Profiles:** `all, cache`
@@ -156,7 +156,7 @@ For detailed architecture information including health checks and dependencies, 
 ### Processor Service
 - **Service Name:** `adempiere-processor`
 - **Container Name:** `adempiere-ui-gateway.processor`
-- **Image:** `marcalwestf/adempiere-processors-service:alpine-1.1.19`
+- **Image:** `ghcr.io/adempiere/adempiere-processors-service:1.0.0`
 - **Purpose:** Background job execution and scheduled tasks
 - **Profiles:** `all, scheduler`
 - **Access:** Port **8899** (DKron Envoy Process Monitor)
@@ -215,7 +215,7 @@ For detailed architecture information including health checks and dependencies, 
 ### ADempiere ZK UI (Classic)
 - **Service Name:** `adempiere-zk`
 - **Container Name:** `adempiere-ui-gateway.zk`
-- **Image:** `marcalwestf/adempiere-shw-zk:jetty-3.9.4.001-shw-1.1.48`
+- **Image:** `ghcr.io/adempiere/adempiere-zk:1.0.0`
 - **Purpose:** Traditional Java-based web UI (ZK framework)
 - **Profiles:** `all, auth, report, scheduler, zk`
 - **Access:** `http://${HOST_IP}/webui` (via nginx)
@@ -227,7 +227,7 @@ For detailed architecture information including health checks and dependencies, 
 ### ADempiere Vue UI (Modern)
 - **Service Name:** `vue-ui`
 - **Container Name:** `adempiere-ui-gateway.vue-ui`
-- **Image:** `marcalwestf/adempiere-vue:0.0.8`
+- **Image:** `ghcr.io/adempiere/adempiere-vue:1.0.0`
 - **Purpose:** Modern Vue.js-based web UI
 - **Profiles:** `all, auth, cache, report, scheduler, storage, vue`
 - **Access:** `http://${HOST_IP}/vue` (via nginx)

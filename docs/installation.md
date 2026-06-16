@@ -180,7 +180,7 @@ Values in file **env_template.env**:
 >
 > COMPOSE_PROJECT_NAME=${CLIENT_NAME}-gateway
 >
-> HOST_IP=192.268.0.246
+> HOST_IP=<your-host-ip-or-domain>
 >
 > HOST_URL=http://${HOST_IP}
 >

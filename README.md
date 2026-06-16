@@ -30,7 +30,7 @@ Due to the technology used, it is highly recommended to have a good knowledge of
     Machine-specific overrides can be placed in **override.env** without touching the versioned template.
 - Single containers or images can be updated and/or replaced easily, making deployments and tests speedy.
 - Separation of concerns: every service implements one and only one solution.
-- The timezone and location for all containers are the same as the hosts'.
+- Container timezone is explicitly configured (`GENERIC_TIMEZONE`, `GENERIC_CENTRAL_STANDARD_TIME` in `override.env`) rather than inherited from the host, so timestamps are correct and predictable regardless of where the stack runs.
 - Ideal for testing situations due to its ease of configuration and execution.
 - No need of deep knowledge of ADempiere Installation, Application Server Installation, Docker, Images or Postgres just to get the stack running.
 - Every container, image and object is unique, derived from a configuration file.
@@ -55,9 +55,3 @@ Please follow the links for detailed information.
 - [License](./LICENSE)
 
 - See installation prerequisites in [Installation](docs/installation.md) (Python 3.10+ required for the generator script).
-
-### Branch Information
-
-- **`main`** — upstream base; use for pull requests to the adempiere org
-- **`feature/SHW_General`** — production branch used by active Systemhaus-Westfalia production sites
-- **`adempiere-trunk`** — current development branch: complete Systemhaus-Westfalia stack, starting point for migration to the adempiere org

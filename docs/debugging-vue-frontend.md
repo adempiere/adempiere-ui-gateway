@@ -380,13 +380,13 @@ Edit code → Build Docker image → Deploy → Restart container (5+ minutes)
 
 ### Development Workflow
 ```bash
-# Start dev server (on Mini PC)
-cd /home/westfalia/adempiere/03-Github-Repositories/adempiere-vue_SHW
+# Start dev server
+cd <path-to-your-adempiere-vue-clone>
 export NODE_OPTIONS=--openssl-legacy-provider
 yarn start
 
 # Watch for: "Compiled successfully in XXXXms"
-# Access: http://192.168.1.12:9527/vue
+# Access: http://<your-host-ip-or-domain>:9527/vue
 ```
 
 ### File Search
