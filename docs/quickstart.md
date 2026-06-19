@@ -136,6 +136,42 @@ Example output:
 - HTTP checks use each container's internal Docker network IP, so the script works correctly regardless of the host's LAN IP or network location.
 - The script auto-detects whether `sudo` is required for Docker commands.
 
+### Full Restart + Health Check
+
+To stop all services, wait for them to go down, start them again, wait for them to come up, and run a health check — all in one command:
+
+```bash
+./full-restart-with-healthcheck.sh
+```
+
+On servers where Docker requires `sudo` (user not in the `docker` group):
+
+```bash
+sudo ./full-restart-with-healthcheck.sh
+```
+
+The script runs these steps in sequence and reports progress at each one:
+
+| Step | What happens |
+|------|-------------|
+| 1 | Checks for running containers; calls `stop-all.sh` only if any are found |
+| 2 | Polls every 5 s until all containers have stopped (timeout: 120 s) |
+| 3 | Calls `start-all.sh` |
+| 4 | Polls every 5 s until all expected containers reach `running` state (timeout: 600 s) |
+| 5 | Polls every 5 s until all container healthchecks leave `starting` state (timeout: 600 s) |
+| 6 | Runs `health-check.sh` and exits with its exit code |
+
+**When to use it:**
+- After a configuration change that requires a full restart
+- To verify the stack recovers cleanly from a stop/start cycle
+- As a single command that both restarts and confirms everything is healthy
+
+**Notes:**
+- The script is safe to run even if services are already stopped — step 1 detects this and skips the stop phase.
+- Steps 4 and 5 together replace the need to wait and re-run `health-check.sh` manually: the health check only runs once all services have had time to fully initialize.
+- If a timeout is exceeded, the script logs a warning and proceeds to the next step rather than aborting, so the health check always runs and shows the actual state.
+- Exit code mirrors `health-check.sh`: `0` = all checks passed, `1` = at least one failure.
+
 ---
 
 ### Frequently Asked Questions
