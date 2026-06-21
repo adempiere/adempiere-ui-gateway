@@ -36,22 +36,33 @@ if [[ -z `psql -Atqc '\list adempiere' postgres` ]]; then
 		cd $POSTGRES_DB_BACKUP_PATH_ON_CONTAINER
 		echo "I am on directory: " `pwd`   # It should be "postgres"
 
+		# Create temp directory with proper permissions
+		TEMP_EXTRACT_DIR=$(mktemp -d)
+		chown postgres:postgres $TEMP_EXTRACT_DIR
+		echo "Create temp directory with permissions $TEMP_EXTRACT_DIR"
+
 		echo "Downloading ADempiere artifact from Github... It may take some time"
-		wget --no-check-certificate --content-disposition $ADEMPIERE_GITHUB_ARTIFACT
+		echo "Download URL $ADEMPIERE_GITHUB_ARTIFACT"
+		wget --no-check-certificate --content-disposition $ADEMPIERE_GITHUB_ARTIFACT -P $TEMP_EXTRACT_DIR
 		echo "Result from ls -la: " `ls -la`
 
-		echo "Check file $ADEMPIERE_GITHUB_COMPRESSED_FILE was downloaded"
-		if [ -f "$ADEMPIERE_GITHUB_COMPRESSED_FILE" ]; then
-			echo "File $ADEMPIERE_GITHUB_COMPRESSED_FILE was downloaded"
-			echo "Unpack $ADEMPIERE_GITHUB_COMPRESSED_FILE here... It may take some time"
-			tar -xvf $ADEMPIERE_GITHUB_COMPRESSED_FILE Adempiere/data/Adempiere_pg.dmp -C .
+		echo "Check file $TEMP_EXTRACT_DIR/$ADEMPIERE_GITHUB_COMPRESSED_FILE was downloaded"
+		if [ -f "$TEMP_EXTRACT_DIR/$ADEMPIERE_GITHUB_COMPRESSED_FILE" ]; then
+			echo "File $TEMP_EXTRACT_DIR/$ADEMPIERE_GITHUB_COMPRESSED_FILE was downloaded"
+			echo "Unpack $TEMP_EXTRACT_DIR/$ADEMPIERE_GITHUB_COMPRESSED_FILE here... It may take some time"
+			# With all artifact release generate
+			tar -xvf $TEMP_EXTRACT_DIR/$ADEMPIERE_GITHUB_COMPRESSED_FILE -C $TEMP_EXTRACT_DIR
+
 			echo "Result from ls -la: " `ls -la`
-			echo "Rename Adempiere_pg.dmp to $POSTGRES_RESTORE_FILE_NAME. Any existing file with same name will disappear!"
-			mv Adempiere/data/Adempiere_pg.dmp $POSTGRES_RESTORE_FILE_NAME
-			echo "Result from ls -la: " `ls -la`
-			rm -rf Adempiere
-			echo "Delete $ADEMPIERE_GITHUB_COMPRESSED_FILE"
-			rm $ADEMPIERE_GITHUB_COMPRESSED_FILE
+			ls $TEMP_EXTRACT_DIR -la
+			echo "Rename adempiere_ui_postgresql_seed.backup to $POSTGRES_RESTORE_FILE_NAME. Any existing file with same name will disappear!"
+			mv $TEMP_EXTRACT_DIR/adempiere_ui_postgresql_seed.backup $POSTGRES_DEFAULT_RESTORE_FILE
+			IS_PSQL=0
+
+			echo "Result from ls -la: " `ls $TEMP_EXTRACT_DIR -la`
+
+			echo "Delete $TEMP_EXTRACT_DIR/$ADEMPIERE_GITHUB_COMPRESSED_FILE"
+			rm -rf $TEMP_EXTRACT_DIR/$ADEMPIERE_GITHUB_COMPRESSED_FILE
 			echo "Result from ls -la: " `ls -la`
 		else
 			echo "ERROR: File $ADEMPIERE_GITHUB_COMPRESSED_FILE could not be downloaded."

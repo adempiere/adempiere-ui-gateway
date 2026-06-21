@@ -1,4 +1,11 @@
-FROM postgres:13
+FROM postgres:14.5
+
+ENV HOME_PATH_ON_CONTAINERS=/home/adempiere
+ENV POSTGRES_DB_BACKUP_PATH_ON_CONTAINER=${HOME_PATH_ON_CONTAINERS}/postgres_backups
+
+
+RUN mkdir -p $POSTGRES_DB_BACKUP_PATH_ON_CONTAINER && \
+	chown -R postgres:postgres $POSTGRES_DB_BACKUP_PATH_ON_CONTAINER
 
 
 # Command "wget" will be used for downloading the standard Adempiere Database in
@@ -12,8 +19,8 @@ RUN echo 'Update APT package handling utility' && \
 	echo 'wget installed'
 
 
-COPY --chown=1 initdb.sh /docker-entrypoint-initdb.d
-COPY --chown=1 after_run/*.sql /tmp/after_run/
 
+COPY --chown=postgres:postgres initdb.sh /docker-entrypoint-initdb.d/
+COPY --chown=postgres:postgres after_run/*.sql /tmp/after_run/
 
 RUN chmod +x /docker-entrypoint-initdb.d/initdb.sh

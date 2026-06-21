@@ -1,0 +1,51 @@
+name: Continuous Integration
+
+on:
+  push:
+    branches:
+      - '*'         # matches every branch that doesn't contain a '/'
+      - '*/*'       # matches every branch containing a single '/'
+      - '**'        # matches every branch
+    paths-ignore:
+      - README.md
+      - 'docs/**'
+
+  pull_request:
+    paths-ignore:
+      - README.md
+      - 'docs/**'
+
+jobs:
+
+  validate-compose:
+    name: Validate Docker Compose Configuration
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v4
+
+      - name: Verify generate-env.sh aborts without required values
+        working-directory: docker-compose
+        run: |
+          if ./generate-env.sh /dev/null /tmp/should-not-exist.env; then
+            echo "generate-env.sh should have aborted: required values (e.g. GENERIC_TIMEZONE) were left unset" >&2
+            exit 1
+          fi
+          if [ -f /tmp/should-not-exist.env ]; then
+            echo "generate-env.sh must not write an .env file when required values are unset" >&2
+            exit 1
+          fi
+
+      - name: Generate .env with required values set
+        working-directory: docker-compose
+        run: |
+          cat > override.env <<EOF
+          GENERIC_TIMEZONE=UTC
+          GENERIC_CENTRAL_STANDARD_TIME=UTC0
+          EOF
+          ./generate-env.sh
+
+      - name: Validate docker-compose config
+        working-directory: docker-compose
+        run: docker compose -f docker-compose.yml config > /dev/null

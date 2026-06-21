@@ -43,7 +43,7 @@ static_resources:
           - name: envoy.filters.http.grpc_json_transcoder
             typed_config:
               "@type": type.googleapis.com/envoy.extensions.filters.http.grpc_json_transcoder.v3.GrpcJsonTranscoder
-              proto_descriptor: "/data/adempiere-grpc-server.pb"
+              proto_descriptor: "/data/adempiere-grpc-server.dsc"
               services:
                 # package.service
                 # - services_enabled
@@ -53,6 +53,7 @@ static_resources:
                 - data.Store
                 - dashboarding.Dashboarding
                 - dictionary.Dictionary
+                # - display_definition.DisplayDefinition
                 - enrollment.Register
                 - express_movement.ExpressMovement
                 - express_receipt.ExpressReceipt
@@ -65,6 +66,7 @@ static_resources:
                 - field.payment.PaymentInfoService
                 - field.product.ProductInfoService
                 - file_management.FileManagement
+                - form.out_bound_order.OutBoundOrderService
                 - general_ledger.GeneralLedger
                 - import_file_loader.ImportFileLoader
                 - issue_management.IssueManagement
@@ -73,7 +75,7 @@ static_resources:
                 - match_po_receipt_invoice.MatchPORReceiptInvoice
                 - material_management.MaterialManagement
                 - notice_management.NoticeManagement
-                - payment_allocation.PaymentAllocation
+                - form.payment_allocation.PaymentAllocation
                 - payment_print_export.PaymentPrintExport
                 - payroll_action_notice.PayrollActionNotice
                 - preference_management.PreferenceManagement
@@ -83,9 +85,10 @@ static_resources:
                 - send_notifications.SendNotifications
                 - store.WebStore
                 - task_management.TaskManagement
+                # - ticket_management.TicketManagement
                 - time_control.TimeControl
                 - time_record.TimeRecord
-                - trial_balance_drillable.TrialBalanceDrillable
+                - form.trial_balance_drillable.TrialBalanceDrillable
                 - updates.UpdateCenter
                 - user_customization.UserCustomization
                 - user_interface.UserInterface
@@ -143,7 +146,7 @@ static_resources:
           - name: envoy.filters.http.grpc_json_transcoder
             typed_config:
               "@type": type.googleapis.com/envoy.extensions.filters.http.grpc_json_transcoder.v3.GrpcJsonTranscoder
-              proto_descriptor: "/data/adempiere-processors-service-service.pb"
+              proto_descriptor: "/data/adempiere-processors-service.dsc"
               services:
                 - processor.Processors
               print_options:

@@ -8,9 +8,8 @@ DOCKER_COMPOSE_FILE=docker-compose.yml
 echo "All services started with the Docker Compose file \"$DOCKER_COMPOSE_FILE\" will be stopped!"
 docker compose -f $DOCKER_COMPOSE_FILE down
 
-# To avoid misunderstandings, the Docker Compose file is deleted.
-# It may be created again by calling "start-all.sh".
-if [ -e $DOCKER_COMPOSE_FILE ]
-then
-    rm $DOCKER_COMPOSE_FILE &&  echo "The Docker Compose file \"$DOCKER_COMPOSE_FILE\" was deleted!"
+# Clean up .env to ensure fresh generation on next start
+if [ -f .env ]; then
+    echo 'Removing .env file to ensure fresh configuration on next start'
+    rm -f .env
 fi
