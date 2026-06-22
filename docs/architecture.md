@@ -10,7 +10,7 @@
 | [Network Architecture](#network-architecture) | Container networking and traffic flow |
 | [Repository Structure](#repository-structure) | Directory layout |
 | [File Structure](#file-structure) | Key files and their purpose |
-| [Health Checks and Startup Order](#health-checks-and-startup-order) | How containers wait for dependencies |
+| [Health Checks and Startup Order](#health-checks-and-startup-order) | How containers wait for dependencies; health-check.sh and full-restart-with-healthcheck.sh |
 | [Images](#images) | Docker image versions |
 | [User's perspective](#users-perspective) | SSH tunnel for remote access |
 
@@ -267,7 +267,11 @@ docker-compose/
 ├── docker-compose.yml        # All service definitions with profiles (assembled by start-all.sh)
 ├── start-all.sh              # Start stack script (assembles docker-compose.yml, activates profiles)
 ├── stop-all.sh               # Stop stack script (also deletes assembled docker-compose.yml)
-├── stop-and-delete-all.sh    # Complete cleanup script
+├── stop-and-delete-all.sh           # Complete cleanup script
+├── generate-env.sh                  # Wrapper: calls generate_env.py with default paths
+├── generate_env.py                  # Env generator: merges env_template.env + override.env → .env
+├── health-check.sh                  # Polls all container health statuses until healthy or timeout
+├── full-restart-with-healthcheck.sh # Full stop+delete+restart cycle followed by health check
 ├── postgresql/
 │   ├── postgres_database/    # Persistent DB storage (mounted volume)
 │   ├── postgres_backups/     # Backup/restore files
@@ -298,6 +302,11 @@ docker-compose/
 - `stop-and-delete-all.sh`: shell script to delete **all** containers, images, networks, cache and volumes, **including the ones** created without `start-all.sh` or by executing `docker-compose.yml`.
 **Be very careful when using this script, because it will reset and delete everything you have of Docker** excepting the database and other persistent volumes.
     After executing this shell, no trace of the application will be left over. Only the persistent directory will not be affected, which must be manually deleted on the host if desired.
+    > **Note:** Named volumes are re-created on each `start-all.sh` run but the old ones are not removed by this script. Repeated stop-and-delete/restart cycles accumulate hundreds of orphaned volumes over time. Run `docker volume prune -f` periodically to reclaim disk space. See [Troubleshooting — Orphan Volumes](./troubleshooting.md#orphan-volumes-from-repeated-startstop-cycles).
+- `generate-env.sh`: convenience wrapper that calls `generate_env.py` with the default paths (`docker-compose/env_template.env`, `docker-compose/override.env`, `docker-compose/.env`). Called automatically by `start-all.sh` before each stack start.
+- `generate_env.py`: Python script that merges `env_template.env` and `override.env` into the runtime `.env` file. Resolves `${VAR}` references recursively and aborts if any required value is still set to `__CHANGE_ME__`. Supports `--dry-run` (prints resolved output without writing) and `--help`.
+- `health-check.sh`: polls the health status of all containers at regular intervals and reports which services are healthy, starting, or unhealthy. Used to confirm the stack is fully up after a start or restart.
+- `full-restart-with-healthcheck.sh`: performs a complete stop-and-delete cycle followed by a fresh stack start, then runs `health-check.sh` to confirm all services reach a healthy state.
 - `postgresql/Dockerfile`: the Dockerfile used.
   It mainly copies `postgresql/initdb.sh` to the container, so it can be executed at start.
 - `postgresql/initdb.sh`: shell script executed when Postgres starts.
@@ -444,6 +453,48 @@ docker compose ps --format "table {{.Name}}\t{{.Status}}\t{{.Health}}"
 ```
 
 See [Troubleshooting Guide](./troubleshooting.md#container-health-checks-failing) for common issues.
+
+#### Health Check Scripts
+
+Two scripts are provided to monitor and verify stack health from the command line.
+
+---
+
+**`health-check.sh`** — point-in-time health report for all containers and HTTP endpoints.
+
+```bash
+cd docker-compose/
+./health-check.sh
+```
+
+The script checks every container across four groups (Infrastructure, Backend Services, Frontend & Gateway, Monitoring & Tooling) and then performs live HTTP requests to key endpoints using each container's internal Docker IP. For each item it reports one of:
+
+- `✅ running · healthy` — container is up and its Docker health check passes
+- `⚠️  running · healthcheck starting` — container is up but the health check is still in its grace period (normal in the first 1–2 minutes after startup)
+- `❌ running · unhealthy` — container is up but failing its health check
+- `❌ <status>` — container is stopped, exited with error, or not found
+
+At the end, a summary shows total passed / failed / warnings. The script exits with code `1` if any checks failed, making it usable in automation.
+
+---
+
+**`full-restart-with-healthcheck.sh`** — performs a full stop → start cycle and confirms the stack is healthy at the end. Useful after configuration changes or to verify a fresh deployment.
+
+```bash
+cd docker-compose/
+sudo ./full-restart-with-healthcheck.sh
+```
+
+The script runs six steps automatically:
+
+1. **Stop** — calls `stop-all.sh` if any stack containers are running
+2. **Wait for shutdown** — polls until all containers disappear (timeout: 120 s)
+3. **Start** — calls `start-all.sh`
+4. **Wait for startup** — polls until all 19 expected long-running containers reach `running` state (timeout: 600 s)
+5. **Wait for health checks** — polls until no container is still in the `starting` health state (timeout: 600 s)
+6. **Health report** — runs `health-check.sh` and exits with its return code
+
+`sudo` is required only if the user is not in the `docker` group — the script detects this automatically.
 
 ---
 
