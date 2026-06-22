@@ -35,6 +35,9 @@ Due to the technology used, it is highly recommended to have a good knowledge of
 - No need of deep knowledge of ADempiere Installation, Application Server Installation, Docker, Images or Postgres just to get the stack running.
 - Every container, image and object is unique, derived from a configuration file.
 - New services can be easily added.
+- **Customizations are non-invasive** — organization-specific logic is compiled into separate derived images; official upstream images are never modified, so upstream releases can be pulled in without touching local changes.
+- **Build and deploy are decoupled** — the customizations repository builds and publishes on its own cycle; the stack consumes only the resulting image tag, so a deployment update is a one-line version bump in `env_template.env`.
+- **One fork, many installations** — the same customizations fork can be reused across multiple `adempiere-ui-gateway` deployments (different clients, environments, regions) by referencing the same image tag.
 
 
 ### Current Limitation — HTTP Only
@@ -61,6 +64,7 @@ Please follow the links for detailed information.
 - [Debugging](docs/debugging.md)
 - [Debugging Vue Frontend](docs/debugging-vue-frontend.md)
 - [Troubleshooting](docs/troubleshooting.md)
+- [Customizations](docs/customizations.md)
 - [Additional Info](docs/additional_info.md)
 - [License](./LICENSE)
 
