@@ -6,6 +6,22 @@ This guide covers debugging errors in the Vue UI itself (component errors, state
 
 ---
 
+## Index
+
+| Section | Description |
+|---------|-------------|
+| [Phase 1: Error Identification](#phase-1-error-identification) | Capture initial state, locate source, verify correct file |
+| [Phase 2: Data Flow Analysis](#phase-2-data-flow-analysis) | API layer, Vuex store, component layer, common issues |
+| [Phase 3: Fix Implementation](#phase-3-fix-implementation) | Property access safety, logic verification, template vs script |
+| [Phase 4: Testing & Verification](#phase-4-testing--verification) | Compilation check, browser testing, console debugging |
+| [Phase 5: Common Fix Patterns](#phase-5-common-fix-patterns) | Undefined property, wrong store module, inverted boolean, raw object |
+| [Phase 6: Database Verification](#phase-6-database-verification) | When and how to verify database state |
+| [Phase 7: Documentation](#phase-7-documentation) | What to document and solution template |
+| [Quick Commands Reference](#quick-commands-reference) | Yarn dev server, file search, database, git |
+| [Success Criteria Checklist](#success-criteria-checklist) | Final checklist before marking a fix complete |
+
+---
+
 ## 🔍 Phase 1: Error Identification
 
 ### ☑️ Capture Initial State

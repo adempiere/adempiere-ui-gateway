@@ -2,6 +2,29 @@
 
 This guide provides comprehensive procedures for backing up and restoring your ADempiere UI Gateway stack, with a focus on the PostgreSQL database which contains all your critical business data.
 
+## Index
+
+| Section | Description |
+|---------|-------------|
+| [Why Backups Are Critical](#why-backups-are-critical) | What you lose without backups |
+| [What to Back Up](#what-to-back-up) | Critical, important, and optional data |
+| [Database Backup Procedures](#database-backup-procedures) | Quick, compressed, and custom format backups |
+| [Automated Backup Script](#automated-backup-script) | Using the backup script with cron |
+| [Database Restore Procedures](#database-restore-procedures) | Automatic, manual, interactive, compressed, and alternative restores |
+| [Monitoring Restore Progress](#monitoring-restore-progress) | Table count, real-time progress, verification |
+| [Post-Restore Tasks](#post-restore-tasks) | SQL scripts to run after restore |
+| [Backup Verification](#backup-verification) | Quick and full verification procedures |
+| [Backup Strategy Recommendations](#backup-strategy-recommendations) | Dev/testing, production, 3-2-1 rule |
+| [Offsite Backup Storage](#offsite-backup-storage) | SCP and cloud storage |
+| [Backup Other Components](#backup-other-components) | Environment config and Docker volumes |
+| [Disaster Recovery Procedures](#disaster-recovery-procedures) | Complete system failure recovery |
+| [Troubleshooting Backup/Restore Issues](#troubleshooting-backuprestore-issues) | Permission errors, disk space, corruption, and more |
+| [Best Practices Summary](#best-practices-summary) | Key recommendations at a glance |
+| [Backup Checklist](#backup-checklist) | Pre-backup and verification checklist |
+| [See Also](#see-also) | Links to related documentation |
+
+---
+
 ## Why Backups Are Critical
 
 **Without regular backups, you risk:**

@@ -591,7 +591,7 @@ The project includes diagnostic scripts in `docs/scripts/` for common debugging 
 ./docs/scripts/03-all-container-times-simple.sh
 ```
 
-See Scripts README (TODO: not yet available) for complete documentation.
+See [Scripts README](./scripts/README.md) for complete documentation.
 
 ### Database Backup Script
 

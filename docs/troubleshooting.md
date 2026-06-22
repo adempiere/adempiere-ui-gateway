@@ -322,7 +322,7 @@ cd docs/scripts/
 ./03-all-container-times-simple.sh
 ```
 
-**See also:** Diagnostic Scripts README (TODO: not yet available) for detailed usage information.
+**See also:** [Diagnostic Scripts README](./scripts/README.md) for detailed usage information.
 
 Expected output:
 - All containers should show `Time diff: 0s (OK)`
@@ -338,7 +338,7 @@ Container: adempiere-ui-gateway.site
   Date: Fri Feb 13 14:55:24 UTC 2026
 ```
 
-Solution: Add TZ to the service in `docker-compose.yml`:
+Solution: First, ensure `GENERIC_TIMEZONE` (and `GENERIC_CENTRAL_STANDARD_TIME`) are set in `override.env` — `generate_env.py` enforces this and will abort if they are missing or still set to the `__CHANGE_ME__` sentinel. Then verify the service definition in `docker-compose.yml` has the TZ variable declared:
 
 ```yaml
 service-name:

@@ -19,6 +19,20 @@ In the file docker-compose.yml the profiles are defined for every service; this 
 
 By calling *docker compose up* or *./start-all.sh* plus a parameter, the parameter is interpreted as the profile to be used.
 
+| Profile | Key | Description |
+|---------|-----|-------------|
+| [Default / Standard](#services-activated-with-defaultstandard-profile-no-parameter-or-empty-string) | _(no parameter)_ | Production-ready core stack (ZK + Vue + gRPC) |
+| [Authentication](#services-activated-with-authentication-profile) | `auth` | Core stack with Keycloak identity provider |
+| [Dictionary Cache](#services-activated-with-dictionary-cache-profile) | `cache` | Adds Kafka + OpenSearch + dictionary-rs caching layer |
+| [Dictionary Report Engine](#services-activated-with-dictionary-report-engine-profile) | `report` | Adds report engine service |
+| [Processor Scheduler](#services-activated-with-processor-scheduler-profile) | `scheduler` | Adds ADempiere processor and Dkron scheduler |
+| [S3 Storage](#services-activated-with-s3-storage-profile) | `storage` | Adds MinIO S3 storage and gateway |
+| [ADempiere-Vue UI](#services-activated-with-adempiere-vue-ui-profile) | `vue` | Minimal stack: Vue UI + gRPC only |
+| [ADempiere-Zk UI](#services-activated-with-adempiere-zk-ui-profile) | `zk` | Minimal stack: ZK UI only |
+| [All](#services-activated-with-all-profile) | `all` | Complete stack with all available services |
+| [Develop](#services-activated-with-develop-profile) | `develop` | Default + monitoring tools and exposed debug ports |
+| [Multiple profiles](#multiple-profiles) | combined | Combining multiple profile keys |
+
 #### Services activated with _Default/Standard_ Profile (No parameter or empty string)
 This is the **production-ready stack** with all core ADempiere services. This profile runs when you execute `./start-all.sh` without any parameter, or with `-d default`.
 

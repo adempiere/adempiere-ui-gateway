@@ -2,6 +2,25 @@
 
 This document outlines the system requirements needed to successfully run the ADempiere UI Gateway stack.
 
+## Index
+
+| Section | Description |
+|---------|-------------|
+| [Hardware Requirements](#hardware-requirements) | Minimum, recommended, and high-performance configurations |
+| [Software Requirements](#software-requirements) | Required software, verification, and what you don't need |
+| [Operating System Requirements](#operating-system-requirements) | Supported OS and kernel requirements |
+| [Disk Space Planning](#disk-space-planning) | Initial, growth, and backup space estimates |
+| [Network Requirements](#network-requirements) | Bandwidth and port reference |
+| [Firewall Considerations](#firewall-considerations) | Docker bypasses host firewalls; SSH tunnel alternative |
+| [Memory Allocation by Service](#memory-allocation-by-service) | Typical memory usage per container |
+| [Performance Optimization Tips](#performance-optimization-tips) | SSD, RAM, startup times |
+| [Pre-Installation Checklist](#pre-installation-checklist) | Checklist before starting |
+| [Troubleshooting Common Issues](#troubleshooting-common-issues) | OOM, disk space, slow performance, missing swap |
+| [Cloud Provider Recommendations](#cloud-provider-recommendations) | AWS, DigitalOcean, Azure, Contabo instance types |
+| [Next Steps](#next-steps) | Where to go after requirements are met |
+
+---
+
 ## Hardware Requirements
 
 ### Minimum Configuration (Testing/Development)
@@ -204,14 +223,79 @@ The following ports are used by default (configurable in `env_template.env`):
 
 **Security Warning:** Only port 80 (nginx) should be exposed to the internet. All other ports should be protected by a firewall. See [Security Documentation](./security.md) for details.
 
-### Firewall Considerations
+---
 
-**CRITICAL:** Docker bypasses host firewall rules (UFW, firewalld, etc.) by manipulating iptables directly.
+## Firewall Considerations
+
+**CRITICAL:** Docker bypasses host firewall rules (UFW, firewalld, etc.) by manipulating iptables directly. A port listed as "exposed" in `docker-compose.yml` is reachable from the internet even if UFW is configured to block it — UFW alone is not sufficient.
 
 **Required security:**
-- Use an external firewall (cloud provider firewall, hardware firewall)
-- Never expose the host directly to the internet
+- Use an **external firewall** (cloud provider firewall, hardware firewall) to block all ports except 80 (and 22 for SSH)
+- Never expose the host directly to the internet without one
 - See [Security Documentation](./security.md) for detailed guidance
+
+---
+
+> ### ✅ Easy Secure Access Without a Cloud Firewall — SSH Tunneling
+>
+> If you cannot or do not want to configure an external firewall, **SSH tunneling** is a
+> practical and equally secure alternative. It requires only **port 22 (SSH) to be open**,
+> which is already needed for server access. All other ports stay blocked.
+>
+> **How it works:** you forward a remote port to your local machine through the encrypted
+> SSH connection. The service appears to run on `localhost` on your machine — no data
+> travels over the internet unencrypted, and no extra port needs to be exposed.
+>
+> **Examples — run these on your local machine:**
+> ```bash
+> # Access PostgreSQL (via PGAdmin on your local machine)
+> ssh -L 55432:localhost:55432 user@<server-ip>
+>
+> # Access MinIO Console
+> ssh -L 9090:localhost:9090 user@<server-ip>
+>
+> # Access Kafdrop (Kafka UI)
+> ssh -L 19000:localhost:19000 user@<server-ip>
+>
+> # Access OpenSearch Dashboards
+> ssh -L 5601:localhost:5601 user@<server-ip>
+>
+> # Tunnel multiple ports in one connection
+> ssh -L 55432:localhost:55432 -L 9090:localhost:9090 -L 19000:localhost:19000 user@<server-ip>
+> ```
+>
+> After running the command, open your browser or client and connect to `localhost:<port>`
+> as if the service were running on your own machine.
+>
+> **Security:** uses your existing SSH key — no passwords, no new certificates, no firewall
+> rules to manage. See [Installation — PGAdmin Access with SSH Certificate](./installation.md#10-pgadmin-access-with-ssh-certificate)
+> for the PGAdmin-specific setup using an SSH identity file.
+>
+> **Changing exposed port numbers via `override.env`:**
+>
+> Every exposed port has a corresponding `*_EXTERNAL_PORT` variable in `env_template.env`.
+> If any default conflicts with another service on your host, set the new value in `override.env`:
+>
+> ```bash
+> # override.env — only the ports you want to change
+> POSTGRES_EXTERNAL_PORT=55433
+> S3_CONSOLE_EXTERNAL_PORT=9091
+> KAFDROP_EXTERNAL_PORT=19001
+> OPENSEARCH_DASHBOARDS_EXTERNAL_PORT=5602
+> DKRON_UI_EXTERNAL_PORT=8900
+> KAFKA_BROKER_EXTERNAL_PORT=29093
+> ```
+>
+> After regenerating `.env` (run `./generate-env.sh` or `./start-all.sh`), update your
+> SSH tunnel commands to use the new port numbers:
+>
+> ```bash
+> # Example after changing POSTGRES_EXTERNAL_PORT to 55433
+> ssh -L 55433:localhost:55433 user@<server-ip>
+> ```
+>
+> The full list of configurable external ports is in `docker-compose/env_template.env`
+> — search for `_EXTERNAL_PORT`.
 
 ---
 
@@ -308,6 +392,30 @@ Before installing, verify you have:
 - Check CPU usage: `top` or `htop`
 - Verify network bandwidth
 - Run PostgreSQL VACUUM: `docker exec adempiere-ui-gateway.postgresql vacuumdb -U postgres -d adempiere -v -z`
+
+### Missing or Insufficient Swap
+
+**Symptoms:** Stack freezes or containers stop unexpectedly after a period of operation — especially during startup when all services initialize simultaneously and briefly spike memory beyond available RAM.
+
+**Check:**
+
+```bash
+free -h   # Swap row should show several GB; "0B" means no swap is configured
+```
+
+**Solutions:**
+- Enable or enlarge swap (example: 4 GB swapfile):
+
+    ```bash
+    sudo fallocate -l 4G /swapfile
+    sudo chmod 600 /swapfile
+    sudo mkswap /swapfile
+    sudo swapon /swapfile
+    echo '/swapfile none swap sw 0 0' | sudo tee -a /etc/fstab
+    ```
+
+- Recommended minimum: 4 GB swap when RAM is below 16 GB
+- After adding swap, restart the stack
 
 ---
 

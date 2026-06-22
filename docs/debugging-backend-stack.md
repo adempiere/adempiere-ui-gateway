@@ -2,6 +2,19 @@
 
 When the Vue UI displays an error, the root cause is almost never in the browser itself — it is somewhere in the chain of containers behind it. This guide explains how to trace an error from the browser all the way to the gRPC server where ADempiere business logic runs.
 
+## Index
+
+| Section | Description |
+|---------|-------------|
+| [The Request Chain](#the-request-chain) | Container chain from browser to gRPC server |
+| [Step-by-Step: Tracing an Error](#step-by-step-tracing-an-error) | nginx → Envoy → gRPC → database |
+| [Reproducing a Request with curl](#reproducing-a-request-with-curl) | Copy as cURL, build manually, call Envoy directly |
+| [Quick Reference: Log Commands](#quick-reference-log-commands) | Common log commands for all containers |
+| [Common Error Patterns](#common-error-patterns) | Mandatory field, NullPointer, 502, 503 |
+| [Tips](#tips) | Practical debugging tips |
+
+---
+
 ## The Request Chain
 
 Every API call made by the Vue UI (Firefox, Chrome, Opera) travels through this chain of containers:
