@@ -2,6 +2,24 @@
 
 This document outlines the system requirements needed to successfully run the ADempiere UI Gateway stack.
 
+## Index
+
+| Section | Description |
+|---------|-------------|
+| [Hardware Requirements](#hardware-requirements) | Minimum, recommended, and high-performance configurations |
+| [Software Requirements](#software-requirements) | Required software, verification, and what you don't need |
+| [Operating System Requirements](#operating-system-requirements) | Supported OS and kernel requirements |
+| [Disk Space Planning](#disk-space-planning) | Initial, growth, and backup space estimates |
+| [Network Requirements](#network-requirements) | Bandwidth, ports, firewall, and SSH tunnel access |
+| [Memory Allocation by Service](#memory-allocation-by-service) | Typical memory usage per container |
+| [Performance Optimization Tips](#performance-optimization-tips) | SSD, RAM, startup times |
+| [Pre-Installation Checklist](#pre-installation-checklist) | Checklist before starting |
+| [Troubleshooting Common Issues](#troubleshooting-common-issues) | OOM, disk space, slow performance, missing swap |
+| [Cloud Provider Recommendations](#cloud-provider-recommendations) | AWS, DigitalOcean, Azure, Contabo instance types |
+| [Next Steps](#next-steps) | Where to go after requirements are met |
+
+---
+
 ## Hardware Requirements
 
 ### Minimum Configuration (Testing/Development)
