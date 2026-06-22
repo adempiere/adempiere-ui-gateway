@@ -10,7 +10,8 @@ This document outlines the system requirements needed to successfully run the AD
 | [Software Requirements](#software-requirements) | Required software, verification, and what you don't need |
 | [Operating System Requirements](#operating-system-requirements) | Supported OS and kernel requirements |
 | [Disk Space Planning](#disk-space-planning) | Initial, growth, and backup space estimates |
-| [Network Requirements](#network-requirements) | Bandwidth, ports, firewall, and SSH tunnel access |
+| [Network Requirements](#network-requirements) | Bandwidth and port reference |
+| [Firewall Considerations](#firewall-considerations) | Docker bypasses host firewalls; SSH tunnel alternative |
 | [Memory Allocation by Service](#memory-allocation-by-service) | Typical memory usage per container |
 | [Performance Optimization Tips](#performance-optimization-tips) | SSD, RAM, startup times |
 | [Pre-Installation Checklist](#pre-installation-checklist) | Checklist before starting |
@@ -222,7 +223,9 @@ The following ports are used by default (configurable in `env_template.env`):
 
 **Security Warning:** Only port 80 (nginx) should be exposed to the internet. All other ports should be protected by a firewall. See [Security Documentation](./security.md) for details.
 
-### Firewall Considerations
+---
+
+## Firewall Considerations
 
 **CRITICAL:** Docker bypasses host firewall rules (UFW, firewalld, etc.) by manipulating iptables directly. A port listed as "exposed" in `docker-compose.yml` is reachable from the internet even if UFW is configured to block it — UFW alone is not sufficient.
 
