@@ -12,6 +12,7 @@
 | [File Structure](#file-structure) | Key files and their purpose |
 | [Health Checks and Startup Order](#health-checks-and-startup-order) | How containers wait for dependencies; health-check.sh and full-restart-with-healthcheck.sh |
 | [Images](#images) | Docker image versions |
+| [Data Persistence](#data-persistence) | Where the database lives on the host and why it survives container removal |
 | [User's perspective](#users-perspective) | SSH tunnel for remote access |
 
 ---
@@ -531,6 +532,91 @@ The actual version is defined in file *env_template.env*.
 - All image versions are defined in `env_template.env` and can be changed as needed  
 - **Version updates:** Check image tags regularly for security updates and new features
 
+
+### Data Persistence
+
+Understanding where the database lives is critical for backups, migrations, and cleanup operations.
+
+#### PostgreSQL — bind-mount volume
+
+The PostgreSQL database is **not stored inside a Docker container or in Docker's internal storage**.  
+It uses a Docker named volume backed by a **bind mount** — the volume definition in `docker-compose.yml` points directly to a host directory:
+
+| | Path |
+|---|---|
+| **Host directory** | `docker-compose/postgresql/postgres_database/` |
+| **Container path** | `/var/lib/postgresql/data` |
+| **Docker volume name** | `adempiere-ui-gateway.volume_postgres_db` |
+
+The backup directory is mounted the same way:
+
+| | Path |
+|---|---|
+| **Host directory** | `docker-compose/postgresql/postgres_backups/` |
+| **Container path** | `/home/adempiere/postgres_backups` |
+| **Docker volume name** | `adempiere-ui-gateway.volume_postgres_backups` |
+
+This is declared in `docker-compose.yml` as:
+
+```yaml
+volumes:
+  volume_postgres:
+    name: ${POSTGRES_VOLUME}
+    driver_opts:
+      type: none
+      o: bind
+      device: ${POSTGRES_DB_PATH_ON_HOST}   # resolves to docker-compose/postgresql/postgres_database/
+```
+
+#### What this means in practice
+
+- **The database survives container removal.**  
+  Running `stop-and-delete-all.sh` removes containers, images, networks, and Docker's named volume definitions — but the host directory and its contents are never touched.  
+  The data is always on the host.
+- **The database survives `docker volume prune`.**  
+  Prune only removes volumes not attached to any running container.  
+  Since the bind-mount volume is attached while the stack is up, it is skipped.  
+  Even if the stack is down, the host directory remains intact independently of Docker.
+- **The database survives `docker image prune -a`.**  
+  Images and data storage are completely separate; removing images has no effect on the host directory.
+- **Direct host access requires sudo.** PostgreSQL runs inside the container as the `postgres` system user (UID 999 by default), which differs from your host user.  
+  Use `sudo ls`, `sudo cp`, etc. to access the directory from the host.
+- **Disk space planning must account for database growth.**  
+  The database grows on the host partition where `docker-compose/` lives — monitor with `du -sh docker-compose/postgresql/postgres_database/`.
+- **Multiple databases can coexist on the host — just swap the directory name.**  
+  Because the active database is simply whichever directory is named `postgres_database/`, you can keep several databases side by side on the host:
+
+    ```
+    docker-compose/postgresql/  
+      postgres_database/         ← currently active (used by the stack)  
+      postgres_database_client1/ ← client 1 database (inactive)  
+      postgres_database_client2/ ← client 2 database (inactive)
+    ```
+
+    To switch databases, stop the stack, rename the directories, and restart:
+
+    ```bash
+    sudo mv postgresql/postgres_database          postgresql/postgres_database_client1
+    sudo mv postgresql/postgres_database_client2  postgresql/postgres_database
+    ./start-all.sh
+    ```
+
+    No data is ever moved or copied — only the directory names change.  
+
+- **The host's PostgreSQL engine can access the data directly — even with containers down.**  
+  Because the data directory is a standard PostgreSQL data directory on the host filesystem, a locally installed `psql` or `pg_dump` can connect to it directly — even with the Docker stack stopped. This is useful for inspecting or exporting data during maintenance or disaster recovery:
+
+    ```bash
+    # Start a temporary postgres instance pointing at the bind-mount directory
+    sudo -u postgres pg_ctl -D docker-compose/postgresql/postgres_database start
+    sudo -u postgres psql -d adempiere
+    ```
+
+  Ensure the PostgreSQL version on the host matches the one used by the container (see `POSTGRES_IMAGE` in `env_template.env`) to avoid data directory incompatibilities.
+
+See [Backup and Restore Guide](./backup-restore.md) for procedures to back up and restore this directory.
+
+---
 
 ### User's perspective  
 From a user's point of view, the application consists of the following.  
