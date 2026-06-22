@@ -1,4 +1,21 @@
 
+## Index
+
+| Section | Description |
+|---------|-------------|
+| [Overview](#overview) | Key technologies and deployment model |
+| [Architecture](#architecture) | Full stack architecture breakdown |
+| [Services of Application Stack](#services-of-application-stack) | All services and their roles |
+| [Quick Description of Application Stack](#quick-description-of-application-stack) | Service summary table |
+| [Network Architecture](#network-architecture) | Container networking and traffic flow |
+| [Repository Structure](#repository-structure) | Directory layout |
+| [File Structure](#file-structure) | Key files and their purpose |
+| [Health Checks and Startup Order](#health-checks-and-startup-order) | How containers wait for dependencies |
+| [Images](#images) | Docker image versions |
+| [User's perspective](#users-perspective) | SSH tunnel for remote access |
+
+---
+
 ## Overview
 
 The **ADempiere UI Gateway** is a Docker Compose-based stack for running ADempiere ERP with multiple UI options (ZK and Vue), integrated services, and a complete microservices architecture. The stack uses nginx as a reverse proxy/API gateway to route requests to various backend services.
