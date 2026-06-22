@@ -187,7 +187,9 @@ The upstream definitions (which container each path routes to) are in `docker-co
                                 └──────────────────────────────┘
 ```
 
-Both ZK UI and the gRPC server connect to the same PostgreSQL instance. ZK connects directly; the gRPC server connects on behalf of the Vue SPA. PostgreSQL is also reachable externally on port 55432 (e.g. from PGAdmin on the host).
+Both ZK UI and the gRPC server connect to the same PostgreSQL instance. ZK connects diectly; the gRPC server connects on behalf of the Vue SPA.  
+PostgreSQL is also reachable externally on port 55432 (e.g. from PGAdmin on the host).  
+For secure remote access via PGAdmin, SSH tunneling is recommended — see [PGAdmin Access with SSH Certificate](./installation.md#10-pgadmin-access-with-ssh-certificate).
 
 **Port Exposure Strategy:**
 
@@ -211,6 +213,14 @@ NETWORK_SUBNET=192.168.100.0/24
 NETWORK_GATEWAY=192.168.100.1
 NETWORK_IP_RANGE=192.168.10.0/24
 ```
+
+If these defaults conflict with an existing network on your host (e.g. your LAN already uses `192.168.100.x`), override them in `override.env`:
+```bash
+NETWORK_SUBNET=10.10.0.0/24
+NETWORK_GATEWAY=10.10.0.1
+NETWORK_IP_RANGE=10.10.0.0/24
+```
+The stack will use the overridden values without any changes to the versioned template.
 
 **Troubleshooting Network Issues:**
 
@@ -429,7 +439,7 @@ The actual version is defined in file *env_template.env*.
 | ----------------------------------- |:-------------------------------------------------------------:|:-------------------------------------:|
 | PostgreSQL                          | postgres                                                      | 14.5                                  |
 | Main Page / Landing Site            | ghcr.io/adempiere/adempiere-landing-page (1)                  | alpine-1.0.4                          |
-| OpenSearch API RESTful              | ghcr.io/adempiere/dictionary-rs                               | 1.6.5                                 |
+| OpenSearch API RESTful              | ghcr.io/adempiere/dictionary-rs                               | 1.6.7                                 |
 | ADempiere Report Engine             | ghcr.io/adempiere/adempiere-report-engine-service             | 1.4.2-alpine                          |
 | S3 Gateway RESTful API              | ghcr.io/adempiere/s3-gateway-rs                               | 1.2.8                                 |
 | S3 Minio Storage                    | quay.io/minio/minio                                           | RELEASE.2025-07-23T15-54-02Z          |
@@ -446,7 +456,7 @@ The actual version is defined in file *env_template.env*.
 | ADempiere Vue UI                    | ghcr.io/adempiere/adempiere-vue                               | 1.0.0                                  |
 | ADempiere Vue Backend (gRPC Server) | ghcr.io/adempiere/adempiere-grpc-server                       | 1.0.0                                  |
 | Adempiere ZK UI                     | ghcr.io/adempiere/adempiere-zk                                 | 1.0.0                                  |
-| ADempiere Processors gRPC Server    | ghcr.io/adempiere/adempiere-processors-service                 | 1.0.0                                  |
+| ADempiere Processors gRPC Server    | ghcr.io/adempiere/adempiere-processors-service                 | 1.2.0                                  |
 
 **Notes:**  
 - (1) The landing page can be replaced with your own custom image  

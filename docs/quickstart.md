@@ -8,21 +8,22 @@
 
 ### What You Need
 
-✓ Docker (20.10 or later)
-✓ Docker Compose (v2.16.0 or later)
-✓ Git
+✓ Docker (20.10 or later)  
+✓ Docker Compose (v2.16.0 or later)  
+✓ Git  
 ✓ Python 3.10 or later (required for the `generate_env.py` script)
 
 ### What You DON'T Need
 
-✗ Java/JDK (runs inside containers)
-✗ Application servers (runs inside containers)
-✗ PostgreSQL (runs inside containers)
+✗ Java/JDK (runs inside containers)  
+✗ Application servers (runs inside containers)  
+✗ PostgreSQL (runs inside containers)  
 ✗ nginx (runs inside containers)
 
 **Everything except Docker, Docker Compose, Git, and Python runs inside containers!**
 
-**Security benefit:** This isolation minimizes your host's attack surface. Software running only in containers cannot directly compromise your host system, even if vulnerabilities exist.
+**Security benefit:** This isolation minimizes your host's attack surface.  
+Software running only in containers cannot directly compromise your host system, even if vulnerabilities exist.
 
 ### Clone the Repository
 
@@ -36,7 +37,7 @@ cd docker-compose
 
 You have two ways to set host-specific values (e.g. IP address, external ports, credentials):
 
-- **Option A — recommended:** create a local `override.env` so you don't modify the versioned template.  
+- **Option A — recommended:** create a local (git-ignored) `override.env` so you don't modify the versioned template.  
 
     1. Copy the provided example template:
      ```bash
@@ -60,12 +61,13 @@ You have two ways to set host-specific values (e.g. IP address, external ports, 
       ```
 
 **Notes on variable resolution:**  
-- `generate_env.py` resolves `${VAR}` and `$VAR` references recursively.   
-      For example: if `override.env` sets `HOST_IP=192.0.2.10`, all template variables that reference `${HOST_IP}` will be expanded accordingly.  
+- The script `generate_env.py` in `docker-compose/` resolves `${VAR}` and `$VAR` references recursively.   
+      For example: if `override.env` sets `HOST_IP=192.0.2.10`, all template variables in `env_template.env` that reference `${HOST_IP}` will be expanded accordingly.  
 - You can also call the generator manually:
+
     ```bash
-  ./generate-env.sh override.env .env    
-    # or directly:  
+    ./generate-env.sh override.env .env
+    # or directly:
     python3 generate_env.py env_template.env override.env .env
     ```
 
@@ -131,9 +133,9 @@ Example output:
 ═══════════════════════════════════════════════════════════
 ```
 
-**Notes:**
-- Init containers (`s3-client`, `opensearch-setup`) are expected to show `exited cleanly` — this is normal.
-- HTTP checks use each container's internal Docker network IP, so the script works correctly regardless of the host's LAN IP or network location.
+**Notes:**  
+- Init containers (`s3-client`, `opensearch-setup`) are expected to show `exited cleanly` — this is normal.  
+- HTTP checks use each container's internal Docker network IP, so the script works correctly regardless of the host's LAN IP or network location.  
 - The script auto-detects whether `sudo` is required for Docker commands.
 
 ### Full Restart + Health Check
@@ -161,15 +163,15 @@ The script runs these steps in sequence and reports progress at each one:
 | 5 | Polls every 5 s until all container healthchecks leave `starting` state (timeout: 600 s) |
 | 6 | Runs `health-check.sh` and exits with its exit code |
 
-**When to use it:**
-- After a configuration change that requires a full restart
-- To verify the stack recovers cleanly from a stop/start cycle
+**When to use it:**  
+- After a configuration change that requires a full restart  
+- To verify the stack recovers cleanly from a stop/start cycle  
 - As a single command that both restarts and confirms everything is healthy
 
-**Notes:**
-- The script is safe to run even if services are already stopped — step 1 detects this and skips the stop phase.
-- Steps 4 and 5 together replace the need to wait and re-run `health-check.sh` manually: the health check only runs once all services have had time to fully initialize.
-- If a timeout is exceeded, the script logs a warning and proceeds to the next step rather than aborting, so the health check always runs and shows the actual state.
+**Notes:**  
+- The script is safe to run even if services are already stopped — step 1 detects this and skips the stop phase.  
+- Steps 4 and 5 together replace the need to wait and re-run `health-check.sh` manually: the health check only runs once all services have had time to fully initialize.  
+- If a timeout is exceeded, the script logs a warning and proceeds to the next step rather than aborting, so the health check always runs and shows the actual state.  
 - Exit code mirrors `health-check.sh`: `0` = all checks passed, `1` = at least one failure.
 
 ---

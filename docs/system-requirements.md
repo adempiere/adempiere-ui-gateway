@@ -309,6 +309,30 @@ Before installing, verify you have:
 - Verify network bandwidth
 - Run PostgreSQL VACUUM: `docker exec adempiere-ui-gateway.postgresql vacuumdb -U postgres -d adempiere -v -z`
 
+### Missing or Insufficient Swap
+
+**Symptoms:** Stack freezes or containers stop unexpectedly after a period of operation — especially during startup when all services initialize simultaneously and briefly spike memory beyond available RAM.
+
+**Check:**
+
+```bash
+free -h   # Swap row should show several GB; "0B" means no swap is configured
+```
+
+**Solutions:**
+- Enable or enlarge swap (example: 4 GB swapfile):
+
+    ```bash
+    sudo fallocate -l 4G /swapfile
+    sudo chmod 600 /swapfile
+    sudo mkswap /swapfile
+    sudo swapon /swapfile
+    echo '/swapfile none swap sw 0 0' | sudo tee -a /etc/fstab
+    ```
+
+- Recommended minimum: 4 GB swap when RAM is below 16 GB
+- After adding swap, restart the stack
+
 ---
 
 ## Cloud Provider Recommendations

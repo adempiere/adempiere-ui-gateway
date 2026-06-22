@@ -327,25 +327,35 @@ cd docker-compose
 **Be very careful when using this script, because it will delete all Docker objects you have!**
 
 ### 9. Database Access
-Connect to database via port **55432** with a DB connector, e.g. PGAdmin.
-Or to the port the variable `POSTGRES_EXTERNAL_PORT` points in file `env_template.env`.
-It is recommendable to configure the PGAdmin access with ssh certification.
+Connect to the database via port **55432** with a DB connector, e.g. PGAdmin.
+Or use the port defined by the variable `POSTGRES_EXTERNAL_PORT` in `env_template.env`.
+It is recommended to configure PGAdmin access with an SSH certificate (see [Step 10](#10-pgadmin-access-with-ssh-certificate) below).
+For context on why port 55432 is exposed, see [Architecture — Port Exposure Strategy](./architecture.md#port-exposure-strategy).
 
 ### 10. PGAdmin Access with ssh certificate
-First step: generate a ssh certificate for a host's user and deploy it on the host
 
-PGAdmin Server Configuration
+**Step 1 — Generate an SSH key pair on the machine running PGAdmin and deploy it to the host:**
+
+```bash
+ssh-keygen -t ed25519 -f ~/.ssh/pgadmin_tunnel
+ssh-copy-id -i ~/.ssh/pgadmin_tunnel.pub username@<host-ip>
+```
+
+The private key `~/.ssh/pgadmin_tunnel` is what you will reference in the PGAdmin Identity File field below.
+
+**Step 2 — Configure the PGAdmin server connection:**
+
 - Connection/Hostname: localhost
-- Connection/Port: the port defined in file _env_template.env_ variable `POSTGRES_EXTERNAL_PORT`. Default is 55432
+- Connection/Port: the port defined in `env_template.env` variable `POSTGRES_EXTERNAL_PORT`. Default is 55432
 - Connection/Maintenance database: postgres
 - Parameters/SSL Mode: [keyword: ssl] [Value: prefer]
 - Parameters/Connection Timeout: e.g. 10 seconds
 - SSH Tunnel/Use SSH Tunneling: Active
-- SSH Tunnel/Tunnel Host: <IP where host is running ssh>
-- SSH Tunnel/Tunnel Port: 22 (default; you can swith to another port if needed)
-- SSH Tunnel/Username: <Username of host according to ssh certificate>
+- SSH Tunnel/Tunnel Host: `<IP where the host is running ssh>`
+- SSH Tunnel/Tunnel Port: 22 (default; you can switch to another port if needed)
+- SSH Tunnel/Username: `<username on the host matching the deployed SSH key>`
 - SSH Tunnel/Authentication: Identity File
-- SSH Tunnel/Identity File: <Path to ssh certificate>
+- SSH Tunnel/Identity File: `~/.ssh/pgadmin_tunnel`
 
 
 
