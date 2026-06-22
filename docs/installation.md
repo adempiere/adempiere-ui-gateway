@@ -7,6 +7,21 @@
 > Java runs inside the Docker containers and is already included in the images.
 > This is one of the main benefits of using Docker!
 
+### Index
+
+| Step | Description |
+|------|-------------|
+| [1. Requirements](#1-requirements) | Tools to install and version checks |
+| [2. Clone This Repository](#2-clone-this-repository) | Get the code |
+| [3. Switch to the Correct Branch](#3-switch-to-the-correct-branch) | Ensure you're on the right branch |
+| [4. Automatic Execution](#4-automatic-execution) | One-script start, result, and restore cases |
+| [5. Manual Execution](#5-manual-execution) | Step-by-step manual setup |
+| [6. Post-Installation: Initialize the Vue Menu](#6-post-installation-initialize-the-vue-menu) | Export dictionary, rebuild OpenSearch index |
+| [7. Stop All Services](#7-stop-all-services-that-were-started-with-script-start-allsh) | How to stop the running stack |
+| [8. Delete All Docker Objects](#8-delete-all-docker-objects) | Full cleanup including volumes |
+| [9. Database Access](#9-database-access) | Connect to PostgreSQL |
+| [10. PGAdmin Access with SSH Certificate](#10-pgadmin-access-with-ssh-certificate) | PGAdmin access via SSH identity file |
+
 ### 1. Requirements
 
 #### Install Tools
