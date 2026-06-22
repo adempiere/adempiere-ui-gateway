@@ -1,4 +1,22 @@
 
+## Index
+
+| Section | Description |
+|---------|-------------|
+| [Overview](#overview) | Key technologies and deployment model |
+| [Architecture](#architecture) | Full stack architecture breakdown |
+| [Services of Application Stack](#services-of-application-stack) | All services and their roles |
+| [Quick Description of Application Stack](#quick-description-of-application-stack) | Service summary table |
+| [Network Architecture](#network-architecture) | Container networking and traffic flow |
+| [Repository Structure](#repository-structure) | Directory layout |
+| [File Structure](#file-structure) | Key files and their purpose |
+| [Health Checks and Startup Order](#health-checks-and-startup-order) | How containers wait for dependencies; health-check.sh and full-restart-with-healthcheck.sh |
+| [Images](#images) | Docker image versions |
+| [Data Persistence](#data-persistence) | Where the database lives on the host and why it survives container removal |
+| [User's perspective](#users-perspective) | SSH tunnel for remote access |
+
+---
+
 ## Overview
 
 The **ADempiere UI Gateway** is a Docker Compose-based stack for running ADempiere ERP with multiple UI options (ZK and Vue), integrated services, and a complete microservices architecture. The stack uses nginx as a reverse proxy/API gateway to route requests to various backend services.
@@ -187,7 +205,9 @@ The upstream definitions (which container each path routes to) are in `docker-co
                                 └──────────────────────────────┘
 ```
 
-Both ZK UI and the gRPC server connect to the same PostgreSQL instance. ZK connects directly; the gRPC server connects on behalf of the Vue SPA. PostgreSQL is also reachable externally on port 55432 (e.g. from PGAdmin on the host).
+Both ZK UI and the gRPC server connect to the same PostgreSQL instance. ZK connects diectly; the gRPC server connects on behalf of the Vue SPA.  
+PostgreSQL is also reachable externally on port 55432 (e.g. from PGAdmin on the host).  
+For secure remote access via PGAdmin, SSH tunneling is recommended — see [PGAdmin Access with SSH Certificate](./installation.md#10-pgadmin-access-with-ssh-certificate).
 
 **Port Exposure Strategy:**
 
@@ -211,6 +231,14 @@ NETWORK_SUBNET=192.168.100.0/24
 NETWORK_GATEWAY=192.168.100.1
 NETWORK_IP_RANGE=192.168.10.0/24
 ```
+
+If these defaults conflict with an existing network on your host (e.g. your LAN already uses `192.168.100.x`), override them in `override.env`:
+```bash
+NETWORK_SUBNET=10.10.0.0/24
+NETWORK_GATEWAY=10.10.0.1
+NETWORK_IP_RANGE=10.10.0.0/24
+```
+The stack will use the overridden values without any changes to the versioned template.
 
 **Troubleshooting Network Issues:**
 
@@ -240,7 +268,11 @@ docker-compose/
 ├── docker-compose.yml        # All service definitions with profiles (assembled by start-all.sh)
 ├── start-all.sh              # Start stack script (assembles docker-compose.yml, activates profiles)
 ├── stop-all.sh               # Stop stack script (also deletes assembled docker-compose.yml)
-├── stop-and-delete-all.sh    # Complete cleanup script
+├── stop-and-delete-all.sh           # Complete cleanup script
+├── generate-env.sh                  # Wrapper: calls generate_env.py with default paths
+├── generate_env.py                  # Env generator: merges env_template.env + override.env → .env
+├── health-check.sh                  # Polls all container health statuses until healthy or timeout
+├── full-restart-with-healthcheck.sh # Full stop+delete+restart cycle followed by health check
 ├── postgresql/
 │   ├── postgres_database/    # Persistent DB storage (mounted volume)
 │   ├── postgres_backups/     # Backup/restore files
@@ -271,6 +303,11 @@ docker-compose/
 - `stop-and-delete-all.sh`: shell script to delete **all** containers, images, networks, cache and volumes, **including the ones** created without `start-all.sh` or by executing `docker-compose.yml`.
 **Be very careful when using this script, because it will reset and delete everything you have of Docker** excepting the database and other persistent volumes.
     After executing this shell, no trace of the application will be left over. Only the persistent directory will not be affected, which must be manually deleted on the host if desired.
+    > **Note:** Named volumes are re-created on each `start-all.sh` run but the old ones are not removed by this script. Repeated stop-and-delete/restart cycles accumulate hundreds of orphaned volumes over time. Run `docker volume prune -f` periodically to reclaim disk space. See [Troubleshooting — Orphan Volumes](./troubleshooting.md#orphan-volumes-from-repeated-startstop-cycles).
+- `generate-env.sh`: convenience wrapper that calls `generate_env.py` with the default paths (`docker-compose/env_template.env`, `docker-compose/override.env`, `docker-compose/.env`). Called automatically by `start-all.sh` before each stack start.
+- `generate_env.py`: Python script that merges `env_template.env` and `override.env` into the runtime `.env` file. Resolves `${VAR}` references recursively and aborts if any required value is still set to `__CHANGE_ME__`. Supports `--dry-run` (prints resolved output without writing) and `--help`.
+- `health-check.sh`: polls the health status of all containers at regular intervals and reports which services are healthy, starting, or unhealthy. Used to confirm the stack is fully up after a start or restart.
+- `full-restart-with-healthcheck.sh`: performs a complete stop-and-delete cycle followed by a fresh stack start, then runs `health-check.sh` to confirm all services reach a healthy state.
 - `postgresql/Dockerfile`: the Dockerfile used.
   It mainly copies `postgresql/initdb.sh` to the container, so it can be executed at start.
 - `postgresql/initdb.sh`: shell script executed when Postgres starts.
@@ -418,6 +455,48 @@ docker compose ps --format "table {{.Name}}\t{{.Status}}\t{{.Health}}"
 
 See [Troubleshooting Guide](./troubleshooting.md#container-health-checks-failing) for common issues.
 
+#### Health Check Scripts
+
+Two scripts are provided to monitor and verify stack health from the command line.
+
+---
+
+**`health-check.sh`** — point-in-time health report for all containers and HTTP endpoints.
+
+```bash
+cd docker-compose/
+./health-check.sh
+```
+
+The script checks every container across four groups (Infrastructure, Backend Services, Frontend & Gateway, Monitoring & Tooling) and then performs live HTTP requests to key endpoints using each container's internal Docker IP. For each item it reports one of:
+
+- `✅ running · healthy` — container is up and its Docker health check passes
+- `⚠️  running · healthcheck starting` — container is up but the health check is still in its grace period (normal in the first 1–2 minutes after startup)
+- `❌ running · unhealthy` — container is up but failing its health check
+- `❌ <status>` — container is stopped, exited with error, or not found
+
+At the end, a summary shows total passed / failed / warnings. The script exits with code `1` if any checks failed, making it usable in automation.
+
+---
+
+**`full-restart-with-healthcheck.sh`** — performs a full stop → start cycle and confirms the stack is healthy at the end. Useful after configuration changes or to verify a fresh deployment.
+
+```bash
+cd docker-compose/
+sudo ./full-restart-with-healthcheck.sh
+```
+
+The script runs six steps automatically:
+
+1. **Stop** — calls `stop-all.sh` if any stack containers are running
+2. **Wait for shutdown** — polls until all containers disappear (timeout: 120 s)
+3. **Start** — calls `start-all.sh`
+4. **Wait for startup** — polls until all 19 expected long-running containers reach `running` state (timeout: 600 s)
+5. **Wait for health checks** — polls until no container is still in the `starting` health state (timeout: 600 s)
+6. **Health report** — runs `health-check.sh` and exits with its return code
+
+`sudo` is required only if the user is not in the `docker` group — the script detects this automatically.
+
 ---
 
 ### Images
@@ -429,7 +508,7 @@ The actual version is defined in file *env_template.env*.
 | ----------------------------------- |:-------------------------------------------------------------:|:-------------------------------------:|
 | PostgreSQL                          | postgres                                                      | 14.5                                  |
 | Main Page / Landing Site            | ghcr.io/adempiere/adempiere-landing-page (1)                  | alpine-1.0.4                          |
-| OpenSearch API RESTful              | ghcr.io/adempiere/dictionary-rs                               | 1.6.5                                 |
+| OpenSearch API RESTful              | ghcr.io/adempiere/dictionary-rs                               | 1.6.7                                 |
 | ADempiere Report Engine             | ghcr.io/adempiere/adempiere-report-engine-service             | 1.4.2-alpine                          |
 | S3 Gateway RESTful API              | ghcr.io/adempiere/s3-gateway-rs                               | 1.2.8                                 |
 | S3 Minio Storage                    | quay.io/minio/minio                                           | RELEASE.2025-07-23T15-54-02Z          |
@@ -446,13 +525,98 @@ The actual version is defined in file *env_template.env*.
 | ADempiere Vue UI                    | ghcr.io/adempiere/adempiere-vue                               | 1.0.0                                  |
 | ADempiere Vue Backend (gRPC Server) | ghcr.io/adempiere/adempiere-grpc-server                       | 1.0.0                                  |
 | Adempiere ZK UI                     | ghcr.io/adempiere/adempiere-zk                                 | 1.0.0                                  |
-| ADempiere Processors gRPC Server    | ghcr.io/adempiere/adempiere-processors-service                 | 1.0.0                                  |
+| ADempiere Processors gRPC Server    | ghcr.io/adempiere/adempiere-processors-service                 | 1.2.0                                  |
 
 **Notes:**  
 - (1) The landing page can be replaced with your own custom image  
 - All image versions are defined in `env_template.env` and can be changed as needed  
 - **Version updates:** Check image tags regularly for security updates and new features
 
+
+### Data Persistence
+
+Understanding where the database lives is critical for backups, migrations, and cleanup operations.
+
+#### PostgreSQL — bind-mount volume
+
+The PostgreSQL database is **not stored inside a Docker container or in Docker's internal storage**.  
+It uses a Docker named volume backed by a **bind mount** — the volume definition in `docker-compose.yml` points directly to a host directory:
+
+| | Path |
+|---|---|
+| **Host directory** | `docker-compose/postgresql/postgres_database/` |
+| **Container path** | `/var/lib/postgresql/data` |
+| **Docker volume name** | `adempiere-ui-gateway.volume_postgres_db` |
+
+The backup directory is mounted the same way:
+
+| | Path |
+|---|---|
+| **Host directory** | `docker-compose/postgresql/postgres_backups/` |
+| **Container path** | `/home/adempiere/postgres_backups` |
+| **Docker volume name** | `adempiere-ui-gateway.volume_postgres_backups` |
+
+This is declared in `docker-compose.yml` as:
+
+```yaml
+volumes:
+  volume_postgres:
+    name: ${POSTGRES_VOLUME}
+    driver_opts:
+      type: none
+      o: bind
+      device: ${POSTGRES_DB_PATH_ON_HOST}   # resolves to docker-compose/postgresql/postgres_database/
+```
+
+#### What this means in practice
+
+- **The database survives container removal.**  
+  Running `stop-and-delete-all.sh` removes containers, images, networks, and Docker's named volume definitions — but the host directory and its contents are never touched.  
+  The data is always on the host.
+- **The database survives `docker volume prune`.**  
+  Prune only removes volumes not attached to any running container.  
+  Since the bind-mount volume is attached while the stack is up, it is skipped.  
+  Even if the stack is down, the host directory remains intact independently of Docker.
+- **The database survives `docker image prune -a`.**  
+  Images and data storage are completely separate; removing images has no effect on the host directory.
+- **Direct host access requires sudo.** PostgreSQL runs inside the container as the `postgres` system user (UID 999 by default), which differs from your host user.  
+  Use `sudo ls`, `sudo cp`, etc. to access the directory from the host.
+- **Disk space planning must account for database growth.**  
+  The database grows on the host partition where `docker-compose/` lives — monitor with `du -sh docker-compose/postgresql/postgres_database/`.
+- **Multiple databases can coexist on the host — just swap the directory name.**  
+  Because the active database is simply whichever directory is named `postgres_database/`, you can keep several databases side by side on the host:
+
+    ```
+    docker-compose/postgresql/  
+      postgres_database/         ← currently active (used by the stack)  
+      postgres_database_client1/ ← client 1 database (inactive)  
+      postgres_database_client2/ ← client 2 database (inactive)
+    ```
+
+    To switch databases, stop the stack, rename the directories, and restart:
+
+    ```bash
+    sudo mv postgresql/postgres_database          postgresql/postgres_database_client1
+    sudo mv postgresql/postgres_database_client2  postgresql/postgres_database
+    ./start-all.sh
+    ```
+
+    No data is ever moved or copied — only the directory names change.  
+
+- **The host's PostgreSQL engine can access the data directly — even with containers down.**  
+  Because the data directory is a standard PostgreSQL data directory on the host filesystem, a locally installed `psql` or `pg_dump` can connect to it directly — even with the Docker stack stopped. This is useful for inspecting or exporting data during maintenance or disaster recovery:
+
+    ```bash
+    # Start a temporary postgres instance pointing at the bind-mount directory
+    sudo -u postgres pg_ctl -D docker-compose/postgresql/postgres_database start
+    sudo -u postgres psql -d adempiere
+    ```
+
+  Ensure the PostgreSQL version on the host matches the one used by the container (see `POSTGRES_IMAGE` in `env_template.env`) to avoid data directory incompatibilities.
+
+See [Backup and Restore Guide](./backup-restore.md) for procedures to back up and restore this directory.
+
+---
 
 ### User's perspective  
 From a user's point of view, the application consists of the following.  

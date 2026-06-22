@@ -7,6 +7,23 @@ For the Kafdrop browser UI (topic inspection, message browsing), see [Remote Acc
 
 ---
 
+## Index
+
+| Section | Description |
+|---------|-------------|
+| [How access works](#how-access-works) | SSH exec into the Kafka container |
+| [Topic management](#topic-management) | List, create, describe, and delete topics |
+| [Producing messages](#producing-messages) | Send single or keyed messages interactively |
+| [Consuming messages](#consuming-messages) | Read messages from the beginning or in follow mode |
+| [Consumer group inspection](#consumer-group-inspection) | List and describe consumer groups and lag |
+| [End-to-end test procedure](#end-to-end-test-procedure) | Produce and consume to verify the pipeline |
+| [Verifying ERP App Service consumption](#verifying-whether-the-windows-erp-app-service-consumed-a-message) | Check if the Windows ERP service picked up a message |
+| [Inspecting a message in Kafdrop](#inspecting-a-message-in-kafdrop) | Browse topics and messages in the Kafdrop UI |
+| [Kafka log level](#kafka-log-level) | Adjust logging verbosity |
+| [Additional resources](#additional-resources) | Further reading |
+
+---
+
 ## How access works
 
 All Kafka CLI tools run **inside the `kafka` container** via `docker exec`.  

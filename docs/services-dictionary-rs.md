@@ -1,5 +1,24 @@
 # Dictionary-RS Service
 
+## Index
+
+| Section | Description |
+|---------|-------------|
+| [Abstract Overview](#abstract-overview) | What dictionary-rs does and why |
+| [Detailed Description](#detailed-description) | Full technical breakdown |
+| [Role in the Stack](#role-in-the-stack) | Where it sits and what it replaces |
+| [Data Flow](#data-flow) | How events flow from ADempiere to the cache |
+| [Kafka Topics](#kafka-topics) | Topics consumed and their purpose |
+| [REST API Endpoints](#rest-api-endpoints) | Available REST endpoints |
+| [OpenSearch Index Naming](#opensearch-index-naming) | How indices are named and structured |
+| [Configuration (Environment Variables)](#configuration-environment-variables) | All configurable environment variables |
+| [Deployment in adempiere-ui-gateway](#deployment-in-adempiere-ui-gateway) | Docker Compose profile and startup behavior |
+| [Updating the Image](#updating-the-image) | How to update the dictionary-rs version |
+| [Cache Rebuild](#cache-rebuild) | How to force a full cache rebuild |
+| [Performance Reference](#performance-reference) | Latency comparison and benchmarks |
+
+---
+
 ## Abstract Overview
 
 `dictionary-rs` is a high-performance caching layer for ADempiere's application dictionary.  

@@ -8,7 +8,7 @@ A comprehensive Docker-based deployment system for ADempiere ERP with modular se
 This project implements a Stack for ADempiere UI.
 
 ### General Explanation
-This application consists of different containers that interact with each other to deliver the functionality of ADempiere.
+This application consists of several containers that interact with each other to deliver the functionality of ADempiere.
 
 The application downloads the required images for each container, runs the configured containers and restores the database if needed on your local machine **just by calling a script**!
 
@@ -25,17 +25,30 @@ Due to the technology used, it is highly recommended to have a good knowledge of
 - No big installation hassle for getting it running: just execute the shell script **start-all.sh** .
 - It can run on different hosts just by changing  
     - the target IP to the one of the host or  
-    - the client name
+    - the client name (this is optional)
 - Fully configurable: all stack parameters — hostnames, ports, image versions, database settings, and more — are defined in a single configuration file, **env_template.env**.   
     Machine-specific overrides can be placed in **override.env** without touching the versioned template.
 - Single containers or images can be updated and/or replaced easily, making deployments and tests speedy.
 - Separation of concerns: every service implements one and only one solution.
-- Container timezone is explicitly configured (`GENERIC_TIMEZONE`, `GENERIC_CENTRAL_STANDARD_TIME` in `override.env`) rather than inherited from the host, so timestamps are correct and predictable regardless of where the stack runs.
+- Container timezone must be explicitly set (`GENERIC_TIMEZONE`, `GENERIC_CENTRAL_STANDARD_TIME` in `override.env`) — the stack refuses to start with defaults — so timestamps are always correct and predictable regardless of where it runs.
 - Ideal for testing situations due to its ease of configuration and execution.
 - No need of deep knowledge of ADempiere Installation, Application Server Installation, Docker, Images or Postgres just to get the stack running.
 - Every container, image and object is unique, derived from a configuration file.
 - New services can be easily added.
+- **Customizations are non-invasive** — organization-specific logic is compiled into separate derived images; official upstream images are never modified, so upstream releases can be pulled in without touching local changes.
+- **Build and deploy are decoupled** — the customizations repository builds and publishes on its own cycle; the stack consumes only the resulting image tag, so a deployment update is a one-line version bump in `env_template.env`.
+- **One fork, many installations** — the same customizations fork can be reused across multiple `adempiere-ui-gateway` deployments (different clients, environments, regions) by referencing the same image tag.
 
+
+### Current Limitation — HTTP Only
+
+> ⚠️ **The stack currently runs on HTTP (port 80) only.** Native HTTPS support is not yet built in — the community is actively working on it.
+>
+> In the meantime, two workarounds are available:
+> - **Let's Encrypt + Certbot** — obtain a free certificate and mount it into the nginx container
+> - **Cloudflare Proxy** — route traffic through Cloudflare for free HTTPS termination without touching the server
+>
+> See [Security — HTTPS/SSL Configuration](docs/security.md#httpsssl-configuration) for step-by-step instructions.
 
 ### Table of Contents
 Please follow the links for detailed information.
@@ -51,6 +64,7 @@ Please follow the links for detailed information.
 - [Debugging](docs/debugging.md)
 - [Debugging Vue Frontend](docs/debugging-vue-frontend.md)
 - [Troubleshooting](docs/troubleshooting.md)
+- [Customizations](docs/customizations.md)
 - [Additional Info](docs/additional_info.md)
 - [License](./LICENSE)
 

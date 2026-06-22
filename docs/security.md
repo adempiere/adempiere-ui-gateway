@@ -341,7 +341,7 @@ Development (additional):
 
 ## HTTPS/SSL Configuration
 
-⚠️ **Currently not configured.** The stack runs on HTTP (port 80) by default.
+⚠️ **The stack runs on HTTP (port 80) only.** Native HTTPS is not yet built in — the community is actively working on it. The workarounds below provide HTTPS in the meantime.
 
 ### Why HTTPS is Important
 

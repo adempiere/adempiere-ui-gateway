@@ -1,5 +1,16 @@
 # Remote Access via SSH Tunnel
 
+## Index
+
+| Section | Description |
+|---------|-------------|
+| [Preferred method for cloud deployments](#preferred-method-for-cloud-deployments) | Why SSH tunneling is the secure approach |
+| [How to open a tunnel](#how-to-open-a-tunnel) | Setup and usage of `ssh -L` port forwarding |
+| [Services reachable via SSH tunnel](#services-reachable-via-ssh-tunnel) | Port reference table for all internal services |
+| [Practical examples per service](#practical-examples-per-service) | PostgreSQL, Kafdrop, OpenSearch, Dkron, dictionary-rs, MinIO, Keycloak |
+
+---
+
 ## Preferred method for cloud deployments
 
 When the ADempiere UI Gateway stack runs on a cloud server, most internal services (PostgreSQL, Kafdrop, OpenSearch Dashboards, Dkron, MinIO, Keycloak) are **not exposed in the firewall**.  

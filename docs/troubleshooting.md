@@ -31,6 +31,7 @@ This guide helps you diagnose and resolve common issues with the ADempiere UI Ga
   - [High CPU or Memory Usage](#high-cpu-or-memory-usage)
 - [Disk Space Issues](#disk-space-issues)
   - [Out of Disk Space](#out-of-disk-space)
+  - [Orphan Volumes from Repeated Start/Stop Cycles](#orphan-volumes-from-repeated-startstop-cycles)
 - [Common Error Messages](#common-error-messages)
   - ["driver failed programming external connectivity"](#driver-failed-programming-external-connectivity)
   - ["connection refused" to PostgreSQL](#connection-refused-to-postgresql)
@@ -322,7 +323,7 @@ cd docs/scripts/
 ./03-all-container-times-simple.sh
 ```
 
-**See also:** Diagnostic Scripts README (TODO: not yet available) for detailed usage information.
+**See also:** [Diagnostic Scripts README](./scripts/README.md) for detailed usage information.
 
 Expected output:
 - All containers should show `Time diff: 0s (OK)`
@@ -338,7 +339,7 @@ Container: adempiere-ui-gateway.site
   Date: Fri Feb 13 14:55:24 UTC 2026
 ```
 
-Solution: Add TZ to the service in `docker-compose.yml`:
+Solution: First, ensure `GENERIC_TIMEZONE` (and `GENERIC_CENTRAL_STANDARD_TIME`) are set in `override.env` — `generate_env.py` enforces this and will abort if they are missing or still set to the `__CHANGE_ME__` sentinel. Then verify the service definition in `docker-compose.yml` has the TZ variable declared:
 
 ```yaml
 service-name:
@@ -770,9 +771,18 @@ docker images -a
 # Remove specific image
 docker rmi <image-id>
 
-# Remove all unused images
-docker image prune -a
+# Remove all unused images — only run while the stack is up
+docker image prune -a -f
 ```
+
+> **Warning:** `docker image prune -a` removes every image not used by a currently running container. If the stack is stopped (e.g. during a nightly maintenance window), all ADempiere images will be deleted and must be re-downloaded on next start.
+>
+> Use this guard to make the command safe — it skips the prune if the stack is not running:
+> ```bash
+> docker ps --filter "name=adempiere-ui-gateway" | grep -q adempiere \
+>   && docker image prune -a -f \
+>   || echo "Stack not running — image prune skipped"
+> ```
 
 #### 3. Clean PostgreSQL Backups
 
@@ -792,6 +802,32 @@ If cleaning doesn't help, you need more disk space:
 - Expand VM disk
 - Add new volume and move Docker data
 - Move database to larger partition
+
+#### 5. Orphan Volumes from Repeated Start/Stop Cycles
+
+Each time `stop-and-delete-all.sh` is followed by a fresh `start-all.sh`, Docker creates new named volumes for the new containers. The old volumes — no longer attached to any container — are not deleted automatically. Over time, hundreds of orphaned volumes accumulate and consume significant disk space with no visible warning.
+
+**Check:**
+
+```bash
+docker system df                                    # "Local Volumes" row: compare total vs. active count
+docker volume ls --filter dangling=true | wc -l    # number of orphaned volumes
+```
+
+**Fix:**
+
+```bash
+docker volume prune -f    # removes all volumes not attached to any container
+```
+
+> **Safe to run while the stack is up.** Docker only removes volumes with no container attached — active volumes (database, OpenSearch indices, etc.) are not touched.
+>
+> For images, use the guarded form to avoid removing ADempiere images during a maintenance window:
+> ```bash
+> docker ps --filter "name=adempiere-ui-gateway" | grep -q adempiere \
+>   && docker image prune -a -f \
+>   || echo "Stack not running — image prune skipped"
+> ```
 
 ---
 
@@ -1242,6 +1278,7 @@ If you've tried the solutions above and still have issues:
 8. ✅ **Test in development first** - Before production changes
 9. ✅ **Document customizations** - Know what you changed
 10. ✅ **Update gradually** - Test updates before deploying
+11. ✅ **Periodically prune orphan volumes** - Run `docker volume prune -f` periodically; orphaned volumes accumulate silently with every stop-and-delete/restart cycle
 
 ---
 

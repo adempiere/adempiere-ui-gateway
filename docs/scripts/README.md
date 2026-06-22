@@ -4,6 +4,20 @@ This directory contains utility scripts for the ADempiere UI Gateway stack:
 - **Diagnostic scripts** for troubleshooting
 - **Backup scripts** for database management
 
+## Index
+
+| Section | Description |
+|---------|-------------|
+| [01-contaniner-times-mismatches.sh](#01-contaniner-times-mismatchessh) | Quick check — reports only containers with time sync issues |
+| [02-container-times-detailed.sh](#02-container-times-detailedsh) | Full timezone configuration report for all containers |
+| [03-all-container-times-simple.sh](#03-all-container-times-simplesh) | Simple table view of all container times |
+| [04-backup-database.sh](#04-backup-databasesh) | Automated PostgreSQL backup with compression and retention |
+| [Output Redirection](#output-redirection) | How to save script output to files |
+| [Troubleshooting Common Issues](#troubleshooting-common-issues) | Permission errors, missing Docker, fewer containers than expected |
+| [Technical Details](#technical-details) | How time sync works, timezone priority, container recreation |
+
+---
+
 ## Timezone and Time Synchronization Scripts
 
 These scripts help verify that all containers have synchronized time with the host and proper timezone configuration.
@@ -297,15 +311,15 @@ Simply restarting (`docker compose restart`) will NOT apply environment variable
 
 ---
 
-## Contributing
+## Contributing  
 
-If you improve these scripts or find issues:
-1. Test thoroughly with various container configurations
-2. Ensure compatibility with file output redirection
-3. Update this README with any changes
+If you improve these scripts or find issues:  
+1. Test thoroughly with various container configurations  
+2. Ensure compatibility with file output redirection  
+3. Update this README with any changes  
 4. Submit improvements via pull request
 
 ---
 
-**Last Updated:** 2026-02-13
+**Last Updated:** 2026-06-21
 **Maintainer:** ADempiere Community

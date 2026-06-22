@@ -1,13 +1,35 @@
 #!/usr/bin/env python3
 
-"""Generate docker-compose/.env from env_template.env and an override.
-Usage: generate_env.py [env_template] [override_env] [out_env]
-If override is missing, uses docker-compose/override.env. Default output: docker-compose/.env
-Supports substitutions ${VAR} and $VAR and resolves them recursively.
+"""Generate docker-compose/.env from env_template.env and an optional override file.
+
+Parameter combinations
+----------------------
+(no args)                   all defaults: template=docker-compose/env_template.env,
+                            override=docker-compose/override.env (skipped if absent),
+                            output=docker-compose/.env
+TEMPLATE                    custom template path; override and output use defaults
+TEMPLATE OVERRIDE           custom template and override; output uses default
+TEMPLATE OVERRIDE OUTPUT    all custom paths
+
+Flags
+-----
+--dry-run   Print the resolved .env to stdout instead of writing the output file.
+            Informational messages are redirected to stderr, so stdout is clean
+            and can be piped or redirected:
+                ./generate_env.py --dry-run > preview.env
+-h/--help   Show this help and exit.
+
+Variable substitution
+---------------------
+Supports ${VAR} and $VAR references; resolved recursively up to 20 passes.
+Variables still set to '__CHANGE_ME__' after merging cause an abort — these
+are required values that must be set explicitly in override.env (e.g. timezone).
 """
 
+import argparse
 import re
 import sys
+import textwrap
 from pathlib import Path
 
 
@@ -44,21 +66,18 @@ def parse_env(path: Path):
         if not s:
             continue
         if s.startswith('#'):
-            # standalone comment line -> skip from mapping
             continue
         code_part, comment_part = _split_unquoted_comment(raw)
         if '=' in code_part:
             k, v = code_part.split('=', 1)
             k = k.strip()
             v = v.strip()
-            # remove surrounding quotes if present
             if (v.startswith('"') and v.endswith('"')) or (v.startswith("'") and v.endswith("'")):
                 v = v[1:-1]
             data[k] = v
             if comment_part:
                 comments[k] = comment_part
         else:
-            # lines like "OPENSEARCH_PORT" without '=' -> treat as key with empty default
             m = re.match(r'^([A-Za-z_][A-Za-z0-9_]*)$', code_part.strip())
             if m:
                 key = m.group(1)
@@ -111,51 +130,83 @@ def resolve_mapping(mapping: dict, max_iters=20) -> dict:
     return resolved
 
 
-def _report_overrides(base: dict, override: dict, override_path: Path) -> None:
+def _report_overrides(base: dict, override: dict, override_path: Path, file=sys.stdout) -> None:
     if not override_path.exists():
-        print('No override.env found — using env_template.env as-is')
+        print('No override.env found — using env_template.env as-is', file=file)
         return
     if not override:
-        print('override.env is empty — no changes from template')
+        print('override.env is empty — no changes from template', file=file)
         return
     changed = {k: (base.get(k, '<not in template>'), v)
                for k, v in override.items()
                if base.get(k) != v}
     if not changed:
-        print('override.env present but all values match template — no effective changes')
+        print('override.env present but all values match template — no effective changes', file=file)
         return
-    print('Changes from override.env:')
+    print('Changes from override.env:', file=file)
     max_len = max(len(k) for k in changed)
     for k, (old_val, new_val) in changed.items():
-        print(f'  {k:{max_len}}  "{old_val}"  →  "{new_val}"')
+        print(f'  {k:{max_len}}  "{old_val}"  →  "{new_val}"', file=file)
 
 
 def main():
-    argv = sys.argv
-    base_path = Path(argv[1]) if len(argv) > 1 else Path('docker-compose/env_template.env')
-    override_path = Path(argv[2]) if len(argv) > 2 else Path('docker-compose/override.env')
-    out_path = Path(argv[3]) if len(argv) > 3 else Path('docker-compose/.env')
+    parser = argparse.ArgumentParser(
+        prog='generate_env.py',
+        description='Generate docker-compose/.env from env_template.env and an optional override file.',
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        epilog=textwrap.dedent("""\
+            examples:
+              ./generate_env.py                                  # all defaults
+              ./generate_env.py env_template.env                 # custom template, rest default
+              ./generate_env.py env_template.env override.env    # custom template + override
+              ./generate_env.py env_template.env override.env .env  # all custom
+              ./generate_env.py --dry-run                        # preview without writing
+              ./generate_env.py --dry-run > preview.env          # save preview to file
+        """),
+    )
+    parser.add_argument(
+        'template', nargs='?', default='docker-compose/env_template.env', metavar='TEMPLATE',
+        help='path to env_template.env (default: docker-compose/env_template.env)',
+    )
+    parser.add_argument(
+        'override', nargs='?', default='docker-compose/override.env', metavar='OVERRIDE',
+        help='path to override.env (default: docker-compose/override.env; silently skipped if absent)',
+    )
+    parser.add_argument(
+        'output', nargs='?', default='docker-compose/.env', metavar='OUTPUT',
+        help='output path for .env (default: docker-compose/.env)',
+    )
+    parser.add_argument(
+        '--dry-run', action='store_true',
+        help='print resolved .env to stdout instead of writing the output file',
+    )
+    args = parser.parse_args()
+
+    base_path = Path(args.template)
+    override_path = Path(args.override)
+    out_path = Path(args.output)
+
+    report_out = sys.stderr if args.dry_run else sys.stdout
 
     base, base_comments = parse_env(base_path)
     override, override_comments = parse_env(override_path)
-    _report_overrides(base, override, override_path)
+    _report_overrides(base, override, override_path, file=report_out)
     merged = base.copy()
     merged.update(override)
     resolved = resolve_mapping(merged)
     check_required(resolved)
 
     out_lines = []
+
     def _format_value(v: str) -> str:
-        # If the value contains spaces, #, quotes, brackets or backslashes, quote it safely
         if v is None:
             return ''
         needs_quote = any(ch in v for ch in (' ', '#', '"', "'", '\\', '[', ']'))
         if not needs_quote:
             return v
-        # escape backslashes and double quotes for a safe double-quoted string
         esc = v.replace('\\', '\\\\').replace('"', '\\"')
         return f'"{esc}"'
-    # preserve comments and order from template when possible
+
     if base_path.exists():
         for line in base_path.read_text().splitlines():
             raw = line.rstrip('\n')
@@ -170,38 +221,32 @@ def main():
             if '=' in code_part:
                 key = code_part.split('=', 1)[0].strip()
                 val = resolved.get(key, '')
-                # prefer override comment then base comment
-                comment = override_comments.get(key) if 'override_comments' in locals() and key in override_comments else base_comments.get(key)
+                comment = override_comments.get(key) or base_comments.get(key)
                 fv = _format_value(val)
-                if comment:
-                    out_lines.append(f'{key}={fv} # {comment}')
-                else:
-                    out_lines.append(f'{key}={fv}')
+                out_lines.append(f'{key}={fv} # {comment}' if comment else f'{key}={fv}')
                 continue
             m = re.match(r'^([A-Za-z_][A-Za-z0-9_]*)$', code_part.strip())
             if m:
                 key = m.group(1)
                 val = resolved.get(key, '')
-                comment = override_comments.get(key) if 'override_comments' in locals() and key in override_comments else base_comments.get(key)
+                comment = override_comments.get(key) or base_comments.get(key)
                 fv = _format_value(val)
-                if comment:
-                    out_lines.append(f'{key}={fv} # {comment}')
-                else:
-                    out_lines.append(f'{key}={fv}')
+                out_lines.append(f'{key}={fv} # {comment}' if comment else f'{key}={fv}')
                 continue
             out_lines.append(raw)
-    # append any extra keys from overrides
-    for k, v in resolved.items():
-        if not any((ln.split('=',1)[0].strip() == k) for ln in out_lines if '=' in ln):
-            comment = override_comments.get(k) if 'override_comments' in locals() and k in override_comments else base_comments.get(k)
-            fv = _format_value(v)
-            if comment:
-                out_lines.append(f'{k}={fv} # {comment}')
-            else:
-                out_lines.append(f'{k}={fv}')
 
-    out_path.write_text('\n'.join(out_lines) + '\n')
-    print(f'Write {out_path}')
+    for k, v in resolved.items():
+        if not any((ln.split('=', 1)[0].strip() == k) for ln in out_lines if '=' in ln):
+            comment = override_comments.get(k) or base_comments.get(k)
+            fv = _format_value(v)
+            out_lines.append(f'{k}={fv} # {comment}' if comment else f'{k}={fv}')
+
+    if args.dry_run:
+        print('\n'.join(out_lines))
+        print(f'[dry-run] would write {len(out_lines)} lines to {out_path}', file=sys.stderr)
+    else:
+        out_path.write_text('\n'.join(out_lines) + '\n')
+        print(f'Written: {out_path}')
 
 
 if __name__ == '__main__':
