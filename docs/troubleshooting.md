@@ -771,9 +771,18 @@ docker images -a
 # Remove specific image
 docker rmi <image-id>
 
-# Remove all unused images
-docker image prune -a
+# Remove all unused images — only run while the stack is up
+docker image prune -a -f
 ```
+
+> **Warning:** `docker image prune -a` removes every image not used by a currently running container. If the stack is stopped (e.g. during a nightly maintenance window), all ADempiere images will be deleted and must be re-downloaded on next start.
+>
+> Use this guard to make the command safe — it skips the prune if the stack is not running:
+> ```bash
+> docker ps --filter "name=adempiere-ui-gateway" | grep -q adempiere \
+>   && docker image prune -a -f \
+>   || echo "Stack not running — image prune skipped"
+> ```
 
 #### 3. Clean PostgreSQL Backups
 
@@ -812,6 +821,13 @@ docker volume prune -f    # removes all volumes not attached to any container
 ```
 
 > **Safe to run while the stack is up.** Docker only removes volumes with no container attached — active volumes (database, OpenSearch indices, etc.) are not touched.
+>
+> For images, use the guarded form to avoid removing ADempiere images during a maintenance window:
+> ```bash
+> docker ps --filter "name=adempiere-ui-gateway" | grep -q adempiere \
+>   && docker image prune -a -f \
+>   || echo "Stack not running — image prune skipped"
+> ```
 
 ---
 
