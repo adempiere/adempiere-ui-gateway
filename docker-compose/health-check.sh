@@ -29,7 +29,7 @@ if [ -n "$PROFILE" ] && [ "$PROFILE" != "all" ]; then
     mapfile -t PROFILE_CONTAINERS < <(
         COMPOSE_PROFILES="$PROFILE" docker compose --project-directory "$SCRIPT_DIR" \
             -f "$SCRIPT_DIR/docker-compose.yml" config 2>/dev/null \
-        | awk '/^\s*container_name:/ {print $2}'
+        | grep 'container_name:' | awk '{print $2}'
     )
 fi
 
