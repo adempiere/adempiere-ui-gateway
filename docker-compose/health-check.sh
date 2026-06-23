@@ -21,12 +21,12 @@ P="${COMPOSE_PROJECT_NAME:-adempiere-ui-gateway}"
 # ── Helper: check container running/health status ─────────────────────────────
 check_container() {
     local container=$1 label=$2
-    printf "  %-50s" "$label"
     local status health
     status=$($DOCKER inspect --format='{{.State.Status}}' "$container" 2>/dev/null)
     if [ -z "$status" ]; then
-        echo -e "${RED}${FAIL}  container not found${NC}"; ((FAIL_COUNT++)); return 1
+        return 0  # container not in active profile — skip silently
     fi
+    printf "  %-50s" "$label"
     health=$($DOCKER inspect --format='{{if .State.Health}}{{.State.Health.Status}}{{else}}none{{end}}' "$container" 2>/dev/null)
     if [ "$status" = "running" ]; then
         case "$health" in
@@ -43,12 +43,12 @@ check_container() {
 # ── Helper: check init container — exited cleanly is expected and OK ──────────
 check_init_container() {
     local container=$1 label=$2
-    printf "  %-50s" "$label"
     local status
     status=$($DOCKER inspect --format='{{.State.Status}}' "$container" 2>/dev/null)
     if [ -z "$status" ]; then
-        echo -e "${RED}${FAIL}  container not found${NC}"; ((FAIL_COUNT++)); return 1
+        return 0  # container not in active profile — skip silently
     fi
+    printf "  %-50s" "$label"
     if [ "$status" = "exited" ]; then
         local exit_code
         exit_code=$($DOCKER inspect --format='{{.State.ExitCode}}' "$container" 2>/dev/null)
@@ -131,6 +131,7 @@ echo ""; echo -e "${BLUE}${BOLD}─── 5. HTTP Endpoint Checks ────�
 
 _http_by_container() {
     local label=$1 container=$2 port=$3 path="${4:-/}" accepted="${5:-200}"
+    $DOCKER inspect "$container" &>/dev/null || return 0  # not in active profile — skip
     local ip
     ip=$(container_ip "$container")
     if [ -n "$ip" ]; then
