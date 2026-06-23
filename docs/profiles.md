@@ -5,19 +5,46 @@
 
 The stack uses a **profile-based activation** model to allow flexible service composition from a single `docker-compose.yml` file:
 
-- Every service definition is tagged with one or more profile names (e.g. `''`, `all`, `auth`, `cache`, `develop`, `storage`, `vue`, `zk`).
-- `start-all.sh` selects which profile(s) to activate based on the `-d <mode>` argument.
-- Only services whose profile matches the activated set are started — all others are ignored.
-- The `start-all.sh` script assembles `docker-compose.yml` from the appropriate fragment files for the selected mode before invoking `docker compose`. See [Stack Assembly Logic](./architecture.md#stack-assembly-logic) for details.
-
-This design means you can run a minimal Vue-only stack, a full production stack, or anything in between — without modifying the service definitions.
+- Every service definition is tagged with one or more profile names (e.g. `all`, `auth`, `cache`, `storage`, `vue`, `zk`).
+- Only services whose profile matches the activated profile are started — all others are ignored.
+- This design means you can run a minimal Vue-only stack, a full production stack, or anything in between — without modifying the service definitions.
 
 This application exploits the [Docker Compose Profiles](https://docs.docker.com/compose/how-tos/profiles/).
 
-It basically defines a group of services that can be started or stopped together; this group is named a "profile".  
-In the file docker-compose.yml the profiles are defined for every service; this can be changed anytime accordingly to the needs.
+### Using Profiles with the Scripts
 
-By calling *docker compose up* or *./start-all.sh* plus a parameter, the parameter is interpreted as the profile to be used.
+All three management scripts accept an optional profile argument (default: `all`):
+
+```bash
+./start-all.sh [profile]
+./health-check.sh [profile]
+./full-restart-with-healthcheck.sh [profile]
+```
+
+**`start-all.sh`** — starts only the services belonging to the given profile:
+```bash
+./start-all.sh          # starts all services (default)
+./start-all.sh vue      # starts only the vue-profile services
+./start-all.sh zk       # starts only the zk-profile services
+```
+
+**`health-check.sh`** — checks only the containers belonging to the given profile:
+```bash
+./health-check.sh       # checks all containers that exist in Docker
+./health-check.sh vue   # checks only vue-profile containers (regardless of what else is running)
+./health-check.sh zk    # checks only zk-profile containers
+```
+Containers that do not exist (not started) or are excluded by the profile are silently skipped — they do not count as failures.
+
+**`full-restart-with-healthcheck.sh`** — stops everything, restarts with the given profile, waits for the stack to be ready, and runs the health check:
+```bash
+./full-restart-with-healthcheck.sh        # restart with all services
+./full-restart-with-healthcheck.sh vue    # restart with only vue-profile services
+./full-restart-with-healthcheck.sh zk     # restart with only zk-profile services
+```
+The script discovers which containers were actually started after `start-all.sh` runs, so the wait and health-check steps automatically cover exactly the services that belong to the active profile.
+
+---
 
 | Profile | Key | Description |
 |---------|-----|-------------|
@@ -30,11 +57,10 @@ By calling *docker compose up* or *./start-all.sh* plus a parameter, the paramet
 | [ADempiere-Vue UI](#services-activated-with-adempiere-vue-ui-profile) | `vue` | Minimal stack: Vue UI + gRPC only |
 | [ADempiere-Zk UI](#services-activated-with-adempiere-zk-ui-profile) | `zk` | Minimal stack: ZK UI only |
 | [All](#services-activated-with-all-profile) | `all` | Complete stack with all available services |
-| [Develop](#services-activated-with-develop-profile) | `develop` | Default + monitoring tools and exposed debug ports |
 | [Multiple profiles](#multiple-profiles) | combined | Combining multiple profile keys |
 
 #### Services activated with _Default/Standard_ Profile (No parameter or empty string)
-This is the **production-ready stack** with all core ADempiere services. This profile runs when you execute `./start-all.sh` without any parameter, or with `-d default`.
+This is the **production-ready stack** with all core ADempiere services. This profile runs when you execute `./start-all.sh` without any parameter.
 
  - postgres-service
  - adempiere-site
@@ -50,10 +76,6 @@ This is the **production-ready stack** with all core ADempiere services. This pr
 Start with:
 ```bash
 ./start-all.sh
-```
-Or:
-```bash
-./start-all.sh -d default
 ```
 
 **Note:** This is the recommended stack for production deployments.
@@ -72,7 +94,7 @@ Or:
 
 Start with:
 ```bash
-COMPOSE_PROFILES="auth" docker compose up
+./start-all.sh auth
 ```
 
 
@@ -92,7 +114,7 @@ COMPOSE_PROFILES="auth" docker compose up
 
 Start with:
 ```bash
-COMPOSE_PROFILES="cache" docker compose up
+./start-all.sh cache
 ```
 
 
@@ -108,7 +130,7 @@ COMPOSE_PROFILES="cache" docker compose up
 
 Start with:
 ```bash
-COMPOSE_PROFILES="report" docker compose up
+./start-all.sh report
 ```
 
 
@@ -126,7 +148,7 @@ COMPOSE_PROFILES="report" docker compose up
 
 Start with:
 ```bash
-COMPOSE_PROFILES="scheduler" docker compose up
+./start-all.sh scheduler
 ```
 
 
@@ -144,7 +166,7 @@ COMPOSE_PROFILES="scheduler" docker compose up
 
 Start with:
 ```bash
-COMPOSE_PROFILES="storage" docker compose up
+./start-all.sh storage
 ```
 
 
@@ -159,7 +181,7 @@ COMPOSE_PROFILES="storage" docker compose up
 
 Start with:
 ```bash
-COMPOSE_PROFILES="vue" docker compose up
+./start-all.sh vue
 ```
 
 
@@ -172,7 +194,7 @@ COMPOSE_PROFILES="vue" docker compose up
 
 Start with:
 ```bash
-COMPOSE_PROFILES="zk" docker compose up
+./start-all.sh zk
 ```
 
 
@@ -181,26 +203,11 @@ The **all** profile activates the complete stack with ALL available services, in
 
 Start with:
 ```bash
-./start-all.sh -d all
+./start-all.sh all
 ```
-Or:
+Or equivalently (since `all` is the default):
 ```bash
-COMPOSE_PROFILES="all" docker compose up
-```
-
-
-#### Services activated with _Develop_ Profile
-The **develop** profile includes additional development and monitoring tools with exposed ports for debugging. This is useful during development and testing.
-
-Additional services compared to default:
- - Exposed database port (55432)
- - Kafdrop (Kafka monitoring)
- - OpenSearch Dashboards
- - Additional debug ports
-
-Start with:
-```bash
-./start-all.sh -d develop
+./start-all.sh
 ```
 
 

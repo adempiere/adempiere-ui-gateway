@@ -7,6 +7,7 @@
 #
 #  Usage: ./full-restart-with-healthcheck.sh [profile]
 #         profile defaults to "all" if not specified
+#         Use "sudo ./full-restart-with-healthcheck.sh" on systems where docker requires sudo.
 # =============================================================================
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
