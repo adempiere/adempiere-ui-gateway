@@ -115,7 +115,7 @@ log "=== Step 1/6: Stopping all services ==="
 running_count=$($DOCKER ps --format '{{.Names}}' | grep -c "^${PROJECT_NAME}\." || true)
 if [ "$running_count" -gt 0 ]; then
     log "Found $running_count running container(s). Calling stop script..."
-    if ! $SUDO bash "$STOP_SCRIPT"; then
+    if ! bash "$STOP_SCRIPT"; then
         log "ERROR: Stop script exited with a non-zero status. Aborting."
         exit 1
     fi
@@ -126,7 +126,7 @@ else
 fi
 
 log "=== Step 3/6: Starting all services (profile: $PROFILE) ==="
-if ! $SUDO bash "$START_SCRIPT" "$PROFILE"; then
+if ! bash "$START_SCRIPT" "$PROFILE"; then
     log "ERROR: Start script exited with a non-zero status. Aborting."
     exit 1
 fi
