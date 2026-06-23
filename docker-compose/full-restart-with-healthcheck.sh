@@ -152,5 +152,5 @@ log "=== Step 5/6: Waiting for healthchecks to complete ==="
 wait_for_healthy
 
 log "=== Step 6/6: Running health check ==="
-bash "$HEALTH_CHECK_SCRIPT"
+bash "$HEALTH_CHECK_SCRIPT" "$PROFILE"
 exit $?
