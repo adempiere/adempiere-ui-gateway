@@ -155,9 +155,12 @@ echo ""; echo -e "${BLUE}${BOLD}─── 5. HTTP Endpoint Checks ────�
 # mappings or LAN IP, so the script works regardless of network location.
 
 _http_by_container() {
-    local label=$1 container=$2 port=$3 path="${4:-/}" accepted="${5:-200}"
-    in_profile "$container" || return 0
-    $DOCKER inspect "$container" &>/dev/null || return 0  # not in active profile — skip
+    local label=$1 container=$2 port=$3 path="${4:-/}" accepted="${5:-200}" guard="${6:-$2}"
+    # guard: container whose existence/profile membership gates this check.
+    # Defaults to container (the one whose IP is used for the request).
+    # Set guard to a backend container when the HTTP request goes via a proxy (e.g. nginx).
+    in_profile "$guard" || return 0
+    $DOCKER inspect "$guard" &>/dev/null || return 0  # not in active profile — skip
     local ip
     ip=$(container_ip "$container")
     if [ -n "$ip" ]; then
@@ -177,9 +180,9 @@ MINIO_PORT="${S3_CONSOLE_PORT:-9090}"
 DICT_PORT="${DICTIONARY_RS_PORT:-7878}"
 OS_PORT="${OPENSEARCH_PORT:-9200}"
 
-_http_by_container "Nginx (root)"                "$P.nginx-ui-gateway"      $NGINX_PORT   "/"        "200 301 302"
-_http_by_container "Vue UI  (via nginx /vue)"    "$P.nginx-ui-gateway"      $NGINX_PORT   "/vue"     "200"
-_http_by_container "ZK UI   (via nginx /webui)"  "$P.nginx-ui-gateway"      $NGINX_PORT   "/webui"   "200 301 302"
+_http_by_container "Nginx (root)"                "$P.nginx-ui-gateway"      $NGINX_PORT   "/"        "200 301 302" "$P.site"
+_http_by_container "Vue UI  (via nginx /vue)"    "$P.nginx-ui-gateway"      $NGINX_PORT   "/vue"     "200"         "$P.vue-ui"
+_http_by_container "ZK UI   (via nginx /webui)"  "$P.nginx-ui-gateway"      $NGINX_PORT   "/webui"   "200 301 302" "$P.zk"
 _http_by_container "Kafdrop"                     "$P.kafdrop"               $KAFDROP_PORT "/"        "200"
 _http_by_container "OpenSearch Dashboards"       "$P.opensearch-dashboards" $OSDASH_PORT  "/"        "200 301 302"
 _http_by_container "Keycloak"                    "$P.keycloak-service"      $KEYCLOAK_PORT "/"       "200 301 302"

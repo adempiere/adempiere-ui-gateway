@@ -133,14 +133,16 @@ if ! bash "$START_SCRIPT" "$PROFILE"; then
 fi
 
 # Discover which containers were actually started by this profile.
-# Services without a restart directive have restart policy "no" — those are
-# one-shot init containers (e.g. s3-client, opensearch-setup) and are excluded.
+# Init containers (e.g. s3-client, opensearch-setup) are excluded by detecting
+# that they have already exited cleanly (status=exited, exit code=0).
 mapfile -t RUNNING_CONTAINERS < <(
     $DOCKER ps -a --format '{{.Names}}' 2>/dev/null \
     | grep "^${PROJECT_NAME}\." \
     | while read -r name; do
-        policy=$($DOCKER inspect --format='{{.HostConfig.RestartPolicy.Name}}' "$name" 2>/dev/null)
-        [ -n "$policy" ] && [ "$policy" != "no" ] && echo "$name"
+        status=$($DOCKER inspect --format='{{.State.Status}}' "$name" 2>/dev/null)
+        exit_code=$($DOCKER inspect --format='{{.State.ExitCode}}' "$name" 2>/dev/null)
+        [ "$status" = "exited" ] && [ "$exit_code" = "0" ] && continue
+        echo "$name"
       done \
     | sort
 )
