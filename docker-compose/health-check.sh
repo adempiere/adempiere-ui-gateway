@@ -1,7 +1,9 @@
 #!/bin/bash
 # =============================================================================
 #  ADempiere UI Gateway — Service Health Check
-#  Usage: ./health-check.sh
+#  Usage: ./health-check.sh [profile]
+#         Without profile: checks all containers that exist in Docker.
+#         With profile:    checks only containers belonging to that profile.
 # =============================================================================
 
 # ── Colors & icons ────────────────────────────────────────────────────────────
@@ -18,9 +20,30 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 [ -f "$SCRIPT_DIR/.env" ] && source "$SCRIPT_DIR/.env"
 P="${COMPOSE_PROJECT_NAME:-adempiere-ui-gateway}"
 
+# ── Profile filter ────────────────────────────────────────────────────────────
+# When a profile is given, build the set of container names that belong to it
+# by querying docker compose. When omitted, all existing containers are checked.
+PROFILE="${1:-}"
+PROFILE_CONTAINERS=()
+if [ -n "$PROFILE" ] && [ "$PROFILE" != "all" ]; then
+    mapfile -t PROFILE_CONTAINERS < <(
+        COMPOSE_PROFILES="$PROFILE" docker compose --project-directory "$SCRIPT_DIR" \
+            -f "$SCRIPT_DIR/docker-compose.yml" config 2>/dev/null \
+        | awk '/^\s*container_name:/ {print $2}'
+    )
+fi
+
+# Returns 0 if the container should be checked, 1 if it should be skipped.
+in_profile() {
+    [ "${#PROFILE_CONTAINERS[@]}" -eq 0 ] && return 0  # no filter: check all
+    local c; for c in "${PROFILE_CONTAINERS[@]}"; do [ "$c" = "$1" ] && return 0; done
+    return 1
+}
+
 # ── Helper: check container running/health status ─────────────────────────────
 check_container() {
     local container=$1 label=$2
+    in_profile "$container" || return 0
     local status health
     status=$($DOCKER inspect --format='{{.State.Status}}' "$container" 2>/dev/null)
     if [ -z "$status" ]; then
@@ -43,6 +66,7 @@ check_container() {
 # ── Helper: check init container — exited cleanly is expected and OK ──────────
 check_init_container() {
     local container=$1 label=$2
+    in_profile "$container" || return 0
     local status
     status=$($DOCKER inspect --format='{{.State.Status}}' "$container" 2>/dev/null)
     if [ -z "$status" ]; then
@@ -87,6 +111,7 @@ echo ""
 echo -e "${BOLD}═══════════════════════════════════════════════════════════${NC}"
 echo -e "${BOLD}  ADempiere UI Gateway — Service Health Check${NC}"
 echo    "  Project : $P"
+echo    "  Profile : ${PROFILE:-all}"
 echo    "  Date    : $(date '+%Y-%m-%d %H:%M:%S')"
 echo -e "${BOLD}═══════════════════════════════════════════════════════════${NC}"
 
@@ -131,6 +156,7 @@ echo ""; echo -e "${BLUE}${BOLD}─── 5. HTTP Endpoint Checks ────�
 
 _http_by_container() {
     local label=$1 container=$2 port=$3 path="${4:-/}" accepted="${5:-200}"
+    in_profile "$container" || return 0
     $DOCKER inspect "$container" &>/dev/null || return 0  # not in active profile — skip
     local ip
     ip=$(container_ip "$container")
