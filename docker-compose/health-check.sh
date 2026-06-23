@@ -88,17 +88,20 @@ check_init_container() {
     fi
 }
 
-# ── Helper: check HTTP endpoint ───────────────────────────────────────────────
+# ── Helper: check HTTP endpoint (retries up to 3×, 10 s apart) ─────────────────
 check_http() {
     local label=$1 url=$2 accepted="${3:-200}"
     printf "  %-50s" "$label"
-    local code
-    code=$(curl -s -o /dev/null -w "%{http_code}" --max-time 5 "$url" 2>/dev/null)
-    if echo "$accepted" | grep -qw "$code"; then
-        echo -e "${GREEN}${OK}  HTTP $code  →  $url${NC}"; ((PASS_COUNT++))
-    else
-        echo -e "${RED}${FAIL}  HTTP $code  →  $url${NC}";  ((FAIL_COUNT++))
-    fi
+    local code attempt retries=3 delay=10
+    for attempt in $(seq 1 $retries); do
+        code=$(curl -s -o /dev/null -w "%{http_code}" --max-time 5 "$url" 2>/dev/null)
+        if echo "$accepted" | grep -qw "$code"; then
+            echo -e "${GREEN}${OK}  HTTP $code  →  $url${NC}"; ((PASS_COUNT++))
+            return
+        fi
+        [ "$attempt" -lt "$retries" ] && sleep "$delay"
+    done
+    echo -e "${RED}${FAIL}  HTTP $code  →  $url${NC}"; ((FAIL_COUNT++))
 }
 
 # ── Helper: get container's internal Docker network IP ────────────────────────
