@@ -192,6 +192,7 @@ The script runs these steps in sequence and reports progress at each one:
 - Container discovery in step 3 is dynamic: it queries Docker after start, so the wait and health-check steps automatically cover exactly the services that were started — no hardcoded list to maintain.  
 - If a timeout is exceeded, the script logs a warning and proceeds to the next step rather than aborting, so the health check always runs and shows the actual state.  
 - Exit code mirrors `health-check.sh`: `0` = all checks passed, `1` = at least one failure.
+- `adempiere-zk`, `keycloak`, and `nginx` now have Docker healthchecks, so Step 5 correctly waits for them to be ready before the health check runs.
 
 **Example output (all 19 services healthy):**
 
@@ -295,14 +296,14 @@ Docker Compose started
   Dictionary RS                                     ✅  running · healthy
   S3 Gateway RS                                     ✅  running · healthy
   Envoy gRPC Proxy                                  ✅  running · healthy
-  Keycloak                                          ✅  running
+  Keycloak                                          ✅  running · healthy
   Dkron Scheduler                                   ✅  running
 
 ─── 3. Frontend & Gateway ──────────────────────────────────
-  ADempiere ZK                                      ✅  running
+  ADempiere ZK                                      ✅  running · healthy
   Vue UI                                            ✅  running · healthy
   ADempiere Site                                    ✅  running
-  Nginx UI Gateway                                  ✅  running
+  Nginx UI Gateway                                  ✅  running · healthy
 
 ─── 4. Monitoring & Tooling ────────────────────────────────
   Kafdrop (Kafka UI)                                ✅  running
@@ -331,6 +332,38 @@ Docker Compose started
 ```
 
 > **Note:** The IPs in the HTTP endpoint checks (e.g. `192.168.100.x`) are internal Docker network addresses — they are the same on every deployment using the default `NETWORK_SUBNET`. The total startup time from stop to all-healthy was approximately 2 minutes on this run.
+
+---
+
+### Validate All Profiles
+
+To verify that every profile starts cleanly and passes its health check in sequence:
+
+```bash
+./test-all-profiles.sh
+```
+
+This script cycles through all profiles (`vue`, `zk`, `auth`, `cache`, `report`, `scheduler`, `storage`, `all`) and for each one:
+
+1. Stops the current stack
+2. Starts the profile
+3. Waits for containers to be running and healthy
+4. Runs `health-check.sh` for that profile
+
+It prints a summary and exits with code `0` only if every profile passes.
+
+```
+[2026-06-23 06:24:36]   Summary
+  vue          PASS
+  zk           PASS
+  auth         PASS
+  cache        PASS
+  report       PASS
+  scheduler    PASS
+  storage      PASS
+  all          PASS
+[2026-06-23 06:24:36] All profiles passed.
+```
 
 ---
 
