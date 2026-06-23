@@ -5,7 +5,9 @@
 #  Sequence: stop all services -> wait until stopped -> start all services
 #  -> wait until running -> wait until healthchecks complete -> run health-check.sh
 #
-#  Usage: sudo ./full-restart-with-healthcheck.sh
+#  Usage: ./full-restart-with-healthcheck.sh [profile]
+#         profile defaults to "all" if not specified
+#         Use "sudo ./full-restart-with-healthcheck.sh" on systems where docker requires sudo.
 # =============================================================================
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -16,34 +18,15 @@ START_SCRIPT="$SCRIPT_DIR/start-all.sh"
 HEALTH_CHECK_SCRIPT="$SCRIPT_DIR/health-check.sh"
 
 PROJECT_NAME="adempiere-ui-gateway"   # COMPOSE_PROJECT_NAME fallback
+PROFILE="${1:-all}"                   # Docker Compose profile (default: all)
 
 STOP_TIMEOUT=120     # seconds to wait for all containers to disappear
 START_TIMEOUT=600    # seconds to wait for all containers to reach "running"
 POLL_INTERVAL=5      # seconds between polls
 
-# Long-running containers expected once the stack is up.
-# Excludes one-shot init containers (s3-client, opensearch-setup), which exit by design.
-RUNNING_CONTAINERS=(
-    "$PROJECT_NAME.postgresql"
-    "$PROJECT_NAME.zookeeper"
-    "$PROJECT_NAME.kafka"
-    "$PROJECT_NAME.opensearch"
-    "$PROJECT_NAME.s3-storage"
-    "$PROJECT_NAME.vue-grpc-server"
-    "$PROJECT_NAME.report-engine"
-    "$PROJECT_NAME.processor"
-    "$PROJECT_NAME.dictionary-rs"
-    "$PROJECT_NAME.s3-gateway-rs"
-    "$PROJECT_NAME.envoy-grpc-proxy"
-    "$PROJECT_NAME.keycloak-service"
-    "$PROJECT_NAME.scheduler-dkron"
-    "$PROJECT_NAME.zk"
-    "$PROJECT_NAME.vue-ui"
-    "$PROJECT_NAME.site"
-    "$PROJECT_NAME.nginx-ui-gateway"
-    "$PROJECT_NAME.kafdrop"
-    "$PROJECT_NAME.opensearch-dashboards"
-)
+# RUNNING_CONTAINERS is populated dynamically after start-all.sh runs.
+# Init containers (restart policy "no") are excluded automatically.
+RUNNING_CONTAINERS=()
 
 # Sudo detection: use sudo for docker and for calling child scripts if not already root
 if [ "$(id -u)" -eq 0 ]; then SUDO=""; else SUDO="sudo"; fi
@@ -133,7 +116,7 @@ log "=== Step 1/6: Stopping all services ==="
 running_count=$($DOCKER ps --format '{{.Names}}' | grep -c "^${PROJECT_NAME}\." || true)
 if [ "$running_count" -gt 0 ]; then
     log "Found $running_count running container(s). Calling stop script..."
-    if ! $SUDO bash "$STOP_SCRIPT"; then
+    if ! bash "$STOP_SCRIPT"; then
         log "ERROR: Stop script exited with a non-zero status. Aborting."
         exit 1
     fi
@@ -143,11 +126,27 @@ else
     log "No '$PROJECT_NAME' containers are running. Skipping stop."
 fi
 
-log "=== Step 3/6: Starting all services ==="
-if ! $SUDO bash "$START_SCRIPT"; then
+log "=== Step 3/6: Starting all services (profile: $PROFILE) ==="
+if ! bash "$START_SCRIPT" "$PROFILE"; then
     log "ERROR: Start script exited with a non-zero status. Aborting."
     exit 1
 fi
+
+# Discover which containers were actually started by this profile.
+# Init containers (e.g. s3-client, opensearch-setup) are excluded by detecting
+# that they have already exited cleanly (status=exited, exit code=0).
+mapfile -t RUNNING_CONTAINERS < <(
+    $DOCKER ps -a --format '{{.Names}}' 2>/dev/null \
+    | grep "^${PROJECT_NAME}\." \
+    | while read -r name; do
+        status=$($DOCKER inspect --format='{{.State.Status}}' "$name" 2>/dev/null)
+        exit_code=$($DOCKER inspect --format='{{.State.ExitCode}}' "$name" 2>/dev/null)
+        [ "$status" = "exited" ] && [ "$exit_code" = "0" ] && continue
+        echo "$name"
+      done \
+    | sort
+)
+log "Monitoring ${#RUNNING_CONTAINERS[@]} long-running container(s)."
 
 log "=== Step 4/6: Waiting for startup ==="
 wait_for_start
@@ -156,5 +155,5 @@ log "=== Step 5/6: Waiting for healthchecks to complete ==="
 wait_for_healthy
 
 log "=== Step 6/6: Running health check ==="
-bash "$HEALTH_CHECK_SCRIPT"
+bash "$HEALTH_CHECK_SCRIPT" "$PROFILE"
 exit $?

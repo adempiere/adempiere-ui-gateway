@@ -104,17 +104,26 @@ Replace `<HOST_IP>` with the value you set for `HOST_IP` in your configuration.
 To check the status of every service from the command line, run the health check script from the `docker-compose/` directory:
 
 ```bash
-./health-check.sh
+./health-check.sh [profile]
 ```
 
-The script checks all containers (running status and health) and probes the HTTP endpoint of each service. It reports results with clear pass/fail indicators and exits with code `1` if any check fails.
+Without a profile argument the script checks all containers that currently exist in Docker, skipping any that were not started. With a profile argument it restricts the check to the containers belonging to that profile — useful when the full stack is running but you only want to verify a specific subset.
 
-Example output:
+```bash
+./health-check.sh          # check all existing containers
+./health-check.sh vue      # check only vue-profile containers
+./health-check.sh zk       # check only zk-profile containers
+```
+
+The script checks container status, healthcheck results, and HTTP endpoints. It reports results with clear pass/fail indicators and exits with code `1` if any check fails.
+
+Example output (full stack):
 
 ```
 ═══════════════════════════════════════════════════════════
   ADempiere UI Gateway — Service Health Check
   Project : adempiere-ui-gateway
+  Profile : all
   Date    : 2026-06-06 07:49:40
 ═══════════════════════════════════════════════════════════
 
@@ -142,6 +151,7 @@ Example output:
 ```
 
 **Notes:**  
+- Containers that were not started (either because no profile was given and they don't exist, or because the given profile does not include them) are silently skipped — they do not count as failures.  
 - Init containers (`s3-client`, `opensearch-setup`) are expected to show `exited cleanly` — this is normal.  
 - HTTP checks use each container's internal Docker network IP, so the script works correctly regardless of the host's LAN IP or network location.  
 - The script auto-detects whether `sudo` is required for Docker commands.
@@ -151,13 +161,13 @@ Example output:
 To stop all services, wait for them to go down, start them again, wait for them to come up, and run a health check — all in one command:
 
 ```bash
-./full-restart-with-healthcheck.sh
+./full-restart-with-healthcheck.sh [profile]
 ```
 
-On servers where Docker requires `sudo` (user not in the `docker` group):
+The profile argument is optional and defaults to `all`. On servers where Docker requires `sudo` (user not in the `docker` group), prefix with `sudo`:
 
 ```bash
-sudo ./full-restart-with-healthcheck.sh
+sudo ./full-restart-with-healthcheck.sh [profile]
 ```
 
 The script runs these steps in sequence and reports progress at each one:
@@ -166,10 +176,10 @@ The script runs these steps in sequence and reports progress at each one:
 |------|-------------|
 | 1 | Checks for running containers; calls `stop-all.sh` only if any are found |
 | 2 | Polls every 5 s until all containers have stopped (timeout: 120 s) |
-| 3 | Calls `start-all.sh` |
-| 4 | Polls every 5 s until all expected containers reach `running` state (timeout: 600 s) |
+| 3 | Calls `start-all.sh [profile]`; then discovers which containers were actually started, excluding one-shot init containers |
+| 4 | Polls every 5 s until all discovered containers reach `running` state (timeout: 600 s) |
 | 5 | Polls every 5 s until all container healthchecks leave `starting` state (timeout: 600 s) |
-| 6 | Runs `health-check.sh` and exits with its exit code |
+| 6 | Runs `health-check.sh [profile]` and exits with its exit code |
 
 **When to use it:**  
 - After a configuration change that requires a full restart  
@@ -179,8 +189,10 @@ The script runs these steps in sequence and reports progress at each one:
 **Notes:**  
 - The script is safe to run even if services are already stopped — step 1 detects this and skips the stop phase.  
 - Steps 4 and 5 together replace the need to wait and re-run `health-check.sh` manually: the health check only runs once all services have had time to fully initialize.  
+- Container discovery in step 3 is dynamic: it queries Docker after start, so the wait and health-check steps automatically cover exactly the services that were started — no hardcoded list to maintain.  
 - If a timeout is exceeded, the script logs a warning and proceeds to the next step rather than aborting, so the health check always runs and shows the actual state.  
 - Exit code mirrors `health-check.sh`: `0` = all checks passed, `1` = at least one failure.
+- `adempiere-zk`, `keycloak`, and `nginx` now have Docker healthchecks, so Step 5 correctly waits for them to be ready before the health check runs.
 
 **Example output (all 19 services healthy):**
 
@@ -284,14 +296,14 @@ Docker Compose started
   Dictionary RS                                     ✅  running · healthy
   S3 Gateway RS                                     ✅  running · healthy
   Envoy gRPC Proxy                                  ✅  running · healthy
-  Keycloak                                          ✅  running
+  Keycloak                                          ✅  running · healthy
   Dkron Scheduler                                   ✅  running
 
 ─── 3. Frontend & Gateway ──────────────────────────────────
-  ADempiere ZK                                      ✅  running
+  ADempiere ZK                                      ✅  running · healthy
   Vue UI                                            ✅  running · healthy
   ADempiere Site                                    ✅  running
-  Nginx UI Gateway                                  ✅  running
+  Nginx UI Gateway                                  ✅  running · healthy
 
 ─── 4. Monitoring & Tooling ────────────────────────────────
   Kafdrop (Kafka UI)                                ✅  running
@@ -320,6 +332,38 @@ Docker Compose started
 ```
 
 > **Note:** The IPs in the HTTP endpoint checks (e.g. `192.168.100.x`) are internal Docker network addresses — they are the same on every deployment using the default `NETWORK_SUBNET`. The total startup time from stop to all-healthy was approximately 2 minutes on this run.
+
+---
+
+### Validate All Profiles
+
+To verify that every profile starts cleanly and passes its health check in sequence:
+
+```bash
+./test-all-profiles.sh
+```
+
+This script cycles through all profiles (`vue`, `zk`, `auth`, `cache`, `report`, `scheduler`, `storage`, `all`) and for each one:
+
+1. Stops the current stack
+2. Starts the profile
+3. Waits for containers to be running and healthy
+4. Runs `health-check.sh` for that profile
+
+It prints a summary and exits with code `0` only if every profile passes.
+
+```
+[2026-06-23 06:24:36]   Summary
+  vue          PASS
+  zk           PASS
+  auth         PASS
+  cache        PASS
+  report       PASS
+  scheduler    PASS
+  storage      PASS
+  all          PASS
+[2026-06-23 06:24:36] All profiles passed.
+```
 
 ---
 

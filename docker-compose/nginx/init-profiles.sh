@@ -60,6 +60,7 @@ else
         ENABLE_ENVOY_BACKEND=true
         ENABLE_ENVOY_REPORT=true
         ENABLE_VUE=true
+        ENABLE_ZK=true
       ;;
       "scheduler")
         echo "The variable contains the profile 'scheduler'."

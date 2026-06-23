@@ -160,6 +160,12 @@ services:
       postgresql-service:
         condition: service_healthy
     restart: ${GENERIC_RESTART}
+    healthcheck:
+      test: "bash -c 'printf \"GET / HTTP/1.1\n\n\" > /dev/tcp/127.0.0.1/${ADEMPIERE_ZK_PORT}; exit $?;'"
+      interval: 30s
+      retries: 10
+      start_period: 120s
+      timeout: 10s
     profiles:
       - ''
       - all
@@ -192,6 +198,12 @@ services:
       postgresql-service:
         condition: service_healthy
     restart: ${GENERIC_RESTART}
+    healthcheck:
+      test: "bash -c 'printf \"GET / HTTP/1.1\n\n\" > /dev/tcp/127.0.0.1/${KEYCLOAK_PORT}; exit $?;'"
+      interval: 30s
+      retries: 15
+      start_period: 90s
+      timeout: 10s
     profiles:
       - ''
       - all
@@ -687,6 +699,12 @@ services:
       - storage
       - vue
       - zk
+    healthcheck:
+      test: "nc -z 127.0.0.1 ${NGINX_UI_GATEWAY_INTERNAL_PORT}"
+      interval: 10s
+      retries: 15
+      start_period: 10s
+      timeout: 5s
     entrypoint: ["/docker-entrypoint.sh"]
     command: ["nginx", "-g", "daemon off;"]
     environment:
