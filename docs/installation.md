@@ -7,6 +7,14 @@
 > Java runs inside the Docker containers and is already included in the images.
 > This is one of the main benefits of using Docker!
 
+### Automated Server Deployment
+
+> **Deploying on a fresh VPS or dedicated server?** The [**adempiere-deployment-and-installation**](https://github.com/adempiere/adempiere-deployment-and-installation) Ansible project automates OS hardening, Docker installation, repository clone, and application start with health check — no manual steps required on the target server.
+>
+> The steps below cover the **manual** setup for a machine where Docker and Git are already installed.
+
+---
+
 ### Index
 
 | Step | Description |
