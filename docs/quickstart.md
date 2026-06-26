@@ -6,6 +6,35 @@
 > Java runs inside the Docker containers and is already included in the images.  
 > This is one of the main benefits of using Docker!
 
+### Automated Server Deployment
+
+> **Deploying on a fresh VPS or dedicated server?** The companion project
+> [**adempiere-deployment-and-installation**](https://github.com/adempiere/adempiere-deployment-and-installation)
+> automates the entire setup from a blank machine: OS hardening, Docker installation, repository clone,
+> two-phase application start, and health check — all from your control machine with a single script.
+>
+> This Quick Start guide covers the **manual** setup on a machine where Docker and Git are already installed.
+
+---
+
+### Index
+
+| Section | Description |
+|---------|-------------|
+| [Automated Server Deployment](#automated-server-deployment) | Ansible-based setup for a fresh VPS |
+| [What You Need](#what-you-need) | Required tools and versions |
+| [Clone the Repository](#clone-the-repository) | Get the code |
+| [Set Host-Specific Values](#set-host-specific-values) | Configure IP and settings |
+| [Start the Stack](#start-the-stack) | Run start-all.sh |
+| [Check the Application](#check-the-application) | Open in browser |
+| [Verify All Services (CLI)](#verify-all-services-cli) | Run health-check.sh |
+| [Full Restart + Health Check](#full-restart--health-check) | full-restart-with-healthcheck.sh |
+| [Validate All Profiles](#validate-all-profiles) | test-all-profiles.sh |
+| [FAQ](#frequently-asked-questions) | Common questions answered |
+| [Key Configuration Variables](#key-configuration-variables) | Variable reference |
+
+---
+
 ### What You Need
 
 ✓ Docker (20.10 or later)  
