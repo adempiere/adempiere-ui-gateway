@@ -42,7 +42,7 @@ For detailed architecture information including health checks and dependencies, 
 ### PostgreSQL Database
 - **Service Name:** `postgresql-service`
 - **Container Name:** `adempiere-ui-gateway.postgresql`
-- **Image:** `postgres:14.5`
+- **Image:** controlled by `POSTGRES_IMAGE` in `env_template.env` (default: `postgres:14.5`)
 - **Purpose:** Primary database for ADempiere ERP data
 - **Profiles:** `all, auth, cache, report, scheduler, storage, vue, zk`
 - **Access:**
