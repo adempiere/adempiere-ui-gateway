@@ -194,7 +194,7 @@ nano override.env
 Alternatively, edit `env_template.env` directly. The variables most commonly changed are:
 - `COMPOSE_PROJECT_NAME` -> the name of your project/client; all container names are derived from this.
 - `HOST_IP` -> the IP address or domain of your host.
-- `POSTGRES_IMAGE` -> the Postgres version to use.
+- `POSTGRES_IMAGE` -> the PostgreSQL version to use (default: `postgres:14.5`). This is the **single source of truth** for the Postgres version — it controls both the `docker-compose.yml` service definition and the `postgresql/postgres.Dockerfile` base image.
 - `ADEMPIERE_GITHUB_VERSION` -> the ADempiere DB seed version.
 - `ADEMPIERE_GITHUB_COMPRESSED_FILE` -> the DB seed archive name.
 
