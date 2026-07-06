@@ -318,7 +318,7 @@ docker-compose/
 - `postgresql/postgres_database`: directory on host used as the mounting point for the Postgres container's database.
   It implements persistence: this makes sure that the database is not deleted even if the docker containers, docker images and even docker are deleted.
   The database contents are always kept persistently on the host.
-- `postgresql/backups`: directory on host used as the mounting point for the `backups/restores` from the Postgres container.
+- `postgresql/postgres_backups`: directory on host used as the mounting point for the `backups/restores` from the Postgres container.
   Here the seed file for a potential restore can be copied and eventually transferred via sftp or scp to anther place.
 
   The name of the seed can be defined in `env_template.env`.
