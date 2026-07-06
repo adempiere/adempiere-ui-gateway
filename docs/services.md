@@ -306,14 +306,14 @@ If `HOST_IP=erp.example.com`:
 Different service combinations can be started using stack profiles. For complete details on starting stacks, see [Quick Start Guide](./quickstart.md).
 
 ### `all` (Default)
-**Command:** `./start-all.sh` or `./start-all.sh -d all`
+**Command:** `./start-all.sh` or `./start-all.sh all`
 
 **Services included:** All services — PostgreSQL, Zookeeper, Kafka, Kafdrop, OpenSearch (+Dashboards), MinIO S3, gRPC Server, Dictionary-RS, Processor, Envoy, nginx, Landing Page, ZK UI, Vue UI, DKron, Keycloak
 
 **Use case:** Full stack deployment with all features enabled
 
 ### `auth`
-**Command:** `./start-all.sh -d auth`
+**Command:** `./start-all.sh auth`
 
 **Services included:**
 - Infrastructure: PostgreSQL
@@ -324,7 +324,7 @@ Different service combinations can be started using stack profiles. For complete
 **Use case:** Deployments requiring LDAP/AD integration or SSO
 
 ### `cache`
-**Command:** `./start-all.sh -d cache`
+**Command:** `./start-all.sh cache`
 
 **Services included:**
 - Infrastructure: PostgreSQL, Zookeeper
@@ -335,7 +335,7 @@ Different service combinations can be started using stack profiles. For complete
 **Use case:** Testing and debugging OpenSearch dictionary caching
 
 ### `report`
-**Command:** `./start-all.sh -d report`
+**Command:** `./start-all.sh report`
 
 **Services included:**
 - Infrastructure: PostgreSQL
@@ -345,7 +345,7 @@ Different service combinations can be started using stack profiles. For complete
 **Use case:** Report generation with minimal services
 
 ### `scheduler`
-**Command:** `./start-all.sh -d scheduler`
+**Command:** `./start-all.sh scheduler`
 
 **Services included:**
 - Infrastructure: PostgreSQL
@@ -356,7 +356,7 @@ Different service combinations can be started using stack profiles. For complete
 **Use case:** Background job processing and scheduled tasks
 
 ### `storage`
-**Command:** `./start-all.sh -d storage`
+**Command:** `./start-all.sh storage`
 
 **Services included:**
 - Infrastructure: PostgreSQL
@@ -367,7 +367,7 @@ Different service combinations can be started using stack profiles. For complete
 **Use case:** Testing and debugging S3 file operations
 
 ### `vue`
-**Command:** `./start-all.sh -d vue`
+**Command:** `./start-all.sh vue`
 
 **Services included:**
 - Infrastructure: PostgreSQL
@@ -377,7 +377,7 @@ Different service combinations can be started using stack profiles. For complete
 **Use case:** Testing Vue interface with minimal resource usage
 
 ### `zk`
-**Command:** `./start-all.sh -d zk`
+**Command:** `./start-all.sh zk`
 
 **Services included:**
 - Infrastructure: PostgreSQL

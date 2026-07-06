@@ -86,37 +86,37 @@ Or:
 
 - Authentication (`auth`) profile/stack:
 ```shell
-./start-all.sh -d auth
+./start-all.sh auth
 ```
 
 - Dictionary Cache (`cache`) profile/stack:
 ```shell
-./start-all.sh -d cache
+./start-all.sh cache
 ```
 
 - Report Engine (`report`) profile/stack:
 ```shell
-./start-all.sh -d report
+./start-all.sh report
 ```
 
 - Processor Scheduler (`scheduler`) profile/stack:
 ```shell
-./start-all.sh -d scheduler
+./start-all.sh scheduler
 ```
 
 - S3 Storage (`storage`) profile/stack:
 ```shell
-./start-all.sh -d storage
+./start-all.sh storage
 ```
 
 - ADempiere-Vue UI (`vue`) profile/stack:
 ```shell
-./start-all.sh -d vue
+./start-all.sh vue
 ```
 
 - ADempiere-Zk UI (`zk`) profile/stack:
 ```shell
-./start-all.sh -d zk
+./start-all.sh zk
 ```
 
 The script `start-all.sh [parameter]` carries out the steps of the automatic installation.
