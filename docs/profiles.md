@@ -48,7 +48,7 @@ The script discovers which containers were actually started after `start-all.sh`
 
 | Profile | Key | Description |
 |---------|-----|-------------|
-| [Default / Standard](#services-activated-with-defaultstandard-profile-no-parameter-or-empty-string) | _(no parameter)_ | Production-ready core stack (ZK + Vue + gRPC) |
+| [Default (no argument)](#services-activated-with-no-argument-the-all-profile) | _(no parameter)_ | Runs the `all` profile — the complete stack |
 | [Authentication](#services-activated-with-authentication-profile) | `auth` | Core stack with Keycloak identity provider |
 | [Dictionary Cache](#services-activated-with-dictionary-cache-profile) | `cache` | Adds Kafka + OpenSearch + dictionary-rs caching layer |
 | [Dictionary Report Engine](#services-activated-with-dictionary-report-engine-profile) | `report` | Adds report engine service |
@@ -59,23 +59,14 @@ The script discovers which containers were actually started after `start-all.sh`
 | [All](#services-activated-with-all-profile) | `all` | Complete stack with all available services |
 | [Multiple profiles](#multiple-profiles) | combined | Combining multiple profile keys |
 
-#### Services activated with _Default/Standard_ Profile (No parameter or empty string)
-This is the **production-ready stack** with all core ADempiere services. This profile runs when you execute `./start-all.sh` without any parameter.
-
- - postgres-service
- - adempiere-site
- - adempiere-zk
- - vue-ui
- - vue-grpc-server
- - adempiere-grpc-server
- - grpc-proxy
- - ui-gateway
+#### Services activated with no argument (the `all` profile)
+There is **no** profile literally named `default` or `standard`. Running `./start-all.sh` **without any argument** activates the **`all`** profile — the complete stack with every service (listed under [All](#services-activated-with-all-profile) below).
 
 ![ADempiere Standard Architecture](architecture/architecture-all.png)
 
 Start with:
 ```bash
-./start-all.sh
+./start-all.sh          # equivalent to ./start-all.sh all
 ```
 
 **Note:** This is the recommended stack for production deployments.
@@ -227,7 +218,7 @@ Start with:
 COMPOSE_PROFILES="report,vue,zk" docker compose up
 ```
 
-**Note:** The default profile (empty string `''`) is always included unless you explicitly specify other profiles.
+**Note:** Only the profiles you pass are activated — there is no automatically-included "default" profile. A service starts only when one of its declared profiles is active (the empty-string profile `''` behaves like `all`, starting the full stack).
 
 
 ---
