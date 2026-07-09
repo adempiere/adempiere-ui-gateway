@@ -633,12 +633,14 @@ sudo ip link set wlan0 down
 nmcli device disconnect wlan0
 ```
 
-Then stop and restart the full stack:
+Then restart the full stack so Docker recreates the containers and the bridge network:
 
 ```bash
-sudo ./stop-and-delete-all.sh
+sudo ./stop-all.sh      # docker compose down — removes containers and network, keeps the database volume
 sudo ./start-all.sh
 ```
+
+> **Do not** use `stop-and-delete-all.sh` here: it is interactive and destructive (`docker compose down -v` plus `docker rmi` and `docker system prune -a`), so it deletes the database volume and all images. A routing fix only needs the containers and network recreated, which `stop-all.sh` + `start-all.sh` does without data loss.
 
 With a single active interface, Docker's bridge routing is unambiguous and all services start correctly.
 
