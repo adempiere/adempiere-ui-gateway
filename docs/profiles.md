@@ -214,18 +214,25 @@ Or equivalently (since `all` is the default):
 #### Multiple profiles
 Profiles can be **combined** to activate services from different profiles. For example `report`, `vue` and `zk` combined profiles, activates the services of:
 
- - postgres-service
+ - postgresql-service
  - adempiere-grpc-server
  - adempiere-report-engine
  - grpc-proxy
  - vue-ui
- - zk
+ - adempiere-zk
  - ui-gateway
 
-Start with:
+Pass the profiles as a **single, comma-separated argument** (no spaces). Start the combined stack with the script:
 ```bash
-COMPOSE_PROFILES="report,vue,zk" docker compose up
+./start-all.sh report,vue,zk
 ```
+
+Or invoke Docker Compose directly:
+```bash
+COMPOSE_PROFILES="report,vue,zk" docker compose up -d
+```
+
+> **Important:** the profiles must be comma-separated in a single argument. A space-separated form such as `./start-all.sh report vue zk` does **not** work — `start-all.sh` only reads the first argument, so only `report` would be activated (and `COMPOSE_PROFILES` itself is comma-separated, never space-separated).
 
 **Note:** The default profile (empty string `''`) is always included unless you explicitly specify other profiles.
 
