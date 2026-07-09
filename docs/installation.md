@@ -75,13 +75,13 @@ Execute script `start-all.sh [all, auth, cache, report, scheduler, storage, vue,
 cd docker-compose
 ```
 
-- Default/Standard profile/stack:
+- Default stack — the `all` profile (started when no argument is given):
 ```shell
 ./start-all.sh
 ```
-Or:
+Or name the profile explicitly:
 ```shell
-./start-all.sh -d default
+./start-all.sh all
 ```
 
 - Authentication (`auth`) profile/stack:

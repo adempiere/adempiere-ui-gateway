@@ -93,7 +93,7 @@ networks:
 **Security considerations:**
 - Change default subnet if it conflicts with your network
 - Only expose ports that require external access
-- Use `develop` profile cautiously (exposes more ports)
+- Expose additional ports cautiously (development environments only)
 
 See [Architecture - Network Architecture](./architecture.md#network-architecture) for details.
 
@@ -206,17 +206,17 @@ docker compose ps | grep processor
 **Security measures:**
 
 1. **Network isolation:**
-   - Default: Internal only (no external port in `standard` profile)
-   - Develop mode: Port 55432 exposed (for debugging only)
+   - Default: internal only (no external DB port)
+   - Development: port 55432 exposed for debugging only
    - Production: Never expose externally
 
 2. **Access control:**
    ```bash
-   # Production: Use standard profile (no external DB port)
+   # Production: default startup; the DB port is controlled in .env
    ./start-all.sh
 
-   # Development: Exposes port 55432
-   ./start-all.sh -d develop
+   # Development: same startup — set POSTGRES_EXTERNAL_PORT in .env to publish port 55432
+   ./start-all.sh
    ```
 
 3. **Firewall rules:**
@@ -256,8 +256,8 @@ docker compose ps | grep processor
 **Security considerations:**
 
 1. **Default credentials:** admin/admin (change in production)
-2. **Dashboards access:** Only expose on `develop` profile
-3. **Production:** Use `standard` profile (no dashboard access)
+2. **Dashboards access:** Only expose in development environments
+3. **Production:** Do not expose dashboards
 4. **Data sensitivity:** Contains dictionary metadata (not business data)
 
 ### MinIO S3 Storage
@@ -307,12 +307,12 @@ Internal Docker Network (192.168.100.0/24)
 
 ### Port Exposure Strategy
 
-**Standard/Production Profile:**
+**Production setup:**
 - **Port 80 (HTTP):** nginx API gateway ONLY
 - **No other ports exposed**
 - All services accessed via nginx reverse proxy
 
-**Develop Profile:**
+**Development setup:**
 - Port 80: nginx
 - Port 55432: PostgreSQL (⚠️ development only)
 - Port 5601: OpenSearch Dashboards (⚠️ development only)
@@ -741,7 +741,7 @@ Use this checklist before going to production:
 - [ ] SSH password authentication disabled
 - [ ] SSH keys configured for all admins
 - [ ] Processor Service has no external ports (verify)
-- [ ] PostgreSQL has no external port in production (use `standard` profile)
+- [ ] PostgreSQL has no external port in production
 - [ ] Backup directory permissions restricted (chmod 700)
 - [ ] `.env` file not committed to version control
 - [ ] Backup encryption implemented
