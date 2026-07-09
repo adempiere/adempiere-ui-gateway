@@ -86,37 +86,37 @@ Or name the profile explicitly:
 
 - Authentication (`auth`) profile/stack:
 ```shell
-./start-all.sh -d auth
+./start-all.sh auth
 ```
 
 - Dictionary Cache (`cache`) profile/stack:
 ```shell
-./start-all.sh -d cache
+./start-all.sh cache
 ```
 
 - Report Engine (`report`) profile/stack:
 ```shell
-./start-all.sh -d report
+./start-all.sh report
 ```
 
 - Processor Scheduler (`scheduler`) profile/stack:
 ```shell
-./start-all.sh -d scheduler
+./start-all.sh scheduler
 ```
 
 - S3 Storage (`storage`) profile/stack:
 ```shell
-./start-all.sh -d storage
+./start-all.sh storage
 ```
 
 - ADempiere-Vue UI (`vue`) profile/stack:
 ```shell
-./start-all.sh -d vue
+./start-all.sh vue
 ```
 
 - ADempiere-Zk UI (`zk`) profile/stack:
 ```shell
-./start-all.sh -d zk
+./start-all.sh zk
 ```
 
 The script `start-all.sh [parameter]` carries out the steps of the automatic installation.
@@ -124,7 +124,7 @@ The script `start-all.sh [parameter]` carries out the steps of the automatic ins
 Depending on the parameter -that BTW selects the profile- the script assembles the services out of file **docker-compose.yml** by including to the project only the services that have the profile set.
 
 If no flag and/or parameter is given, the call will default to `docker compose -f docker-compose.yml` for the services combination **all**.
-If directories `postgresql/postgres_database` and `postgresql/backups` do not exist, they are created.
+If directories `postgresql/postgres_database` and `postgresql/postgres_backups` do not exist, they are created.
 
 #### b. Result Of Script Execution
 The docker compose project is executed with only services that have the profile given as parameter to the script `./start-all.sh`.
@@ -138,7 +138,7 @@ Once the image have been downloaded, the container creation and start will last 
 
 #### c. Cases When Database Will Be Restored
 If
-- there is a file *seed.backup* (or as defined in `env_template.env`, variable `POSTGRES_RESTORE_FILE_NAME`) in directory `postgresql/backups`, and
+- there is a file *seed.backup* (or as defined in `env_template.env`, variable `POSTGRES_RESTORE_FILE_NAME`) in directory `postgresql/postgres_backups`, and
 - the database as specified in `env_template.env`, variable `POSTGRES_DATABASE_NAME` does not exist in Postgres, and
 - directory `postgresql/postgres_database` does not exist.
 
@@ -163,7 +163,7 @@ mkdir postgresql/postgres_database
 
 #### b. Create the directory on the host where the backups will be mounted
 ```shell
-mkdir postgresql/backups
+mkdir postgresql/postgres_backups
 ```
 
 #### c. Copy backup file (if restore is needed)
@@ -174,12 +174,12 @@ mkdir postgresql/backups
   _docker exec -i adempiere-ui-gateway.postgresql pg_dump --no-owner -h localhost -U postgres adempiere > adempiere-$(date '+%Y-%m-%d').backup_
 - Or you can go into the container with _docker exec -it adempiere-ui-gateway.postgresql bash_ and execute there a backup e.g.: `cd /home/adempiere/postgres_backups` followed by `pg_dump -v --no-owner -h localhost -U postgres <DB-NAME> > adempiere-$(date '+%Y-%m-%d').backup`. Remember to first change directory to the shared directory between host and Postgres container.
 - The file can have the name you wish, but if you want to execute a restore, it must be named `seed.backup` or as it was defined in *env_template.env*, variable `POSTGRES_RESTORE_FILE_NAME`.
-  The backup file should be visible under `adempiere-ui-gateway/postgresql/backups`. You can copy it for safety reasons to other location e.g. the cloud.
+  The backup file should be visible under `adempiere-ui-gateway/postgresql/postgres_backups`. You can copy it for safety reasons to other location e.g. the cloud.
 - Make sure it is not the compressed backup (e.g. .jar).
 - The database directory `adempiere-ui-gateway/docker-compose/postgresql/postgres_database` must be non-existing for the restore to ocurr.
   A backup will not ocurr if the database directory exists or has contents.
 ```shell
-cp <PATH-TO-BACKUP-FILE> postgresql/backups
+cp <PATH-TO-BACKUP-FILE> postgresql/postgres_backups
 ```
 
 #### d. Modify configuration as needed
