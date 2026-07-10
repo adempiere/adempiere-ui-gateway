@@ -25,3 +25,14 @@ COPY --chown=postgres:postgres initdb.sh /docker-entrypoint-initdb.d/
 COPY --chown=postgres:postgres after_run/*.sql /tmp/after_run/
 
 RUN chmod +x /docker-entrypoint-initdb.d/initdb.sh
+
+
+# Re-apply role passwords from the environment on EVERY start (the stock image only does this
+# on the first initdb). custom-entrypoint.sh runs sync-credentials.sh in the background and
+# then hands off to the stock postgres entrypoint unchanged.
+COPY --chown=postgres:postgres sync-credentials.sh custom-entrypoint.sh /usr/local/bin/
+RUN chmod +x /usr/local/bin/sync-credentials.sh /usr/local/bin/custom-entrypoint.sh
+
+# Setting ENTRYPOINT in a derived image resets the inherited CMD, so re-declare it.
+ENTRYPOINT ["custom-entrypoint.sh"]
+CMD ["postgres"]

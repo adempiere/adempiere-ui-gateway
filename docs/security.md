@@ -108,7 +108,7 @@ See [Architecture - Network Architecture](./architecture.md#network-architecture
 | Service | Default User | Default Password | Environment Variable | Change Priority |
 |---------|--------------|------------------|---------------------|-----------------|
 | **PostgreSQL** | postgres | postgres | `POSTGRES_PASSWORD` | 🔴 CRITICAL |
-| **PostgreSQL** | adempiere | adempiere | `POSTGRES_ADEMPIERE_PASSWORD` | 🔴 CRITICAL |
+| **PostgreSQL** | adempiere | adempiere | `ADEMPIERE_DB_PASSWORD` | 🔴 CRITICAL |
 | **OpenSearch** | admin | admin | `OPENSEARCH_ADMIN_PASSWORD` | 🟡 HIGH |
 | **MinIO S3** | minioadmin | minioadmin | `MINIO_ROOT_USER`, `MINIO_ROOT_PASSWORD` | 🟡 HIGH |
 | **Keycloak** | admin | admin | `KEYCLOAK_ADMIN`, `KEYCLOAK_ADMIN_PASSWORD` | 🔴 CRITICAL |
@@ -122,7 +122,7 @@ See [Services - Service Access Summary](./services.md#service-access-summary) fo
    ```bash
    # PostgreSQL
    POSTGRES_PASSWORD=your-strong-password-here
-   POSTGRES_ADEMPIERE_PASSWORD=your-adempiere-password-here
+   ADEMPIERE_DB_PASSWORD=your-adempiere-password-here
 
    # OpenSearch
    OPENSEARCH_ADMIN_PASSWORD=your-opensearch-password-here
@@ -143,6 +143,23 @@ See [Services - Service Access Summary](./services.md#service-access-summary) fo
    ./stop-all.sh
    ./start-all.sh
    ```
+
+> **Note — which file to edit.** Apply the change to the **active `docker-compose/.env`** (or via
+> `override.env`). `start-all.sh` keeps an existing `.env`, so editing only `env_template.env` does
+> **not** affect an already-generated `.env`.
+>
+> **Note — when the change takes effect.** Editing the env var only sets the *initial* value for
+> services that persist their credentials in a data volume. This stack handles the common cases:
+> - **PostgreSQL** — the `postgres` and `adempiere` role passwords are re-applied from the
+>   environment on **every** start, so `stop-all.sh` + `start-all.sh` updates them even on an
+>   already-initialised database.
+> - **MinIO** — applies `MINIO_ROOT_USER` / `MINIO_ROOT_PASSWORD` from the environment on every
+>   start; the change takes effect immediately.
+> - **Keycloak** — the admin account is created **only on the first start**; changing
+>   `KEYCLOAK_ADMIN_PASSWORD` afterwards has no effect on an existing Keycloak database. Rotate it
+>   from the Keycloak admin console instead.
+> - **OpenSearch** — an already-initialised cluster keeps its stored password; use the OpenSearch
+>   security tooling to rotate it.
 
 **Password Requirements:**
 - Minimum 16 characters

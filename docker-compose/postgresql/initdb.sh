@@ -9,7 +9,11 @@ echo "Check if user 'adempiere' exists."
 if [ "$( psql -U $POSTGRES_USER -tAc "SELECT 1 FROM pg_roles WHERE rolname='adempiere'" )" != '1' ]; then
 	echo "The role 'adempiere' does not exist -->> it will be created and restored"
 	createuser -U postgres adempiere -dlrs
-	psql -U postgres -tAc "ALTER USER adempiere password 'adempiere';"
+	# Use a heredoc (not psql -c): psql only interpolates :'var' when reading from a
+	# script/stdin, not from a -c command string. This keeps special characters safe.
+	psql -U postgres -v apw="${ADEMPIERE_DB_PASSWORD:-adempiere}" <<'SQL'
+ALTER ROLE adempiere WITH PASSWORD :'apw';
+SQL
 fi
 
 # Test database existence
