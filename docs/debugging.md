@@ -123,9 +123,9 @@ docker compose rm -s -f postgresql-service
 docker compose up -d <service-name>
 
 # Example: Recreate ZK UI container
-docker compose stop adempiere-zk-service
-docker compose rm -f adempiere-zk-service
-docker compose up -d adempiere-zk-service
+docker compose stop adempiere-zk
+docker compose rm -f adempiere-zk
+docker compose up -d adempiere-zk
 ```
 
 **When to recreate:**
@@ -666,12 +666,12 @@ See [Troubleshooting - Container Health Checks](./troubleshooting.md#container-h
 3. **Check backend service:**
    ```bash
    # For ZK UI
-   docker compose ps adempiere-zk-service
+   docker compose ps adempiere-zk
    docker container logs adempiere-ui-gateway.zk
 
    # For Vue UI
-   docker compose ps adempiere-vue-service
-   docker container logs adempiere-ui-gateway.vue
+   docker compose ps vue-ui
+   docker container logs adempiere-ui-gateway.vue-ui
    ```
 
 4. **Test from inside nginx:**
