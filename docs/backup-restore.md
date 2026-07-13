@@ -560,8 +560,7 @@ Run the same health check used by Docker Compose:
 # Manual health check
 docker exec adempiere-ui-gateway.postgresql bash -c \
   "pg_isready -U postgres && \
-   psql -U adempiere -d adempiere -t -c \
-   'SELECT COUNT(*) FROM information_schema.tables WHERE table_schema = '\''adempiere'\''' | grep -q '760'"
+   psql -U adempiere -d adempiere -c 'SELECT Version FROM AD_SYSTEM'"
 
 # If exit code is 0, database is healthy
 echo $?
