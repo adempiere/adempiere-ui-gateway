@@ -138,11 +138,16 @@ Once the image have been downloaded, the container creation and start will last 
 
 #### c. Cases When Database Will Be Restored
 If
-- there is a file *seed.backup* (or as defined in `env_template.env`, variable `POSTGRES_RESTORE_FILE_NAME`) in directory `postgresql/postgres_backups`, and
-- the database as specified in `env_template.env`, variable `POSTGRES_DATABASE_NAME` does not exist in Postgres, and
-- directory `postgresql/postgres_database` does not exist.
+- the database `adempiere` does not exist in Postgres (the name is hardcoded in `postgresql/initdb.sh`; there is no `POSTGRES_DATABASE_NAME` variable), and
+- directory `postgresql/postgres_database` does not exist (or has no contents).
 
 *The database  will be restored*.
+
+The seed source is chosen automatically:
+- if a file *seed.backup* (or as defined in `env_template.env`, variable `POSTGRES_RESTORE_FILE_NAME`) exists in directory `postgresql/postgres_backups`, it is used;
+- otherwise a fixed ADempiere seed is downloaded from GitHub (version `ADEMPIERE_GITHUB_VERSION`, currently `3.9.4`).
+
+So the local seed file is **optional**: when it is absent, the restore falls back to the downloaded seed.
 
 #### d. Cases When Database Will Not Be Restored
 The execution of `postgresql/initdb.sh` will be skipped if

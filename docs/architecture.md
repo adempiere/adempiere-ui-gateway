@@ -314,7 +314,7 @@ docker-compose/
   If there is a database named `adempiere`, nothing happens.
   If there is no database named `adempiere`, the script checks if there is a database seed file in the backups directory.
   - If there is one, it launches a restore database.
-  - If there is none, the latest ADempiere seed is downloaded from Github and the restore is started with it.
+  - If there is none, a fixed ADempiere seed (version `ADEMPIERE_GITHUB_VERSION`, currently `3.9.4`) is downloaded from Github and the restore is started with it — so the local seed file is optional.
 - `postgresql/postgres_database`: directory on host used as the mounting point for the Postgres container's database.
   It implements persistence: this makes sure that the database is not deleted even if the docker containers, docker images and even docker are deleted.
   The database contents are always kept persistently on the host.

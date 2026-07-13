@@ -294,15 +294,17 @@ The stack automatically restores from a seed file on first startup:
 
 **Conditions for automatic restore:**
 1. Database directory is empty: `postgresql/postgres_database/` has no contents
-2. Seed file exists: `postgresql/postgres_backups/seed.backup`
+2. Database `adempiere` does not yet exist
 3. Stack is starting for the first time
+
+A local seed file is **optional**: if `postgresql/postgres_backups/seed.backup` is present it is used, otherwise the seed is downloaded from GitHub (see below).
 
 **How it works:**
 - The `initdb.sh` script runs when PostgreSQL container starts
 - Checks if database "adempiere" exists
 - If not, looks for `seed.backup` file
 - Restores database from the seed file **with `pg_restore`**
-- If no seed file found, downloads latest from GitHub
+- If no seed file found, downloads a fixed version from GitHub (`ADEMPIERE_GITHUB_VERSION`, currently `3.9.4`) — not the latest release
 
 > **Important — the seed must be a custom-format dump.** `initdb.sh` restores `seed.backup` with `pg_restore`, which only reads PostgreSQL's **custom format** (`pg_dump --format=custom`, see [Custom Format Backup](#custom-format-backup-advanced)). A plain-SQL dump — the `.backup` produced by the quick and compressed procedures above — will **not** work as an auto-restore seed. To restore a plain-SQL dump, use the [Manual Restore](#manual-restore-existing-database) procedure (`psql`) instead.
 
