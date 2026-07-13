@@ -265,9 +265,9 @@ docker-compose/
 ├── env_template.env          # Main configuration — edit this, not .env
 ├── override_template.env     # Template for machine-specific overrides — copy to override.env and set values
 ├── override.env              # (not in git) Active overrides: values here replace env_template.env defaults in .env
-├── docker-compose.yml        # All service definitions with profiles (assembled by start-all.sh)
-├── start-all.sh              # Start stack script (assembles docker-compose.yml, activates profiles)
-├── stop-all.sh               # Stop stack script (also deletes assembled docker-compose.yml)
+├── docker-compose.yml        # All service definitions with profiles (static, committed as-is)
+├── start-all.sh              # Start stack script (creates host dirs, prepares .env, activates profiles)
+├── stop-all.sh               # Stop stack script (docker compose down; removes .env)
 ├── stop-and-delete-all.sh           # Complete cleanup script
 ├── generate-env.sh                  # Wrapper: calls generate_env.py with default paths
 ├── generate_env.py                  # Env generator: merges env_template.env + override.env → .env
