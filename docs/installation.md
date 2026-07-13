@@ -333,6 +333,8 @@ cd docker-compose
 ./stop-all.sh
 ```
 
+This runs `docker compose down` (removes the containers and the network but **keeps** the database volume and its data) and removes the generated `.env` file. It does **not** delete the `docker-compose.yml` file, which is static and committed. To also delete volumes, images and data, use `stop-and-delete-all.sh` (see [Step 8](#8-delete-all-docker-objects)).
+
 ### 8. Delete All Docker Objects
 Sometimes, due to different reasons, you need to undo everything you have created on Docker and start anew. This is mostly in development, not in production.
 Then:
