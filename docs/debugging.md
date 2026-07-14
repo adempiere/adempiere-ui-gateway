@@ -419,7 +419,8 @@ docker exec -i adempiere-ui-gateway.postgresql \
   psql -U adempiere -d adempiere \
   < postgresql/postgres_backups/<your-backup-file>.backup
 
-# Automated backup script
+# Automated backup script (lives in docs/scripts/, run from the repo root)
+cd ..
 ./docs/scripts/04-backup-database.sh
 ```
 
@@ -577,7 +578,7 @@ For expected health check timings, see [Architecture - Health Checks](./architec
 
 ## Utility Scripts
 
-The project includes diagnostic scripts in `docs/scripts/` for common debugging tasks.
+The project includes diagnostic scripts in `docs/scripts/` for common debugging tasks. Unlike the rest of this guide, run these from the **repository root** (not `docker-compose/`) — the `./docs/scripts/...` paths below are relative to it.
 
 ### Timezone Diagnostic Scripts
 

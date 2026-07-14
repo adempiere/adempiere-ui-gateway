@@ -175,6 +175,8 @@ sudo lsof -i :55432
 - Or change the port in `env_template.env`
 
 ```bash
+cd docker-compose/
+
 # Edit env_template.env
 nano env_template.env
 
@@ -220,6 +222,8 @@ ls -la postgresql/postgres_database/
 Solution: Delete the database directory and restart:
 
 ```bash
+cd docker-compose/
+
 # Stop containers
 ./stop-all.sh
 
@@ -280,6 +284,8 @@ You want a fresh restore, but the database already exists and restore is skipped
 
 
 ```bash
+cd docker-compose/
+
 # Stop all containers
 ./stop-all.sh
 
@@ -556,7 +562,8 @@ nano docker-compose/env_template.env
 # Set HOST_IP to your actual IP or domain
 HOST_IP=192.168.1.100
 
-# Restart
+# Restart (the scripts live in docker-compose/)
+cd docker-compose/
 ./stop-all.sh
 ./start-all.sh
 ```
@@ -636,6 +643,7 @@ nmcli device disconnect wlan0
 Then restart the full stack so Docker recreates the containers and the bridge network:
 
 ```bash
+cd docker-compose/
 sudo ./stop-all.sh      # docker compose down — removes containers and network, keeps the database volume
 sudo ./start-all.sh
 ```
@@ -1196,7 +1204,9 @@ docker exec adempiere-ui-gateway.nginx-ui-gateway nginx -s reload
 # Check the current value
 grep COMPOSE_PROJECT_NAME docker-compose/env_template.env
 
-# After changing it, restart the stack so .env is regenerated:
+# After changing it, restart the stack so .env is regenerated
+# (the scripts live in docker-compose/):
+cd docker-compose/
 ./stop-all.sh
 ./start-all.sh
 ```
