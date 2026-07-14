@@ -144,7 +144,8 @@ docker compose stop
 # Stop and remove containers (preserves volumes and data)
 docker compose down
 
-# For complete cleanup, see: ./stop-all.sh or ./stop-and-delete-all.sh
+# ./stop-all.sh              → docker compose down + removes .env (keeps volumes/data)
+# ./stop-and-delete-all.sh   → complete/destructive cleanup (also deletes volumes and images)
 ```
 
 ### Recreate All Services
