@@ -62,8 +62,8 @@ docker ps -a --format "{{.ID}}: {{.Names}}"
 # List all services defined in docker-compose.yml
 docker compose config --services
 
-# Note: docker-compose.yml must exist
-# If not assembled yet, run: ./start-all.sh
+# Note: run this from the docker-compose/ directory, where the
+# committed docker-compose.yml lives (it is static, not generated)
 ```
 
 ### View Docker Images

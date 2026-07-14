@@ -121,7 +121,7 @@ Or name the profile explicitly:
 
 The script `start-all.sh [parameter]` carries out the steps of the automatic installation.
 
-Depending on the parameter -that BTW selects the profile- the script assembles the services out of file **docker-compose.yml** by including to the project only the services that have the profile set.
+Depending on the parameter -that BTW selects the profile- Docker Compose activates, from the static file **docker-compose.yml**, only the services that have the given profile set. The file is committed as-is; `start-all.sh` does not generate or assemble it — it just exports `COMPOSE_PROFILES` and runs `docker compose up`.
 
 If no flag and/or parameter is given, the call will default to `docker compose -f docker-compose.yml` for the services combination **all**.
 If directories `postgresql/postgres_database` and `postgresql/postgres_backups` do not exist, they are created.
