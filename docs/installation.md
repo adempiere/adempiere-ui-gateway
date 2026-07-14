@@ -222,7 +222,14 @@ Feel free to change them accordingly to your wishes/purposes.
 There should be no need to change file `docker-compose.yml`.
 
 #### e. env_template.env and .env
-Once you have modified *env_template.env* as needed, run `start-all.sh` — it will automatically generate `.env` from `env_template.env` (and `override.env` if present) before starting Docker Compose. **Do not copy `env_template.env` to `.env` manually.**
+Once you have modified *env_template.env* as needed, run `start-all.sh` — it prepares `.env` before starting Docker Compose. **Do not copy `env_template.env` to `.env` manually.**
+
+How `start-all.sh` prepares `.env`:
+- if `override.env` exists, it **regenerates** `.env` on every run by merging `env_template.env` + `override.env` via `generate-env.sh`;
+- otherwise it copies `env_template.env` to `.env` **only if `.env` does not exist yet**;
+- if `.env` already exists and there is no `override.env`, the existing `.env` is **kept unchanged**.
+
+So when there is no `override.env`, editing `env_template.env` alone does **not** update an already-generated `.env`. To apply the change, edit `.env` directly, delete it first so it is recreated, or put the value in `override.env`.
 
 #### f. File initdb.sh (optional)
 Modify `postgresql/initdb.sh` as necessary, depending on what you may want to do at database first start.
