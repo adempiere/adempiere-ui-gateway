@@ -798,7 +798,7 @@ See [Troubleshooting - Performance Issues](./troubleshooting.md#performance-issu
 - **[Backup and Restore Guide](./backup-restore.md)** - Database operations
 - **[System Requirements](./system-requirements.md)** - Resource planning
 - **[Kafka Debugging Guide](./debugging-kafka.md)** - Kafka CLI testing (topics, produce, consume, consumer groups)
-- **Scripts README (TODO: not yet available)** - Diagnostic script documentation
+- **[Scripts README](./scripts/README.md)** - Diagnostic script documentation
 
 ---
 
