@@ -340,9 +340,11 @@ Expected output:
 #### 1. TZ Environment Variable Not Set
 
 ```
-Container: adempiere-ui-gateway.site
-  TZ env var: not set
-  Date: Fri Feb 13 14:55:24 UTC 2026
+[7] adempiere-ui-gateway.site
+  Date:            Fri Feb 13 14:55:24 UTC 2026
+  Timestamp:       1770994524
+  Time diff:       0s (OK)
+  TZ env var:      not set
 ```
 
 Solution: First, ensure `GENERIC_TIMEZONE` (and `GENERIC_CENTRAL_STANDARD_TIME`) are set in `override.env` — `generate_env.py` enforces this and will abort if they are missing or still set to the `__CHANGE_ME__` sentinel. Then verify the service definition in `docker-compose.yml` has the TZ variable declared:
