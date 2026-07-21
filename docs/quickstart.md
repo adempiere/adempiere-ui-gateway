@@ -307,6 +307,7 @@ Docker Compose started
 ═══════════════════════════════════════════════════════════
   ADempiere UI Gateway — Service Health Check
   Project : adempiere-ui-gateway
+  Profile : all
   Date    : 2026-06-21 22:41:10
 ═══════════════════════════════════════════════════════════
 

@@ -191,6 +191,7 @@ ADempiere Database Backup
 Date: Thu Feb 13 11:30:45 CST 2026
 Database: adempiere
 Container: adempiere-ui-gateway.postgresql
+Backup directory: ../../docker-compose/postgresql/postgres_backups
 
 Creating backup...
 ✅ Backup created successfully: adempiere-2026-02-13-113045.backup
@@ -202,11 +203,20 @@ Compressing backup...
    Compression ratio: ~82%
 
 Cleaning old backups (keeping last 30 days)...
+🗑️  Deleted 3 old backup(s)
 📦 Backups remaining: 28
+
+Backup directory disk usage:
+1.2G    ../../docker-compose/postgresql/postgres_backups
 
 ==========================================
 ✅ Backup completed successfully!
 ==========================================
+
+Backup file: adempiere-2026-02-13-113045.backup.gz
+
+To restore this backup, see:
+  docs/backup-restore.md#database-restore-procedures
 ```
 
 **Scheduling automated backups:**
