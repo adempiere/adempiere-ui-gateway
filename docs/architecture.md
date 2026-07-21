@@ -308,8 +308,9 @@ docker-compose/
 - `generate_env.py`: Python script that merges `env_template.env` and `override.env` into the runtime `.env` file. Resolves `${VAR}` references recursively and aborts if any required value is still set to `__CHANGE_ME__`. Supports `--dry-run` (prints resolved output without writing) and `--help`.
 - `health-check.sh`: polls the health status of all containers at regular intervals and reports which services are healthy, starting, or unhealthy. Used to confirm the stack is fully up after a start or restart.
 - `full-restart-with-healthcheck.sh`: performs a complete stop-and-delete cycle followed by a fresh stack start, then runs `health-check.sh` to confirm all services reach a healthy state.
-- `postgresql/Dockerfile`: the Dockerfile used.
-  It mainly copies `postgresql/initdb.sh` to the container, so it can be executed at start.
+- `postgresql/postgres.Dockerfile`: the Dockerfile used (the name comes from `DOCKERFILE_NAME` in `env_template.env`).
+  It copies `postgresql/initdb.sh` to the container so it can be executed at first start, and installs
+  the entrypoint wrapper that re-applies the role passwords from the environment on every start.
 - `postgresql/initdb.sh`: shell script executed when Postgres starts.
   If there is a database named `adempiere`, nothing happens.
   If there is no database named `adempiere`, the script checks if there is a database seed file in the backups directory.
